@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ml">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ഉംറ | Swalath</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #eee8d9;
+
+            color: #222;
+
+            transition: 0.3s;
+
+        }
+
+        .app {
+
+            max-width: 430px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            background: #fffdf8;
+
+            box-shadow:
+                0 0 25px rgba(0,0,0,0.08);
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #123d34,
+                    #1d5b4c
+                );
+
+            color: white;
+
+            padding: 25px 20px 30px;
+
+            text-align: center;
+
+            border-radius:
+                0 0 30px 30px;
+
+        }
+
+        header .icon {
+
+            font-size: 48px;
+
+            margin-bottom: 8px;
+
+        }
+
+        header h1 {
+
+            font-size: 27px;
+
+            margin-bottom: 6px;
+
+        }
+
+        header p {
+
+            font-size: 13px;
+
+            opacity: 0.9;
+
+        }
+
+
+        /* =========================
+           TOP BUTTONS
+        ========================= */
+
+        .top-buttons {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 18px 20px 5px;
+
+        }
+
+        .top-buttons button {
+
+            border: none;
+
+            background: #f1dfb0;
+
+            color: #123d34;
+
+            padding: 10px 16px;
+
+            border-radius: 25px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            padding: 15px 20px 30px;
+
+        }
+
+
+        .intro {
+
+            text-align: center;
+
+            padding: 15px 5px 25px;
+
+        }
+
+        .intro h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 8px;
+
+            color: #123d34;
+
+        }
+
+        .intro p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+
+            margin-bottom: 22px;
+
+        }
+
+        .section-title {
+
+            background: #123d34;
+
+            color: white;
+
+            padding: 13px 16px;
+
+            border-radius: 16px;
+
+            font-size: 17px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        /* =========================
+           STEP CARD
+        ========================= */
+
+        .step {
+
+            background: white;
+
+            border: 1px solid #e5dece;
+
+            border-radius: 18px;
+
+            padding: 17px;
+
+            margin-bottom: 12px;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.04);
+
+        }
+
+        .step-number {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 32px;
+
+            height: 32px;
+
+            background: #f1dfb0;
+
+            color: #123d34;
+
+            border-radius: 50%;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+        .step h3 {
+
+            color: #123d34;
+
+            font-size: 16px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .step p {
+
+            color: #555;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =========================
+           IMPORTANT NOTE
+        ========================= */
+
+        .success {
+
+            background: #edf5ef;
+
+            border-left: 5px solid #123d34;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin-top: 12px;
+
+        }
+
+
+        /* =========================
+           BENEFITS
+        ========================= */
+
+        .benefit {
+
+            background: #faf6eb;
+
+            border-radius: 17px;
+
+            padding: 17px;
+
+            margin-bottom: 12px;
+
+            border: 1px solid #eadfca;
+
+        }
+
+        .benefit h3 {
+
+            color: #123d34;
+
+            font-size: 15px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .benefit p {
+
+            color: #555;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =========================
+           NAZYAN
+        ========================= */
+
+        .nazy {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #123d34,
+                    #1d5b4c
+                );
+
+            color: white;
+
+            border-radius: 22px;
+
+            padding: 24px 18px;
+
+            text-align: center;
+
+            margin-top: 25px;
+
+        }
+
+        .nazy .small {
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.8;
+
+        }
+
+        .nazy h2 {
+
+            font-size: 23px;
+
+            margin: 7px 0 12px;
+
+        }
+
+        .nazy h3 {
+
+            font-size: 17px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .nazy p {
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            opacity: 0.95;
+
+        }
+
+        .price {
+
+            font-size: 27px !important;
+
+            font-weight: bold;
+
+            color: #f1dfb0;
+
+            margin: 15px 0 !important;
+
+        }
+
+
+        /* =========================
+           WHATSAPP
+        ========================= */
+
+        .whatsapp {
+
+            display: inline-block;
+
+            margin-top: 18px;
+
+            text-decoration: none;
+
+            background: #f1dfb0;
+
+            color: #123d34;
+
+            padding: 13px 22px;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           DISCLAIMER
+        ========================= */
+
+        .note {
+
+            background: #f7f3e9;
+
+            color: #666;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            margin-top: 20px;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 20px;
+
+            color: #999;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark {
+
+            background: #111;
+
+            color: #eee;
+
+        }
+
+        body.dark .app {
+
+            background: #181818;
+
+        }
+
+        body.dark .step {
+
+            background: #222;
+
+            border-color: #333;
+
+        }
+
+        body.dark .step p,
+
+        body.dark .benefit p,
+
+        body.dark .intro p {
+
+            color: #bbb;
+
+        }
+
+        body.dark .benefit {
+
+            background: #222;
+
+            border-color: #333;
+
+        }
+
+        body.dark .note {
+
+            background: #222;
+
+            color: #aaa;
+
+        }
+
+        body.dark .intro h2,
+
+        body.dark .step h3,
+
+        body.dark .benefit h3 {
+
+            color: #f1dfb0;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="icon">
+            🕋
+        </div>
+
+        <h1>
+            ഉംറ
+        </h1>
+
+        <p>
+            Umrah Guide & Information
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         TOP BUTTONS
+    ========================= -->
+
+    <div class="top-buttons">
+
+        <button onclick="goHome()">
+            ← Home
+        </button>
+
+        <button onclick="toggleDark()">
+            🌙 Dark Mode
+        </button>
+
+    </div>
+
+
+    <main>
+
+
+        <!-- =========================
+             INTRO
+        ========================= -->
+
+        <div class="intro">
+
+            <h2>
+                ഉംറ നിർവഹിക്കേണ്ട രീതി
+            </h2>
+
+            <p>
+                അല്ലാഹുവിന്റെ ഭവനമായ കഅ്ബ സന്ദർശിച്ച്
+                നിർദ്ദിഷ്ട രീതിയിൽ നിർവഹിക്കുന്ന
+                മഹത്തായ ഇബാദത്താണ് ഉംറ.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             UMRAH STEPS
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+                🕋 ഉംറയുടെ പ്രധാന ഘട്ടങ്ങൾ
+            </div>
+
+
+            <!-- STEP 1 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    ഇഹ്‌റാം ധരിക്കുക
+                </h3>
+
+                <p>
+                    മീഖാത്തിൽ എത്തുന്നതിന് മുമ്പ്
+                    ഇഹ്‌റാമിൽ പ്രവേശിച്ച് ഉംറയ്ക്കുള്ള
+                    നിയ്യത്ത് ചെയ്യുക.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    തൽബിയ്യത്ത് ചൊല്ലുക
+                </h3>
+
+                <p>
+                    ഉംറയ്ക്കുള്ള നിയ്യത്ത് ചെയ്ത ശേഷം
+                    തൽബിയ്യത്ത് ചൊല്ലിക്കൊണ്ട്
+                    മസ്ജിദുൽ ഹറാമിലേക്ക് പോകുക.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    ത്വവാഫ്
+                </h3>
+
+                <p>
+                    കഅ്ബയെ ചുറ്റി ഏഴ് പ്രാവശ്യം
+                    ത്വവാഫ് ചെയ്യുക.
+                    ത്വവാഫ് പൂർത്തിയാക്കിയ ശേഷം
+                    സാധ്യമെങ്കിൽ രണ്ട് റക്അത്ത്
+                    നമസ്കരിക്കുക.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    4
+                </div>
+
+                <h3>
+                    സഅ്‌യ്
+                </h3>
+
+                <p>
+                    സ്വഫാ മുതൽ മർവ വരെയും
+                    മർവ മുതൽ സ്വഫാ വരെയും
+                    നടന്ന് ഏഴ് പ്രാവശ്യം പൂർത്തിയാക്കുക.
+                    സ്വഫായിൽ ആരംഭിച്ച് മർവയിൽ
+                    ഏഴാമത്തെ ചുറ്റ് അവസാനിക്കും.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 5 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    5
+                </div>
+
+                <h3>
+                    മുടി മുറിക്കുക / കുറയ്ക്കുക
+                </h3>
+
+                <p>
+                    സഅ്‌യ് പൂർത്തിയാക്കിയ ശേഷം
+                    പുരുഷന്മാർ തല മുണ്ഡനം ചെയ്യുകയോ
+                    മുടി കുറയ്ക്കുകയോ ചെയ്യുക.
+                    സ്ത്രീകൾ മുടിയുടെ അറ്റത്തിൽ നിന്ന്
+                    കുറച്ച് മുറിക്കുക.
+                </p>
+
+            </div>
+
+
+            <div class="success">
+
+                <strong>
+                    الحمد لله
+                </strong>
+
+                <br>
+
+                ഇതോടെ ഉംറ പൂർത്തിയാകുന്നു.
+                ഇഹ്‌റാമിന്റെ വിലക്കുകൾ അവസാനിക്കുകയും
+                സാധാരണ വസ്ത്രത്തിലേക്ക് മാറുകയും ചെയ്യാം.
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             BENEFITS
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+                🌿 ഉംറയുടെ മഹത്വവും ഗുണങ്ങളും
+            </div>
+
+
+            <div class="benefit">
+
+                <h3>
+                    🌿 മഹത്തായ ഇബാദത്ത്
+                </h3>
+
+                <p>
+                    അല്ലാഹുവിന്റെ ഭവനമായ കഅ്ബ സന്ദർശിക്കുകയും
+                    ത്വവാഫ്, സഅ്‌യ്, ദുആ, മറ്റ് ഇബാദത്തുകൾ
+                    എന്നിവ നിർവഹിക്കുകയും ചെയ്യുന്നതിനാൽ
+                    ഉംറ ഒരു മഹത്തായ ആരാധനയാണ്.
+                </p>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <h3>
+                    🤲 പാപമോചനത്തിന്റെ മഹത്വം
+                </h3>
+
+                <p>
+                    ഒരു ഉംറ മുതൽ അടുത്ത ഉംറ വരെയുള്ള
+                    ഇടയിൽ സംഭവിക്കുന്ന പാപങ്ങൾക്ക്
+                    ഉംറ പ്രായശ്ചിത്തമാകുമെന്ന്
+                    ഹദീസിൽ വന്നിട്ടുണ്ട്.
+                </p>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <h3>
+                    ❤️ അല്ലാഹുവിലേക്ക് കൂടുതൽ അടുക്കുക
+                </h3>
+
+                <p>
+                    ദുആ, ദിക്റ്, ത്വവാഫ്, സഅ്‌യ് തുടങ്ങിയ
+                    ഇബാദത്തുകളിലൂടെ അല്ലാഹുവിന്റെ
+                    സാമീപ്യം തേടാനുള്ള മഹത്തായ അവസരമാണ്
+                    ഉംറ.
+                </p>
+
+            </div>
+
+
+            <div class="benefit">
+
+                <h3>
+                    🕋 പരിശുദ്ധ ഭവനത്തിന്റെ സന്ദർശനം
+                </h3>
+
+                <p>
+                    മസ്ജിദുൽ ഹറാമിലും കഅ്ബയുടെ
+                    സമീപത്തും ഇബാദത്തിൽ ഏർപ്പെടാനുള്ള
+                    അപൂർവമായ അവസരമാണ് ഉംറ.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NAZYAN TRAVELS
+        ========================= -->
+
+        <section class="nazy">
+
+            <div class="small">
+                NAZYAN TRAVELS
+            </div>
+
+            <h2>
+                🕋 ഉംറ പാക്കേജുകൾ
+            </h2>
+
+            <h3>
+                Group Umrah Package
+            </h3>
+
+            <p>
+                പരിചയസമ്പന്നരായ ഉസ്താദുമാരുടെ
+                നേതൃത്വത്തിൽ ഉംറ നിർവഹിക്കാനുള്ള
+                സൗകര്യം.
+            </p>
+
+            <h3 style="margin-top:15px;">
+                Individual Umrah Package
+            </h3>
+
+            <p>
+                വ്യക്തിഗത ആവശ്യങ്ങൾക്കനുസരിച്ചുള്ള
+                ഉംറ യാത്രാ സൗകര്യം.
+            </p>
+
+            <p class="price">
+                Starting ₹79,800/-
+            </p>
+
+            <p>
+                കുറഞ്ഞ നിരക്കിൽ ഉംറ നിർവഹിക്കാൻ
+                NAZYAN TRAVELS-മായി ബന്ധപ്പെടുക.
+            </p>
+
+            <p style="margin-top:10px;">
+                കുറഞ്ഞ നിരക്കിലുള്ള ഫ്ലൈറ്റ് ടിക്കറ്റുകൾക്കും
+                NAZYAN TRAVELS-നെ ബന്ധപ്പെടുക.
+            </p>
+
+
+            <a
+                class="whatsapp"
+                href="https://wa.me/919946010375"
+                target="_blank"
+            >
+                💬 WhatsApp Enquiry
+            </a>
+
+        </section>
+
+
+        <!-- =========================
+             NOTE
+        ========================= -->
+
+        <div class="note">
+
+            <strong>
+                ശ്രദ്ധിക്കുക:
+            </strong>
+
+            <br>
+
+            ഉംറയുടെ ഓരോ കർമ്മവും ശരിയായ രീതിയിൽ
+            നിർവഹിക്കുന്നതിനായി വിശ്വസനീയരായ
+            പണ്ഡിതരിൽ നിന്നും ഉസ്താദുമാരിൽ നിന്നും
+            ആവശ്യമായ മാർഗനിർദേശം തേടുക.
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © Swalath App
+
+        <br>
+
+        Islamic Guide & Information
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+
+    /* =========================
+       HOME
+    ========================= */
+
+    function goHome(){
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    /* =========================
+       DARK MODE
+    ========================= */
+
+    function toggleDark(){
+
+        document.body.classList.toggle("dark");
+
+        if(
+            document.body.classList.contains("dark")
+        ){
+
+            localStorage.setItem(
+                "swalathDarkMode",
+                "on"
+            );
+
+        } else {
+
+            localStorage.setItem(
+                "swalathDarkMode",
+                "off"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       LOAD DARK MODE
+    ========================= */
+
+    if(
+        localStorage.getItem(
+            "swalathDarkMode"
+        ) === "on"
+    ){
+
+        document.body.classList.add("dark");
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

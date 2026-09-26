@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eee8d9;
+    color: #222;
+}
+
+.app {
+    max-width: 430px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffdf8;
+    box-shadow: 0 0 25px rgba(0,0,0,0.08);
+}
+
+.hero {
+    text-align: center;
+    padding: 38px 20px 32px;
+    background: linear-gradient(145deg, #123d34, #1d5b4c);
+    color: white;
+    border-radius: 0 0 30px 30px;
+}
+
+.moon {
+    font-size: 45px;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    letter-spacing: 4px;
+}
+
+.hero p {
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+main {
+    padding: 20px;
+}
+
+.welcome {
+    text-align: center;
+    padding: 10px 5px 22px;
+}
+
+.welcome h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #777;
+    font-size: 14px;
+}
+
+.today {
+    text-align: center;
+    padding: 25px 18px;
+    background: #f1dfb0;
+    border-radius: 22px;
+    margin-bottom: 20px;
+}
+
+.small-title {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.today h2 {
+    font-size: 55px;
+    margin: 8px 0;
+}
+
+.today p:not(.small-title) {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.today button {
+    border: none;
+    background: #123d34;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 30px;
+    margin-top: 18px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.today button:active {
+    transform: scale(0.97);
+}
+
+.counter {
+    margin-top: 18px;
+}
+
+.counter span {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.counter small {
+    color: #666;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.menu-card {
+    border: 1px solid #e6dfd0;
+    background: white;
+    border-radius: 18px;
+    padding: 20px 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menu-card:hover {
+    transform: translateY(-2px);
+}
+
+.menu-card:first-line {
+    font-size: 25px;
+}
+
+.menu-card strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.menu-card span {
+    display: block;
+    margin-top: 5px;
+    color: #888;
+    font-size: 11px;
+}
+
+.travel {
+    text-align: center;
+    padding: 22px 15px;
+    border-radius: 20px;
+    background: #123d34;
+    color: white;
+}
+
+.travel p {
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.travel h2 {
+    margin: 7px 0;
+    letter-spacing: 1px;
+}
+
+.travel span {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.travel a {
+    display: inline-block;
+    text-decoration: none;
+    background: #f1dfb0;
+    color: #123d34;
+    padding: 11px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 11px;
+}

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="ml">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>സ്വലാത്ത്</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<style>
+
+/* =========================
+   EXTRA FEATURES
+========================= */
+
+.search-box {
+
+    width: 100%;
+
+    padding: 13px 16px;
+
+    border: 1px solid #e6dfd0;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+
+    background: white;
+
+    color: #222;
+
+}
+
+.search-box:focus {
+
+    border-color: #123d34;
+
+}
+
+.feature-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+}
+
+.dark-button {
+
+    border: none;
+
+    background: #123d34;
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+
+    background: #111;
+
+    color: #eee;
+
+}
+
+body.dark-mode .app {
+
+    background: #181818;
+
+}
+
+body.dark-mode .welcome p {
+
+    color: #aaa;
+
+}
+
+body.dark-mode .menu-card {
+
+    background: #222;
+
+    border-color: #444;
+
+    color: #eee;
+
+}
+
+body.dark-mode .menu-card span {
+
+    color: #aaa;
+
+}
+
+body.dark-mode .search-box {
+
+    background: #222;
+
+    color: white;
+
+    border-color: #444;
+
+}
+
+body.dark-mode #collectionSection h2,
+body.dark-mode #favoritesSection h2 {
+
+    color: #fff;
+
+}
+
+body.dark-mode .dark-button {
+
+    background: #f1dfb0;
+
+    color: #123d34;
+
+}
+
+body.dark-mode .favorite-item,
+body.dark-mode .collection-item {
+
+    background: #222 !important;
+
+    border-color: #444 !important;
+
+    color: #fff !important;
+
+}
+
+body.dark-mode footer {
+
+    color: #777;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="moon">
+        🌙
+    </div>
+
+    <h1>
+        സ്വലാത്ത്
+    </h1>
+
+    <p>
+        തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ
+        മനോഹരമായ വഴികൾ
+    </p>
+
+</section>
+
+
+
+<main>
+
+
+<!-- =========================
+     WELCOME
+========================= -->
+
+<section class="welcome">
+
+    <h2>
+        അസ്സലാമു അലൈക്കും
+    </h2>
+
+    <p>
+        സ്വലാത്തുകൾ ചൊല്ലാനും
+        വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     TODAY
+========================= -->
+
+<section class="today">
+
+    <div class="small-title">
+        TODAY
+    </div>
+
+    <h2 id="count">
+        0
+    </h2>
+
+    <p>
+        ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ
+    </p>
+
+    <button
+        onclick="increaseCount()"
+    >
+        ﷺ സ്വലാത്ത് ചൊല്ലി
+    </button>
+
+</section>
+
+
+
+<!-- =========================
+     DARK MODE
+========================= -->
+
+<div class="feature-buttons">
+
+    <button
+        id="darkModeButton"
+        class="dark-button"
+        onclick="toggleDarkMode()"
+    >
+        🌙 Dark Mode
+    </button>
+
+</div>
+
+
+
+<!-- =========================
+     MAIN MENU
+========================= -->
+
+<div class="menu-grid">
+
+
+    <!-- COLLECTION -->
+
+    <div
+        class="menu-card"
+        onclick="openCollection()"
+    >
+
+        <div style="font-size:30px;">
+            📖
+        </div>
+
+        <strong>
+            സ്വലാത്തുകൾ
+        </strong>
+
+        <span>
+            വിവിധ സ്വലാത്തുകൾ വായിക്കാം
+        </span>
+
+    </div>
+
+
+
+    <!-- FAVOURITES -->
+
+    <div
+        class="menu-card"
+        onclick="openFavorites()"
+    >
+
+        <div style="font-size:30px;">
+            ❤️
+        </div>
+
+        <strong>
+            My Favourites
+        </strong>
+
+        <span>
+            Favourite ആയി ചേർത്തവ
+        </span>
+
+    </div>
+
+
+
+    <!-- ASMAUL HUSNA -->
+
+    <div
+        class="menu-card"
+        onclick="openAsmaulHusna()"
+    >
+
+        <div style="font-size:30px;">
+            🕌
+        </div>
+
+        <strong>
+            أَسْمَاءُ الْحُسْنَى
+        </strong>
+
+        <span>
+            أسماء الله الحسنى
+        </span>
+
+    </div>
+
+
+
+    <!-- QURAN -->
+
+    <div
+        class="menu-card"
+        onclick="openQuran()"
+    >
+
+        <div style="font-size:30px;">
+            📖
+        </div>
+
+        <strong>
+            القرآن الكريم
+        </strong>
+
+        <span>
+            ഖുർആൻ
+        </span>
+
+    </div>
+
+
+
+    <!-- =========================
+         UMRAH
+    ========================= -->
+
+    <div
+        class="menu-card"
+        onclick="openUmrah()"
+    >
+
+        <div style="font-size:30px;">
+            🕋
+        </div>
+
+        <strong>
+            ഉംറ
+        </strong>
+
+        <span>
+            ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     COLLECTION
+========================= -->
+
+<section
+    id="collectionSection"
+    style="display:none;"
+>
+
+    <div
+        style="
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-bottom:18px;
+        "
+    >
+
+        <button
+            onclick="closeCollection()"
+            style="
+                border:none;
+                background:#123d34;
+                color:white;
+                padding:9px 15px;
+                border-radius:10px;
+                cursor:pointer;
+            "
+        >
+            ← Back
+        </button>
+
+        <h2 style="margin:0;">
+            സ്വലാത്തുകൾ
+        </h2>
+
+    </div>
+
+
+    <input
+        type="text"
+        id="searchSwalath"
+        class="search-box"
+        placeholder="🔍 സ്വലാത്ത് തിരയുക..."
+        oninput="searchSwalath()"
+    >
+
+
+    <div id="collectionList"></div>
+
+</section>
+
+
+
+<!-- =========================
+     FAVOURITES
+========================= -->
+
+<section
+    id="favoritesSection"
+    style="display:none;"
+>
+
+    <div
+        style="
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-bottom:18px;
+        "
+    >
+
+        <button
+            onclick="closeFavorites()"
+            style="
+                border:none;
+                background:#123d34;
+                color:white;
+                padding:9px 15px;
+                border-radius:10px;
+                cursor:pointer;
+            "
+        >
+            ← Back
+        </button>
+
+        <h2 style="margin:0;">
+            ❤️ My Favourites
+        </h2>
+
+    </div>
+
+
+    <div id="favoritesList"></div>
+
+</section>
+
+
+
+<!-- =========================
+     NAZYAN TRAVELS
+========================= -->
+
+<section
+    id="travelSection"
+    class="travel"
+>
+
+    <p>
+        TRAVEL PARTNER
+    </p>
+
+    <h2>
+        NAZYAN TRAVELS
+    </h2>
+
+    <span>
+        Flight Tickets • Tour Packages
+        <br>
+        Visa • Umrah • Certificate Attestation
+    </span>
+
+
+    <a
+        href="https://wa.me/9946010375"
+        target="_blank"
+    >
+        WhatsApp Enquiry
+    </a>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 Swalath
+    </p>
+
+    <p>
+        Made with ❤️
+    </p>
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =================================================
+   TODAY DATE
+================================================= */
+
+const todayDate =
+    new Date().toISOString().split("T")[0];
+
+
+let savedDate =
+    localStorage.getItem(
+        "swalathCountDate"
+    );
+
+
+let count =
+    Number(
+        localStorage.getItem(
+            "swalathDailyCount"
+        ) || 0
+    );
+
+
+if(savedDate !== todayDate){
+
+    count = 0;
+
+    localStorage.setItem(
+        "swalathCountDate",
+        todayDate
+    );
+
+    localStorage.setItem(
+        "swalathDailyCount",
+        "0"
+    );
+
+}
+
+
+document.getElementById(
+    "count"
+).textContent = count;
+
+
+
+/* =================================================
+   INCREASE COUNTER
+================================================= */
+
+function increaseCount(){
+
+    count++;
+
+    document.getElementById(
+        "count"
+    ).textContent = count;
+
+    localStorage.setItem(
+        "swalathDailyCount",
+        count
+    );
+
+    localStorage.setItem(
+        "swalathCountDate",
+        todayDate
+    );
+
+}
+
+
+
+/* =================================================
+   SWALATH NAMES - 21
+================================================= */
+
+const swalathNames = {
+
+    ibrahimiyya:
+        "സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
+
+    nariya:
+        "സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
+
+    tunjina:
+        "സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ",
+
+    fatih:
+        "സ്വലാത്തുൽ ഫാതിഹ്",
+
+    tibbiyya:
+        "സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ",
+
+    nuraniyya:
+        "സ്വലാത്തുന്നൂറാനിയ്യ",
+
+    saadah:
+        "സ്വലാത്തുസ്സആദ",
+
+    kamaliyya:
+        "സ്വലാത്തുൽ കമാലിയ്യ",
+
+    dhatiyya:
+        "സ്വലാത്തുദ്ദാതിയ്യ",
+
+    jawharat:
+        "ജൗഹറത്തുൽ കമാൽ",
+
+    taj:
+        "ദുറൂദുത്താജ്",
+
+    faraj:
+        "സ്വലാത്തുൽ ഫറജ്",
+
+    bashair:
+        "ബശാഇറുൽ ഖൈറാത്ത്",
+
+    ahlam:
+        "സ്വലാത്തുൽ അഹ്‌ലാം",
+
+    hulo:
+        "സ്വലാത്തുൽ ഹുലൂർ",
+
+    friday:
+        "വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്",
+
+    mashishiyya:
+        "സ്വലാത്തുൽ മശീഷിയ്യ",
+
+    ummiyya:
+        "സ്വലാത്തുൽ ഉമ്മിയ്യ",
+
+    shadhiliyya:
+        "സ്വലാത്തുശ്ശാദിലിയ്യ",
+
+    anwar:
+        "സ്വലാത്തുൽ അന്വാർ",
+
+    yaqutat:
+        "സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്"
+
+};
+
+
+
+/* =================================================
+   OPEN ASMAUL HUSNA
+================================================= */
+
+function openAsmaulHusna(){
+
+    window.location.href =
+        "asmaul-husna.html";
+
+}
+
+
+
+/* =================================================
+   OPEN QURAN
+================================================= */
+
+function openQuran(){
+
+    window.location.href =
+        "quran.html";
+
+}
+
+
+
+/* =================================================
+   OPEN UMRAH
+================================================= */
+
+function openUmrah(){
+
+    window.location.href =
+        "umrah.html";
+
+}
+
+
+
+/* =================================================
+   OPEN COLLECTION
+================================================= */
+
+function openCollection(){
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".today"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".menu-grid"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".feature-buttons"
+    ).style.display = "none";
+
+    document.getElementById(
+        "travelSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "favoritesSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "collectionSection"
+    ).style.display = "block";
+
+    document.getElementById(
+        "searchSwalath"
+    ).value = "";
+
+    loadCollection();
+
+}
+
+
+
+/* =================================================
+   CLOSE COLLECTION
+================================================= */
+
+function closeCollection(){
+
+    document.getElementById(
+        "collectionSection"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "block";
+
+    document.querySelector(
+        ".today"
+    ).style.display = "block";
+
+    document.querySelector(
+        ".menu-grid"
+    ).style.display = "grid";
+
+    document.querySelector(
+        ".feature-buttons"
+    ).style.display = "flex";
+
+    document.getElementById(
+        "travelSection"
+    ).style.display = "block";
+
+}
+
+
+
+/* =================================================
+   LOAD COLLECTION
+================================================= */
+
+function loadCollection(){
+
+    const list =
+        document.getElementById(
+            "collectionList"
+        );
+
+    list.innerHTML = "";
+
+    Object.keys(
+        swalathNames
+    ).forEach(function(key){
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+        item.className =
+            "collection-item";
+
+        item.style.cssText = `
+
+            background:white;
+
+            border:1px solid #e6dfd0;
+
+            border-radius:18px;
+
+            padding:16px;
+
+            margin-bottom:10px;
+
+            cursor:pointer;
+
+            color:#123d34;
+
+            font-weight:bold;
+
+        `;
+
+        item.dataset.name =
+            swalathNames[key]
+            .toLowerCase();
+
+        item.innerHTML =
+            "📖 " +
+            swalathNames[key];
+
+        item.onclick =
+            function(){
+
+                window.location.href =
+                    "swalath.html#" +
+                    key;
+
+            };
+
+        list.appendChild(
+            item
+        );
+
+    });
+
+}
+
+
+
+/* =================================================
+   SEARCH SWALATH
+================================================= */
+
+function searchSwalath(){
+
+    const input =
+        document.getElementById(
+            "searchSwalath"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards =
+        document.querySelectorAll(
+            ".collection-item"
+        );
+
+    cards.forEach(
+        function(card){
+
+            const text =
+                card.dataset.name;
+
+            if(
+                text.includes(input)
+            ){
+
+                card.style.display =
+                    "block";
+
+            }else{
+
+                card.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =================================================
+   OPEN FAVOURITES
+================================================= */
+
+function openFavorites(){
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".today"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".menu-grid"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".feature-buttons"
+    ).style.display = "none";
+
+    document.getElementById(
+        "collectionSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "travelSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "favoritesSection"
+    ).style.display = "block";
+
+    loadFavorites();
+
+}
+
+
+
+/* =================================================
+   CLOSE FAVOURITES
+================================================= */
+
+function closeFavorites(){
+
+    document.getElementById(
+        "favoritesSection"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "block";
+
+    document.querySelector(
+        ".today"
+    ).style.display = "block";
+
+    document.querySelector(
+        ".menu-grid"
+    ).style.display = "grid";
+
+    document.querySelector(
+        ".feature-buttons"
+    ).style.display = "flex";
+
+    document.getElementById(
+        "travelSection"
+    ).style.display = "block";
+
+}
+
+
+
+/* =================================================
+   LOAD FAVOURITES
+================================================= */
+
+function loadFavorites(){
+
+    const list =
+        document.getElementById(
+            "favoritesList"
+        );
+
+    list.innerHTML = "";
+
+    const favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "swalathFavorites"
+            ) || "[]"
+        );
+
+
+    if(
+        favorites.length === 0
+    ){
+
+        list.innerHTML = `
+
+            <div
+                style="
+                    text-align:center;
+                    padding:25px;
+                    color:#777;
+                    background:white;
+                    border-radius:14px;
+                "
+            >
+
+                ഇതുവരെ Favourite ഒന്നുമില്ല ❤️
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    favorites.forEach(
+        function(key){
+
+            const name =
+                swalathNames[key];
+
+            if(!name){
+
+                return;
+
+            }
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "favorite-item";
+
+            item.style.cssText = `
+
+                background:white;
+
+                border:1px solid #e6dfd0;
+
+                border-radius:18px;
+
+                padding:16px;
+
+                margin-bottom:10px;
+
+                cursor:pointer;
+
+                color:#123d34;
+
+                font-weight:bold;
+
+            `;
+
+            item.innerHTML =
+                "❤️ " + name;
+
+            item.onclick =
+                function(){
+
+                    window.location.href =
+                        "swalath.html#" +
+                        key;
+
+                };
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =================================================
+   DARK MODE
+================================================= */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+
+    const enabled =
+        document.body.classList.contains(
+            "dark-mode"
+        );
+
+    localStorage.setItem(
+        "swalathDarkMode",
+        enabled
+    );
+
+    updateDarkButton();
+
+}
+
+
+
+/* =================================================
+   DARK MODE BUTTON TEXT
+================================================= */
+
+function updateDarkButton(){
+
+    const button =
+        document.getElementById(
+            "darkModeButton"
+        );
+
+    if(
+        document.body.classList.contains(
+            "dark-mode"
+        )
+    ){
+
+        button.textContent =
+            "☀️ Light Mode";
+
+    }else{
+
+        button.textContent =
+            "🌙 Dark Mode";
+
+    }
+
+}
+
+
+
+/* =================================================
+   LOAD DARK MODE
+================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const darkMode =
+            localStorage.getItem(
+                "swalathDarkMode"
+            );
+
+        if(
+            darkMode === "true"
+        ){
+
+            document.body.classList.add(
+                "dark-mode"
+            );
+
+        }
+
+        updateDarkButton();
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

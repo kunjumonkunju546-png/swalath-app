@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>സ്വലാത്ത് ശേഖരം</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Malayalam",sans-serif;
+    background:#f5f1e8;
+    color:#26352d;
+}
+
+.app{
+    max-width:430px;
+    margin:auto;
+    min-height:100vh;
+    background:#fffdf8;
+    box-shadow:0 0 20px rgba(0,0,0,.08);
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#064e3b,#0b6b50);
+    color:white;
+    padding:22px 18px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header p{
+    margin:7px 0 0;
+    font-size:14px;
+    opacity:.9;
+}
+
+/* HOME */
+
+.home-button{
+    display:block;
+    margin:15px;
+    padding:13px;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    background:#b58b32;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* SEARCH */
+
+.search-box{
+    padding:15px;
+}
+
+.search-box input{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#b58b32;
+}
+
+/* COLLECTION */
+
+.collection{
+    padding:0 15px 25px;
+}
+
+.collection-title{
+    text-align:center;
+    font-size:19px;
+    font-weight:bold;
+    color:#07543f;
+    margin:5px 0 18px;
+}
+
+.swalath-card{
+    background:white;
+    border:1px solid #e5ddcc;
+    border-radius:14px;
+    padding:17px;
+    margin-bottom:12px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.swalath-card:hover{
+    border-color:#c29a45;
+}
+
+.swalath-card h3{
+    margin:0;
+    font-size:16px;
+    color:#164f3d;
+}
+
+.swalath-card span{
+    display:block;
+    margin-top:6px;
+    font-size:12px;
+    color:#8a7651;
+}
+
+/* DETAIL */
+
+.detail{
+    display:none;
+    padding:15px;
+}
+
+.back-button{
+    border:0;
+    background:#07543f;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-bottom:15px;
+}
+
+.detail-card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    border:1px solid #e4dccb;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.detail-title{
+    text-align:center;
+    color:#07543f;
+    margin:0 0 20px;
+    font-size:22px;
+}
+
+/* ARABIC */
+
+.arabic{
+    direction:rtl;
+    text-align:center;
+    font-size:27px;
+    line-height:2.1;
+    color:#172b23;
+    background:#faf7ef;
+    padding:20px 12px;
+    border-radius:14px;
+    margin-bottom:12px;
+    white-space:pre-line;
+}
+
+/* COUNT */
+
+.counter-box{
+    text-align:center;
+    background:#f1eadb;
+    padding:15px;
+    border-radius:14px;
+    margin-bottom:18px;
+}
+
+.count-number{
+    font-size:30px;
+    font-weight:bold;
+    color:#07543f;
+    margin-bottom:10px;
+}
+
+.count-button{
+    width:100%;
+    border:0;
+    background:#07543f;
+    color:white;
+    padding:14px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.reset-button{
+    margin-top:8px;
+    border:0;
+    background:#ddd4c1;
+    color:#403b31;
+    padding:9px 15px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+/* SECTIONS */
+
+.section{
+    margin-top:18px;
+}
+
+.section-title{
+    font-size:17px;
+    font-weight:bold;
+    color:#07543f;
+    margin-bottom:8px;
+}
+
+.section-content{
+    background:#faf7ef;
+    padding:14px;
+    border-radius:12px;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.fadheela{
+    background:#f4ead3;
+    border-left:4px solid #b58b32;
+}
+
+/* FAVOURITE */
+
+.favorite-button{
+    width:100%;
+    margin-top:18px;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #c9aa68;
+    background:white;
+    color:#7b5d21;
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.favorite-button.active{
+    background:#b58b32;
+    color:white;
+}
+
+/* PDF */
+
+.pdf-button{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#07543f;
+    color:white;
+    padding:14px;
+    border-radius:12px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#817965;
+    font-size:12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="header">
+
+    <h1>🌿 സ്വലാത്ത് ശേഖരം</h1>
+
+    <p>സ്വലാത്തുകൾ • ദിക്ർ • ആത്മീയ സമാധാനം</p>
+
+</div>
+
+
+<a href="index.html" class="home-button">
+    🏠 Home
+</a>
+
+
+<div id="collectionPage">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 സ്വലാത്ത് തിരയുക..."
+            oninput="searchSwalath()">
+
+    </div>
+
+
+    <div class="collection">
+
+        <div class="collection-title">
+            📖 21 സ്വലാത്തുകളുടെ ശേഖരം
+        </div>
+
+
+        <div class="swalath-card" onclick="openSwalath('ibrahimiyya')">
+            <h3>സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ</h3>
+            <span>Swalath Ibrahimiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('nariya')">
+            <h3>സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ</h3>
+            <span>Salat Nariya / Tafrijiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('tunjina')">
+            <h3>സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ</h3>
+            <span>Salat Tunjina / Munjiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('fatih')">
+            <h3>സ്വലാത്തുൽ ഫാതിഹ്</h3>
+            <span>Salat al-Fatih</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('tibbiyya')">
+            <h3>സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ</h3>
+            <span>Salat Tibbiyya / Shifa</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('nuraniyya')">
+            <h3>സ്വലാത്തുന്നൂറാനിയ്യ</h3>
+            <span>Salat Nuraniyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('saadah')">
+            <h3>സ്വലാത്തുസ്സആദ</h3>
+            <span>Salat Saadah</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('kamaliyya')">
+            <h3>സ്വലാത്തുൽ കമാലിയ്യ</h3>
+            <span>Salat Kamaliyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('dhatiyya')">
+            <h3>സ്വലാത്തുദ്ദാതിയ്യ</h3>
+            <span>Salat Dhatiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('jawharat')">
+            <h3>ജൗഹറത്തുൽ കമാൽ</h3>
+            <span>Jawharat al-Kamal</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('taj')">
+            <h3>ദുറൂദുത്താജ്</h3>
+            <span>Durood Taj</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('faraj')">
+            <h3>സ്വലാത്തുൽ ഫറജ്</h3>
+            <span>Salat al-Faraj</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('bashair')">
+            <h3>ബശാഇറുൽ ഖൈറാത്ത്</h3>
+            <span>Bashairul Khairat</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('ahlam')">
+            <h3>സ്വലാത്തുൽ അഹ്‌ലാം</h3>
+            <span>Salat al-Ahlam</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('hulo')">
+            <h3>സ്വലാത്തുൽ ഹുലൂർ</h3>
+            <span>Salat al-Hulo</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('friday')">
+            <h3>വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്</h3>
+            <span>Friday Swalath</span>
+        </div>
+
+
+        <!-- NEW 5 -->
+
+        <div class="swalath-card" onclick="openSwalath('mashishiyya')">
+            <h3>സ്വലാത്തുൽ മശീഷിയ്യ</h3>
+            <span>Salat al-Mashishiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('ummiyya')">
+            <h3>സ്വലാത്തുൽ ഉമ്മിയ്യ</h3>
+            <span>Salat al-Ummiyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('shadhiliyya')">
+            <h3>സ്വലാത്തുശ്ശാദിലിയ്യ</h3>
+            <span>Salat al-Shadhiliyya</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('anwar')">
+            <h3>സ്വലാത്തുൽ അന്വാർ</h3>
+            <span>Salat al-Anwar</span>
+        </div>
+
+        <div class="swalath-card" onclick="openSwalath('yaqutat')">
+            <h3>സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്</h3>
+            <span>Salat Yaqutat al-Haqaiq</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DETAIL -->
+
+<div id="detailPage" class="detail">
+
+    <button class="back-button" onclick="goBack()">
+        ← സ്വലാത്തുകളുടെ പട്ടിക
+    </button>
+
+    <div class="detail-card">
+
+        <h2 id="detailTitle" class="detail-title"></h2>
+
+        <div id="arabicText" class="arabic"></div>
+
+
+        <div class="counter-box">
+
+            <div id="countNumber" class="count-number">
+                0
+            </div>
+
+            <button class="count-button" onclick="countSwalath()">
+                📿 ചൊല്ലി — Count കൂട്ടുക
+            </button>
+
+            <button class="reset-button" onclick="resetCount()">
+                Reset
+            </button>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+                🗣️ മലയാളം ഉച്ചാരണം
+            </div>
+
+            <div id="pronunciationText" class="section-content"></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+                📖 മലയാളം അർത്ഥം
+            </div>
+
+            <div id="meaningText" class="section-content"></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+                🌿 ചൊല്ലുന്നതിന്റെ ഗുണങ്ങൾ / ഫദീലത്ത്
+            </div>
+
+            <div id="fadheelaText" class="section-content fadheela"></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-title">
+                📚 ഉറവിടം / കുറിപ്പ്
+            </div>
+
+            <div id="sourceText" class="section-content"></div>
+
+        </div>
+
+
+        <button
+            id="favoriteButton"
+            class="favorite-button"
+            onclick="favoriteSwalath()">
+
+            ♡ Favourite ആയി ചേർക്കുക
+
+        </button>
+
+
+        <div id="pdfArea"></div>
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+
+    🌿 സ്വലാത്ത് ശേഖരം<br>
+    Allahumma Salli Ala Sayyidina Muhammad ﷺ
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   SWALATH DATA
+========================================== */
+
+const swalathData = {
+
+ibrahimiyya:{
+name:"സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ،
+كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ،
+إِنَّكَ حَمِيدٌ مَجِيدٌ.
+اللَّهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ،
+كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ،
+إِنَّكَ حَمِيدٌ مَجِيدٌ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ മുഹമ്മദിൻ വഅലാ ആലി മുഹമ്മദിൻ, കമാ സ്വല്ലയ്ത അലാ ഇബ്രാഹീമ വഅലാ ആലി ഇബ്രാഹീമ, ഇന്നക ഹമീദും മജീദ്. അല്ലാഹുമ്മ ബാരിക് അലാ മുഹമ്മദിൻ വഅലാ ആലി മുഹമ്മദിൻ, കമാ ബാരക്ത അലാ ഇബ്രാഹീമ വഅലാ ആലി ഇബ്രാഹീമ, ഇന്നക ഹമീദും മജീദ്.",
+
+meaning:"അല്ലാഹുവേ, ഇബ്രാഹീമിനും അദ്ദേഹത്തിന്റെ കുടുംബത്തിനും നീ അനുഗ്രഹം നൽകിയതുപോലെ മുഹമ്മദ് നബിക്കും അദ്ദേഹത്തിന്റെ കുടുംബത്തിനും അനുഗ്രഹം നൽകേണമേ. തീർച്ചയായും നീ സ്തുത്യർഹനും മഹത്വമുള്ളവനുമാകുന്നു.",
+
+fadheela:"നബി ﷺ പഠിപ്പിച്ച സ്വലാത്തിന്റെ പ്രസിദ്ധമായ രൂപമാണിത്. നബി ﷺ യുടെ മേൽ സ്വലാത്ത് അയയ്ക്കുന്നതിന്റെ മഹത്തായ പ്രതിഫലത്തെക്കുറിച്ച് ഹദീസുകൾ വന്നിട്ടുണ്ട്.",
+
+source:"സഹീഹ് അൽ-ബുഖാരി, സഹീഹ് മുസ്ലിം എന്നിവയിലെ സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യയുടെ നിവേദനങ്ങൾ."
+},
+
+
+nariya:{
+name:"സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَىٰ سَيِّدِنَا مُحَمَّدٍ،
+الَّذِي تَنْحَلُّ بِهِ الْعُقَدُ،
+وَتَنْفَرِجُ بِهِ الْكُرَبُ،
+وَتُقْضَىٰ بِهِ الْحَوَائِجُ،
+وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِيمِ،
+وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيمِ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ فِي كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُومٍ لَكَ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി സ്വലാത്തൻ കാമിലതൻ വസല്ലിം സലാമൻ താമ്മൻ അലാ സയ്യിദിനാ മുഹമ്മദിൻ, അൽലദീ തൻഹല്ലു ബിഹിൽ ഉഖദ്, വതൻഫരിജു ബിഹിൽ കുരബ്, വതുഖ്ദാ ബിഹിൽ ഹവാഇജ്, വതുനാലു ബിഹിർ റഗാഇബ് വഹുസ്നുൽ ഖവാതിം.",
+
+meaning:"അല്ലാഹുവേ, ഞങ്ങളുടെ നേതാവായ മുഹമ്മദ് നബിയുടെ മേൽ പൂർണ്ണമായ സ്വലാത്തും സമ്പൂർണ്ണമായ സലാമും വർഷിക്കേണമേ. അവിടുത്തെ മുഖേന പ്രയാസങ്ങൾ നീങ്ങുകയും ആവശ്യങ്ങൾ നിറവേറുകയും നല്ല പര്യവസാനം ലഭിക്കുകയും ചെയ്യണമേ എന്ന പ്രാർത്ഥനയാണ്.",
+
+fadheela:"പ്രയാസങ്ങളും വിഷമങ്ങളും നീങ്ങാനും ആവശ്യങ്ങൾ നിറവേറാനും വേണ്ടി വ്യാപകമായി ചൊല്ലിവരുന്ന പ്രസിദ്ധമായ സ്വലാത്താണ്.",
+
+source:"പിന്നീടുള്ള പണ്ഡിതപരമ്പരയിൽ പ്രസിദ്ധമായ സ്വലാത്ത്."
+},
+
+
+tunjina:{
+name:"സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُنْجِينَا بِهَا مِنْ جَمِيعِ الْأَهْوَالِ وَالْآفَاتِ،
+وَتَقْضِي لَنَا بِهَا جَمِيعَ الْحَاجَاتِ،
+وَتُطَهِّرُنَا بِهَا مِنْ جَمِيعِ السَّيِّئَاتِ،
+وَتَرْفَعُنَا بِهَا عِنْدَكَ أَعْلَى الدَّرَجَاتِ،
+وَتُبَلِّغُنَا بِهَا أَقْصَى الْغَايَاتِ مِنْ جَمِيعِ الْخَيْرَاتِ فِي الْحَيَاةِ وَبَعْدَ الْمَمَاتِ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ സ്വലാതൻ തുനജ്ജീനാ ബിഹാ മിൻ ജമീഇൽ അഹ്‌വാലി വൽ ആഫാത്, വതഖ്ദീ ലനാ ബിഹാ ജമീഅൽ ഹാജാത്, വതുതഹ്ഹിറുനാ ബിഹാ മിൻ ജമീഇസ്സയ്യിആത്, വതർഫഅുനാ ബിഹാ ഇന്ദക അഅ്ലദ്ദറജാത്.",
+
+meaning:"എല്ലാ ഭയങ്ങളിൽ നിന്നും വിപത്തുകളിൽ നിന്നും രക്ഷിക്കാനും ആവശ്യങ്ങൾ നിറവേറ്റാനും പാപങ്ങളിൽ നിന്ന് ശുദ്ധീകരിക്കാനും ഉയർന്ന പദവികളിലേക്ക് ഉയർത്താനും നന്മകളിലേക്ക് എത്തിക്കാനും വേണ്ടി ചൊല്ലുന്ന പ്രാർത്ഥനാരൂപത്തിലുള്ള സ്വലാത്താണ്.",
+
+fadheela:"പ്രയാസങ്ങളിൽ നിന്നും വിപത്തുകളിൽ നിന്നും രക്ഷ തേടിയും ആവശ്യങ്ങൾ നിറവേറണമെന്ന പ്രാർത്ഥനയോടെയും ചൊല്ലിവരുന്നു.",
+
+source:"പിന്നീടുള്ള പണ്ഡിതപരമ്പരയിൽ പ്രസിദ്ധമായ ദുആയും സ്വലാത്തും."
+},
+
+
+fatih:{
+name:"സ്വലാത്തുൽ ഫാതിഹ്",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ الْفَاتِحِ لِمَا أُغْلِقَ،
+وَالْخَاتِمِ لِمَا سَبَقَ،
+نَاصِرِ الْحَقِّ بِالْحَقِّ،
+وَالْهَادِي إِلَىٰ صِرَاطِكَ الْمُسْتَقِيمِ،
+وَعَلَىٰ آلِهِ حَقَّ قَدْرِهِ وَمِقْدَارِهِ الْعَظِيمِ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ അൽ ഫാതിഹി ലിമാ ഉഘ്‌ലിഖ്, വൽ ഖാതിമി ലിമാ സബഖ്, നാസിരിൽ ഹഖ്ഖി ബിൽ ഹഖ്, വൽ ഹാദീ ഇലാ സ്വിറാത്വികൽ മുസ്തഖീം.",
+
+meaning:"അടഞ്ഞുകിടന്നതിനെ തുറന്നവനും മുമ്പുണ്ടായതിന്റെ സമാപകനുമായ, സത്യത്തെ സത്യത്തിലൂടെ സഹായിക്കുന്നവനും നിന്റെ നേരായ പാതയിലേക്ക് വഴികാട്ടിയുമായ മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്ത് വർഷിക്കേണമേ.",
+
+fadheela:"ചില പണ്ഡിതപരമ്പരകളിൽ പ്രത്യേക പ്രാധാന്യത്തോടെ ചൊല്ലിവരുന്ന സ്വലാത്താണ്.",
+
+source:"പിന്നീടുള്ള ആത്മീയ പാരമ്പര്യങ്ങളിൽ പ്രസിദ്ധമായ സ്വലാത്ത്."
+},
+
+
+tibbiyya:{
+name:"സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ طِبِّ الْقُلُوبِ وَدَوَائِهَا،
+وَعَافِيَةِ الْأَبْدَانِ وَشِفَائِهَا،
+وَنُورِ الْأَبْصَارِ وَضِيَائِهَا،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ തിബ്ബിൽ ഖുലൂബി വദവാഇഹാ, വആഫിയതിൽ അബ്‌ദാനി വശിഫാഇഹാ, വനൂരിൽ അബ്സാരി വദിയാഇഹാ, വഅലാ ആലിഹി വസ്വഹ്ബിഹി വസല്ലിം.",
+
+meaning:"ഹൃദയങ്ങളുടെ ഔഷധവും ശരീരങ്ങളുടെ ആരോഗ്യവും രോഗശമനവും കണ്ണുകളുടെ പ്രകാശവുമായ മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്ത് വർഷിക്കേണമേ.",
+
+fadheela:"രോഗശമനത്തിനും ആരോഗ്യത്തിനും വേണ്ടി പ്രാർത്ഥനയായി ചൊല്ലിവരുന്ന പ്രസിദ്ധമായ സ്വലാത്താണ്.",
+
+source:"പിന്നീടുള്ള പണ്ഡിതപരമ്പരയിൽ പ്രസിദ്ധമായ സ്വലാത്ത്."
+},
+
+
+nuraniyya:{
+name:"സ്വലാത്തുന്നൂറാനിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ نُورِ الْأَنْوَارِ،
+وَسِرِّ الْأَسْرَارِ،
+وَسَيِّدِ الْأَبْرَارِ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ മുഹമ്മദിൻ നൂറിൽ അൻവാർ, വസിർറിൽ അസ്റാർ, വസയ്യിദിൽ അബ്രാർ, വഅലാ ആലിഹി വസ്വഹ്ബിഹി അജ്മഈൻ.",
+
+meaning:"പ്രകാശങ്ങളുടെ പ്രകാശവും സദ്‌വൃത്തരുടെ നേതാവുമായ മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്തും സലാമും ബറകത്തും നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യോടുള്ള സ്നേഹവും ആദരവും പ്രകടിപ്പിക്കുന്നതിനായി ചൊല്ലിവരുന്ന സ്വലാത്താണ്.",
+
+source:"പിന്നീടുള്ള സ്വലാത്ത് സമാഹാരങ്ങളിലും പണ്ഡിതപരമ്പരകളിലും കാണപ്പെടുന്ന രൂപം."
+},
+
+
+saadah:{
+name:"സ്വലാത്തുസ്സആദ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِ سَيِّدِنَا مُحَمَّدٍ،
+وَسَلِّمْ تَسْلِيمًا كَثِيرًا.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ വഅലാ ആലി സയ്യിദിനാ മുഹമ്മദ്, വസല്ലിം തസ്ലീമൻ കസീറാ.",
+
+meaning:"ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെയും കുടുംബത്തിന്റെയും മേൽ സ്വലാത്ത് വർഷിക്കേണമേ, ധാരാളം സലാം നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യുടെ മേൽ ധാരാളമായി സ്വലാത്ത് അയയ്ക്കാനുള്ള ലളിതമായ പ്രാർത്ഥനയായി ചൊല്ലാം.",
+
+source:"സ്വലാത്ത് സമാഹാരങ്ങളിൽ കാണപ്പെടുന്ന പ്രാർത്ഥനാരൂപം."
+},
+
+
+kamaliyya:{
+name:"സ്വലാത്തുൽ കമാലിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ،
+الْكَامِلِ الْمُكَمَّلِ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ മുഹമ്മദിൻ, അൽ കാമിലിൽ മുകമ്മൽ, വഅലാ ആലിഹി വസ്വഹ്ബിഹി അജ്മഈൻ.",
+
+meaning:"പൂർണ്ണത പ്രാപിച്ച ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്തും സലാമും ബറകത്തും നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യോടുള്ള സ്നേഹവും ആദരവും പ്രകടിപ്പിക്കുന്നതിനായി ചൊല്ലിവരുന്ന സ്വലാത്ത്.",
+
+source:"പിന്നീടുള്ള സ്വലാത്ത് സമാഹാരങ്ങളിൽ കാണുന്ന രൂപം."
+},
+
+
+dhatiyya:{
+name:"സ്വലാത്തുദ്ദാതിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِ سَيِّدِنَا مُحَمَّدٍ،
+صَلَاةً تَلِيقُ بِذَاتِكَ الْكَرِيمَةِ،
+وَتُقَرِّبُنَا بِهَا إِلَيْكَ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ വഅലാ ആലി സയ്യിദിനാ മുഹമ്മദ്, സ്വലാതൻ തലീഖു ബിദാതികൽ കരീമ, വതുഖരിബുനാ ബിഹാ ഇലൈക്.",
+
+meaning:"നിന്റെ മഹത്തായ സത്തയ്ക്ക് യോജിച്ച രീതിയിൽ മുഹമ്മദ് നബിയുടെയും കുടുംബത്തിന്റെയും മേൽ സ്വലാത്ത് വർഷിക്കേണമേ; അതിലൂടെ ഞങ്ങളെ നിന്നിലേക്ക് അടുപ്പിക്കേണമേ.",
+
+fadheela:"അല്ലാഹുവിനോടുള്ള അടുപ്പവും നബി ﷺ യോടുള്ള സ്നേഹവും ലക്ഷ്യമാക്കി ചൊല്ലിവരുന്ന സ്വലാത്ത്.",
+
+source:"സ്വലാത്ത് പാരമ്പര്യങ്ങളിൽ കാണപ്പെടുന്ന പ്രാർത്ഥനാരൂപം."
+},
+
+
+jawharat:{
+name:"ജൗഹറത്തുൽ കമാൽ",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ عَيْنِ الرَّحْمَةِ الرَّبَّانِيَّةِ،
+وَالْيَاقُوتَةِ الْمُتَحَقِّقَةِ،
+وَنُورِ الْأَكْوَانِ،
+وَسَيِّدِنَا مُحَمَّدٍ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം അലാ ഐനിർ റഹ്മതിറബ്ബാനിയ്യ, വൽ യാഖൂതതിൽ മുതഹഖ്ഖിഖ, വനൂരിൽ അക്വാൻ, വസയ്യിദിനാ മുഹമ്മദ്, വഅലാ ആലിഹി വസ്വഹ്ബിഹി.",
+
+meaning:"റബ്ബാനിയായ കരുണയുടെ ഉറവിടമായ മുഹമ്മദ് നബി ﷺ യുടെ മേൽ സ്വലാത്തും സലാമും അർപ്പിക്കുന്ന പ്രസിദ്ധമായ സ്വലാത്താണ്.",
+
+fadheela:"ചില ആത്മീയ പാരമ്പര്യങ്ങളിൽ പ്രത്യേക വിർദായി ചൊല്ലിവരുന്നു.",
+
+source:"തിജാനിയ്യ പാരമ്പര്യത്തിൽ പ്രത്യേകമായി പ്രസിദ്ധമായ സ്വലാത്ത്."
+},
+
+
+taj:{
+name:"ദുറൂദുത്താജ്",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا وَمَوْلَانَا مُحَمَّدٍ،
+صَاحِبِ التَّاجِ وَالْمِعْرَاجِ وَالْبُرَاقِ وَالرَّايَةِ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ വമൗലാനാ മുഹമ്മദിൻ, സ്വാഹിബിത്താജി വൽ മിഅ്റാജി വൽ ബുറാഖി വറ്രായ, വഅലാ ആലിഹി വസ്വഹ്ബിഹി വസല്ലിം.",
+
+meaning:"ഞങ്ങളുടെ നേതാവും മൗലായുമായ മുഹമ്മദ് നബിയുടെ മേൽ അല്ലാഹുവേ സ്വലാത്ത് നൽകേണമേ; അവിടുത്തെ കുടുംബത്തിനും സഹാബിമാർക്കും സലാം നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യുടെ മഹത്വവും മിഅ്റാജും ഓർമ്മപ്പെടുത്തി ചൊല്ലിവരുന്ന പ്രസിദ്ധമായ ദുറൂദാണ്.",
+
+source:"പിന്നീടുള്ള സ്വലാത്ത് പാരമ്പര്യങ്ങളിൽ പ്രസിദ്ധമായ ദുറൂദ്."
+},
+
+
+faraj:{
+name:"സ്വലാത്തുൽ ഫറജ്",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ صَلَاةً تُفَرِّجُ بِهَا عَنَّا الْهُمُومَ وَالْكُرُوبَ،
+وَتَقْضِي بِهَا الْحَوَائِجَ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ സ്വലാതൻ തുഫരിജു ബിഹാ അന്നൽ ഹുമൂമ വൽ കുരൂബ്, വതഖ്ദീ ബിഹൽ ഹവാഇജ്, വഅലാ ആലിഹി വസ്വഹ്ബിഹി വസല്ലിം.",
+
+meaning:"ഞങ്ങളുടെ വിഷമങ്ങളും പ്രയാസങ്ങളും നീങ്ങാനും ആവശ്യങ്ങൾ നിറവേറാനും കാരണമാകുന്ന സ്വലാത്ത് ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെ മേൽ വർഷിക്കേണമേ.",
+
+fadheela:"വിഷമങ്ങളിലും പ്രയാസങ്ങളിലും ആശ്വാസം തേടി ചൊല്ലിവരുന്ന സ്വലാത്താണ്.",
+
+source:"പിന്നീടുള്ള സ്വലാത്ത് പാരമ്പര്യങ്ങളിൽ കാണപ്പെടുന്ന പ്രാർത്ഥനാരൂപം."
+},
+
+
+bashair:{
+name:"ബശാഇറുൽ ഖൈറാത്ത്",
+
+arabic:`
+بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+`,
+
+pronunciation:"ബിസ്മില്ലാഹിർ റഹ്മാനിർ റഹീം.",
+
+meaning:"പരമകാരുണികനും കരുണാനിധിയുമായ അല്ലാഹുവിന്റെ നാമത്തിൽ.",
+
+fadheela:"ബശാഇറുൽ ഖൈറാത്ത് ഒരു വിപുലമായ സ്വലാത്ത് സമാഹാരമാണ്. പൂർണ്ണമായ പാരായണം PDF ആയി നൽകുന്നു.",
+
+source:"ബശാഇറുൽ ഖൈറാത്ത് — പൂർണ്ണ PDF താഴെയുള്ള ബട്ടണിലൂടെ തുറക്കാം."
+},
+
+
+ahlam:{
+name:"സ്വലാത്തുൽ അഹ്‌ലാം",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ،
+صَلَاةً تَجْعَلُ لَنَا بِهَا فَرَجًا مِنْ كُلِّ هَمٍّ،
+وَمَخْرَجًا مِنْ كُلِّ ضِيقٍ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ, സ്വലാതൻ തജ്അലു ലനാ ബിഹാ ഫറജൻ മിൻ കുല്ലി ഹമ്മിൻ, വമഖ്റജൻ മിൻ കുല്ലി ദ്വീഖ്, വഅലാ ആലിഹി വസ്വഹ്ബിഹി വസല്ലിം.",
+
+meaning:"എല്ലാ വിഷമങ്ങളിൽ നിന്നും ആശ്വാസവും എല്ലാ പ്രയാസങ്ങളിൽ നിന്നും പുറത്തേക്കുള്ള വഴിയും ലഭിക്കാനായി മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്ത് വർഷിക്കേണമേ.",
+
+fadheela:"വിഷമങ്ങളിൽ ആശ്വാസം തേടി ചൊല്ലിവരുന്ന പ്രാർത്ഥനാരൂപത്തിലുള്ള സ്വലാത്ത്.",
+
+source:"സ്വലാത്ത് പാരമ്പര്യങ്ങളിൽ കാണപ്പെടുന്ന രൂപം."
+},
+
+
+hulo:{
+name:"സ്വലാത്തുൽ ഹുലൂർ",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ മുഹമ്മദിൻ, വഅലാ ആലിഹി വസ്വഹ്ബിഹി അജ്മഈൻ.",
+
+meaning:"ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെ മേൽ അല്ലാഹുവേ സ്വലാത്തും സലാമും ബറകത്തും നൽകേണമേ; അവിടുത്തെ കുടുംബത്തിനും മുഴുവൻ സഹാബിമാർക്കും നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യെ ഓർത്ത് സ്വലാത്ത് വർദ്ധിപ്പിക്കുന്നതിനായി ചൊല്ലാവുന്ന ലളിതമായ രൂപം.",
+
+source:"സ്വലാത്ത് പാരമ്പര്യങ്ങളിൽ ഉപയോഗിക്കുന്ന പ്രാർത്ഥനാരൂപം."
+},
+
+
+friday:{
+name:"വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ،
+وَعَلَىٰ آلِ سَيِّدِنَا مُحَمَّدٍ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ മുഹമ്മദിൻ, വഅലാ ആലി സയ്യിദിനാ മുഹമ്മദ്.",
+
+meaning:"അല്ലാഹുവേ, ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെയും കുടുംബത്തിന്റെയും മേൽ സ്വലാത്തും സലാമും ബറകത്തും നൽകേണമേ.",
+
+fadheela:"വെള്ളിയാഴ്ച നബി ﷺ യുടെ മേൽ കൂടുതൽ സ്വലാത്ത് ചൊല്ലാൻ പ്രോത്സാഹിപ്പിക്കുന്ന ഹദീസ് നിവേദനങ്ങൾ വന്നിട്ടുണ്ട്.",
+
+source:"വെള്ളിയാഴ്ച സ്വലാത്ത് വർദ്ധിപ്പിക്കുന്നതിനെ സംബന്ധിച്ച ഹദീസ് നിവേദനങ്ങൾ വിവിധ ഹദീസ് ഗ്രന്ഥങ്ങളിൽ കാണാം."
+},
+
+
+/* ==========================================
+   17. MASHISHIYYA
+========================================== */
+
+mashishiyya:{
+name:"സ്വലാത്തുൽ മശീഷിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَى مَنْ مِنْهُ انْشَقَّتِ الْأَسْرَارُ،
+وَانْفَلَقَتِ الْأَنْوَارُ،
+وَفِيهِ ارْتَقَتِ الْحَقَائِقُ،
+وَتَنَزَّلَتْ عُلُومُ آدَمَ فَأَعْجَزَ الْخَلَائِقِ،
+وَلَهُ تَضَاءَلَتِ الْفُهُومُ،
+فَلَمْ يُدْرِكْهُ مِنَّا سَابِقٌ وَلَا لَاحِقٌ،
+فَرِيَاضُ الْمَلَكُوتِ بِزَهْرِ جَمَالِهِ مُونِقَةٌ،
+وَحِيَاضُ الْجَبَرُوتِ بِفَيْضِ أَنْوَارِهِ مُتَدَفِّقَةٌ،
+وَلَا شَيْءَ إِلَّا وَهُوَ بِهِ مَنُوطٌ،
+إِذْ لَوْلَا الْوَاسِطَةُ لَذَهَبَ الْمَوْسُوطُ،
+صَلَاةً تَلِيقُ بِكَ مِنْكَ إِلَيْهِ كَمَا هُوَ أَهْلُهُ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ മൻ മിൻഹു ഇൻശഖ്ഖതിൽ അസ്റാർ, വൻഫലഖതിൽ അൻവാർ, വഫീഹിർതഖതിൽ ഹഖാഇഖ്, വനതനസ്സലത് ഉലൂമു ആദമ, ഫഅഅ്ജസൽ ഖലാഇഖ്. വലഹു തദാഅലതിൽ ഫുഹൂം, ഫലം യുഡ്രിക്ഹു മിന്നാ സാബിഖുൻ വലാ ലാഹിഖ്.",
+
+meaning:"രഹസ്യങ്ങൾ വെളിപ്പെടുകയും പ്രകാശങ്ങൾ വിരിയുകയും ചെയ്ത നബി ﷺ യുടെ മേൽ സ്വലാത്ത് വർഷിക്കേണമേ എന്ന ആത്മീയ പ്രാർത്ഥനാരൂപമാണ്.",
+
+fadheela:"അബ്ദുസ്സലാം ഇബ്നു മശീഷ് رحمه الله എന്ന പണ്ഡിതനോട് ബന്ധപ്പെട്ട പ്രസിദ്ധമായ സ്വലാത്താണ്. ആത്മീയ പാരമ്പര്യങ്ങളിൽ ഇത് വിർദായി ചൊല്ലിവരുന്നു.",
+
+source:"അബ്ദുസ്സലാം ഇബ്നു മശീഷ് رحمه الله എന്ന പേരിൽ രേഖപ്പെടുത്തിയ സ്വലാത്തുൽ മശീഷിയ്യ. 1"
+},
+
+
+/* ==========================================
+   18. UMMIYYA
+========================================== */
+
+ummiyya:{
+name:"സ്വലാത്തുൽ ഉമ്മിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَنَبِيِّكَ وَرَسُولِكَ النَّبِيِّ الْأُمِّيِّ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ،
+وَسَلِّمْ تَسْلِيمًا.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ അബ്ദിക വ നബിയ്യിക വ റസൂലികന്നബിയ്യിൽ ഉമ്മിയ്യി, വഅലാ ആലിഹി വസ്വഹ്ബിഹി, വസല്ലിം തസ്ലീമാ.",
+
+meaning:"അല്ലാഹുവേ, നിന്റെ ദാസനും നബിയും റസൂലുമായ ഉമ്മിയായ മുഹമ്മദ് നബിയുടെ മേലും അവിടുത്തെ കുടുംബത്തിന്റെയും സഹാബിമാരുടെയും മേലും സ്വലാത്തും സലാമും നൽകേണമേ.",
+
+fadheela:"നബി ﷺ യോടുള്ള സ്നേഹവും ആദരവും പ്രകടിപ്പിച്ച് സ്വലാത്ത് ചൊല്ലുന്ന ലളിതമായ രൂപമാണ്.",
+
+source:"ശാദിലിയ്യ പാരമ്പര്യത്തിലെ വിവിധ വിർദുകളിലും സ്വലാത്ത് സമാഹാരങ്ങളിലും ഈ രൂപം കാണപ്പെടുന്നു. 2"
+},
+
+
+/* ==========================================
+   19. SHADHILIYYA
+========================================== */
+
+shadhiliyya:{
+name:"സ്വലാത്തുശ്ശാദിലിയ്യ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ النَّبِيِّ الْأُمِّيِّ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ،
+وَسَلِّمْ تَسْلِيمًا بِقَدْرِ عَظَمَةِ ذَاتِكَ فِي كُلِّ وَقْتٍ وَحِينٍ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ സയ്യിദിനാ മുഹമ്മദിൻ അബ്ദിക വ റസൂലികന്നബിയ്യിൽ ഉമ്മിയ്യി, വഅലാ ആലിഹി വസ്വഹ്ബിഹി, വസല്ലിം തസ്ലീമൻ ബിഖദ്രി അദമതി ദാതിക ഫീ കുല്ലി വഖ്തിൻ വഹീൻ.",
+
+meaning:"നിന്റെ ദാസനും റസൂലുമായ ഉമ്മിയായ മുഹമ്മദ് നബിയുടെ മേലും അവിടുത്തെ കുടുംബത്തിന്റെയും സഹാബിമാരുടെയും മേലും എല്ലാ സമയത്തും നിന്റെ മഹത്വത്തിന് യോജിച്ച രീതിയിൽ സ്വലാത്തും സലാമും നൽകേണമേ.",
+
+fadheela:"ശാദിലിയ്യ പാരമ്പര്യത്തിൽ പ്രചരിക്കുന്ന പ്രസിദ്ധമായ സ്വലാത്ത് രൂപമാണ്.",
+
+source:"ശാദിലിയ്യ പാരമ്പര്യത്തിലെ വിർദുകളിൽ ഈ രൂപം കാണപ്പെടുന്നു. 3"
+},
+
+
+/* ==========================================
+   20. ANWAR
+========================================== */
+
+anwar:{
+name:"സ്വലാത്തുൽ അന്വാർ",
+
+arabic:`
+اللَّهُمَّ صَلِّ عَلَىٰ نُورِ الْأَنْوَارِ،
+وَسِرِّ الْأَسْرَارِ،
+وَتِرْيَاقِ الْأَغْيَارِ،
+وَمِفْتَاحِ بَابِ الْيَسَارِ،
+سَيِّدِنَا مُحَمَّدٍ الْمُخْتَارِ،
+وَآلِهِ الْأَطْهَارِ،
+وَأَصْحَابِهِ الْأَخْيَارِ،
+عَدَدَ نِعَمِ اللَّهِ وَإِفْضَالِهِ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി അലാ നൂറിൽ അൻവാർ, വസിർറിൽ അസ്റാർ, വതിറ്യാഖിൽ അഗ്യാർ, വമിഫ്താഹി ബാബിൽ യസാർ, സയ്യിദിനാ മുഹമ്മദിൻ അൽ മുഖ്താർ, വആലിഹിൽ അത്ഹാർ, വഅസ്വ്ഹാബിഹിൽ അഖ്യാർ, അദദ നിഅമില്ലാഹി വഇഫ്ദാലിഹി.",
+
+meaning:"പ്രകാശങ്ങളുടെ പ്രകാശവും രഹസ്യങ്ങളുടെ രഹസ്യവും, തിരഞ്ഞെടുക്കപ്പെട്ട ഞങ്ങളുടെ നേതാവ് മുഹമ്മദ് നബിയുടെ മേൽ സ്വലാത്ത് വർഷിക്കേണമേ; അവിടുത്തെ ശുദ്ധമായ കുടുംബത്തിനും ഉത്തമരായ സഹാബിമാർക്കും കൂടി.",
+
+fadheela:"നബി ﷺ യുടെ മഹത്വവും സ്നേഹവും ഓർത്ത് ചൊല്ലിവരുന്ന പാരമ്പര്യ സ്വലാത്താണ്.",
+
+source:"ഇമാം അഹ്മദ് അൽ-ബദവിയോട് ബന്ധപ്പെട്ട് പ്രചരിക്കുന്ന സ്വലാത്തുൽ അന്വാറിന്റെ രൂപം. ലഭ്യമായ പാഠസ്രോതസ്സുകളിൽ ഈ രൂപം കാണാം. 4"
+},
+
+
+/* ==========================================
+   21. YAQUTAT AL-HAQAIQ
+========================================== */
+
+yaqutat:{
+name:"സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്",
+
+arabic:`
+اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَىٰ سَيِّدِنَا وَمَوْلَانَا مُحَمَّدٍ،
+يَاقُوتَةِ الْحَقَائِقِ،
+وَالنُّورِ الْأَسْبَقِ لِلْخَلَائِقِ،
+صَلَاةً تُعَرِّفُنَا بِحَقِيقَتِهِ الرَّبَّانِيَّةِ،
+وَتُقَرِّبُنَا مِنْ حَضْرَتِهِ الْأَحَدِيَّةِ،
+وَتُحَبِّبُ لَنَا ذَاتَهُ الشَّرِيفَةَ الْأَحْمَدِيَّةَ،
+وَتُزَيِّنُ أَفْعَالَنَا وَأَقْوَالَنَا ظَاهِرَنَا وَبَاطِنَنَا بِالْأَخْلَاقِ الْمُحَمَّدِيَّةِ،
+حَتَّىٰ نَكُونَ مِنْهُ وَإِلَيْهِ،
+فَأَنْتَ الْمُعْطِي وَهُوَ الْقَاسِمُ،
+وَعَلَىٰ آلِهِ وَصَحْبِهِ.
+`,
+
+pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ വമൗലാനാ മുഹമ്മദിൻ, യാഖൂതതിൽ ഹഖാഇഖ്, വന്നൂരിൽ അസ്ബഖി ലിൽഖലാഇഖ്, സ്വലാതൻ തുഅറിഫുനാ ബിഹഖീഖതിഹിർ റബ്ബാനിയ്യ, വതുഖരിബുനാ മിൻ ഹദ്റതിഹിൽ അഹദിയ്യ, വതുഹബ്ബിബു ലനാ ദാതഹുശ്ശരീഫതൽ അഹ്മദിയ്യ.",
+
+meaning:"സത്യങ്ങളുടെ യാഖൂതും സൃഷ്ടികൾക്കുമുമ്പുള്ള പ്രകാശവുമായ മുഹമ്മദ് നബി ﷺ യുടെ മേൽ സ്വലാത്തും സലാമും ബറകത്തും നൽകേണമേ; അവിടുത്തെ മഹത്വം മനസ്സിലാക്കാനും അവിടുത്തെ സ്നേഹം നമ്മുടെ പ്രവൃത്തികളിലും സ്വഭാവത്തിലും പ്രതിഫലിപ്പിക്കാനും സഹായിക്കണമേ എന്ന പ്രാർത്ഥന.",
+
+fadheela:"ആത്മീയ പാരമ്പര്യത്തിൽ പ്രചരിക്കുന്ന ഒരു സ്വലാത്ത് രൂപമാണ്. ഇതിലെ പ്രത്യേക ഫദീലത്തുകൾ പാരമ്പര്യപരമായവയായി മാത്രം കാണണം.",
+
+source:"സ്വലാത്ത് സമാഹാരങ്ങളിൽ കാണപ്പെടുന്ന യാഖൂതത്തുൽ ഹഖാഇഖ് എന്ന പേരിലുള്ള രൂപം. 5"
+}
+
+};
+
+
+/* ==========================================
+   CURRENT SWALATH
+========================================== */
+
+let currentSwalath = null;
+
+
+/* ==========================================
+   OPEN SWALATH
+========================================== */
+
+function openSwalath(name){
+
+    if(!swalathData[name]){
+        return;
+    }
+
+    currentSwalath = name;
+
+    const data = swalathData[name];
+
+    document.getElementById("collectionPage")
+        .style.display="none";
+
+    document.getElementById("detailPage")
+        .style.display="block";
+
+    document.getElementById("detailTitle")
+        .textContent=data.name;
+
+    document.getElementById("arabicText")
+        .textContent=data.arabic;
+
+    document.getElementById("pronunciationText")
+        .textContent=data.pronunciation;
+
+    document.getElementById("meaningText")
+        .textContent=data.meaning;
+
+    document.getElementById("fadheelaText")
+        .textContent=data.fadheela;
+
+    document.getElementById("sourceText")
+        .textContent=data.source;
+
+    const count =
+        localStorage.getItem(
+            "swalath_count_"+name
+        ) || "0";
+
+    document.getElementById("countNumber")
+        .textContent=count;
+
+
+    /* FAVOURITE */
+
+    const favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "swalathFavorites"
+            ) || "[]"
+        );
+
+    const isFavorite =
+        favorites.includes(name);
+
+    const button =
+        document.getElementById(
+            "favoriteButton"
+        );
+
+    if(isFavorite){
+
+        button.classList.add("active");
+
+        button.textContent =
+            "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്";
+
+    }else{
+
+        button.classList.remove("active");
+
+        button.textContent =
+            "♡ Favourite ആയി ചേർക്കുക";
+
+    }
+
+
+    /* PDF */
+
+    const pdfArea =
+        document.getElementById("pdfArea");
+
+    if(name === "bashair"){
+
+        pdfArea.innerHTML=`
+
+            <a
+                href="bashairul-khairat.pdf"
+                target="_blank"
+                class="pdf-button">
+
+                📖 ബശാഇറുൽ ഖൈറാത്ത് — Full PDF
+
+            </a>
+
+        `;
+
+    }else{
+
+        pdfArea.innerHTML="";
+
+    }
+
+}
+
+
+/* ==========================================
+   COUNT
+========================================== */
+
+function countSwalath(){
+
+    if(!currentSwalath){
+        return;
+    }
+
+    const key =
+        "swalath_count_"+currentSwalath;
+
+    let count =
+        parseInt(
+            localStorage.getItem(key) || "0"
+        );
+
+    count++;
+
+    localStorage.setItem(
+        key,
+        count
+    );
+
+    document.getElementById(
+        "countNumber"
+    ).textContent=count;
+
+}
+
+
+/* ==========================================
+   RESET COUNT
+========================================== */
+
+function resetCount(){
+
+    if(!currentSwalath){
+        return;
+    }
+
+    const key =
+        "swalath_count_"+currentSwalath;
+
+    localStorage.setItem(
+        key,
+        "0"
+    );
+
+    document.getElementById(
+        "countNumber"
+    ).textContent="0";
+
+}
+
+
+/* ==========================================
+   FAVOURITE
+========================================== */
+
+function favoriteSwalath(){
+
+    if(!currentSwalath){
+        return;
+    }
+
+    let favorites =
+        JSON.parse(
+            localStorage.getItem(
+                "swalathFavorites"
+            ) || "[]"
+        );
+
+    const index =
+        favorites.indexOf(
+            currentSwalath
+        );
+
+    const button =
+        document.getElementById(
+            "favoriteButton"
+        );
+
+    if(index !== -1){
+
+        favorites.splice(
+            index,
+            1
+        );
+
+        localStorage.setItem(
+            "swalathFavorites",
+            JSON.stringify(favorites)
+        );
+
+        button.classList.remove(
+            "active"
+        );
+
+        button.textContent =
+            "♡ Favourite ആയി ചേർക്കുക";
+
+    }else{
+
+        favorites.push(
+            currentSwalath
+        );
+
+        localStorage.setItem(
+            "swalathFavorites",
+            JSON.stringify(favorites)
+        );
+
+        button.classList.add(
+            "active"
+        );
+
+        button.textContent =
+            "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്";
+
+    }
+
+}
+
+
+/* ==========================================
+   BACK
+========================================== */
+
+function goBack(){
+
+    document.getElementById(
+        "detailPage"
+    ).style.display="none";
+
+    document.getElementById(
+        "collectionPage"
+    ).style.display="block";
+
+    currentSwalath=null;
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchSwalath(){
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards =
+        document.querySelectorAll(
+            ".swalath-card"
+        );
+
+    cards.forEach(function(card){
+
+        const text =
+            card.textContent.toLowerCase();
+
+        if(text.includes(input)){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================
+   OPEN FROM MY FAVOURITES
+========================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const hash =
+            window.location.hash
+            .replace("#","");
+
+        if(hash && swalathData[hash]){
+
+            openSwalath(hash);
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
