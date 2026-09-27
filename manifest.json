@@ -1,0 +1,24 @@
+{
+  "name": "Swalath",
+  "short_name": "Swalath",
+  "description": "സ്വലാത്തുകളും ദുആകളും ദിക്‌റുകളും ഖുർആനും ഉൾപ്പെടുന്ന ഇസ്‌ലാമിക് ആപ്പ്",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f5ee",
+  "theme_color": "#123d34",
+  "orientation": "portrait",
+  "lang": "ml",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
