@@ -26,21 +26,13 @@
 .search-box {
 
     width: 100%;
-
     padding: 13px 16px;
-
     border: 1px solid #e6dfd0;
-
     border-radius: 14px;
-
     outline: none;
-
     font-size: 14px;
-
     margin-bottom: 15px;
-
     background: white;
-
     color: #222;
 
 }
@@ -54,11 +46,8 @@
 .feature-buttons {
 
     display: flex;
-
     justify-content: center;
-
     gap: 10px;
-
     margin-bottom: 18px;
 
 }
@@ -66,18 +55,76 @@
 .dark-button {
 
     border: none;
-
     background: #123d34;
-
     color: white;
-
     padding: 10px 16px;
-
     border-radius: 25px;
-
     cursor: pointer;
-
     font-size: 13px;
+
+}
+
+
+/* =========================
+   EXTRA MENU
+========================= */
+
+.extra-menu-title {
+
+    text-align: center;
+    margin: 28px 0 15px;
+    color: #123d34;
+
+}
+
+.extra-menu-grid {
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+
+}
+
+.extra-card {
+
+    background: white;
+    border: 1px solid #e6dfd0;
+    border-radius: 18px;
+    padding: 18px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    color: #123d34;
+
+}
+
+.extra-card:active {
+
+    transform: scale(0.97);
+
+}
+
+.extra-card .icon {
+
+    font-size: 30px;
+    margin-bottom: 7px;
+
+}
+
+.extra-card strong {
+
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+
+}
+
+.extra-card span {
+
+    display: block;
+    font-size: 11px;
+    color: #777;
 
 }
 
@@ -89,7 +136,6 @@
 body.dark-mode {
 
     background: #111;
-
     color: #eee;
 
 }
@@ -109,9 +155,7 @@ body.dark-mode .welcome p {
 body.dark-mode .menu-card {
 
     background: #222;
-
     border-color: #444;
-
     color: #eee;
 
 }
@@ -122,12 +166,30 @@ body.dark-mode .menu-card span {
 
 }
 
+body.dark-mode .extra-menu-title {
+
+    color: #f1dfb0;
+
+}
+
+body.dark-mode .extra-card {
+
+    background: #222;
+    border-color: #444;
+    color: #eee;
+
+}
+
+body.dark-mode .extra-card span {
+
+    color: #aaa;
+
+}
+
 body.dark-mode .search-box {
 
     background: #222;
-
     color: white;
-
     border-color: #444;
 
 }
@@ -142,7 +204,6 @@ body.dark-mode #favoritesSection h2 {
 body.dark-mode .dark-button {
 
     background: #f1dfb0;
-
     color: #123d34;
 
 }
@@ -151,9 +212,7 @@ body.dark-mode .favorite-item,
 body.dark-mode .collection-item {
 
     background: #222 !important;
-
     border-color: #444 !important;
-
     color: #fff !important;
 
 }
@@ -364,9 +423,7 @@ body.dark-mode footer {
 
 
 
-    <!-- =========================
-         UMRAH
-    ========================= -->
+    <!-- UMRAH -->
 
     <div
         class="menu-card"
@@ -383,6 +440,205 @@ body.dark-mode footer {
 
         <span>
             ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     EXTRA FEATURES
+========================= -->
+
+<h3 class="extra-menu-title">
+    ✨ കൂടുതൽ സൗകര്യങ്ങൾ
+</h3>
+
+
+<div class="extra-menu-grid">
+
+
+    <!-- DUA -->
+
+    <div
+        class="extra-card"
+        onclick="openDua()"
+    >
+
+        <div class="icon">
+            🤲
+        </div>
+
+        <strong>
+            ദുആകൾ
+        </strong>
+
+        <span>
+            വിവിധ ദുആകൾ
+        </span>
+
+    </div>
+
+
+
+    <!-- DHIKR -->
+
+    <div
+        class="extra-card"
+        onclick="openDhikr()"
+    >
+
+        <div class="icon">
+            📿
+        </div>
+
+        <strong>
+            ദിക്ർ
+        </strong>
+
+        <span>
+            ദിക്ർ ചൊല്ലാം
+        </span>
+
+    </div>
+
+
+
+    <!-- TASBEEH -->
+
+    <div
+        class="extra-card"
+        onclick="openTasbeeh()"
+    >
+
+        <div class="icon">
+            🔢
+        </div>
+
+        <strong>
+            തസ്ബീഹ്
+        </strong>
+
+        <span>
+            ഡിജിറ്റൽ കൗണ്ടർ
+        </span>
+
+    </div>
+
+
+
+    <!-- DAILY AZKAR -->
+
+    <div
+        class="extra-card"
+        onclick="openAzkar()"
+    >
+
+        <div class="icon">
+            🌙
+        </div>
+
+        <strong>
+            Daily Azkar
+        </strong>
+
+        <span>
+            ദിവസേനയുള്ള അദ്കാർ
+        </span>
+
+    </div>
+
+
+
+    <!-- SALAH GUIDE -->
+
+    <div
+        class="extra-card"
+        onclick="openSalahGuide()"
+    >
+
+        <div class="icon">
+            🕌
+        </div>
+
+        <strong>
+            Salah Guide
+        </strong>
+
+        <span>
+            നമസ്കാര മാർഗ്ഗനിർദ്ദേശം
+        </span>
+
+    </div>
+
+
+
+    <!-- DAILY REMINDER -->
+
+    <div
+        class="extra-card"
+        onclick="openDailyReminder()"
+    >
+
+        <div class="icon">
+            🌅
+        </div>
+
+        <strong>
+            Daily Reminder
+        </strong>
+
+        <span>
+            ദിവസേന ഓർമ്മപ്പെടുത്തൽ
+        </span>
+
+    </div>
+
+
+
+    <!-- DAILY ASMA -->
+
+    <div
+        class="extra-card"
+        onclick="openDailyAsma()"
+    >
+
+        <div class="icon">
+            ⭐
+        </div>
+
+        <strong>
+            Daily Asmaul Husna
+        </strong>
+
+        <span>
+            ദിവസത്തെ ഒരു നാമം
+        </span>
+
+    </div>
+
+
+
+    <!-- NAZYAN TRAVELS -->
+
+    <div
+        class="extra-card"
+        onclick="openNazyAN()"
+    >
+
+        <div class="icon">
+            ✈️
+        </div>
+
+        <strong>
+            NAZYAN TRAVELS
+        </strong>
+
+        <span>
+            Travel Services
         </span>
 
     </div>
@@ -698,7 +954,7 @@ const swalathNames = {
 
 
 /* =================================================
-   OPEN ASMAUL HUSNA
+   PAGE OPEN FUNCTIONS
 ================================================= */
 
 function openAsmaulHusna(){
@@ -709,11 +965,6 @@ function openAsmaulHusna(){
 }
 
 
-
-/* =================================================
-   OPEN QURAN
-================================================= */
-
 function openQuran(){
 
     window.location.href =
@@ -722,15 +973,74 @@ function openQuran(){
 }
 
 
-
-/* =================================================
-   OPEN UMRAH
-================================================= */
-
 function openUmrah(){
 
     window.location.href =
         "umrah.html";
+
+}
+
+
+function openDua(){
+
+    window.location.href =
+        "dua.html";
+
+}
+
+
+function openDhikr(){
+
+    window.location.href =
+        "dhikr.html";
+
+}
+
+
+function openTasbeeh(){
+
+    window.location.href =
+        "tasbeeh.html";
+
+}
+
+
+function openAzkar(){
+
+    window.location.href =
+        "azkar.html";
+
+}
+
+
+function openSalahGuide(){
+
+    window.location.href =
+        "salah-guide.html";
+
+}
+
+
+function openDailyReminder(){
+
+    window.location.href =
+        "daily-reminder.html";
+
+}
+
+
+function openDailyAsma(){
+
+    window.location.href =
+        "daily-asma.html";
+
+}
+
+
+function openNazyAN(){
+
+    window.location.href =
+        "nazyAN.html";
 
 }
 
@@ -756,6 +1066,14 @@ function openCollection(){
 
     document.querySelector(
         ".feature-buttons"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".extra-menu-grid"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".extra-menu-title"
     ).style.display = "none";
 
     document.getElementById(
@@ -805,6 +1123,14 @@ function closeCollection(){
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
+
+    document.querySelector(
+        ".extra-menu-grid"
+    ).style.display = "grid";
+
+    document.querySelector(
+        ".extra-menu-title"
+    ).style.display = "block";
 
     document.getElementById(
         "travelSection"
@@ -954,6 +1280,14 @@ function openFavorites(){
         ".feature-buttons"
     ).style.display = "none";
 
+    document.querySelector(
+        ".extra-menu-grid"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".extra-menu-title"
+    ).style.display = "none";
+
     document.getElementById(
         "collectionSection"
     ).style.display = "none";
@@ -997,6 +1331,14 @@ function closeFavorites(){
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
+
+    document.querySelector(
+        ".extra-menu-grid"
+    ).style.display = "grid";
+
+    document.querySelector(
+        ".extra-menu-title"
+    ).style.display = "block";
 
     document.getElementById(
         "travelSection"
