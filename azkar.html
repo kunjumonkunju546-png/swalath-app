@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Azkar | Swalath</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eee8d9;
+      color: #183c35;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123d34, #1d5b4c);
+      color: #f1dfb0;
+      padding: 20px 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 7px 0 0;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .home-btn {
+      background: #f1dfb0;
+      color: #123d34;
+      font-weight: bold;
+    }
+
+    .dark-btn {
+      background: #ffffff;
+      color: #123d34;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .intro {
+      background: #fffaf0;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 15px;
+      text-align: center;
+      line-height: 1.7;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .azkar-card {
+      background: #fffaf0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-left: 4px solid #1d5b4c;
+    }
+
+    .azkar-card h2 {
+      margin-top: 0;
+      font-size: 19px;
+      color: #123d34;
+    }
+
+    .arabic {
+      direction: rtl;
+      text-align: right;
+      font-size: 25px;
+      line-height: 2;
+      margin: 12px 0;
+      color: #173f36;
+    }
+
+    .malayalam {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .count {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 7px 12px;
+      background: #f1dfb0;
+      color: #123d34;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #101816;
+      color: #eeeeee;
+    }
+
+    body.dark .intro,
+    body.dark .azkar-card {
+      background: #192521;
+      color: #eeeeee;
+      box-shadow: none;
+    }
+
+    body.dark .azkar-card h2 {
+      color: #f1dfb0;
+    }
+
+    body.dark .arabic {
+      color: #ffffff;
+    }
+
+    body.dark .malayalam {
+      color: #dddddd;
+    }
+
+    body.dark .count {
+      background: #314c43;
+      color: #f1dfb0;
+    }
+
+    body.dark footer {
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌙 Daily Azkar</h1>
+  <p>ദൈനംദിന അസ്‌കാർ</p>
+
+  <div class="top-buttons">
+    <button class="home-btn" onclick="goHome()">🏠 Home</button>
+    <button class="dark-btn" onclick="toggleDark()">🌙 Dark</button>
+  </div>
+</header>
+
+
+<div class="container">
+
+  <div class="intro">
+    🌿 <strong>ദിവസവും ഓർക്കാനും ചൊല്ലാനും</strong><br>
+    അല്ലാഹുവിനെ സ്മരിക്കുന്നതിനുള്ള ചില പ്രധാന ദിക്റുകൾ.
+  </div>
+
+
+  <!-- 1 -->
+
+  <div class="azkar-card">
+
+    <h2>1️⃣ സുബ്ഹാനല്ലാഹി വബിഹംദിഹി</h2>
+
+    <div class="arabic">
+      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാനല്ലാഹി വബിഹംദിഹി
+    </div>
+
+    <div class="count">
+      📿 100 തവണ
+    </div>
+
+  </div>
+
+
+  <!-- 2 -->
+
+  <div class="azkar-card">
+
+    <h2>2️⃣ സുബ്ഹാനല്ലാഹി വബിഹംദിഹി – സുബ്ഹാനല്ലാഹിൽ അസീം</h2>
+
+    <div class="arabic">
+      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാനല്ലാഹി വബിഹംദിഹി, സുബ്ഹാനല്ലാഹിൽ അസീം
+    </div>
+
+  </div>
+
+
+  <!-- 3 -->
+
+  <div class="azkar-card">
+
+    <h2>3️⃣ ലാ ഇലാഹ ഇല്ലല്ലാഹ്</h2>
+
+    <div class="arabic">
+      لَا إِلَٰهَ إِلَّا اللَّهُ
+    </div>
+
+    <div class="malayalam">
+      ലാ ഇലാഹ ഇല്ലല്ലാഹ്
+    </div>
+
+    <div class="count">
+      📿 കഴിയുന്നത്ര
+    </div>
+
+  </div>
+
+
+  <!-- 4 -->
+
+  <div class="azkar-card">
+
+    <h2>4️⃣ അസ്തഗ്ഫിറുല്ലാഹ്</h2>
+
+    <div class="arabic">
+      أَسْتَغْفِرُ اللَّهَ
+    </div>
+
+    <div class="malayalam">
+      അസ്തഗ്ഫിറുല്ലാഹ്
+    </div>
+
+    <div class="count">
+      📿 100 തവണ
+    </div>
+
+  </div>
+
+
+  <!-- 5 -->
+
+  <div class="azkar-card">
+
+    <h2>5️⃣ ലാ ഹൗല വലാ ഖുവ്വത ഇല്ലാ ബില്ലാഹ്</h2>
+
+    <div class="arabic">
+      لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ
+    </div>
+
+    <div class="malayalam">
+      ലാ ഹൗല വലാ ഖുവ്വത ഇല്ലാ ബില്ലാഹ്
+    </div>
+
+  </div>
+
+
+  <!-- 6 -->
+
+  <div class="azkar-card">
+
+    <h2>6️⃣ ഹസ്ബിയല്ലാഹു</h2>
+
+    <div class="arabic">
+      حَسْبِيَ اللَّهُ
+    </div>
+
+    <div class="malayalam">
+      ഹസ്ബിയല്ലാഹ്
+    </div>
+
+  </div>
+
+
+  <!-- 7 -->
+
+  <div class="azkar-card">
+
+    <h2>7️⃣ അല്ലാഹു അക്ബർ</h2>
+
+    <div class="arabic">
+      اللَّهُ أَكْبَرُ
+    </div>
+
+    <div class="malayalam">
+      അല്ലാഹു അക്ബർ
+    </div>
+
+    <div class="count">
+      📿 കഴിയുന്നത്ര
+    </div>
+
+  </div>
+
+
+  <!-- 8 -->
+
+  <div class="azkar-card">
+
+    <h2>8️⃣ അൽഹംദുലില്ലാഹ്</h2>
+
+    <div class="arabic">
+      الْحَمْدُ لِلَّهِ
+    </div>
+
+    <div class="malayalam">
+      അൽഹംദുലില്ലാഹ്
+    </div>
+
+  </div>
+
+
+  <!-- 9 -->
+
+  <div class="azkar-card">
+
+    <h2>9️⃣ സുബ്ഹാനല്ലാഹ്</h2>
+
+    <div class="arabic">
+      سُبْحَانَ اللَّهِ
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാനല്ലാഹ്
+    </div>
+
+  </div>
+
+
+  <!-- 10 -->
+
+  <div class="azkar-card">
+
+    <h2>🔟 നബി ﷺ യുടെ മേൽ സ്വലാത്ത്</h2>
+
+    <div class="arabic">
+      اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ
+    </div>
+
+    <div class="malayalam">
+      അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം അലാ നബിയ്യിനാ മുഹമ്മദ്
+    </div>
+
+    <div class="count">
+      🤍 കഴിയുന്നത്ര
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © Swalath • Daily Azkar
+</footer>
+
+
+<script>
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+
+  function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+      localStorage.setItem("swalathDarkMode", "on");
+
+    } else {
+
+      localStorage.setItem("swalathDarkMode", "off");
+
+    }
+
+  }
+
+
+  window.onload = function() {
+
+    const darkMode = localStorage.getItem("swalathDarkMode");
+
+    if (darkMode === "on") {
+
+      document.body.classList.add("dark");
+
+    }
+
+  };
+
+</script>
+
+</body>
+</html>

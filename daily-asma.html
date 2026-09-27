@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Daily Asmaul Husna | Swalath</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eee8d9;
+      color: #183c35;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123d34, #1d5b4c);
+      color: #f1dfb0;
+      text-align: center;
+      padding: 20px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 7px 0 0;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .home-btn {
+      background: #f1dfb0;
+      color: #123d34;
+      font-weight: bold;
+    }
+
+    .dark-btn {
+      background: #fff;
+      color: #123d34;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .intro {
+      background: #fffaf0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 15px;
+      text-align: center;
+      line-height: 1.8;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .day-box {
+      background: #123d34;
+      color: #f1dfb0;
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .day-box h2 {
+      margin: 0 0 5px;
+      font-size: 20px;
+    }
+
+    .day-box p {
+      margin: 0;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .asma-card {
+      background: #fffaf0;
+      border-radius: 18px;
+      padding: 22px 18px;
+      margin-bottom: 15px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-top: 4px solid #1d5b4c;
+    }
+
+    .number {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .arabic {
+      direction: rtl;
+      font-size: 38px;
+      line-height: 1.8;
+      color: #123d34;
+      margin: 8px 0;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1d5b4c;
+      margin: 8px 0;
+    }
+
+    .meaning {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #444;
+      margin-top: 10px;
+    }
+
+    .reminder {
+      background: #f1dfb0;
+      color: #123d34;
+      border-radius: 12px;
+      padding: 13px;
+      margin-top: 15px;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .all-button {
+      display: block;
+      width: 100%;
+      background: #123d34;
+      color: #f1dfb0;
+      font-weight: bold;
+      padding: 13px;
+      margin: 20px 0;
+    }
+
+    .all-names {
+      display: none;
+    }
+
+    .all-names.show {
+      display: block;
+    }
+
+    .name-row {
+      background: #fffaf0;
+      border-radius: 12px;
+      padding: 13px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .name-row-number {
+      min-width: 30px;
+      font-weight: bold;
+      color: #1d5b4c;
+    }
+
+    .name-row-arabic {
+      direction: rtl;
+      font-size: 21px;
+      flex: 1;
+      text-align: right;
+    }
+
+    .name-row-meaning {
+      font-size: 13px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #101816;
+      color: #eee;
+    }
+
+    body.dark .intro,
+    body.dark .asma-card,
+    body.dark .name-row {
+      background: #192521;
+      color: #eee;
+      box-shadow: none;
+    }
+
+    body.dark .arabic {
+      color: #fff;
+    }
+
+    body.dark .name {
+      color: #f1dfb0;
+    }
+
+    body.dark .meaning,
+    body.dark .name-row-meaning {
+      color: #ddd;
+    }
+
+    body.dark .number {
+      color: #aaa;
+    }
+
+    body.dark .reminder {
+      background: #314c43;
+      color: #f1dfb0;
+    }
+
+    body.dark footer {
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>⭐ Daily Asmaul Husna</h1>
+
+  <p>അല്ലാഹുവിന്റെ മനോഹരമായ നാമങ്ങൾ</p>
+
+  <div class="top-buttons">
+
+    <button class="home-btn" onclick="goHome()">
+      🏠 Home
+    </button>
+
+    <button class="dark-btn" onclick="toggleDark()">
+      🌙 Dark
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="intro">
+
+    🌿 <strong>അസ്മാഉൽ ഹുസ്ന</strong>
+
+    <br><br>
+
+    അല്ലാഹുവിന്റെ മനോഹരമായ നാമങ്ങൾ
+    പഠിക്കുകയും ഓർക്കുകയും ചെയ്യാം.
+
+  </div>
+
+
+  <div class="day-box">
+
+    <h2 id="dayTitle">ഇന്നത്തെ പേര്</h2>
+
+    <p id="todayDate"></p>
+
+  </div>
+
+
+  <!-- DAILY NAME -->
+
+  <div class="asma-card">
+
+    <div class="number" id="asmaNumber">
+      പേര് 1 / 99
+    </div>
+
+    <div class="arabic" id="asmaArabic">
+      الرَّحْمَنُ
+    </div>
+
+    <div class="name" id="asmaName">
+      അർ-റഹ്മാൻ
+    </div>
+
+    <div class="meaning" id="asmaMeaning">
+      പരമകാരുണികൻ
+    </div>
+
+    <div class="reminder">
+
+      🤍 ഇന്നത്തെ നാമം ഓർക്കാനും
+      അതിന്റെ അർത്ഥം മനസ്സിലാക്കാനും ശ്രമിക്കാം.
+
+    </div>
+
+  </div>
+
+
+  <button class="all-button" onclick="toggleAll()">
+    📖 99 നാമങ്ങൾ കാണുക
+  </button>
+
+
+  <div class="all-names" id="allNames"></div>
+
+
+</div>
+
+
+<footer>
+  © Swalath • Daily Asmaul Husna
+</footer>
+
+
+<script>
+
+  const asma = [
+
+    ["الرَّحْمَنُ", "അർ-റഹ്മാൻ", "പരമകാരുണികൻ"],
+    ["الرَّحِيمُ", "അർ-റഹീം", "പരമദയാലു"],
+    ["الْمَلِكُ", "അൽ-മലിക്", "രാജാധിരാജൻ"],
+    ["الْقُدُّوسُ", "അൽ-ഖുദ്ദൂസ്", "പരിശുദ്ധൻ"],
+    ["السَّلَامُ", "അസ്-സലാം", "സമാധാനത്തിന്റെ ഉറവിടം"],
+    ["الْمُؤْمِنُ", "അൽ-മുഅ്മിൻ", "വിശ്വാസവും സുരക്ഷയും നൽകുന്നവൻ"],
+    ["الْمُهَيْمِنُ", "അൽ-മുഹൈമിൻ", "സംരക്ഷകൻ"],
+    ["الْعَزِيزُ", "അൽ-അസീസ്", "പ്രതാപശാലി"],
+    ["الْجَبَّارُ", "അൽ-ജബ്ബാർ", "പരമശക്തൻ"],
+    ["الْمُتَكَبِّرُ", "അൽ-മുതകബ്ബിർ", "മഹത്വമുള്ളവൻ"],
+
+    ["الْخَالِقُ", "അൽ-ഖാലിഖ്", "സ്രഷ്ടാവ്"],
+    ["الْبَارِئُ", "അൽ-ബാരിഅ്", "സൃഷ്ടിക്കുന്നവൻ"],
+    ["الْمُصَوِّرُ", "അൽ-മുസവ്വിർ", "രൂപം നൽകുന്നവൻ"],
+    ["الْغَفَّارُ", "അൽ-ഗഫ്ഫാർ", "വളരെയധികം പൊറുക്കുന്നവൻ"],
+    ["الْقَهَّارُ", "അൽ-ഖഹ്ഹാർ", "സർവ്വാധിപൻ"],
+    ["الْوَهَّابُ", "അൽ-വഹ്ഹാബ്", "ധാരാളം നൽകുന്നവൻ"],
+    ["الرَّزَّاقُ", "അർ-റസ്സാഖ്", "ഉപജീവനം നൽകുന്നവൻ"],
+    ["الْفَتَّاحُ", "അൽ-ഫത്താഹ്", "വിജയത്തിന്റെ വാതിൽ തുറക്കുന്നവൻ"],
+    ["الْعَلِيمُ", "അൽ-അലീം", "സർവ്വജ്ഞൻ"],
+    ["الْقَابِضُ", "അൽ-ഖാബിദ്", "പിടിച്ചുവെക്കുന്നവൻ"],
+
+    ["الْبَاسِطُ", "അൽ-ബാസിത്", "വിപുലീകരിക്കുന്നവൻ"],
+    ["الْخَافِضُ", "അൽ-ഖാഫിദ്", "താഴ്ത്തുന്നവൻ"],
+    ["الرَّافِعُ", "അർ-റാഫിഅ്", "ഉയർത്തുന്നവൻ"],
+    ["الْمُعِزُّ", "അൽ-മുഇസ്സു", "ബഹുമതി നൽകുന്നവൻ"],
+    ["الْمُذِلُّ", "അൽ-മുദില്ലു", "താഴ്ത്തുന്നവൻ"],
+    ["السَّمِيعُ", "അസ്-സമീഅ്", "എല്ലാം കേൾക്കുന്നവൻ"],
+    ["الْبَصِيرُ", "അൽ-ബസീർ", "എല്ലാം കാണുന്നവൻ"],
+    ["الْحَكَمُ", "അൽ-ഹകം", "വിധികർത്താവ്"],
+    ["الْعَدْلُ", "അൽ-അദ്ല്", "നീതിമാൻ"],
+    ["اللَّطِيفُ", "അൽ-ലതീഫ്", "സൂക്ഷ്മമായി കരുണ ചെയ്യുന്നവൻ"],
+
+    ["الْخَبِيرُ", "അൽ-ഖബീർ", "സർവ്വജ്ഞാനി"],
+    ["الْحَلِيمُ", "അൽ-ഹലീം", "ക്ഷമാശീലൻ"],
+    ["الْعَظِيمُ", "അൽ-അസീം", "മഹാനായവൻ"],
+    ["الْغَفُورُ", "അൽ-ഗഫൂർ", "പൊറുക്കുന്നവൻ"],
+    ["الشَّكُورُ", "അശ്ശകൂർ", "നന്മയ്ക്ക് പ്രതിഫലം നൽകുന്നവൻ"],
+    ["الْعَلِيُّ", "അൽ-അലിയ്യ്", "അത്യൂന്നതൻ"],
+    ["الْكَبِيرُ", "അൽ-കബീർ", "മഹത്തായവൻ"],
+    ["الْحَفِيظُ", "അൽ-ഹഫീള്", "സംരക്ഷകൻ"],
+    ["الْمُقِيتُ", "അൽ-മുകീത്", "ഉപജീവനം നൽകുന്നവൻ"],
+    ["الْحَسِيبُ", "അൽ-ഹസീബ്", "കണക്കെടുക്കുന്നവൻ"],
+
+    ["الْجَلِيلُ", "അൽ-ജലീൽ", "മഹത്വമുള്ളവൻ"],
+    ["الْكَرِيمُ", "അൽ-കരീം", "ഉദാരൻ"],
+    ["الرَّقِيبُ", "അർ-റഖീബ്", "നിരീക്ഷിക്കുന്നവൻ"],
+    ["الْمُجِيبُ", "അൽ-മുജീബ്", "പ്രാർത്ഥനയ്ക്ക് ഉത്തരം നൽകുന്നവൻ"],
+    ["الْوَاسِعُ", "അൽ-വാസിഅ്", "വിശാലമായവൻ"],
+    ["الْحَكِيمُ", "അൽ-ഹകീം", "യുക്തിമാൻ"],
+    ["الْوَدُودُ", "അൽ-വദൂദ്", "സ്നേഹിക്കുന്നവൻ"],
+    ["الْمَجِيدُ", "അൽ-മജീദ്", "മഹത്വശാലി"],
+    ["الْبَاعِثُ", "അൽ-ബാഇഥ്", "ഉയിർത്തെഴുന്നേൽപ്പിക്കുന്നവൻ"],
+    ["الشَّهِيدُ", "അശ്ശഹീദ്", "സാക്ഷി"],
+
+    ["الْحَقُّ", "അൽ-ഹഖ്", "സത്യം"],
+    ["الْوَكِيلُ", "അൽ-വകീൽ", "കാര്യങ്ങൾ ഏൽപ്പിക്കാവുന്നവൻ"],
+    ["الْقَوِيُّ", "അൽ-ഖവിയ്യ്", "ശക്തൻ"],
+    ["الْمَتِينُ", "അൽ-മതീൻ", "അചഞ്ചല ശക്തിയുള്ളവൻ"],
+    ["الْوَلِيُّ", "അൽ-വലിയ്യ്", "സഹായി"],
+    ["الْحَمِيدُ", "അൽ-ഹമീദ്", "സ്തുത്യർഹൻ"],
+    ["الْمُحْصِي", "അൽ-മുഹ്സി", "എല്ലാം എണ്ണുന്നവൻ"],
+    ["الْمُبْدِئُ", "അൽ-മുബ്ദിഅ്", "ആരംഭിക്കുന്നവൻ"],
+    ["الْمُعِيدُ", "അൽ-മുഈദ്", "പുനഃസൃഷ്ടിക്കുന്നവൻ"],
+    ["الْمُحْيِي", "അൽ-മുഹ്യി", "ജീവൻ നൽകുന്നവൻ"],
+
+    ["الْمُمِيتُ", "അൽ-മുമീത്", "മരണം നൽകുന്നവൻ"],
+    ["الْحَيُّ", "അൽ-ഹയ്യ്", "എന്നും ജീവിച്ചിരിക്കുന്നവൻ"],
+    ["الْقَيُّومُ", "അൽ-ഖയ്യൂം", "എല്ലാം നിലനിർത്തുന്നവൻ"],
+    ["الْوَاجِدُ", "അൽ-വാജിദ്", "എല്ലാം കണ്ടെത്തുന്നവൻ"],
+    ["الْمَاجِدُ", "അൽ-മാജിദ്", "മഹത്വമുള്ളവൻ"],
+    ["الْوَاحِدُ", "അൽ-വാഹിദ്", "ഏകനായവൻ"],
+    ["الْأَحَدُ", "അൽ-അഹദ്", "ഏകനായവൻ"],
+    ["الصَّمَدُ", "അസ്-സമദ്", "എല്ലാവർക്കും ആശ്രയമായവൻ"],
+    ["الْقَادِرُ", "അൽ-ഖാദിർ", "സർവ്വശക്തൻ"],
+    ["الْمُقْتَدِرُ", "അൽ-മുക്തദിർ", "പരമശക്തൻ"],
+
+    ["الْمُقَدِّمُ", "അൽ-മുകദ്ദിം", "മുന്നോട്ട് കൊണ്ടുവരുന്നവൻ"],
+    ["الْمُؤَخِّرُ", "അൽ-മുഅഖ്ഖിർ", "പിന്നോട്ട് മാറ്റുന്നവൻ"],
+    ["الْأَوَّلُ", "അൽ-അവ്വൽ", "ആദി"],
+    ["الْآخِرُ", "അൽ-ആഖിർ", "അന്ത്യം"],
+    ["الظَّاهِرُ", "അള്ളാഹിർ", "പ്രത്യക്ഷനായവൻ"],
+    ["الْبَاطِنُ", "അൽ-ബാതിൻ", "അദൃശ്യനായവൻ"],
+    ["الْوَالِي", "അൽ-വാലി", "കാര്യങ്ങളുടെ സംരക്ഷകൻ"],
+    ["الْمُتَعَالِي", "അൽ-മുതആലി", "അത്യൂന്നതൻ"],
+    ["الْبَرُّ", "അൽ-ബർറ്", "നന്മ ചെയ്യുന്നവൻ"],
+    ["التَّوَّابُ", "അത്തവ്വാബ്", "തൗബ സ്വീകരിക്കുന്നവൻ"],
+
+    ["الْمُنْتَقِمُ", "അൽ-മുന്തഖിം", "നീതി നടപ്പാക്കുന്നവൻ"],
+    ["الْعَفُوُّ", "അൽ-അഫുവ്വ്", "മാപ്പ് ചെയ്യുന്നവൻ"],
+    ["الرَّؤُوفُ", "അർ-റഊഫ്", "അത്യന്തം കരുണയുള്ളവൻ"],
+    ["مَالِكُ الْمُلْكِ", "മാലികുൽ മുൽക്ക്", "രാജ്യാധികാരത്തിന്റെ ഉടമ"],
+    ["ذُو الْجَلَالِ وَالْإِكْرَامِ", "ദുൽ ജലാലി വൽ ഇക്രാം", "മഹത്വത്തിന്റെയും ആദരത്തിന്റെയും ഉടമ"],
+    ["الْمُقْسِطُ", "അൽ-മുക്സിത്", "നീതി പാലിക്കുന്നവൻ"],
+    ["الْجَامِعُ", "അൽ-ജാമിഅ്", "ഒരുമിച്ചു കൂട്ടുന്നവൻ"],
+    ["الْغَنِيُّ", "അൽ-ഗനിയ്യ്", "സ്വയം പര്യാപ്തൻ"],
+    ["الْمُغْنِي", "അൽ-മുഗ്നി", "സമ്പന്നനാക്കുന്നവൻ"],
+    ["الْمَانِعُ", "അൽ-മാനിഅ്", "തടയുന്നവൻ"],
+
+    ["الضَّارُ", "അദ്-ദാറ്", "ദോഷം സംഭവിക്കാൻ അനുവദിക്കുന്നവൻ"],
+    ["النَّافِعُ", "അൻ-നാഫിഅ്", "പ്രയോജനം നൽകുന്നവൻ"],
+    ["النُّورُ", "അൻ-നൂർ", "പ്രകാശം"],
+    ["الْهَادِي", "അൽ-ഹാദി", "മാർഗദർശകൻ"],
+    ["الْبَدِيعُ", "അൽ-ബദീഅ്", "അതുല്യ സ്രഷ്ടാവ്"],
+    ["الْبَاقِي", "അൽ-ബാഖി", "ശാശ്വതൻ"],
+    ["الْوَارِثُ", "അൽ-വാരിഥ്", "അവകാശി"],
+    ["الرَّشِيدُ", "അർ-റശീദ്", "ശരിയായ വഴി കാണിക്കുന്നവൻ"],
+    ["الصَّبُورُ", "അസ്-സബൂർ", "അത്യന്തം ക്ഷമാശീലൻ"]
+
+  ];
+
+
+  /* TODAY */
+
+  function getDayNumber() {
+
+    const start = new Date(2026, 0, 1);
+
+    const today = new Date();
+
+    start.setHours(0,0,0,0);
+    today.setHours(0,0,0,0);
+
+    const difference =
+      Math.floor(
+        (today - start) / (1000 * 60 * 60 * 24)
+      );
+
+    return difference % asma.length;
+
+  }
+
+
+  function showDailyName() {
+
+    const index = getDayNumber();
+
+    const item = asma[index];
+
+    document.getElementById("asmaNumber").textContent =
+      "പേര് " + (index + 1) + " / " + asma.length;
+
+    document.getElementById("asmaArabic").textContent =
+      item[0];
+
+    document.getElementById("asmaName").textContent =
+      item[1];
+
+    document.getElementById("asmaMeaning").textContent =
+      item[2];
+
+    document.getElementById("todayDate").textContent =
+      new Date().toLocaleDateString("ml-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+  }
+
+
+  /* ALL NAMES */
+
+  function showAllNames() {
+
+    const box =
+      document.getElementById("allNames");
+
+    box.innerHTML = "";
+
+    asma.forEach(function(item, index) {
+
+      const row =
+        document.createElement("div");
+
+      row.className = "name-row";
+
+      row.innerHTML = `
+        <div class="name-row-number">
+          ${index + 1}
+        </div>
+
+        <div>
+          <div class="name-row-arabic">
+            ${item[0]}
+          </div>
+
+          <div class="name-row-meaning">
+            ${item[1]} — ${item[2]}
+          </div>
+        </div>
+      `;
+
+      box.appendChild(row);
+
+    });
+
+  }
+
+
+  function toggleAll() {
+
+    const box =
+      document.getElementById("allNames");
+
+    const button =
+      document.querySelector(".all-button");
+
+    if (box.classList.contains("show")) {
+
+      box.classList.remove("show");
+
+      button.textContent =
+        "📖 99 നാമങ്ങൾ കാണുക";
+
+    } else {
+
+      box.classList.add("show");
+
+      button.textContent =
+        "⬆️ 99 നാമങ്ങൾ അടയ്ക്കുക";
+
+    }
+
+  }
+
+
+  /* HOME */
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+
+  /* DARK MODE */
+
+  function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+      localStorage.setItem(
+        "swalathDarkMode",
+        "on"
+      );
+
+    } else {
+
+      localStorage.setItem(
+        "swalathDarkMode",
+        "off"
+      );
+
+    }
+
+  }
+
+
+  /* START */
+
+  window.onload = function() {
+
+    showDailyName();
+
+    showAllNames();
+
+    const darkMode =
+      localStorage.getItem("swalathDarkMode");
+
+    if (darkMode === "on") {
+
+      document.body.classList.add("dark");
+
+    }
+
+  };
+
+</script>
+
+</body>
+</html>

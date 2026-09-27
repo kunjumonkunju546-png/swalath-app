@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Salah Guide | Swalath</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eee8d9;
+      color: #183c35;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123d34, #1d5b4c);
+      color: #f1dfb0;
+      text-align: center;
+      padding: 20px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 7px 0 0;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .home-btn {
+      background: #f1dfb0;
+      color: #123d34;
+      font-weight: bold;
+    }
+
+    .dark-btn {
+      background: #fff;
+      color: #123d34;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .intro,
+    .card {
+      background: #fffaf0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .intro {
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #123d34;
+      font-size: 20px;
+    }
+
+    .card h3 {
+      color: #1d5b4c;
+      margin-bottom: 7px;
+    }
+
+    .text {
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .arabic {
+      direction: rtl;
+      text-align: right;
+      font-size: 24px;
+      line-height: 2;
+      margin: 12px 0;
+      color: #173f36;
+    }
+
+    .malayalam {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .step {
+      background: #f1dfb0;
+      color: #123d34;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+      line-height: 1.7;
+    }
+
+    .warning {
+      background: #f8e9c7;
+      border-left: 4px solid #1d5b4c;
+      padding: 13px;
+      border-radius: 10px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .back-home {
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .back-home button {
+      background: #123d34;
+      color: #f1dfb0;
+      font-weight: bold;
+      padding: 13px 25px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #101816;
+      color: #eee;
+    }
+
+    body.dark .intro,
+    body.dark .card {
+      background: #192521;
+      color: #eee;
+      box-shadow: none;
+    }
+
+    body.dark .card h2,
+    body.dark .card h3 {
+      color: #f1dfb0;
+    }
+
+    body.dark .arabic {
+      color: #fff;
+    }
+
+    body.dark .malayalam {
+      color: #ddd;
+    }
+
+    body.dark .step {
+      background: #314c43;
+      color: #fff;
+    }
+
+    body.dark .warning {
+      background: #283c35;
+      color: #eee;
+    }
+
+    body.dark footer {
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>🕌 Salah Guide</h1>
+
+  <p>നമസ്കാരത്തിന്റെ അടിസ്ഥാന മാർഗ്ഗനിർദ്ദേശം</p>
+
+  <div class="top-buttons">
+
+    <button class="home-btn" onclick="goHome()">
+      🏠 Home
+    </button>
+
+    <button class="dark-btn" onclick="toggleDark()">
+      🌙 Dark
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <!-- INTRO -->
+
+  <div class="intro">
+
+    🕌 <strong>നമസ്കാരം</strong><br>
+
+    അല്ലാഹുവിനെ ആരാധിക്കുന്നതിലെ ഏറ്റവും പ്രധാനപ്പെട്ട
+    ഇബാദത്തുകളിൽ ഒന്നാണ് സ്വലാത്ത്.
+
+    <br><br>
+
+    താഴെ കൊടുത്തിരിക്കുന്നത് പൊതുവായ പഠനസഹായിയാണ്.
+    നിങ്ങളുടെ മദ്ഹബ് / ഉസ്താദ് പഠിപ്പിക്കുന്ന വിശദാംശങ്ങൾ
+    അനുസരിക്കുക.
+
+  </div>
+
+
+  <!-- WUDU -->
+
+  <div class="card">
+
+    <h2>💧 1. നമസ്കാരത്തിന് മുമ്പ്</h2>
+
+    <div class="text">
+
+      നമസ്കാരത്തിന് മുമ്പ്:
+
+    </div>
+
+    <div class="step">
+      ✓ വുദൂ ഉണ്ടായിരിക്കണം
+    </div>
+
+    <div class="step">
+      ✓ ശരീരം, വസ്ത്രം, നമസ്കരിക്കുന്ന സ്ഥലം എന്നിവ ശുദ്ധമായിരിക്കണം
+    </div>
+
+    <div class="step">
+      ✓ ഔറത്ത് മറച്ചിരിക്കണം
+    </div>
+
+    <div class="step">
+      ✓ നമസ്കാര സമയം ആയിരിക്കണം
+    </div>
+
+    <div class="step">
+      ✓ ഖിബ്ലയിലേക്ക് തിരിഞ്ഞിരിക്കണം
+    </div>
+
+  </div>
+
+
+  <!-- NIYYAH -->
+
+  <div class="card">
+
+    <h2>🤲 2. നിയ്യത്ത്</h2>
+
+    <div class="text">
+
+      ഏത് നമസ്കാരമാണ് നിർവഹിക്കുന്നത് എന്നത്
+      ഹൃദയത്തിൽ ഉദ്ദേശിക്കുക.
+
+      <br><br>
+
+      നിയ്യത്തിന്റെ വിശദമായ വാക്കുകൾ ഓരോ നമസ്കാരത്തിനും
+      വ്യത്യസ്തമായിരിക്കും. നിങ്ങളുടെ ഉസ്താദിൽ നിന്ന്
+      ശരിയായ രീതിയിൽ പഠിക്കുക.
+
+    </div>
+
+  </div>
+
+
+  <!-- TAKBEER -->
+
+  <div class="card">
+
+    <h2>1️⃣ 3. തക്ബീറത്തുൽ ഇഹ്റാം</h2>
+
+    <div class="text">
+      നമസ്കാരം ആരംഭിക്കുമ്പോൾ:
+    </div>
+
+    <div class="arabic">
+      اللهُ أَكْبَرُ
+    </div>
+
+    <div class="malayalam">
+      അല്ലാഹു അക്ബർ
+    </div>
+
+  </div>
+
+
+  <!-- QIYAM -->
+
+  <div class="card">
+
+    <h2>2️⃣ 4. ഖിയാം</h2>
+
+    <div class="text">
+
+      നിൽക്കുക.
+
+      <br><br>
+
+      സാധാരണയായി ആദ്യം:
+
+    </div>
+
+    <div class="arabic">
+      سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാനകല്ലാഹുമ്മ വബിഹംദിക
+    </div>
+
+    <br>
+
+    <div class="text">
+      തുടർന്ന് സൂറത്തുൽ ഫാതിഹയും
+      ഖുർആനിലെ മറ്റൊരു ഭാഗവും പാരായണം ചെയ്യുന്നു.
+    </div>
+
+  </div>
+
+
+  <!-- RUKU -->
+
+  <div class="card">
+
+    <h2>3️⃣ 5. റുകൂഅ്</h2>
+
+    <div class="text">
+      റുകൂഅിലേക്ക് പോകുമ്പോൾ:
+    </div>
+
+    <div class="arabic">
+      اللهُ أَكْبَرُ
+    </div>
+
+    <div class="malayalam">
+      അല്ലാഹു അക്ബർ
+    </div>
+
+    <br>
+
+    <div class="text">
+      റുകൂഅിൽ ചൊല്ലുന്നത്:
+    </div>
+
+    <div class="arabic">
+      سُبْحَانَ رَبِّيَ الْعَظِيمِ
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാന റബ്ബിയൽ അസീം
+    </div>
+
+  </div>
+
+
+  <!-- QAWMAH -->
+
+  <div class="card">
+
+    <h2>4️⃣ 6. റുകൂഅിൽ നിന്ന് എഴുന്നേൽക്കൽ</h2>
+
+    <div class="arabic">
+      سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ
+    </div>
+
+    <div class="malayalam">
+      സമിഅല്ലാഹു ലിമൻ ഹമിദഹ്
+    </div>
+
+    <br>
+
+    <div class="arabic">
+      رَبَّنَا وَلَكَ الْحَمْدُ
+    </div>
+
+    <div class="malayalam">
+      റബ്ബനാ വലകല്ഹംദ്
+    </div>
+
+  </div>
+
+
+  <!-- SUJOOD -->
+
+  <div class="card">
+
+    <h2>5️⃣ 7. സുജൂദ്</h2>
+
+    <div class="text">
+      സുജൂദിലേക്ക് പോകുമ്പോൾ:
+    </div>
+
+    <div class="arabic">
+      اللهُ أَكْبَرُ
+    </div>
+
+    <div class="malayalam">
+      അല്ലാഹു അക്ബർ
+    </div>
+
+    <br>
+
+    <div class="text">
+      സുജൂദിൽ:
+    </div>
+
+    <div class="arabic">
+      سُبْحَانَ رَبِّيَ الْأَعْلَى
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാന റബ്ബിയൽ അഅ്ലാ
+    </div>
+
+  </div>
+
+
+  <!-- BETWEEN TWO SUJOOD -->
+
+  <div class="card">
+
+    <h2>6️⃣ 8. രണ്ട് സുജൂദുകൾക്കിടയിൽ</h2>
+
+    <div class="arabic">
+      رَبِّ اغْفِرْ لِي
+    </div>
+
+    <div class="malayalam">
+      റബ്ബിഗ്ഫിർ ലീ
+    </div>
+
+    <div class="text">
+
+      അർത്ഥം:
+      എന്റെ രക്ഷിതാവേ, എനിക്ക് പൊറുത്തുതരണമേ.
+
+    </div>
+
+  </div>
+
+
+  <!-- SECOND SUJOOD -->
+
+  <div class="card">
+
+    <h2>7️⃣ 9. രണ്ടാമത്തെ സുജൂദ്</h2>
+
+    <div class="arabic">
+      سُبْحَانَ رَبِّيَ الْأَعْلَى
+    </div>
+
+    <div class="malayalam">
+      സുബ്ഹാന റബ്ബിയൽ അഅ്ലാ
+    </div>
+
+  </div>
+
+
+  <!-- TASHahHUD -->
+
+  <div class="card">
+
+    <h2>8️⃣ 10. തശഹ്ഹുദ്</h2>
+
+    <div class="text">
+
+      ഇരുന്ന് അത്തഹിയ്യാത്ത് പാരായണം ചെയ്യുന്നു.
+
+    </div>
+
+    <div class="arabic">
+
+      التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ
+
+    </div>
+
+    <div class="malayalam">
+
+      അത്തഹിയ്യാത്തു ലില്ലാഹി വസ്സലവാത്തു വത്തയ്യിബാത്ത്
+
+    </div>
+
+    <div class="warning">
+
+      ℹ️ അത്തഹിയ്യാത്തിന്റെ പൂർണ്ണ പാരായണം
+      നിങ്ങളുടെ ഉസ്താദിൽ നിന്ന് ശരിയായ ഉച്ചാരണത്തോടെ
+      പഠിക്കുന്നത് നല്ലതാണ്.
+
+    </div>
+
+  </div>
+
+
+  <!-- SALAM -->
+
+  <div class="card">
+
+    <h2>9️⃣ 11. സലാം</h2>
+
+    <div class="text">
+
+      നമസ്കാരം അവസാനിപ്പിക്കുമ്പോൾ വലത്തേക്കും
+      ഇടത്തേക്കും സലാം ചൊല്ലുന്നു.
+
+    </div>
+
+    <div class="arabic">
+      السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ
+    </div>
+
+    <div class="malayalam">
+      അസ്സലാമു അലൈക്കും വറഹ്മതുല്ലാഹ്
+    </div>
+
+  </div>
+
+
+  <!-- FIVE PRAYERS -->
+
+  <div class="card">
+
+    <h2>🕰️ 12. അഞ്ച് ഫർള് നമസ്കാരങ്ങൾ</h2>
+
+    <div class="step">
+      🌅 ഫജർ — 2 റക്അത്ത് ഫർള്
+    </div>
+
+    <div class="step">
+      ☀️ ളുഹർ — 4 റക്അത്ത് ഫർള്
+    </div>
+
+    <div class="step">
+      🌤️ അസർ — 4 റക്അത്ത് ഫർള്
+    </div>
+
+    <div class="step">
+      🌇 മഗ്രിബ് — 3 റക്അത്ത് ഫർള്
+    </div>
+
+    <div class="step">
+      🌙 ഇശാ — 4 റക്അത്ത് ഫർള്
+    </div>
+
+  </div>
+
+
+  <!-- IMPORTANT -->
+
+  <div class="card">
+
+    <h2>📖 പ്രധാന ഓർമ്മപ്പെടുത്തൽ</h2>
+
+    <div class="warning">
+
+      ഈ പേജ് പഠനസഹായിയായി മാത്രം ഉപയോഗിക്കുക.
+
+      <br><br>
+
+      നമസ്കാരത്തിന്റെ ശരിയായ രീതിയും,
+      മദ്ഹബ് അനുസരിച്ചുള്ള വിശദാംശങ്ങളും,
+      ഖുർആൻ പാരായണവും,
+      തശഹ്ഹുദും മറ്റു ദുആകളും
+      യോഗ്യനായ ഉസ്താദ് / പണ്ഡിതനിൽ നിന്ന്
+      നേരിട്ട് പഠിക്കുക.
+
+    </div>
+
+  </div>
+
+
+  <div class="back-home">
+
+    <button onclick="goHome()">
+      🏠 Swalath Home
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © Swalath • Salah Guide
+</footer>
+
+
+<script>
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+
+  function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+      localStorage.setItem("swalathDarkMode", "on");
+
+    } else {
+
+      localStorage.setItem("swalathDarkMode", "off");
+
+    }
+
+  }
+
+
+  window.onload = function() {
+
+    const darkMode = localStorage.getItem("swalathDarkMode");
+
+    if (darkMode === "on") {
+      document.body.classList.add("dark");
+    }
+
+  };
+
+</script>
+
+</body>
+</html>

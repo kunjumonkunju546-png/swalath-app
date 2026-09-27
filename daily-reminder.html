@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Daily Reminder | Swalath</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eee8d9;
+      color: #183c35;
+    }
+
+    header {
+      background: linear-gradient(135deg, #123d34, #1d5b4c);
+      color: #f1dfb0;
+      text-align: center;
+      padding: 20px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 7px 0 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .home-btn {
+      background: #f1dfb0;
+      color: #123d34;
+      font-weight: bold;
+    }
+
+    .dark-btn {
+      background: white;
+      color: #123d34;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .date-box {
+      background: #123d34;
+      color: #f1dfb0;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .date-box h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .date-box p {
+      margin: 0;
+      color: white;
+    }
+
+    .intro,
+    .reminder-card {
+      background: #fffaf0;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .intro {
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .reminder-card {
+      border-left: 4px solid #1d5b4c;
+    }
+
+    .reminder-card h2 {
+      margin-top: 0;
+      color: #123d34;
+      font-size: 19px;
+    }
+
+    .arabic {
+      direction: rtl;
+      text-align: right;
+      font-size: 24px;
+      line-height: 2;
+      margin: 12px 0;
+      color: #173f36;
+    }
+
+    .malayalam {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .small-note {
+      font-size: 13px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .check-box {
+      margin-top: 12px;
+      background: #f1dfb0;
+      border-radius: 10px;
+      padding: 11px;
+      color: #123d34;
+      font-weight: bold;
+    }
+
+    .check-box label {
+      cursor: pointer;
+    }
+
+    .check-box input {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 7px;
+    }
+
+    .refresh-btn {
+      display: block;
+      margin: 20px auto;
+      background: #123d34;
+      color: #f1dfb0;
+      font-weight: bold;
+      padding: 13px 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #101816;
+      color: #eee;
+    }
+
+    body.dark .intro,
+    body.dark .reminder-card {
+      background: #192521;
+      color: #eee;
+      box-shadow: none;
+    }
+
+    body.dark .reminder-card h2 {
+      color: #f1dfb0;
+    }
+
+    body.dark .arabic {
+      color: white;
+    }
+
+    body.dark .malayalam {
+      color: #ddd;
+    }
+
+    body.dark .small-note {
+      color: #aaa;
+    }
+
+    body.dark .check-box {
+      background: #314c43;
+      color: #f1dfb0;
+    }
+
+    body.dark footer {
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>🌅 Daily Reminder</h1>
+
+  <p>ഇന്നത്തെ ആത്മീയ ഓർമ്മപ്പെടുത്തൽ</p>
+
+  <div class="top-buttons">
+
+    <button class="home-btn" onclick="goHome()">
+      🏠 Home
+    </button>
+
+    <button class="dark-btn" onclick="toggleDark()">
+      🌙 Dark
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <!-- DATE -->
+
+  <div class="date-box">
+
+    <h2 id="todayDate">ഇന്ന്</h2>
+
+    <p>അല്ലാഹുവിന്റെ സ്മരണയോടെ ദിവസം ആരംഭിക്കാം 🤍</p>
+
+  </div>
+
+
+  <!-- INTRO -->
+
+  <div class="intro">
+
+    🌿 <strong>ഇന്നത്തെ ചെറിയ ഓർമ്മപ്പെടുത്തൽ</strong>
+
+    <br><br>
+
+    ഒരു ദിവസം മുഴുവൻ വലിയ കാര്യങ്ങൾ ചെയ്യാൻ
+    കഴിയാതിരുന്നാലും, ചെറിയ നല്ല പ്രവർത്തനങ്ങൾ
+    സ്ഥിരമായി ചെയ്യാൻ ശ്രമിക്കാം.
+
+  </div>
+
+
+  <!-- REMINDER 1 -->
+
+  <div class="reminder-card">
+
+    <h2>🕌 1. അഞ്ച് നേരത്തെ നമസ്കാരം</h2>
+
+    <div class="malayalam">
+
+      ഇന്ന് അഞ്ച് നേരത്തെ നമസ്കാരവും
+      സമയത്ത് നിർവഹിക്കാൻ ശ്രമിക്കാം.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="salahCheck">
+        ഇന്ന് നമസ്കാരത്തിന് പ്രത്യേക ശ്രദ്ധ നൽകാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 2 -->
+
+  <div class="reminder-card">
+
+    <h2>📖 2. ഖുർആൻ</h2>
+
+    <div class="malayalam">
+
+      ദിവസവും കുറച്ച് ആയത്തുകളെങ്കിലും
+      ഖുർആൻ വായിക്കുകയോ കേൾക്കുകയോ ചെയ്യാം.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="quranCheck">
+        ഇന്ന് ഖുർആൻ വായിക്കാം / കേൾക്കാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 3 -->
+
+  <div class="reminder-card">
+
+    <h2>📿 3. ദിക്റ്</h2>
+
+    <div class="arabic">
+      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+    </div>
+
+    <div class="malayalam">
+
+      സുബ്ഹാനല്ലാഹി വബിഹംദിഹി
+
+      <br><br>
+
+      ഇന്ന് കുറച്ച് സമയം അല്ലാഹുവിനെ
+      സ്മരിക്കാം.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="dhikrCheck">
+        ഇന്ന് ദിക്റിന് സമയം മാറ്റിവെക്കാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 4 -->
+
+  <div class="reminder-card">
+
+    <h2>🤲 4. ദുആ</h2>
+
+    <div class="malayalam">
+
+      സ്വന്തം ആവശ്യങ്ങൾക്കും മാതാപിതാക്കൾക്കും
+      കുടുംബത്തിനും മറ്റുള്ളവർക്കും വേണ്ടി ദുആ ചെയ്യാം.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="duaCheck">
+        ഇന്ന് കൂടുതൽ ദുആ ചെയ്യാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 5 -->
+
+  <div class="reminder-card">
+
+    <h2>❤️ 5. മാതാപിതാക്കളെ ഓർക്കാം</h2>
+
+    <div class="malayalam">
+
+      മാതാപിതാക്കൾക്കായി ദുആ ചെയ്യുക.
+      കഴിയുമെങ്കിൽ അവരോട് സ്നേഹത്തോടെ സംസാരിക്കുക.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="parentsCheck">
+        മാതാപിതാക്കൾക്കായി ഇന്ന് ദുആ ചെയ്യാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 6 -->
+
+  <div class="reminder-card">
+
+    <h2>🤝 6. ഒരു നല്ല പ്രവൃത്തി</h2>
+
+    <div class="malayalam">
+
+      ഇന്ന് ഒരാൾക്ക് സഹായം ചെയ്യുക,
+      നല്ല വാക്ക് പറയുക,
+      അല്ലെങ്കിൽ ആരെയെങ്കിലും സന്തോഷിപ്പിക്കുക.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="goodCheck">
+        ഇന്ന് ഒരു നല്ല പ്രവൃത്തി ചെയ്യാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- REMINDER 7 -->
+
+  <div class="reminder-card">
+
+    <h2>🌙 7. ഉറങ്ങുന്നതിന് മുമ്പ്</h2>
+
+    <div class="malayalam">
+
+      ദിവസത്തെ തെറ്റുകൾ ഓർത്ത് അല്ലാഹുവിനോട്
+      മാപ്പ് ചോദിക്കുകയും ദുആ ചെയ്യുകയും ചെയ്യാം.
+
+    </div>
+
+    <div class="check-box">
+
+      <label>
+        <input type="checkbox" id="nightCheck">
+        ഉറങ്ങുന്നതിന് മുമ്പ് ദുആ ചെയ്യാം
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <button class="refresh-btn" onclick="resetToday()">
+    🔄 ഇന്നത്തെ Check-list Reset
+  </button>
+
+
+  <div class="small-note" style="text-align:center;">
+    ഈ checklist ഈ ദിവസത്തെ നിങ്ങളുടെ ഉപകരണത്തിൽ മാത്രം സൂക്ഷിക്കുന്നു.
+  </div>
+
+
+</div>
+
+
+<footer>
+  © Swalath • Daily Reminder
+</footer>
+
+
+<script>
+
+  /* HOME */
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+
+  /* DARK MODE */
+
+  function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+      localStorage.setItem("swalathDarkMode", "on");
+
+    } else {
+
+      localStorage.setItem("swalathDarkMode", "off");
+
+    }
+
+  }
+
+
+  /* DATE */
+
+  function showDate() {
+
+    const now = new Date();
+
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
+
+    document.getElementById("todayDate").textContent =
+      now.toLocaleDateString("ml-IN", options);
+
+  }
+
+
+  /* DAILY CHECKLIST */
+
+  const checks = [
+    "salahCheck",
+    "quranCheck",
+    "dhikrCheck",
+    "duaCheck",
+    "parentsCheck",
+    "goodCheck",
+    "nightCheck"
+  ];
+
+
+  function getTodayKey() {
+
+    const date = new Date();
+
+    return date.getFullYear() + "-" +
+           (date.getMonth() + 1) + "-" +
+           date.getDate();
+
+  }
+
+
+  function saveChecks() {
+
+    const today = getTodayKey();
+
+    const data = {};
+
+    checks.forEach(function(id) {
+
+      data[id] =
+        document.getElementById(id).checked;
+
+    });
+
+    localStorage.setItem(
+      "swalathDailyReminder_" + today,
+      JSON.stringify(data)
+    );
+
+  }
+
+
+  function loadChecks() {
+
+    const today = getTodayKey();
+
+    const saved =
+      localStorage.getItem(
+        "swalathDailyReminder_" + today
+      );
+
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    checks.forEach(function(id) {
+
+      if (data[id] === true) {
+
+        document.getElementById(id).checked = true;
+
+      }
+
+    });
+
+  }
+
+
+  function resetToday() {
+
+    const today = getTodayKey();
+
+    localStorage.removeItem(
+      "swalathDailyReminder_" + today
+    );
+
+    checks.forEach(function(id) {
+
+      document.getElementById(id).checked = false;
+
+    });
+
+  }
+
+
+  /* START */
+
+  window.onload = function() {
+
+    showDate();
+
+    loadChecks();
+
+    const darkMode =
+      localStorage.getItem("swalathDarkMode");
+
+    if (darkMode === "on") {
+
+      document.body.classList.add("dark");
+
+    }
+
+
+    checks.forEach(function(id) {
+
+      document.getElementById(id)
+        .addEventListener("change", saveChecks);
+
+    });
+
+  };
+
+</script>
+
+</body>
+</html>

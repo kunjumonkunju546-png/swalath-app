@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ദിക്റുകൾ | Swalath</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#eee8d9;
+    color:#222;
+}
+
+.app{
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:#fffdf8;
+    box-shadow:0 0 25px rgba(0,0,0,.08);
+}
+
+.header{
+    text-align:center;
+    padding:25px 20px 28px;
+    background:linear-gradient(145deg,#123d34,#1d5b4c);
+    color:white;
+    border-radius:0 0 28px 28px;
+}
+
+.icon{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.header h1{
+    font-size:28px;
+}
+
+.header p{
+    margin-top:7px;
+    font-size:13px;
+    opacity:.85;
+}
+
+.top-buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+}
+
+.top-buttons button{
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:white;
+    padding:9px 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+main{
+    padding:20px;
+}
+
+.intro{
+    text-align:center;
+    padding:5px 5px 20px;
+}
+
+.intro h2{
+    font-size:21px;
+    margin-bottom:8px;
+}
+
+.intro p{
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.dhikr-card{
+    background:white;
+    border:1px solid #e6dfd0;
+    border-radius:20px;
+    padding:20px 15px;
+    margin-bottom:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.04);
+}
+
+.dhikr-title{
+    text-align:center;
+    color:#123d34;
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+.arabic{
+    direction:rtl;
+    text-align:center;
+    font-size:25px;
+    line-height:2;
+    margin-bottom:14px;
+}
+
+.pronunciation{
+    background:#f7f2e7;
+    border-radius:14px;
+    padding:13px;
+    text-align:center;
+    font-size:14px;
+    line-height:1.8;
+    color:#555;
+}
+
+.count{
+    text-align:center;
+    margin-top:12px;
+    color:#123d34;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.back-home{
+    width:100%;
+    border:none;
+    background:#123d34;
+    color:white;
+    padding:14px;
+    border-radius:28px;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#999;
+    font-size:11px;
+}
+
+body.dark{
+    background:#111;
+    color:#eee;
+}
+
+body.dark .app{
+    background:#181818;
+}
+
+body.dark .dhikr-card{
+    background:#222;
+    border-color:#333;
+}
+
+body.dark .dhikr-title{
+    color:#f1dfb0;
+}
+
+body.dark .arabic{
+    color:white;
+}
+
+body.dark .pronunciation{
+    background:#2b2b2b;
+    color:#ddd;
+}
+
+body.dark .intro p{
+    color:#aaa;
+}
+
+body.dark .count{
+    color:#f1dfb0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="icon">📿</div>
+
+    <h1>ദിക്റുകൾ</h1>
+
+    <p>അല്ലാഹുവിനെ ഓർക്കാം</p>
+
+    <div class="top-buttons">
+
+        <button onclick="goHome()">
+            ← Home
+        </button>
+
+        <button onclick="toggleDark()">
+            🌙
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="intro">
+
+    <h2>📿 ദിക്റുകൾ</h2>
+
+    <p>
+        നാവിനും ഹൃദയത്തിനും എളുപ്പമുള്ള
+        അല്ലാഹുവിന്റെ സ്മരണകൾ.
+    </p>
+
+</section>
+
+
+<!-- 1 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        🌿 സുബ്ഹാനല്ലാഹി വബിഹംദിഹി
+    </div>
+
+    <div class="arabic">
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+    </div>
+
+    <div class="pronunciation">
+        സുബ്ഹാനല്ലാഹി വബിഹംദിഹി
+    </div>
+
+    <div class="count">
+        100 തവണ
+    </div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        🤍 സുബ്ഹാനല്ലാഹി വബിഹംദിഹി സുബ്ഹാനല്ലാഹിൽ അദ്വീം
+    </div>
+
+    <div class="arabic">
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ
+    </div>
+
+    <div class="pronunciation">
+        സുബ്ഹാനല്ലാഹി വബിഹംദിഹി,
+        സുബ്ഹാനല്ലാഹിൽ അദ്വീം
+    </div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        ☝️ തഹ്‌ലീൽ
+    </div>
+
+    <div class="arabic">
+        لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+    </div>
+
+    <div class="pronunciation">
+        ലാ ഇലാഹ ഇല്ലല്ലാഹു വഹ്ദഹൂ ലാ ശരീക ലഹു,
+        ലഹുൽ മുൽക്കു വ ലഹുൽ ഹംദു വ ഹുവ അലാ കുള്ളി ശൈഇൻ ഖദീർ.
+    </div>
+
+    <div class="count">
+        10 തവണ
+    </div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        🌸 ഇസ്തിഗ്ഫാർ
+    </div>
+
+    <div class="arabic">
+        أَسْتَغْفِرُ اللَّهَ
+    </div>
+
+    <div class="pronunciation">
+        അസ്തഗ്ഫിറുല്ലാഹ്
+    </div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        ⭐ തസ്ബീഹ്
+    </div>
+
+    <div class="arabic">
+        سُبْحَانَ اللَّهِ
+    </div>
+
+    <div class="pronunciation">
+        സുബ്ഹാനല്ലാഹ്
+    </div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        🌿 തഹ്മീദ്
+    </div>
+
+    <div class="arabic">
+        الْحَمْدُ لِلَّهِ
+    </div>
+
+    <div class="pronunciation">
+        അൽഹംദുലില്ലാഹ്
+    </div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        ✨ തക്ബീർ
+    </div>
+
+    <div class="arabic">
+        اللَّهُ أَكْبَرُ
+    </div>
+
+    <div class="pronunciation">
+        അല്ലാഹു അക്ബർ
+    </div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="dhikr-card">
+
+    <div class="dhikr-title">
+        ❤️ സ്വലാത്ത് നബി ﷺ
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ
+    </div>
+
+    <div class="pronunciation">
+        അല്ലാഹുമ്മ സ്വല്ലി അലാ മുഹമ്മദിൻ
+        വ അലാ ആലി മുഹമ്മദ്.
+    </div>
+
+</div>
+
+
+<button class="back-home" onclick="goHome()">
+    🏠 Swalath Home
+</button>
+
+</main>
+
+
+<footer>
+    Swalath • ذكر الله
+</footer>
+
+</div>
+
+
+<script>
+
+function goHome(){
+    window.location.href="index.html";
+}
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("swalathDarkMode","on");
+    }else{
+        localStorage.setItem("swalathDarkMode","off");
+    }
+
+}
+
+window.addEventListener("load",function(){
+
+    if(localStorage.getItem("swalathDarkMode")==="on"){
+        document.body.classList.add("dark");
+    }
+
+});
+
+</script>
+
+</body>
+</html>

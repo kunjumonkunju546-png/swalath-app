@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>തസ്ബീഹ് Counter | Swalath</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#eee8d9;
+    color:#222;
+}
+
+.app{
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:#fffdf8;
+    box-shadow:0 0 25px rgba(0,0,0,.08);
+}
+
+.header{
+    text-align:center;
+    padding:25px 20px 28px;
+    background:linear-gradient(145deg,#123d34,#1d5b4c);
+    color:white;
+    border-radius:0 0 28px 28px;
+}
+
+.icon{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.header h1{
+    font-size:28px;
+}
+
+.header p{
+    margin-top:7px;
+    font-size:13px;
+    opacity:.85;
+}
+
+.top-buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+}
+
+.top-buttons button{
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:white;
+    padding:9px 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+main{
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.title h2{
+    font-size:21px;
+    margin-bottom:7px;
+}
+
+.title p{
+    color:#777;
+    font-size:13px;
+}
+
+.select-box{
+    background:white;
+    border:1px solid #e6dfd0;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.select-box label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:8px;
+    color:#555;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd4c2;
+    border-radius:12px;
+    background:#fffdf8;
+    font-size:14px;
+}
+
+.counter-box{
+    background:#f1dfb0;
+    border-radius:25px;
+    text-align:center;
+    padding:25px 18px;
+    margin-bottom:15px;
+}
+
+.counter-name{
+    font-size:17px;
+    font-weight:bold;
+    color:#123d34;
+}
+
+.counter{
+    font-size:72px;
+    font-weight:bold;
+    margin:15px 0 5px;
+    color:#123d34;
+}
+
+.target{
+    font-size:13px;
+    color:#555;
+}
+
+.progress{
+    height:8px;
+    background:rgba(255,255,255,.7);
+    border-radius:10px;
+    overflow:hidden;
+    margin:18px 0;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#123d34;
+    transition:.2s;
+}
+
+.count-button{
+    width:180px;
+    height:180px;
+    border:none;
+    border-radius:50%;
+    background:#123d34;
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.count-button:active{
+    transform:scale(.95);
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.action-button{
+    flex:1;
+    border:none;
+    padding:13px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.reset{
+    background:#e5ddd0;
+    color:#333;
+}
+
+.target-button{
+    background:#123d34;
+    color:white;
+}
+
+.target-options{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.target-options button{
+    flex:1;
+    border:1px solid #ddd4c2;
+    background:white;
+    padding:10px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.target-options button.active{
+    background:#123d34;
+    color:white;
+}
+
+.message{
+    text-align:center;
+    margin-top:15px;
+    min-height:20px;
+    font-size:13px;
+    color:#123d34;
+    font-weight:bold;
+}
+
+.back-home{
+    width:100%;
+    border:none;
+    background:#123d34;
+    color:white;
+    padding:14px;
+    border-radius:28px;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#999;
+    font-size:11px;
+}
+
+body.dark{
+    background:#111;
+    color:#eee;
+}
+
+body.dark .app{
+    background:#181818;
+}
+
+body.dark .select-box{
+    background:#222;
+    border-color:#333;
+}
+
+body.dark .select-box label{
+    color:#bbb;
+}
+
+body.dark select{
+    background:#2b2b2b;
+    color:white;
+    border-color:#444;
+}
+
+body.dark .counter-box{
+    background:#3a321f;
+}
+
+body.dark .counter-name,
+body.dark .counter{
+    color:#f1dfb0;
+}
+
+body.dark .target{
+    color:#ccc;
+}
+
+body.dark .target-options button{
+    background:#222;
+    color:#ddd;
+    border-color:#444;
+}
+
+body.dark .target-options button.active{
+    background:#f1dfb0;
+    color:#123d34;
+}
+
+body.dark .reset{
+    background:#333;
+    color:#eee;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="icon">📿</div>
+
+    <h1>തസ്ബീഹ്</h1>
+
+    <p>അല്ലാഹുവിനെ ഓർക്കാം</p>
+
+    <div class="top-buttons">
+
+        <button onclick="goHome()">
+            ← Home
+        </button>
+
+        <button onclick="toggleDark()">
+            🌙
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<div class="title">
+
+    <h2>📿 Tasbeeh Counter</h2>
+
+    <p>
+        ദിക്റുകൾ എണ്ണാൻ ലളിതമായ ഡിജിറ്റൽ തസ്ബീഹ്
+    </p>
+
+</div>
+
+
+<div class="select-box">
+
+    <label>ദിക്റ് തിരഞ്ഞെടുക്കുക</label>
+
+    <select id="dhikrSelect" onchange="changeDhikr()">
+
+        <option value="SubhanAllah">
+            سُبْحَانَ اللَّهِ — സുബ്ഹാനല്ലാഹ്
+        </option>
+
+        <option value="Alhamdulillah">
+            الْحَمْدُ لِلَّهِ — അൽഹംദുലില്ലാഹ്
+        </option>
+
+        <option value="AllahuAkbar">
+            اللَّهُ أَكْبَرُ — അല്ലാഹു അക്ബർ
+        </option>
+
+        <option value="Istighfar">
+            أَسْتَغْفِرُ اللَّهَ — അസ്തഗ്ഫിറുല്ലാഹ്
+        </option>
+
+        <option value="LaIlaha">
+            لَا إِلَٰهَ إِلَّا اللَّهُ — ലാ ഇലാഹ ഇല്ലല്ലാഹ്
+        </option>
+
+        <option value="Salawat">
+            اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ — സ്വലാത്ത്
+        </option>
+
+    </select>
+
+</div>
+
+
+<div class="counter-box">
+
+    <div class="counter-name" id="counterName">
+        സുബ്ഹാനല്ലാഹ്
+    </div>
+
+    <div class="counter" id="counter">
+        0
+    </div>
+
+    <div class="target" id="targetText">
+        ലക്ഷ്യം: 33
+    </div>
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progressBar"
+        ></div>
+
+    </div>
+
+
+    <button
+        class="count-button"
+        onclick="addCount()"
+    >
+        +1
+    </button>
+
+
+    <div class="buttons">
+
+        <button
+            class="action-button reset"
+            onclick="resetCount()"
+        >
+            ↻ Reset
+        </button>
+
+    </div>
+
+
+    <div
+        class="message"
+        id="message"
+    ></div>
+
+</div>
+
+
+<div class="select-box">
+
+    <label>ലക്ഷ്യം തിരഞ്ഞെടുക്കുക</label>
+
+    <div class="target-options">
+
+        <button
+            id="target33"
+            onclick="setTarget(33)"
+        >
+            33
+        </button>
+
+        <button
+            id="target99"
+            onclick="setTarget(99)"
+        >
+            99
+        </button>
+
+        <button
+            id="target100"
+            onclick="setTarget(100)"
+        >
+            100
+        </button>
+
+    </div>
+
+</div>
+
+
+<button
+    class="back-home"
+    onclick="goHome()"
+>
+    🏠 Swalath Home
+</button>
+
+</main>
+
+
+<footer>
+    Swalath • Tasbeeh
+</footer>
+
+</div>
+
+
+<script>
+
+let currentDhikr = "SubhanAllah";
+
+let target = Number(
+    localStorage.getItem("tasbeehTarget")
+) || 33;
+
+
+const names = {
+
+    SubhanAllah:
+        "സുബ്ഹാനല്ലാഹ്",
+
+    Alhamdulillah:
+        "അൽഹംദുലില്ലാഹ്",
+
+    AllahuAkbar:
+        "അല്ലാഹു അക്ബർ",
+
+    Istighfar:
+        "അസ്തഗ്ഫിറുല്ലാഹ്",
+
+    LaIlaha:
+        "ലാ ഇലാഹ ഇല്ലല്ലാഹ്",
+
+    Salawat:
+        "സ്വലാത്ത്"
+
+};
+
+
+function getStorageKey(){
+
+    return "tasbeeh_" + currentDhikr;
+
+}
+
+
+function getCount(){
+
+    return Number(
+        localStorage.getItem(
+            getStorageKey()
+        )
+    ) || 0;
+
+}
+
+
+function saveCount(count){
+
+    localStorage.setItem(
+        getStorageKey(),
+        count
+    );
+
+}
+
+
+function updateScreen(){
+
+    const count = getCount();
+
+    document.getElementById(
+        "counter"
+    ).textContent = count;
+
+    document.getElementById(
+        "counterName"
+    ).textContent = names[currentDhikr];
+
+    document.getElementById(
+        "targetText"
+    ).textContent =
+        "ലക്ഷ്യം: " + target;
+
+    let percent =
+        (count / target) * 100;
+
+    if(percent > 100){
+        percent = 100;
+    }
+
+    document.getElementById(
+        "progressBar"
+    ).style.width = percent + "%";
+
+
+    document.getElementById(
+        "target33"
+    ).classList.toggle(
+        "active",
+        target === 33
+    );
+
+    document.getElementById(
+        "target99"
+    ).classList.toggle(
+        "active",
+        target === 99
+    );
+
+    document.getElementById(
+        "target100"
+    ).classList.toggle(
+        "active",
+        target === 100
+    );
+
+}
+
+
+function addCount(){
+
+    let count = getCount();
+
+    count++;
+
+    saveCount(count);
+
+    updateScreen();
+
+    if(count === target){
+
+        document.getElementById(
+            "message"
+        ).textContent =
+            "മാഷാ അല്ലാഹ് 🤲 ലക്ഷ്യം പൂർത്തിയായി";
+
+    }
+
+}
+
+
+function resetCount(){
+
+    saveCount(0);
+
+    document.getElementById(
+        "message"
+    ).textContent = "";
+
+    updateScreen();
+
+}
+
+
+function changeDhikr(){
+
+    currentDhikr =
+        document.getElementById(
+            "dhikrSelect"
+        ).value;
+
+    document.getElementById(
+        "message"
+    ).textContent = "";
+
+    updateScreen();
+
+}
+
+
+function setTarget(value){
+
+    target = value;
+
+    localStorage.setItem(
+        "tasbeehTarget",
+        target
+    );
+
+    document.getElementById(
+        "message"
+    ).textContent = "";
+
+    updateScreen();
+
+}
+
+
+function goHome(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function toggleDark(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+    if(
+        document.body.classList.contains(
+            "dark"
+        )
+    ){
+
+        localStorage.setItem(
+            "swalathDarkMode",
+            "on"
+        );
+
+    }else{
+
+        localStorage.setItem(
+            "swalathDarkMode",
+            "off"
+        );
+
+    }
+
+}
+
+
+window.addEventListener(
+    "load",
+    function(){
+
+        if(
+            localStorage.getItem(
+                "swalathDarkMode"
+            ) === "on"
+        ){
+
+            document.body.classList.add(
+                "dark"
+            );
+
+        }
+
+        document.getElementById(
+            "dhikrSelect"
+        ).value = currentDhikr;
+
+        updateScreen();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

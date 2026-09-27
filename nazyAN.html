@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NAZYAN TRAVELS</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f3ed;
+    color: #222;
+}
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(135deg, #063b2d, #0b5943);
+    color: white;
+    text-align: center;
+    padding: 28px 18px;
+    border-bottom: 3px solid #d4af37;
+}
+
+.logo-icon {
+    font-size: 42px;
+    margin-bottom: 5px;
+}
+
+.header h1 {
+    margin: 0;
+    color: #e5c45c;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    font-size: 14px;
+}
+
+
+/* MAIN CONTAINER */
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    padding: 20px 15px 40px;
+}
+
+
+/* INTRO */
+
+.intro {
+    text-align: center;
+    padding: 15px 5px 20px;
+}
+
+.intro h2 {
+    margin: 5px 0 10px;
+    color: #07543e;
+    font-size: 24px;
+}
+
+.intro p {
+    line-height: 1.7;
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* SERVICES */
+
+.services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 17px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    border: 1px solid #e4dcc4;
+}
+
+.service-card .icon {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.service-card h3 {
+    margin: 5px 0;
+    font-size: 15px;
+    color: #07543e;
+}
+
+.service-card p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #666;
+}
+
+
+/* GULF SECTION */
+
+.gulf-box {
+    margin-top: 20px;
+    padding: 20px 15px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #0a4a38, #063326);
+    color: white;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.gulf-box h3 {
+    margin: 0 0 12px;
+    color: #e5c45c;
+    font-size: 18px;
+}
+
+.gulf-box p {
+    margin: 0;
+    line-height: 2;
+    font-size: 13px;
+}
+
+
+/* CONTACT */
+
+.contact-box {
+    margin-top: 20px;
+    background: white;
+    border-radius: 18px;
+    padding: 22px 16px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+.contact-box h3 {
+    margin: 0 0 10px;
+    color: #07543e;
+    font-size: 20px;
+}
+
+.contact-box p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #555;
+}
+
+
+/* WHATSAPP BUTTON */
+
+.whatsapp {
+    display: block;
+    margin: 18px auto 12px;
+    max-width: 300px;
+    padding: 14px 20px;
+    background: #d4af37;
+    color: #111;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0,0,0,0.18);
+}
+
+
+/* PHONE NUMBERS */
+
+.phone {
+    color: #07543e;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 2;
+    margin-top: 8px;
+}
+
+
+/* HOME BUTTON */
+
+.home-btn {
+    display: block;
+    width: fit-content;
+    margin: 25px auto 0;
+    padding: 10px 22px;
+    border-radius: 25px;
+    background: #07543e;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+
+/* FOOTER */
+
+.footer {
+    margin-top: 25px;
+    padding: 20px 15px;
+    background: #063326;
+    color: #ddd;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.footer strong {
+    color: #e5c45c;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+
+    .services {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+    }
+
+    .service-card {
+        padding: 15px 8px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+    }
+
+    .intro h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="logo-icon">✈️</div>
+
+    <h1>NAZYAN TRAVELS</h1>
+
+    <p>
+        നിങ്ങളുടെ യാത്രകൾക്ക് വിശ്വാസമുള്ള കൂട്ടുകാരൻ
+    </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+    <!-- INTRO -->
+
+    <div class="intro">
+
+        <h2>
+            യാത്രകൾ ഇനി കൂടുതൽ എളുപ്പത്തിൽ
+        </h2>
+
+        <p>
+            വിമാന ടിക്കറ്റുകൾ മുതൽ ടൂർ പാക്കേജുകൾ,
+            ഉംറ, വിസ, സർട്ടിഫിക്കറ്റ് അറ്റസ്റ്റേഷൻ തുടങ്ങി
+            യാത്രയുമായി ബന്ധപ്പെട്ട വിവിധ സേവനങ്ങൾ
+            ഒരിടത്ത്.
+        </p>
+
+    </div>
+
+
+
+    <!-- SERVICES -->
+
+    <div class="services">
+
+
+        <!-- FLIGHT -->
+
+        <div class="service-card">
+
+            <div class="icon">✈️</div>
+
+            <h3>
+                വിമാന ടിക്കറ്റുകൾ
+            </h3>
+
+            <p>
+                Gulf രാജ്യങ്ങളിലേക്കും തിരിച്ചും
+                ഏറ്റവും കുറഞ്ഞ നിരക്കിൽ ടിക്കറ്റുകൾ
+            </p>
+
+        </div>
+
+
+
+        <!-- PACKAGES -->
+
+        <div class="service-card">
+
+            <div class="icon">🌍</div>
+
+            <h3>
+                ടൂർ പാക്കേജുകൾ
+            </h3>
+
+            <p>
+                Kerala • India • GCC • Worldwide
+                വിവിധ യാത്രാ പാക്കേജുകൾ
+            </p>
+
+        </div>
+
+
+
+        <!-- UMRAH -->
+
+        <div class="service-card">
+
+            <div class="icon">🕋</div>
+
+            <h3>
+                ഉംറ സർവീസ്
+            </h3>
+
+            <p>
+                ഉംറ യാത്രയ്ക്കുള്ള ആവശ്യമായ
+                സേവനങ്ങളും സഹായങ്ങളും
+            </p>
+
+        </div>
+
+
+
+        <!-- VISA -->
+
+        <div class="service-card">
+
+            <div class="icon">🛂</div>
+
+            <h3>
+                വിസ സർവീസ്
+            </h3>
+
+            <p>
+                വിവിധ രാജ്യങ്ങളിലേക്കുള്ള
+                വിസ സഹായം
+            </p>
+
+        </div>
+
+
+
+        <!-- ATTESTATION -->
+
+        <div class="service-card">
+
+            <div class="icon">📜</div>
+
+            <h3>
+                സർട്ടിഫിക്കറ്റ് അറ്റസ്റ്റേഷൻ
+            </h3>
+
+            <p>
+                Certificate Attestation
+                സേവനം
+            </p>
+
+        </div>
+
+
+
+        <!-- TRAVEL ASSISTANCE -->
+
+        <div class="service-card">
+
+            <div class="icon">🚗</div>
+
+            <h3>
+                ട്രാവൽ അസിസ്റ്റൻസ്
+            </h3>
+
+            <p>
+                യാത്രയുമായി ബന്ധപ്പെട്ട
+                സഹായങ്ങളും സേവനങ്ങളും
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- GULF COUNTRIES -->
+
+    <div class="gulf-box">
+
+        <h3>
+            🌍 ഞങ്ങളുടെ പ്രധാന യാത്രാ മേഖലകൾ
+        </h3>
+
+        <p>
+
+            🇶🇦 Qatar &nbsp;
+            🇦🇪 UAE &nbsp;
+            🇸🇦 Saudi Arabia
+
+            <br>
+
+            🇧🇭 Bahrain &nbsp;
+            🇰🇼 Kuwait &nbsp;
+            🇴🇲 Oman
+
+            <br>
+
+            🇮🇳 India &nbsp;
+            & മറ്റ് രാജ്യങ്ങൾ
+
+        </p>
+
+    </div>
+
+
+
+    <!-- CONTACT -->
+
+    <div class="contact-box">
+
+        <h3>
+            📱 ഇപ്പോൾ തന്നെ ബന്ധപ്പെടൂ
+        </h3>
+
+        <p>
+
+            ടിക്കറ്റ് നിരക്ക്, ടൂർ പാക്കേജ്,
+            ഉംറ, വിസ, അറ്റസ്റ്റേഷൻ തുടങ്ങിയ
+            വിവരങ്ങൾക്കായി WhatsApp വഴി
+            ഞങ്ങളുമായി ബന്ധപ്പെടാം.
+
+        </p>
+
+
+        <!-- WHATSAPP -->
+
+        <a
+            href="https://wa.me/919946010375"
+            class="whatsapp"
+            target="_blank"
+        >
+
+            📱 WhatsApp Enquiry
+
+        </a>
+
+
+        <!-- ALL CONTACT NUMBERS -->
+
+        <div class="phone">
+
+            🇮🇳 +91 99460 10375
+
+            <br>
+
+            🇶🇦 +974 66468020
+
+            <br>
+
+            🇦🇪 +971 563153059
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HOME -->
+
+    <a
+        href="index.html"
+        class="home-btn"
+    >
+
+        🏠 Swalath Home
+
+    </a>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    <strong>
+        NAZYAN TRAVELS
+    </strong>
+
+    <br>
+
+    നിങ്ങളുടെ യാത്ര സുരക്ഷിതവും
+    സൗകര്യപ്രദവും ആക്കാൻ ഞങ്ങളോടൊപ്പം.
+
+    <br><br>
+
+    അല്ലാഹു നമ്മുടെ എല്ലാ ഹലാൽ ശ്രമങ്ങൾക്കും
+    ബറക്കത്ത് നൽകട്ടെ. ആമീൻ 🤲
+
+</div>
+
+
+</body>
+</html>
