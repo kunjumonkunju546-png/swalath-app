@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ദുആകൾ | Swalath</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #222;
+    transition: 0.3s;
+}
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(135deg, #07543e, #0b7053);
+    color: white;
+    text-align: center;
+    padding: 22px 15px;
+    border-bottom: 3px solid #d4af37;
+}
+
+.header .icon {
+    font-size: 38px;
+}
+
+.header h1 {
+    margin: 5px 0;
+    font-size: 27px;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 13px;
+}
+
+/* TOP BUTTONS */
+
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px auto 5px;
+}
+
+.top-btn {
+    border: none;
+    background: #07543e;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 10px 14px 40px;
+}
+
+/* INTRO */
+
+.intro {
+    text-align: center;
+    margin: 15px 0 20px;
+}
+
+.intro h2 {
+    color: #07543e;
+    font-size: 21px;
+    margin: 5px 0 8px;
+}
+
+.intro p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #666;
+}
+
+/* DUA CARD */
+
+.dua-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 17px;
+    margin-bottom: 15px;
+    border-left: 4px solid #d4af37;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+}
+
+.dua-title {
+    color: #07543e;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+.arabic {
+    direction: rtl;
+    text-align: right;
+    font-family: "Traditional Arabic", "Amiri", serif;
+    font-size: 25px;
+    line-height: 2;
+    color: #111;
+    margin-bottom: 14px;
+}
+
+.malayalam {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #555;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+/* CATEGORY */
+
+.category {
+    margin: 25px 0 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #07543e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* HOME */
+
+.home-btn {
+    display: block;
+    width: fit-content;
+    margin: 25px auto 0;
+    padding: 11px 23px;
+    border-radius: 25px;
+    background: #07543e;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* DARK MODE */
+
+body.dark {
+    background: #111;
+    color: #eee;
+}
+
+body.dark .dua-card {
+    background: #1d1d1d;
+    box-shadow: none;
+}
+
+body.dark .arabic {
+    color: #fff;
+}
+
+body.dark .malayalam {
+    color: #ccc;
+    border-color: #333;
+}
+
+body.dark .intro p {
+    color: #bbb;
+}
+
+body.dark .intro h2 {
+    color: #d4af37;
+}
+
+body.dark .dua-title {
+    color: #d4af37;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    .arabic {
+        font-size: 23px;
+    }
+
+    .dua-card {
+        padding: 18px 14px;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="icon">🤲</div>
+
+    <h1>ദുആകൾ</h1>
+
+    <p>
+        ജീവിതത്തിലെ വിവിധ സാഹചര്യങ്ങൾക്ക് ഉപകാരപ്പെടുന്ന ദുആകൾ
+    </p>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="top-buttons">
+
+    <button class="top-btn" onclick="goHome()">
+        🏠 Home
+    </button>
+
+    <button class="top-btn" onclick="toggleDark()">
+        🌙 Dark
+    </button>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="intro">
+
+    <h2>🤲 നമ്മുടെ ജീവിതത്തിലെ ദുആകൾ</h2>
+
+    <p>
+        അല്ലാഹുവിനോട് സഹായം തേടുകയും,
+        നമ്മുടെ എല്ലാ കാര്യങ്ങളിലും അവനിൽ
+        ഭരമേൽപ്പിക്കുകയും ചെയ്യാം.
+    </p>
+
+</div>
+
+
+
+<!-- ================= GENERAL ================= -->
+
+<div class="category">
+    🌿 പൊതുവായ ദുആകൾ
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        1. ലോകത്തും ആഖിറത്തിലും നന്മയ്ക്കായി
+    </div>
+
+    <div class="arabic">
+        رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+    </div>
+
+    <div class="malayalam">
+        റബ്ബനാ ആതിനാ ഫിദ്ദുന്യാ ഹസനതൻ, വഫിൽ ആഖിറതി ഹസനതൻ, വകിനാ അദാബന്നാർ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        2. അല്ലാഹുവിനോട് സഹായം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+    </div>
+
+    <div class="malayalam">
+        ഇയ്യാക നഅ്ബുദു വ ഇയ്യാക നസ്തഈൻ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        3. കാര്യങ്ങൾ എളുപ്പമാകാൻ
+    </div>
+
+    <div class="arabic">
+        رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي
+    </div>
+
+    <div class="malayalam">
+        റബ്ബിശ്‌റഹ് ലീ സ്വദ്രീ, വയസ്സിർ ലീ അമ്രീ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= DEBT ================= -->
+
+<div class="category">
+    💰 കടവും സാമ്പത്തിക ബുദ്ധിമുട്ടുകളും
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        4. കടം തീർക്കാനും ഹലാൽ സമ്പത്ത് ലഭിക്കാനും
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മക്‌ഫിനീ ബിഹലാലിക അൻ ഹറാമിക, വ അഗ്നിനീ ബിഫള്ലിക അമ്മൻ സിവാക്.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        5. കടബാധ്യതയിൽ നിന്ന് മോചനം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ ഇന്നീ അഊദു ബിക മിനൽ ഹമ്മി വൽ ഹസൻ,
+        വഅഊദു ബിക മിനൽ അജ്സി വൽ കസൽ,
+        വഅഊദു ബിക മിനൽ ജുബ്നി വൽ ബുഖ്ൽ,
+        വഅഊദു ബിക മിൻ ഗലബതിദ്ദൈനി വകഹ്‌രിർ റിജാൽ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= RIZQ ================= -->
+
+<div class="category">
+    💼 റിസ്കും ഉപജീവനവും
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        6. നല്ല ഉപജീവനം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ
+    </div>
+
+    <div class="malayalam">
+        റബ്ബി ഇന്നീ ലിമാ അൻസൽത ഇലയ്യ മിൻ ഖൈരിൻ ഫഖീർ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        7. ഉപകാരപ്രദമായ അറിവിനും ഹലാൽ ഉപജീവനത്തിനും
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ ഇന്നീ അസ്അലുക ഇൽമൻ നാഫിഅൻ,
+        വ റിസ്‌ഖൻ ത്വയ്യിബൻ, വ അമലൻ മുതഖബ്ബലൻ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= HOUSE ================= -->
+
+<div class="category">
+    🏠 വീട് & ജീവിത കാര്യങ്ങൾ
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        8. കുടുംബത്തിന് നന്മയ്ക്കായി
+    </div>
+
+    <div class="arabic">
+        رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا
+    </div>
+
+    <div class="malayalam">
+        റബ്ബനാ ഹബ് ലനാ മിൻ അസ്വാജിനാ വ ദുറിയ്യാതിനാ ഖുർറത അഅ്‌യുനിൻ,
+        വജ്അൽനാ ലിൽമുത്തഖീന ഇമാമാ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        9. ഒരു കാര്യം എളുപ്പമാകാൻ
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ ലാ സഹ്‌ല ഇല്ലാ മാ ജഅൽതഹു സഹ്‌ലാ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= VEHICLE ================= -->
+
+<div class="category">
+    🚗 വാഹനം & യാത്ര
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        10. വാഹനത്തിൽ കയറുമ്പോൾ
+    </div>
+
+    <div class="arabic">
+        سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ ۝ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ
+    </div>
+
+    <div class="malayalam">
+        സുബ്ഹാനല്ലദീ സഖ്ഖറ ലനാ ഹാദാ വമാ കുന്നാ ലഹു മുഖ്‌രിനീൻ,
+        വ ഇന്നാ ഇലാ റബ്ബിനാ ലമുൻഖലിബൂൻ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        11. യാത്ര തുടങ്ങുമ്പോൾ
+    </div>
+
+    <div class="arabic">
+        سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ ۝ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ
+    </div>
+
+    <div class="malayalam">
+        സുബ്ഹാനല്ലദീ സഖ്ഖറ ലനാ ഹാദാ വമാ കുന്നാ ലഹു മുഖ്‌രിനീൻ,
+        വ ഇന്നാ ഇലാ റബ്ബിനാ ലമുൻഖലിബൂൻ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        12. യാത്രയിൽ സംരക്ഷണത്തിനായി
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَىٰ وَمِنَ الْعَمَلِ مَا تَرْضَىٰ
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ ഇന്നാ നസ്അലുക ഫീ സഫരിനാ ഹാദൽ ബിർറ വത്തഖ്‌വാ,
+        വ മിനൽ അമലി മാ തർളാ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= WORRY ================= -->
+
+<div class="category">
+    😟 വിഷമം & ബുദ്ധിമുട്ടുകൾ
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        13. വിഷമവും പ്രയാസവും ഉണ്ടാകുമ്പോൾ
+    </div>
+
+    <div class="arabic">
+        حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ
+    </div>
+
+    <div class="malayalam">
+        ഹസ്ബിയല്ലാഹു ലാ ഇലാഹ ഇല്ലാ ഹുവ,
+        അലൈഹി തവക്കൽതു വ ഹുവ റബ്ബുൽ അർശിൽ അളീം.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        14. ബുദ്ധിമുട്ടിൽ സഹായം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ
+    </div>
+
+    <div class="malayalam">
+        ലാ ഇലാഹ ഇല്ലാ അന്ത, സുബ്ഹാനക ഇന്നീ കുന്തു മിനള്ളാലിമീൻ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= PROTECTION ================= -->
+
+<div class="category">
+    🛡️ സംരക്ഷണം
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        15. എല്ലാ തരത്തിലുള്ള ദോഷങ്ങളിൽ നിന്നും
+    </div>
+
+    <div class="arabic">
+        أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ
+    </div>
+
+    <div class="malayalam">
+        അഊദു ബികലിമാതില്ലാഹിത്താമ്മാത്തി മിൻ ശർറി മാ ഖലഖ്.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        16. അല്ലാഹുവിന്റെ സംരക്ഷണം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ
+    </div>
+
+    <div class="malayalam">
+        ഖുൽ ഹുവല്ലാഹു അഹദ്. അല്ലാഹുസ്സമദ്.
+    </div>
+
+</div>
+
+
+
+<!-- ================= PARENTS ================= -->
+
+<div class="category">
+    ❤️ മാതാപിതാക്കൾക്കായി
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        17. മാതാപിതാക്കൾക്ക് കരുണയ്ക്കായി
+    </div>
+
+    <div class="arabic">
+        رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا
+    </div>
+
+    <div class="malayalam">
+        റബ്ബിർഹംഹുമാ കമാ റബ്ബയാനീ സ്വഗീറാ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= HEALTH ================= -->
+
+<div class="category">
+    🤍 ആരോഗ്യം & രോഗം
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        18. ആരോഗ്യത്തിനായി
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ ആഫിനീ ഫീ ബദനീ,
+        അല്ലാഹുമ്മ ആഫിനീ ഫീ സമ്‌ഈ,
+        അല്ലാഹുമ്മ ആഫിനീ ഫീ ബസ്വരീ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        19. രോഗശാന്തിക്കായി
+    </div>
+
+    <div class="arabic">
+        أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ
+    </div>
+
+    <div class="malayalam">
+        അസ്അലുല്ലാഹൽ അളീമ, റബ്ബൽ അർശിൽ അളീം,
+        അൻ യശ്ഫിയക.
+    </div>
+
+</div>
+
+
+
+<!-- ================= FORGIVENESS ================= -->
+
+<div class="category">
+    🤍 പാപമോചനവും തൗബയും
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        20. പാപമോചനത്തിനായി
+    </div>
+
+    <div class="arabic">
+        رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ
+    </div>
+
+    <div class="malayalam">
+        റബ്ബിഗ്ഫിർ ലീ വ തുബ് അലയ്യ,
+        ഇന്നക അന്തത്തവ്വാബുറഹീം.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        21. സയ്യിദുൽ ഇസ്തിഗ്ഫാർ
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ അന്ത റബ്ബീ ലാ ഇലാഹ ഇല്ലാ അന്ത,
+        ഖലഖ്തനീ വ അനാ അബ്ദുക.
+    </div>
+
+</div>
+
+
+
+<!-- ================= SLEEP ================= -->
+
+<div class="category">
+    🌙 ഉറങ്ങുന്നതിന് മുമ്പ്
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        22. ഉറങ്ങുന്നതിന് മുമ്പ്
+    </div>
+
+    <div class="arabic">
+        بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا
+    </div>
+
+    <div class="malayalam">
+        ബിസ്മികല്ലാഹുമ്മ അമൂതു വ അഹ്‌യാ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= MORNING ================= -->
+
+<div class="category">
+    🌅 രാവിലെ
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        23. രാവിലെ അല്ലാഹുവിനെ സ്തുതിക്കാൻ
+    </div>
+
+    <div class="arabic">
+        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+    </div>
+
+    <div class="malayalam">
+        അൽഹംദുലില്ലാഹി റബ്ബിൽ ആലമീൻ.
+    </div>
+
+</div>
+
+
+
+<!-- ================= GOOD DEEDS ================= -->
+
+<div class="category">
+    🌿 നല്ല ജീവിതത്തിനായി
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        24. ഹൃദയം സ്ഥിരമായി നിൽക്കാൻ
+    </div>
+
+    <div class="arabic">
+        رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً
+    </div>
+
+    <div class="malayalam">
+        റബ്ബനാ ലാ തുസിഗ് ഖുലൂബനാ ബഅ്ദ ഇദ് ഹദൈതനാ,
+        വ ഹബ് ലനാ മിൻ ലദുൻക റഹ്മതൻ.
+    </div>
+
+</div>
+
+
+<div class="dua-card">
+
+    <div class="dua-title">
+        25. നന്മയിലും ആരാധനയിലും സഹായം തേടാൻ
+    </div>
+
+    <div class="arabic">
+        اللَّهُمَّ أَعِنِّي عَلَىٰ ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ
+    </div>
+
+    <div class="malayalam">
+        അല്ലാഹുമ്മ അഇന്നീ അലാ ദിക്‌രിക,
+        വ ശുക്‌രിക, വ ഹുസ്നി ഇബാദതിക.
+    </div>
+
+</div>
+
+
+
+<!-- HOME -->
+
+<a href="index.html" class="home-btn">
+    🏠 Swalath Home
+</a>
+
+
+</div>
+
+
+
+<script>
+
+/* HOME */
+
+function goHome() {
+    window.location.href = "index.html";
+}
+
+
+/* DARK MODE */
+
+function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+
+        localStorage.setItem(
+            "swalathDarkMode",
+            "enabled"
+        );
+
+    } else {
+
+        localStorage.setItem(
+            "swalathDarkMode",
+            "disabled"
+        );
+
+    }
+
+}
+
+
+/* LOAD DARK MODE */
+
+window.addEventListener("load", function() {
+
+    if (
+        localStorage.getItem("swalathDarkMode")
+        === "enabled"
+    ) {
+
+        document.body.classList.add("dark");
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
