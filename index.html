@@ -1552,6 +1552,44 @@ window.addEventListener(
 </script>
 
 
+<!-- =================================================
+     OFFLINE SUPPORT
+================================================= -->
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+        "load",
+        function(){
+
+            navigator.serviceWorker
+                .register("./sw.js")
+                .then(function(){
+
+                    console.log(
+                        "Swalath offline mode ready"
+                    );
+
+                })
+                .catch(function(error){
+
+                    console.log(
+                        "Offline setup error:",
+                        error
+                    );
+
+                });
+
+        }
+    );
+
+}
+
+</script>
+
+
 </body>
 
 </html>
