@@ -225,6 +225,229 @@ body.dark-mode footer {
 
 }
 
+
+/* =================================================
+   NAZYAN TRAVELS POPUP
+================================================= */
+
+.travel-ad-overlay {
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px;
+
+    z-index: 99999;
+
+}
+
+
+.travel-ad {
+
+    position: relative;
+
+    width: 100%;
+    max-width: 420px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 28px 22px 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+
+}
+
+
+.travel-ad h2 {
+
+    margin: 0 0 18px;
+
+    font-size: 28px;
+
+    letter-spacing: 1px;
+
+    color: #123d34;
+
+}
+
+
+.travel-ad-close {
+
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eeeeee;
+
+    color: #333;
+
+    font-size: 25px;
+
+    line-height: 34px;
+
+    cursor: pointer;
+
+}
+
+
+.travel-services {
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    font-weight: bold;
+
+    color: #222;
+
+}
+
+
+.travel-countries {
+
+    margin: 14px 0;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #555;
+
+}
+
+
+.travel-tagline {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: #123d34;
+
+    margin: 12px 0;
+
+}
+
+
+.travel-whatsapp {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #25D366;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin: 5px 0 12px;
+
+}
+
+
+.travel-ad hr {
+
+    border: none;
+
+    border-top: 1px solid #ddd;
+
+    margin: 10px 0 15px;
+
+}
+
+
+.swalath-note {
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #555;
+
+    margin: 9px 0;
+
+}
+
+
+.dua-note {
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    font-weight: bold;
+
+    color: #123d34;
+
+    margin-top: 14px;
+
+}
+
+
+/* =========================
+   POPUP DARK MODE
+========================= */
+
+body.dark-mode .travel-ad {
+
+    background: #222;
+
+}
+
+body.dark-mode .travel-ad h2,
+body.dark-mode .travel-tagline,
+body.dark-mode .dua-note {
+
+    color: #f1dfb0;
+
+}
+
+body.dark-mode .travel-services {
+
+    color: #eee;
+
+}
+
+body.dark-mode .travel-countries,
+body.dark-mode .swalath-note {
+
+    color: #bbb;
+
+}
+
 </style>
 
 </head>
@@ -774,7 +997,7 @@ body.dark-mode footer {
 
 
     <a
-        href="https://wa.me/9946010375"
+        href="https://wa.me/919946010375"
         target="_blank"
     >
         WhatsApp Enquiry
@@ -803,6 +1026,106 @@ body.dark-mode footer {
 
 </footer>
 
+
+</div>
+
+
+
+<!-- =================================================
+     NAZYAN TRAVELS POPUP
+================================================= -->
+
+<div
+    id="travelAd"
+    class="travel-ad-overlay"
+>
+
+    <div class="travel-ad">
+
+        <button
+            class="travel-ad-close"
+            onclick="closeTravelAd()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            NAZYAN TRAVELS
+        </h2>
+
+
+        <div class="travel-services">
+
+            ✈️ FLIGHT TICKETS<br>
+
+            🌍 TOUR PACKAGES<br>
+
+            🕋 UMRAH SERVICES<br>
+
+            🛂 VISA SERVICES<br>
+
+            📜 CERTIFICATE ATTESTATION
+
+        </div>
+
+
+        <p class="travel-countries">
+
+            Qatar 🇶🇦 | UAE 🇦🇪 | Saudi 🇸🇦<br>
+
+            Bahrain 🇧🇭 | Kuwait 🇰🇼 | India 🇮🇳
+
+        </p>
+
+
+        <p class="travel-tagline">
+
+            Your Journey, Our Care.
+
+        </p>
+
+
+        <a
+            href="https://wa.me/919946010375"
+            target="_blank"
+            class="travel-whatsapp"
+        >
+
+            📲 WhatsApp / Enquiry
+
+        </a>
+
+
+        <hr>
+
+
+        <p class="swalath-note">
+
+            🤲 ഈ ആപ്പിൽ നൽകിയിട്ടുള്ള ഉള്ളടക്കങ്ങളിൽ
+            എന്തെങ്കിലും തെറ്റുകൾ ഉണ്ടായിട്ടുണ്ടെങ്കിൽ
+            ദയവായി ക്ഷമിക്കുക.
+
+        </p>
+
+
+        <p class="swalath-note">
+
+            അതോടൊപ്പം, എന്നെയും എന്റെ കുടുംബത്തെയും
+            നിങ്ങളുടെ പ്രാർത്ഥനകളിൽ ഉൾപ്പെടുത്തണമേ. 🤲
+
+        </p>
+
+
+        <p class="dua-note">
+
+            അല്ലാഹു നമ്മുടെ എല്ലാ ഹലാൽ ശ്രമങ്ങൾക്കും
+            ബറക്കത്ത് നൽകട്ടെ. ആമീൻ.
+
+        </p>
+
+    </div>
 
 </div>
 
@@ -1549,7 +1872,79 @@ window.addEventListener(
 );
 
 
+
+/* =================================================
+   NAZYAN TRAVELS POPUP - ONCE DAILY
+================================================= */
+
+function showTravelAdOnceDaily(){
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    const lastShown =
+        localStorage.getItem(
+            "nazyANTravelAdDate"
+        );
+
+
+    if(
+        lastShown !== today
+    ){
+
+        document.getElementById(
+            "travelAd"
+        ).style.display = "flex";
+
+    }
+
+}
+
+
+
+function closeTravelAd(){
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    localStorage.setItem(
+        "nazyANTravelAdDate",
+        today
+    );
+
+
+    document.getElementById(
+        "travelAd"
+    ).style.display = "none";
+
+}
+
+
+/* =========================
+   SHOW AD AFTER APP LOAD
+========================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            showTravelAdOnceDaily,
+            500
+        );
+
+    }
+);
+
+
 </script>
+
 
 
 <!-- =================================================
