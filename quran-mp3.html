@@ -951,8 +951,107 @@ function previousSurah(){
 /* =====================================
    FULL QURAN
 ===================================== */
+async function downloadSurah(number){
 
-async function playFullQuran(){
+    const url = getAudioUrl(number);
+
+    downloadStatus.innerHTML =
+        `Preparing Surah ${number}...`;
+
+    try{
+
+        const cache =
+            await caches.open(CACHE_NAME);
+
+        /*
+         * First check whether already cached
+         */
+
+        const existing =
+            await cache.match(url);
+
+        if(existing){
+
+            downloadStatus.innerHTML =
+                `Surah ${number} already saved offline ✓`;
+
+            return;
+        }
+
+        /*
+         * Ask Service Worker to cache
+         */
+
+        if(
+            navigator.serviceWorker &&
+            navigator.serviceWorker.controller
+        ){
+
+            const messageChannel =
+                new MessageChannel();
+
+            const result =
+                new Promise((resolve) => {
+
+                    messageChannel.port1.onmessage =
+                        function(event){
+
+                            resolve(
+                                event.data
+                            );
+
+                        };
+
+                });
+
+            navigator.serviceWorker.controller.postMessage(
+                {
+                    type:"CACHE_QURAN",
+                    url:url
+                },
+                [
+                    messageChannel.port2
+                ]
+            );
+
+            const response =
+                await result;
+
+            if(response && response.success){
+
+                downloadStatus.innerHTML =
+                    `Surah ${number} saved offline ✓`;
+
+            }else{
+
+                throw new Error(
+                    response?.error ||
+                    "Service Worker cache failed"
+                );
+
+            }
+
+        }else{
+
+            throw new Error(
+                "Service Worker not active"
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Quran download error:",
+            error
+        );
+
+        downloadStatus.innerHTML =
+            `Could not download Surah ${number}`;
+
+    }
+
+}
 
     fullQuranMode = true;
 
