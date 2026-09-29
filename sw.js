@@ -1,6 +1,15 @@
 const CACHE_NAME = "swalath-v4";
 
+const QURAN_CACHE_NAME =
+"swalath-quran-mp3-128kbps-v1";
+
+
+/* =====================================
+   APP FILES
+===================================== */
+
 const FILES_TO_CACHE = [
+
   "./",
   "./index.html",
   "./style.css",
@@ -12,6 +21,7 @@ const FILES_TO_CACHE = [
 
   "./swalath.html",
   "./asmaul-husna.html",
+
   "./quran.html",
   "./quran-mp3.html",
   "./quran-data.js",
@@ -29,144 +39,373 @@ const FILES_TO_CACHE = [
   "./bashairul-khairat.pdf",
 
   "./nazyAN.html"
+
 ];
 
 
-self.addEventListener("install", event => {
+/* =====================================
+   INSTALL
+===================================== */
 
-  event.waitUntil(
+self.addEventListener(
+  "install",
+  event => {
 
-    caches.open(CACHE_NAME).then(cache => {
+    event.waitUntil(
 
-      return cache.addAll(FILES_TO_CACHE);
+      caches
+        .open(CACHE_NAME)
+        .then(cache => {
 
-    })
+          return cache.addAll(
+            FILES_TO_CACHE
+          );
 
-  );
+        })
 
-  self.skipWaiting();
+    );
 
-});
+    self.skipWaiting();
+
+  }
+);
 
 
-self.addEventListener("activate", event => {
+/* =====================================
+   ACTIVATE
+===================================== */
 
-  event.waitUntil(
+self.addEventListener(
+  "activate",
+  event => {
 
-    caches.keys().then(keys => {
+    event.waitUntil(
 
-      return Promise.all(
+      caches.keys().then(keys => {
 
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+        return Promise.all(
+
+          keys
+            .filter(
+              key =>
+                key !== CACHE_NAME &&
+                key !== QURAN_CACHE_NAME
+            )
+            .map(
+              key =>
+                caches.delete(key)
+            )
+
+        );
+
+      })
+
+    );
+
+    self.clients.claim();
+
+  }
+);
+
+
+/* =====================================
+   QURAN DOWNLOAD MESSAGE
+===================================== */
+
+self.addEventListener(
+  "message",
+  event => {
+
+    if(
+      !event.data ||
+      event.data.type !==
+      "CACHE_QURAN"
+    ){
+
+      return;
+
+    }
+
+
+    const url =
+    event.data.url;
+
+
+    const work =
+
+      caches
+        .open(QURAN_CACHE_NAME)
+
+        .then(
+          async cache => {
+
+            /* -------------------------
+               CHECK ALREADY DOWNLOADED
+            ------------------------- */
+
+            const existing =
+            await cache.match(url);
+
+
+            if(existing){
+
+              return {
+                success:true
+              };
+
+            }
+
+
+            /* -------------------------
+               DOWNLOAD AUDIO
+            ------------------------- */
+
+            const response =
+            await fetch(
+              url,
+              {
+                mode:"no-cors",
+                cache:"no-store"
+              }
+            );
+
+
+            /* -------------------------
+               CHECK RESPONSE
+            ------------------------- */
+
+            if(
+              !response ||
+              (
+                !response.ok &&
+                response.type !==
+                "opaque"
+              )
+            ){
+
+              throw new Error(
+                "Audio download failed"
+              );
+
+            }
+
+
+            /* -------------------------
+               SAVE TO CACHE
+            ------------------------- */
+
+            await cache.put(
+              url,
+              response.clone()
+            );
+
+
+            return {
+              success:true
+            };
+
+          }
+        )
+
+        .catch(
+          error => {
+
+            return {
+
+              success:false,
+
+              error:
+              error.message ||
+              String(error)
+
+            };
+
+          }
+        );
+
+
+    /* =================================
+       SEND RESULT BACK TO PAGE
+    ================================= */
+
+    if(
+      event.ports &&
+      event.ports[0]
+    ){
+
+      event.waitUntil(
+
+        work.then(
+          result => {
+
+            event.ports[0]
+              .postMessage(result);
+
+          }
+        )
 
       );
 
-    })
+    }
 
-  );
-
-  self.clients.claim();
-
-});
+  }
+);
 
 
-self.addEventListener("fetch", event => {
+/* =====================================
+   FETCH
+===================================== */
 
-  const request = event.request;
+self.addEventListener(
+  "fetch",
+  event => {
+
+    const request =
+    event.request;
 
 
-  /*
-   * AUDIO FILES
-   *
-   * Never return index.html for an audio request.
-   * First look in every cache.
-   */
+    /* =================================
+       QURAN AUDIO
+    ================================= */
 
-  if (
-    request.url.includes(
-      "cdn.islamic.network/quran/audio-surah/"
-    )
-  ) {
+    if(
+      request.url.includes(
+        "cdn.islamic.network/quran/audio-surah/"
+      )
+    ){
+
+      event.respondWith(
+
+        caches
+          .open(QURAN_CACHE_NAME)
+          .then(
+            async cache => {
+
+              const cached =
+              await cache.match(
+                request
+              );
+
+
+              if(cached){
+
+                return cached;
+
+              }
+
+
+              /*
+               * Not downloaded yet.
+               * Get it from internet.
+               */
+
+              return fetch(
+                request
+              );
+
+            }
+          )
+          .catch(
+            () => {
+
+              return Response.error();
+
+            }
+          )
+
+      );
+
+      return;
+
+    }
+
+
+    /* =================================
+       NAVIGATION / HTML PAGES
+    ================================= */
+
+    if(
+      request.mode ===
+      "navigate"
+    ){
+
+      event.respondWith(
+
+        fetch(request)
+
+          .then(
+            response => {
+
+              return response;
+
+            }
+          )
+
+          .catch(
+            async () => {
+
+              const cachedPage =
+              await caches.match(
+                request
+              );
+
+
+              if(cachedPage){
+
+                return cachedPage;
+
+              }
+
+
+              return caches.match(
+                "./index.html"
+              );
+
+            }
+          )
+
+      );
+
+      return;
+
+    }
+
+
+    /* =================================
+       OTHER APP FILES
+    ================================= */
 
     event.respondWith(
 
-      caches.match(request).then(cachedResponse => {
+      caches
+        .match(request)
 
-        if (cachedResponse) {
+        .then(
+          cachedResponse => {
 
-          return cachedResponse;
+            if(cachedResponse){
 
-        }
+              return cachedResponse;
 
-        return fetch(request);
-
-      }).catch(() => {
-
-        return Response.error();
-
-      })
-
-    );
-
-    return;
-
-  }
+            }
 
 
-  /*
-   * HTML NAVIGATION
-   */
+            return fetch(
+              request
+            );
 
-  if (request.mode === "navigate") {
+          }
+        )
 
-    event.respondWith(
+        .catch(
+          () => {
 
-      fetch(request).then(response => {
+            return Response.error();
 
-        return response;
-
-      }).catch(() => {
-
-        return caches.match(request).then(cachedPage => {
-
-          return cachedPage ||
-                 caches.match("./index.html");
-
-        });
-
-      })
+          }
+        )
 
     );
 
-    return;
-
   }
-
-
-  /*
-   * NORMAL FILES
-   */
-
-  event.respondWith(
-
-    caches.match(request).then(cachedResponse => {
-
-      if (cachedResponse) {
-
-        return cachedResponse;
-
-      }
-
-      return fetch(request);
-
-    }).catch(() => {
-
-      return Response.error();
-
-    })
-
-  );
-
-});
+);
