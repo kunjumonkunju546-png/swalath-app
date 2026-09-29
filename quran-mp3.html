@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Quran MP3 - Swalath</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -173,7 +178,8 @@ body.dark .search{
 
 .surah-list{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
     gap:12px;
 }
 
@@ -238,10 +244,14 @@ body.dark .surah-card{
     }
 
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -259,13 +269,18 @@ body.dark .surah-card{
     <button
         class="back-btn"
         onclick="goBack()">
+
         ← Back
+
     </button>
+
 
     <button
         class="dark-btn"
         onclick="toggleDark()">
+
         🌙 Dark Mode
+
     </button>
 
 </div>
@@ -274,147 +289,154 @@ body.dark .surah-card{
 <div class="container">
 
 
-    <!-- FULL DOWNLOAD -->
+<!-- =====================================
+     FULL DOWNLOAD
+===================================== -->
 
-    <div class="download-box">
+<div class="download-box">
+
+    <button
+        class="download-btn"
+        onclick="downloadFullQuran()">
+
+        ⬇️ Download Full Quran
+
+    </button>
+
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+
+    <div
+        class="status"
+        id="downloadStatus">
+
+        Ready
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     PLAYER
+===================================== -->
+
+<div class="player">
+
+
+    <div
+        class="now-playing"
+        id="nowPlaying">
+
+        Select a Surah
+
+    </div>
+
+
+    <audio
+        id="audioPlayer"
+        controls
+        preload="metadata">
+    </audio>
+
+
+    <div class="controls">
+
 
         <button
-            class="download-btn"
-            onclick="downloadFullQuran()">
+            class="control-btn"
+            onclick="previousSurah()">
 
-            ⬇️ Download Full Quran
+            ⏮ Previous
 
         </button>
 
 
-        <div class="progress">
+        <button
+            class="main-play"
+            id="playPauseBtn"
+            onclick="togglePlay()">
 
-            <div
-                class="progress-bar"
-                id="progressBar">
-            </div>
+            ▶ Play
 
-        </div>
-
-
-        <div
-            class="status"
-            id="downloadStatus">
-
-            Ready
-
-        </div>
-
-    </div>
+        </button>
 
 
+        <button
+            class="control-btn"
+            onclick="nextSurah()">
 
-    <!-- PLAYER -->
+            Next ⏭
 
-    <div class="player">
-
-
-        <div
-            class="now-playing"
-            id="nowPlaying">
-
-            Select a Surah
-
-        </div>
-
-
-        <audio
-            id="audioPlayer"
-            controls
-            preload="metadata">
-        </audio>
-
-
-        <div class="controls">
-
-
-            <button
-                class="control-btn"
-                onclick="previousSurah()">
-
-                ⏮ Previous
-
-            </button>
-
-
-            <button
-                class="main-play"
-                id="playPauseBtn"
-                onclick="togglePlay()">
-
-                ▶ Play
-
-            </button>
-
-
-            <button
-                class="control-btn"
-                onclick="nextSurah()">
-
-                Next ⏭
-
-            </button>
-
-        </div>
-
-
-        <div
-            class="controls"
-            style="margin-top:10px;">
-
-
-            <button
-                class="control-btn"
-                onclick="playFullQuran()">
-
-                ▶ Play Full Quran
-
-            </button>
-
-
-        </div>
-
-
-        <div
-            class="error"
-            id="audioError">
-
-            Audio player error.
-            Please try again.
-
-        </div>
+        </button>
 
 
     </div>
 
-
-
-    <!-- SEARCH -->
-
-    <input
-        type="text"
-        id="searchBox"
-        class="search"
-        placeholder="🔎 Search Surah..."
-        oninput="searchSurahs()"
-    >
-
-
-
-    <!-- SURAHS -->
 
     <div
-        class="surah-list"
-        id="surahList">
+        class="controls"
+        style="margin-top:10px;">
+
+        <button
+            class="control-btn"
+            onclick="playFullQuran()">
+
+            ▶ Play Full Quran
+
+        </button>
+
     </div>
+
+
+    <div
+        class="error"
+        id="audioError">
+
+        Audio player error.
+        Please try again.
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     SEARCH
+===================================== -->
+
+<input
+    type="text"
+    id="searchBox"
+    class="search"
+    placeholder="🔎 Search Surah..."
+    oninput="searchSurahs()"
+>
+
+
+
+<!-- =====================================
+     SURAHS
+===================================== -->
+
+<div
+    class="surah-list"
+    id="surahList">
+</div>
 
 
 </div>
+
 
 
 <script>
@@ -559,9 +581,11 @@ const surahs = [
 
 const surahList =
 surahs.map(x => ({
+
     n:x[0],
     ar:x[1],
     en:x[2]
+
 }));
 
 
@@ -680,6 +704,7 @@ function renderSurahs(
 
         `;
 
+
         container.appendChild(card);
 
     });
@@ -701,17 +726,19 @@ async function playSurah(number){
         number
     );
 
-    fullQuranMode = false;
 
     const surah =
     surahList.find(
         s => s.n === number
     );
 
+
     if(!surah) return;
+
 
     audioError.style.display =
     "none";
+
 
     nowPlaying.innerHTML =
     `▶ ${surah.n}. ${surah.en} — ${surah.ar}`;
@@ -724,7 +751,7 @@ async function playSurah(number){
 
 
         /*
-         * TRY OFFLINE CACHE FIRST
+         * CHECK OFFLINE CACHE FIRST
          */
 
         try{
@@ -733,6 +760,7 @@ async function playSurah(number){
             await caches.open(
                 CACHE_NAME
             );
+
 
             const cached =
             await cache.match(url);
@@ -770,11 +798,11 @@ async function playSurah(number){
             }
 
 
-        }catch(cacheError){
+        }catch(error){
 
             console.log(
-                "Cache unavailable:",
-                cacheError
+                "Cache check error:",
+                error
             );
 
             audio.src =
@@ -787,7 +815,7 @@ async function playSurah(number){
 
 
         /*
-         * RESTORE POSITION
+         * RESTORE SAVED POSITION
          */
 
         const savedPosition =
@@ -817,6 +845,7 @@ async function playSurah(number){
                         savedPosition;
 
                     }
+
 
                     audio.removeEventListener(
                         "loadedmetadata",
@@ -848,8 +877,10 @@ async function playSurah(number){
             error
         );
 
+
         playPauseBtn.innerHTML =
         "▶ Play";
+
 
         audioError.style.display =
         "block";
@@ -875,6 +906,7 @@ async function togglePlay(){
         return;
 
     }
+
 
     try{
 
@@ -935,7 +967,8 @@ function nextSurah(){
 function previousSurah(){
 
     if(
-        currentSurah > 1
+        currentSurah >
+        1
     ){
 
         playSurah(
@@ -949,109 +982,10 @@ function previousSurah(){
 
 
 /* =====================================
-   FULL QURAN
+   FULL QURAN PLAY
 ===================================== */
-async function downloadSurah(number){
 
-    const url = getAudioUrl(number);
-
-    downloadStatus.innerHTML =
-        `Preparing Surah ${number}...`;
-
-    try{
-
-        const cache =
-            await caches.open(CACHE_NAME);
-
-        /*
-         * First check whether already cached
-         */
-
-        const existing =
-            await cache.match(url);
-
-        if(existing){
-
-            downloadStatus.innerHTML =
-                `Surah ${number} already saved offline ✓`;
-
-            return;
-        }
-
-        /*
-         * Ask Service Worker to cache
-         */
-
-        if(
-            navigator.serviceWorker &&
-            navigator.serviceWorker.controller
-        ){
-
-            const messageChannel =
-                new MessageChannel();
-
-            const result =
-                new Promise((resolve) => {
-
-                    messageChannel.port1.onmessage =
-                        function(event){
-
-                            resolve(
-                                event.data
-                            );
-
-                        };
-
-                });
-
-            navigator.serviceWorker.controller.postMessage(
-                {
-                    type:"CACHE_QURAN",
-                    url:url
-                },
-                [
-                    messageChannel.port2
-                ]
-            );
-
-            const response =
-                await result;
-
-            if(response && response.success){
-
-                downloadStatus.innerHTML =
-                    `Surah ${number} saved offline ✓`;
-
-            }else{
-
-                throw new Error(
-                    response?.error ||
-                    "Service Worker cache failed"
-                );
-
-            }
-
-        }else{
-
-            throw new Error(
-                "Service Worker not active"
-            );
-
-        }
-
-    }catch(error){
-
-        console.log(
-            "Quran download error:",
-            error
-        );
-
-        downloadStatus.innerHTML =
-            `Could not download Surah ${number}`;
-
-    }
-
-}
+async function playFullQuran(){
 
     fullQuranMode = true;
 
@@ -1093,8 +1027,10 @@ audio.addEventListener(
                 fullQuranMode =
                 false;
 
+
                 nowPlaying.innerHTML =
                 "Quran completed";
+
 
                 playPauseBtn.innerHTML =
                 "▶ Play";
@@ -1123,6 +1059,7 @@ audio.addEventListener(
 
         playPauseBtn.innerHTML =
         "⏸ Pause";
+
 
         audioError.style.display =
         "none";
@@ -1154,8 +1091,10 @@ audio.addEventListener(
             "Browser audio error"
         );
 
+
         playPauseBtn.innerHTML =
         "▶ Play";
+
 
         audioError.style.display =
         "block";
@@ -1224,6 +1163,7 @@ function searchSurahs(){
 
         String(surah.n)
         .includes(query)
+
     );
 
 
@@ -1245,15 +1185,11 @@ async function downloadSurah(number){
     getAudioUrl(number);
 
 
+    downloadStatus.innerHTML =
+    `Preparing Surah ${number}...`;
+
+
     try{
-
-        downloadStatus.innerHTML =
-        `Checking Surah ${number}...`;
-
-
-        /*
-         * OPEN CACHE
-         */
 
         const cache =
         await caches.open(
@@ -1262,7 +1198,7 @@ async function downloadSurah(number){
 
 
         /*
-         * CHECK WHETHER ALREADY SAVED
+         * CHECK EXISTING CACHE
          */
 
         const existing =
@@ -1280,91 +1216,122 @@ async function downloadSurah(number){
 
 
         /*
-         * FETCH AUDIO
-         *
-         * Explicit CORS request.
+         * SERVICE WORKER CHECK
          */
+
+        if(
+            !navigator.serviceWorker ||
+            !navigator.serviceWorker.controller
+        ){
+
+            throw new Error(
+                "Service Worker is not active"
+            );
+
+        }
+
 
         downloadStatus.innerHTML =
         `Downloading Surah ${number}...`;
 
 
-        const response =
-        await fetch(
-            url,
-            {
-                method:"GET",
-                mode:"cors",
-                cache:"no-store"
+        /*
+         * SEND REQUEST TO SERVICE WORKER
+         */
+
+        const messageChannel =
+        new MessageChannel();
+
+
+        const result =
+        new Promise(
+            (resolve,reject) => {
+
+                const timeout =
+                setTimeout(
+                    () => {
+
+                        reject(
+                            new Error(
+                                "Service Worker timeout"
+                            )
+                        );
+
+                    },
+                    60000
+                );
+
+
+                messageChannel
+                .port1
+                .onmessage =
+                function(event){
+
+                    clearTimeout(
+                        timeout
+                    );
+
+                    resolve(
+                        event.data
+                    );
+
+                };
+
             }
         );
 
 
-        if(!response.ok){
+        navigator
+        .serviceWorker
+        .controller
+        .postMessage(
 
-            throw new Error(
-                "HTTP " +
-                response.status
-            );
+            {
+                type:
+                "CACHE_QURAN",
 
-        }
+                url:url
+            },
 
+            [
+                messageChannel.port2
+            ]
 
-        /*
-         * SAVE INTO CACHE
-         */
-
-        await cache.put(
-            url,
-            response.clone()
         );
 
 
-        /*
-         * VERIFY CACHE
-         */
-
-        const saved =
-        await cache.match(url);
+        const response =
+        await result;
 
 
-        if(!saved){
+        if(
+            response &&
+            response.success
+        ){
+
+            downloadStatus.innerHTML =
+            `Surah ${number} saved offline ✓`;
+
+        }else{
 
             throw new Error(
-                "Audio was not saved"
+                response?.error ||
+                "Download failed"
             );
 
         }
-
-
-        downloadStatus.innerHTML =
-        `Surah ${number} saved offline ✓`;
 
 
     }catch(error){
 
         console.log(
-            "DOWNLOAD ERROR:",
+            "Quran download error:",
             error
         );
 
 
         downloadStatus.innerHTML =
         `Could not download Surah ${number}`;
-
-
-        /*
-         * FALLBACK:
-         * Open audio directly.
-         *
-         * This confirms the audio
-         * source itself is working.
-         */
-
-        console.log(
-            "Audio URL:",
-            url
-        );
 
     }
 
@@ -1378,131 +1345,183 @@ async function downloadSurah(number){
 
 async function downloadFullQuran(){
 
-    const confirmDownload =
+    const confirmed =
     confirm(
         "Download all 114 Surahs for offline listening?"
     );
 
 
-    if(!confirmDownload) return;
+    if(!confirmed){
+
+        return;
+
+    }
 
 
-    try{
-
-        const cache =
-        await caches.open(
-            CACHE_NAME
-        );
+    progressBar.style.width =
+    "0%";
 
 
-        let successful =
-        0;
+    let successful =
+    0;
 
 
-        for(
-            let i = 1;
-            i <= TOTAL_SURAHS;
-            i++
-        ){
+    for(
+        let i = 1;
+        i <= TOTAL_SURAHS;
+        i++
+    ){
+
+        downloadStatus.innerHTML =
+        `Downloading ${i} / 114...`;
+
+
+        try{
 
             const url =
             getAudioUrl(i);
 
 
-            downloadStatus.innerHTML =
-            `Downloading ${i} / 114...`;
+            const cache =
+            await caches.open(
+                CACHE_NAME
+            );
 
 
-            try{
-
-                /*
-                 * CHECK EXISTING CACHE
-                 */
-
-                const existing =
-                await cache.match(url);
+            const existing =
+            await cache.match(url);
 
 
-                if(existing){
+            if(existing){
 
-                    successful++;
+                successful++;
 
-                }else{
+            }else{
 
-                    const response =
-                    await fetch(
-                        url,
-                        {
-                            method:"GET",
-                            mode:"cors",
-                            cache:"no-store"
-                        }
+                if(
+                    !navigator.serviceWorker ||
+                    !navigator.serviceWorker.controller
+                ){
+
+                    throw new Error(
+                        "Service Worker not active"
                     );
-
-
-                    if(response.ok){
-
-                        await cache.put(
-                            url,
-                            response.clone()
-                        );
-
-                        successful++;
-
-                    }
 
                 }
 
-            }catch(error){
 
-                console.log(
-                    "Failed Surah:",
-                    i,
-                    error
+                const messageChannel =
+                new MessageChannel();
+
+
+                const result =
+                new Promise(
+                    (resolve,reject) => {
+
+                        const timeout =
+                        setTimeout(
+                            () => {
+
+                                reject(
+                                    new Error(
+                                        "Timeout"
+                                    )
+                                );
+
+                            },
+                            60000
+                        );
+
+
+                        messageChannel
+                        .port1
+                        .onmessage =
+                        function(event){
+
+                            clearTimeout(
+                                timeout
+                            );
+
+                            resolve(
+                                event.data
+                            );
+
+                        };
+
+                    }
                 );
+
+
+                navigator
+                .serviceWorker
+                .controller
+                .postMessage(
+
+                    {
+                        type:
+                        "CACHE_QURAN",
+
+                        url:url
+                    },
+
+                    [
+                        messageChannel.port2
+                    ]
+
+                );
+
+
+                const response =
+                await result;
+
+
+                if(
+                    response &&
+                    response.success
+                ){
+
+                    successful++;
+
+                }
 
             }
 
+        }catch(error){
 
-            const percent =
-            (
-                i /
-                TOTAL_SURAHS
-            ) * 100;
-
-
-            progressBar.style.width =
-            percent + "%";
+            console.log(
+                "Failed Surah:",
+                i,
+                error
+            );
 
         }
 
 
-        if(
-            successful ===
+        const percent =
+        (
+            i /
             TOTAL_SURAHS
-        ){
-
-            downloadStatus.innerHTML =
-            "Full Quran downloaded ✓";
-
-        }else{
-
-            downloadStatus.innerHTML =
-            `${successful} / 114 Surahs saved offline`;
-
-        }
+        ) * 100;
 
 
-    }catch(error){
+        progressBar.style.width =
+        percent + "%";
 
-        console.log(
-            "FULL DOWNLOAD ERROR:",
-            error
-        );
+    }
 
+
+    if(
+        successful ===
+        TOTAL_SURAHS
+    ){
 
         downloadStatus.innerHTML =
-        "Download error";
+        "Full Quran downloaded ✓";
+
+    }else{
+
+        downloadStatus.innerHTML =
+        `${successful} / 114 Surahs saved offline`;
 
     }
 
@@ -1641,4 +1660,5 @@ renderSurahs();
 </script>
 
 </body>
+
 </html>
