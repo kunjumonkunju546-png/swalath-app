@@ -22,6 +22,183 @@
 <style>
 
 /* =========================
+   SWALATH SPLASH SCREEN
+========================= */
+
+#splashScreen {
+
+    position: fixed;
+    inset: 0;
+
+    background: #123d34;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100000;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+
+}
+
+#splashScreen.hide {
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+}
+
+.splash-content {
+
+    text-align: center;
+    padding: 25px;
+
+    animation: splashFade 1s ease;
+
+}
+
+.splash-moon {
+
+    font-size: 58px;
+
+    margin-bottom: 10px;
+
+    animation:
+        moonFloat 2s ease-in-out infinite;
+
+}
+
+.splash-content h1 {
+
+    margin: 0;
+
+    color: #f1dfb0;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+}
+
+.splash-content p {
+
+    margin: 12px 0 22px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+.splash-loader {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+.splash-loader span {
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #f1dfb0;
+
+    animation:
+        splashLoading 1.2s infinite ease-in-out;
+
+}
+
+.splash-loader span:nth-child(2) {
+
+    animation-delay: 0.15s;
+
+}
+
+.splash-loader span:nth-child(3) {
+
+    animation-delay: 0.3s;
+
+}
+
+@keyframes splashLoading {
+
+    0%,
+    60%,
+    100% {
+
+        transform: translateY(0);
+
+        opacity: 0.45;
+
+    }
+
+    30% {
+
+        transform: translateY(-7px);
+
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes moonFloat {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-6px);
+
+    }
+
+}
+
+@keyframes splashFade {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================
    EXTRA FEATURES
 ========================= */
 
@@ -455,6 +632,42 @@ body.dark-mode .swalath-note {
 
 <body>
 
+
+<!-- =================================================
+     SWALATH SPLASH SCREEN
+================================================= -->
+
+<div id="splashScreen">
+
+    <div class="splash-content">
+
+        <div class="splash-moon">
+            🌙
+        </div>
+
+        <h1>
+            സ്വലാത്ത്
+        </h1>
+
+        <p>
+            തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>
+            മനോഹരമായ വഴികൾ
+        </p>
+
+        <div class="splash-loader">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <div class="app">
 
 
@@ -847,7 +1060,7 @@ body.dark-mode .swalath-note {
 
 
 
-    <!-- QURAN MP3 ⭐ NEW -->
+    <!-- QURAN MP3 -->
 
     <div
         class="extra-card"
@@ -1320,10 +1533,6 @@ function openQuran(){
 
 }
 
-
-/* =================================================
-   QURAN MP3 ⭐ NEW
-================================================= */
 
 function openQuranMP3(){
 
@@ -1961,8 +2170,42 @@ function closeTravelAd(){
 }
 
 
+
+/* =================================================
+   SPLASH SCREEN
+================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                const splash =
+                    document.getElementById(
+                        "splashScreen"
+                    );
+
+                if(splash){
+
+                    splash.classList.add(
+                        "hide"
+                    );
+
+                }
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+
 /* =========================
-   SHOW AD AFTER APP LOAD
+   SHOW NAZYAN AD AFTER SPLASH
 ========================= */
 
 window.addEventListener(
@@ -1971,7 +2214,7 @@ window.addEventListener(
 
         setTimeout(
             showTravelAdOnceDaily,
-            500
+            2300
         );
 
     }
