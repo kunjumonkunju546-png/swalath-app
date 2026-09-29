@@ -332,7 +332,6 @@ body.dark .surah-card{
 
 <div class="player">
 
-
     <div
         class="now-playing"
         id="nowPlaying">
@@ -350,7 +349,6 @@ body.dark .surah-card{
 
 
     <div class="controls">
-
 
         <button
             class="control-btn"
@@ -378,7 +376,6 @@ body.dark .surah-card{
             Next ⏭
 
         </button>
-
 
     </div>
 
@@ -623,8 +620,6 @@ parseInt(
 
 let fullQuranMode = false;
 
-let currentObjectUrl = null;
-
 
 
 /* =====================================
@@ -721,6 +716,7 @@ async function playSurah(number){
 
     currentSurah = number;
 
+
     localStorage.setItem(
         "quranCurrentSurah",
         number
@@ -744,119 +740,71 @@ async function playSurah(number){
     `▶ ${surah.n}. ${surah.en} — ${surah.ar}`;
 
 
-    try{
-
-        const url =
-        getAudioUrl(number);
+    const url =
+    getAudioUrl(number);
 
 
-        /*
-         * CHECK OFFLINE CACHE FIRST
-         */
+    /*
+     * IMPORTANT
+     *
+     * We DO NOT convert the cached
+     * audio into a Blob URL here.
+     *
+     * The Service Worker intercepts
+     * the original URL and returns
+     * the offline cached audio.
+     */
 
-        try{
+    audio.src = url;
 
-            const cache =
-            await caches.open(
-                CACHE_NAME
-            );
-
-
-            const cached =
-            await cache.match(url);
-
-
-            if(cached){
-
-                const blob =
-                await cached.blob();
+    audio.load();
 
 
-                if(currentObjectUrl){
+    /*
+     * RESTORE SAVED POSITION
+     */
 
-                    URL.revokeObjectURL(
-                        currentObjectUrl
-                    );
+    const savedPosition =
+    parseFloat(
+        localStorage.getItem(
+            "quranPosition_" +
+            number
+        )
+    );
+
+
+    if(
+        savedPosition &&
+        savedPosition > 0
+    ){
+
+        audio.addEventListener(
+            "loadedmetadata",
+            function restorePosition(){
+
+                if(
+                    savedPosition <
+                    audio.duration
+                ){
+
+                    audio.currentTime =
+                    savedPosition;
 
                 }
 
 
-                currentObjectUrl =
-                URL.createObjectURL(
-                    blob
+                audio.removeEventListener(
+                    "loadedmetadata",
+                    restorePosition
                 );
 
-
-                audio.src =
-                currentObjectUrl;
-
-            }else{
-
-                audio.src =
-                url;
-
             }
-
-
-        }catch(error){
-
-            console.log(
-                "Cache check error:",
-                error
-            );
-
-            audio.src =
-            url;
-
-        }
-
-
-        audio.load();
-
-
-        /*
-         * RESTORE SAVED POSITION
-         */
-
-        const savedPosition =
-        parseFloat(
-            localStorage.getItem(
-                "quranPosition_" +
-                number
-            )
         );
 
-
-        if(
-            savedPosition &&
-            savedPosition > 0
-        ){
-
-            audio.addEventListener(
-                "loadedmetadata",
-                function restorePosition(){
-
-                    if(
-                        savedPosition <
-                        audio.duration
-                    ){
-
-                        audio.currentTime =
-                        savedPosition;
-
-                    }
+    }
 
 
-                    audio.removeEventListener(
-                        "loadedmetadata",
-                        restorePosition
-                    );
-
-                }
-            );
-
-        }
-
+    try{
 
         await audio.play();
 
@@ -869,11 +817,10 @@ async function playSurah(number){
             surah
         );
 
-
     }catch(error){
 
         console.log(
-            "Audio error:",
+            "Audio play error:",
             error
         );
 
@@ -982,18 +929,17 @@ function previousSurah(){
 
 
 /* =====================================
-   FULL QURAN PLAY
+   FULL QURAN
 ===================================== */
 
 async function playFullQuran(){
 
     fullQuranMode = true;
 
+
     await playSurah(
         currentSurah
     );
-
-    fullQuranMode = true;
 
 }
 
@@ -1018,7 +964,8 @@ audio.addEventListener(
                     currentSurah + 1
                 ).then(() => {
 
-                    fullQuranMode = true;
+                    fullQuranMode =
+                    true;
 
                 });
 
@@ -1197,10 +1144,6 @@ async function downloadSurah(number){
         );
 
 
-        /*
-         * CHECK EXISTING CACHE
-         */
-
         const existing =
         await cache.match(url);
 
@@ -1214,10 +1157,6 @@ async function downloadSurah(number){
 
         }
 
-
-        /*
-         * SERVICE WORKER CHECK
-         */
 
         if(
             !navigator.serviceWorker ||
@@ -1234,10 +1173,6 @@ async function downloadSurah(number){
         downloadStatus.innerHTML =
         `Downloading Surah ${number}...`;
 
-
-        /*
-         * SEND REQUEST TO SERVICE WORKER
-         */
 
         const messageChannel =
         new MessageChannel();
@@ -1270,6 +1205,7 @@ async function downloadSurah(number){
                     clearTimeout(
                         timeout
                     );
+
 
                     resolve(
                         event.data
@@ -1441,6 +1377,7 @@ async function downloadFullQuran(){
                             clearTimeout(
                                 timeout
                             );
+
 
                             resolve(
                                 event.data
