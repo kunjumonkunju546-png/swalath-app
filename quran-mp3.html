@@ -360,7 +360,6 @@ body.dark .surah-card{
 
             </button>
 
-
         </div>
 
 
@@ -560,11 +559,9 @@ const surahs = [
 
 const surahList =
 surahs.map(x => ({
-
     n:x[0],
     ar:x[1],
     en:x[2]
-
 }));
 
 
@@ -638,12 +635,10 @@ function renderSurahs(
 
     list.forEach(surah => {
 
-
         const card =
         document.createElement(
             "div"
         );
-
 
         card.className =
         "surah-card";
@@ -685,7 +680,6 @@ function renderSurahs(
 
         `;
 
-
         container.appendChild(card);
 
     });
@@ -702,28 +696,22 @@ async function playSurah(number){
 
     currentSurah = number;
 
-
     localStorage.setItem(
         "quranCurrentSurah",
         number
     );
 
-
     fullQuranMode = false;
-
 
     const surah =
     surahList.find(
         s => s.n === number
     );
 
-
     if(!surah) return;
-
 
     audioError.style.display =
     "none";
-
 
     nowPlaying.innerHTML =
     `▶ ${surah.n}. ${surah.en} — ${surah.ar}`;
@@ -736,7 +724,7 @@ async function playSurah(number){
 
 
         /*
-         * Try offline cache
+         * TRY OFFLINE CACHE FIRST
          */
 
         try{
@@ -745,7 +733,6 @@ async function playSurah(number){
             await caches.open(
                 CACHE_NAME
             );
-
 
             const cached =
             await cache.match(url);
@@ -775,7 +762,6 @@ async function playSurah(number){
                 audio.src =
                 currentObjectUrl;
 
-
             }else{
 
                 audio.src =
@@ -791,7 +777,6 @@ async function playSurah(number){
                 cacheError
             );
 
-
             audio.src =
             url;
 
@@ -802,9 +787,7 @@ async function playSurah(number){
 
 
         /*
-         * IMPORTANT:
-         * Each Surah has its own
-         * saved playback position.
+         * RESTORE POSITION
          */
 
         const savedPosition =
@@ -834,7 +817,6 @@ async function playSurah(number){
                         savedPosition;
 
                     }
-
 
                     audio.removeEventListener(
                         "loadedmetadata",
@@ -866,10 +848,8 @@ async function playSurah(number){
             error
         );
 
-
         playPauseBtn.innerHTML =
         "▶ Play";
-
 
         audioError.style.display =
         "block";
@@ -896,7 +876,6 @@ async function togglePlay(){
 
     }
 
-
     try{
 
         if(audio.paused){
@@ -905,7 +884,6 @@ async function togglePlay(){
 
             playPauseBtn.innerHTML =
             "⏸ Pause";
-
 
         }else{
 
@@ -982,12 +960,6 @@ async function playFullQuran(){
         currentSurah
     );
 
-    /*
-     * playSurah() normally sets
-     * fullQuranMode false.
-     * Restore it here.
-     */
-
     fullQuranMode = true;
 
 }
@@ -1022,10 +994,8 @@ audio.addEventListener(
                 fullQuranMode =
                 false;
 
-
                 nowPlaying.innerHTML =
                 "Quran completed";
-
 
                 playPauseBtn.innerHTML =
                 "▶ Play";
@@ -1054,7 +1024,6 @@ audio.addEventListener(
 
         playPauseBtn.innerHTML =
         "⏸ Pause";
-
 
         audioError.style.display =
         "none";
@@ -1086,10 +1055,8 @@ audio.addEventListener(
             "Browser audio error"
         );
 
-
         playPauseBtn.innerHTML =
         "▶ Play";
-
 
         audioError.style.display =
         "block";
@@ -1111,12 +1078,6 @@ audio.addEventListener(
             audio.currentTime > 0 &&
             currentSurah
         ){
-
-            /*
-             * IMPORTANT:
-             * Position is saved separately
-             * for every Surah.
-             */
 
             localStorage.setItem(
                 "quranPosition_" +
@@ -1179,15 +1140,21 @@ function searchSurahs(){
    DOWNLOAD ONE SURAH
 ===================================== */
 
-async function downloadSurah(
-    number
-){
+async function downloadSurah(number){
+
+    const url =
+    getAudioUrl(number);
+
 
     try{
 
         downloadStatus.innerHTML =
-        `Downloading Surah ${number}...`;
+        `Checking Surah ${number}...`;
 
+
+        /*
+         * OPEN CACHE
+         */
 
         const cache =
         await caches.open(
@@ -1195,27 +1162,80 @@ async function downloadSurah(
         );
 
 
-        const url =
-        getAudioUrl(number);
+        /*
+         * CHECK WHETHER ALREADY SAVED
+         */
+
+        const existing =
+        await cache.match(url);
+
+
+        if(existing){
+
+            downloadStatus.innerHTML =
+            `Surah ${number} already saved offline ✓`;
+
+            return;
+
+        }
+
+
+        /*
+         * FETCH AUDIO
+         *
+         * Explicit CORS request.
+         */
+
+        downloadStatus.innerHTML =
+        `Downloading Surah ${number}...`;
 
 
         const response =
-        await fetch(url);
+        await fetch(
+            url,
+            {
+                method:"GET",
+                mode:"cors",
+                cache:"no-store"
+            }
+        );
 
 
         if(!response.ok){
 
             throw new Error(
-                "Download failed"
+                "HTTP " +
+                response.status
             );
 
         }
 
 
+        /*
+         * SAVE INTO CACHE
+         */
+
         await cache.put(
             url,
             response.clone()
         );
+
+
+        /*
+         * VERIFY CACHE
+         */
+
+        const saved =
+        await cache.match(url);
+
+
+        if(!saved){
+
+            throw new Error(
+                "Audio was not saved"
+            );
+
+        }
 
 
         downloadStatus.innerHTML =
@@ -1224,11 +1244,28 @@ async function downloadSurah(
 
     }catch(error){
 
-        console.log(error);
+        console.log(
+            "DOWNLOAD ERROR:",
+            error
+        );
 
 
         downloadStatus.innerHTML =
         `Could not download Surah ${number}`;
+
+
+        /*
+         * FALLBACK:
+         * Open audio directly.
+         *
+         * This confirms the audio
+         * source itself is working.
+         */
+
+        console.log(
+            "Audio URL:",
+            url
+        );
 
     }
 
@@ -1259,6 +1296,10 @@ async function downloadFullQuran(){
         );
 
 
+        let successful =
+        0;
+
+
         for(
             let i = 1;
             i <= TOTAL_SURAHS;
@@ -1270,28 +1311,53 @@ async function downloadFullQuran(){
 
 
             downloadStatus.innerHTML =
-            `Downloading ${i} / 114`;
+            `Downloading ${i} / 114...`;
 
 
             try{
 
-                const response =
-                await fetch(url);
+                /*
+                 * CHECK EXISTING CACHE
+                 */
+
+                const existing =
+                await cache.match(url);
 
 
-                if(response.ok){
+                if(existing){
 
-                    await cache.put(
+                    successful++;
+
+                }else{
+
+                    const response =
+                    await fetch(
                         url,
-                        response.clone()
+                        {
+                            method:"GET",
+                            mode:"cors",
+                            cache:"no-store"
+                        }
                     );
+
+
+                    if(response.ok){
+
+                        await cache.put(
+                            url,
+                            response.clone()
+                        );
+
+                        successful++;
+
+                    }
 
                 }
 
             }catch(error){
 
                 console.log(
-                    "Failed:",
+                    "Failed Surah:",
                     i,
                     error
                 );
@@ -1312,13 +1378,28 @@ async function downloadFullQuran(){
         }
 
 
-        downloadStatus.innerHTML =
-        "Full Quran downloaded ✓";
+        if(
+            successful ===
+            TOTAL_SURAHS
+        ){
+
+            downloadStatus.innerHTML =
+            "Full Quran downloaded ✓";
+
+        }else{
+
+            downloadStatus.innerHTML =
+            `${successful} / 114 Surahs saved offline`;
+
+        }
 
 
     }catch(error){
 
-        console.log(error);
+        console.log(
+            "FULL DOWNLOAD ERROR:",
+            error
+        );
 
 
         downloadStatus.innerHTML =
