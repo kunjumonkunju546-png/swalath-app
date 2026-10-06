@@ -107,7 +107,6 @@
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     gap: 7px;
@@ -205,13 +204,21 @@
 .search-box {
 
     width: 100%;
+
     padding: 13px 16px;
+
     border: 1px solid #e6dfd0;
+
     border-radius: 14px;
+
     outline: none;
+
     font-size: 14px;
+
     margin-bottom: 15px;
+
     background: white;
+
     color: #222;
 
 }
@@ -225,8 +232,11 @@
 .feature-buttons {
 
     display: flex;
+
     justify-content: center;
+
     gap: 10px;
+
     margin-bottom: 18px;
 
 }
@@ -234,76 +244,18 @@
 .dark-button {
 
     border: none;
+
     background: #123d34;
+
     color: white;
+
     padding: 10px 16px;
+
     border-radius: 25px;
+
     cursor: pointer;
+
     font-size: 13px;
-
-}
-
-
-/* =========================
-   EXTRA MENU
-========================= */
-
-.extra-menu-title {
-
-    text-align: center;
-    margin: 28px 0 15px;
-    color: #123d34;
-
-}
-
-.extra-menu-grid {
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 25px;
-
-}
-
-.extra-card {
-
-    background: white;
-    border: 1px solid #e6dfd0;
-    border-radius: 18px;
-    padding: 18px 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s;
-    color: #123d34;
-
-}
-
-.extra-card:active {
-
-    transform: scale(0.97);
-
-}
-
-.extra-card .icon {
-
-    font-size: 30px;
-    margin-bottom: 7px;
-
-}
-
-.extra-card strong {
-
-    display: block;
-    font-size: 15px;
-    margin-bottom: 5px;
-
-}
-
-.extra-card span {
-
-    display: block;
-    font-size: 11px;
-    color: #777;
 
 }
 
@@ -334,7 +286,9 @@ body.dark-mode .welcome p {
 body.dark-mode .menu-card {
 
     background: #222;
+
     border-color: #444;
+
     color: #eee;
 
 }
@@ -345,30 +299,12 @@ body.dark-mode .menu-card span {
 
 }
 
-body.dark-mode .extra-menu-title {
-
-    color: #f1dfb0;
-
-}
-
-body.dark-mode .extra-card {
-
-    background: #222;
-    border-color: #444;
-    color: #eee;
-
-}
-
-body.dark-mode .extra-card span {
-
-    color: #aaa;
-
-}
-
 body.dark-mode .search-box {
 
     background: #222;
+
     color: white;
+
     border-color: #444;
 
 }
@@ -383,6 +319,7 @@ body.dark-mode #favoritesSection h2 {
 body.dark-mode .dark-button {
 
     background: #f1dfb0;
+
     color: #123d34;
 
 }
@@ -391,7 +328,9 @@ body.dark-mode .favorite-item,
 body.dark-mode .collection-item {
 
     background: #222 !important;
+
     border-color: #444 !important;
+
     color: #fff !important;
 
 }
@@ -410,6 +349,7 @@ body.dark-mode footer {
 .travel-ad-overlay {
 
     position: fixed;
+
     inset: 0;
 
     background: rgba(0, 0, 0, 0.72);
@@ -417,6 +357,7 @@ body.dark-mode footer {
     display: none;
 
     justify-content: center;
+
     align-items: center;
 
     padding: 18px;
@@ -425,12 +366,12 @@ body.dark-mode footer {
 
 }
 
-
 .travel-ad {
 
     position: relative;
 
     width: 100%;
+
     max-width: 420px;
 
     max-height: 90vh;
@@ -452,7 +393,6 @@ body.dark-mode footer {
 
 }
 
-
 .travel-ad h2 {
 
     margin: 0 0 18px;
@@ -465,15 +405,16 @@ body.dark-mode footer {
 
 }
 
-
 .travel-ad-close {
 
     position: absolute;
 
     top: 10px;
+
     right: 12px;
 
     width: 34px;
+
     height: 34px;
 
     border: none;
@@ -492,7 +433,6 @@ body.dark-mode footer {
 
 }
 
-
 .travel-services {
 
     font-size: 15px;
@@ -504,7 +444,6 @@ body.dark-mode footer {
     color: #222;
 
 }
-
 
 .travel-countries {
 
@@ -518,7 +457,6 @@ body.dark-mode footer {
 
 }
 
-
 .travel-tagline {
 
     font-size: 16px;
@@ -530,7 +468,6 @@ body.dark-mode footer {
     margin: 12px 0;
 
 }
-
 
 .travel-whatsapp {
 
@@ -554,7 +491,6 @@ body.dark-mode footer {
 
 }
 
-
 .travel-ad hr {
 
     border: none;
@@ -564,7 +500,6 @@ body.dark-mode footer {
     margin: 10px 0 15px;
 
 }
-
 
 .swalath-note {
 
@@ -577,7 +512,6 @@ body.dark-mode footer {
     margin: 9px 0;
 
 }
-
 
 .dua-note {
 
@@ -762,14 +696,30 @@ body.dark-mode .swalath-note {
 
 
 
-<!-- =========================
+<!-- =================================================
      MAIN MENU
-========================= -->
+     
+     ORDER:
+     1. SWALATH
+     2. QURAN
+     3. QURAN MP3
+     4. DUA
+     5. ASMAUL HUSNA
+     6. DHIKR
+     7. TASBEEH
+     8. DAILY AZKAR
+     9. SALAH GUIDE
+     10. DAILY REMINDER
+     11. DAILY ASMA
+     12. UMRAH
+     13. FAVOURITES
+     14. NAZYAN TRAVELS
+================================================= -->
 
 <div class="menu-grid">
 
 
-    <!-- COLLECTION -->
+    <!-- 1. SWALATH -->
 
     <div
         class="menu-card"
@@ -777,7 +727,7 @@ body.dark-mode .swalath-note {
     >
 
         <div style="font-size:30px;">
-            📖
+            🕌
         </div>
 
         <strong>
@@ -791,54 +741,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-
-    <!-- FAVOURITES -->
-
-    <div
-        class="menu-card"
-        onclick="openFavorites()"
-    >
-
-        <div style="font-size:30px;">
-            ❤️
-        </div>
-
-        <strong>
-            My Favourites
-        </strong>
-
-        <span>
-            Favourite ആയി ചേർത്തവ
-        </span>
-
-    </div>
-
-
-
-    <!-- ASMAUL HUSNA -->
-
-    <div
-        class="menu-card"
-        onclick="openAsmaulHusna()"
-    >
-
-        <div style="font-size:30px;">
-            🕌
-        </div>
-
-        <strong>
-            أَسْمَاءُ الْحُسْنَى
-        </strong>
-
-        <span>
-            أسماء الله الحسنى
-        </span>
-
-    </div>
-
-
-
-    <!-- QURAN -->
+    <!-- 2. QURAN -->
 
     <div
         class="menu-card"
@@ -854,14 +757,211 @@ body.dark-mode .swalath-note {
         </strong>
 
         <span>
-            ഖുർആൻ
+            ഖുർആൻ വായിക്കാം
         </span>
 
     </div>
 
 
+    <!-- 3. QURAN MP3 -->
 
-    <!-- UMRAH -->
+    <div
+        class="menu-card"
+        onclick="openQuranMP3()"
+    >
+
+        <div style="font-size:30px;">
+            🎧
+        </div>
+
+        <strong>
+            Quran MP3
+        </strong>
+
+        <span>
+            ഖുർആൻ കേൾക്കാം
+        </span>
+
+    </div>
+
+
+    <!-- 4. DUA -->
+
+    <div
+        class="menu-card"
+        onclick="openDua()"
+    >
+
+        <div style="font-size:30px;">
+            🤲
+        </div>
+
+        <strong>
+            ദുആകൾ
+        </strong>
+
+        <span>
+            വിവിധ ദുആകൾ
+        </span>
+
+    </div>
+
+
+    <!-- 5. ASMAUL HUSNA -->
+
+    <div
+        class="menu-card"
+        onclick="openAsmaulHusna()"
+    >
+
+        <div style="font-size:30px;">
+            ✨
+        </div>
+
+        <strong>
+            أَسْمَاءُ الْحُسْنَى
+        </strong>
+
+        <span>
+            أسماء الله الحسنى
+        </span>
+
+    </div>
+
+
+    <!-- 6. DHIKR -->
+
+    <div
+        class="menu-card"
+        onclick="openDhikr()"
+    >
+
+        <div style="font-size:30px;">
+            📿
+        </div>
+
+        <strong>
+            ദിക്ർ
+        </strong>
+
+        <span>
+            ദിക്ർ ചൊല്ലാം
+        </span>
+
+    </div>
+
+
+    <!-- 7. TASBEEH -->
+
+    <div
+        class="menu-card"
+        onclick="openTasbeeh()"
+    >
+
+        <div style="font-size:30px;">
+            🔢
+        </div>
+
+        <strong>
+            തസ്ബീഹ്
+        </strong>
+
+        <span>
+            ഡിജിറ്റൽ കൗണ്ടർ
+        </span>
+
+    </div>
+
+
+    <!-- 8. DAILY AZKAR -->
+
+    <div
+        class="menu-card"
+        onclick="openAzkar()"
+    >
+
+        <div style="font-size:30px;">
+            🌙
+        </div>
+
+        <strong>
+            Daily Azkar
+        </strong>
+
+        <span>
+            ദിവസേനയുള്ള അദ്കാർ
+        </span>
+
+    </div>
+
+
+    <!-- 9. SALAH GUIDE -->
+
+    <div
+        class="menu-card"
+        onclick="openSalahGuide()"
+    >
+
+        <div style="font-size:30px;">
+            🕌
+        </div>
+
+        <strong>
+            Salah Guide
+        </strong>
+
+        <span>
+            നമസ്കാര മാർഗ്ഗനിർദ്ദേശം
+        </span>
+
+    </div>
+
+
+    <!-- 10. DAILY REMINDER -->
+
+    <div
+        class="menu-card"
+        onclick="openDailyReminder()"
+    >
+
+        <div style="font-size:30px;">
+            🌅
+        </div>
+
+        <strong>
+            Daily Reminder
+        </strong>
+
+        <span>
+            ദിവസേന ഓർമ്മപ്പെടുത്തൽ
+        </span>
+
+    </div>
+
+
+    <!-- 11. DAILY ASMA -->
+
+    <div
+        class="menu-card"
+        onclick="openDailyAsma()"
+    >
+
+        <div style="font-size:30px;">
+            ⭐
+        </div>
+
+        <strong>
+            Daily Asmaul Husna
+        </strong>
+
+        <span>
+            ദിവസത്തെ ഒരു നാമം
+        </span>
+
+    </div>
+
+
+    <!-- 12. UMRAH -->
 
     <div
         class="menu-card"
@@ -883,214 +983,36 @@ body.dark-mode .swalath-note {
     </div>
 
 
-</div>
-
-
-
-<!-- =========================
-     EXTRA FEATURES
-========================= -->
-
-<h3 class="extra-menu-title">
-    ✨ കൂടുതൽ സൗകര്യങ്ങൾ
-</h3>
-
-
-<div class="extra-menu-grid">
-
-
-    <!-- DUA -->
+    <!-- 13. FAVOURITES -->
 
     <div
-        class="extra-card"
-        onclick="openDua()"
+        class="menu-card"
+        onclick="openFavorites()"
     >
 
-        <div class="icon">
-            🤲
+        <div style="font-size:30px;">
+            ❤️
         </div>
 
         <strong>
-            ദുആകൾ
+            My Favourites
         </strong>
 
         <span>
-            വിവിധ ദുആകൾ
+            Favourite ആയി ചേർത്തവ
         </span>
 
     </div>
 
 
-
-    <!-- DHIKR -->
-
-    <div
-        class="extra-card"
-        onclick="openDhikr()"
-    >
-
-        <div class="icon">
-            📿
-        </div>
-
-        <strong>
-            ദിക്ർ
-        </strong>
-
-        <span>
-            ദിക്ർ ചൊല്ലാം
-        </span>
-
-    </div>
-
-
-
-    <!-- TASBEEH -->
+    <!-- 14. NAZYAN TRAVELS -->
 
     <div
-        class="extra-card"
-        onclick="openTasbeeh()"
-    >
-
-        <div class="icon">
-            🔢
-        </div>
-
-        <strong>
-            തസ്ബീഹ്
-        </strong>
-
-        <span>
-            ഡിജിറ്റൽ കൗണ്ടർ
-        </span>
-
-    </div>
-
-
-
-    <!-- DAILY AZKAR -->
-
-    <div
-        class="extra-card"
-        onclick="openAzkar()"
-    >
-
-        <div class="icon">
-            🌙
-        </div>
-
-        <strong>
-            Daily Azkar
-        </strong>
-
-        <span>
-            ദിവസേനയുള്ള അദ്കാർ
-        </span>
-
-    </div>
-
-
-
-    <!-- SALAH GUIDE -->
-
-    <div
-        class="extra-card"
-        onclick="openSalahGuide()"
-    >
-
-        <div class="icon">
-            🕌
-        </div>
-
-        <strong>
-            Salah Guide
-        </strong>
-
-        <span>
-            നമസ്കാര മാർഗ്ഗനിർദ്ദേശം
-        </span>
-
-    </div>
-
-
-
-    <!-- DAILY REMINDER -->
-
-    <div
-        class="extra-card"
-        onclick="openDailyReminder()"
-    >
-
-        <div class="icon">
-            🌅
-        </div>
-
-        <strong>
-            Daily Reminder
-        </strong>
-
-        <span>
-            ദിവസേന ഓർമ്മപ്പെടുത്തൽ
-        </span>
-
-    </div>
-
-
-
-    <!-- DAILY ASMA -->
-
-    <div
-        class="extra-card"
-        onclick="openDailyAsma()"
-    >
-
-        <div class="icon">
-            ⭐
-        </div>
-
-        <strong>
-            Daily Asmaul Husna
-        </strong>
-
-        <span>
-            ദിവസത്തെ ഒരു നാമം
-        </span>
-
-    </div>
-
-
-
-    <!-- QURAN MP3 -->
-
-    <div
-        class="extra-card"
-        onclick="openQuranMP3()"
-    >
-
-        <div class="icon">
-            🎧
-        </div>
-
-        <strong>
-            Quran MP3
-        </strong>
-
-        <span>
-            ഖുർആൻ കേൾക്കാം
-        </span>
-
-    </div>
-
-
-
-    <!-- NAZYAN TRAVELS -->
-
-    <div
-        class="extra-card"
+        class="menu-card"
         onclick="openNazyAN()"
     >
 
-        <div class="icon">
+        <div style="font-size:30px;">
             ✈️
         </div>
 
@@ -1637,14 +1559,6 @@ function openCollection(){
         ".feature-buttons"
     ).style.display = "none";
 
-    document.querySelector(
-        ".extra-menu-grid"
-    ).style.display = "none";
-
-    document.querySelector(
-        ".extra-menu-title"
-    ).style.display = "none";
-
     document.getElementById(
         "travelSection"
     ).style.display = "none";
@@ -1692,14 +1606,6 @@ function closeCollection(){
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
-
-    document.querySelector(
-        ".extra-menu-grid"
-    ).style.display = "grid";
-
-    document.querySelector(
-        ".extra-menu-title"
-    ).style.display = "block";
 
     document.getElementById(
         "travelSection"
@@ -1849,14 +1755,6 @@ function openFavorites(){
         ".feature-buttons"
     ).style.display = "none";
 
-    document.querySelector(
-        ".extra-menu-grid"
-    ).style.display = "none";
-
-    document.querySelector(
-        ".extra-menu-title"
-    ).style.display = "none";
-
     document.getElementById(
         "collectionSection"
     ).style.display = "none";
@@ -1900,14 +1798,6 @@ function closeFavorites(){
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
-
-    document.querySelector(
-        ".extra-menu-grid"
-    ).style.display = "grid";
-
-    document.querySelector(
-        ".extra-menu-title"
-    ).style.display = "block";
 
     document.getElementById(
         "travelSection"
