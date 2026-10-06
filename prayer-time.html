@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prayer Times & Qibla - സ്വലാത്ത്</title>
+
+<meta name="theme-color" content="#17483d">
+
+<style>
+:root{
+    --bg:#f3f0e8;
+    --surface:#fffdf8;
+    --card:#ffffff;
+    --primary:#17483d;
+    --primary-dark:#10382f;
+    --primary-soft:#e8f0eb;
+    --gold:#c7a45b;
+    --gold-soft:#f4e8c8;
+    --text:#202a27;
+    --muted:#7a817e;
+    --border:#e7e1d5;
+    --danger:#a54848;
+    --shadow:0 8px 25px rgba(20,50,40,.08);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+}
+
+body{
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+body.dark{
+    --bg:#101714;
+    --surface:#17211e;
+    --card:#1b2723;
+    --primary:#8fc6b3;
+    --primary-dark:#b6dccd;
+    --primary-soft:#20352e;
+    --gold:#d5b66f;
+    --gold-soft:#3b3321;
+    --text:#eef5f1;
+    --muted:#aebbb5;
+    --border:#2b3934;
+    --danger:#e28b8b;
+    --shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.page{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+    min-height:100vh;
+    padding-bottom:30px;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(
+        145deg,
+        var(--primary-dark),
+        var(--primary)
+    );
+    color:#fff;
+    padding:18px 18px 22px;
+    border-radius:0 0 26px 26px;
+    box-shadow:var(--shadow);
+}
+
+.header-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back-btn,
+.dark-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.13);
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.header-title{
+    flex:1;
+}
+
+.header-title h1{
+    margin:0;
+    font-size:21px;
+    font-weight:700;
+}
+
+.header-title p{
+    margin:3px 0 0;
+    font-size:12px;
+    opacity:.82;
+}
+
+/* CONTENT */
+
+.content{
+    padding:16px;
+}
+
+/* LOCATION PERMISSION NOTICE */
+
+.permission-notice{
+    display:none;
+    background:var(--gold-soft);
+    border:1px solid var(--gold);
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+}
+
+.permission-notice.show{
+    display:block;
+}
+
+.permission-icon{
+    font-size:25px;
+    margin-bottom:6px;
+}
+
+.permission-title{
+    font-size:15px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:5px;
+}
+
+.permission-text{
+    font-size:12px;
+    line-height:1.65;
+    color:var(--muted);
+}
+
+.permission-btn{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:11px 12px;
+    margin-top:11px;
+    background:var(--primary);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.permission-btn:active{
+    transform:scale(.98);
+}
+
+.permission-help{
+    margin-top:8px;
+    font-size:10px;
+    line-height:1.5;
+    color:var(--muted);
+    text-align:center;
+}
+
+/* LOCATION CARD */
+
+.location-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    margin-bottom:14px;
+}
+
+.location-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.location-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    background:var(--primary-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.location-info{
+    flex:1;
+}
+
+.location-label{
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:3px;
+}
+
+.location-name{
+    font-size:15px;
+    font-weight:700;
+}
+
+.location-status{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.location-btn{
+    margin-top:13px;
+    width:100%;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--primary);
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* DATE */
+
+.date-card{
+    background:var(--primary);
+    color:#fff;
+    border-radius:20px;
+    padding:17px;
+    margin-bottom:14px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.date-day{
+    font-size:22px;
+    font-weight:700;
+}
+
+.date-text{
+    font-size:12px;
+    opacity:.85;
+    margin-top:4px;
+}
+
+/* PRAYER TIMES */
+
+.section-title{
+    font-size:15px;
+    font-weight:700;
+    margin:18px 3px 10px;
+}
+
+.prayer-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.prayer-row{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:13px 15px;
+    display:flex;
+    align-items:center;
+    box-shadow:0 4px 15px rgba(20,50,40,.04);
+}
+
+.prayer-row.current{
+    background:var(--primary-soft);
+    border-color:var(--gold);
+}
+
+.prayer-icon{
+    width:39px;
+    height:39px;
+    border-radius:12px;
+    background:var(--surface);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:12px;
+    font-size:19px;
+}
+
+.prayer-name{
+    flex:1;
+}
+
+.prayer-name strong{
+    display:block;
+    font-size:14px;
+}
+
+.prayer-name span{
+    display:block;
+    font-size:10px;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+.prayer-time{
+    font-size:17px;
+    font-weight:700;
+    color:var(--primary);
+}
+
+.current-badge{
+    font-size:9px;
+    background:var(--gold);
+    color:#fff;
+    padding:3px 7px;
+    border-radius:20px;
+    margin-left:8px;
+}
+
+/* QIBLA */
+
+.qibla-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    margin-top:14px;
+    box-shadow:var(--shadow);
+    text-align:center;
+}
+
+.qibla-title{
+    font-size:16px;
+    font-weight:700;
+}
+
+.qibla-subtitle{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.qibla-compass{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border:7px solid var(--primary-soft);
+    margin:20px auto 15px;
+    position:relative;
+    background:
+        radial-gradient(
+            circle,
+            var(--surface) 0%,
+            var(--surface) 63%,
+            var(--primary-soft) 64%,
+            var(--primary-soft) 67%,
+            var(--surface) 68%
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.compass-arrow{
+    width:4px;
+    height:115px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform-origin:center center;
+    transform:translate(-50%,-50%);
+}
+
+.arrow-head{
+    width:0;
+    height:0;
+    border-left:9px solid transparent;
+    border-right:9px solid transparent;
+    border-bottom:27px solid var(--gold);
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.arrow-line{
+    width:4px;
+    height:80px;
+    background:var(--gold);
+    position:absolute;
+    top:24px;
+    left:0;
+    border-radius:5px;
+}
+
+.compass-center{
+    width:18px;
+    height:18px;
+    background:var(--primary);
+    border:3px solid var(--surface);
+    border-radius:50%;
+    z-index:2;
+}
+
+.compass-direction{
+    position:absolute;
+    font-size:11px;
+    font-weight:700;
+    color:var(--muted);
+}
+
+.compass-n{
+    top:8px;
+}
+
+.compass-s{
+    bottom:8px;
+}
+
+.compass-e{
+    right:9px;
+}
+
+.compass-w{
+    left:9px;
+}
+
+.qibla-degree{
+    font-size:25px;
+    font-weight:800;
+    color:var(--primary);
+}
+
+.qibla-info{
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.6;
+    margin-top:5px;
+}
+
+.compass-btn{
+    margin-top:13px;
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* INFO */
+
+.info-card{
+    margin-top:14px;
+    padding:14px;
+    border-radius:17px;
+    background:var(--primary-soft);
+    font-size:11px;
+    line-height:1.7;
+    color:var(--muted);
+}
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+    padding:25px 10px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.error{
+    background:#f9eaea;
+    color:var(--danger);
+    border-radius:14px;
+    padding:12px;
+    font-size:11px;
+    line-height:1.6;
+    margin-bottom:12px;
+}
+
+body.dark .error{
+    background:#392424;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    padding:25px 15px 5px;
+    font-size:10px;
+    color:var(--muted);
+}
+
+.footer strong{
+    color:var(--primary);
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-row">
+
+            <button class="back-btn" onclick="goBack()" aria-label="Back">
+                ←
+            </button>
+
+            <div class="header-title">
+                <h1>🕌 Prayer Times & Qibla</h1>
+                <p>നമസ്കാര സമയം • ഖിബ്‌ല ദിശ</p>
+            </div>
+
+            <button class="dark-btn" onclick="toggleDarkMode()" aria-label="Dark mode">
+                ◐
+            </button>
+
+        </div>
+    </header>
+
+
+    <main class="content">
+
+        <!-- LOCATION PERMISSION NOTICE -->
+        <div id="locationPermissionNotice" class="permission-notice">
+
+            <div class="permission-icon">📍</div>
+
+            <div class="permission-title">
+                കൃത്യമായ നമസ്കാര സമയം ലഭിക്കാൻ Location Permission അനുവദിക്കുക
+            </div>
+
+            <div class="permission-text">
+                നിങ്ങളുടെ ഇപ്പോഴത്തെ സ്ഥലമനുസരിച്ചാണ് Prayer Times & Qibla കണക്കാക്കുന്നത്.
+                Location Permission അനുവദിച്ചാൽ നിങ്ങളുടെ നിലവിലെ location ഉപയോഗിച്ച്
+                കൂടുതൽ കൃത്യമായ സമയം ലഭിക്കും.
+            </div>
+
+            <button
+                id="allowLocationBtn"
+                class="permission-btn"
+                onclick="requestLocationPermission()">
+                📍 Location Permission നൽകുക
+            </button>
+
+            <div class="permission-help">
+                Permission നേരത്തെ Block ചെയ്തിട്ടുണ്ടെങ്കിൽ,
+                Browser / App Settings → Site Permissions → Location → Allow
+                ചെയ്യേണ്ടി വരാം.
+            </div>
+
+        </div>
+
+
+        <!-- ERROR -->
+        <div id="errorBox" class="error" style="display:none;"></div>
+
+
+        <!-- LOCATION -->
+        <div class="location-card">
+
+            <div class="location-top">
+
+                <div class="location-icon">
+                    📍
+                </div>
+
+                <div class="location-info">
+
+                    <div class="location-label">
+                        നിങ്ങളുടെ Location
+                    </div>
+
+                    <div id="locationName" class="location-name">
+                        Location കണ്ടെത്തുന്നു...
+                    </div>
+
+                    <div id="locationStatus" class="location-status">
+                        Please wait...
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="location-btn"
+                onclick="requestLocationPermission()">
+                📍 Current Location കണ്ടെത്തുക
+            </button>
+
+        </div>
+
+
+        <!-- DATE -->
+        <div class="date-card">
+
+            <div id="gregorianDate" class="date-day">
+                —
+            </div>
+
+            <div id="hijriDate" class="date-text">
+                —
+            </div>
+
+        </div>
+
+
+        <!-- PRAYER TIMES -->
+        <div class="section-title">
+            🕰️ ഇന്നത്തെ നമസ്കാര സമയം
+        </div>
+
+        <div id="prayerList" class="prayer-list">
+
+            <div class="loading">
+                നമസ്കാര സമയം ലഭിക്കുന്നു...
+            </div>
+
+        </div>
+
+
+        <!-- QIBLA -->
+        <div class="qibla-card">
+
+            <div class="qibla-title">
+                🕋 Qibla Direction
+            </div>
+
+            <div class="qibla-subtitle">
+                കഅ്ബയിലേക്കുള്ള ദിശ
+            </div>
+
+
+            <div class="qibla-compass">
+
+                <span class="compass-direction compass-n">N</span>
+                <span class="compass-direction compass-s">S</span>
+                <span class="compass-direction compass-e">E</span>
+                <span class="compass-direction compass-w">W</span>
+
+                <div id="compassArrow" class="compass-arrow">
+
+                    <div class="arrow-head"></div>
+
+                    <div class="arrow-line"></div>
+
+                </div>
+
+                <div class="compass-center"></div>
+
+            </div>
+
+
+            <div id="qiblaDegree" class="qibla-degree">
+                —
+            </div>
+
+            <div id="qiblaInfo" class="qibla-info">
+                നിങ്ങളുടെ location ലഭിച്ചതിന് ശേഷം Qibla direction കാണിക്കും.
+            </div>
+
+            <button
+                id="compassButton"
+                class="compass-btn"
+                onclick="startCompass()">
+                🧭 Live Compass ഉപയോഗിക്കുക
+            </button>
+
+        </div>
+
+
+        <!-- INFO -->
+        <div class="info-card">
+
+            📌 Prayer Times നിങ്ങളുടെ current location അനുസരിച്ചാണ്
+            കണക്കാക്കുന്നത്.
+
+            <br>
+
+            📌 Location permission അനുവദിക്കാത്ത പക്ഷം മുമ്പ് save ചെയ്ത
+            location ലഭ്യമാണെങ്കിൽ അത് ഉപയോഗിക്കും.
+
+            <br>
+
+            📌 Saved location ഇല്ലെങ്കിൽ Kerala (Palakkad) fallback
+            ഉപയോഗിക്കും.
+
+            <br>
+
+            📌 നിങ്ങളുടെ exact address ഈ app display ചെയ്യുകയോ save ചെയ്യുകയോ ചെയ്യുന്നില്ല.
+            Prayer calculation-ന് ആവശ്യമായ location coordinates മാത്രമാണ് ഉപയോഗിക്കുന്നത്.
+
+        </div>
+
+
+        <div class="footer">
+            <strong>സ്വലാത്ത്</strong><br>
+            Your Daily Islamic Companion
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+const KAABA_LAT = 21.4225;
+const KAABA_LON = 39.8262;
+
+/*
+   Kerala fallback.
+   Exact address is never shown.
+*/
+const KERALA_FALLBACK = {
+    latitude: 10.7867,
+    longitude: 76.6548,
+    name: "Kerala",
+    source: "fallback"
+};
+
+const LOCATION_KEY = "swalathLastLocation";
+const PRAYER_CACHE_KEY = "swalathPrayerCache";
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function applyDarkMode(){
+
+    const dark = localStorage.getItem("swalathDarkMode") === "true";
+
+    document.body.classList.toggle("dark", dark);
+}
+
+function toggleDarkMode(){
+
+    const isDark = document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "swalathDarkMode",
+        String(!isDark)
+    );
+
+    applyDarkMode();
+}
+
+applyDarkMode();
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+function goBack(){
+
+    if(document.referrer){
+        history.back();
+    }else{
+        window.location.href = "index.html";
+    }
+}
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const locationNotice =
+    document.getElementById("locationPermissionNotice");
+
+const locationName =
+    document.getElementById("locationName");
+
+const locationStatus =
+    document.getElementById("locationStatus");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+const prayerList =
+    document.getElementById("prayerList");
+
+const gregorianDate =
+    document.getElementById("gregorianDate");
+
+const hijriDate =
+    document.getElementById("hijriDate");
+
+const qiblaDegree =
+    document.getElementById("qiblaDegree");
+
+const qiblaInfo =
+    document.getElementById("qiblaInfo");
+
+const compassArrow =
+    document.getElementById("compassArrow");
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function showError(message){
+
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+}
+
+function hideError(){
+
+    errorBox.style.display = "none";
+    errorBox.textContent = "";
+}
+
+
+function showPermissionNotice(){
+
+    locationNotice.classList.add("show");
+}
+
+
+function hidePermissionNotice(){
+
+    locationNotice.classList.remove("show");
+}
+
+
+/* =========================================================
+   SAVED LOCATION
+========================================================= */
+
+function getSavedLocation(){
+
+    try{
+
+        const data =
+            localStorage.getItem(LOCATION_KEY);
+
+        if(!data){
+            return null;
+        }
+
+        return JSON.parse(data);
+
+    }catch(error){
+
+        return null;
+    }
+}
+
+
+function saveLocation(location){
+
+    try{
+
+        localStorage.setItem(
+            LOCATION_KEY,
+            JSON.stringify(location)
+        );
+
+    }catch(error){
+
+        console.log("Could not save location.");
+    }
+}
+
+
+/* =========================================================
+   PERMISSION STATE
+========================================================= */
+
+async function checkLocationPermission(){
+
+    /*
+       Permissions API is not available
+       in every browser.
+    */
+
+    if(!navigator.permissions){
+
+        requestCurrentLocation();
+
+        return;
+    }
+
+    try{
+
+        const permission =
+            await navigator.permissions.query({
+                name:"geolocation"
+            });
+
+        if(permission.state === "granted"){
+
+            /*
+               Already allowed.
+               No notification.
+            */
+
+            hidePermissionNotice();
+
+            requestCurrentLocation();
+
+        }
+        else if(permission.state === "denied"){
+
+            /*
+               Only users who denied permission
+               see our custom notice.
+            */
+
+            showPermissionNotice();
+
+            useFallbackLocation(
+                "Location Permission അനുവദിച്ചിട്ടില്ല"
+            );
+
+        }
+        else{
+
+            /*
+               "prompt"
+               Browser itself will ask permission.
+            */
+
+            hidePermissionNotice();
+
+            requestCurrentLocation();
+        }
+
+        permission.onchange = function(){
+
+            if(permission.state === "granted"){
+
+                hidePermissionNotice();
+
+                requestCurrentLocation();
+
+            }
+            else if(permission.state === "denied"){
+
+                showPermissionNotice();
+            }
+
+        };
+
+    }catch(error){
+
+        /*
+           If Permissions API fails,
+           let browser handle normal geolocation prompt.
+        */
+
+        requestCurrentLocation();
+    }
+}
+
+
+/* =========================================================
+   REQUEST LOCATION
+========================================================= */
+
+function requestLocationPermission(){
+
+    hideError();
+
+    if(!navigator.geolocation){
+
+        showPermissionNotice();
+
+        showError(
+            "ഈ device/browser Location support ചെയ്യുന്നില്ല."
+        );
+
+        useFallbackLocation(
+            "Location support ലഭ്യമല്ല"
+        );
+
+        return;
+    }
+
+    /*
+       This call will trigger browser permission
+       if permission is still in "prompt" state.
+    */
+
+    requestCurrentLocation();
+}
+
+
+function requestCurrentLocation(){
+
+    if(!navigator.geolocation){
+
+        showPermissionNotice();
+
+        useFallbackLocation(
+            "Location support ലഭ്യമല്ല"
+        );
+
+        return;
+    }
+
+    locationName.textContent =
+        "Location കണ്ടെത്തുന്നു...";
+
+    locationStatus.textContent =
+        "Permission / GPS പരിശോധിക്കുന്നു...";
+
+    navigator.geolocation.getCurrentPosition(
+        handleLocationSuccess,
+        handleLocationError,
+        {
+            enableHighAccuracy:true,
+            timeout:15000,
+            maximumAge:300000
+        }
+    );
+}
+
+
+/* =========================================================
+   LOCATION SUCCESS
+========================================================= */
+
+function handleLocationSuccess(position){
+
+    hideError();
+    hidePermissionNotice();
+
+    const latitude =
+        position.coords.latitude;
+
+    const longitude =
+        position.coords.longitude;
+
+    const location = {
+
+        latitude:latitude,
+        longitude:longitude,
+
+        /*
+           We intentionally do not save
+           exact address or display name.
+        */
+
+        name:"Current Location",
+
+        source:"gps",
+
+        updatedAt:Date.now()
+    };
+
+    saveLocation(location);
+
+    locationName.textContent =
+        "Current Location";
+
+    locationStatus.textContent =
+        "✓ Location Permission അനുവദിച്ചിട്ടുണ്ട്";
+
+    loadPrayerTimes(location);
+
+    calculateQibla(location.latitude, location.longitude);
+}
+
+
+/* =========================================================
+   LOCATION ERROR
+========================================================= */
+
+function handleLocationError(error){
+
+    console.log("Geolocation error:", error);
+
+    if(error.code === 1){
+
+        /*
+           PERMISSION_DENIED
+        */
+
+        showPermissionNotice();
+
+        locationStatus.textContent =
+            "Location Permission അനുവദിച്ചിട്ടില്ല";
+
+        const saved =
+            getSavedLocation();
+
+        if(saved){
+
+            useSavedLocation(
+                saved,
+                "Previous location ഉപയോഗിക്കുന്നു"
+            );
+
+        }else{
+
+            useFallbackLocation(
+                "Kerala fallback ഉപയോഗിക്കുന്നു"
+            );
+        }
+
+        return;
+    }
+
+
+    if(error.code === 2){
+
+        /*
+           POSITION_UNAVAILABLE
+        */
+
+        const saved =
+            getSavedLocation();
+
+        if(saved){
+
+            useSavedLocation(
+                saved,
+                "GPS ലഭ്യമല്ല • Previous location ഉപയോഗിക്കുന്നു"
+            );
+
+        }else{
+
+            useFallbackLocation(
+                "GPS ലഭ്യമല്ല • Kerala fallback ഉപയോഗിക്കുന്നു"
+            );
+        }
+
+        return;
+    }
+
+
+    if(error.code === 3){
+
+        /*
+           TIMEOUT
+        */
+
+        const saved =
+            getSavedLocation();
+
+        if(saved){
+
+            useSavedLocation(
+                saved,
+                "GPS timeout • Previous location ഉപയോഗിക്കുന്നു"
+            );
+
+        }else{
+
+            useFallbackLocation(
+                "GPS timeout • Kerala fallback ഉപയോഗിക്കുന്നു"
+            );
+        }
+
+        return;
+    }
+
+
+    useFallbackLocation(
+        "Location ലഭ്യമല്ല • Kerala fallback ഉപയോഗിക്കുന്നു"
+    );
+}
+
+
+/* =========================================================
+   SAVED LOCATION
+========================================================= */
+
+function useSavedLocation(location, statusText){
+
+    locationName.textContent =
+        "Previous Location";
+
+    locationStatus.textContent =
+        statusText;
+
+    loadPrayerTimes(location);
+
+    calculateQibla(
+        location.latitude,
+        location.longitude
+    );
+}
+
+
+/* =========================================================
+   KERALA FALLBACK
+========================================================= */
+
+function useFallbackLocation(statusText){
+
+    locationName.textContent =
+        "Kerala";
+
+    locationStatus.textContent =
+        statusText;
+
+    loadPrayerTimes(KERALA_FALLBACK);
+
+    calculateQibla(
+        KERALA_FALLBACK.latitude,
+        KERALA_FALLBACK.longitude
+    );
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function getTodayDate(){
+
+    const now = new Date();
+
+    const day =
+        String(now.getDate()).padStart(2,"0");
+
+    const month =
+        String(now.getMonth()+1).padStart(2,"0");
+
+    const year =
+        now.getFullYear();
+
+    return `${day}-${month}-${year}`;
+}
+
+
+/* =========================================================
+   PRAYER API
+========================================================= */
+
+async function loadPrayerTimes(location){
+
+    prayerList.innerHTML = `
+        <div class="loading">
+            🕰️ നമസ്കാര സമയം ലഭിക്കുന്നു...
+        </div>
+    `;
+
+    const date =
+        getTodayDate();
+
+    const url =
+        `https://api.aladhan.com/v1/timings/${date}` +
+        `?latitude=${location.latitude}` +
+        `&longitude=${location.longitude}` +
+        `&method=1` +
+        `&school=0`;
+
+    try{
+
+        const response =
+            await fetch(url);
+
+        if(!response.ok){
+            throw new Error("API error");
+        }
+
+        const data =
+            await response.json();
+
+        if(
+            !data ||
+            !data.data ||
+            !data.data.timings
+        ){
+
+            throw new Error("Invalid prayer data");
+        }
+
+        /*
+           Cache today's data.
+        */
+
+        const cache = {
+
+            date:date,
+
+            location:location,
+
+            data:data.data,
+
+            savedAt:Date.now()
+        };
+
+        try{
+
+            localStorage.setItem(
+                PRAYER_CACHE_KEY,
+                JSON.stringify(cache)
+            );
+
+        }catch(error){
+
+            console.log("Prayer cache failed.");
+        }
+
+        displayPrayerTimes(data.data);
+
+    }catch(error){
+
+        console.log(error);
+
+        /*
+           Try today's cached prayer times.
+        */
+
+        if(loadPrayerCache(date)){
+
+            return;
+        }
+
+        prayerList.innerHTML = `
+            <div class="error">
+                ഇപ്പോൾ Prayer Times ലഭ്യമാകുന്നില്ല.
+                Internet connection പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.
+            </div>
+        `;
+    }
+}
+
+
+/* =========================================================
+   CACHE
+========================================================= */
+
+function loadPrayerCache(today){
+
+    try{
+
+        const raw =
+            localStorage.getItem(PRAYER_CACHE_KEY);
+
+        if(!raw){
+            return false;
+        }
+
+        const cache =
+            JSON.parse(raw);
+
+        if(!cache || cache.date !== today){
+            return false;
+        }
+
+        displayPrayerTimes(cache.data);
+
+        return true;
+
+    }catch(error){
+
+        return false;
+    }
+}
+
+
+/* =========================================================
+   DISPLAY PRAYER TIMES
+========================================================= */
+
+function displayPrayerTimes(data){
+
+    const prayers = [
+
+        {
+            key:"Fajr",
+            name:"Fajr",
+            ml:"ഫജർ",
+            icon:"🌙"
+        },
+
+        {
+            key:"Sunrise",
+            name:"Sunrise",
+            ml:"സൂര്യോദയം",
+            icon:"🌅"
+        },
+
+        {
+            key:"Dhuhr",
+            name:"Dhuhr",
+            ml:"ദുഹർ",
+            icon:"☀️"
+        },
+
+        {
+            key:"Asr",
+            name:"Asr",
+            ml:"അസർ",
+            icon:"🌤️"
+        },
+
+        {
+            key:"Maghrib",
+            name:"Maghrib",
+            ml:"മഗ്‌രിബ്",
+            icon:"🌇"
+        },
+
+        {
+            key:"Isha",
+            name:"Isha",
+            ml:"ഇശാ",
+            icon:"🌌"
+        }
+
+    ];
+
+
+    prayerList.innerHTML =
+        prayers.map(prayer => {
+
+            const time =
+                cleanTime(data.timings[prayer.key]);
+
+            const current =
+                isCurrentPrayer(
+                    prayer.key,
+                    data.timings
+                );
+
+            return `
+
+                <div class="prayer-row ${current ? "current" : ""}">
+
+                    <div class="prayer-icon">
+                        ${prayer.icon}
+                    </div>
+
+                    <div class="prayer-name">
+
+                        <strong>
+                            ${prayer.name}
+                        </strong>
+
+                        <span>
+                            ${prayer.ml}
+                        </span>
+
+                    </div>
+
+                    <div class="prayer-time">
+                        ${time}
+                    </div>
+
+                    ${
+                        current
+                        ?
+                        `<div class="current-badge">
+                            NOW
+                        </div>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    /*
+       Date information
+    */
+
+    if(data.date){
+
+        if(data.date.gregorian){
+
+            gregorianDate.textContent =
+                data.date.gregorian.date || "—";
+        }
+
+        if(data.date.hijri){
+
+            const h =
+                data.date.hijri;
+
+            hijriDate.textContent =
+                `${h.day} ${h.month.en} ${h.year} AH`;
+        }
+    }
+}
+
+
+/* =========================================================
+   TIME CLEANER
+========================================================= */
+
+function cleanTime(time){
+
+    if(!time){
+        return "--:--";
+    }
+
+    return time
+        .replace(/\s*\(.+\)/,"")
+        .trim();
+}
+
+
+/* =========================================================
+   CURRENT PRAYER
+========================================================= */
+
+function isCurrentPrayer(key, timings){
+
+    if(
+        key === "Sunrise"
+    ){
+        return false;
+    }
+
+    const now =
+        new Date();
+
+    const currentMinutes =
+        now.getHours() * 60 +
+        now.getMinutes();
+
+
+    const prayerKeys = [
+        "Fajr",
+        "Dhuhr",
+        "Asr",
+        "Maghrib",
+        "Isha"
+    ];
+
+
+    const times =
+        prayerKeys.map(k => {
+
+            const value =
+                cleanTime(timings[k]);
+
+            const parts =
+                value.split(":");
+
+            return {
+
+                key:k,
+
+                minutes:
+                    Number(parts[0]) * 60 +
+                    Number(parts[1])
+            };
+
+        });
+
+
+    let current = null;
+
+
+    for(let i=0; i<times.length; i++){
+
+        if(
+            currentMinutes >=
+            times[i].minutes
+        ){
+
+            current =
+                times[i].key;
+        }
+    }
+
+
+    /*
+       After Isha and before Fajr,
+       consider Isha as current night prayer.
+    */
+
+    if(!current){
+
+        current = "Isha";
+    }
+
+
+    return current === key;
+}
+
+
+/* =========================================================
+   QIBLA CALCULATION
+========================================================= */
+
+function calculateQibla(latitude, longitude){
+
+    const lat1 =
+        toRadians(latitude);
+
+    const lat2 =
+        toRadians(KAABA_LAT);
+
+    const deltaLon =
+        toRadians(
+            KAABA_LON - longitude
+        );
+
+
+    const y =
+        Math.sin(deltaLon) *
+        Math.cos(lat2);
+
+    const x =
+        Math.cos(lat1) *
+        Math.sin(lat2)
+        -
+        Math.sin(lat1) *
+        Math.cos(lat2) *
+        Math.cos(deltaLon);
+
+
+    let bearing =
+        Math.atan2(y,x);
+
+    bearing =
+        toDegrees(bearing);
+
+    bearing =
+        (bearing + 360) % 360;
+
+
+    qiblaDegree.textContent =
+        `${Math.round(bearing)}°`;
+
+
+    qiblaInfo.textContent =
+        `നിങ്ങളുടെ location-ൽ നിന്ന് കഅ്ബയിലേക്കുള്ള Qibla bearing: ${Math.round(bearing)}°`;
+
+
+    /*
+       Static compass arrow.
+       0° = North
+    */
+
+    compassArrow.style.transform =
+        `translate(-50%,-50%) rotate(${bearing}deg)`;
+
+}
+
+
+/* =========================================================
+   MATH
+========================================================= */
+
+function toRadians(degrees){
+
+    return degrees *
+        Math.PI / 180;
+}
+
+function toDegrees(radians){
+
+    return radians *
+        180 / Math.PI;
+}
+
+
+/* =========================================================
+   LIVE COMPASS
+========================================================= */
+
+let compassStarted = false;
+
+
+async function startCompass(){
+
+    /*
+       iPhone/iPad permission
+    */
+
+    if(
+        typeof DeviceOrientationEvent !==
+        "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission ===
+        "function"
+    ){
+
+        try{
+
+            const permission =
+                await DeviceOrientationEvent
+                    .requestPermission();
+
+            if(permission !== "granted"){
+
+                qiblaInfo.textContent =
+                    "Compass permission അനുവദിച്ചിട്ടില്ല.";
+
+                return;
+            }
+
+        }catch(error){
+
+            console.log(error);
+
+            return;
+        }
+    }
+
+
+    if(
+        typeof DeviceOrientationEvent ===
+        "undefined"
+    ){
+
+        qiblaInfo.textContent =
+            "ഈ device/browser live compass support ചെയ്യുന്നില്ല.";
+
+        return;
+    }
+
+
+    window.addEventListener(
+        "deviceorientation",
+        handleOrientation,
+        true
+    );
+
+
+    compassStarted = true;
+
+
+    document.getElementById(
+        "compassButton"
+    ).textContent =
+        "🧭 Live Compass Active";
+
+
+    qiblaInfo.textContent =
+        "Phone തിരിച്ച് കഅ്ബയുടെ ദിശയിലേക്ക് arrow align ചെയ്യുക.";
+}
+
+
+/* =========================================================
+   DEVICE ORIENTATION
+========================================================= */
+
+function handleOrientation(event){
+
+    let heading = null;
+
+
+    /*
+       iOS
+    */
+
+    if(
+        typeof event.webkitCompassHeading ===
+        "number"
+    ){
+
+        heading =
+            event.webkitCompassHeading;
+
+    }
+
+    /*
+       Android / standard
+    */
+
+    else if(
+        typeof event.alpha ===
+        "number"
+    ){
+
+        heading =
+            360 - event.alpha;
+    }
+
+
+    if(heading === null){
+        return;
+    }
+
+
+    /*
+       Get current saved location
+    */
+
+    const saved =
+        getSavedLocation();
+
+    let location =
+        saved || KERALA_FALLBACK;
+
+
+    const qibla =
+        calculateQiblaValue(
+            location.latitude,
+            location.longitude
+        );
+
+
+    /*
+       Arrow should point toward Qibla
+       relative to phone heading.
+    */
+
+    const relative =
+        qibla - heading;
+
+
+    compassArrow.style.transform =
+        `translate(-50%,-50%) rotate(${relative}deg)`;
+}
+
+
+/* =========================================================
+   QIBLA VALUE
+========================================================= */
+
+function calculateQiblaValue(
+    latitude,
+    longitude
+){
+
+    const lat1 =
+        toRadians(latitude);
+
+    const lat2 =
+        toRadians(KAABA_LAT);
+
+    const deltaLon =
+        toRadians(
+            KAABA_LON - longitude
+        );
+
+
+    const y =
+        Math.sin(deltaLon) *
+        Math.cos(lat2);
+
+    const x =
+        Math.cos(lat1) *
+        Math.sin(lat2)
+        -
+        Math.sin(lat1) *
+        Math.cos(lat2) *
+        Math.cos(deltaLon);
+
+
+    let bearing =
+        Math.atan2(y,x);
+
+    bearing =
+        toDegrees(bearing);
+
+    return (bearing + 360) % 360;
+}
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+async function init(){
+
+    /*
+       Check browser permission state.
+       If granted → automatically get current location.
+       If denied → show notice ONLY to that user.
+       If prompt → browser asks automatically.
+    */
+
+    await checkLocationPermission();
+
+}
+
+
+/* START */
+
+init();
+
+</script>
+
+</body>
+</html>
