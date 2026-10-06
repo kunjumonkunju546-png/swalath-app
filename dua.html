@@ -6,6 +6,10 @@
 
 <title>ദുആകൾ | Swalath</title>
 
+<!-- COMMON SHARE CARD -->
+<link rel="stylesheet" href="share-card.css">
+<script src="share-card.js" defer></script>
+
 <style>
 * {
     box-sizing: border-box;
@@ -125,6 +129,49 @@ body {
     padding-top: 12px;
 }
 
+/* SHARE CARD AREA */
+
+.dua-share-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.dua-share-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.dua-share-btn:active {
+    transform: scale(0.97);
+}
+
+.dua-share-btn.share {
+    background: #17483d;
+    color: white;
+}
+
+.dua-share-btn.save {
+    background: #f4e8c8;
+    color: #17483d;
+}
+
+.dua-share-status {
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+    margin-top: 7px;
+    min-height: 15px;
+}
+
 /* CATEGORY */
 
 .category {
@@ -184,6 +231,15 @@ body.dark .dua-title {
     color: #d4af37;
 }
 
+body.dark .dua-share-actions {
+    border-color: #333;
+}
+
+body.dark .dua-share-btn.save {
+    background: #302b20;
+    color: #e5c76b;
+}
+
 /* MOBILE */
 
 @media (max-width: 500px) {
@@ -194,6 +250,11 @@ body.dark .dua-title {
 
     .dua-card {
         padding: 18px 14px;
+    }
+
+    .dua-share-btn {
+        font-size: 11px;
+        padding: 10px 5px;
     }
 
 }
@@ -809,20 +870,26 @@ body.dark .dua-title {
 
 <script>
 
-/* HOME */
+/* =====================================================
+   HOME
+   ===================================================== */
 
 function goHome() {
     window.location.href = "index.html";
 }
 
 
-/* DARK MODE */
+/* =====================================================
+   DARK MODE
+   ===================================================== */
 
 function toggleDark() {
 
     document.body.classList.toggle("dark");
 
-    if (document.body.classList.contains("dark")) {
+    if (
+        document.body.classList.contains("dark")
+    ) {
 
         localStorage.setItem(
             "swalathDarkMode",
@@ -841,20 +908,314 @@ function toggleDark() {
 }
 
 
-/* LOAD DARK MODE */
+/* =====================================================
+   LOAD DARK MODE
+   ===================================================== */
 
-window.addEventListener("load", function() {
+window.addEventListener(
+    "load",
+    function () {
 
-    if (
-        localStorage.getItem("swalathDarkMode")
-        === "enabled"
-    ) {
+        if (
+            localStorage.getItem(
+                "swalathDarkMode"
+            ) === "enabled"
+        ) {
 
-        document.body.classList.add("dark");
+            document.body.classList.add(
+                "dark"
+            );
+
+        }
+
+        setupDuaShareCards();
 
     }
+);
 
-});
+
+/* =====================================================
+   DUA SHARE CARD SYSTEM
+   ===================================================== */
+
+function setupDuaShareCards() {
+
+    const cards =
+        document.querySelectorAll(
+            ".dua-card"
+        );
+
+
+    cards.forEach(
+        function (card, index) {
+
+            const titleElement =
+                card.querySelector(
+                    ".dua-title"
+                );
+
+            const arabicElement =
+                card.querySelector(
+                    ".arabic"
+                );
+
+            const malayalamElement =
+                card.querySelector(
+                    ".malayalam"
+                );
+
+
+            if (
+                !titleElement ||
+                !arabicElement ||
+                !malayalamElement
+            ) {
+
+                return;
+
+            }
+
+
+            /* Avoid duplicate buttons */
+
+            if (
+                card.querySelector(
+                    ".dua-share-actions"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "dua-share-actions";
+
+
+            const shareButton =
+                document.createElement(
+                    "button"
+                );
+
+            shareButton.type =
+                "button";
+
+            shareButton.className =
+                "dua-share-btn share";
+
+            shareButton.innerHTML =
+                "📤 Share Card";
+
+
+            const saveButton =
+                document.createElement(
+                    "button"
+                );
+
+            saveButton.type =
+                "button";
+
+            saveButton.className =
+                "dua-share-btn save";
+
+            saveButton.innerHTML =
+                "🖼️ Save Image";
+
+
+            const status =
+                document.createElement(
+                    "div"
+                );
+
+            status.className =
+                "dua-share-status";
+
+
+            actions.appendChild(
+                shareButton
+            );
+
+            actions.appendChild(
+                saveButton
+            );
+
+
+            card.appendChild(
+                actions
+            );
+
+            card.appendChild(
+                status
+            );
+
+
+            /* ---------------------------------------------
+               Get existing content only
+               --------------------------------------------- */
+
+            function getDuaData() {
+
+                return {
+
+                    title:
+                        titleElement
+                            .textContent
+                            .trim(),
+
+                    arabic:
+                        arabicElement
+                            .textContent
+                            .trim(),
+
+                    pronunciation:
+                        malayalamElement
+                            .textContent
+                            .trim(),
+
+                    meaning:
+                        "",
+
+                    type:
+                        "Dua",
+
+                    includeMeaning:
+                        false
+
+                };
+
+            }
+
+
+            /* ---------------------------------------------
+               SHARE
+               --------------------------------------------- */
+
+            shareButton.addEventListener(
+                "click",
+                async function () {
+
+                    status.textContent =
+                        "Card തയ്യാറാക്കുന്നു...";
+
+
+                    try {
+
+                        if (
+                            typeof window
+                                .shareIslamicCard
+                            !== "function"
+                        ) {
+
+                            status.textContent =
+                                "Share Card system load ആയിട്ടില്ല.";
+
+                            return;
+
+                        }
+
+
+                        await window
+                            .shareIslamicCard(
+                                getDuaData()
+                            );
+
+
+                        status.textContent =
+                            "";
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Dua Share Card Error:",
+                            error
+                        );
+
+
+                        status.textContent =
+                            "Share Card തയ്യാറാക്കാൻ കഴിഞ്ഞില്ല.";
+
+                    }
+
+                }
+            );
+
+
+            /* ---------------------------------------------
+               SAVE IMAGE
+               --------------------------------------------- */
+
+            saveButton.addEventListener(
+                "click",
+                async function () {
+
+                    status.textContent =
+                        "Image തയ്യാറാക്കുന്നു...";
+
+
+                    try {
+
+                        if (
+                            typeof window
+                                .saveIslamicCard
+                            !== "function"
+                        ) {
+
+                            status.textContent =
+                                "Share Card system load ആയിട്ടില്ല.";
+
+                            return;
+
+                        }
+
+
+                        await window
+                            .saveIslamicCard(
+                                getDuaData()
+                            );
+
+
+                        status.textContent =
+                            "Image save ചെയ്തു ✓";
+
+
+                        setTimeout(
+                            function () {
+
+                                status.textContent =
+                                    "";
+
+                            },
+                            2000
+                        );
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Dua Save Card Error:",
+                            error
+                        );
+
+
+                        status.textContent =
+                            "Image save ചെയ്യാൻ കഴിഞ്ഞില്ല.";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
 
 </script>
 
