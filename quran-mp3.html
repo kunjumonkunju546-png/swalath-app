@@ -63,6 +63,11 @@ button{
     font-size:15px;
 }
 
+button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
 .back-btn{
     background:#222;
     color:white;
@@ -297,6 +302,7 @@ body.dark .surah-card{
 
     <button
         class="download-btn"
+        id="fullDownloadBtn"
         onclick="downloadFullQuran()">
 
         ⬇️ Download Full Quran
@@ -440,17 +446,16 @@ body.dark .surah-card{
 
 
 /* =====================================
-   AUDIO SOURCE
+   AUDIO CONFIGURATION
 ===================================== */
 
 const AUDIO_BASE =
 "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/";
 
 const CACHE_NAME =
-"swalath-quran-mp3-128kbps-v1";
+"swalath-quran-mp3-128kbps-v2";
 
 const TOTAL_SURAHS = 114;
-
 
 
 /* =====================================
@@ -586,7 +591,6 @@ surahs.map(x => ({
 }));
 
 
-
 /* =====================================
    VARIABLES
 ===================================== */
@@ -609,6 +613,9 @@ document.getElementById("progressBar");
 const downloadStatus =
 document.getElementById("downloadStatus");
 
+const fullDownloadBtn =
+document.getElementById("fullDownloadBtn");
+
 
 let currentSurah =
 parseInt(
@@ -620,6 +627,16 @@ parseInt(
 
 let fullQuranMode = false;
 
+
+/*
+ * Current Blob URL.
+ *
+ * Only the currently playing
+ * cached audio is converted to
+ * a Blob URL.
+ */
+
+let currentBlobUrl = null;
 
 
 /* =====================================
@@ -634,6 +651,50 @@ function getAudioUrl(number){
 
 }
 
+
+/* =====================================
+   GET CACHE
+===================================== */
+
+async function getQuranCache(){
+
+    return await caches.open(
+        CACHE_NAME
+    );
+
+}
+
+
+/* =====================================
+   CHECK IF SURAH IS DOWNLOADED
+===================================== */
+
+async function isSurahCached(number){
+
+    try{
+
+        const cache =
+        await getQuranCache();
+
+        const response =
+        await cache.match(
+            getAudioUrl(number)
+        );
+
+        return !!response;
+
+    }catch(error){
+
+        console.log(
+            "Cache check error:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
 
 
 /* =====================================
@@ -707,6 +768,88 @@ function renderSurahs(
 }
 
 
+/* =====================================
+   LOAD AUDIO
+   FROM CACHE OR INTERNET
+===================================== */
+
+async function loadAudioSource(number){
+
+    const url =
+    getAudioUrl(number);
+
+
+    /*
+     * First check offline cache.
+     */
+
+    try{
+
+        const cache =
+        await getQuranCache();
+
+        const cachedResponse =
+        await cache.match(url);
+
+
+        if(cachedResponse){
+
+            const blob =
+            await cachedResponse.blob();
+
+
+            if(blob.size > 0){
+
+                if(currentBlobUrl){
+
+                    URL.revokeObjectURL(
+                        currentBlobUrl
+                    );
+
+                }
+
+
+                currentBlobUrl =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+                audio.src =
+                currentBlobUrl;
+
+                audio.load();
+
+
+                return true;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Cache playback error:",
+            error
+        );
+
+    }
+
+
+    /*
+     * If not cached, use the
+     * original online URL.
+     */
+
+    audio.src = url;
+
+    audio.load();
+
+    return false;
+
+}
+
 
 /* =====================================
    PLAY SURAH
@@ -729,7 +872,11 @@ async function playSurah(number){
     );
 
 
-    if(!surah) return;
+    if(!surah){
+
+        return;
+
+    }
 
 
     audioError.style.display =
@@ -740,28 +887,18 @@ async function playSurah(number){
     `▶ ${surah.n}. ${surah.en} — ${surah.ar}`;
 
 
-    const url =
-    getAudioUrl(number);
-
-
     /*
-     * IMPORTANT
-     *
-     * We DO NOT convert the cached
-     * audio into a Blob URL here.
-     *
-     * The Service Worker intercepts
-     * the original URL and returns
-     * the offline cached audio.
+     * Save whether this is a full
+     * Quran session before changing
+     * the source.
      */
 
-    audio.src = url;
-
-    audio.load();
+    const continueFullQuran =
+    fullQuranMode;
 
 
     /*
-     * RESTORE SAVED POSITION
+     * Remember current saved position.
      */
 
     const savedPosition =
@@ -773,38 +910,70 @@ async function playSurah(number){
     );
 
 
-    if(
-        savedPosition &&
-        savedPosition > 0
-    ){
+    try{
 
-        audio.addEventListener(
-            "loadedmetadata",
-            function restorePosition(){
+        await loadAudioSource(
+            number
+        );
+
+
+        /*
+         * Restore previous position
+         * after metadata becomes available.
+         */
+
+        if(
+            savedPosition &&
+            savedPosition > 0
+        ){
+
+            const restore =
+            function(){
 
                 if(
+                    isFinite(audio.duration) &&
                     savedPosition <
                     audio.duration
                 ){
 
-                    audio.currentTime =
-                    savedPosition;
+                    try{
+
+                        audio.currentTime =
+                        savedPosition;
+
+                    }catch(e){}
 
                 }
 
 
                 audio.removeEventListener(
                     "loadedmetadata",
-                    restorePosition
+                    restore
                 );
 
-            }
+            };
+
+
+            audio.addEventListener(
+                "loadedmetadata",
+                restore
+            );
+
+        }
+
+
+        /*
+         * Update Media Session.
+         */
+
+        updateMediaSession(
+            surah
         );
 
-    }
 
-
-    try{
+        /*
+         * Start playback.
+         */
 
         await audio.play();
 
@@ -813,9 +982,14 @@ async function playSurah(number){
         "⏸ Pause";
 
 
-        updateMediaSession(
-            surah
-        );
+        /*
+         * Make sure full Quran mode
+         * remains active.
+         */
+
+        fullQuranMode =
+        continueFullQuran;
+
 
     }catch(error){
 
@@ -832,10 +1006,24 @@ async function playSurah(number){
         audioError.style.display =
         "block";
 
+
+        if(
+            navigator.onLine === false
+        ){
+
+            audioError.innerHTML =
+            "This Surah is not downloaded for offline listening.";
+
+        }else{
+
+            audioError.innerHTML =
+            "Audio player error. Please try again.";
+
+        }
+
     }
 
 }
-
 
 
 /* =====================================
@@ -844,18 +1032,18 @@ async function playSurah(number){
 
 async function togglePlay(){
 
-    if(!audio.src){
-
-        await playSurah(
-            currentSurah
-        );
-
-        return;
-
-    }
-
-
     try{
+
+        if(!audio.src){
+
+            await playSurah(
+                currentSurah
+            );
+
+            return;
+
+        }
+
 
         if(audio.paused){
 
@@ -875,7 +1063,10 @@ async function togglePlay(){
 
     }catch(error){
 
-        console.log(error);
+        console.log(
+            "Play/Pause error:",
+            error
+        );
 
         audioError.style.display =
         "block";
@@ -883,7 +1074,6 @@ async function togglePlay(){
     }
 
 }
-
 
 
 /* =====================================
@@ -906,7 +1096,6 @@ function nextSurah(){
 }
 
 
-
 /* =====================================
    PREVIOUS
 ===================================== */
@@ -927,7 +1116,6 @@ function previousSurah(){
 }
 
 
-
 /* =====================================
    FULL QURAN
 ===================================== */
@@ -944,56 +1132,69 @@ async function playFullQuran(){
 }
 
 
-
 /* =====================================
    AUTO NEXT
 ===================================== */
 
 audio.addEventListener(
     "ended",
-    function(){
+    async function(){
 
-        if(fullQuranMode){
+        /*
+         * Save end position.
+         */
+
+        localStorage.setItem(
+            "quranPosition_" +
+            currentSurah,
+            "0"
+        );
+
+
+        if(
+            fullQuranMode &&
+            currentSurah <
+            TOTAL_SURAHS
+        ){
+
+            const next =
+            currentSurah + 1;
+
+
+            /*
+             * Keep full Quran mode ON.
+             */
+
+            fullQuranMode = true;
+
+
+            await playSurah(
+                next
+            );
+
+        }else{
+
+            fullQuranMode = false;
+
+
+            playPauseBtn.innerHTML =
+            "▶ Play";
+
 
             if(
-                currentSurah <
+                currentSurah >=
                 TOTAL_SURAHS
             ){
-
-                playSurah(
-                    currentSurah + 1
-                ).then(() => {
-
-                    fullQuranMode =
-                    true;
-
-                });
-
-            }else{
-
-                fullQuranMode =
-                false;
-
 
                 nowPlaying.innerHTML =
                 "Quran completed";
 
-
-                playPauseBtn.innerHTML =
-                "▶ Play";
-
             }
-
-        }else{
-
-            playPauseBtn.innerHTML =
-            "▶ Play";
 
         }
 
     }
 );
-
 
 
 /* =====================================
@@ -1050,7 +1251,6 @@ audio.addEventListener(
 );
 
 
-
 /* =====================================
    SAVE POSITION
 ===================================== */
@@ -1074,7 +1274,6 @@ audio.addEventListener(
 
     }
 );
-
 
 
 /* =====================================
@@ -1121,7 +1320,6 @@ function searchSurahs(){
 }
 
 
-
 /* =====================================
    DOWNLOAD ONE SURAH
 ===================================== */
@@ -1133,16 +1331,18 @@ async function downloadSurah(number){
 
 
     downloadStatus.innerHTML =
-    `Preparing Surah ${number}...`;
+    `Checking Surah ${number}...`;
 
 
     try{
 
         const cache =
-        await caches.open(
-            CACHE_NAME
-        );
+        await getQuranCache();
 
+
+        /*
+         * Check existing cache.
+         */
 
         const existing =
         await cache.match(url);
@@ -1158,104 +1358,49 @@ async function downloadSurah(number){
         }
 
 
-        if(
-            !navigator.serviceWorker ||
-            !navigator.serviceWorker.controller
-        ){
-
-            throw new Error(
-                "Service Worker is not active"
-            );
-
-        }
-
+        /*
+         * Download directly.
+         *
+         * This no longer depends on
+         * Service Worker postMessage.
+         */
 
         downloadStatus.innerHTML =
         `Downloading Surah ${number}...`;
 
 
-        const messageChannel =
-        new MessageChannel();
-
-
-        const result =
-        new Promise(
-            (resolve,reject) => {
-
-                const timeout =
-                setTimeout(
-                    () => {
-
-                        reject(
-                            new Error(
-                                "Service Worker timeout"
-                            )
-                        );
-
-                    },
-                    60000
-                );
-
-
-                messageChannel
-                .port1
-                .onmessage =
-                function(event){
-
-                    clearTimeout(
-                        timeout
-                    );
-
-
-                    resolve(
-                        event.data
-                    );
-
-                };
-
+        const response =
+        await fetch(
+            url,
+            {
+                method:"GET",
+                cache:"no-store"
             }
         );
 
 
-        navigator
-        .serviceWorker
-        .controller
-        .postMessage(
-
-            {
-                type:
-                "CACHE_QURAN",
-
-                url:url
-            },
-
-            [
-                messageChannel.port2
-            ]
-
-        );
-
-
-        const response =
-        await result;
-
-
-        if(
-            response &&
-            response.success
-        ){
-
-            downloadStatus.innerHTML =
-            `Surah ${number} saved offline ✓`;
-
-        }else{
+        if(!response.ok){
 
             throw new Error(
-                response?.error ||
-                "Download failed"
+                "HTTP " +
+                response.status
             );
 
         }
+
+
+        /*
+         * Store the response in Cache API.
+         */
+
+        await cache.put(
+            url,
+            response.clone()
+        );
+
+
+        downloadStatus.innerHTML =
+        `Surah ${number} saved offline ✓`;
 
 
     }catch(error){
@@ -1269,10 +1414,139 @@ async function downloadSurah(number){
         downloadStatus.innerHTML =
         `Could not download Surah ${number}`;
 
+
+        /*
+         * If the normal fetch fails,
+         * try the existing Service Worker
+         * as a backup.
+         */
+
+        try{
+
+            await serviceWorkerDownload(
+                url,
+                number
+            );
+
+        }catch(swError){
+
+            console.log(
+                "Service Worker backup failed:",
+                swError
+            );
+
+        }
+
     }
 
 }
 
+
+/* =====================================
+   SERVICE WORKER BACKUP DOWNLOAD
+===================================== */
+
+function serviceWorkerDownload(
+    url,
+    number
+){
+
+    return new Promise(
+        (resolve,reject) => {
+
+            if(
+                !navigator.serviceWorker ||
+                !navigator.serviceWorker.controller
+            ){
+
+                reject(
+                    new Error(
+                        "Service Worker unavailable"
+                    )
+                );
+
+                return;
+
+            }
+
+
+            const messageChannel =
+            new MessageChannel();
+
+
+            const timeout =
+            setTimeout(
+                () => {
+
+                    reject(
+                        new Error(
+                            "Service Worker timeout"
+                        )
+                    );
+
+                },
+                60000
+            );
+
+
+            messageChannel
+            .port1
+            .onmessage =
+            function(event){
+
+                clearTimeout(
+                    timeout
+                );
+
+
+                if(
+                    event.data &&
+                    event.data.success
+                ){
+
+                    downloadStatus.innerHTML =
+                    `Surah ${number} saved offline ✓`;
+
+                    resolve(
+                        event.data
+                    );
+
+                }else{
+
+                    reject(
+                        new Error(
+                            event.data?.error ||
+                            "Service Worker download failed"
+                        )
+                    );
+
+                }
+
+            };
+
+
+            navigator
+            .serviceWorker
+            .controller
+            .postMessage(
+
+                {
+                    type:
+                    "CACHE_QURAN",
+
+                    url:url
+                },
+
+                [
+                    messageChannel.port2
+                ]
+
+            );
+
+        }
+    );
+
+}
 
 
 /* =====================================
@@ -1294,6 +1568,10 @@ async function downloadFullQuran(){
     }
 
 
+    fullDownloadBtn.disabled =
+    true;
+
+
     progressBar.style.width =
     "0%";
 
@@ -1302,168 +1580,176 @@ async function downloadFullQuran(){
     0;
 
 
-    for(
-        let i = 1;
-        i <= TOTAL_SURAHS;
-        i++
-    ){
-
-        downloadStatus.innerHTML =
-        `Downloading ${i} / 114...`;
+    let failed =
+    0;
 
 
-        try{
+    try{
+
+        const cache =
+        await getQuranCache();
+
+
+        for(
+            let i = 1;
+            i <= TOTAL_SURAHS;
+            i++
+        ){
 
             const url =
             getAudioUrl(i);
 
 
-            const cache =
-            await caches.open(
-                CACHE_NAME
-            );
+            downloadStatus.innerHTML =
+            `Checking ${i} / 114...`;
 
 
-            const existing =
-            await cache.match(url);
+            try{
+
+                /*
+                 * Check if already downloaded.
+                 */
+
+                const existing =
+                await cache.match(url);
 
 
-            if(existing){
+                if(existing){
 
-                successful++;
+                    successful++;
 
-            }else{
+                }else{
 
-                if(
-                    !navigator.serviceWorker ||
-                    !navigator.serviceWorker.controller
-                ){
+                    downloadStatus.innerHTML =
+                    `Downloading ${i} / 114...`;
 
-                    throw new Error(
-                        "Service Worker not active"
+
+                    /*
+                     * Direct download.
+                     */
+
+                    const response =
+                    await fetch(
+                        url,
+                        {
+                            method:"GET",
+                            cache:"no-store"
+                        }
                     );
 
-                }
 
+                    if(!response.ok){
 
-                const messageChannel =
-                new MessageChannel();
-
-
-                const result =
-                new Promise(
-                    (resolve,reject) => {
-
-                        const timeout =
-                        setTimeout(
-                            () => {
-
-                                reject(
-                                    new Error(
-                                        "Timeout"
-                                    )
-                                );
-
-                            },
-                            60000
+                        throw new Error(
+                            "HTTP " +
+                            response.status
                         );
 
-
-                        messageChannel
-                        .port1
-                        .onmessage =
-                        function(event){
-
-                            clearTimeout(
-                                timeout
-                            );
-
-
-                            resolve(
-                                event.data
-                            );
-
-                        };
-
                     }
-                );
 
 
-                navigator
-                .serviceWorker
-                .controller
-                .postMessage(
+                    await cache.put(
+                        url,
+                        response.clone()
+                    );
 
-                    {
-                        type:
-                        "CACHE_QURAN",
-
-                        url:url
-                    },
-
-                    [
-                        messageChannel.port2
-                    ]
-
-                );
-
-
-                const response =
-                await result;
-
-
-                if(
-                    response &&
-                    response.success
-                ){
 
                     successful++;
 
                 }
 
+            }catch(error){
+
+                console.log(
+                    "Direct download failed:",
+                    i,
+                    error
+                );
+
+
+                /*
+                 * Try Service Worker as backup.
+                 */
+
+                try{
+
+                    await serviceWorkerDownload(
+                        url,
+                        i
+                    );
+
+
+                    successful++;
+
+                }catch(swError){
+
+                    console.log(
+                        "Service Worker failed:",
+                        i,
+                        swError
+                    );
+
+
+                    failed++;
+
+                }
+
             }
 
-        }catch(error){
 
-            console.log(
-                "Failed Surah:",
-                i,
-                error
-            );
+            const percent =
+            (
+                i /
+                TOTAL_SURAHS
+            ) * 100;
+
+
+            progressBar.style.width =
+            percent + "%";
 
         }
 
 
-        const percent =
-        (
-            i /
+        if(
+            successful ===
             TOTAL_SURAHS
-        ) * 100;
+        ){
+
+            downloadStatus.innerHTML =
+            "Full Quran downloaded ✓";
+
+        }else{
+
+            downloadStatus.innerHTML =
+            `${successful} / 114 Surahs saved offline`;
+
+            if(failed > 0){
+
+                downloadStatus.innerHTML +=
+                ` • ${failed} failed`;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Full Quran download error:",
+            error
+        );
 
 
-        progressBar.style.width =
-        percent + "%";
+        downloadStatus.innerHTML =
+        "Download process failed.";
 
     }
 
 
-    if(
-        successful ===
-        TOTAL_SURAHS
-    ){
-
-        downloadStatus.innerHTML =
-        "Full Quran downloaded ✓";
-
-    }else{
-
-        downloadStatus.innerHTML =
-        `${successful} / 114 Surahs saved offline`;
-
-    }
+    fullDownloadBtn.disabled =
+    false;
 
 }
-
 
 
 /* =====================================
@@ -1500,7 +1786,6 @@ if(
 }
 
 
-
 /* =====================================
    BACK BUTTON
 ===================================== */
@@ -1525,7 +1810,6 @@ function goBack(){
 }
 
 
-
 /* =====================================
    MEDIA SESSION
 ===================================== */
@@ -1538,54 +1822,103 @@ function updateMediaSession(
         "mediaSession" in navigator
     ){
 
-        navigator.mediaSession.metadata =
-        new MediaMetadata({
+        try{
 
-            title:
-            `${surah.en} — ${surah.ar}`,
+            navigator.mediaSession.metadata =
+            new MediaMetadata({
 
-            artist:
-            "Mishary Rashid Alafasy",
+                title:
+                `${surah.en} — ${surah.ar}`,
 
-            album:
-            "Quran MP3 • Swalath"
+                artist:
+                "Mishary Rashid Alafasy",
 
-        });
+                album:
+                "Quran MP3 • Swalath"
+
+            });
+
+        }catch(error){
+
+            console.log(
+                "MediaSession metadata error:",
+                error
+            );
+
+        }
 
     }
 
 }
 
 
+/* =====================================
+   MEDIA SESSION CONTROLS
+===================================== */
+
 if(
     "mediaSession" in navigator
 ){
 
-    navigator.mediaSession.setActionHandler(
-        "play",
-        () => audio.play()
-    );
+    try{
+
+        navigator.mediaSession.setActionHandler(
+            "play",
+            async () => {
+
+                try{
+
+                    await audio.play();
+
+                }catch(e){
+
+                    console.log(e);
+
+                }
+
+            }
+        );
 
 
-    navigator.mediaSession.setActionHandler(
-        "pause",
-        () => audio.pause()
-    );
+        navigator.mediaSession.setActionHandler(
+            "pause",
+            () => {
+
+                audio.pause();
+
+            }
+        );
 
 
-    navigator.mediaSession.setActionHandler(
-        "previoustrack",
-        () => previousSurah()
-    );
+        navigator.mediaSession.setActionHandler(
+            "previoustrack",
+            () => {
+
+                previousSurah();
+
+            }
+        );
 
 
-    navigator.mediaSession.setActionHandler(
-        "nexttrack",
-        () => nextSurah()
-    );
+        navigator.mediaSession.setActionHandler(
+            "nexttrack",
+            () => {
+
+                nextSurah();
+
+            }
+        );
+
+    }catch(error){
+
+        console.log(
+            "MediaSession setup error:",
+            error
+        );
+
+    }
 
 }
-
 
 
 /* =====================================
@@ -1593,6 +1926,45 @@ if(
 ===================================== */
 
 renderSurahs();
+
+
+/*
+ * Show the last selected Surah
+ * without automatically playing it.
+ */
+
+const initialSurah =
+surahList.find(
+    s => s.n === currentSurah
+);
+
+
+if(initialSurah){
+
+    nowPlaying.innerHTML =
+    `Select a Surah • ${initialSurah.n}. ${initialSurah.en}`;
+
+}
+
+
+/* =====================================
+   CLEANUP OLD BLOB URL
+===================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(currentBlobUrl){
+
+            URL.revokeObjectURL(
+                currentBlobUrl
+            );
+
+        }
+
+    }
+);
 
 </script>
 
