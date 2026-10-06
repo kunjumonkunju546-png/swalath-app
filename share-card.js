@@ -1,5 +1,5 @@
 /* =========================================================
-   SWALATH - COMMON SHARE CARD
+   NAZYAN TRAVELS — SWALATH SHARE CARD
    Offline image generation + native sharing
    ========================================================= */
 
@@ -10,24 +10,50 @@
     const CARD_WIDTH = 1080;
     const PADDING = 75;
 
+
+    /* =====================================================
+       FONT READY
+       ===================================================== */
+
     function loadFont() {
-        return document.fonts.ready;
+
+        if (document.fonts && document.fonts.ready) {
+            return document.fonts.ready;
+        }
+
+        return Promise.resolve();
+
     }
+
+
+    /* =====================================================
+       TEXT WRAPPING
+       ===================================================== */
 
     function wrapText(ctx, text, maxWidth) {
 
-        const words = String(text || "").split(/\s+/);
+        const words =
+            String(text || "").split(/\s+/);
+
         const lines = [];
+
         let line = "";
 
         words.forEach(function (word) {
 
             const test =
-                line ? line + " " + word : word;
+                line
+                    ? line + " " + word
+                    : word;
 
-            if (ctx.measureText(test).width > maxWidth && line) {
+            if (
+                ctx.measureText(test).width >
+                    maxWidth &&
+                line
+            ) {
 
                 lines.push(line);
+
                 line = word;
 
             } else {
@@ -43,6 +69,7 @@
         }
 
         return lines;
+
     }
 
 
@@ -56,8 +83,11 @@
         paragraphs.forEach(function (paragraph) {
 
             if (!paragraph.trim()) {
+
                 lines.push("");
+
                 return;
+
             }
 
             const words =
@@ -68,15 +98,18 @@
             words.forEach(function (word) {
 
                 const test =
-                    line ? line + " " + word : word;
+                    line
+                        ? line + " " + word
+                        : word;
 
                 if (
                     ctx.measureText(test).width >
-                    maxWidth &&
+                        maxWidth &&
                     line
                 ) {
 
                     lines.push(line);
+
                     line = word;
 
                 } else {
@@ -94,8 +127,13 @@
         });
 
         return lines;
+
     }
 
+
+    /* =====================================================
+       ROUND RECTANGLE
+       ===================================================== */
 
     function roundRect(
         ctx,
@@ -108,7 +146,10 @@
 
         ctx.beginPath();
 
-        ctx.moveTo(x + radius, y);
+        ctx.moveTo(
+            x + radius,
+            y
+        );
 
         ctx.lineTo(
             x + width - radius,
@@ -163,7 +204,15 @@
     }
 
 
-    function drawBackground(ctx, width, height) {
+    /* =====================================================
+       BACKGROUND
+       ===================================================== */
+
+    function drawBackground(
+        ctx,
+        width,
+        height
+    ) {
 
         const gradient =
             ctx.createLinearGradient(
@@ -192,13 +241,17 @@
             height
         );
 
-        /* decorative circles */
+
+        /* Decorative circles */
 
         ctx.globalAlpha = 0.08;
 
-        ctx.fillStyle = "#17483d";
+        ctx.fillStyle =
+            "#17483d";
+
 
         ctx.beginPath();
+
         ctx.arc(
             width - 80,
             80,
@@ -206,9 +259,12 @@
             0,
             Math.PI * 2
         );
+
         ctx.fill();
 
+
         ctx.beginPath();
+
         ctx.arc(
             60,
             height - 60,
@@ -216,34 +272,48 @@
             0,
             Math.PI * 2
         );
+
         ctx.fill();
+
 
         ctx.globalAlpha = 1;
 
     }
 
 
+    /* =====================================================
+       CREATE SHARE CARD
+       ===================================================== */
+
     function createCard(options) {
+
+        options = options || {};
 
         return loadFont().then(function () {
 
             const title =
-                options.title || "സ്വലാത്ത്";
+                options.title ||
+                "സ്വലാത്ത്";
 
             const arabic =
-                options.arabic || "";
+                options.arabic ||
+                "";
 
             const pronunciation =
-                options.pronunciation || "";
+                options.pronunciation ||
+                "";
 
             const meaning =
-                options.meaning || "";
+                options.meaning ||
+                "";
 
             const type =
-                options.type || "Islamic Reminder";
+                options.type ||
+                "Islamic Reminder";
 
             const includeMeaning =
                 options.includeMeaning !== false;
+
 
             const canvas =
                 document.createElement("canvas");
@@ -251,15 +321,18 @@
             const ctx =
                 canvas.getContext("2d");
 
-            const contentWidth =
-                CARD_WIDTH - PADDING * 2;
 
-            /*
-               First calculate required height.
-            */
+            const contentWidth =
+                CARD_WIDTH -
+                PADDING * 2;
+
+
+            /* =================================================
+               CALCULATE TEXT LINES
+               ================================================= */
 
             ctx.font =
-                'bold 44px "Amiri", "Traditional Arabic", serif';
+                'bold 44px "Noto Sans Malayalam", "Amiri", serif';
 
             const titleLines =
                 wrapText(
@@ -267,6 +340,7 @@
                     title,
                     contentWidth
                 );
+
 
             ctx.font =
                 '48px "Amiri", "Traditional Arabic", serif';
@@ -278,8 +352,9 @@
                     contentWidth
                 );
 
+
             ctx.font =
-                '32px Arial, "Noto Sans Malayalam", sans-serif';
+                '32px "Noto Sans Malayalam", Arial, sans-serif';
 
             const pronunciationLines =
                 wrapText(
@@ -288,6 +363,7 @@
                     contentWidth
                 );
 
+
             const meaningLines =
                 wrapText(
                     ctx,
@@ -295,12 +371,21 @@
                     contentWidth
                 );
 
+
+            /* =================================================
+               CALCULATE CARD HEIGHT
+               ================================================= */
+
             let height = 300;
 
+
             height +=
-                titleLines.length * 58;
+                titleLines.length *
+                58;
+
 
             height += 50;
+
 
             height +=
                 Math.max(
@@ -308,14 +393,17 @@
                     1
                 ) * 72;
 
+
             if (pronunciation) {
 
                 height += 55;
 
                 height +=
-                    pronunciationLines.length * 45;
+                    pronunciationLines.length *
+                    45;
 
             }
+
 
             if (
                 includeMeaning &&
@@ -325,11 +413,14 @@
                 height += 55;
 
                 height +=
-                    meaningLines.length * 45;
+                    meaningLines.length *
+                    45;
 
             }
 
+
             height += 180;
+
 
             canvas.width =
                 CARD_WIDTH;
@@ -340,9 +431,10 @@
                     height
                 );
 
-            /*
-               Background
-            */
+
+            /* =================================================
+               BACKGROUND
+               ================================================= */
 
             drawBackground(
                 ctx,
@@ -351,16 +443,20 @@
             );
 
 
-            /*
-               Main card
-            */
+            /* =================================================
+               MAIN CARD
+               ================================================= */
 
             const cardX = 35;
+
             const cardY = 35;
+
             const cardW =
                 canvas.width - 70;
+
             const cardH =
                 canvas.height - 70;
+
 
             ctx.save();
 
@@ -371,6 +467,7 @@
 
             ctx.shadowOffsetY = 10;
 
+
             roundRect(
                 ctx,
                 cardX,
@@ -380,10 +477,12 @@
                 36
             );
 
+
             ctx.fillStyle =
                 "#fffdf8";
 
             ctx.fill();
+
 
             ctx.restore();
 
@@ -391,19 +490,24 @@
             let y = 105;
 
 
-            /*
-               Small brand
-            */
+            /* =================================================
+               BRAND
+               ================================================= */
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
 
-            ctx.direction = "ltr";
+            ctx.direction =
+                "ltr";
+
 
             ctx.font =
-                'bold 25px Arial';
+                "bold 25px Arial";
+
 
             ctx.fillStyle =
                 "#b08a3e";
+
 
             ctx.fillText(
                 "SWALATH",
@@ -411,18 +515,21 @@
                 y
             );
 
+
             y += 75;
 
 
-            /*
-               Type
-            */
+            /* =================================================
+               TYPE
+               ================================================= */
 
             ctx.font =
                 '24px Arial, "Noto Sans Malayalam", sans-serif';
 
+
             ctx.fillStyle =
                 "#8b8170";
+
 
             ctx.fillText(
                 type,
@@ -430,18 +537,21 @@
                 y
             );
 
+
             y += 55;
 
 
-            /*
-               Title
-            */
+            /* =================================================
+               TITLE
+               ================================================= */
 
             ctx.font =
                 'bold 44px "Noto Sans Malayalam", "Amiri", serif';
 
+
             ctx.fillStyle =
                 "#17483d";
+
 
             titleLines.forEach(function (line) {
 
@@ -459,14 +569,15 @@
             y += 35;
 
 
-            /*
-               Gold divider
-            */
+            /* =================================================
+               GOLD DIVIDER
+               ================================================= */
 
             ctx.strokeStyle =
                 "#c7a45b";
 
             ctx.lineWidth = 3;
+
 
             ctx.beginPath();
 
@@ -482,22 +593,28 @@
 
             ctx.stroke();
 
+
             y += 70;
 
 
-            /*
-               Arabic
-            */
+            /* =================================================
+               ARABIC
+               ================================================= */
 
-            ctx.direction = "rtl";
+            ctx.direction =
+                "rtl";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.font =
                 '48px "Amiri", "Traditional Arabic", serif';
 
+
             ctx.fillStyle =
                 "#172b23";
+
 
             arabicLines.forEach(function (line) {
 
@@ -512,16 +629,20 @@
             });
 
 
-            /*
-               Pronunciation
-            */
+            /* =================================================
+               PRONUNCIATION
+               ================================================= */
 
             if (pronunciation) {
 
                 y += 20;
 
+
                 const boxH =
-                    pronunciationLines.length * 45 + 45;
+                    pronunciationLines.length *
+                    45 +
+                    45;
+
 
                 roundRect(
                     ctx,
@@ -532,20 +653,27 @@
                     22
                 );
 
+
                 ctx.fillStyle =
                     "#f4eee1";
 
                 ctx.fill();
 
+
                 y += 38;
 
-                ctx.direction = "ltr";
+
+                ctx.direction =
+                    "ltr";
+
 
                 ctx.font =
                     '30px "Noto Sans Malayalam", Arial, sans-serif';
 
+
                 ctx.fillStyle =
                     "#514d45";
+
 
                 pronunciationLines.forEach(function (line) {
 
@@ -559,14 +687,15 @@
 
                 });
 
+
                 y += 30;
 
             }
 
 
-            /*
-               Meaning
-            */
+            /* =================================================
+               MEANING
+               ================================================= */
 
             if (
                 includeMeaning &&
@@ -575,13 +704,18 @@
 
                 y += 15;
 
-                ctx.direction = "ltr";
+
+                ctx.direction =
+                    "ltr";
+
 
                 ctx.font =
                     '30px "Noto Sans Malayalam", Arial, sans-serif';
 
+
                 ctx.fillStyle =
                     "#4c554f";
+
 
                 meaningLines.forEach(function (line) {
 
@@ -598,22 +732,28 @@
             }
 
 
-            /*
-               Footer branding
-            */
+            /* =================================================
+               FOOTER BRANDING
+               ================================================= */
 
             const footerY =
                 canvas.height - 105;
 
-            ctx.direction = "ltr";
 
-            ctx.textAlign = "center";
+            ctx.direction =
+                "ltr";
+
+            ctx.textAlign =
+                "center";
+
 
             ctx.font =
-                'bold 27px Arial';
+                "bold 27px Arial";
+
 
             ctx.fillStyle =
                 "#17483d";
+
 
             ctx.fillText(
                 "NAZYAN TRAVELS",
@@ -621,11 +761,14 @@
                 footerY
             );
 
+
             ctx.font =
-                '20px Arial';
+                "20px Arial";
+
 
             ctx.fillStyle =
                 "#8a8172";
+
 
             ctx.fillText(
                 "Your Journey, Our Care.",
@@ -641,44 +784,78 @@
     }
 
 
-    function saveImage(canvas, filename) {
+    /* =====================================================
+       SAVE IMAGE
+       ===================================================== */
 
-        canvas.toBlob(
-            function (blob) {
+    function saveImage(
+        canvas,
+        filename
+    ) {
 
-                if (!blob) {
-                    return;
-                }
+        return new Promise(function (resolve) {
 
-                const url =
-                    URL.createObjectURL(blob);
+            canvas.toBlob(
+                function (blob) {
 
-                const a =
-                    document.createElement("a");
+                    if (!blob) {
 
-                a.href = url;
+                        resolve(false);
 
-                a.download =
-                    filename || "swalath-share.png";
+                        return;
 
-                document.body.appendChild(a);
+                    }
 
-                a.click();
 
-                a.remove();
+                    const url =
+                        URL.createObjectURL(blob);
 
-                setTimeout(function () {
 
-                    URL.revokeObjectURL(url);
+                    const a =
+                        document.createElement("a");
 
-                }, 1000);
 
-            },
-            "image/png"
-        );
+                    a.href =
+                        url;
+
+
+                    a.download =
+                        filename ||
+                        "swalath-share.png";
+
+
+                    document.body.appendChild(a);
+
+
+                    a.click();
+
+
+                    a.remove();
+
+
+                    setTimeout(function () {
+
+                        URL.revokeObjectURL(
+                            url
+                        );
+
+                    }, 1000);
+
+
+                    resolve(true);
+
+                },
+                "image/png"
+            );
+
+        });
 
     }
 
+
+    /* =====================================================
+       NATIVE SHARE
+       ===================================================== */
 
     async function shareImage(
         canvas,
@@ -692,64 +869,80 @@
                 async function (blob) {
 
                     if (!blob) {
+
                         resolve(false);
+
                         return;
+
                     }
+
 
                     const file =
                         new File(
                             [blob],
-                            filename,
+                            filename ||
+                                "swalath-share.png",
                             {
-                                type:"image/png"
+                                type:
+                                    "image/png"
                             }
                         );
 
-                    /*
-                       Native Android / iOS share
-                    */
+
+                    /* =========================================
+                       NATIVE FILE SHARE
+                       ========================================= */
 
                     if (
                         navigator.share &&
-                        navigator.canShare &&
-                        navigator.canShare({
-                            files:[file]
-                        })
+                        navigator.canShare
                     ) {
 
                         try {
 
-                            await navigator.share({
+                            const canShareFiles =
+                                navigator.canShare({
+                                    files: [file]
+                                });
 
-                                title:
-                                    shareTitle ||
-                                    "Swalath",
 
-                                text:
-                                    "Swalath • NAZYAN TRAVELS",
+                            if (canShareFiles) {
 
-                                files:[file]
+                                await navigator.share({
 
-                            });
+                                    title:
+                                        shareTitle ||
+                                        "Swalath",
 
-                            resolve(true);
+                                    text:
+                                        "Swalath • NAZYAN TRAVELS",
 
-                            return;
+                                    files: [file]
+
+                                });
+
+
+                                resolve(true);
+
+                                return;
+
+                            }
 
                         } catch (error) {
 
                             /*
                                User cancelled share.
-                               Do not show an error.
+                               No error message.
                             */
 
                             if (
                                 error &&
                                 error.name ===
-                                "AbortError"
+                                    "AbortError"
                             ) {
 
                                 resolve(false);
+
                                 return;
 
                             }
@@ -759,15 +952,15 @@
                     }
 
 
-                    /*
-                       Browser doesn't support
-                       native file sharing.
-                    */
+                    /* =========================================
+                       FALLBACK
+                       ========================================= */
 
-                    saveImage(
+                    await saveImage(
                         canvas,
                         filename
                     );
+
 
                     resolve(true);
 
@@ -780,14 +973,155 @@
     }
 
 
+    /* =====================================================
+       DATA NORMALIZER
+       ===================================================== */
+
+    function normalizeData(data) {
+
+        data = data || {};
+
+        return {
+
+            title:
+                data.title ||
+                "സ്വലാത്ത്",
+
+            arabic:
+                data.arabic ||
+                "",
+
+            pronunciation:
+                data.pronunciation ||
+                "",
+
+            meaning:
+                data.meaning ||
+                "",
+
+            extra:
+                data.extra ||
+                "",
+
+            type:
+                data.type ||
+                "Islamic Reminder"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       GLOBAL FUNCTION
+       USED BY SWALATH.HTML
+       ===================================================== */
+
+    window.shareIslamicCard =
+        async function (data) {
+
+            const cardData =
+                normalizeData(data);
+
+
+            const canvas =
+                await createCard(
+                    cardData
+                );
+
+
+            const safeTitle =
+                String(
+                    cardData.title ||
+                    "swalath"
+                )
+                .replace(
+                    /[\\/:*?"<>|]/g,
+                    ""
+                )
+                .trim();
+
+
+            const filename =
+                (
+                    safeTitle ||
+                    "swalath"
+                ) +
+                "-share.png";
+
+
+            return shareImage(
+                canvas,
+                filename,
+                cardData.title
+            );
+
+        };
+
+
+    /* =====================================================
+       GLOBAL SAVE FUNCTION
+       USED BY SWALATH.HTML
+       ===================================================== */
+
+    window.saveIslamicCard =
+        async function (data) {
+
+            const cardData =
+                normalizeData(data);
+
+
+            const canvas =
+                await createCard(
+                    cardData
+                );
+
+
+            const safeTitle =
+                String(
+                    cardData.title ||
+                    "swalath"
+                )
+                .replace(
+                    /[\\/:*?"<>|]/g,
+                    ""
+                )
+                .trim();
+
+
+            const filename =
+                (
+                    safeTitle ||
+                    "swalath"
+                ) +
+                "-share.png";
+
+
+            return saveImage(
+                canvas,
+                filename
+            );
+
+        };
+
+
+    /* =====================================================
+       COMMON OBJECT
+       KEPT FOR FUTURE PAGES
+       ===================================================== */
+
     window.SwalathShareCard = {
 
-        create: createCard,
+        create:
+            createCard,
 
-        save: saveImage,
+        save:
+            saveImage,
 
-        share: shareImage
+        share:
+            shareImage
 
     };
+
 
 })();
