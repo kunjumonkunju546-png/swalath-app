@@ -1,137 +1,312 @@
+/* =========================================================
+   SWALATH — PREMIUM UI
+   Clean • Islamic • Mobile First • Minimal
+   ========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #eee8d9;
-    color: #222;
+:root {
+    --bg: #f3f0e8;
+    --surface: #fffdf8;
+    --card: #ffffff;
+    --primary: #17483d;
+    --primary-dark: #10382f;
+    --primary-soft: #e8f0eb;
+    --gold: #c7a45b;
+    --gold-soft: #f4e8c8;
+    --text: #202a27;
+    --muted: #7a817e;
+    --border: #e7e1d5;
+    --shadow: 0 10px 30px rgba(27, 48, 42, 0.08);
+    --shadow-soft: 0 5px 18px rgba(27, 48, 42, 0.06);
+    --radius: 20px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #faf8f2 0%, #f3f0e8 55%, #ebe6db 100%);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Main App */
+
 .app {
+    width: 100%;
     max-width: 430px;
     min-height: 100vh;
     margin: auto;
-    background: #fffdf8;
-    box-shadow: 0 0 25px rgba(0,0,0,0.08);
+    background: var(--surface);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.08);
+    overflow-x: hidden;
 }
 
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .hero {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    padding: 38px 20px 32px;
-    background: linear-gradient(145deg, #123d34, #1d5b4c);
-    color: white;
-    border-radius: 0 0 30px 30px;
+    padding: 42px 20px 38px;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.10), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(199,164,91,0.12), transparent 35%),
+        linear-gradient(145deg, #10382f, #17483d 55%, #205b4d);
+    color: #fff;
+    border-radius: 0 0 34px 34px;
+    box-shadow: 0 12px 30px rgba(23, 72, 61, 0.18);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    top: -90px;
+    right: -70px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border: 1px solid rgba(199,164,91,0.14);
+    border-radius: 50%;
+    bottom: -80px;
+    left: -50px;
 }
 
 .moon {
-    font-size: 45px;
-    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+    font-size: 44px;
+    margin-bottom: 9px;
 }
 
 .hero h1 {
-    font-size: 32px;
+    position: relative;
+    z-index: 1;
+    font-size: 31px;
+    font-weight: 700;
     letter-spacing: 4px;
+    line-height: 1.2;
 }
 
 .hero p {
-    margin-top: 8px;
-    font-size: 14px;
-    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.82;
+    letter-spacing: 0.4px;
 }
 
+/* =========================================================
+   MAIN
+   ========================================================= */
+
 main {
-    padding: 20px;
+    padding: 22px 18px 10px;
 }
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
 
 .welcome {
     text-align: center;
-    padding: 10px 5px 22px;
+    padding: 10px 5px 24px;
 }
 
 .welcome h2 {
-    font-size: 22px;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 8px;
 }
 
 .welcome p {
-    color: #777;
-    font-size: 14px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
 }
 
+/* =========================================================
+   TODAY / DAILY COUNTER
+   ========================================================= */
+
 .today {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    padding: 25px 18px;
-    background: #f1dfb0;
-    border-radius: 22px;
-    margin-bottom: 20px;
+    padding: 27px 18px 25px;
+    background:
+        linear-gradient(145deg, #f7edcf, #f1dfb0);
+    border: 1px solid rgba(199,164,91,0.25);
+    border-radius: 24px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-soft);
+}
+
+.today::before {
+    content: "☾";
+    position: absolute;
+    right: 18px;
+    top: 8px;
+    font-size: 54px;
+    color: rgba(23,72,61,0.07);
+}
+
+.today::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgba(23,72,61,0.07);
+    border-radius: 50%;
+    left: -45px;
+    bottom: -45px;
 }
 
 .small-title {
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    color: #6f6248;
 }
 
 .today h2 {
-    font-size: 55px;
-    margin: 8px 0;
+    position: relative;
+    z-index: 1;
+    font-size: 56px;
+    line-height: 1;
+    margin: 12px 0 8px;
+    color: var(--primary);
 }
 
 .today p:not(.small-title) {
-    font-size: 14px;
-    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #665e50;
 }
 
 .today button {
+    position: relative;
+    z-index: 1;
     border: none;
-    background: #123d34;
-    color: white;
-    padding: 13px 22px;
+    background: var(--primary);
+    color: #fff;
+    padding: 13px 23px;
     border-radius: 30px;
     margin-top: 18px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 7px 16px rgba(23,72,61,0.18);
+    transition: 0.2s ease;
+}
+
+.today button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
 
 .today button:active {
     transform: scale(0.97);
 }
 
+/* Counter */
+
 .counter {
+    position: relative;
+    z-index: 1;
     margin-top: 18px;
 }
 
 .counter span {
     display: block;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
+    color: var(--primary);
 }
 
 .counter small {
-    color: #666;
+    color: #766f62;
+    font-size: 11px;
 }
+
+/* =========================================================
+   MENU GRID
+   ========================================================= */
 
 .menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .menu-card {
-    border: 1px solid #e6dfd0;
-    background: white;
-    border-radius: 18px;
-    padding: 20px 10px;
+    position: relative;
+    min-height: 122px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background:
+        linear-gradient(145deg, #ffffff, #fcfaf5);
+    border-radius: var(--radius);
+    padding: 17px 10px;
     cursor: pointer;
     text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        rgba(23,72,61,0.035),
+        transparent 55%
+    );
+    pointer-events: none;
 }
 
 .menu-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    border-color: rgba(23,72,61,0.18);
+    box-shadow: 0 12px 26px rgba(27,48,42,0.10);
+}
+
+.menu-card:active {
+    transform: scale(0.98);
 }
 
 .menu-card:first-line {
@@ -139,58 +314,182 @@ main {
 }
 
 .menu-card strong {
+    position: relative;
+    z-index: 1;
     display: block;
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 9px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.3;
 }
 
 .menu-card span {
+    position: relative;
+    z-index: 1;
     display: block;
     margin-top: 5px;
-    color: #888;
-    font-size: 11px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.4;
 }
 
+/* =========================================================
+   TRAVEL / NAZYAN
+   ========================================================= */
+
 .travel {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    padding: 22px 15px;
-    border-radius: 20px;
-    background: #123d34;
+    padding: 26px 16px;
+    border-radius: 23px;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(199,164,91,0.15), transparent 30%),
+        linear-gradient(145deg, #10382f, #17483d);
     color: white;
+    box-shadow: 0 12px 28px rgba(23,72,61,0.15);
+}
+
+.travel::before {
+    content: "✦";
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    color: rgba(255,255,255,0.15);
+    font-size: 24px;
+}
+
+.travel::after {
+    content: "✦";
+    position: absolute;
+    bottom: 8px;
+    right: 20px;
+    color: rgba(199,164,91,0.18);
+    font-size: 30px;
 }
 
 .travel p {
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+    font-size: 9px;
+    letter-spacing: 2.2px;
+    opacity: 0.72;
 }
 
 .travel h2 {
-    margin: 7px 0;
+    position: relative;
+    z-index: 1;
+    margin: 8px 0;
     letter-spacing: 1px;
+    font-size: 20px;
 }
 
 .travel span {
+    position: relative;
+    z-index: 1;
     display: block;
-    font-size: 12px;
-    opacity: 0.9;
-    margin-bottom: 15px;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: 0.82;
+    margin-bottom: 17px;
 }
 
 .travel a {
+    position: relative;
+    z-index: 1;
     display: inline-block;
     text-decoration: none;
     background: #f1dfb0;
-    color: #123d34;
-    padding: 11px 20px;
+    color: var(--primary-dark);
+    padding: 11px 21px;
     border-radius: 25px;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+    transition: 0.2s ease;
 }
+
+.travel a:hover {
+    transform: translateY(-1px);
+    background: #f6e8c4;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
     text-align: center;
-    padding: 20px;
-    color: #999;
-    font-size: 11px;
+    padding: 23px 20px;
+    color: #9a9a94;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   SMALL MOBILE DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .hero {
+        padding: 35px 16px 32px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+        letter-spacing: 3px;
+    }
+
+    main {
+        padding: 18px 14px 8px;
+    }
+
+    .menu-grid {
+        gap: 9px;
+    }
+
+    .menu-card {
+        min-height: 115px;
+        padding: 15px 8px;
+    }
+
+    .today h2 {
+        font-size: 50px;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+button,
+a,
+.menu-card {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+.menu-card:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
 }
