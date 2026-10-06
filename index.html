@@ -260,6 +260,231 @@
 }
 
 
+/* =================================================
+   PRAYER TIMES
+================================================= */
+
+.prayer-section {
+
+    margin: 18px 0 22px;
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #123d34,
+            #1d5548
+        );
+
+    color: white;
+
+    box-shadow:
+        0 12px 30px rgba(18,61,52,0.18);
+
+}
+
+.prayer-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+}
+
+.prayer-title {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+.prayer-location {
+
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    opacity: 0.75;
+
+}
+
+.prayer-refresh {
+
+    border: none;
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+}
+
+.prayer-next {
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 16px;
+
+    padding: 13px 15px;
+
+    margin-bottom: 14px;
+
+}
+
+.prayer-next-label {
+
+    font-size: 11px;
+
+    opacity: 0.7;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+}
+
+.prayer-next-name {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-top: 3px;
+
+}
+
+.prayer-countdown {
+
+    font-size: 13px;
+
+    margin-top: 3px;
+
+    color: #f1dfb0;
+
+    font-weight: bold;
+
+}
+
+.prayer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 6px;
+
+}
+
+.prayer-item {
+
+    text-align: center;
+
+    padding: 10px 4px;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,0.08);
+
+}
+
+.prayer-item.active {
+
+    background: #f1dfb0;
+
+    color: #123d34;
+
+}
+
+.prayer-name {
+
+    display: block;
+
+    font-size: 10px;
+
+    opacity: 0.75;
+
+    margin-bottom: 4px;
+
+}
+
+.prayer-time {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+.prayer-status {
+
+    text-align: center;
+
+    margin: 12px 0 0;
+
+    font-size: 11px;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================
+   PRAYER MENU CARD
+========================= */
+
+.prayer-menu-card {
+
+    position: relative;
+
+}
+
+.prayer-menu-badge {
+
+    position: absolute;
+
+    top: 9px;
+
+    right: 9px;
+
+    font-size: 9px;
+
+    padding: 3px 6px;
+
+    border-radius: 20px;
+
+    background: #f1dfb0;
+
+    color: #123d34;
+
+    font-weight: bold;
+
+}
+
+
 /* =========================
    DARK MODE
 ========================= */
@@ -559,6 +784,46 @@ body.dark-mode .swalath-note {
 
 }
 
+body.dark-mode .prayer-section {
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.35);
+
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 360px){
+
+    .prayer-grid {
+
+        gap: 4px;
+
+    }
+
+    .prayer-item {
+
+        padding: 9px 2px;
+
+    }
+
+    .prayer-time {
+
+        font-size: 11px;
+
+    }
+
+    .prayer-name {
+
+        font-size: 9px;
+
+    }
+
+}
+
 </style>
 
 </head>
@@ -678,6 +943,165 @@ body.dark-mode .swalath-note {
 
 
 
+<!-- =================================================
+     PRAYER TIMES
+================================================= -->
+
+<section
+    id="prayerSection"
+    class="prayer-section"
+>
+
+    <div class="prayer-top">
+
+        <div>
+
+            <h2 class="prayer-title">
+                🕌 നമസ്കാര സമയങ്ങൾ
+            </h2>
+
+            <p
+                id="prayerLocation"
+                class="prayer-location"
+            >
+                📍 Kerala — Ottappalam
+            </p>
+
+        </div>
+
+
+        <button
+            class="prayer-refresh"
+            onclick="loadPrayerTimes(true)"
+            aria-label="Refresh prayer times"
+        >
+            ↻
+        </button>
+
+    </div>
+
+
+    <div class="prayer-next">
+
+        <div class="prayer-next-label">
+            NEXT PRAYER
+        </div>
+
+        <div
+            id="nextPrayerName"
+            class="prayer-next-name"
+        >
+            സമയം ലഭ്യമാക്കുന്നു...
+        </div>
+
+        <div
+            id="prayerCountdown"
+            class="prayer-countdown"
+        >
+            --
+        </div>
+
+    </div>
+
+
+    <div
+        id="prayerGrid"
+        class="prayer-grid"
+    >
+
+        <div class="prayer-item">
+
+            <span class="prayer-name">
+                Fajr
+            </span>
+
+            <span
+                id="fajrTime"
+                class="prayer-time"
+            >
+                --:--
+            </span>
+
+        </div>
+
+
+        <div class="prayer-item">
+
+            <span class="prayer-name">
+                Dhuhr
+            </span>
+
+            <span
+                id="dhuhrTime"
+                class="prayer-time"
+            >
+                --:--
+            </span>
+
+        </div>
+
+
+        <div class="prayer-item">
+
+            <span class="prayer-name">
+                Asr
+            </span>
+
+            <span
+                id="asrTime"
+                class="prayer-time"
+            >
+                --:--
+            </span>
+
+        </div>
+
+
+        <div class="prayer-item">
+
+            <span class="prayer-name">
+                Maghrib
+            </span>
+
+            <span
+                id="maghribTime"
+                class="prayer-time"
+            >
+                --:--
+            </span>
+
+        </div>
+
+
+        <div class="prayer-item">
+
+            <span class="prayer-name">
+                Isha
+            </span>
+
+            <span
+                id="ishaTime"
+                class="prayer-time"
+            >
+                --:--
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <p
+        id="prayerStatus"
+        class="prayer-status"
+    >
+        Kerala prayer times loading...
+    </p>
+
+</section>
+
+
+
 <!-- =========================
      DARK MODE
 ========================= -->
@@ -698,22 +1122,6 @@ body.dark-mode .swalath-note {
 
 <!-- =================================================
      MAIN MENU
-     
-     ORDER:
-     1. SWALATH
-     2. QURAN
-     3. QURAN MP3
-     4. DUA
-     5. ASMAUL HUSNA
-     6. DHIKR
-     7. TASBEEH
-     8. DAILY AZKAR
-     9. SALAH GUIDE
-     10. DAILY REMINDER
-     11. DAILY ASMA
-     12. UMRAH
-     13. FAVOURITES
-     14. NAZYAN TRAVELS
 ================================================= -->
 
 <div class="menu-grid">
@@ -895,7 +1303,33 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 9. SALAH GUIDE -->
+    <!-- 9. PRAYER TIMES -->
+
+    <div
+        class="menu-card prayer-menu-card"
+        onclick="scrollToPrayerTimes()"
+    >
+
+        <span class="prayer-menu-badge">
+            TODAY
+        </span>
+
+        <div style="font-size:30px;">
+            🕰️
+        </div>
+
+        <strong>
+            Prayer Times
+        </strong>
+
+        <span>
+            ഇന്നത്തെ നമസ്കാര സമയങ്ങൾ
+        </span>
+
+    </div>
+
+
+    <!-- 10. SALAH GUIDE -->
 
     <div
         class="menu-card"
@@ -917,7 +1351,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 10. DAILY REMINDER -->
+    <!-- 11. DAILY REMINDER -->
 
     <div
         class="menu-card"
@@ -939,7 +1373,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 11. DAILY ASMA -->
+    <!-- 12. DAILY ASMA -->
 
     <div
         class="menu-card"
@@ -961,7 +1395,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 12. UMRAH -->
+    <!-- 13. UMRAH -->
 
     <div
         class="menu-card"
@@ -983,7 +1417,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 13. FAVOURITES -->
+    <!-- 14. FAVOURITES -->
 
     <div
         class="menu-card"
@@ -1005,7 +1439,7 @@ body.dark-mode .swalath-note {
     </div>
 
 
-    <!-- 14. NAZYAN TRAVELS -->
+    <!-- 15. NAZYAN TRAVELS -->
 
     <div
         class="menu-card"
@@ -1538,6 +1972,1069 @@ function openNazyAN(){
 
 
 /* =================================================
+   PRAYER TIMES
+================================================= */
+
+const prayerIds = {
+
+    Fajr:
+        "fajrTime",
+
+    Dhuhr:
+        "dhuhrTime",
+
+    Asr:
+        "asrTime",
+
+    Maghrib:
+        "maghribTime",
+
+    Isha:
+        "ishaTime"
+
+};
+
+
+let prayerTimings = null;
+
+let prayerDate = null;
+
+let prayerTimer = null;
+
+
+/* =================================================
+   KERALA DEFAULT LOCATION
+================================================= */
+
+/*
+   Main focus:
+   Kerala, India
+
+   Default:
+   Ottappalam, Palakkad
+
+   If the user grants location permission,
+   the actual phone location will be used.
+*/
+
+const fallbackLocation = {
+
+    latitude:
+        10.7725,
+
+    longitude:
+        76.3774,
+
+    name:
+        "Ottappalam, Kerala"
+
+};
+
+
+/* =================================================
+   PRAYER CALCULATION METHOD
+================================================= */
+
+/*
+   Method 1:
+   University of Islamic Sciences, Karachi
+
+   Commonly used in South Asia.
+*/
+
+const prayerCalculationMethod = 1;
+
+
+
+/* =================================================
+   LOAD PRAYER TIMES
+================================================= */
+
+async function loadPrayerTimes(
+    forceRefresh = false
+){
+
+    const status =
+        document.getElementById(
+            "prayerStatus"
+        );
+
+
+    const locationText =
+        document.getElementById(
+            "prayerLocation"
+        );
+
+
+    status.textContent =
+        "Prayer times loading...";
+
+
+    /*
+       Kerala is the default.
+       Phone location is used only when
+       permission is available.
+    */
+
+    let location =
+        fallbackLocation;
+
+
+    if(
+        navigator.geolocation
+    ){
+
+        try{
+
+            const position =
+                await new Promise(
+                    function(
+                        resolve,
+                        reject
+                    ){
+
+                        navigator.geolocation
+                            .getCurrentPosition(
+
+                                resolve,
+
+                                reject,
+
+                                {
+
+                                    enableHighAccuracy:
+                                        false,
+
+                                    timeout:
+                                        5000,
+
+                                    maximumAge:
+                                        3600000
+
+                                }
+
+                            );
+
+                    }
+                );
+
+
+            location = {
+
+                latitude:
+                    position.coords.latitude,
+
+                longitude:
+                    position.coords.longitude,
+
+                name:
+                    "Current Location"
+
+            };
+
+        }catch(error){
+
+            /*
+               Permission denied or
+               location unavailable.
+
+               Stay with Kerala default.
+            */
+
+            location =
+                fallbackLocation;
+
+        }
+
+    }
+
+
+    locationText.textContent =
+        "📍 " + location.name;
+
+
+    const now =
+        new Date();
+
+
+    const dateString =
+        String(
+            now.getDate()
+        ).padStart(2,"0")
+        +
+        "-"
+        +
+        String(
+            now.getMonth() + 1
+        ).padStart(2,"0")
+        +
+        "-"
+        +
+        now.getFullYear();
+
+
+    const cacheKey =
+        "swalathPrayerTimes";
+
+
+    /*
+       Use today's saved data first.
+    */
+
+    if(!forceRefresh){
+
+        const cached =
+            localStorage.getItem(
+                cacheKey
+            );
+
+
+        if(cached){
+
+            try{
+
+                const data =
+                    JSON.parse(
+                        cached
+                    );
+
+
+                if(
+
+                    data &&
+
+                    data.date ===
+                        dateString &&
+
+                    data.timings
+
+                ){
+
+                    prayerTimings =
+                        data.timings;
+
+                    prayerDate =
+                        data.date;
+
+
+                    displayPrayerTimes(
+                        prayerTimings
+                    );
+
+
+                    status.textContent =
+                        "Saved prayer times";
+
+
+                    startPrayerCountdown();
+
+
+                    /*
+                       Try updating in
+                       background.
+                    */
+
+                    fetchPrayerTimes(
+                        location,
+                        dateString
+                    );
+
+
+                    return;
+
+                }
+
+            }catch(error){
+
+                console.log(
+                    "Prayer cache error:",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+
+
+    await fetchPrayerTimes(
+        location,
+        dateString
+    );
+
+}
+
+
+
+/* =================================================
+   FETCH PRAYER TIMES
+================================================= */
+
+async function fetchPrayerTimes(
+    location,
+    dateString
+){
+
+    const status =
+        document.getElementById(
+            "prayerStatus"
+        );
+
+
+    const locationText =
+        document.getElementById(
+            "prayerLocation"
+        );
+
+
+    try{
+
+        const url =
+            "https://api.aladhan.com/v1/timings/"
+            +
+            dateString
+            +
+            "?latitude="
+            +
+            encodeURIComponent(
+                location.latitude
+            )
+            +
+            "&longitude="
+            +
+            encodeURIComponent(
+                location.longitude
+            )
+            +
+            "&method="
+            +
+            prayerCalculationMethod;
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Prayer API error"
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        if(
+
+            !result.data ||
+
+            !result.data.timings
+
+        ){
+
+            throw new Error(
+                "Prayer timings unavailable"
+            );
+
+        }
+
+
+        const timings =
+            result.data.timings;
+
+
+        prayerTimings = {
+
+            Fajr:
+                timings.Fajr,
+
+            Dhuhr:
+                timings.Dhuhr,
+
+            Asr:
+                timings.Asr,
+
+            Maghrib:
+                timings.Maghrib,
+
+            Isha:
+                timings.Isha
+
+        };
+
+
+        prayerDate =
+            dateString;
+
+
+        localStorage.setItem(
+
+            "swalathPrayerTimes",
+
+            JSON.stringify({
+
+                date:
+                    dateString,
+
+                timings:
+                    prayerTimings
+
+            })
+
+        );
+
+
+        displayPrayerTimes(
+            prayerTimings
+        );
+
+
+        status.textContent =
+            "Updated just now";
+
+
+        if(
+            location.name ===
+            "Current Location"
+        ){
+
+            locationText.textContent =
+                "📍 Current Location";
+
+        }else{
+
+            locationText.textContent =
+                "📍 Ottappalam, Kerala";
+
+        }
+
+
+        startPrayerCountdown();
+
+
+    }catch(error){
+
+        console.log(
+            "Prayer time error:",
+            error
+        );
+
+
+        /*
+           Use previously saved timings
+           if internet is unavailable.
+        */
+
+        const cached =
+            localStorage.getItem(
+                "swalathPrayerTimes"
+            );
+
+
+        if(cached){
+
+            try{
+
+                const data =
+                    JSON.parse(
+                        cached
+                    );
+
+
+                if(
+
+                    data &&
+
+                    data.timings
+
+                ){
+
+                    prayerTimings =
+                        data.timings;
+
+                    prayerDate =
+                        data.date;
+
+
+                    displayPrayerTimes(
+                        prayerTimings
+                    );
+
+
+                    status.textContent =
+                        "Offline — saved times";
+
+
+                    startPrayerCountdown();
+
+
+                    return;
+
+                }
+
+            }catch(cacheError){
+
+                console.log(
+                    cacheError
+                );
+
+            }
+
+        }
+
+
+        status.textContent =
+            "Internet connection required for today's prayer times";
+
+
+        document.getElementById(
+            "nextPrayerName"
+        ).textContent =
+            "സമയം ലഭ്യമല്ല";
+
+    }
+
+}
+
+
+
+/* =================================================
+   DISPLAY PRAYER TIMES
+================================================= */
+
+function displayPrayerTimes(
+    timings
+){
+
+    const prayerList = [
+
+        "Fajr",
+        "Dhuhr",
+        "Asr",
+        "Maghrib",
+        "Isha"
+
+    ];
+
+
+    prayerList.forEach(
+        function(name){
+
+            const element =
+                document.getElementById(
+                    prayerIds[name]
+                );
+
+
+            if(!element){
+
+                return;
+
+            }
+
+
+            element.textContent =
+                convertTo12Hour(
+                    timings[name]
+                );
+
+        }
+    );
+
+}
+
+
+
+/* =================================================
+   CONVERT TIME
+================================================= */
+
+function convertTo12Hour(
+    time
+){
+
+    if(!time){
+
+        return "--:--";
+
+    }
+
+
+    const clean =
+        String(time)
+        .split(" ")[0];
+
+
+    const parts =
+        clean.split(":");
+
+
+    let hour =
+        Number(
+            parts[0]
+        );
+
+
+    const minute =
+        parts[1];
+
+
+    const ampm =
+        hour >= 12
+            ? "PM"
+            : "AM";
+
+
+    hour =
+        hour % 12 ||
+        12;
+
+
+    return (
+
+        hour
+        +
+        ":"
+        +
+        minute
+        +
+        " "
+        +
+        ampm
+
+    );
+
+}
+
+
+
+/* =================================================
+   GET MINUTES FROM TIME
+================================================= */
+
+function getMinutesFromTime(
+    time
+){
+
+    if(!time){
+
+        return null;
+
+    }
+
+
+    const clean =
+        String(time)
+        .split(" ")[0];
+
+
+    const parts =
+        clean.split(":");
+
+
+    const hour =
+        Number(
+            parts[0]
+        );
+
+
+    const minute =
+        Number(
+            parts[1]
+        );
+
+
+    if(
+
+        Number.isNaN(hour) ||
+
+        Number.isNaN(minute)
+
+    ){
+
+        return null;
+
+    }
+
+
+    return (
+
+        hour * 60
+        +
+        minute
+
+    );
+
+}
+
+
+
+/* =================================================
+   NEXT PRAYER
+================================================= */
+
+function getNextPrayer(){
+
+    if(!prayerTimings){
+
+        return null;
+
+    }
+
+
+    const prayers = [
+
+        "Fajr",
+        "Dhuhr",
+        "Asr",
+        "Maghrib",
+        "Isha"
+
+    ];
+
+
+    const now =
+        new Date();
+
+
+    const currentMinutes =
+        now.getHours() * 60
+        +
+        now.getMinutes();
+
+
+    for(
+
+        let i = 0;
+
+        i < prayers.length;
+
+        i++
+
+    ){
+
+        const minutes =
+            getMinutesFromTime(
+                prayerTimings[
+                    prayers[i]
+                ]
+            );
+
+
+        if(
+
+            minutes !== null &&
+
+            minutes > currentMinutes
+
+        ){
+
+            return {
+
+                name:
+                    prayers[i],
+
+                minutes:
+                    minutes
+
+            };
+
+        }
+
+    }
+
+
+    return {
+
+        name:
+            "Fajr",
+
+        minutes:
+            getMinutesFromTime(
+                prayerTimings.Fajr
+            ),
+
+        tomorrow:
+            true
+
+    };
+
+}
+
+
+
+/* =================================================
+   START COUNTDOWN
+================================================= */
+
+function startPrayerCountdown(){
+
+    if(prayerTimer){
+
+        clearInterval(
+            prayerTimer
+        );
+
+    }
+
+
+    updatePrayerCountdown();
+
+
+    prayerTimer =
+        setInterval(
+
+            updatePrayerCountdown,
+
+            1000
+
+        );
+
+}
+
+
+
+/* =================================================
+   UPDATE COUNTDOWN
+================================================= */
+
+function updatePrayerCountdown(){
+
+    if(!prayerTimings){
+
+        return;
+
+    }
+
+
+    const next =
+        getNextPrayer();
+
+
+    if(!next){
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    let target =
+        new Date();
+
+
+    target.setHours(
+
+        Math.floor(
+            next.minutes / 60
+        ),
+
+        next.minutes % 60,
+
+        0,
+
+        0
+
+    );
+
+
+    if(next.tomorrow){
+
+        target.setDate(
+
+            target.getDate() + 1
+
+        );
+
+    }
+
+
+    let difference =
+        target.getTime()
+        -
+        now.getTime();
+
+
+    if(difference < 0){
+
+        difference = 0;
+
+    }
+
+
+    const totalSeconds =
+        Math.floor(
+
+            difference / 1000
+
+        );
+
+
+    const hours =
+        Math.floor(
+
+            totalSeconds / 3600
+
+        );
+
+
+    const minutes =
+        Math.floor(
+
+            (totalSeconds % 3600) / 60
+
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    document.getElementById(
+        "nextPrayerName"
+    ).textContent =
+        next.name;
+
+
+    document.getElementById(
+        "prayerCountdown"
+    ).textContent =
+
+        "അടുത്ത നമസ്കാരം വരെ "
+        +
+        String(
+            hours
+        ).padStart(
+            2,
+            "0"
+        )
+        +
+        ":"
+        +
+        String(
+            minutes
+        ).padStart(
+            2,
+            "0"
+        )
+        +
+        ":"
+        +
+        String(
+            seconds
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    highlightNextPrayer(
+        next.name
+    );
+
+}
+
+
+
+/* =================================================
+   HIGHLIGHT NEXT PRAYER
+================================================= */
+
+function highlightNextPrayer(
+    nextName
+){
+
+    const items =
+        document.querySelectorAll(
+            ".prayer-item"
+        );
+
+
+    const names = [
+
+        "Fajr",
+        "Dhuhr",
+        "Asr",
+        "Maghrib",
+        "Isha"
+
+    ];
+
+
+    items.forEach(
+
+        function(
+            item,
+            index
+        ){
+
+            item.classList.remove(
+                "active"
+            );
+
+
+            if(
+
+                names[index] ===
+                nextName
+
+            ){
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+    );
+
+}
+
+
+
+/* =================================================
+   SCROLL TO PRAYER TIMES
+================================================= */
+
+function scrollToPrayerTimes(){
+
+    const section =
+        document.getElementById(
+            "prayerSection"
+        );
+
+
+    if(section){
+
+        section.scrollIntoView({
+
+            behavior:
+                "smooth",
+
+            block:
+                "center"
+
+        });
+
+    }
+
+}
+
+
+
+/* =================================================
    OPEN COLLECTION
 ================================================= */
 
@@ -1547,33 +3044,46 @@ function openCollection(){
         ".welcome"
     ).style.display = "none";
 
+
     document.querySelector(
         ".today"
     ).style.display = "none";
+
+
+    document.getElementById(
+        "prayerSection"
+    ).style.display = "none";
+
 
     document.querySelector(
         ".menu-grid"
     ).style.display = "none";
 
+
     document.querySelector(
         ".feature-buttons"
     ).style.display = "none";
+
 
     document.getElementById(
         "travelSection"
     ).style.display = "none";
 
+
     document.getElementById(
         "favoritesSection"
     ).style.display = "none";
+
 
     document.getElementById(
         "collectionSection"
     ).style.display = "block";
 
+
     document.getElementById(
         "searchSwalath"
     ).value = "";
+
 
     loadCollection();
 
@@ -1591,21 +3101,31 @@ function closeCollection(){
         "collectionSection"
     ).style.display = "none";
 
+
     document.querySelector(
         ".welcome"
     ).style.display = "block";
+
 
     document.querySelector(
         ".today"
     ).style.display = "block";
 
+
+    document.getElementById(
+        "prayerSection"
+    ).style.display = "block";
+
+
     document.querySelector(
         ".menu-grid"
     ).style.display = "grid";
 
+
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
+
 
     document.getElementById(
         "travelSection"
@@ -1626,62 +3146,76 @@ function loadCollection(){
             "collectionList"
         );
 
+
     list.innerHTML = "";
+
 
     Object.keys(
         swalathNames
-    ).forEach(function(key){
+    ).forEach(
 
-        const item =
-            document.createElement(
-                "div"
+        function(key){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "collection-item";
+
+
+            item.style.cssText = `
+
+                background:white;
+
+                border:1px solid #e6dfd0;
+
+                border-radius:18px;
+
+                padding:16px;
+
+                margin-bottom:10px;
+
+                cursor:pointer;
+
+                color:#123d34;
+
+                font-weight:bold;
+
+            `;
+
+
+            item.dataset.name =
+                swalathNames[key]
+                .toLowerCase();
+
+
+            item.innerHTML =
+                "📖 "
+                +
+                swalathNames[key];
+
+
+            item.onclick =
+                function(){
+
+                    window.location.href =
+                        "swalath.html#"
+                        +
+                        key;
+
+                };
+
+
+            list.appendChild(
+                item
             );
 
-        item.className =
-            "collection-item";
+        }
 
-        item.style.cssText = `
-
-            background:white;
-
-            border:1px solid #e6dfd0;
-
-            border-radius:18px;
-
-            padding:16px;
-
-            margin-bottom:10px;
-
-            cursor:pointer;
-
-            color:#123d34;
-
-            font-weight:bold;
-
-        `;
-
-        item.dataset.name =
-            swalathNames[key]
-            .toLowerCase();
-
-        item.innerHTML =
-            "📖 " +
-            swalathNames[key];
-
-        item.onclick =
-            function(){
-
-                window.location.href =
-                    "swalath.html#" +
-                    key;
-
-            };
-
-        list.appendChild(
-            item
-        );
-
-    });
+    );
 
 }
 
@@ -1701,19 +3235,27 @@ function searchSwalath(){
         .toLowerCase()
         .trim();
 
+
     const cards =
         document.querySelectorAll(
             ".collection-item"
         );
 
+
     cards.forEach(
+
         function(card){
 
             const text =
                 card.dataset.name;
 
+
             if(
-                text.includes(input)
+
+                text.includes(
+                    input
+                )
+
             ){
 
                 card.style.display =
@@ -1727,6 +3269,7 @@ function searchSwalath(){
             }
 
         }
+
     );
 
 }
@@ -1743,29 +3286,41 @@ function openFavorites(){
         ".welcome"
     ).style.display = "none";
 
+
     document.querySelector(
         ".today"
     ).style.display = "none";
+
+
+    document.getElementById(
+        "prayerSection"
+    ).style.display = "none";
+
 
     document.querySelector(
         ".menu-grid"
     ).style.display = "none";
 
+
     document.querySelector(
         ".feature-buttons"
     ).style.display = "none";
+
 
     document.getElementById(
         "collectionSection"
     ).style.display = "none";
 
+
     document.getElementById(
         "travelSection"
     ).style.display = "none";
 
+
     document.getElementById(
         "favoritesSection"
     ).style.display = "block";
+
 
     loadFavorites();
 
@@ -1783,21 +3338,31 @@ function closeFavorites(){
         "favoritesSection"
     ).style.display = "none";
 
+
     document.querySelector(
         ".welcome"
     ).style.display = "block";
+
 
     document.querySelector(
         ".today"
     ).style.display = "block";
 
+
+    document.getElementById(
+        "prayerSection"
+    ).style.display = "block";
+
+
     document.querySelector(
         ".menu-grid"
     ).style.display = "grid";
 
+
     document.querySelector(
         ".feature-buttons"
     ).style.display = "flex";
+
 
     document.getElementById(
         "travelSection"
@@ -1818,13 +3383,19 @@ function loadFavorites(){
             "favoritesList"
         );
 
+
     list.innerHTML = "";
+
 
     const favorites =
         JSON.parse(
+
             localStorage.getItem(
                 "swalathFavorites"
-            ) || "[]"
+            )
+            ||
+            "[]"
+
         );
 
 
@@ -1857,10 +3428,12 @@ function loadFavorites(){
 
 
     favorites.forEach(
+
         function(key){
 
             const name =
                 swalathNames[key];
+
 
             if(!name){
 
@@ -1874,8 +3447,10 @@ function loadFavorites(){
                     "div"
                 );
 
+
             item.className =
                 "favorite-item";
+
 
             item.style.cssText = `
 
@@ -1897,23 +3472,30 @@ function loadFavorites(){
 
             `;
 
+
             item.innerHTML =
-                "❤️ " + name;
+                "❤️ "
+                +
+                name;
+
 
             item.onclick =
                 function(){
 
                     window.location.href =
-                        "swalath.html#" +
+                        "swalath.html#"
+                        +
                         key;
 
                 };
+
 
             list.appendChild(
                 item
             );
 
         }
+
     );
 
 }
@@ -1930,15 +3512,18 @@ function toggleDarkMode(){
         "dark-mode"
     );
 
+
     const enabled =
         document.body.classList.contains(
             "dark-mode"
         );
 
+
     localStorage.setItem(
         "swalathDarkMode",
         enabled
     );
+
 
     updateDarkButton();
 
@@ -1957,10 +3542,13 @@ function updateDarkButton(){
             "darkModeButton"
         );
 
+
     if(
+
         document.body.classList.contains(
             "dark-mode"
         )
+
     ){
 
         button.textContent =
@@ -1982,13 +3570,16 @@ function updateDarkButton(){
 ================================================= */
 
 window.addEventListener(
+
     "load",
+
     function(){
 
         const darkMode =
             localStorage.getItem(
                 "swalathDarkMode"
             );
+
 
         if(
             darkMode === "true"
@@ -2000,9 +3591,29 @@ window.addEventListener(
 
         }
 
+
         updateDarkButton();
 
     }
+
+);
+
+
+
+/* =================================================
+   LOAD PRAYER TIMES
+================================================= */
+
+window.addEventListener(
+
+    "load",
+
+    function(){
+
+        loadPrayerTimes();
+
+    }
+
 );
 
 
@@ -2031,7 +3642,8 @@ function showTravelAdOnceDaily(){
 
         document.getElementById(
             "travelAd"
-        ).style.display = "flex";
+        ).style.display =
+            "flex";
 
     }
 
@@ -2055,7 +3667,8 @@ function closeTravelAd(){
 
     document.getElementById(
         "travelAd"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 }
 
@@ -2066,16 +3679,20 @@ function closeTravelAd(){
 ================================================= */
 
 window.addEventListener(
+
     "load",
+
     function(){
 
         setTimeout(
+
             function(){
 
                 const splash =
                     document.getElementById(
                         "splashScreen"
                     );
+
 
                 if(splash){
 
@@ -2086,28 +3703,37 @@ window.addEventListener(
                 }
 
             },
+
             1800
+
         );
 
     }
+
 );
 
 
 
-/* =========================
+/* =================================================
    SHOW NAZYAN AD AFTER SPLASH
-========================= */
+================================================= */
 
 window.addEventListener(
+
     "load",
+
     function(){
 
         setTimeout(
+
             showTravelAdOnceDaily,
+
             2300
+
         );
 
     }
+
 );
 
 
@@ -2124,28 +3750,39 @@ window.addEventListener(
 if ("serviceWorker" in navigator) {
 
     window.addEventListener(
+
         "load",
+
         function(){
 
             navigator.serviceWorker
                 .register("./sw.js")
-                .then(function(){
+                .then(
 
-                    console.log(
-                        "Swalath offline mode ready"
-                    );
+                    function(){
 
-                })
-                .catch(function(error){
+                        console.log(
+                            "Swalath offline mode ready"
+                        );
 
-                    console.log(
-                        "Offline setup error:",
-                        error
-                    );
+                    }
 
-                });
+                )
+                .catch(
+
+                    function(error){
+
+                        console.log(
+                            "Offline setup error:",
+                            error
+                        );
+
+                    }
+
+                );
 
         }
+
     );
 
 }
