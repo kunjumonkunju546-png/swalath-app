@@ -1,5 +1,5 @@
 /* =========================================================
-   NAZYAN TRAVELS — SWALATH SHARE CARD
+   SWALATH - COMMON SHARE CARD
    Offline image generation + native sharing
    ========================================================= */
 
@@ -12,7 +12,7 @@
 
 
     /* =====================================================
-       FONT READY
+       FONT LOADING
        ===================================================== */
 
     function loadFont() {
@@ -42,13 +42,11 @@
         words.forEach(function (word) {
 
             const test =
-                line
-                    ? line + " " + word
-                    : word;
+                line ? line + " " + word : word;
 
             if (
                 ctx.measureText(test).width >
-                    maxWidth &&
+                maxWidth &&
                 line
             ) {
 
@@ -98,13 +96,11 @@
             words.forEach(function (word) {
 
                 const test =
-                    line
-                        ? line + " " + word
-                        : word;
+                    line ? line + " " + word : word;
 
                 if (
                     ctx.measureText(test).width >
-                        maxWidth &&
+                    maxWidth &&
                     line
                 ) {
 
@@ -132,7 +128,7 @@
 
 
     /* =====================================================
-       ROUND RECTANGLE
+       ROUNDED RECTANGLE
        ===================================================== */
 
     function roundRect(
@@ -232,7 +228,8 @@
             "#fffdf8"
         );
 
-        ctx.fillStyle = gradient;
+        ctx.fillStyle =
+            gradient;
 
         ctx.fillRect(
             0,
@@ -248,7 +245,6 @@
 
         ctx.fillStyle =
             "#17483d";
-
 
         ctx.beginPath();
 
@@ -275,7 +271,6 @@
 
         ctx.fill();
 
-
         ctx.globalAlpha = 1;
 
     }
@@ -287,7 +282,8 @@
 
     function createCard(options) {
 
-        options = options || {};
+        options =
+            options || {};
 
         return loadFont().then(function () {
 
@@ -322,14 +318,21 @@
                 canvas.getContext("2d");
 
 
+            if (!ctx) {
+                throw new Error(
+                    "Canvas is not supported"
+                );
+            }
+
+
             const contentWidth =
                 CARD_WIDTH -
                 PADDING * 2;
 
 
-            /* =================================================
-               CALCULATE TEXT LINES
-               ================================================= */
+            /* ---------------------------------------------
+               Calculate required height
+               --------------------------------------------- */
 
             ctx.font =
                 'bold 44px "Noto Sans Malayalam", "Amiri", serif';
@@ -354,7 +357,7 @@
 
 
             ctx.font =
-                '32px "Noto Sans Malayalam", Arial, sans-serif';
+                '32px Arial, "Noto Sans Malayalam", sans-serif';
 
             const pronunciationLines =
                 wrapText(
@@ -372,16 +375,14 @@
                 );
 
 
-            /* =================================================
-               CALCULATE CARD HEIGHT
-               ================================================= */
-
             let height = 300;
 
 
             height +=
-                titleLines.length *
-                58;
+                Math.max(
+                    titleLines.length,
+                    1
+                ) * 58;
 
 
             height += 50;
@@ -399,8 +400,7 @@
                 height += 55;
 
                 height +=
-                    pronunciationLines.length *
-                    45;
+                    pronunciationLines.length * 45;
 
             }
 
@@ -413,8 +413,7 @@
                 height += 55;
 
                 height +=
-                    meaningLines.length *
-                    45;
+                    meaningLines.length * 45;
 
             }
 
@@ -432,9 +431,9 @@
                 );
 
 
-            /* =================================================
-               BACKGROUND
-               ================================================= */
+            /* ---------------------------------------------
+               Background
+               --------------------------------------------- */
 
             drawBackground(
                 ctx,
@@ -443,9 +442,9 @@
             );
 
 
-            /* =================================================
-               MAIN CARD
-               ================================================= */
+            /* ---------------------------------------------
+               Main card
+               --------------------------------------------- */
 
             const cardX = 35;
 
@@ -483,16 +482,15 @@
 
             ctx.fill();
 
-
             ctx.restore();
 
 
             let y = 105;
 
 
-            /* =================================================
-               BRAND
-               ================================================= */
+            /* ---------------------------------------------
+               Brand
+               --------------------------------------------- */
 
             ctx.textAlign =
                 "center";
@@ -500,10 +498,8 @@
             ctx.direction =
                 "ltr";
 
-
             ctx.font =
                 "bold 25px Arial";
-
 
             ctx.fillStyle =
                 "#b08a3e";
@@ -519,13 +515,12 @@
             y += 75;
 
 
-            /* =================================================
-               TYPE
-               ================================================= */
+            /* ---------------------------------------------
+               Type
+               --------------------------------------------- */
 
             ctx.font =
                 '24px Arial, "Noto Sans Malayalam", sans-serif';
-
 
             ctx.fillStyle =
                 "#8b8170";
@@ -541,13 +536,12 @@
             y += 55;
 
 
-            /* =================================================
-               TITLE
-               ================================================= */
+            /* ---------------------------------------------
+               Title
+               --------------------------------------------- */
 
             ctx.font =
                 'bold 44px "Noto Sans Malayalam", "Amiri", serif';
-
 
             ctx.fillStyle =
                 "#17483d";
@@ -569,9 +563,9 @@
             y += 35;
 
 
-            /* =================================================
-               GOLD DIVIDER
-               ================================================= */
+            /* ---------------------------------------------
+               Gold divider
+               --------------------------------------------- */
 
             ctx.strokeStyle =
                 "#c7a45b";
@@ -597,9 +591,9 @@
             y += 70;
 
 
-            /* =================================================
-               ARABIC
-               ================================================= */
+            /* ---------------------------------------------
+               Arabic
+               --------------------------------------------- */
 
             ctx.direction =
                 "rtl";
@@ -607,31 +601,33 @@
             ctx.textAlign =
                 "center";
 
-
             ctx.font =
                 '48px "Amiri", "Traditional Arabic", serif';
-
 
             ctx.fillStyle =
                 "#172b23";
 
 
-            arabicLines.forEach(function (line) {
+            if (arabicLines.length) {
 
-                ctx.fillText(
-                    line,
-                    CARD_WIDTH / 2,
-                    y
-                );
+                arabicLines.forEach(function (line) {
 
-                y += 72;
+                    ctx.fillText(
+                        line,
+                        CARD_WIDTH / 2,
+                        y
+                    );
 
-            });
+                    y += 72;
+
+                });
+
+            }
 
 
-            /* =================================================
-               PRONUNCIATION
-               ================================================= */
+            /* ---------------------------------------------
+               Pronunciation
+               --------------------------------------------- */
 
             if (pronunciation) {
 
@@ -670,22 +666,23 @@
                 ctx.font =
                     '30px "Noto Sans Malayalam", Arial, sans-serif';
 
-
                 ctx.fillStyle =
                     "#514d45";
 
 
-                pronunciationLines.forEach(function (line) {
+                pronunciationLines.forEach(
+                    function (line) {
 
-                    ctx.fillText(
-                        line,
-                        CARD_WIDTH / 2,
-                        y
-                    );
+                        ctx.fillText(
+                            line,
+                            CARD_WIDTH / 2,
+                            y
+                        );
 
-                    y += 45;
+                        y += 45;
 
-                });
+                    }
+                );
 
 
                 y += 30;
@@ -693,9 +690,9 @@
             }
 
 
-            /* =================================================
-               MEANING
-               ================================================= */
+            /* ---------------------------------------------
+               Meaning
+               --------------------------------------------- */
 
             if (
                 includeMeaning &&
@@ -712,29 +709,30 @@
                 ctx.font =
                     '30px "Noto Sans Malayalam", Arial, sans-serif';
 
-
                 ctx.fillStyle =
                     "#4c554f";
 
 
-                meaningLines.forEach(function (line) {
+                meaningLines.forEach(
+                    function (line) {
 
-                    ctx.fillText(
-                        line,
-                        CARD_WIDTH / 2,
-                        y
-                    );
+                        ctx.fillText(
+                            line,
+                            CARD_WIDTH / 2,
+                            y
+                        );
 
-                    y += 45;
+                        y += 45;
 
-                });
+                    }
+                );
 
             }
 
 
-            /* =================================================
-               FOOTER BRANDING
-               ================================================= */
+            /* ---------------------------------------------
+               Footer branding
+               --------------------------------------------- */
 
             const footerY =
                 canvas.height - 105;
@@ -750,7 +748,6 @@
             ctx.font =
                 "bold 27px Arial";
 
-
             ctx.fillStyle =
                 "#17483d";
 
@@ -764,7 +761,6 @@
 
             ctx.font =
                 "20px Arial";
-
 
             ctx.fillStyle =
                 "#8a8172";
@@ -833,13 +829,16 @@
                     a.remove();
 
 
-                    setTimeout(function () {
+                    setTimeout(
+                        function () {
 
-                        URL.revokeObjectURL(
-                            url
-                        );
+                            URL.revokeObjectURL(
+                                url
+                            );
 
-                    }, 1000);
+                        },
+                        1000
+                    );
 
 
                     resolve(true);
@@ -881,7 +880,7 @@
                         new File(
                             [blob],
                             filename ||
-                                "swalath-share.png",
+                            "swalath-share.png",
                             {
                                 type:
                                     "image/png"
@@ -889,56 +888,49 @@
                         );
 
 
-                    /* =========================================
-                       NATIVE FILE SHARE
-                       ========================================= */
+                    /* -------------------------------------
+                       Native Android / iOS Share
+                       ------------------------------------- */
 
                     if (
                         navigator.share &&
-                        navigator.canShare
+                        navigator.canShare &&
+                        navigator.canShare({
+                            files: [file]
+                        })
                     ) {
 
                         try {
 
-                            const canShareFiles =
-                                navigator.canShare({
-                                    files: [file]
-                                });
+                            await navigator.share({
+
+                                title:
+                                    shareTitle ||
+                                    "Swalath",
+
+                                text:
+                                    "Swalath • NAZYAN TRAVELS",
+
+                                files: [file]
+
+                            });
 
 
-                            if (canShareFiles) {
+                            resolve(true);
 
-                                await navigator.share({
-
-                                    title:
-                                        shareTitle ||
-                                        "Swalath",
-
-                                    text:
-                                        "Swalath • NAZYAN TRAVELS",
-
-                                    files: [file]
-
-                                });
-
-
-                                resolve(true);
-
-                                return;
-
-                            }
+                            return;
 
                         } catch (error) {
 
                             /*
-                               User cancelled share.
-                               No error message.
+                               User cancelled sharing.
+                               No error message needed.
                             */
 
                             if (
                                 error &&
                                 error.name ===
-                                    "AbortError"
+                                "AbortError"
                             ) {
 
                                 resolve(false);
@@ -952,13 +944,14 @@
                     }
 
 
-                    /* =========================================
-                       FALLBACK
-                       ========================================= */
+                    /* -------------------------------------
+                       Fallback: Save Image
+                       ------------------------------------- */
 
                     await saveImage(
                         canvas,
-                        filename
+                        filename ||
+                        "swalath-share.png"
                     );
 
 
@@ -974,140 +967,7 @@
 
 
     /* =====================================================
-       DATA NORMALIZER
-       ===================================================== */
-
-    function normalizeData(data) {
-
-        data = data || {};
-
-        return {
-
-            title:
-                data.title ||
-                "സ്വലാത്ത്",
-
-            arabic:
-                data.arabic ||
-                "",
-
-            pronunciation:
-                data.pronunciation ||
-                "",
-
-            meaning:
-                data.meaning ||
-                "",
-
-            extra:
-                data.extra ||
-                "",
-
-            type:
-                data.type ||
-                "Islamic Reminder"
-
-        };
-
-    }
-
-
-    /* =====================================================
-       GLOBAL FUNCTION
-       USED BY SWALATH.HTML
-       ===================================================== */
-
-    window.shareIslamicCard =
-        async function (data) {
-
-            const cardData =
-                normalizeData(data);
-
-
-            const canvas =
-                await createCard(
-                    cardData
-                );
-
-
-            const safeTitle =
-                String(
-                    cardData.title ||
-                    "swalath"
-                )
-                .replace(
-                    /[\\/:*?"<>|]/g,
-                    ""
-                )
-                .trim();
-
-
-            const filename =
-                (
-                    safeTitle ||
-                    "swalath"
-                ) +
-                "-share.png";
-
-
-            return shareImage(
-                canvas,
-                filename,
-                cardData.title
-            );
-
-        };
-
-
-    /* =====================================================
-       GLOBAL SAVE FUNCTION
-       USED BY SWALATH.HTML
-       ===================================================== */
-
-    window.saveIslamicCard =
-        async function (data) {
-
-            const cardData =
-                normalizeData(data);
-
-
-            const canvas =
-                await createCard(
-                    cardData
-                );
-
-
-            const safeTitle =
-                String(
-                    cardData.title ||
-                    "swalath"
-                )
-                .replace(
-                    /[\\/:*?"<>|]/g,
-                    ""
-                )
-                .trim();
-
-
-            const filename =
-                (
-                    safeTitle ||
-                    "swalath"
-                ) +
-                "-share.png";
-
-
-            return saveImage(
-                canvas,
-                filename
-            );
-
-        };
-
-
-    /* =====================================================
-       COMMON OBJECT
-       KEPT FOR FUTURE PAGES
+       PUBLIC SHARE CARD API
        ===================================================== */
 
     window.SwalathShareCard = {
@@ -1122,6 +982,109 @@
             shareImage
 
     };
+
+
+    /* =====================================================
+       SWALATH PAGE BRIDGE FUNCTIONS
+       IMPORTANT:
+       These are required by swalath.html
+       ===================================================== */
+
+    window.shareIslamicCard =
+        async function (data) {
+
+            data =
+                data || {};
+
+
+            const canvas =
+                await createCard({
+
+                    title:
+                        data.title ||
+                        "സ്വലാത്ത്",
+
+                    arabic:
+                        data.arabic ||
+                        "",
+
+                    pronunciation:
+                        data.pronunciation ||
+                        "",
+
+                    meaning:
+                        data.meaning ||
+                        "",
+
+                    type:
+                        data.type ||
+                        "Swalath",
+
+                    includeMeaning:
+                        data.includeMeaning !== false
+
+                });
+
+
+            return shareImage(
+
+                canvas,
+
+                "swalath-share.png",
+
+                data.title ||
+                "Swalath"
+
+            );
+
+        };
+
+
+    window.saveIslamicCard =
+        async function (data) {
+
+            data =
+                data || {};
+
+
+            const canvas =
+                await createCard({
+
+                    title:
+                        data.title ||
+                        "സ്വലാത്ത്",
+
+                    arabic:
+                        data.arabic ||
+                        "",
+
+                    pronunciation:
+                        data.pronunciation ||
+                        "",
+
+                    meaning:
+                        data.meaning ||
+                        "",
+
+                    type:
+                        data.type ||
+                        "Swalath",
+
+                    includeMeaning:
+                        data.includeMeaning !== false
+
+                });
+
+
+            return saveImage(
+
+                canvas,
+
+                "swalath-share.png"
+
+            );
+
+        };
 
 
 })();
