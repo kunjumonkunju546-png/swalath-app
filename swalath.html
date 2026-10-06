@@ -262,41 +262,6 @@ body{
     font-size:12px;
 }
 
-
-/* =========================================================
-   SHARE CARD BUTTONS
-   ========================================================= */
-
-.share-actions{
-    display:flex;
-    gap:10px;
-    margin-top:18px;
-}
-
-.share-card-btn,
-.save-card-btn{
-    flex:1;
-    border:1px solid #c9aa68;
-    background:#fffdf8;
-    color:#07543f;
-    padding:13px 8px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.share-card-btn{
-    background:#07543f;
-    color:white;
-    border-color:#07543f;
-}
-
-.share-card-btn:active,
-.save-card-btn:active{
-    transform:scale(.98);
-}
-
 </style>
 
 </head>
@@ -327,7 +292,7 @@ body{
         type="text"
         id="searchInput"
         placeholder="🔍 സ്വലാത്ത് തിരയുക..."
-        oninput="searchSwalath()">
+        oninput="searchSwalath">
 
 </div>
 
@@ -344,120 +309,100 @@ body{
         <span>Swalath Ibrahimiyya</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('nariya')">
         <h3>സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ</h3>
         <span>Salat Nariya / Tafrijiyya</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('tunjina')">
         <h3>സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ</h3>
         <span>Salat Tunjina / Munjiyya</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('fatih')">
         <h3>സ്വലാത്തുൽ ഫാതിഹ്</h3>
         <span>Salat al-Fatih</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('tibbiyya')">
         <h3>സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ</h3>
         <span>Salat Tibbiyya / Shifa</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('nuraniyya')">
         <h3>സ്വലാത്തുന്നൂറാനിയ്യ</h3>
         <span>Salat Nuraniyya</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('saadah')">
         <h3>സ്വലാത്തുസ്സആദ</h3>
         <span>Salat Saadah</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('kamaliyya')">
         <h3>സ്വലാത്തുൽ കമാലിയ്യ</h3>
         <span>Salat Kamaliyya</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('dhatiyya')">
         <h3>സ്വലാത്തുദ്ദാതിയ്യ</h3>
         <span>Salat Dhatiyya</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('jawharat')">
         <h3>ജൗഹറത്തുൽ കമാൽ</h3>
         <span>Jawharat al-Kamal</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('taj')">
         <h3>ദുറൂദുത്താജ്</h3>
         <span>Durood Taj</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('faraj')">
         <h3>സ്വലാത്തുൽ ഫറജ്</h3>
         <span>Salat al-Faraj</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('bashair')">
         <h3>ബശാഇറുൽ ഖൈറാത്ത്</h3>
         <span>Bashairul Khairat</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('ahlam')">
         <h3>സ്വലാത്തുൽ അഹ്‌ലാം</h3>
         <span>Salat al-Ahlam</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('hulo')">
         <h3>സ്വലാത്തുൽ ഹുലൂർ</h3>
         <span>Salat al-Hulo</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('friday')">
         <h3>വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്</h3>
         <span>Friday Swalath</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('mashishiyya')">
         <h3>സ്വലാത്തുൽ മശീഷിയ്യ</h3>
         <span>Salat al-Mashishiyya</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('ummiyya')">
         <h3>സ്വലാത്തുൽ ഉമ്മിയ്യ</h3>
         <span>Salat al-Ummiyya</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('shadhiliyya')">
         <h3>സ്വലാത്തുശ്ശാദിലിയ്യ</h3>
         <span>Salat al-Shadhiliyya</span>
     </div>
 
-
     <div class="swalath-card" onclick="openSwalath('anwar')">
         <h3>സ്വലാത്തുൽ അന്വാർ</h3>
         <span>Salat al-Anwar</span>
     </div>
-
 
     <div class="swalath-card" onclick="openSwalath('yaqutat')">
         <h3>സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്</h3>
@@ -480,9 +425,7 @@ body{
 
     <h2 id="detailTitle" class="detail-title"></h2>
 
-
     <div id="arabicText" class="arabic"></div>
-
 
     <div class="counter-box">
 
@@ -497,7 +440,6 @@ body{
             📿 ചൊല്ലി — Count കൂട്ടുക
 
         </button>
-
 
         <button
             class="reset-button"
@@ -578,26 +520,31 @@ body{
 
     <!-- SHARE CARD -->
 
-    <div class="share-actions">
+    <div class="share-card-section">
 
-        <button
-            type="button"
-            class="share-card-btn"
-            onclick="shareCurrentSwalath()">
+        <div class="share-card-actions">
 
-            📤 Share Card
+            <button
+                type="button"
+                class="share-card-btn share-card-share"
+                onclick="shareCurrentSwalath()">
 
-        </button>
+                <span class="share-card-icon">📤</span>
+                Share Card
 
+            </button>
 
-        <button
-            type="button"
-            class="save-card-btn"
-            onclick="saveCurrentSwalathCard()">
+            <button
+                type="button"
+                class="share-card-btn share-card-save"
+                onclick="saveCurrentSwalathCard()">
 
-            🖼️ Save Image
+                <span class="share-card-icon">🖼️</span>
+                Save Image
 
-        </button>
+            </button>
+
+        </div>
 
     </div>
 
@@ -915,15 +862,15 @@ function prepareSwalathShare(data){
 
     currentSwalathForShare = {
 
-        title: data.name || "സ്വലാത്ത്",
+        title:data.name || "സ്വലാത്ത്",
 
-        arabic: data.arabic || "",
+        arabic:data.arabic || "",
 
-        pronunciation: data.pronunciation || "",
+        pronunciation:data.pronunciation || "",
 
-        meaning: data.meaning || "",
+        meaning:data.meaning || "",
 
-        extra: data.fadheela || ""
+        extra:data.fadheela || ""
 
     };
 
@@ -941,11 +888,10 @@ async function shareCurrentSwalath(){
         alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
 
         return;
+
     }
 
-    if(
-        typeof shareIslamicCard === "function"
-    ){
+    if(typeof shareIslamicCard === "function"){
 
         try{
 
@@ -984,11 +930,10 @@ async function saveCurrentSwalathCard(){
         alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
 
         return;
+
     }
 
-    if(
-        typeof saveIslamicCard === "function"
-    ){
+    if(typeof saveIslamicCard === "function"){
 
         try{
 
@@ -1020,7 +965,7 @@ async function saveCurrentSwalathCard(){
    OPEN SWALATH
    ========================================================= */
 
-function openSwalath(name, addHistory = true){
+function openSwalath(name,addHistory=true){
 
     if(!swalathData[name]){
 
@@ -1028,24 +973,13 @@ function openSwalath(name, addHistory = true){
 
     }
 
-    currentSwalath = name;
+    currentSwalath=name;
 
-    const data = swalathData[name];
+    const data=swalathData[name];
 
-
-    /* SHARE CARD DATA */
 
     prepareSwalathShare(data);
 
-
-    /*
-       IMPORTANT:
-       ഓരോ Swalath തുറക്കുമ്പോഴും browser history-ൽ
-       ഒരു പുതിയ entry ഉണ്ടാക്കുന്നു.
-
-       അതിനാൽ Android system Back അമർത്തുമ്പോൾ
-       app close ആകാതെ previous state-ലേക്ക് വരും.
-    */
 
     if(addHistory){
 
@@ -1055,16 +989,12 @@ function openSwalath(name, addHistory = true){
             encodeURIComponent(name);
 
         history.pushState(
-
             {
                 page:"swalath",
                 swalath:name
             },
-
             "",
-
             newUrl
-
         );
 
     }
@@ -1121,21 +1051,16 @@ function openSwalath(name, addHistory = true){
     ).textContent=count;
 
 
-    /* FAVOURITE */
-
     let favorites=[];
 
 
     try{
 
-        favorites =
-            JSON.parse(
-
-                localStorage.getItem(
-                    "swalathFavorites"
-                ) || "[]"
-
-            );
+        favorites=JSON.parse(
+            localStorage.getItem(
+                "swalathFavorites"
+            ) || "[]"
+        );
 
 
         if(!Array.isArray(favorites)){
@@ -1163,20 +1088,14 @@ function openSwalath(name, addHistory = true){
 
     if(isFavorite){
 
-        button.classList.add(
-            "active"
-        );
-
+        button.classList.add("active");
 
         button.textContent =
             "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്";
 
     }else{
 
-        button.classList.remove(
-            "active"
-        );
-
+        button.classList.remove("active");
 
         button.textContent =
             "♡ Favourite ആയി ചേർക്കുക";
@@ -1184,15 +1103,13 @@ function openSwalath(name, addHistory = true){
     }
 
 
-    /* PDF */
-
     const pdfArea =
         document.getElementById(
             "pdfArea"
         );
 
 
-    if(name === "bashair"){
+    if(name==="bashair"){
 
         pdfArea.innerHTML=`
 
@@ -1237,7 +1154,6 @@ function showCollection(){
 
     currentSwalathForShare=null;
 
-
     document.title="സ്വലാത്ത് ശേഖരം";
 
 }
@@ -1249,18 +1165,9 @@ function showCollection(){
 
 function goBack(){
 
-    /*
-       Detail page-ൽ നിന്ന് back ചെയ്യുമ്പോൾ
-       browser history-യിലെ Swalath hash entry
-       remove ചെയ്ത് collection state-ലേക്ക് വരുന്നു.
-    */
-
     if(
-
         window.location.hash &&
-
-        history.length > 1
-
+        history.length>1
     ){
 
         history.back();
@@ -1269,17 +1176,12 @@ function goBack(){
 
         showCollection();
 
-
         history.replaceState(
-
             {
                 page:"collection"
             },
-
             "",
-
             window.location.pathname
-
         );
 
     }
@@ -1292,40 +1194,26 @@ function goBack(){
    ========================================================= */
 
 window.addEventListener(
-
     "popstate",
-
-    function(event){
+    function(){
 
         const hash =
             decodeURIComponent(
-
                 window.location.hash.replace(
                     "#",
                     ""
                 )
-
             );
 
 
-        /*
-           Hash ഉണ്ടെങ്കിൽ Swalath detail കാണിക്കുക.
-        */
-
         if(
-
             hash &&
-
             swalathData[hash]
-
         ){
 
             openSwalath(
-
                 hash,
-
                 false
-
             );
 
             return;
@@ -1333,14 +1221,9 @@ window.addEventListener(
         }
 
 
-        /*
-           Hash ഇല്ലെങ്കിൽ collection page കാണിക്കുക.
-        */
-
         showCollection();
 
     }
-
 );
 
 
@@ -1363,13 +1246,8 @@ function countSwalath(){
 
     let count =
         parseInt(
-
-            localStorage.getItem(
-                key
-            ) || "0",
-
+            localStorage.getItem(key) || "0",
             10
-
         );
 
 
@@ -1384,11 +1262,8 @@ function countSwalath(){
 
 
     localStorage.setItem(
-
         key,
-
         String(count)
-
     );
 
 
@@ -1417,11 +1292,8 @@ function resetCount(){
 
 
     localStorage.setItem(
-
         key,
-
         "0"
-
     );
 
 
@@ -1450,14 +1322,11 @@ function favoriteSwalath(){
 
     try{
 
-        favorites =
-            JSON.parse(
-
-                localStorage.getItem(
-                    "swalathFavorites"
-                ) || "[]"
-
-            );
+        favorites=JSON.parse(
+            localStorage.getItem(
+                "swalathFavorites"
+            ) || "[]"
+        );
 
 
         if(!Array.isArray(favorites)){
@@ -1485,25 +1354,17 @@ function favoriteSwalath(){
         );
 
 
-    if(index !== -1){
+    if(index!==-1){
 
         favorites.splice(
-
             index,
-
             1
-
         );
 
 
         localStorage.setItem(
-
             "swalathFavorites",
-
-            JSON.stringify(
-                favorites
-            )
-
+            JSON.stringify(favorites)
         );
 
 
@@ -1523,13 +1384,8 @@ function favoriteSwalath(){
 
 
         localStorage.setItem(
-
             "swalathFavorites",
-
-            JSON.stringify(
-                favorites
-            )
-
+            JSON.stringify(favorites)
         );
 
 
@@ -1596,65 +1452,38 @@ function searchSwalath(){
    ========================================================= */
 
 window.addEventListener(
-
     "DOMContentLoaded",
-
     function(){
 
         const hash =
             decodeURIComponent(
-
                 window.location.hash.replace(
                     "#",
                     ""
                 )
-
             );
 
 
-        /*
-           Direct link:
-           swalath.html#ibrahimiyya
-        */
-
         if(
-
             hash &&
-
             swalathData[hash]
-
         ){
 
-            /*
-               replaceState ഉപയോഗിക്കുന്നു.
-               കാരണം initial page load-ൽ
-               duplicate history entry ഉണ്ടാക്കേണ്ടതില്ല.
-            */
-
             history.replaceState(
-
                 {
                     page:"swalath",
                     swalath:hash
                 },
-
                 "",
-
                 window.location.pathname +
-
                 "#" +
-
                 encodeURIComponent(hash)
-
             );
 
 
             openSwalath(
-
                 hash,
-
                 false
-
             );
 
         }else{
@@ -1664,7 +1493,6 @@ window.addEventListener(
         }
 
     }
-
 );
 
 </script>
