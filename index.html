@@ -2,1529 +2,603 @@
 <html lang="ml">
 
 <head>
-
 <meta charset="UTF-8">
-
-<link rel="manifest" href="manifest.json">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
 <title>സ്വലാത്ത്</title>
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
+<link rel="stylesheet" href="style.css">
 
 <style>
-
 /* =========================
-   SWALATH SPLASH SCREEN
+   SPLASH SCREEN
 ========================= */
-
 #splashScreen {
-
     position: fixed;
     inset: 0;
-
-    background: #123d34;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     z-index: 100000;
-
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity 0.6s ease,
-        visibility 0.6s ease;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #092b25, #123d34, #1d5143);
+    color: #f1dfb0;
+    transition: opacity .6s ease, visibility .6s ease;
 }
 
 #splashScreen.hide {
-
     opacity: 0;
     visibility: hidden;
-
     pointer-events: none;
-
 }
 
 .splash-content {
-
+    width: 90%;
+    max-width: 360px;
     text-align: center;
-    padding: 25px;
-
-    animation: splashFade 1s ease;
-
+    padding: 30px 20px;
 }
 
 .splash-moon {
-
-    font-size: 58px;
-
-    margin-bottom: 10px;
-
-    animation:
-        moonFloat 2s ease-in-out infinite;
-
+    font-size: 66px;
+    margin-bottom: 18px;
+    animation: moonFloat 2s ease-in-out infinite;
 }
 
 .splash-content h1 {
-
-    margin: 0;
-
+    font-size: 34px;
+    margin: 0 0 14px;
     color: #f1dfb0;
-
-    font-size: 38px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
 }
 
 .splash-content p {
-
-    margin: 12px 0 22px;
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    line-height: 1.8;
-
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0;
+    color: #fff8e8;
 }
 
 .splash-loader {
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 7px;
-
-}
-
-.splash-loader span {
-
-    width: 8px;
-    height: 8px;
-
+    width: 38px;
+    height: 38px;
+    border: 3px solid rgba(241,223,176,.25);
+    border-top-color: #f1dfb0;
     border-radius: 50%;
-
-    background: #f1dfb0;
-
-    animation:
-        splashLoading 1.2s infinite ease-in-out;
-
+    margin: 30px auto 0;
+    animation: splashSpin .9s linear infinite;
 }
 
-.splash-loader span:nth-child(2) {
-
-    animation-delay: 0.15s;
-
-}
-
-.splash-loader span:nth-child(3) {
-
-    animation-delay: 0.3s;
-
-}
-
-@keyframes splashLoading {
-
-    0%,
-    60%,
-    100% {
-
-        transform: translateY(0);
-
-        opacity: 0.45;
-
-    }
-
-    30% {
-
-        transform: translateY(-7px);
-
-        opacity: 1;
-
-    }
-
+@keyframes splashSpin {
+    to { transform: rotate(360deg); }
 }
 
 @keyframes moonFloat {
-
-    0%,
-    100% {
-
-        transform: translateY(0);
-
-    }
-
-    50% {
-
-        transform: translateY(-6px);
-
-    }
-
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
-
-@keyframes splashFade {
-
-    from {
-
-        opacity: 0;
-        transform: translateY(10px);
-
-    }
-
-    to {
-
-        opacity: 1;
-        transform: translateY(0);
-
-    }
-
-}
-
 
 /* =========================
-   EXTRA FEATURES
+   NAZYAN TRAVELS POPUP
 ========================= */
+.travel-ad-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,.72);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
 
-.search-box {
-
+.travel-ad {
+    position: relative;
     width: 100%;
+    max-width: 390px;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: #fffdf7;
+    color: #25352e;
+    border-radius: 22px;
+    padding: 27px 20px 22px;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0,0,0,.3);
+    animation: popupAppear .35s ease;
+}
 
-    padding: 13px 16px;
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
-    border: 1px solid #e6dfd0;
+.travel-ad-close {
+    position: absolute;
+    top: 9px;
+    right: 11px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: #e9e5da;
+    color: #123d34;
+    font-size: 23px;
+    line-height: 1;
+    cursor: pointer;
+}
 
-    border-radius: 14px;
+.travel-ad-moon {
+    font-size: 35px;
+    margin: 0 0 7px;
+}
 
-    outline: none;
+.travel-ad h2 {
+    color: #123d34;
+    font-size: 23px;
+    margin: 5px 0 7px;
+}
 
+.travel-ad-tagline {
+    color: #9b7932;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin: 0 0 18px;
+}
+
+.travel-ad-services {
+    border-top: 1px solid #e7dfcc;
+    border-bottom: 1px solid #e7dfcc;
+    padding: 13px 5px;
+    margin: 15px 0;
     font-size: 14px;
+    line-height: 1.9;
+    color: #29473c;
+}
 
+.travel-ad-countries {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 12px 0;
+}
+
+.travel-ad-message {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 13px 0;
+}
+
+.travel-ad-whatsapp {
+    display: inline-block;
+    background: #123d34;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 8px 0 12px;
+}
+
+.travel-ad-whatsapp:active {
+    transform: scale(.98);
+}
+
+.travel-ad-dua {
+    color: #8a6a2d;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 8px 0 0;
+}
+
+body.dark-mode .travel-ad {
+    background: #202720;
+    color: #eee;
+}
+
+body.dark-mode .travel-ad h2 {
+    color: #f1dfb0;
+}
+
+body.dark-mode .travel-ad-services {
+    color: #e4e4d8;
+    border-color: #454b43;
+}
+
+body.dark-mode .travel-ad-countries,
+body.dark-mode .travel-ad-message {
+    color: #ccc;
+}
+
+body.dark-mode .travel-ad-close {
+    background: #3b433b;
+    color: #fff;
+}
+
+/* =========================
+   SEARCH
+========================= */
+.search-box {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #e6dfd0;
+    border-radius: 14px;
+    outline: none;
+    font-size: 14px;
     margin-bottom: 15px;
-
     background: white;
-
     color: #222;
-
+    box-sizing: border-box;
 }
 
 .search-box:focus {
-
     border-color: #123d34;
-
 }
 
+/* =========================
+   DARK BUTTON
+========================= */
 .feature-buttons {
-
     display: flex;
-
     justify-content: center;
-
     gap: 10px;
-
     margin-bottom: 18px;
-
 }
 
 .dark-button {
-
     border: none;
-
     background: #123d34;
-
     color: white;
-
     padding: 10px 16px;
-
     border-radius: 25px;
-
     cursor: pointer;
-
     font-size: 13px;
-
 }
-
-
-/* =================================================
-   PRAYER TIMES
-================================================= */
-
-.prayer-section {
-
-    margin: 18px 0 22px;
-
-    padding: 20px;
-
-    border-radius: 22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #123d34,
-            #1d5548
-        );
-
-    color: white;
-
-    box-shadow:
-        0 12px 30px rgba(18,61,52,0.18);
-
-}
-
-.prayer-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 15px;
-
-}
-
-.prayer-title {
-
-    margin: 0;
-
-    font-size: 20px;
-
-}
-
-.prayer-location {
-
-    margin: 5px 0 0;
-
-    font-size: 12px;
-
-    opacity: 0.75;
-
-}
-
-.prayer-refresh {
-
-    border: none;
-
-    background: rgba(255,255,255,0.12);
-
-    color: white;
-
-    width: 38px;
-
-    height: 38px;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    font-size: 18px;
-
-}
-
-.prayer-next {
-
-    background: rgba(255,255,255,0.10);
-
-    border: 1px solid rgba(255,255,255,0.10);
-
-    border-radius: 16px;
-
-    padding: 13px 15px;
-
-    margin-bottom: 14px;
-
-}
-
-.prayer-next-label {
-
-    font-size: 11px;
-
-    opacity: 0.7;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.7px;
-
-}
-
-.prayer-next-name {
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    margin-top: 3px;
-
-}
-
-.prayer-countdown {
-
-    font-size: 13px;
-
-    margin-top: 3px;
-
-    color: #f1dfb0;
-
-    font-weight: bold;
-
-}
-
-.prayer-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, 1fr);
-
-    gap: 6px;
-
-}
-
-.prayer-item {
-
-    text-align: center;
-
-    padding: 10px 4px;
-
-    border-radius: 13px;
-
-    background: rgba(255,255,255,0.08);
-
-}
-
-.prayer-item.active {
-
-    background: #f1dfb0;
-
-    color: #123d34;
-
-}
-
-.prayer-name {
-
-    display: block;
-
-    font-size: 10px;
-
-    opacity: 0.75;
-
-    margin-bottom: 4px;
-
-}
-
-.prayer-time {
-
-    display: block;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-}
-
-.prayer-status {
-
-    text-align: center;
-
-    margin: 12px 0 0;
-
-    font-size: 11px;
-
-    opacity: 0.65;
-
-}
-
 
 /* =========================
-   PRAYER MENU CARD
+   ADVERTISING PROGRAM
 ========================= */
-
-.prayer-menu-card {
-
-    position: relative;
-
+.advertising-page {
+    display: none;
 }
 
-.prayer-menu-badge {
+.advertising-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-    position: absolute;
+.advertising-back {
+    border: none;
+    background: #123d34;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+}
 
-    top: 9px;
-
-    right: 9px;
-
-    font-size: 9px;
-
-    padding: 3px 6px;
-
+.advertising-card {
+    background: white;
+    border: 1px solid #e6dfd0;
     border-radius: 20px;
-
-    background: #f1dfb0;
-
-    color: #123d34;
-
-    font-weight: bold;
-
+    padding: 20px 17px;
+    margin-bottom: 14px;
+    box-shadow: 0 5px 18px rgba(18,61,52,.05);
 }
 
+.advertising-title {
+    text-align: center;
+    color: #123d34;
+    margin-bottom: 8px;
+}
+
+.advertising-subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.advertising-card h3 {
+    color: #123d34;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.advertising-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.advertising-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.advertising-list li {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.advertising-contact {
+    text-align: center;
+    background: #123d34;
+    color: white;
+    border-radius: 20px;
+    padding: 22px 15px;
+    margin-bottom: 14px;
+}
+
+.advertising-contact h3 {
+    color: white;
+    margin-bottom: 12px;
+}
+
+.advertising-contact p {
+    color: white;
+    margin-bottom: 8px;
+}
+
+.advertising-contact a {
+    display: inline-block;
+    text-decoration: none;
+    background: #f1dfb0;
+    color: #123d34;
+    padding: 11px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.advertising-footer {
+    text-align: center;
+    padding: 10px 5px 20px;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.7;
+}
 
 /* =========================
    DARK MODE
 ========================= */
-
 body.dark-mode {
-
     background: #111;
     color: #eee;
-
 }
 
 body.dark-mode .app {
-
     background: #181818;
-
 }
 
 body.dark-mode .welcome p {
-
     color: #aaa;
-
 }
 
 body.dark-mode .menu-card {
-
     background: #222;
-
     border-color: #444;
-
     color: #eee;
-
 }
 
 body.dark-mode .menu-card span {
-
     color: #aaa;
-
 }
 
 body.dark-mode .search-box {
-
     background: #222;
-
     color: white;
-
     border-color: #444;
-
 }
 
 body.dark-mode #collectionSection h2,
 body.dark-mode #favoritesSection h2 {
-
     color: #fff;
-
 }
 
 body.dark-mode .dark-button {
-
     background: #f1dfb0;
-
     color: #123d34;
-
 }
 
 body.dark-mode .favorite-item,
 body.dark-mode .collection-item {
-
     background: #222 !important;
-
     border-color: #444 !important;
-
     color: #fff !important;
-
 }
 
 body.dark-mode footer {
-
     color: #777;
-
 }
 
-
-/* =================================================
-   NAZYAN TRAVELS POPUP
-================================================= */
-
-.travel-ad-overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.72);
-
-    display: none;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 18px;
-
-    z-index: 99999;
-
-}
-
-.travel-ad {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 420px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    box-sizing: border-box;
-
-    background: #fff;
-
-    border-radius: 22px;
-
-    padding: 28px 22px 24px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.35);
-
-}
-
-.travel-ad h2 {
-
-    margin: 0 0 18px;
-
-    font-size: 28px;
-
-    letter-spacing: 1px;
-
-    color: #123d34;
-
-}
-
-.travel-ad-close {
-
-    position: absolute;
-
-    top: 10px;
-
-    right: 12px;
-
-    width: 34px;
-
-    height: 34px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #eeeeee;
-
-    color: #333;
-
-    font-size: 25px;
-
-    line-height: 34px;
-
-    cursor: pointer;
-
-}
-
-.travel-services {
-
-    font-size: 15px;
-
-    line-height: 1.9;
-
-    font-weight: bold;
-
-    color: #222;
-
-}
-
-.travel-countries {
-
-    margin: 14px 0;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-
-    color: #555;
-
-}
-
-.travel-tagline {
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    color: #123d34;
-
-    margin: 12px 0;
-
-}
-
-.travel-whatsapp {
-
-    display: inline-block;
-
-    text-decoration: none;
-
-    background: #25D366;
-
-    color: white;
-
-    padding: 12px 22px;
-
-    border-radius: 25px;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    margin: 5px 0 12px;
-
-}
-
-.travel-ad hr {
-
-    border: none;
-
-    border-top: 1px solid #ddd;
-
-    margin: 10px 0 15px;
-
-}
-
-.swalath-note {
-
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    color: #555;
-
-    margin: 9px 0;
-
-}
-
-.dua-note {
-
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    font-weight: bold;
-
-    color: #123d34;
-
-    margin-top: 14px;
-
-}
-
-
-/* =========================
-   POPUP DARK MODE
-========================= */
-
-body.dark-mode .travel-ad {
-
+body.dark-mode .advertising-card {
     background: #222;
-
+    border-color: #444;
 }
 
-body.dark-mode .travel-ad h2,
-body.dark-mode .travel-tagline,
-body.dark-mode .dua-note {
-
+body.dark-mode .advertising-title,
+body.dark-mode .advertising-card h3 {
     color: #f1dfb0;
-
 }
 
-body.dark-mode .travel-services {
-
-    color: #eee;
-
+body.dark-mode .advertising-subtitle,
+body.dark-mode .advertising-card p,
+body.dark-mode .advertising-list li {
+    color: #ccc;
 }
 
-body.dark-mode .travel-countries,
-body.dark-mode .swalath-note {
-
-    color: #bbb;
-
+body.dark-mode .advertising-contact {
+    background: #123d34;
 }
 
-body.dark-mode .prayer-section {
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.35);
-
-}
-
-
-/* =========================
-   SMALL SCREEN
-========================= */
-
-@media (max-width: 360px){
-
-    .prayer-grid {
-
-        gap: 4px;
-
+@media (max-width: 360px) {
+    .travel-ad {
+        padding: 25px 15px 18px;
     }
 
-    .prayer-item {
-
-        padding: 9px 2px;
-
+    .travel-ad h2 {
+        font-size: 21px;
     }
-
-    .prayer-time {
-
-        font-size: 11px;
-
-    }
-
-    .prayer-name {
-
-        font-size: 9px;
-
-    }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =================================================
-     SWALATH SPLASH SCREEN
-================================================= -->
-
+<!-- =========================
+     SPLASH SCREEN
+========================= -->
 <div id="splashScreen">
-
     <div class="splash-content">
-
-        <div class="splash-moon">
-            🌙
-        </div>
-
-        <h1>
-            സ്വലാത്ത്
-        </h1>
-
+        <div class="splash-moon">🌙</div>
+        <h1>സ്വലാത്ത്</h1>
         <p>
-            തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>
+            തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ
             മനോഹരമായ വഴികൾ
         </p>
-
-        <div class="splash-loader">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </div>
-
+        <div class="splash-loader"></div>
     </div>
-
 </div>
 
-
-
 <div class="app">
-
 
 <!-- =========================
      HERO
 ========================= -->
-
 <section class="hero">
-
-    <div class="moon">
-        🌙
-    </div>
-
-    <h1>
-        സ്വലാത്ത്
-    </h1>
-
+    <div class="moon">🌙</div>
+    <h1>സ്വലാത്ത്</h1>
     <p>
         തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ
         മനോഹരമായ വഴികൾ
     </p>
-
 </section>
-
-
 
 <main>
 
-
-<!-- =========================
-     WELCOME
-========================= -->
-
+<!-- WELCOME -->
 <section class="welcome">
-
-    <h2>
-        അസ്സലാമു അലൈക്കും
-    </h2>
-
+    <h2>അസ്സലാമു അലൈക്കും</h2>
     <p>
         സ്വലാത്തുകൾ ചൊല്ലാനും
         വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം
     </p>
-
 </section>
 
-
-
-<!-- =========================
-     TODAY
-========================= -->
-
+<!-- TODAY -->
 <section class="today">
-
-    <div class="small-title">
-        TODAY
-    </div>
-
-    <h2 id="count">
-        0
-    </h2>
-
-    <p>
-        ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ
-    </p>
-
-    <button
-        onclick="increaseCount()"
-    >
-        ﷺ സ്വലാത്ത് ചൊല്ലി
-    </button>
-
+    <div class="small-title">TODAY</div>
+    <h2 id="count">0</h2>
+    <p>ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
+    <button onclick="increaseCount()">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
 </section>
 
-
-
-<!-- =================================================
-     PRAYER TIMES
-================================================= -->
-
-<section
-    id="prayerSection"
-    class="prayer-section"
->
-
-    <div class="prayer-top">
-
-        <div>
-
-            <h2 class="prayer-title">
-                🕌 നമസ്കാര സമയങ്ങൾ
-            </h2>
-
-            <p
-                id="prayerLocation"
-                class="prayer-location"
-            >
-                📍 Kerala — Ottappalam
-            </p>
-
-        </div>
-
-
-        <button
-            class="prayer-refresh"
-            onclick="loadPrayerTimes(true)"
-            aria-label="Refresh prayer times"
-        >
-            ↻
-        </button>
-
-    </div>
-
-
-    <div class="prayer-next">
-
-        <div class="prayer-next-label">
-            NEXT PRAYER
-        </div>
-
-        <div
-            id="nextPrayerName"
-            class="prayer-next-name"
-        >
-            സമയം ലഭ്യമാക്കുന്നു...
-        </div>
-
-        <div
-            id="prayerCountdown"
-            class="prayer-countdown"
-        >
-            --
-        </div>
-
-    </div>
-
-
-    <div
-        id="prayerGrid"
-        class="prayer-grid"
-    >
-
-        <div class="prayer-item">
-
-            <span class="prayer-name">
-                Fajr
-            </span>
-
-            <span
-                id="fajrTime"
-                class="prayer-time"
-            >
-                --:--
-            </span>
-
-        </div>
-
-
-        <div class="prayer-item">
-
-            <span class="prayer-name">
-                Dhuhr
-            </span>
-
-            <span
-                id="dhuhrTime"
-                class="prayer-time"
-            >
-                --:--
-            </span>
-
-        </div>
-
-
-        <div class="prayer-item">
-
-            <span class="prayer-name">
-                Asr
-            </span>
-
-            <span
-                id="asrTime"
-                class="prayer-time"
-            >
-                --:--
-            </span>
-
-        </div>
-
-
-        <div class="prayer-item">
-
-            <span class="prayer-name">
-                Maghrib
-            </span>
-
-            <span
-                id="maghribTime"
-                class="prayer-time"
-            >
-                --:--
-            </span>
-
-        </div>
-
-
-        <div class="prayer-item">
-
-            <span class="prayer-name">
-                Isha
-            </span>
-
-            <span
-                id="ishaTime"
-                class="prayer-time"
-            >
-                --:--
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <p
-        id="prayerStatus"
-        class="prayer-status"
-    >
-        Kerala prayer times loading...
-    </p>
-
-</section>
-
-
-
-<!-- =========================
-     DARK MODE
-========================= -->
-
+<!-- DARK MODE -->
 <div class="feature-buttons">
-
     <button
         id="darkModeButton"
         class="dark-button"
         onclick="toggleDarkMode()"
-    >
-        🌙 Dark Mode
-    </button>
-
+    >🌙 Dark Mode</button>
 </div>
 
-
-
-<!-- =================================================
-     MAIN MENU
-================================================= -->
-
+<!-- MAIN MENU -->
 <div class="menu-grid">
 
-
-    <!-- 1. SWALATH -->
-
-    <div
-        class="menu-card"
-        onclick="openCollection()"
-    >
-
-        <div style="font-size:30px;">
-            🕌
-        </div>
-
-        <strong>
-            സ്വലാത്തുകൾ
-        </strong>
-
-        <span>
-            വിവിധ സ്വലാത്തുകൾ വായിക്കാം
-        </span>
-
+    <div class="menu-card" onclick="openQuran()">
+        <div style="font-size:30px;">📖</div>
+        <strong>القرآن الكريم</strong>
+        <span>ഖുർആൻ</span>
     </div>
 
-
-    <!-- 2. QURAN -->
-
-    <div
-        class="menu-card"
-        onclick="openQuran()"
-    >
-
-        <div style="font-size:30px;">
-            📖
-        </div>
-
-        <strong>
-            القرآن الكريم
-        </strong>
-
-        <span>
-            ഖുർആൻ വായിക്കാം
-        </span>
-
+    <div class="menu-card" onclick="openCollection()">
+        <div style="font-size:30px;">🕌</div>
+        <strong>സ്വലാത്തുകൾ</strong>
+        <span>വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
     </div>
 
-
-    <!-- 3. QURAN MP3 -->
-
-    <div
-        class="menu-card"
-        onclick="openQuranMP3()"
-    >
-
-        <div style="font-size:30px;">
-            🎧
-        </div>
-
-        <strong>
-            Quran MP3
-        </strong>
-
-        <span>
-            ഖുർആൻ കേൾക്കാം
-        </span>
-
+    <div class="menu-card" onclick="openQuranMP3()">
+        <div style="font-size:30px;">🎧</div>
+        <strong>Quran MP3</strong>
+        <span>ഖുർആൻ കേൾക്കാം</span>
     </div>
 
-
-    <!-- 4. DUA -->
-
-    <div
-        class="menu-card"
-        onclick="openDua()"
-    >
-
-        <div style="font-size:30px;">
-            🤲
-        </div>
-
-        <strong>
-            ദുആകൾ
-        </strong>
-
-        <span>
-            വിവിധ ദുആകൾ
-        </span>
-
+    <div class="menu-card" onclick="openPrayerTimes()">
+        <div style="font-size:30px;">🕐</div>
+        <strong>Prayer Times</strong>
+        <span>നമസ്കാര സമയവും Adhan-ഉം</span>
     </div>
 
-
-    <!-- 5. ASMAUL HUSNA -->
-
-    <div
-        class="menu-card"
-        onclick="openAsmaulHusna()"
-    >
-
-        <div style="font-size:30px;">
-            ✨
-        </div>
-
-        <strong>
-            أَسْمَاءُ الْحُسْنَى
-        </strong>
-
-        <span>
-            أسماء الله الحسنى
-        </span>
-
+    <div class="menu-card" onclick="openDua()">
+        <div style="font-size:30px;">🤲</div>
+        <strong>ദുആകൾ</strong>
+        <span>വിവിധ ദുആകൾ</span>
     </div>
 
-
-    <!-- 6. DHIKR -->
-
-    <div
-        class="menu-card"
-        onclick="openDhikr()"
-    >
-
-        <div style="font-size:30px;">
-            📿
-        </div>
-
-        <strong>
-            ദിക്ർ
-        </strong>
-
-        <span>
-            ദിക്ർ ചൊല്ലാം
-        </span>
-
+    <div class="menu-card" onclick="openDhikr()">
+        <div style="font-size:30px;">📿</div>
+        <strong>ദിക്ർ</strong>
+        <span>ദിക്ർ ചൊല്ലാം</span>
     </div>
 
-
-    <!-- 7. TASBEEH -->
-
-    <div
-        class="menu-card"
-        onclick="openTasbeeh()"
-    >
-
-        <div style="font-size:30px;">
-            🔢
-        </div>
-
-        <strong>
-            തസ്ബീഹ്
-        </strong>
-
-        <span>
-            ഡിജിറ്റൽ കൗണ്ടർ
-        </span>
-
+    <div class="menu-card" onclick="openQibla()">
+        <div style="font-size:30px;">🧭</div>
+        <strong>Qibla</strong>
+        <span>ഖിബ്‌ല ദിശ കണ്ടെത്താം</span>
     </div>
 
-
-    <!-- 8. DAILY AZKAR -->
-
-    <div
-        class="menu-card"
-        onclick="openAzkar()"
-    >
-
-        <div style="font-size:30px;">
-            🌙
-        </div>
-
-        <strong>
-            Daily Azkar
-        </strong>
-
-        <span>
-            ദിവസേനയുള്ള അദ്കാർ
-        </span>
-
+    <div class="menu-card" onclick="openFavorites()">
+        <div style="font-size:30px;">❤️</div>
+        <strong>My Favourites</strong>
+        <span>Favourite ആയി ചേർത്തവ</span>
     </div>
 
-
-    <!-- 9. PRAYER TIMES -->
-
-    <div
-        class="menu-card prayer-menu-card"
-        onclick="scrollToPrayerTimes()"
-    >
-
-        <span class="prayer-menu-badge">
-            TODAY
-        </span>
-
-        <div style="font-size:30px;">
-            🕰️
-        </div>
-
-        <strong>
-            Prayer Times
-        </strong>
-
-        <span>
-            ഇന്നത്തെ നമസ്കാര സമയങ്ങൾ
-        </span>
-
+    <div class="menu-card" onclick="openAsmaulHusna()">
+        <div style="font-size:30px;">⭐</div>
+        <strong>أَسْمَاءُ الْحُسْنَى</strong>
+        <span>أسماء الله الحسنى</span>
     </div>
 
-
-    <!-- 10. SALAH GUIDE -->
-
-    <div
-        class="menu-card"
-        onclick="openSalahGuide()"
-    >
-
-        <div style="font-size:30px;">
-            🕌
-        </div>
-
-        <strong>
-            Salah Guide
-        </strong>
-
-        <span>
-            നമസ്കാര മാർഗ്ഗനിർദ്ദേശം
-        </span>
-
+    <div class="menu-card" onclick="openUmrah()">
+        <div style="font-size:30px;">🕋</div>
+        <strong>ഉംറ</strong>
+        <span>ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
     </div>
 
-
-    <!-- 11. DAILY REMINDER -->
-
-    <div
-        class="menu-card"
-        onclick="openDailyReminder()"
-    >
-
-        <div style="font-size:30px;">
-            🌅
-        </div>
-
-        <strong>
-            Daily Reminder
-        </strong>
-
-        <span>
-            ദിവസേന ഓർമ്മപ്പെടുത്തൽ
-        </span>
-
+    <div class="menu-card" onclick="openAdvertising()">
+        <div style="font-size:30px;">📢</div>
+        <strong>Advertise With Us</strong>
+        <span>Reach Malayali Audience</span>
     </div>
-
-
-    <!-- 12. DAILY ASMA -->
-
-    <div
-        class="menu-card"
-        onclick="openDailyAsma()"
-    >
-
-        <div style="font-size:30px;">
-            ⭐
-        </div>
-
-        <strong>
-            Daily Asmaul Husna
-        </strong>
-
-        <span>
-            ദിവസത്തെ ഒരു നാമം
-        </span>
-
-    </div>
-
-
-    <!-- 13. UMRAH -->
-
-    <div
-        class="menu-card"
-        onclick="openUmrah()"
-    >
-
-        <div style="font-size:30px;">
-            🕋
-        </div>
-
-        <strong>
-            ഉംറ
-        </strong>
-
-        <span>
-            ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ
-        </span>
-
-    </div>
-
-
-    <!-- 14. FAVOURITES -->
-
-    <div
-        class="menu-card"
-        onclick="openFavorites()"
-    >
-
-        <div style="font-size:30px;">
-            ❤️
-        </div>
-
-        <strong>
-            My Favourites
-        </strong>
-
-        <span>
-            Favourite ആയി ചേർത്തവ
-        </span>
-
-    </div>
-
-
-    <!-- 15. NAZYAN TRAVELS -->
-
-    <div
-        class="menu-card"
-        onclick="openNazyAN()"
-    >
-
-        <div style="font-size:30px;">
-            ✈️
-        </div>
-
-        <strong>
-            NAZYAN TRAVELS
-        </strong>
-
-        <span>
-            Travel Services
-        </span>
-
-    </div>
-
-
-    <!-- 16. ADVERTISE WITH US -->
-
-    <div
-        class="menu-card"
-        onclick="openAdvertising()"
-    >
-
-        <div style="font-size:30px;">
-            📢
-        </div>
-
-        <strong>
-            Advertise with Us
-        </strong>
-
-        <span>
-            Promote Your Business
-        </span>
-
-    </div>
-
 
 </div>
 
+<!-- COLLECTION -->
+<section id="collectionSection" style="display:none;">
 
-
-<!-- =========================
-     COLLECTION
-========================= -->
-
-<section
-    id="collectionSection"
-    style="display:none;"
->
-
-    <div
-        style="
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin-bottom:18px;
-        "
-    >
-
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
         <button
             onclick="closeCollection()"
-            style="
-                border:none;
-                background:#123d34;
-                color:white;
-                padding:9px 15px;
-                border-radius:10px;
-                cursor:pointer;
-            "
-        >
-            ← Back
-        </button>
+            style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;"
+        >← Back</button>
 
-        <h2 style="margin:0;">
-            സ്വലാത്തുകൾ
-        </h2>
-
+        <h2 style="margin:0;">സ്വലാത്തുകൾ</h2>
     </div>
-
 
     <input
         type="text"
@@ -1534,74 +608,166 @@ body.dark-mode .prayer-section {
         oninput="searchSwalath()"
     >
 
-
     <div id="collectionList"></div>
-
 </section>
 
+<!-- FAVOURITES -->
+<section id="favoritesSection" style="display:none;">
 
-
-<!-- =========================
-     FAVOURITES
-========================= -->
-
-<section
-    id="favoritesSection"
-    style="display:none;"
->
-
-    <div
-        style="
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin-bottom:18px;
-        "
-    >
-
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
         <button
             onclick="closeFavorites()"
-            style="
-                border:none;
-                background:#123d34;
-                color:white;
-                padding:9px 15px;
-                border-radius:10px;
-                cursor:pointer;
-            "
-        >
-            ← Back
-        </button>
+            style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;"
+        >← Back</button>
 
-        <h2 style="margin:0;">
-            ❤️ My Favourites
-        </h2>
-
+        <h2 style="margin:0;">❤️ My Favourites</h2>
     </div>
 
-
     <div id="favoritesList"></div>
+</section>
+
+<!-- ADVERTISING PROGRAM -->
+<section id="advertisingSection" class="advertising-page">
+
+    <div class="advertising-header">
+        <button class="advertising-back" onclick="closeAdvertising()">← Back</button>
+        <h2 style="margin:0;">Advertise With Us</h2>
+    </div>
+
+    <div class="advertising-card">
+        <h2 class="advertising-title">📢 NAZYAN ADVERTISING PROGRAM</h2>
+        <p class="advertising-subtitle">🌍 Reach a Wider Malayali Audience</p>
+
+        <p>
+            നിങ്ങളുടെ business-നെ Kerala, GCC രാജ്യങ്ങൾ,
+            ലോകമെമ്പാടുമുള്ള Malayali audience-ലേക്ക്
+            പരിചയപ്പെടുത്താൻ Swalaath app-ൽ
+            professional advertising അവസരം.
+        </p>
+
+        <p>
+            Swalaath ഒരു Islamic platform ആണ് —
+            Swalaath, Quran, Dua, Dhikr, Asmaul Husna
+            തുടങ്ങിയ Islamic content ഒരിടത്ത്
+            ലഭ്യമാക്കുന്ന app.
+        </p>
+    </div>
+
+    <div class="advertising-card">
+        <h3>✨ Why Advertise With Us?</h3>
+        <ul class="advertising-list">
+            <li>✅ Kerala, GCC & worldwide Malayali audience</li>
+            <li>✅ Strong relevance for Muslim & family-oriented audiences</li>
+            <li>✅ Professional in-app advertisement</li>
+            <li>✅ Direct WhatsApp / Call / Website link</li>
+            <li>✅ Flexible advertising duration</li>
+            <li>✅ Advertisement manually reviewed before publication</li>
+            <li>✅ Suitable & permissible businesses only</li>
+        </ul>
+    </div>
+
+    <div class="advertising-card">
+        <h3>🏢 Suitable Business Categories</h3>
+        <ul class="advertising-list">
+            <li>🍽️ Halal Restaurants & Food Businesses</li>
+            <li>📚 Islamic Products & Bookstores</li>
+            <li>🧕 Modest Fashion / Abaya</li>
+            <li>🕋 Umrah & Hajj Services</li>
+            <li>✈️ Halal Travel & Tourism</li>
+            <li>🏨 Hotels & Muslim-friendly Services</li>
+            <li>🎓 Education & Professional Services</li>
+            <li>💼 Other permissible businesses</li>
+        </ul>
+    </div>
+
+    <div class="advertising-card">
+        <h3>📦 Advertising Packages</h3>
+        <ul class="advertising-list">
+            <li>1 Month</li>
+            <li>3 Months</li>
+            <li>6 Months</li>
+            <li>12 Months</li>
+        </ul>
+
+        <p>
+            നിങ്ങളുടെ business-ന് അനുയോജ്യമായ
+            package, pricing, advertisement format,
+            placement എന്നിവയെക്കുറിച്ച് കൂടുതൽ അറിയാൻ
+            ഞങ്ങളെ contact ചെയ്യുക.
+        </p>
+    </div>
+
+    <div class="advertising-card">
+        <h3>💻 Need a Website or Mobile App?</h3>
+
+        <p>
+            നിങ്ങളുടെ business-ന് ഒരു professional
+            website അല്ലെങ്കിൽ mobile app ആവശ്യമുണ്ടോ?
+        </p>
+
+        <p>
+            നിങ്ങളുടെ business requirements അനുസരിച്ച്
+            modern websites & mobile applications
+            develop ചെയ്യാൻ ഞങ്ങളെ contact ചെയ്യുക.
+        </p>
+
+        <p style="text-align:center;font-weight:bold;color:#123d34;">
+            Your Business. Your Brand.
+            Your Digital Presence.
+        </p>
+    </div>
+
+    <div class="advertising-contact">
+        <h3>📲 Contact Us</h3>
+
+        <p><strong>WhatsApp</strong></p>
+        <p>+91 9946010375</p>
+
+        <a href="https://wa.me/919946010375" target="_blank" rel="noopener">
+            WhatsApp Us
+        </a>
+
+        <p style="margin-top:18px;"><strong>Website</strong></p>
+        <p>www.nazyantravels.com</p>
+
+        <p style="margin-top:18px;"><strong>Email</strong></p>
+        <p>nazyantravels@gmail.com</p>
+    </div>
+
+    <div class="advertising-card">
+        <h3>🛡️ Advertisement Policy</h3>
+
+        <p>
+            എല്ലാ advertisements-ഉം
+            publication-ന് മുമ്പ് manually reviewed
+            ചെയ്യുന്നതാണ്.
+        </p>
+
+        <p>
+            Suitable & permissible businesses
+            മാത്രമേ advertise ചെയ്യാൻ അനുവദിക്കൂ.
+        </p>
+
+        <p>
+            Swalaath-ന്റെ nature, values, audience
+            എന്നിവയ്ക്ക് അനുയോജ്യമല്ലാത്ത advertisements
+            reject ചെയ്യാനുള്ള അവകാശം NAZYAN TRAVELS-ൽ
+            ഉണ്ടായിരിക്കും.
+        </p>
+    </div>
+
+    <div class="advertising-footer">
+        <strong>SWALAATH</strong>
+        <br>
+        Powered by NAZYAN TRAVELS
+    </div>
 
 </section>
 
-
-
-<!-- =========================
-     NAZYAN TRAVELS
-========================= -->
-
-<section
-    id="travelSection"
-    class="travel"
->
-
-    <p>
-        TRAVEL PARTNER
-    </p>
-
-    <h2>
-        NAZYAN TRAVELS
-    </h2>
+<!-- NAZYAN TRAVELS SECTION -->
+<section id="travelSection" class="travel">
+    <p>TRAVEL PARTNER</p>
+    <h2>NAZYAN TRAVELS</h2>
 
     <span>
         Flight Tickets • Tour Packages
@@ -1609,2221 +775,465 @@ body.dark-mode .prayer-section {
         Visa • Umrah • Certificate Attestation
     </span>
 
-
-    <a
-        href="https://wa.me/919946010375"
-        target="_blank"
-    >
+    <a href="https://wa.me/919946010375" target="_blank" rel="noopener">
         WhatsApp Enquiry
     </a>
-
 </section>
-
 
 </main>
 
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
-
-    <p>
-        © 2026 Swalath
-    </p>
-
-    <p>
-        Made with ❤️
-    </p>
-
+    <p>© 2026 Swalath</p>
+    <p>Made with ❤️</p>
 </footer>
-
 
 </div>
 
-
-
-<!-- =================================================
+<!-- =========================
      NAZYAN TRAVELS POPUP
-================================================= -->
-
+========================= -->
 <div
     id="travelAd"
     class="travel-ad-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="NAZYAN TRAVELS advertisement"
 >
-
     <div class="travel-ad">
 
         <button
             class="travel-ad-close"
             onclick="closeTravelAd()"
-            aria-label="Close"
-        >
-            ×
-        </button>
+            aria-label="Close advertisement"
+        >×</button>
 
+        <div class="travel-ad-moon">🌙</div>
 
-        <h2>
-            NAZYAN TRAVELS
-        </h2>
+        <p style="font-size:11px;letter-spacing:2px;color:#9b7932;margin:0;">
+            TRAVEL PARTNER
+        </p>
 
+        <h2>NAZYAN TRAVELS</h2>
 
-        <div class="travel-services">
+        <p class="travel-ad-tagline">YOUR JOURNEY, OUR CARE</p>
 
-            ✈️ FLIGHT TICKETS<br>
-
-            🌍 TOUR PACKAGES<br>
-
-            🕋 UMRAH SERVICES<br>
-
-            🛂 VISA SERVICES<br>
-
-            📜 CERTIFICATE ATTESTATION
-
+        <div class="travel-ad-services">
+            ✈️ Flight Tickets<br>
+            🌍 Tour Packages<br>
+            🕋 Umrah Services<br>
+            🛂 Visa Services<br>
+            📄 Certificate Attestation
         </div>
 
-
-        <p class="travel-countries">
-
-            Qatar 🇶🇦 | UAE 🇦🇪 | Saudi 🇸🇦<br>
-
-            Bahrain 🇧🇭 | Kuwait 🇰🇼 | India 🇮🇳
-
+        <p class="travel-ad-countries">
+            Qatar • UAE • Saudi Arabia<br>
+            Bahrain • Kuwait • India
         </p>
-
-
-        <p class="travel-tagline">
-
-            Your Journey, Our Care.
-
-        </p>
-
 
         <a
+            class="travel-ad-whatsapp"
             href="https://wa.me/919946010375"
             target="_blank"
-            class="travel-whatsapp"
-        >
+            rel="noopener"
+        >📲 WhatsApp: +91 9946010375</a>
 
-            📲 WhatsApp / Enquiry
-
-        </a>
-
-
-        <hr>
-
-
-        <p class="swalath-note">
-
-            🤲 ഈ ആപ്പിൽ നൽകിയിട്ടുള്ള ഉള്ളടക്കങ്ങളിൽ
-            എന്തെങ്കിലും തെറ്റുകൾ ഉണ്ടായിട്ടുണ്ടെങ്കിൽ
-            ദയവായി ക്ഷമിക്കുക.
-
+        <p class="travel-ad-message">
+            ഈ ആപ്പിലെ ഉള്ളടക്കത്തിൽ എന്തെങ്കിലും പിഴവുകൾ
+            ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി ക്ഷമിക്കുക.
+            മെച്ചപ്പെടുത്താൻ ഞങ്ങൾ പരിശ്രമിച്ചുകൊണ്ടിരിക്കുന്നു.
         </p>
 
-
-        <p class="swalath-note">
-
-            അതോടൊപ്പം, എന്നെയും എന്റെ കുടുംബത്തെയും
-            നിങ്ങളുടെ പ്രാർത്ഥനകളിൽ ഉൾപ്പെടുത്തണമേ. 🤲
-
-        </p>
-
-
-        <p class="dua-note">
-
-            അല്ലാഹു നമ്മുടെ എല്ലാ ഹലാൽ ശ്രമങ്ങൾക്കും
-            ബറക്കത്ത് നൽകട്ടെ. ആമീൻ.
-
+        <p class="travel-ad-dua">
+            അല്ലാഹു നമ്മുടെ ഹലാലായ പരിശ്രമങ്ങൾ സ്വീകരിക്കട്ടെ.<br>
+            നിങ്ങൾക്കും കുടുംബത്തിനും ബറക്കത്ത് നൽകട്ടെ. ആമീൻ 🤲
         </p>
 
     </div>
-
 </div>
 
-
-
 <script>
+/* =========================
+   LOCAL DATE
+========================= */
+function getLocalDateString() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return year + "-" + month + "-" + day;
+}
 
+/* =========================
+   DAILY SWALATH COUNTER
+========================= */
+const todayDate = getLocalDateString();
 
-/* =================================================
-   TODAY DATE
-================================================= */
+let savedDate = localStorage.getItem("swalathCountDate");
 
-const todayDate =
-    new Date().toISOString().split("T")[0];
+let count = Number(
+    localStorage.getItem("swalathDailyCount") || 0
+);
 
-
-let savedDate =
-    localStorage.getItem(
-        "swalathCountDate"
-    );
-
-
-let count =
-    Number(
-        localStorage.getItem(
-            "swalathDailyCount"
-        ) || 0
-    );
-
-
-if(savedDate !== todayDate){
-
+if (savedDate !== todayDate) {
     count = 0;
 
-    localStorage.setItem(
-        "swalathCountDate",
-        todayDate
-    );
-
-    localStorage.setItem(
-        "swalathDailyCount",
-        "0"
-    );
-
+    localStorage.setItem("swalathCountDate", todayDate);
+    localStorage.setItem("swalathDailyCount", "0");
 }
 
+document.getElementById("count").textContent = count;
 
-document.getElementById(
-    "count"
-).textContent = count;
-
-
-
-/* =================================================
-   INCREASE COUNTER
-================================================= */
-
-function increaseCount(){
-
+function increaseCount() {
     count++;
 
-    document.getElementById(
-        "count"
-    ).textContent = count;
+    document.getElementById("count").textContent = count;
 
-    localStorage.setItem(
-        "swalathDailyCount",
-        count
-    );
-
-    localStorage.setItem(
-        "swalathCountDate",
-        todayDate
-    );
-
+    localStorage.setItem("swalathDailyCount", String(count));
+    localStorage.setItem("swalathCountDate", getLocalDateString());
 }
 
-
-
-/* =================================================
+/* =========================
    SWALATH NAMES - 21
-================================================= */
-
+========================= */
 const swalathNames = {
-
-    ibrahimiyya:
-        "സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
-
-    nariya:
-        "സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
-
-    tunjina:
-        "സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ",
-
-    fatih:
-        "സ്വലാത്തുൽ ഫാതിഹ്",
-
-    tibbiyya:
-        "സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ",
-
-    nuraniyya:
-        "സ്വലാത്തുന്നൂറാനിയ്യ",
-
-    saadah:
-        "സ്വലാത്തുസ്സആദ",
-
-    kamaliyya:
-        "സ്വലാത്തുൽ കമാലിയ്യ",
-
-    dhatiyya:
-        "സ്വലാത്തുദ്ദാതിയ്യ",
-
-    jawharat:
-        "ജൗഹറത്തുൽ കമാൽ",
-
-    taj:
-        "ദുറൂദുത്താജ്",
-
-    faraj:
-        "സ്വലാത്തുൽ ഫറജ്",
-
-    bashair:
-        "ബശാഇറുൽ ഖൈറാത്ത്",
-
-    ahlam:
-        "സ്വലാത്തുൽ അഹ്‌ലാം",
-
-    hulo:
-        "സ്വലാത്തുൽ ഹുലൂർ",
-
-    friday:
-        "വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്",
-
-    mashishiyya:
-        "സ്വലാത്തുൽ മശീഷിയ്യ",
-
-    ummiyya:
-        "സ്വലാത്തുൽ ഉമ്മിയ്യ",
-
-    shadhiliyya:
-        "സ്വലാത്തുശ്ശാദിലിയ്യ",
-
-    anwar:
-        "സ്വലാത്തുൽ അന്വാർ",
-
-    yaqutat:
-        "സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്"
-
+    ibrahimiyya: "സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
+    nariya: "സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
+    tunjina: "സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ",
+    fatih: "സ്വലാത്തുൽ ഫാതിഹ്",
+    tibbiyya: "സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ",
+    nuraniyya: "സ്വലാത്തുന്നൂറാനിയ്യ",
+    saadah: "സ്വലാത്തുസ്സആദ",
+    kamaliyya: "സ്വലാത്തുൽ കമാലിയ്യ",
+    dhatiyya: "സ്വലാത്തുദ്ദാതിയ്യ",
+    jawharat: "ജൗഹറത്തുൽ കമാൽ",
+    taj: "ദുറൂദുത്താജ്",
+    faraj: "സ്വലാത്തുൽ ഫറജ്",
+    bashair: "ബശാഇറുൽ ഖൈറാത്ത്",
+    ahlam: "സ്വലാത്തുൽ അഹ്‌ലാം",
+    hulo: "സ്വലാത്തുൽ ഹുലൂർ",
+    friday: "വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്",
+    mashishiyya: "സ്വലാത്തുൽ മശീഷിയ്യ",
+    ummiyya: "സ്വലാത്തുൽ ഉമ്മിയ്യ",
+    shadhiliyya: "സ്വലാത്തുശ്ശാദിലിയ്യ",
+    anwar: "സ്വലാത്തുൽ അന്വാർ",
+    yaqutat: "സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്"
 };
 
-
-
-/* =================================================
+/* =========================
    PAGE OPEN FUNCTIONS
-================================================= */
-
-function openAsmaulHusna(){
-
-    window.location.href =
-        "asmaul-husna.html";
-
+========================= */
+function openAsmaulHusna() {
+    window.location.href = "asmaul-husna.html";
 }
 
-
-function openQuran(){
-
-    window.location.href =
-        "quran.html";
-
+function openQuran() {
+    window.location.href = "quran.html";
 }
 
-
-function openQuranMP3(){
-
-    window.location.href =
-        "quran-mp3.html";
-
+function openQuranMP3() {
+    window.location.href = "quran-mp3.html";
 }
 
-
-function openUmrah(){
-
-    window.location.href =
-        "umrah.html";
-
+function openQibla() {
+    window.location.href = "qibla.html";
 }
 
-
-function openDua(){
-
-    window.location.href =
-        "dua.html";
-
+function openUmrah() {
+    window.location.href = "umrah.html";
 }
 
-
-function openDhikr(){
-
-    window.location.href =
-        "dhikr.html";
-
+function openDua() {
+    window.location.href = "dua.html";
 }
 
-
-function openTasbeeh(){
-
-    window.location.href =
-        "tasbeeh.html";
-
+function openDhikr() {
+    window.location.href = "dhikr.html";
 }
 
-
-function openAzkar(){
-
-    window.location.href =
-        "azkar.html";
-
+function openPrayerTimes() {
+    window.location.href = "prayer-times.html";
 }
 
-
-function openSalahGuide(){
-
-    window.location.href =
-        "salah-guide.html";
-
+/* =========================
+   HOME VISIBILITY HELPERS
+========================= */
+function hideHomeElements() {
+    document.querySelector(".welcome").style.display = "none";
+    document.querySelector(".today").style.display = "none";
+    document.querySelector(".menu-grid").style.display = "none";
+    document.querySelector(".feature-buttons").style.display = "none";
+    document.getElementById("travelSection").style.display = "none";
 }
 
+function showHomeElements() {
+    document.querySelector(".welcome").style.display = "block";
+    document.querySelector(".today").style.display = "block";
+    document.querySelector(".menu-grid").style.display = "grid";
+    document.querySelector(".feature-buttons").style.display = "flex";
+    document.getElementById("travelSection").style.display = "block";
 
-function openDailyReminder(){
-
-    window.location.href =
-        "daily-reminder.html";
-
+    document.getElementById("collectionSection").style.display = "none";
+    document.getElementById("favoritesSection").style.display = "none";
+    document.getElementById("advertisingSection").style.display = "none";
 }
 
+/* =========================
+   ADVERTISING PAGE
+========================= */
+function openAdvertising() {
+    hideHomeElements();
 
-function openDailyAsma(){
+    document.getElementById("collectionSection").style.display = "none";
+    document.getElementById("favoritesSection").style.display = "none";
+    document.getElementById("advertisingSection").style.display = "block";
 
-    window.location.href =
-        "daily-asma.html";
-
+    window.scrollTo(0, 0);
 }
 
-
-function openNazyAN(){
-
-    window.location.href =
-        "nazyAN.html";
-
+function closeAdvertising() {
+    document.getElementById("advertisingSection").style.display = "none";
+    showHomeElements();
+    window.scrollTo(0, 0);
 }
 
-
-/* =================================================
-   ADVERTISE WITH US
-================================================= */
-
-function openAdvertising(){
-
-    window.location.href =
-        "advertise.html";
-
-}
-
-
-
-/* =================================================
-   PRAYER TIMES
-================================================= */
-
-const prayerIds = {
-
-    Fajr:
-        "fajrTime",
-
-    Dhuhr:
-        "dhuhrTime",
-
-    Asr:
-        "asrTime",
-
-    Maghrib:
-        "maghribTime",
-
-    Isha:
-        "ishaTime"
-
-};
-
-
-let prayerTimings = null;
-
-let prayerDate = null;
-
-let prayerTimer = null;
-
-
-/* =================================================
-   KERALA DEFAULT LOCATION
-================================================= */
-
-/*
-   Main focus:
-   Kerala, India
-
-   Default:
-   Ottappalam, Palakkad
-
-   If the user grants location permission,
-   the actual phone location will be used.
-*/
-
-const fallbackLocation = {
-
-    latitude:
-        10.7725,
-
-    longitude:
-        76.3774,
-
-    name:
-        "Ottappalam, Kerala"
-
-};
-
-
-/* =================================================
-   PRAYER CALCULATION METHOD
-================================================= */
-
-/*
-   Method 1:
-   University of Islamic Sciences, Karachi
-
-   Commonly used in South Asia.
-*/
-
-const prayerCalculationMethod = 1;
-
-
-
-/* =================================================
-   LOAD PRAYER TIMES
-================================================= */
-
-async function loadPrayerTimes(
-    forceRefresh = false
-){
-
-    const status =
-        document.getElementById(
-            "prayerStatus"
-        );
-
-
-    const locationText =
-        document.getElementById(
-            "prayerLocation"
-        );
-
-
-    status.textContent =
-        "Prayer times loading...";
-
-
-    /*
-       Kerala is the default.
-       Phone location is used only when
-       permission is available.
-    */
-
-    let location =
-        fallbackLocation;
-
-
-    if(
-        navigator.geolocation
-    ){
-
-        try{
-
-            const position =
-                await new Promise(
-                    function(
-                        resolve,
-                        reject
-                    ){
-
-                        navigator.geolocation
-                            .getCurrentPosition(
-
-                                resolve,
-
-                                reject,
-
-                                {
-
-                                    enableHighAccuracy:
-                                        false,
-
-                                    timeout:
-                                        5000,
-
-                                    maximumAge:
-                                        3600000
-
-                                }
-
-                            );
-
-                    }
-                );
-
-
-            location = {
-
-                latitude:
-                    position.coords.latitude,
-
-                longitude:
-                    position.coords.longitude,
-
-                name:
-                    "Current Location"
-
-            };
-
-        }catch(error){
-
-            /*
-               Permission denied or
-               location unavailable.
-
-               Stay with Kerala default.
-            */
-
-            location =
-                fallbackLocation;
-
-        }
-
-    }
-
-
-    locationText.textContent =
-        "📍 " + location.name;
-
-
-    const now =
-        new Date();
-
-
-    const dateString =
-        String(
-            now.getDate()
-        ).padStart(2,"0")
-        +
-        "-"
-        +
-        String(
-            now.getMonth() + 1
-        ).padStart(2,"0")
-        +
-        "-"
-        +
-        now.getFullYear();
-
-
-    const cacheKey =
-        "swalathPrayerTimes";
-
-
-    /*
-       Use today's saved data first.
-    */
-
-    if(!forceRefresh){
-
-        const cached =
-            localStorage.getItem(
-                cacheKey
-            );
-
-
-        if(cached){
-
-            try{
-
-                const data =
-                    JSON.parse(
-                        cached
-                    );
-
-
-                if(
-
-                    data &&
-
-                    data.date ===
-                        dateString &&
-
-                    data.timings
-
-                ){
-
-                    prayerTimings =
-                        data.timings;
-
-                    prayerDate =
-                        data.date;
-
-
-                    displayPrayerTimes(
-                        prayerTimings
-                    );
-
-
-                    status.textContent =
-                        "Saved prayer times";
-
-
-                    startPrayerCountdown();
-
-
-                    /*
-                       Try updating in
-                       background.
-                    */
-
-                    fetchPrayerTimes(
-                        location,
-                        dateString
-                    );
-
-
-                    return;
-
-                }
-
-            }catch(error){
-
-                console.log(
-                    "Prayer cache error:",
-                    error
-                );
-
-            }
-
-        }
-
-    }
-
-
-    await fetchPrayerTimes(
-        location,
-        dateString
-    );
-
-}
-
-
-
-/* =================================================
-   FETCH PRAYER TIMES
-================================================= */
-
-async function fetchPrayerTimes(
-    location,
-    dateString
-){
-
-    const status =
-        document.getElementById(
-            "prayerStatus"
-        );
-
-
-    const locationText =
-        document.getElementById(
-            "prayerLocation"
-        );
-
-
-    try{
-
-        const url =
-            "https://api.aladhan.com/v1/timings/"
-            +
-            dateString
-            +
-            "?latitude="
-            +
-            encodeURIComponent(
-                location.latitude
-            )
-            +
-            "&longitude="
-            +
-            encodeURIComponent(
-                location.longitude
-            )
-            +
-            "&method="
-            +
-            prayerCalculationMethod;
-
-
-        const response =
-            await fetch(
-                url
-            );
-
-
-        if(!response.ok){
-
-            throw new Error(
-                "Prayer API error"
-            );
-
-        }
-
-
-        const result =
-            await response.json();
-
-
-        if(
-
-            !result.data ||
-
-            !result.data.timings
-
-        ){
-
-            throw new Error(
-                "Prayer timings unavailable"
-            );
-
-        }
-
-
-        const timings =
-            result.data.timings;
-
-
-        prayerTimings = {
-
-            Fajr:
-                timings.Fajr,
-
-            Dhuhr:
-                timings.Dhuhr,
-
-            Asr:
-                timings.Asr,
-
-            Maghrib:
-                timings.Maghrib,
-
-            Isha:
-                timings.Isha
-
-        };
-
-
-        prayerDate =
-            dateString;
-
-
-        localStorage.setItem(
-
-            "swalathPrayerTimes",
-
-            JSON.stringify({
-
-                date:
-                    dateString,
-
-                timings:
-                    prayerTimings
-
-            })
-
-        );
-
-
-        displayPrayerTimes(
-            prayerTimings
-        );
-
-
-        status.textContent =
-            "Updated just now";
-
-
-        if(
-            location.name ===
-            "Current Location"
-        ){
-
-            locationText.textContent =
-                "📍 Current Location";
-
-        }else{
-
-            locationText.textContent =
-                "📍 Ottappalam, Kerala";
-
-        }
-
-
-        startPrayerCountdown();
-
-
-    }catch(error){
-
-        console.log(
-            "Prayer time error:",
-            error
-        );
-
-
-        /*
-           Use previously saved timings
-           if internet is unavailable.
-        */
-
-        const cached =
-            localStorage.getItem(
-                "swalathPrayerTimes"
-            );
-
-
-        if(cached){
-
-            try{
-
-                const data =
-                    JSON.parse(
-                        cached
-                    );
-
-
-                if(
-
-                    data &&
-
-                    data.timings
-
-                ){
-
-                    prayerTimings =
-                        data.timings;
-
-                    prayerDate =
-                        data.date;
-
-
-                    displayPrayerTimes(
-                        prayerTimings
-                    );
-
-
-                    status.textContent =
-                        "Offline — saved times";
-
-
-                    startPrayerCountdown();
-
-
-                    return;
-
-                }
-
-            }catch(cacheError){
-
-                console.log(
-                    cacheError
-                );
-
-            }
-
-        }
-
-
-        status.textContent =
-            "Internet connection required for today's prayer times";
-
-
-        document.getElementById(
-            "nextPrayerName"
-        ).textContent =
-            "സമയം ലഭ്യമല്ല";
-
-    }
-
-}
-
-
-
-/* =================================================
-   DISPLAY PRAYER TIMES
-================================================= */
-
-function displayPrayerTimes(
-    timings
-){
-
-    const prayerList = [
-
-        "Fajr",
-        "Dhuhr",
-        "Asr",
-        "Maghrib",
-        "Isha"
-
-    ];
-
-
-    prayerList.forEach(
-        function(name){
-
-            const element =
-                document.getElementById(
-                    prayerIds[name]
-                );
-
-
-            if(!element){
-
-                return;
-
-            }
-
-
-            element.textContent =
-                convertTo12Hour(
-                    timings[name]
-                );
-
-        }
-    );
-
-}
-
-
-
-/* =================================================
-   CONVERT TIME
-================================================= */
-
-function convertTo12Hour(
-    time
-){
-
-    if(!time){
-
-        return "--:--";
-
-    }
-
-
-    const clean =
-        String(time)
-        .split(" ")[0];
-
-
-    const parts =
-        clean.split(":");
-
-
-    let hour =
-        Number(
-            parts[0]
-        );
-
-
-    const minute =
-        parts[1];
-
-
-    const ampm =
-        hour >= 12
-            ? "PM"
-            : "AM";
-
-
-    hour =
-        hour % 12 ||
-        12;
-
-
-    return (
-
-        hour
-        +
-        ":"
-        +
-        minute
-        +
-        " "
-        +
-        ampm
-
-    );
-
-}
-
-
-
-/* =================================================
-   GET MINUTES FROM TIME
-================================================= */
-
-function getMinutesFromTime(
-    time
-){
-
-    if(!time){
-
-        return null;
-
-    }
-
-
-    const clean =
-        String(time)
-        .split(" ")[0];
-
-
-    const parts =
-        clean.split(":");
-
-
-    const hour =
-        Number(
-            parts[0]
-        );
-
-
-    const minute =
-        Number(
-            parts[1]
-        );
-
-
-    if(
-
-        Number.isNaN(hour) ||
-
-        Number.isNaN(minute)
-
-    ){
-
-        return null;
-
-    }
-
-
-    return (
-
-        hour * 60
-        +
-        minute
-
-    );
-
-}
-
-
-
-/* =================================================
-   NEXT PRAYER
-================================================= */
-
-function getNextPrayer(){
-
-    if(!prayerTimings){
-
-        return null;
-
-    }
-
-
-    const prayers = [
-
-        "Fajr",
-        "Dhuhr",
-        "Asr",
-        "Maghrib",
-        "Isha"
-
-    ];
-
-
-    const now =
-        new Date();
-
-
-    const currentMinutes =
-        now.getHours() * 60
-        +
-        now.getMinutes();
-
-
-    for(
-
-        let i = 0;
-
-        i < prayers.length;
-
-        i++
-
-    ){
-
-        const minutes =
-            getMinutesFromTime(
-                prayerTimings[
-                    prayers[i]
-                ]
-            );
-
-
-        if(
-
-            minutes !== null &&
-
-            minutes > currentMinutes
-
-        ){
-
-            return {
-
-                name:
-                    prayers[i],
-
-                minutes:
-                    minutes
-
-            };
-
-        }
-
-    }
-
-
-    return {
-
-        name:
-            "Fajr",
-
-        minutes:
-            getMinutesFromTime(
-                prayerTimings.Fajr
-            ),
-
-        tomorrow:
-            true
-
-    };
-
-}
-
-
-
-/* =================================================
-   START COUNTDOWN
-================================================= */
-
-function startPrayerCountdown(){
-
-    if(prayerTimer){
-
-        clearInterval(
-            prayerTimer
-        );
-
-    }
-
-
-    updatePrayerCountdown();
-
-
-    prayerTimer =
-        setInterval(
-
-            updatePrayerCountdown,
-
-            1000
-
-        );
-
-}
-
-
-
-/* =================================================
-   UPDATE COUNTDOWN
-================================================= */
-
-function updatePrayerCountdown(){
-
-    if(!prayerTimings){
-
-        return;
-
-    }
-
-
-    const next =
-        getNextPrayer();
-
-
-    if(!next){
-
-        return;
-
-    }
-
-
-    const now =
-        new Date();
-
-
-    let target =
-        new Date();
-
-
-    target.setHours(
-
-        Math.floor(
-            next.minutes / 60
-        ),
-
-        next.minutes % 60,
-
-        0,
-
-        0
-
-    );
-
-
-    if(next.tomorrow){
-
-        target.setDate(
-
-            target.getDate() + 1
-
-        );
-
-    }
-
-
-    let difference =
-        target.getTime()
-        -
-        now.getTime();
-
-
-    if(difference < 0){
-
-        difference = 0;
-
-    }
-
-
-    const totalSeconds =
-        Math.floor(
-
-            difference / 1000
-
-        );
-
-
-    const hours =
-        Math.floor(
-
-            totalSeconds / 3600
-
-        );
-
-
-    const minutes =
-        Math.floor(
-
-            (totalSeconds % 3600) / 60
-
-        );
-
-
-    const seconds =
-        totalSeconds % 60;
-
-
-    document.getElementById(
-        "nextPrayerName"
-    ).textContent =
-        next.name;
-
-
-    document.getElementById(
-        "prayerCountdown"
-    ).textContent =
-
-        "അടുത്ത നമസ്കാരം വരെ "
-        +
-        String(
-            hours
-        ).padStart(
-            2,
-            "0"
-        )
-        +
-        ":"
-        +
-        String(
-            minutes
-        ).padStart(
-            2,
-            "0"
-        )
-        +
-        ":"
-        +
-        String(
-            seconds
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    highlightNextPrayer(
-        next.name
-    );
-
-}
-
-
-
-/* =================================================
-   HIGHLIGHT NEXT PRAYER
-================================================= */
-
-function highlightNextPrayer(
-    nextName
-){
-
-    const items =
-        document.querySelectorAll(
-            ".prayer-item"
-        );
-
-
-    const names = [
-
-        "Fajr",
-        "Dhuhr",
-        "Asr",
-        "Maghrib",
-        "Isha"
-
-    ];
-
-
-    items.forEach(
-
-        function(
-            item,
-            index
-        ){
-
-            item.classList.remove(
-                "active"
-            );
-
-
-            if(
-
-                names[index] ===
-                nextName
-
-            ){
-
-                item.classList.add(
-                    "active"
-                );
-
-            }
-
-        }
-
-    );
-
-}
-
-
-
-/* =================================================
-   SCROLL TO PRAYER TIMES
-================================================= */
-
-function scrollToPrayerTimes(){
-
-    const section =
-        document.getElementById(
-            "prayerSection"
-        );
-
-
-    if(section){
-
-        section.scrollIntoView({
-
-            behavior:
-                "smooth",
-
-            block:
-                "center"
-
-        });
-
-    }
-
-}
-
-
-
-/* =================================================
-   OPEN COLLECTION
-================================================= */
-
-function openCollection(){
-
-    document.querySelector(
-        ".welcome"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".today"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "prayerSection"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".menu-grid"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".feature-buttons"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "travelSection"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "favoritesSection"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "collectionSection"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "searchSwalath"
-    ).value = "";
-
+/* =========================
+   COLLECTION
+========================= */
+function openCollection() {
+    hideHomeElements();
+
+    document.getElementById("favoritesSection").style.display = "none";
+    document.getElementById("advertisingSection").style.display = "none";
+    document.getElementById("collectionSection").style.display = "block";
+
+    document.getElementById("searchSwalath").value = "";
 
     loadCollection();
-
+    window.scrollTo(0, 0);
 }
 
-
-
-/* =================================================
-   CLOSE COLLECTION
-================================================= */
-
-function closeCollection(){
-
-    document.getElementById(
-        "collectionSection"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".welcome"
-    ).style.display = "block";
-
-
-    document.querySelector(
-        ".today"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "prayerSection"
-    ).style.display = "block";
-
-
-    document.querySelector(
-        ".menu-grid"
-    ).style.display = "grid";
-
-
-    document.querySelector(
-        ".feature-buttons"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "travelSection"
-    ).style.display = "block";
-
+function closeCollection() {
+    document.getElementById("collectionSection").style.display = "none";
+    showHomeElements();
+    window.scrollTo(0, 0);
 }
 
-
-
-/* =================================================
-   LOAD COLLECTION
-================================================= */
-
-function loadCollection(){
-
-    const list =
-        document.getElementById(
-            "collectionList"
-        );
-
-
+function loadCollection() {
+    const list = document.getElementById("collectionList");
     list.innerHTML = "";
 
-
-    Object.keys(
-        swalathNames
-    ).forEach(
-
-        function(key){
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "collection-item";
-
-
-            item.style.cssText = `
-
-                background:white;
-
-                border:1px solid #e6dfd0;
-
-                border-radius:18px;
-
-                padding:16px;
-
-                margin-bottom:10px;
-
-                cursor:pointer;
-
-                color:#123d34;
-
-                font-weight:bold;
-
-            `;
-
-
-            item.dataset.name =
-                swalathNames[key]
-                .toLowerCase();
-
-
-            item.innerHTML =
-                "📖 "
-                +
-                swalathNames[key];
-
-
-            item.onclick =
-                function(){
-
-                    window.location.href =
-                        "swalath.html#"
-                        +
-                        key;
-
-                };
-
-
-            list.appendChild(
-                item
-            );
-
-        }
-
-    );
-
-}
-
-
-
-/* =================================================
-   SEARCH SWALATH
-================================================= */
-
-function searchSwalath(){
-
-    const input =
-        document.getElementById(
-            "searchSwalath"
-        )
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    const cards =
-        document.querySelectorAll(
-            ".collection-item"
-        );
-
-
-    cards.forEach(
-
-        function(card){
-
-            const text =
-                card.dataset.name;
-
-
-            if(
-
-                text.includes(
-                    input
-                )
-
-            ){
-
-                card.style.display =
-                    "block";
-
-            }else{
-
-                card.style.display =
-                    "none";
-
-            }
-
-        }
-
-    );
-
-}
-
-
-
-/* =================================================
-   OPEN FAVOURITES
-================================================= */
-
-function openFavorites(){
-
-    document.querySelector(
-        ".welcome"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".today"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "prayerSection"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".menu-grid"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".feature-buttons"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "collectionSection"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "travelSection"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "favoritesSection"
-    ).style.display = "block";
-
-
-    loadFavorites();
-
-}
-
-
-
-/* =================================================
-   CLOSE FAVOURITES
-================================================= */
-
-function closeFavorites(){
-
-    document.getElementById(
-        "favoritesSection"
-    ).style.display = "none";
-
-
-    document.querySelector(
-        ".welcome"
-    ).style.display = "block";
-
-
-    document.querySelector(
-        ".today"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "prayerSection"
-    ).style.display = "block";
-
-
-    document.querySelector(
-        ".menu-grid"
-    ).style.display = "grid";
-
-
-    document.querySelector(
-        ".feature-buttons"
-    ).style.display = "flex";
-
-
-    document.getElementById(
-        "travelSection"
-    ).style.display = "block";
-
-}
-
-
-
-/* =================================================
-   LOAD FAVOURITES
-================================================= */
-
-function loadFavorites(){
-
-    const list =
-        document.getElementById(
-            "favoritesList"
-        );
-
-
-    list.innerHTML = "";
-
-
-    const favorites =
-        JSON.parse(
-
-            localStorage.getItem(
-                "swalathFavorites"
-            )
-            ||
-            "[]"
-
-        );
-
-
-    if(
-        favorites.length === 0
-    ){
-
-        list.innerHTML = `
-
-            <div
-                style="
-                    text-align:center;
-                    padding:25px;
-                    color:#777;
-                    background:white;
-                    border-radius:14px;
-                "
-            >
-
-                ഇതുവരെ Favourite ഒന്നുമില്ല ❤️
-
-            </div>
-
+    Object.keys(swalathNames).forEach(function(key) {
+        const item = document.createElement("div");
+
+        item.className = "collection-item";
+        item.style.cssText = `
+            background:white;
+            border:1px solid #e6dfd0;
+            border-radius:18px;
+            padding:16px;
+            margin-bottom:10px;
+            cursor:pointer;
+            color:#123d34;
+            font-weight:bold;
         `;
 
-        return;
+        item.dataset.name = swalathNames[key].toLowerCase();
+        item.textContent = "📖 " + swalathNames[key];
 
+        item.onclick = function() {
+            window.location.href = "swalath.html#" + key;
+        };
+
+        list.appendChild(item);
+    });
+}
+
+function searchSwalath() {
+    const input = document.getElementById("searchSwalath")
+        .value.toLowerCase().trim();
+
+    document.querySelectorAll(".collection-item").forEach(function(card) {
+        card.style.display = card.dataset.name.includes(input) ? "block" : "none";
+    });
+}
+
+/* =========================
+   FAVOURITES
+========================= */
+function openFavorites() {
+    hideHomeElements();
+
+    document.getElementById("collectionSection").style.display = "none";
+    document.getElementById("advertisingSection").style.display = "none";
+    document.getElementById("favoritesSection").style.display = "block";
+
+    loadFavorites();
+    window.scrollTo(0, 0);
+}
+
+function closeFavorites() {
+    document.getElementById("favoritesSection").style.display = "none";
+    showHomeElements();
+    window.scrollTo(0, 0);
+}
+
+function loadFavorites() {
+    const list = document.getElementById("favoritesList");
+    list.innerHTML = "";
+
+    let favorites = [];
+
+    try {
+        favorites = JSON.parse(
+            localStorage.getItem("swalathFavorites") || "[]"
+        );
+
+        if (!Array.isArray(favorites)) {
+            favorites = [];
+        }
+    } catch (error) {
+        favorites = [];
     }
 
-
-
-    favorites.forEach(
-
-        function(key){
-
-            const name =
-                swalathNames[key];
-
-
-            if(!name){
-
-                return;
-
-            }
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "favorite-item";
-
-
-            item.style.cssText = `
-
+    if (favorites.length === 0) {
+        list.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:25px;
+                color:#777;
                 background:white;
+                border-radius:14px;
+            ">
+                ഇതുവരെ Favourite ഒന്നുമില്ല ❤️
+            </div>
+        `;
+        return;
+    }
 
-                border:1px solid #e6dfd0;
+    favorites.forEach(function(key) {
+        const name = swalathNames[key];
 
-                border-radius:18px;
-
-                padding:16px;
-
-                margin-bottom:10px;
-
-                cursor:pointer;
-
-                color:#123d34;
-
-                font-weight:bold;
-
-            `;
-
-
-            item.innerHTML =
-                "❤️ "
-                +
-                name;
-
-
-            item.onclick =
-                function(){
-
-                    window.location.href =
-                        "swalath.html#"
-                        +
-                        key;
-
-                };
-
-
-            list.appendChild(
-                item
-            );
-
+        if (!name) {
+            return;
         }
 
-    );
+        const item = document.createElement("div");
+        item.className = "favorite-item";
 
+        item.style.cssText = `
+            background:white;
+            border:1px solid #e6dfd0;
+            border-radius:18px;
+            padding:16px;
+            margin-bottom:10px;
+            cursor:pointer;
+            color:#123d34;
+            font-weight:bold;
+        `;
+
+        item.textContent = "❤️ " + name;
+
+        item.onclick = function() {
+            window.location.href = "swalath.html#" + key;
+        };
+
+        list.appendChild(item);
+    });
 }
 
-
-
-/* =================================================
+/* =========================
    DARK MODE
-================================================= */
+========================= */
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
 
-function toggleDarkMode(){
+    const enabled = document.body.classList.contains("dark-mode");
 
-    document.body.classList.toggle(
-        "dark-mode"
-    );
-
-
-    const enabled =
-        document.body.classList.contains(
-            "dark-mode"
-        );
-
-
-    localStorage.setItem(
-        "swalathDarkMode",
-        enabled
-    );
-
-
+    localStorage.setItem("swalathDarkMode", String(enabled));
     updateDarkButton();
-
 }
 
+function updateDarkButton() {
+    const button = document.getElementById("darkModeButton");
 
+    if (!button) return;
 
-/* =================================================
-   DARK MODE BUTTON TEXT
-================================================= */
-
-function updateDarkButton(){
-
-    const button =
-        document.getElementById(
-            "darkModeButton"
-        );
-
-
-    if(
-
-        document.body.classList.contains(
-            "dark-mode"
-        )
-
-    ){
-
-        button.textContent =
-            "☀️ Light Mode";
-
-    }else{
-
-        button.textContent =
-            "🌙 Dark Mode";
-
-    }
-
+    button.textContent = document.body.classList.contains("dark-mode")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
 }
 
+/* =========================
+   NAZYAN POPUP - ONCE DAILY
+========================= */
+function showTravelAdOnceDaily() {
+    const popup = document.getElementById("travelAd");
+    if (!popup) return;
 
+    const today = getLocalDateString();
+    const lastShownDate = localStorage.getItem("nazyANTravelAdDate");
 
-/* =================================================
-   LOAD DARK MODE
-================================================= */
-
-window.addEventListener(
-
-    "load",
-
-    function(){
-
-        const darkMode =
-            localStorage.getItem(
-                "swalathDarkMode"
-            );
-
-
-        if(
-            darkMode === "true"
-        ){
-
-            document.body.classList.add(
-                "dark-mode"
-            );
-
-        }
-
-
-        updateDarkButton();
-
+    if (lastShownDate !== today) {
+        popup.style.display = "flex";
     }
-
-);
-
-
-
-/* =================================================
-   LOAD PRAYER TIMES
-================================================= */
-
-window.addEventListener(
-
-    "load",
-
-    function(){
-
-        loadPrayerTimes();
-
-    }
-
-);
-
-
-
-/* =================================================
-   NAZYAN TRAVELS POPUP - ONCE DAILY
-================================================= */
-
-function showTravelAdOnceDaily(){
-
-    const today =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
-
-    const lastShown =
-        localStorage.getItem(
-            "nazyANTravelAdDate"
-        );
-
-
-    if(
-        lastShown !== today
-    ){
-
-        document.getElementById(
-            "travelAd"
-        ).style.display =
-            "flex";
-
-    }
-
 }
 
-
-
-function closeTravelAd(){
-
-    const today =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
+function closeTravelAd() {
+    const popup = document.getElementById("travelAd");
 
     localStorage.setItem(
         "nazyANTravelAdDate",
-        today
+        getLocalDateString()
     );
 
-
-    document.getElementById(
-        "travelAd"
-    ).style.display =
-        "none";
-
+    if (popup) {
+        popup.style.display = "none";
+    }
 }
 
+/* Close popup if the user taps outside the card */
+document.getElementById("travelAd").addEventListener("click", function(event) {
+    if (event.target === this) {
+        closeTravelAd();
+    }
+});
 
+/* =========================
+   SPLASH, DARK MODE & POPUP
+========================= */
+window.addEventListener("load", function() {
+    const darkMode = localStorage.getItem("swalathDarkMode");
 
-/* =================================================
-   SPLASH SCREEN
-================================================= */
-
-window.addEventListener(
-
-    "load",
-
-    function(){
-
-        setTimeout(
-
-            function(){
-
-                const splash =
-                    document.getElementById(
-                        "splashScreen"
-                    );
-
-
-                if(splash){
-
-                    splash.classList.add(
-                        "hide"
-                    );
-
-                }
-
-            },
-
-            1800
-
-        );
-
+    if (darkMode === "true") {
+        document.body.classList.add("dark-mode");
     }
 
-);
+    updateDarkButton();
 
+    const splash = document.getElementById("splashScreen");
 
-
-/* =================================================
-   SHOW NAZYAN AD AFTER SPLASH
-================================================= */
-
-window.addEventListener(
-
-    "load",
-
-    function(){
-
-        setTimeout(
-
-            showTravelAdOnceDaily,
-
-            2300
-
-        );
-
-    }
-
-);
-
-
-</script>
-
-
-
-<!-- =================================================
-     OFFLINE SUPPORT
-================================================= -->
-
-<script>
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener(
-
-        "load",
-
-        function(){
-
-            navigator.serviceWorker
-                .register("./sw.js")
-                .then(
-
-                    function(){
-
-                        console.log(
-                            "Swalath offline mode ready"
-                        );
-
-                    }
-
-                )
-                .catch(
-
-                    function(error){
-
-                        console.log(
-                            "Offline setup error:",
-                            error
-                        );
-
-                    }
-
-                );
-
+    window.setTimeout(function() {
+        if (splash) {
+            splash.classList.add("hide");
         }
+    }, 1800);
 
-    );
+    window.setTimeout(function() {
+        showTravelAdOnceDaily();
+    }, 2300);
+});
 
+/* =========================
+   SERVICE WORKER
+========================= */
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("./sw.js").catch(function(error) {
+            console.log("Service worker registration failed:", error);
+        });
+    });
 }
-
 </script>
-
 
 </body>
-
 </html>
