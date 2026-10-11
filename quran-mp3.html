@@ -34,7 +34,7 @@ body.dark .number{color:#4dd0c4;}
 .english{font-size:13px;opacity:.7;}
 .surah-actions{display:flex;gap:5px;}
 .play-btn{background:#075e54;color:white;}
-.download-btn{background:#777;color:white;text-decoration:none;padding:8px 12px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;}
+.download-btn{background:#777;color:white;text-decoration:none;padding:8px 12px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;}
 </style>
 </head>
 
@@ -226,7 +226,7 @@ function renderSurahs(list = surahs){
             </div>
             <div class="surah-actions">
                 <button class="play-btn" onclick="playSurah(${number})">▶</button>
-                <a href="${audioUrl}" download="Surah_${number}_${english}.mp3" class="download-btn" target="_blank">⬇️</a>
+                <a href="${audioUrl}" class="download-btn" target="_blank" download>⬇️</a>
             </div>
         `;
         surahList.appendChild(card);
