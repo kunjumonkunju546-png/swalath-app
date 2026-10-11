@@ -3,185 +3,361 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#123d34">
-<title>Prayer Times - സ്വലാത്ത്</title>
+<meta name="theme-color" content="#103b30">
+<title>Prayer Times | സ്വലാത്ത്</title>
 
 <style>
 :root {
-    --green: #123d34;
-    --green2: #1d5143;
-    --gold: #f1dfb0;
-    --bg: #f5f5ef;
+    --bg: #f5f6f1;
     --card: #ffffff;
-    --text: #20332b;
-    --muted: #727970;
-    --border: #e5e5d9;
+    --green: #103b30;
+    --green-light: #1b5141;
+    --gold: #d8bd79;
+    --text: #23372e;
+    --muted: #879087;
+    --line: #e9ece5;
+    --highlight: #edf4ec;
 }
 * { box-sizing: border-box; }
+
 body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
     font-family: Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
+
 .page {
-    width: 100%;
-    max-width: 600px;
+    max-width: 560px;
     min-height: 100vh;
     margin: auto;
-    padding: 16px;
+    padding: 18px 16px 30px;
 }
-.header {
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+}
+
+.top-left {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 4px 0 20px;
 }
-.back {
-    border: 0;
-    background: var(--green);
-    color: white;
-    border-radius: 11px;
-    padding: 11px 15px;
-    font-size: 15px;
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    color: var(--green);
+    font-size: 20px;
     cursor: pointer;
 }
-.header h1 {
-    font-size: 21px;
-    margin: 0;
+
+.brand-title {
+    font-size: 18px;
+    font-weight: bold;
     color: var(--green);
 }
-.hero {
-    background: linear-gradient(140deg, #092b25, #1d5143);
-    color: white;
-    border-radius: 22px;
-    padding: 25px 18px;
-    text-align: center;
-    margin-bottom: 16px;
+
+.brand-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
 }
-.moon { font-size: 34px; }
-.hero h2 {
-    color: var(--gold);
-    margin: 8px 0;
-    font-size: 24px;
-}
-.hero p {
-    margin: 7px 0;
-    font-size: 14px;
-    line-height: 1.7;
-}
-#hijriDate { color: var(--gold); }
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 17px;
-    margin-bottom: 15px;
-}
-.card h3 {
-    margin: 0 0 13px;
-    font-size: 17px;
-    color: var(--green);
-}
-.location {
+
+.location-chip {
     display: flex;
-    gap: 9px;
-    flex-wrap: wrap;
-}
-input, select {
-    min-width: 0;
-    flex: 1;
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--card);
-    color: var(--text);
-    font-size: 14px;
-}
-button { font-family: inherit; }
-.action {
-    border: 0;
-    border-radius: 10px;
-    padding: 12px 14px;
-    background: var(--green);
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-.secondary {
-    background: #e9eee8;
+    align-items: center;
+    gap: 5px;
+    max-width: 145px;
     color: var(--green);
-}
-.note {
-    color: var(--muted);
     font-size: 12px;
-    line-height: 1.7;
-    margin: 11px 0 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
 }
-.status {
-    color: var(--muted);
+
+#locationName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 26px 19px 24px;
+    text-align: center;
+    color: white;
+    border-radius: 25px;
+    background: linear-gradient(145deg, #0b2e25, #164b3c, #22604b);
+    box-shadow: 0 12px 28px rgba(16,59,48,.12);
+    margin-bottom: 23px;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(216,189,121,.17);
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    pointer-events: none;
+}
+
+.hero::before {
+    top: -120px;
+    right: -60px;
+}
+
+.hero::after {
+    bottom: -140px;
+    left: -70px;
+}
+
+.hero-label {
+    position: relative;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    position: relative;
+    font-size: 26px;
+    margin: 0 0 9px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.hero-date {
+    position: relative;
+    color: #e0e8df;
     font-size: 13px;
-    line-height: 1.6;
-    margin: 10px 0 0;
+    line-height: 1.7;
 }
+
+.hijri-date {
+    position: relative;
+    color: var(--gold);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.next-card {
+    position: relative;
+    margin-top: 22px;
+    padding: 16px;
+    text-align: left;
+    border-radius: 17px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.13);
+}
+
+.next-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 9px;
+}
+
+.next-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.next-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.next-time {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2px 13px;
+}
+
+.section-heading h2 {
+    color: var(--green);
+    font-size: 17px;
+    margin: 0;
+}
+
+.section-heading span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.prayer-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 21px;
+    padding: 5px 15px;
+    box-shadow: 0 5px 20px rgba(24,49,34,.025);
+}
+
 .prayer-row {
+    min-height: 72px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    padding: 15px 12px;
-    border-bottom: 1px solid var(--border);
-}
-.prayer-row:last-child { border-bottom: 0; }
-.prayer-name {
-    font-size: 15px;
-    font-weight: bold;
-}
-.prayer-ar {
-    display: block;
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-.prayer-time {
-    font-size: 19px;
-    font-weight: bold;
-    color: var(--green);
-    white-space: nowrap;
-}
-.prayer-row.next {
-    background: #edf4ed;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
     border-radius: 12px;
 }
+
+.prayer-row:last-child {
+    border-bottom: none;
+}
+
+.prayer-row.next {
+    background: var(--highlight);
+}
+
+.prayer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prayer-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    background: #f1f4ed;
+    color: var(--green);
+    font-size: 18px;
+}
+
+.prayer-row.next .prayer-symbol {
+    background: var(--green);
+    color: white;
+}
+
+.prayer-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.prayer-arabic {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.prayer-time {
+    color: var(--green);
+    font-size: 17px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.next-tag {
+    display: inline-block;
+    color: #47734f;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+.loading {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 25px 10px;
+    line-height: 1.8;
+}
+
+.error {
+    text-align: center;
+    padding: 20px 10px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.retry {
+    margin-top: 10px;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 20px;
+    background: var(--green);
+    color: white;
+    cursor: pointer;
+}
+
 .footer {
     text-align: center;
     color: var(--muted);
-    font-size: 12px;
-    padding: 10px 0 22px;
+    font-size: 11px;
+    padding: 24px 0 8px;
 }
+
 body.dark-mode {
     --bg: #111713;
     --card: #202720;
-    --text: #eeeeea;
-    --muted: #b0b8ae;
-    --border: #3b453d;
     --green: #d7e6d8;
+    --text: #e9eee8;
+    --muted: #a6b0a5;
+    --line: #374038;
+    --highlight: #2b3b2e;
 }
-body.dark-mode .header h1,
-body.dark-mode .card h3,
+
+body.dark-mode .icon-btn,
+body.dark-mode .location-chip {
+    background: var(--card);
+    color: var(--green);
+    border-color: var(--line);
+}
+
+body.dark-mode .brand-title,
+body.dark-mode .section-heading h2,
 body.dark-mode .prayer-time {
+    color: var(--green);
+}
+
+body.dark-mode .prayer-symbol {
+    background: #303b31;
     color: #d7e6d8;
 }
-body.dark-mode .prayer-row.next { background: #2a392e; }
-body.dark-mode .secondary {
-    background: #354339;
-    color: #fff;
+
+body.dark-mode .prayer-row.next .prayer-symbol {
+    background: #d7e6d8;
+    color: #103b30;
 }
-@media(max-width:360px) {
-    .page { padding: 11px; }
-    .header h1 { font-size: 18px; }
-    .prayer-time { font-size: 17px; }
+
+@media (max-width: 360px) {
+    .page { padding: 13px 11px 25px; }
+    .hero { padding: 23px 13px; }
+    .hero h1 { font-size: 23px; }
+    .next-time { font-size: 21px; }
+    .prayer-card { padding: 4px 9px; }
+    .prayer-time { font-size: 16px; }
 }
 </style>
 </head>
@@ -189,285 +365,274 @@ body.dark-mode .secondary {
 <body>
 <div class="page">
 
-    <div class="header">
-        <button class="back" onclick="goBack()">← Back</button>
-        <h1>🕌 Prayer Times</h1>
-    </div>
+    <header class="topbar">
+        <div class="top-left">
+            <button class="icon-btn" onclick="goBack()" aria-label="Back">←</button>
+            <div>
+                <div class="brand-title">സ്വലാത്ത്</div>
+                <div class="brand-subtitle">PRAYER TIMES</div>
+            </div>
+        </div>
+
+        <button class="location-chip" onclick="changeLocation()">
+            <span>📍</span>
+            <span id="locationName">Doha, Qatar</span>
+        </button>
+    </header>
 
     <section class="hero">
-        <div class="moon">🌙</div>
+        <div class="hero-label">DAILY PRAYER</div>
+        <h1>نَمَازُ الْوَقْت</h1>
+        <div class="hero-date" id="todayDate"></div>
+        <div class="hijri-date" id="hijriDate"></div>
+
+        <div class="next-card">
+            <div class="next-label">UPCOMING PRAYER</div>
+            <div class="next-content">
+                <div class="next-name" id="nextName">സമയം കണ്ടെത്തുന്നു...</div>
+                <div class="next-time" id="nextTime">--:--</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-heading">
         <h2>നമസ്കാര സമയങ്ങൾ</h2>
-        <p id="todayDate">ഇന്നത്തെ തീയതി</p>
-        <p id="hijriDate">ഹിജ്റി തീയതി ലഭ്യമാക്കുന്നു...</p>
-        <p id="locationLabel">Doha, Qatar</p>
-    </section>
-
-    <section class="card">
-        <h3>📍 സ്ഥലം തിരഞ്ഞെടുക്കുക</h3>
-
-        <div class="location">
-            <input id="cityInput"
-                   type="text"
-                   value="Doha"
-                   placeholder="City, e.g. Doha">
-
-            <input id="countryInput"
-                   type="text"
-                   value="Qatar"
-                   placeholder="Country">
-        </div>
-
-        <div style="margin-top:10px">
-            <label for="method" class="note">
-                Prayer calculation method
-            </label>
-            <select id="method">
-                <option value="10" selected>Qatar</option>
-                <option value="1">Karachi</option>
-                <option value="3">Muslim World League</option>
-                <option value="4">Umm Al-Qura</option>
-                <option value="2">ISNA</option>
-            </select>
-        </div>
-
-        <div class="location" style="margin-top:12px">
-            <button class="action" onclick="loadByCity()">
-                സമയം കണ്ടെത്തുക
-            </button>
-            <button class="action secondary"
-                    onclick="loadByLocation()">
-                📍 എന്റെ സ്ഥലം
-            </button>
-        </div>
-
-        <p id="status" class="status">
-            നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...
-        </p>
-        <p class="note">
-            ലൊക്കേഷൻ ഉപയോഗിക്കാൻ അനുമതി ആവശ്യപ്പെട്ടേക്കാം.
-            കൃത്യമായ സമയങ്ങൾക്ക് നിങ്ങളുടെ പ്രദേശത്തെ
-            ഔദ്യോഗിക നമസ്കാര സമയവുമായി താരതമ്യം ചെയ്യുക.
-        </p>
-    </section>
-
-    <section class="card">
-        <h3>🕰️ ഇന്നത്തെ നമസ്കാര സമയങ്ങൾ</h3>
-        <div id="prayerList">
-            <p class="status">സമയങ്ങൾ ലോഡ് ചെയ്യുന്നു...</p>
-        </div>
-    </section>
-
-    <section class="card">
-        <h3>📌 പ്രധാന കുറിപ്പ്</h3>
-        <p class="note">
-            ഈ പേജ് ഇന്റർനെറ്റിലൂടെ നമസ്കാര സമയങ്ങൾ
-            ലഭ്യമാക്കുന്നു. ഈ പതിപ്പിൽ സ്വയമേവ ബാങ്ക്
-            വിളിക്കുന്ന സംവിധാനം ഉൾപ്പെടുത്തിയിട്ടില്ല.
-            അത് പിന്നീട് Android Studio-യിൽ പ്രത്യേകം
-            ചേർക്കുന്നതാണ്.
-        </p>
-    </section>
-
-    <div class="footer">
-        സ്വലാത്ത് · നമസ്കാര സമയങ്ങൾ
+        <span id="updatedDate"></span>
     </div>
+
+    <section class="prayer-card" id="prayerList">
+        <div class="loading">നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...</div>
+    </section>
+
+    <footer class="footer">
+        SWALAATH · Made with care
+    </footer>
 
 </div>
 
 <script>
 "use strict";
 
-const prayerNames = [
-    ["Fajr", "ഫജ്റ്", "الفجر"],
-    ["Sunrise", "സൂര്യോദയം", "الشروق"],
-    ["Dhuhr", "ളുഹർ", "الظهر"],
-    ["Asr", "അസർ", "العصر"],
-    ["Maghrib", "മഗ്‌രിബ്", "المغرب"],
-    ["Isha", "ഇശാഅ്", "العشاء"]
+const API = "https://api.aladhan.com/v1/";
+const prayerItems = [
+    { key: "Fajr", name: "ഫജ്റ്", ar: "الفجر", icon: "🌅" },
+    { key: "Sunrise", name: "സൂര്യോദയം", ar: "الشروق", icon: "☀️" },
+    { key: "Dhuhr", name: "ളുഹർ", ar: "الظهر", icon: "🌤️" },
+    { key: "Asr", name: "അസർ", ar: "العصر", icon: "🌇" },
+    { key: "Maghrib", name: "മഗ്‌രിബ്", ar: "المغرب", icon: "🌆" },
+    { key: "Isha", name: "ഇശാഅ്", ar: "العشاء", icon: "🌙" }
 ];
 
-function localDate() {
-    const d = new Date();
-    return d.getFullYear() + "-" +
-        String(d.getMonth() + 1).padStart(2, "0") + "-" +
-        String(d.getDate()).padStart(2, "0");
+let currentLocation = {
+    city: "Doha",
+    country: "Qatar"
+};
+
+function dateString(date = new Date()) {
+    return date.getFullYear() + "-" +
+        String(date.getMonth() + 1).padStart(2, "0") + "-" +
+        String(date.getDate()).padStart(2, "0");
 }
 
-function showStatus(message) {
-    document.getElementById("status").textContent = message;
+function updateDates() {
+    const now = new Date();
+
+    document.getElementById("todayDate").textContent =
+        now.toLocaleDateString("ml-IN", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+
+    document.getElementById("updatedDate").textContent =
+        now.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short"
+        });
 }
 
-function cleanTime(value) {
-    if (!value) return "--:--";
-    return String(value).split(" ")[0];
-}
+function parseTime(value) {
+    const match = String(value || "").match(/(\d{1,2}):(\d{2})/);
+    if (!match) return null;
 
-function getMinutes(value) {
-    const match = cleanTime(value).match(/^(\d{1,2}):(\d{2})$/);
-    if (!match) return -1;
     return Number(match[1]) * 60 + Number(match[2]);
 }
 
-function displayPrayers(data) {
-    const timings = data.timings;
-    const list = document.getElementById("prayerList");
+function formatTime(value) {
+    const minutes = parseTime(value);
+    if (minutes === null) return "--:--";
 
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+
+    const temp = new Date();
+    temp.setHours(h, m, 0, 0);
+
+    return temp.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+}
+
+function getNextPrayer(timings) {
     const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const current = now.getHours() * 60 + now.getMinutes();
 
-    const mainPrayers = prayerNames.filter(
-        item => item[0] !== "Sunrise"
+    const main = prayerItems.filter(
+        p => p.key !== "Sunrise"
     );
 
-    let nextPrayer = null;
+    for (const p of main) {
+        const minutes = parseTime(timings[p.key]);
 
-    for (const item of mainPrayers) {
-        const minutes = getMinutes(timings[item[0]]);
-        if (minutes >= currentMinutes) {
-            nextPrayer = item[0];
-            break;
+        if (minutes !== null && minutes > current) {
+            return p;
         }
     }
 
+    return main[0];
+}
+
+function renderPrayerTimes(data) {
+    const timings = data.timings;
+    const next = getNextPrayer(timings);
+
+    document.getElementById("nextName").textContent =
+        next.name + " · " + next.ar;
+
+    document.getElementById("nextTime").textContent =
+        formatTime(timings[next.key]);
+
+    if (data.date && data.date.hijri) {
+        const h = data.date.hijri;
+        document.getElementById("hijriDate").textContent =
+            h.day + " " + h.month.en + " " + h.year + " AH";
+    }
+
+    const list = document.getElementById("prayerList");
     list.innerHTML = "";
 
-    prayerNames.forEach(function(item) {
-        const name = item[0];
+    prayerItems.forEach(function(p) {
         const row = document.createElement("div");
         row.className = "prayer-row";
 
-        if (name === nextPrayer) {
+        if (p.key === next.key) {
             row.classList.add("next");
         }
 
-        const left = document.createElement("div");
-        const title = document.createElement("span");
-        title.className = "prayer-name";
-        title.textContent = item[1];
+        const info = document.createElement("div");
+        info.className = "prayer-info";
 
-        const arabic = document.createElement("span");
-        arabic.className = "prayer-ar";
-        arabic.textContent = item[2];
+        const symbol = document.createElement("div");
+        symbol.className = "prayer-symbol";
+        symbol.textContent = p.icon;
 
-        left.appendChild(title);
-        left.appendChild(arabic);
+        const details = document.createElement("div");
 
-        const time = document.createElement("span");
+        const name = document.createElement("div");
+        name.className = "prayer-name";
+        name.textContent = p.name;
+
+        const arabic = document.createElement("div");
+        arabic.className = "prayer-arabic";
+        arabic.textContent = p.ar;
+
+        details.appendChild(name);
+        details.appendChild(arabic);
+
+        if (p.key === next.key) {
+            const tag = document.createElement("div");
+            tag.className = "next-tag";
+            tag.textContent = "അടുത്ത നമസ്കാരം";
+            details.appendChild(tag);
+        }
+
+        info.appendChild(symbol);
+        info.appendChild(details);
+
+        const time = document.createElement("div");
         time.className = "prayer-time";
-        time.textContent = cleanTime(timings[name]);
+        time.textContent = formatTime(timings[p.key]);
 
-        row.appendChild(left);
+        row.appendChild(info);
         row.appendChild(time);
         list.appendChild(row);
     });
-
-    const hijri = data.date && data.date.hijri
-        ? data.date.hijri
-        : null;
-
-    if (hijri) {
-        document.getElementById("hijriDate").textContent =
-            "ഹിജ്റി: " + hijri.day + " " +
-            hijri.month.en + " " + hijri.year;
-    }
 }
 
-async function fetchPrayerTimes(url, locationText) {
-    showStatus("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...");
-    document.getElementById("prayerList").innerHTML =
-        '<p class="status">ദയവായി കാത്തിരിക്കൂ...</p>';
+async function fetchTimes(url) {
+    const list = document.getElementById("prayerList");
+    list.innerHTML =
+        '<div class="loading">നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...</div>';
 
     try {
         const response = await fetch(url);
 
-        if (!response.ok) {
-            throw new Error("Network response error");
-        }
+        if (!response.ok) throw new Error("Network error");
 
         const result = await response.json();
 
-        if (result.code !== 200 || !result.data ||
+        if (result.code !== 200 ||
+            !result.data ||
             !result.data.timings) {
-            throw new Error("Prayer time data unavailable");
+            throw new Error("Prayer times unavailable");
         }
 
-        displayPrayers(result.data);
-        document.getElementById("locationLabel").textContent =
-            locationText;
-
-        showStatus(
-            "സമയങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു. Calculation method: " +
-            document.getElementById("method").selectedOptions[0].text
-        );
+        renderPrayerTimes(result.data);
     } catch (error) {
-        document.getElementById("prayerList").innerHTML =
-            '<p class="status">സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ' +
-            'ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</p>';
+        list.innerHTML = "";
 
-        showStatus(
-            "സമയം ലഭിക്കാൻ ഇന്റർനെറ്റ് ആവശ്യമാണ്. വീണ്ടും ശ്രമിക്കുക."
-        );
+        const box = document.createElement("div");
+        box.className = "error";
+        box.textContent =
+            "നമസ്കാര സമയങ്ങൾ ഇപ്പോൾ ലഭ്യമല്ല. ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.";
+
+        const button = document.createElement("button");
+        button.className = "retry";
+        button.textContent = "വീണ്ടും ശ്രമിക്കുക";
+        button.onclick = function() {
+            loadCity(currentLocation.city, currentLocation.country);
+        };
+
+        box.appendChild(document.createElement("br"));
+        box.appendChild(button);
+        list.appendChild(box);
+
+        document.getElementById("nextName").textContent =
+            "സമയം ലഭ്യമല്ല";
+
+        document.getElementById("nextTime").textContent = "--:--";
     }
 }
 
-function loadByCity() {
-    const city = document.getElementById("cityInput").value.trim();
-    const country = document.getElementById("countryInput").value.trim();
-    const method = document.getElementById("method").value;
+function loadCity(city, country) {
+    currentLocation = { city, country };
 
-    if (!city || !country) {
-        showStatus("നഗരവും രാജ്യവും നൽകുക.");
-        return;
-    }
+    document.getElementById("locationName").textContent =
+        city + ", " + country;
 
-    const url =
-        "https://api.aladhan.com/v1/timingsByCity/" +
-        encodeURIComponent(localDate()) +
+    const url = API + "timingsByCity/" +
+        encodeURIComponent(dateString()) +
         "?city=" + encodeURIComponent(city) +
         "&country=" + encodeURIComponent(country) +
-        "&method=" + encodeURIComponent(method);
+        "&method=10";
 
-    fetchPrayerTimes(url, city + ", " + country);
+    fetchTimes(url);
 }
 
-function loadByLocation() {
-    if (!navigator.geolocation) {
-        showStatus("ഈ ഉപകരണത്തിൽ ലൊക്കേഷൻ സൗകര്യം ലഭ്യമല്ല.");
-        return;
-    }
+function changeLocation() {
+    const city = prompt("നിങ്ങളുടെ നഗരം നൽകുക:", currentLocation.city);
+    if (city === null || !city.trim()) return;
 
-    showStatus("നിങ്ങളുടെ ലൊക്കേഷൻ കണ്ടെത്തുന്നു...");
-
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const method = document.getElementById("method").value;
-
-            const url =
-                "https://api.aladhan.com/v1/timings/" +
-                encodeURIComponent(localDate()) +
-                "?latitude=" + encodeURIComponent(lat) +
-                "&longitude=" + encodeURIComponent(lon) +
-                "&method=" + encodeURIComponent(method);
-
-            document.getElementById("cityInput").value = "";
-            document.getElementById("countryInput").value = "";
-
-            fetchPrayerTimes(
-                url,
-                "നിങ്ങളുടെ ലൊക്കേഷൻ (" +
-                lat.toFixed(3) + ", " + lon.toFixed(3) + ")"
-            );
-        },
-        function(error) {
-            showStatus(
-                "ലൊക്കേഷൻ ലഭിച്ചില്ല. അനുമതി നൽകി വീണ്ടും ശ്രമിക്കുക, " +
-                "അല്ലെങ്കിൽ നഗരം നൽകി സമയം കണ്ടെത്തുക."
-            );
-        },
-        { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 }
+    const country = prompt(
+        "രാജ്യം നൽകുക:",
+        currentLocation.country
     );
+    if (country === null || !country.trim()) return;
+
+    loadCity(city.trim(), country.trim());
 }
 
 function goBack() {
@@ -479,19 +644,12 @@ function goBack() {
     }
 }
 
-document.getElementById("todayDate").textContent =
-    new Date().toLocaleDateString("ml-IN", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    });
-
 if (localStorage.getItem("swalathDarkMode") === "true") {
     document.body.classList.add("dark-mode");
 }
 
-loadByCity();
+updateDates();
+loadCity("Doha", "Qatar");
 </script>
 </body>
 </html>
