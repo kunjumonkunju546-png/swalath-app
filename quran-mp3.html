@@ -10,46 +10,90 @@ HTML
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
-body.dark{background:#121212;color:#fff}
-header{background:#075e54;color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
-header h2{margin:0;font-size:21px}
-.top-buttons{display:flex;justify-content:space-between;margin-top:10px}
-button{border:0;border-radius:8px;padding:10px 12px;cursor:pointer;font-size:14px}
-.back-btn{background:white;color:#075e54}
-.dark-btn{background:#222;color:white}
-.container{max-width:720px;margin:auto;padding:14px}
-.player-box,.surah-card,.storage-box{background:white;padding:15px;border-radius:13px;margin-bottom:12px;box-shadow:0 2px 7px #00000012}
-body.dark .player-box,body.dark .surah-card,body.dark .storage-box{background:#1e1e1e}
-.now-playing{text-align:center;font-weight:bold;margin-bottom:12px}
+body{margin:0;font-family:Arial,sans-serif;background:#f7f8f6;color:#202b27}
+body.dark{background:#121815;color:#fff}
+
+header{
+  background:linear-gradient(135deg,#064e3b,#087f68);
+  color:white;padding:19px 16px;text-align:center;
+  position:sticky;top:0;z-index:10;
+  box-shadow:0 4px 16px rgba(0,50,35,.12)
+}
+header h2{margin:0;font-size:22px;letter-spacing:.2px}
+.top-buttons{display:flex;justify-content:space-between;margin-top:13px}
+button{border:0;border-radius:10px;padding:10px 13px;cursor:pointer;font-size:14px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.back-btn{background:#fff;color:#075e54}
+.dark-btn{background:#173a30;color:white}
+
+.container{max-width:720px;margin:auto;padding:17px 14px}
+
+.player-box,.storage-box,.surah-card{
+  background:white;border:1px solid rgba(7,94,84,.08);
+  border-radius:16px;margin-bottom:13px;
+  box-shadow:0 4px 18px rgba(20,50,40,.055)
+}
+.player-box{padding:20px 16px}
+.storage-box{padding:16px}
+.now-playing{
+  text-align:center;font-weight:bold;font-size:16px;
+  line-height:1.6;margin-bottom:13px;color:#075e54
+}
+body.dark .now-playing{color:#80cbc4}
 audio{width:100%}
-.controls{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:10px}
-.controls button,.play-btn,.download-full{background:#075e54;color:white}
-.full-btn{width:100%;margin-top:10px;background:#d4a017;color:white;font-weight:bold}
-.download-full{display:block;text-decoration:none;text-align:center;padding:12px;border-radius:8px;margin-bottom:12px}
-.search{width:100%;padding:13px;border:1px solid #ccc;border-radius:10px;margin-bottom:12px;font-size:15px}
-body.dark .search{background:#222;color:white;border-color:#444}
-.surah-card{display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+.controls{
+  display:flex;justify-content:center;gap:8px;
+  flex-wrap:wrap;margin-top:12px
+}
+.controls button,.play-btn{background:#075e54;color:white}
+.full-btn{
+  width:100%;margin-top:12px;background:#c69b43;
+  color:white;font-weight:bold;padding:13px
+}
+
+.download-full{
+  display:block;width:100%;text-decoration:none;text-align:center;
+  padding:13px;border-radius:11px;margin-bottom:13px;
+  background:#075e54;color:white;font-weight:bold
+}
+
+.search{
+  width:100%;padding:14px;border:1px solid #e2e8e4;
+  border-radius:12px;margin-bottom:14px;font-size:15px;
+  background:white;outline-color:#087f68
+}
+body.dark .search{background:#202822;color:white;border-color:#38443c}
+
+.surah-card{
+  padding:14px;display:flex;align-items:center;
+  justify-content:space-between;gap:10px
+}
 .surah-info{flex:1;min-width:0}
-.number{font-weight:bold;color:#075e54}
-body.dark .number{color:#4dd0c4}
-.arabic{font-size:19px;direction:rtl;margin:5px 0}
-.english{font-size:12px;opacity:.7}
-.surah-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
-.play-btn{min-width:40px}
-.download-btn{background:#666;color:white}
-.saved-btn{background:#287a42;color:white}
-.delete-btn{background:#a83232;color:white}
-.status{font-size:12px;margin-top:6px;opacity:.8;overflow-wrap:anywhere}
+.number{font-weight:bold;font-size:14px;color:#075e54}
+body.dark .number{color:#80cbc4}
+.arabic{font-size:21px;direction:rtl;margin:5px 0;line-height:1.7}
+.english{font-size:12px;opacity:.65}
+.surah-actions{display:flex;gap:6px;flex-shrink:0}
+.play-btn,.download-btn{min-width:41px;min-height:40px;border-radius:10px}
+.download-btn{background:#e7f2ed;color:#075e54}
+body.dark .download-btn{background:#263e36;color:#a7e3cb}
+
+.status{font-size:12px;margin-top:6px;opacity:.75;overflow-wrap:anywhere}
 .progress-box{margin:12px 0;font-size:13px}
-progress{width:100%;height:15px}
-.notice{font-size:13px;line-height:1.5;padding:10px;background:#fff4d6;color:#5b4610;border-radius:8px;margin-bottom:12px}
-body.dark .notice{background:#3b321d;color:#ffe5a3}
-button:disabled{opacity:.5;cursor:not-allowed}
+progress{width:100%;height:7px;accent-color:#087f68}
+#stopBtn{background:#e9eeeb;color:#33483e}
+body.dark #stopBtn{background:#303b34;color:white}
+body.dark .player-box,
+body.dark .storage-box,
+body.dark .surah-card{background:#1e2721;border-color:#303a35}
+
 @media(max-width:400px){
- .surah-card{padding:10px}
- .surah-actions{gap:4px}
- .surah-actions button{padding:9px}
+  .container{padding:13px 10px}
+  .surah-card{padding:11px}
+  .surah-actions{gap:4px}
+  .surah-actions button{padding:9px}
+  .arabic{font-size:19px}
 }
 </style>
 </head>
@@ -65,50 +109,47 @@ button:disabled{opacity:.5;cursor:not-allowed}
 
 <div class="container">
 
-  <div class="notice">
-    ഡൗൺലോഡ് ചെയ്ത സൂറത്തുകൾ ഈ ബ്രൗസറിലെ സ്റ്റോറേജിൽ സൂക്ഷിക്കും.
-    ബ്രൗസറിന്റെ ഡാറ്റ മായ്ച്ചാൽ ഫയലുകൾ നഷ്ടപ്പെടാം.
-    Full Quran ഡൗൺലോഡ് ചെയ്യാൻ ധാരാളം സ്റ്റോറേജ് ആവശ്യമാണ്.
-  </div>
-
   <a href="https://www.mp3quran.net/eng/afs"
      target="_blank" rel="noopener" class="download-full">
     🌐 Official Quran Download Center
   </a>
 
   <div class="storage-box">
-    <strong>📥 Offline Quran Downloads</strong>
-    <div id="savedCount" class="status">Saved surahs: പരിശോധിക്കുന്നു...</div>
+    <strong>📥 Offline Quran</strong>
+    <div id="savedCount" class="status">Loading saved surahs...</div>
+
     <div class="progress-box">
       <div id="progressText">Download progress: 0%</div>
       <progress id="downloadProgress" value="0" max="100"></progress>
     </div>
+
     <button id="fullDownloadBtn" class="download-full"
       onclick="downloadFullQuran()">⬇️ Download Full Quran</button>
+
     <button id="stopBtn" onclick="stopFullDownload()" disabled>
       Stop Download
     </button>
-    <button onclick="refreshSavedCount()">↻ Refresh Saved Status</button>
-    <div id="downloadMessage" class="status" role="status">
-      Download ചെയ്യാൻ സൂറത്തിന്റെ Download ബട്ടൺ അമർത്തുക.
-    </div>
+
+    <div id="downloadMessage" class="status" role="status"></div>
   </div>
 
   <div class="player-box">
     <div class="now-playing" id="nowPlaying">Select a Surah</div>
     <audio id="audio" controls preload="metadata"></audio>
+
     <div class="controls">
       <button onclick="previousSurah()">⏮ Previous</button>
       <button onclick="togglePlay()" id="playPauseBtn">▶ Play</button>
       <button onclick="nextSurah()">Next ⏭</button>
     </div>
+
     <button class="full-btn" onclick="playFullQuran()">
       ▶️ Play Full Quran
     </button>
   </div>
 
   <input type="search" id="searchInput" class="search"
-    placeholder="🔎 Search Surah by name or number..." oninput="searchSurah()">
+    placeholder="🔎 Search Surah..." oninput="searchSurah()">
 
   <div id="surahList"></div>
 </div>
@@ -212,7 +253,7 @@ function openDatabase() {
 
   dbPromise = new Promise((resolve, reject) => {
     if (!("indexedDB" in window)) {
-      reject(new Error("ഈ ബ്രൗസറിൽ offline storage ലഭ്യമല്ല."));
+      reject(new Error("Offline storage unavailable"));
       return;
     }
 
@@ -234,6 +275,7 @@ function openDatabase() {
 
 async function getSavedSurah(n) {
   const database = await openDatabase();
+
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(STORE_NAME, "readonly");
     const request = transaction.objectStore(STORE_NAME).get(n);
@@ -244,34 +286,29 @@ async function getSavedSurah(n) {
 
 async function saveSurah(n, blob) {
   const database = await openDatabase();
+
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(STORE_NAME, "readwrite");
+
     transaction.objectStore(STORE_NAME).put({
       number: n,
       blob: blob,
       savedAt: Date.now()
     });
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error);
-    transaction.onabort = () => reject(transaction.error || new Error("Save cancelled"));
-  });
-}
 
-async function deleteSavedSurah(n) {
-  const database = await openDatabase();
-  return new Promise((resolve, reject) => {
-    const transaction = database.transaction(STORE_NAME, "readwrite");
-    transaction.objectStore(STORE_NAME).delete(n);
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
+    transaction.onabort = () => reject(transaction.error || new Error("Save failed"));
   });
 }
 
 async function getSavedNumbers() {
   const database = await openDatabase();
+
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(STORE_NAME, "readonly");
     const request = transaction.objectStore(STORE_NAME).getAllKeys();
+
     request.onsuccess = () => resolve(request.result.map(Number));
     request.onerror = () => reject(request.error);
   });
@@ -280,12 +317,14 @@ async function getSavedNumbers() {
 async function refreshSavedCount() {
   try {
     const saved = await getSavedNumbers();
+
     document.getElementById("savedCount").textContent =
-      "Saved surahs: " + saved.length + " / " + TOTAL_SURAHS;
+      saved.length + " of " + TOTAL_SURAHS + " surahs saved";
+
     renderSurahs();
   } catch (error) {
     document.getElementById("savedCount").textContent =
-      "Offline storage ലഭ്യമല്ല: " + error.message;
+      "Offline storage unavailable";
   }
 }
 
@@ -296,21 +335,20 @@ function setMessage(message) {
 function setProgress(done, total) {
   const percent = total ? Math.round(done / total * 100) : 0;
   progress.value = percent;
-  progressText.textContent = "Download progress: " + percent + "% (" +
-    done + " / " + total + ")";
+  progressText.textContent =
+    "Download progress: " + percent + "% (" + done + "/" + total + ")";
 }
 
 async function downloadSurah(n) {
-  const surah = surahs[n - 1];
-  if (!surah) throw new Error("Invalid Surah number");
+  const saved = await getSavedSurah(n);
 
-  const alreadySaved = await getSavedSurah(n);
-  if (alreadySaved) {
-    setMessage("Surah " + n + " ഇതിനകം സേവ് ചെയ്തിട്ടുണ്ട്.");
+  if (saved) {
+    setMessage("Surah " + n + " is already saved.");
     return;
   }
 
-  setMessage("Surah " + n + " ഡൗൺലോഡ് ചെയ്യുന്നു...");
+  setMessage("Downloading Surah " + n + "...");
+
   const response = await fetch(getAudioUrl(n), { mode: "cors" });
 
   if (!response.ok) {
@@ -319,15 +357,16 @@ async function downloadSurah(n) {
 
   const blob = await response.blob();
 
-  if (!blob.size) throw new Error("Empty audio file received.");
+  if (!blob.size) throw new Error("Empty audio file received");
 
   if (blob.type && !blob.type.includes("audio") &&
       !blob.type.includes("octet-stream")) {
-    throw new Error("MP3 ലഭിച്ചില്ല. Server നൽകിയ file type: " + blob.type);
+    throw new Error("Audio file unavailable from server");
   }
 
   await saveSurah(n, blob);
-  setMessage("✅ Surah " + n + " offline-നായി സേവ് ചെയ്തു.");
+
+  setMessage("Surah " + n + " saved for offline playback.");
   await refreshSavedCount();
 }
 
@@ -336,9 +375,9 @@ function renderSurahs(list = surahs) {
 
   list.forEach(surah => {
     const n = surah[0];
+
     const card = document.createElement("div");
     card.className = "surah-card";
-    card.id = "surah-card-" + n;
 
     const info = document.createElement("div");
     info.className = "surah-info";
@@ -358,7 +397,7 @@ function renderSurahs(list = surahs) {
     const status = document.createElement("div");
     status.className = "status";
     status.id = "status-" + n;
-    status.textContent = "Checking saved status...";
+    status.textContent = "Checking...";
 
     info.append(title, arabic, subtitle, status);
 
@@ -369,43 +408,32 @@ function renderSurahs(list = surahs) {
     playBtn.className = "play-btn";
     playBtn.textContent = "▶";
     playBtn.title = "Play Surah";
+    playBtn.setAttribute("aria-label", "Play Surah " + n);
     playBtn.onclick = () => playSurah(n);
 
     const downloadBtn = document.createElement("button");
     downloadBtn.className = "download-btn";
-    downloadBtn.textContent = "⬇️";
-    downloadBtn.title = "Download for offline playback";
+    downloadBtn.textContent = "⬇";
+    downloadBtn.title = "Download Surah";
+    downloadBtn.setAttribute("aria-label", "Download Surah " + n);
+
     downloadBtn.onclick = async () => {
       downloadBtn.disabled = true;
+
       try {
         await downloadSurah(n);
       } catch (error) {
-        setMessage("Download failed: " + error.message +
-          ". Server CORS അല്ലെങ്കിൽ connection പ്രശ്നമായിരിക്കാം.");
+        setMessage("Download failed. Check connection or audio server.");
       } finally {
         downloadBtn.disabled = false;
         updateCardStatus(n);
       }
     };
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "delete-btn";
-    removeBtn.textContent = "✕";
-    removeBtn.title = "Delete saved audio";
-    removeBtn.onclick = async () => {
-      if (!confirm("Surah " + n + " offline storage-ൽ നിന്ന് delete ചെയ്യണോ?")) return;
-      try {
-        await deleteSavedSurah(n);
-        setMessage("Surah " + n + " deleted.");
-        await refreshSavedCount();
-      } catch (error) {
-        setMessage("Delete failed: " + error.message);
-      }
-    };
-
-    actions.append(playBtn, downloadBtn, removeBtn);
+    actions.append(playBtn, downloadBtn);
     card.append(info, actions);
     surahList.appendChild(card);
+
     updateCardStatus(n);
   });
 }
@@ -413,13 +441,12 @@ function renderSurahs(list = surahs) {
 async function updateCardStatus(n) {
   const status = document.getElementById("status-" + n);
   if (!status) return;
+
   try {
     const saved = await getSavedSurah(n);
-    status.textContent = saved
-      ? "✅ Saved for offline playback"
-      : "Not downloaded";
+    status.textContent = saved ? "✓ Saved offline" : "";
   } catch (error) {
-    status.textContent = "Storage status unavailable";
+    status.textContent = "";
   }
 }
 
@@ -431,29 +458,31 @@ async function playSurah(n) {
     const surah = surahs[n - 1];
     if (!surah) return;
 
-    nowPlaying.textContent = "Loading: " + n + ". " + surah[2];
+    nowPlaying.textContent = "Loading " + n + ". " + surah[2];
 
     const saved = await getSavedSurah(n);
     let source;
 
     if (saved && saved.blob) {
       if (activeObjectUrl) URL.revokeObjectURL(activeObjectUrl);
+
       activeObjectUrl = URL.createObjectURL(saved.blob);
       source = activeObjectUrl;
-      nowPlaying.textContent = "📥 Offline: " + n + ". " + surah[2];
+      nowPlaying.textContent = "📥 " + n + ". " + surah[2] + " · Offline";
     } else {
       source = getAudioUrl(n);
-      nowPlaying.textContent = "🌐 Online: " + n + ". " + surah[2];
+      nowPlaying.textContent = "🌐 " + n + ". " + surah[2];
     }
 
     audio.src = source;
     audio.load();
     await audio.play();
+
     playPauseBtn.textContent = "⏸ Pause";
   } catch (error) {
     console.error(error);
     playPauseBtn.textContent = "▶ Play";
-    setMessage("Playback failed. Internet പരിശോധിക്കുക, അല്ലെങ്കിൽ Surah ആദ്യം download ചെയ്യുക.");
+    setMessage("Unable to play. Check your connection or download the surah first.");
   }
 }
 
@@ -467,7 +496,7 @@ async function togglePlay() {
     try {
       await audio.play();
     } catch (error) {
-      setMessage("Play ചെയ്യാനായില്ല. വീണ്ടും ശ്രമിക്കുക.");
+      setMessage("Unable to start playback.");
     }
   } else {
     audio.pause();
@@ -475,11 +504,15 @@ async function togglePlay() {
 }
 
 function nextSurah() {
-  if (currentSurah < TOTAL_SURAHS) playSurah(currentSurah + 1);
+  if (currentSurah < TOTAL_SURAHS) {
+    playSurah(currentSurah + 1);
+  }
 }
 
 function previousSurah() {
-  if (currentSurah > 1) playSurah(currentSurah - 1);
+  if (currentSurah > 1) {
+    playSurah(currentSurah - 1);
+  }
 }
 
 function playFullQuran() {
@@ -493,8 +526,9 @@ audio.addEventListener("ended", () => {
   } else {
     fullQuranMode = false;
     playPauseBtn.textContent = "▶ Play";
+
     if (currentSurah === TOTAL_SURAHS) {
-      nowPlaying.textContent = "✅ Quran completed";
+      nowPlaying.textContent = "✓ Quran completed";
     }
   }
 });
@@ -517,37 +551,37 @@ async function downloadFullQuran() {
 
   try {
     const savedNumbers = await getSavedNumbers();
-    let done = 0;
-    setProgress(0, TOTAL_SURAHS);
+    let done = savedNumbers.length;
+
+    setProgress(done, TOTAL_SURAHS);
 
     for (let n = 1; n <= TOTAL_SURAHS; n++) {
       if (stopRequested) {
-        setMessage("Download stopped. വീണ്ടും അമർത്തിയാൽ ബാക്കിയുള്ള സൂറത്തുകൾ പരിശോധിച്ച് തുടരും.");
+        setMessage("Download paused. Press Download Full Quran to continue.");
         break;
       }
 
-      if (savedNumbers.includes(n)) {
-        done++;
-        setProgress(done, TOTAL_SURAHS);
-        continue;
-      }
+      if (savedNumbers.includes(n)) continue;
 
       try {
         await downloadSurah(n);
         done++;
         setProgress(done, TOTAL_SURAHS);
       } catch (error) {
-        setMessage("Surah " + n + " download failed: " + error.message +
-          ". Download നിർത്തുന്നു; connection/server പ്രശ്നം പരിശോധിക്കുക.");
+        setMessage("Download stopped at Surah " + n +
+          ". Check your internet connection or audio server.");
         break;
       }
     }
 
-    if (!stopRequested && done === TOTAL_SURAHS) {
-      setMessage("🎉 Full Quran download complete!");
+    const latest = await getSavedNumbers();
+    setProgress(latest.length, TOTAL_SURAHS);
+
+    if (!stopRequested && latest.length === TOTAL_SURAHS) {
+      setMessage("Full Quran download complete.");
     }
   } catch (error) {
-    setMessage("Offline storage error: " + error.message);
+    setMessage("Offline storage unavailable.");
   } finally {
     downloadInProgress = false;
     fullDownloadBtn.disabled = false;
@@ -559,7 +593,7 @@ async function downloadFullQuran() {
 function stopFullDownload() {
   stopRequested = true;
   stopBtn.disabled = true;
-  setMessage("നിലവിലെ സൂറത്ത് പൂർത്തിയായ ശേഷം download നിർത്തും.");
+  setMessage("Stopping after the current surah...");
 }
 
 function searchSurah() {
@@ -577,13 +611,19 @@ function searchSurah() {
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
-  localStorage.setItem("quranDarkMode",
-    document.body.classList.contains("dark"));
+
+  localStorage.setItem(
+    "quranDarkMode",
+    document.body.classList.contains("dark")
+  );
 }
 
 function goBack() {
-  if (history.length > 1) history.back();
-  else location.href = "../index.html";
+  if (history.length > 1) {
+    history.back();
+  } else {
+    location.href = "../index.html";
+  }
 }
 
 if (localStorage.getItem("quranDarkMode") === "true") {
