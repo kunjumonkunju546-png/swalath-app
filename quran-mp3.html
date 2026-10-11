@@ -3,371 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Quran MP3 - Swalath</title>
-
 <style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f5f5f5;
-    color:#222;
-}
-
-body.dark{
-    background:#121212;
-    color:#fff;
-}
-
-header{
-    background:#075e54;
-    color:white;
-    padding:15px;
-    text-align:center;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-header h2{
-    margin:0;
-    font-size:21px;
-}
-
-.top-buttons{
-    display:flex;
-    justify-content:space-between;
-    margin-top:10px;
-}
-
-button{
-    border:0;
-    border-radius:8px;
-    padding:10px 14px;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.back-btn{
-    background:white;
-    color:#075e54;
-}
-
-.dark-btn{
-    background:#222;
-    color:white;
-}
-
-.container{
-    max-width:700px;
-    margin:auto;
-    padding:15px;
-}
-
-.player-box{
-    background:white;
-    padding:18px;
-    border-radius:14px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-body.dark .player-box{
-    background:#1e1e1e;
-}
-
-.now-playing{
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-audio{
-    width:100%;
-}
-
-.controls{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:12px;
-    flex-wrap:wrap;
-}
-
-.controls button{
-    background:#075e54;
-    color:white;
-}
-
-.full-btn{
-    width:100%;
-    margin-top:12px;
-    background:#d4a017 !important;
-    color:white !important;
-    font-weight:bold;
-}
-
-.search{
-    width:100%;
-    padding:13px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    margin-bottom:15px;
-    font-size:15px;
-}
-
-body.dark .search{
-    background:#222;
-    color:white;
-    border-color:#444;
-}
-
-.download-full{
-    width:100%;
-    background:#075e54;
-    color:white;
-    margin-bottom:10px;
-}
-
-.progress-box{
-    display:none;
-    margin:10px 0;
-}
-
-.progress{
-    width:100%;
-    height:10px;
-}
-
-.progress-text{
-    text-align:center;
-    font-size:13px;
-    margin-top:5px;
-}
-
-.surah-card{
-    background:white;
-    border-radius:12px;
-    padding:15px;
-    margin-bottom:10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    box-shadow:0 1px 5px rgba(0,0,0,.08);
-}
-
-body.dark .surah-card{
-    background:#1e1e1e;
-}
-
-.surah-info{
-    flex:1;
-}
-
-.number{
-    font-weight:bold;
-    color:#075e54;
-}
-
-body.dark .number{
-    color:#4dd0c4;
-}
-
-.arabic{
-    font-size:18px;
-    direction:rtl;
-    margin-bottom:4px;
-}
-
-.english{
-    font-size:13px;
-    opacity:.7;
-}
-
-.surah-actions{
-    display:flex;
-    gap:5px;
-}
-
-.play-btn{
-    background:#075e54;
-    color:white;
-}
-
-.download-btn{
-    background:#777;
-    color:white;
-}
-
-.completed{
-    text-align:center;
-    font-weight:bold;
-    color:#075e54;
-    margin-top:10px;
-}
-
-body.dark .completed{
-    color:#4dd0c4;
-}
-
+*{box-sizing:border-box;}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222;}
+body.dark{background:#121212;color:#fff;}
+header{background:#075e54;color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:100;}
+header h2{margin:0;font-size:21px;}
+.top-buttons{display:flex;justify-content:space-between;margin-top:10px;}
+button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:14px;}
+.back-btn{background:white;color:#075e54;}
+.dark-btn{background:#222;color:white;}
+.container{max-width:700px;margin:auto;padding:15px;}
+.player-box{background:white;padding:18px;border-radius:14px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+body.dark .player-box{background:#1e1e1e;}
+.now-playing{text-align:center;font-weight:bold;margin-bottom:12px;}
+audio{width:100%;}
+.controls{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.controls button{background:#075e54;color:white;}
+.full-btn{width:100%;margin-top:12px;background:#d4a017 !important;color:white !important;font-weight:bold;}
+.search{width:100%;padding:13px;border:1px solid #ccc;border-radius:10px;margin-bottom:15px;font-size:15px;}
+body.dark .search{background:#222;color:white;border-color:#444;}
+.download-full{width:100%;background:#075e54;color:white;margin-bottom:10px;font-weight:bold;text-align:center;display:block;text-decoration:none;padding:12px;border-radius:8px;}
+.surah-card{background:white;border-radius:12px;padding:15px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 1px 5px rgba(0,0,0,.08);}
+body.dark .surah-card{background:#1e1e1e;}
+.surah-info{flex:1;}
+.number{font-weight:bold;color:#075e54;}
+body.dark .number{color:#4dd0c4;}
+.arabic{font-size:18px;direction:rtl;margin-bottom:4px;}
+.english{font-size:13px;opacity:.7;}
+.surah-actions{display:flex;gap:5px;}
+.play-btn{background:#075e54;color:white;}
+.download-btn{background:#777;color:white;text-decoration:none;padding:8px 12px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;}
 </style>
 </head>
 
 <body>
 
 <header>
-
 <h2>📖 Quran MP3</h2>
-
 <div class="top-buttons">
-
-<button class="back-btn" onclick="goBack()">
-← Back
-</button>
-
-<button class="dark-btn" onclick="toggleDarkMode()">
-🌙 Dark
-</button>
-
+<button class="back-btn" onclick="goBack()">← Back</button>
+<button class="dark-btn" onclick="toggleDarkMode()">🌙 Dark</button>
 </div>
-
 </header>
-
 
 <div class="container">
 
-
-<!-- FULL QURAN DOWNLOAD -->
-
-<button
-class="download-full"
-onclick="downloadFullQuran()">
-
-⬇️ Download Full Quran Offline
-
-</button>
-
-
-<div
-class="progress-box"
-id="progressBox">
-
-<progress
-class="progress"
-id="downloadProgress"
-value="0"
-max="114">
-</progress>
-
-<div
-class="progress-text"
-id="progressText">
-
-Preparing...
-
-</div>
-
-</div>
-
-
-<!-- PLAYER -->
+<a href="https://www.mp3quran.net/eng/afs" target="_blank" class="download-full">
+⬇️ Open Full Quran Download Center
+</a>
 
 <div class="player-box">
-
-<div
-class="now-playing"
-id="nowPlaying">
-
-Select a Surah
-
-</div>
-
-
-<audio
-id="audio"
-controls
-preload="metadata">
-</audio>
-
-
+<div class="now-playing" id="nowPlaying">Select a Surah</div>
+<audio id="audio" controls preload="metadata"></audio>
 <div class="controls">
-
-<button onclick="previousSurah()">
-⏮ Previous
-</button>
-
-<button
-onclick="togglePlay()"
-id="playPauseBtn">
-
-▶ Play
-
-</button>
-
-<button onclick="nextSurah()">
-Next ⏭
-</button>
-
+<button onclick="previousSurah()">⏮ Previous</button>
+<button onclick="togglePlay()" id="playPauseBtn">▶ Play</button>
+<button onclick="nextSurah()">Next ⏭</button>
+</div>
+<button class="full-btn" onclick="playFullQuran()">▶️ Play Full Quran</button>
 </div>
 
-
-<button
-class="full-btn"
-onclick="playFullQuran()">
-
-▶️ Play Full Quran
-
-</button>
-
-
-</div>
-
-
-<!-- SEARCH -->
-
-<input
-type="text"
-id="searchInput"
-class="search"
-placeholder="🔎 Search Surah..."
-oninput="searchSurah()">
-
-
-<!-- SURAHS -->
+<input type="text" id="searchInput" class="search" placeholder="🔎 Search Surah..." oninput="searchSurah()">
 
 <div id="surahList"></div>
 
-
 </div>
 
-
 <script>
-
-/* =====================================
-   QURAN AUDIO SETTINGS
-===================================== */
-
-const AUDIO_BASE =
-"https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/";
-
-const CACHE_NAME =
-"swalath-quran-mp3-128kbps-v2";
-
+const AUDIO_BASE = "https://server8.mp3quran.net/afs/";
 const TOTAL_SURAHS = 114;
 
-
-/* =====================================
-   SURAHS
-===================================== */
-
 const surahs = [
-
 [1,"الفاتحة","Al-Fatihah"],
 [2,"البقرة","Al-Baqarah"],
 [3,"آل عمران","Aal-Imran"],
@@ -484,891 +192,138 @@ const surahs = [
 [114,"الناس","An-Nas"]
 ];
 
+const audio = document.getElementById("audio");
+const nowPlaying = document.getElementById("nowPlaying");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const surahList = document.getElementById("surahList");
 
-/* =====================================
-   VARIABLES
-===================================== */
-
-const audio =
-document.getElementById("audio");
-
-const nowPlaying =
-document.getElementById("nowPlaying");
-
-const playPauseBtn =
-document.getElementById("playPauseBtn");
-
-const surahList =
-document.getElementById("surahList");
-
-let currentSurah =
-parseInt(
-localStorage.getItem("quranCurrentSurah")
-) || 1;
-
+let currentSurah = parseInt(localStorage.getItem("quranCurrentSurah")) || 1;
 let fullQuranMode = false;
 
-let objectUrl = null;
-
-
-/* =====================================
-   URL
-===================================== */
+function formatNumber(num) {
+    return String(num).padStart(3, '0');
+}
 
 function getAudioUrl(number){
-
-return AUDIO_BASE + number + ".mp3";
-
+    return AUDIO_BASE + formatNumber(number) + ".mp3";
 }
-
-
-/* =====================================
-   RENDER SURAHS
-===================================== */
 
 function renderSurahs(list = surahs){
+    surahList.innerHTML = "";
+    list.forEach(function(surah){
+        const number = surah[0];
+        const arabic = surah[1];
+        const english = surah[2];
+        const audioUrl = getAudioUrl(number);
 
-surahList.innerHTML = "";
-
-list.forEach(function(surah){
-
-const number = surah[0];
-const arabic = surah[1];
-const english = surah[2];
-
-const card =
-document.createElement("div");
-
-card.className =
-"surah-card";
-
-card.innerHTML = `
-
-<div class="surah-info">
-
-<div class="number">
-${number}. ${english}
-</div>
-
-<div class="arabic">
-${arabic}
-</div>
-
-<div class="english">
-Surah ${number}
-</div>
-
-</div>
-
-<div class="surah-actions">
-
-<button
-class="play-btn"
-onclick="playSurah(${number})">
-
-▶
-
-</button>
-
-<button
-class="download-btn"
-onclick="downloadSurah(${number})">
-
-⬇️
-
-</button>
-
-</div>
-
-`;
-
-surahList.appendChild(card);
-
-});
-
+        const card = document.createElement("div");
+        card.className = "surah-card";
+        card.innerHTML = `
+            <div class="surah-info">
+                <div class="number">${number}. ${english}</div>
+                <div class="arabic">${arabic}</div>
+                <div class="english">Surah ${number}</div>
+            </div>
+            <div class="surah-actions">
+                <button class="play-btn" onclick="playSurah(${number})">▶</button>
+                <a href="${audioUrl}" download="Surah_${number}_${english}.mp3" class="download-btn" target="_blank">⬇️</a>
+            </div>
+        `;
+        surahList.appendChild(card);
+    });
 }
-
-
-/* =====================================
-   PLAY SURAH
-===================================== */
 
 async function playSurah(number){
+    try{
+        currentSurah = number;
+        localStorage.setItem("quranCurrentSurah", number);
+        const surah = surahs[number - 1];
+        if(!surah) return;
 
-try{
+        nowPlaying.innerHTML = "▶ " + number + ". " + surah[2];
+        audio.src = getAudioUrl(number);
+        audio.load();
 
-currentSurah = number;
-
-localStorage.setItem(
-"quranCurrentSurah",
-number
-);
-
-const surah =
-surahs[number - 1];
-
-if(!surah){
-return;
+        await audio.play();
+        playPauseBtn.innerHTML = "⏸ Pause";
+    } catch(error){
+        console.log("Audio play error:", error);
+        playPauseBtn.innerHTML = "▶ Play";
+    }
 }
-
-nowPlaying.innerHTML =
-"▶ " + number + ". " + surah[2];
-
-
-/* Save current full mode */
-
-const continueFullQuran =
-fullQuranMode;
-
-
-/* =====================================
-   CHECK CACHE
-===================================== */
-
-let audioUrl =
-getAudioUrl(number);
-
-let cache =
-await caches.open(CACHE_NAME);
-
-let response =
-await cache.match(audioUrl);
-
-
-/* =====================================
-   USE OFFLINE FILE
-===================================== */
-
-if(response){
-
-const blob =
-await response.blob();
-
-if(objectUrl){
-
-URL.revokeObjectURL(objectUrl);
-
-}
-
-objectUrl =
-URL.createObjectURL(blob);
-
-audio.src =
-objectUrl;
-
-}
-
-/* =====================================
-   ONLINE
-===================================== */
-
-else{
-
-audio.src =
-audioUrl;
-
-}
-
-
-audio.load();
-
-
-/* =====================================
-   RESTORE POSITION
-===================================== */
-
-const savedPosition =
-parseFloat(
-localStorage.getItem(
-"quranPosition_" + number
-)
-) || 0;
-
-
-audio.addEventListener(
-"loadedmetadata",
-function restorePosition(){
-
-audio.currentTime =
-Math.min(
-savedPosition,
-audio.duration || 0
-);
-
-audio.removeEventListener(
-"loadedmetadata",
-restorePosition
-);
-
-},
-{once:true}
-);
-
-
-/* =====================================
-   PLAY
-===================================== */
-
-await audio.play();
-
-playPauseBtn.innerHTML =
-"⏸ Pause";
-
-
-/* Restore Full Quran mode */
-
-fullQuranMode =
-continueFullQuran;
-
-
-/* =====================================
-   MEDIA SESSION
-===================================== */
-
-if("mediaSession" in navigator){
-
-navigator.mediaSession.metadata =
-new MediaMetadata({
-
-title:
-surah[2],
-
-artist:
-"Quran - Alafasy",
-
-album:
-"Swalath Quran MP3"
-
-});
-
-}
-
-}
-
-catch(error){
-
-console.log(
-"Audio play error:",
-error
-);
-
-playPauseBtn.innerHTML =
-"▶ Play";
-
-}
-
-}
-
-
-/* =====================================
-   PLAY / PAUSE
-===================================== */
 
 async function togglePlay(){
-
-if(!audio.src){
-
-await playSurah(currentSurah);
-
-return;
-
+    if(!audio.src){
+        await playSurah(currentSurah);
+        return;
+    }
+    if(audio.paused){
+        try{
+            await audio.play();
+            playPauseBtn.innerHTML = "⏸ Pause";
+        }catch(error){ console.log(error); }
+    } else {
+        audio.pause();
+        playPauseBtn.innerHTML = "▶ Play";
+    }
 }
-
-if(audio.paused){
-
-try{
-
-await audio.play();
-
-playPauseBtn.innerHTML =
-"⏸ Pause";
-
-}
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
-else{
-
-audio.pause();
-
-playPauseBtn.innerHTML =
-"▶ Play";
-
-}
-
-}
-
-
-/* =====================================
-   NEXT
-===================================== */
 
 function nextSurah(){
-
-if(currentSurah < TOTAL_SURAHS){
-
-fullQuranMode = false;
-
-playSurah(
-currentSurah + 1
-);
-
+    if(currentSurah < TOTAL_SURAHS){
+        fullQuranMode = false;
+        playSurah(currentSurah + 1);
+    }
 }
-
-}
-
-
-/* =====================================
-   PREVIOUS
-===================================== */
 
 function previousSurah(){
-
-if(currentSurah > 1){
-
-fullQuranMode = false;
-
-playSurah(
-currentSurah - 1
-);
-
+    if(currentSurah > 1){
+        fullQuranMode = false;
+        playSurah(currentSurah - 1);
+    }
 }
-
-}
-
-
-/* =====================================
-   PLAY FULL QURAN
-===================================== */
 
 function playFullQuran(){
-
-fullQuranMode = true;
-
-playSurah(currentSurah);
-
+    fullQuranMode = true;
+    playSurah(currentSurah);
 }
 
-
-/* =====================================
-   ⭐ AUTO NEXT SURAH
-===================================== */
-
-audio.addEventListener(
-"ended",
-function(){
-
-console.log(
-"Surah ended:",
-currentSurah
-);
-
-
-/* Reset saved position */
-
-localStorage.setItem(
-"quranPosition_" + currentSurah,
-"0"
-);
-
-
-/* =====================================
-   CONTINUE FULL QURAN
-===================================== */
-
-if(
-fullQuranMode === true &&
-currentSurah < TOTAL_SURAHS
-){
-
-const nextNumber =
-currentSurah + 1;
-
-
-/* VERY IMPORTANT:
-   Keep Full Quran mode ON */
-
-fullQuranMode = true;
-
-
-/* Small delay for Android */
-
-setTimeout(
-async function(){
-
-try{
-
-await playSurah(
-nextNumber
-);
-
-/* Make sure it remains ON */
-
-fullQuranMode = true;
-
-}
-catch(error){
-
-console.log(
-"Auto next error:",
-error
-);
-
-}
-
-},
-150
-);
-
-}
-
-
-/* =====================================
-   QURAN FINISHED
-===================================== */
-
-else{
-
-fullQuranMode = false;
-
-playPauseBtn.innerHTML =
-"▶ Play";
-
-if(
-currentSurah >= TOTAL_SURAHS
-){
-
-nowPlaying.innerHTML =
-"✅ Quran completed";
-
-}
-
-}
-
+audio.addEventListener("ended", function(){
+    if(fullQuranMode === true && currentSurah < TOTAL_SURAHS){
+        playSurah(currentSurah + 1);
+    } else {
+        fullQuranMode = false;
+        playPauseBtn.innerHTML = "▶ Play";
+        if(currentSurah >= TOTAL_SURAHS){
+            nowPlaying.innerHTML = "✅ Quran completed";
+        }
+    }
 });
 
-
-/* =====================================
-   SAVE POSITION
-===================================== */
-
-audio.addEventListener(
-"timeupdate",
-function(){
-
-if(currentSurah){
-
-localStorage.setItem(
-"quranPosition_" + currentSurah,
-audio.currentTime
-);
-
-}
-
-});
-
-
-/* =====================================
-   PLAY EVENT
-===================================== */
-
-audio.addEventListener(
-"play",
-function(){
-
-playPauseBtn.innerHTML =
-"⏸ Pause";
-
-});
-
-
-/* =====================================
-   PAUSE EVENT
-===================================== */
-
-audio.addEventListener(
-"pause",
-function(){
-
-if(!audio.ended){
-
-playPauseBtn.innerHTML =
-"▶ Play";
-
-}
-
-});
-
-
-/* =====================================
-   SEARCH
-===================================== */
+audio.addEventListener("play", function(){ playPauseBtn.innerHTML = "⏸ Pause"; });
+audio.addEventListener("pause", function(){ if(!audio.ended) playPauseBtn.innerHTML = "▶ Play"; });
 
 function searchSurah(){
-
-const value =
-document
-.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
-
-const filtered =
-surahs.filter(function(surah){
-
-return (
-
-surah[0].toString()
-.includes(value)
-
-||
-
-surah[1]
-.includes(value)
-
-||
-
-surah[2]
-.toLowerCase()
-.includes(value)
-
-);
-
-});
-
-renderSurahs(filtered);
-
+    const value = document.getElementById("searchInput").value.toLowerCase().trim();
+    const filtered = surahs.filter(function(surah){
+        return surah[0].toString().includes(value) || surah[1].includes(value) || surah[2].toLowerCase().includes(value);
+    });
+    renderSurahs(filtered);
 }
-
-
-/* =====================================
-   DOWNLOAD ONE SURAH
-===================================== */
-
-async function downloadSurah(number){
-
-try{
-
-const url =
-getAudioUrl(number);
-
-const cache =
-await caches.open(CACHE_NAME);
-
-const existing =
-await cache.match(url);
-
-if(existing){
-
-alert(
-"ഈ Surah ഇതിനകം offline ആയി save ചെയ്തിട്ടുണ്ട്."
-);
-
-return;
-
-}
-
-
-const response =
-await fetch(url);
-
-if(!response.ok){
-
-throw new Error(
-"Download failed"
-);
-
-}
-
-
-await cache.put(
-url,
-response.clone()
-);
-
-
-alert(
-"Surah " +
-number +
-" offline ആയി save ചെയ്തു."
-);
-
-}
-
-catch(error){
-
-console.log(error);
-
-alert(
-"Download failed. Internet connection പരിശോധിക്കുക."
-);
-
-}
-
-}
-
-
-/* =====================================
-   DOWNLOAD FULL QURAN
-===================================== */
-
-async function downloadFullQuran(){
-
-const progressBox =
-document.getElementById(
-"progressBox"
-);
-
-const progress =
-document.getElementById(
-"downloadProgress"
-);
-
-const progressText =
-document.getElementById(
-"progressText"
-);
-
-
-progressBox.style.display =
-"block";
-
-progress.value = 0;
-
-progress.max =
-TOTAL_SURAHS;
-
-progressText.innerHTML =
-"Preparing...";
-
-
-try{
-
-const cache =
-await caches.open(
-CACHE_NAME
-);
-
-
-for(
-let i = 1;
-i <= TOTAL_SURAHS;
-i++
-){
-
-const url =
-getAudioUrl(i);
-
-
-/* Already downloaded? */
-
-const existing =
-await cache.match(url);
-
-
-if(!existing){
-
-const response =
-await fetch(url);
-
-if(!response.ok){
-
-throw new Error(
-"Failed at Surah " + i
-);
-
-}
-
-await cache.put(
-url,
-response.clone()
-);
-
-}
-
-
-progress.value =
-i;
-
-progressText.innerHTML =
-"Downloading Surah " +
-i +
-" / " +
-TOTAL_SURAHS;
-
-
-/* Give browser some breathing time */
-
-await new Promise(
-resolve =>
-setTimeout(
-resolve,
-50
-)
-);
-
-}
-
-
-progressText.innerHTML =
-"✅ Full Quran downloaded for offline use";
-
-alert(
-"Full Quran offline download completed."
-);
-
-}
-
-catch(error){
-
-console.log(error);
-
-progressText.innerHTML =
-"❌ Download failed";
-
-alert(
-"Full Quran download failed. Internet connection പരിശോധിക്കുക."
-);
-
-}
-
-}
-
-
-/* =====================================
-   DARK MODE
-===================================== */
 
 function toggleDarkMode(){
-
-document.body.classList.toggle(
-"dark"
-);
-
-const enabled =
-document.body.classList.contains(
-"dark"
-);
-
-localStorage.setItem(
-"quranDarkMode",
-enabled
-);
-
+    document.body.classList.toggle("dark");
+    localStorage.setItem("quranDarkMode", document.body.classList.contains("dark"));
 }
 
-
-/* =====================================
-   LOAD DARK MODE
-===================================== */
-
-if(
-localStorage.getItem(
-"quranDarkMode"
-) === "true"
-){
-
-document.body.classList.add(
-"dark"
-);
-
+if(localStorage.getItem("quranDarkMode") === "true"){
+    document.body.classList.add("dark");
 }
-
-
-/* =====================================
-   BACK BUTTON
-===================================== */
 
 function goBack(){
-
-history.back();
-
+    history.back();
 }
-
-
-/* =====================================
-   MEDIA SESSION
-===================================== */
-
-if("mediaSession" in navigator){
-
-navigator.mediaSession.setActionHandler(
-"play",
-function(){
-
-audio.play();
-
-}
-);
-
-
-navigator.mediaSession.setActionHandler(
-"pause",
-function(){
-
-audio.pause();
-
-}
-);
-
-
-navigator.mediaSession.setActionHandler(
-"nexttrack",
-function(){
-
-nextSurah();
-
-}
-);
-
-
-navigator.mediaSession.setActionHandler(
-"previoustrack",
-function(){
-
-previousSurah();
-
-}
-);
-
-}
-
-
-/* =====================================
-   INITIAL LOAD
-===================================== */
 
 renderSurahs();
-
-
-/* =====================================
-   RESTORE CURRENT SURAH
-===================================== */
-
-if(currentSurah >= 1 &&
-currentSurah <= TOTAL_SURAHS){
-
-const saved =
-surahs[currentSurah - 1];
-
-if(saved){
-
-nowPlaying.innerHTML =
-"Last Surah: " +
-currentSurah +
-". " +
-saved[2];
-
-}
-
-}
-
 </script>
-
 </body>
 </html>
