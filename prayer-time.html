@@ -1,513 +1,497 @@
-HTML
-
 <!DOCTYPE html>
 <html lang="ml">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17483d">
-<meta name="description" content="സ്വലാത്ത് - നമസ്കാര സമയങ്ങളും ഖിബ്‌ല ദിശയും">
-<title>Prayer Times & Qibla - സ്വലാത്ത്</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
+<title>Prayer Times - സ്വലാത്ത്</title>
 
 <style>
-:root{
-  --bg:#f3f0e8;--card:#fff;--surface:#fffdf8;
-  --primary:#17483d;--soft:#e8f0eb;--gold:#c7a45b;
-  --text:#202a27;--muted:#7a817e;--border:#e7e1d5;
-  --shadow:0 8px 25px rgba(20,50,40,.07);
+:root {
+    --green: #123d34;
+    --green2: #1d5143;
+    --gold: #f1dfb0;
+    --bg: #f5f5ef;
+    --card: #ffffff;
+    --text: #20332b;
+    --muted: #727970;
+    --border: #e5e5d9;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:var(--bg);color:var(--text);
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
 }
-body.dark{
-  --bg:#101714;--card:#1b2723;--surface:#17211e;
-  --primary:#8fc6b3;--soft:#20352e;--text:#eef5f1;
-  --muted:#aebbb5;--border:#2b3934;--shadow:0 8px 25px #0004;
+.page {
+    width: 100%;
+    max-width: 600px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 16px;
 }
-button{font:inherit;cursor:pointer}
-.page{max-width:430px;margin:auto;min-height:100vh;padding-bottom:24px}
-.header{
-  background:linear-gradient(145deg,#10382f,#17614e);
-  color:white;padding:18px;border-radius:0 0 26px 26px;
-  box-shadow:var(--shadow)
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 20px;
 }
-.header-row{display:flex;align-items:center;gap:12px}
-.back-btn,.dark-btn{
-  width:42px;height:42px;flex-shrink:0;border:0;border-radius:50%;
-  background:#ffffff20;color:white;font-size:20px
+.back {
+    border: 0;
+    background: var(--green);
+    color: white;
+    border-radius: 11px;
+    padding: 11px 15px;
+    font-size: 15px;
+    cursor: pointer;
 }
-.header-title{flex:1}
-.header-title h1{margin:0;font-size:19px;font-weight:750}
-.header-title p{margin:5px 0 0;font-size:12px;opacity:.85}
-.content{padding:16px}
-.card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:19px;padding:15px;margin-bottom:14px;
-  box-shadow:var(--shadow)
+.header h1 {
+    font-size: 21px;
+    margin: 0;
+    color: var(--green);
 }
-.location-line{display:flex;align-items:center;gap:12px}
-.location-symbol{
-  width:43px;height:43px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--soft);font-size:20px;flex-shrink:0
+.hero {
+    background: linear-gradient(140deg, #092b25, #1d5143);
+    color: white;
+    border-radius: 22px;
+    padding: 25px 18px;
+    text-align: center;
+    margin-bottom: 16px;
 }
-.label{font-size:11px;color:var(--muted);margin-bottom:4px}
-.location-name{font-size:15px;font-weight:750}
-.location-status{font-size:11px;color:var(--muted);margin-top:4px}
-.date-card{
-  background:linear-gradient(145deg,#17483d,#216b55);
-  color:white;border-radius:19px;padding:19px;text-align:center;
-  margin-bottom:19px;box-shadow:var(--shadow)
+.moon { font-size: 34px; }
+.hero h2 {
+    color: var(--gold);
+    margin: 8px 0;
+    font-size: 24px;
 }
-.date-day{font-size:22px;font-weight:750}
-.date-text{font-size:12px;margin-top:6px;opacity:.9}
-.section-title{font-size:15px;font-weight:750;margin:18px 3px 11px}
-.prayer-list{display:flex;flex-direction:column;gap:9px}
-.prayer-row{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:12px;display:flex;align-items:center;
-  box-shadow:0 4px 15px #14322808
+.hero p {
+    margin: 7px 0;
+    font-size: 14px;
+    line-height: 1.7;
 }
-.prayer-row.current{background:var(--soft);border-color:var(--gold)}
-.prayer-icon{
-  width:39px;height:39px;border-radius:12px;background:var(--surface);
-  display:flex;align-items:center;justify-content:center;
-  margin-right:11px;font-size:19px;flex-shrink:0
+#hijriDate { color: var(--gold); }
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 17px;
+    margin-bottom: 15px;
 }
-.prayer-name{flex:1}
-.prayer-name strong{display:block;font-size:14px}
-.prayer-name span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
-.prayer-time{font-size:16px;font-weight:750;color:var(--primary)}
-.current-badge{
-  font-size:9px;background:var(--gold);color:white;
-  padding:3px 6px;border-radius:20px;margin-left:6px
+.card h3 {
+    margin: 0 0 13px;
+    font-size: 17px;
+    color: var(--green);
 }
-.qibla-card{text-align:center;margin-top:19px}
-.qibla-title{font-size:16px;font-weight:750}
-.qibla-subtitle{font-size:11px;color:var(--muted);margin-top:4px}
-.compass{
-  width:180px;height:180px;border:7px solid var(--soft);
-  border-radius:50%;margin:20px auto 15px;position:relative;
-  background:radial-gradient(circle,var(--surface) 0 63%,var(--soft) 64% 67%,var(--surface) 68%);
-  display:flex;align-items:center;justify-content:center
+.location {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
 }
-.direction{position:absolute;font-size:11px;font-weight:750;color:var(--muted)}
-.n{top:8px}.s{bottom:8px}.e{right:9px}.w{left:9px}
-.arrow{
-  width:4px;height:115px;position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%);transform-origin:center
+input, select {
+    min-width: 0;
+    flex: 1;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 14px;
 }
-.arrow-head{
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:0;height:0;border-left:9px solid transparent;
-  border-right:9px solid transparent;border-bottom:27px solid var(--gold)
+button { font-family: inherit; }
+.action {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: var(--green);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
 }
-.arrow-line{
-  position:absolute;top:24px;width:4px;height:80px;
-  background:var(--gold);border-radius:5px
+.secondary {
+    background: #e9eee8;
+    color: var(--green);
 }
-.center-dot{
-  width:18px;height:18px;border-radius:50%;background:var(--primary);
-  border:3px solid var(--surface);z-index:2
+.note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 11px 0 0;
 }
-.degree{font-size:25px;font-weight:800;color:var(--primary)}
-.qibla-info{font-size:11px;color:var(--muted);line-height:1.6;margin-top:7px}
-.action{
-  width:100%;padding:12px;border:0;border-radius:12px;
-  background:var(--primary);color:white;font-weight:700;margin-top:15px
+.status {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 10px 0 0;
 }
-body.dark .action{color:#102019}
-.action:disabled{opacity:.6}
-.loading{padding:22px 8px;text-align:center;color:var(--muted);font-size:12px}
-.footer{text-align:center;padding:24px 10px 5px;color:var(--muted);font-size:10px}
-.footer strong{color:var(--primary);font-size:13px}
-@media(max-width:360px){
-  .content{padding:12px}.header-title h1{font-size:17px}
+.prayer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 12px;
+    border-bottom: 1px solid var(--border);
+}
+.prayer-row:last-child { border-bottom: 0; }
+.prayer-name {
+    font-size: 15px;
+    font-weight: bold;
+}
+.prayer-ar {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+.prayer-time {
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--green);
+    white-space: nowrap;
+}
+.prayer-row.next {
+    background: #edf4ed;
+    border-radius: 12px;
+}
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 10px 0 22px;
+}
+body.dark-mode {
+    --bg: #111713;
+    --card: #202720;
+    --text: #eeeeea;
+    --muted: #b0b8ae;
+    --border: #3b453d;
+    --green: #d7e6d8;
+}
+body.dark-mode .header h1,
+body.dark-mode .card h3,
+body.dark-mode .prayer-time {
+    color: #d7e6d8;
+}
+body.dark-mode .prayer-row.next { background: #2a392e; }
+body.dark-mode .secondary {
+    background: #354339;
+    color: #fff;
+}
+@media(max-width:360px) {
+    .page { padding: 11px; }
+    .header h1 { font-size: 18px; }
+    .prayer-time { font-size: 17px; }
 }
 </style>
 </head>
 
 <body>
 <div class="page">
-  <header class="header">
-    <div class="header-row">
-      <button class="back-btn" onclick="goBack()" aria-label="Back">←</button>
-      <div class="header-title">
-        <h1>🕌 Prayer Times & Qibla</h1>
-        <p>നമസ്കാര സമയം · ഖിബ്‌ല ദിശ</p>
-      </div>
-      <button class="dark-btn" onclick="toggleDarkMode()" aria-label="Dark mode">◐</button>
-    </div>
-  </header>
 
-  <main class="content">
+    <div class="header">
+        <button class="back" onclick="goBack()">← Back</button>
+        <h1>🕌 Prayer Times</h1>
+    </div>
+
+    <section class="hero">
+        <div class="moon">🌙</div>
+        <h2>നമസ്കാര സമയങ്ങൾ</h2>
+        <p id="todayDate">ഇന്നത്തെ തീയതി</p>
+        <p id="hijriDate">ഹിജ്റി തീയതി ലഭ്യമാക്കുന്നു...</p>
+        <p id="locationLabel">Doha, Qatar</p>
+    </section>
+
     <section class="card">
-      <div class="location-line">
-        <div class="location-symbol">📍</div>
-        <div>
-          <div class="label">നിങ്ങളുടെ സ്ഥലം</div>
-          <div id="locationName" class="location-name">Location കണ്ടെത്തുന്നു...</div>
-          <div id="locationStatus" class="location-status">നമസ്കാര സമയം തയ്യാറാക്കുന്നു</div>
+        <h3>📍 സ്ഥലം തിരഞ്ഞെടുക്കുക</h3>
+
+        <div class="location">
+            <input id="cityInput"
+                   type="text"
+                   value="Doha"
+                   placeholder="City, e.g. Doha">
+
+            <input id="countryInput"
+                   type="text"
+                   value="Qatar"
+                   placeholder="Country">
         </div>
-      </div>
+
+        <div style="margin-top:10px">
+            <label for="method" class="note">
+                Prayer calculation method
+            </label>
+            <select id="method">
+                <option value="10" selected>Qatar</option>
+                <option value="1">Karachi</option>
+                <option value="3">Muslim World League</option>
+                <option value="4">Umm Al-Qura</option>
+                <option value="2">ISNA</option>
+            </select>
+        </div>
+
+        <div class="location" style="margin-top:12px">
+            <button class="action" onclick="loadByCity()">
+                സമയം കണ്ടെത്തുക
+            </button>
+            <button class="action secondary"
+                    onclick="loadByLocation()">
+                📍 എന്റെ സ്ഥലം
+            </button>
+        </div>
+
+        <p id="status" class="status">
+            നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...
+        </p>
+        <p class="note">
+            ലൊക്കേഷൻ ഉപയോഗിക്കാൻ അനുമതി ആവശ്യപ്പെട്ടേക്കാം.
+            കൃത്യമായ സമയങ്ങൾക്ക് നിങ്ങളുടെ പ്രദേശത്തെ
+            ഔദ്യോഗിക നമസ്കാര സമയവുമായി താരതമ്യം ചെയ്യുക.
+        </p>
     </section>
 
-    <section class="date-card">
-      <div id="gregorianDate" class="date-day">—</div>
-      <div id="hijriDate" class="date-text">—</div>
+    <section class="card">
+        <h3>🕰️ ഇന്നത്തെ നമസ്കാര സമയങ്ങൾ</h3>
+        <div id="prayerList">
+            <p class="status">സമയങ്ങൾ ലോഡ് ചെയ്യുന്നു...</p>
+        </div>
     </section>
 
-    <div class="section-title">🕰️ ഇന്നത്തെ നമസ്കാര സമയം</div>
-    <div id="prayerList" class="prayer-list">
-      <div class="loading">നമസ്കാര സമയം ലഭിക്കുന്നു...</div>
-    </div>
-
-    <section class="card qibla-card">
-      <div class="qibla-title">🕋 Qibla Direction</div>
-      <div class="qibla-subtitle">കഅ്ബയിലേക്കുള്ള ദിശ</div>
-
-      <div class="compass">
-        <span class="direction n">N</span>
-        <span class="direction s">S</span>
-        <span class="direction e">E</span>
-        <span class="direction w">W</span>
-        <div id="compassArrow" class="arrow">
-          <div class="arrow-head"></div>
-          <div class="arrow-line"></div>
-        </div>
-        <div class="center-dot"></div>
-      </div>
-
-      <div id="qiblaDegree" class="degree">—</div>
-      <div id="qiblaInfo" class="qibla-info">
-        ഖിബ്‌ല ദിശ കണക്കാക്കുന്നു...
-      </div>
-      <button id="compassButton" class="action" onclick="startCompass()">
-        🧭 Live Compass
-      </button>
+    <section class="card">
+        <h3>📌 പ്രധാന കുറിപ്പ്</h3>
+        <p class="note">
+            ഈ പേജ് ഇന്റർനെറ്റിലൂടെ നമസ്കാര സമയങ്ങൾ
+            ലഭ്യമാക്കുന്നു. ഈ പതിപ്പിൽ സ്വയമേവ ബാങ്ക്
+            വിളിക്കുന്ന സംവിധാനം ഉൾപ്പെടുത്തിയിട്ടില്ല.
+            അത് പിന്നീട് Android Studio-യിൽ പ്രത്യേകം
+            ചേർക്കുന്നതാണ്.
+        </p>
     </section>
 
     <div class="footer">
-      <strong>സ്വലാത്ത്</strong><br>
-      Your Daily Islamic Companion
+        സ്വലാത്ത് · നമസ്കാര സമയങ്ങൾ
     </div>
-  </main>
+
 </div>
 
 <script>
 "use strict";
 
-const KAABA_LAT = 21.4225;
-const KAABA_LON = 39.8262;
-const LOCATION_KEY = "swalathLastLocation";
-const CACHE_KEY = "swalathPrayerCacheV3";
+const prayerNames = [
+    ["Fajr", "ഫജ്റ്", "الفجر"],
+    ["Sunrise", "സൂര്യോദയം", "الشروق"],
+    ["Dhuhr", "ളുഹർ", "الظهر"],
+    ["Asr", "അസർ", "العصر"],
+    ["Maghrib", "മഗ്‌രിബ്", "المغرب"],
+    ["Isha", "ഇശാഅ്", "العشاء"]
+];
 
-const DOHA = {
-  name:"Doha, Qatar",
-  latitude:25.2854,
-  longitude:51.5310,
-  method:10,
-  school:0,
-  source:"default"
-};
-
-let activeLocation = null;
-let qiblaBearing = null;
-let compassActive = false;
-
-const $ = id => document.getElementById(id);
-
-function applyDarkMode(){
-  document.body.classList.toggle(
-    "dark",localStorage.getItem("swalathDarkMode")==="true"
-  );
+function localDate() {
+    const d = new Date();
+    return d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
 }
 
-function toggleDarkMode(){
-  const enabled=!document.body.classList.contains("dark");
-  localStorage.setItem("swalathDarkMode",String(enabled));
-  applyDarkMode();
+function showStatus(message) {
+    document.getElementById("status").textContent = message;
 }
 
-applyDarkMode();
+function cleanTime(value) {
+    if (!value) return "--:--";
+    return String(value).split(" ")[0];
+}
 
-function goBack(){
-  try{
-    if(document.referrer && new URL(document.referrer).origin===location.origin){
-      history.back();
-    }else{
-      location.href="index.html";
+function getMinutes(value) {
+    const match = cleanTime(value).match(/^(\d{1,2}):(\d{2})$/);
+    if (!match) return -1;
+    return Number(match[1]) * 60 + Number(match[2]);
+}
+
+function displayPrayers(data) {
+    const timings = data.timings;
+    const list = document.getElementById("prayerList");
+
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const mainPrayers = prayerNames.filter(
+        item => item[0] !== "Sunrise"
+    );
+
+    let nextPrayer = null;
+
+    for (const item of mainPrayers) {
+        const minutes = getMinutes(timings[item[0]]);
+        if (minutes >= currentMinutes) {
+            nextPrayer = item[0];
+            break;
+        }
     }
-  }catch(e){
-    location.href="index.html";
-  }
-}
 
-function getSavedLocation(){
-  try{
-    const value=JSON.parse(localStorage.getItem(LOCATION_KEY)||"null");
-    if(value && Number.isFinite(Number(value.latitude)) &&
-       Number.isFinite(Number(value.longitude))){
-      return value;
-    }
-  }catch(e){}
-  return null;
-}
+    list.innerHTML = "";
 
-function saveLocation(value){
-  try{
-    localStorage.setItem(LOCATION_KEY,JSON.stringify(value));
-  }catch(e){}
-}
+    prayerNames.forEach(function(item) {
+        const name = item[0];
+        const row = document.createElement("div");
+        row.className = "prayer-row";
 
-function dateString(date=new Date()){
-  return String(date.getDate()).padStart(2,"0")+"-"+
-    String(date.getMonth()+1).padStart(2,"0")+"-"+date.getFullYear();
-}
+        if (name === nextPrayer) {
+            row.classList.add("next");
+        }
 
-function cacheKey(date,location){
-  return CACHE_KEY+"_"+date+"_"+
-    Number(location.latitude).toFixed(3)+"_"+
-    Number(location.longitude).toFixed(3);
-}
+        const left = document.createElement("div");
+        const title = document.createElement("span");
+        title.className = "prayer-name";
+        title.textContent = item[1];
 
-function setActiveLocation(value,status){
-  activeLocation=value;
-  saveLocation(value);
-  $("locationName").textContent=value.name||"Current Location";
-  $("locationStatus").textContent=status||"";
-  loadPrayerTimes(value);
-  calculateQibla(value.latitude,value.longitude);
-}
+        const arabic = document.createElement("span");
+        arabic.className = "prayer-ar";
+        arabic.textContent = item[2];
 
-function requestCurrentLocation(){
-  if(!navigator.geolocation){
-    useSavedOrDefault();
-    return;
-  }
+        left.appendChild(title);
+        left.appendChild(arabic);
 
-  navigator.geolocation.getCurrentPosition(
-    position=>{
-      const value={
-        name:"Current Location",
-        latitude:position.coords.latitude,
-        longitude:position.coords.longitude,
-        source:"gps",
-        method:null,
-        school:0,
-        updatedAt:Date.now()
-      };
-      setActiveLocation(value,"");
-    },
-    ()=>{
-      useSavedOrDefault();
-    },
-    {enableHighAccuracy:false,timeout:10000,maximumAge:300000}
-  );
-}
+        const time = document.createElement("span");
+        time.className = "prayer-time";
+        time.textContent = cleanTime(timings[name]);
 
-function useSavedOrDefault(){
-  const saved=getSavedLocation();
-
-  if(saved){
-    setActiveLocation(saved,saved.source==="gps"?"":"");
-  }else{
-    setActiveLocation({...DOHA},"");
-  }
-}
-
-async function loadPrayerTimes(location){
-  const key=cacheKey(dateString(),location);
-  $("prayerList").innerHTML=
-    '<div class="loading">നമസ്കാര സമയം ലഭിക്കുന്നു...</div>';
-
-  try{
-    const params=new URLSearchParams({
-      latitude:String(location.latitude),
-      longitude:String(location.longitude),
-      school:String(location.school ?? 0)
+        row.appendChild(left);
+        row.appendChild(time);
+        list.appendChild(row);
     });
 
-    if(location.method!==undefined && location.method!==null){
-      params.set("method",String(location.method));
+    const hijri = data.date && data.date.hijri
+        ? data.date.hijri
+        : null;
+
+    if (hijri) {
+        document.getElementById("hijriDate").textContent =
+            "ഹിജ്റി: " + hijri.day + " " +
+            hijri.month.en + " " + hijri.year;
     }
+}
 
-    const url="https://api.aladhan.com/v1/timings/"+
-      dateString()+"?"+params.toString();
+async function fetchPrayerTimes(url, locationText) {
+    showStatus("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കുന്നു...");
+    document.getElementById("prayerList").innerHTML =
+        '<p class="status">ദയവായി കാത്തിരിക്കൂ...</p>';
 
-    const response=await fetch(url);
-    if(!response.ok) throw new Error("Prayer API unavailable");
+    try {
+        const response = await fetch(url);
 
-    const result=await response.json();
-    if(result.code!==200 || !result.data?.timings){
-      throw new Error("Prayer data unavailable");
+        if (!response.ok) {
+            throw new Error("Network response error");
+        }
+
+        const result = await response.json();
+
+        if (result.code !== 200 || !result.data ||
+            !result.data.timings) {
+            throw new Error("Prayer time data unavailable");
+        }
+
+        displayPrayers(result.data);
+        document.getElementById("locationLabel").textContent =
+            locationText;
+
+        showStatus(
+            "സമയങ്ങൾ അപ്ഡേറ്റ് ചെയ്തു. Calculation method: " +
+            document.getElementById("method").selectedOptions[0].text
+        );
+    } catch (error) {
+        document.getElementById("prayerList").innerHTML =
+            '<p class="status">സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ' +
+            'ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</p>';
+
+        showStatus(
+            "സമയം ലഭിക്കാൻ ഇന്റർനെറ്റ് ആവശ്യമാണ്. വീണ്ടും ശ്രമിക്കുക."
+        );
     }
+}
 
-    try{
-      localStorage.setItem(key,JSON.stringify(result.data));
-    }catch(e){}
+function loadByCity() {
+    const city = document.getElementById("cityInput").value.trim();
+    const country = document.getElementById("countryInput").value.trim();
+    const method = document.getElementById("method").value;
 
-    displayPrayerTimes(result.data);
-  }catch(error){
-    console.error("Prayer time error:",error);
-
-    try{
-      const cached=localStorage.getItem(key);
-      if(cached){
-        displayPrayerTimes(JSON.parse(cached));
+    if (!city || !country) {
+        showStatus("നഗരവും രാജ്യവും നൽകുക.");
         return;
-      }
-    }catch(e){}
-
-    $("prayerList").innerHTML=
-      '<div class="loading">നമസ്കാര സമയം ഇപ്പോൾ ലഭ്യമല്ല. Internet കണക്ഷൻ പരിശോധിക്കുക.</div>';
-    $("locationStatus").textContent="സമയം പുതുക്കാൻ കഴിഞ്ഞില്ല";
-  }
-}
-
-function cleanTime(value){
-  if(!value)return "--:--";
-  return String(value).replace(/\s*\(.+\)/,"").trim();
-}
-
-function timeMinutes(value){
-  const parts=cleanTime(value).split(":");
-  if(parts.length<2)return NaN;
-  return Number(parts[0])*60+Number(parts[1]);
-}
-
-function displayPrayerTimes(data){
-  const items=[
-    ["Fajr","ഫജർ","🌙"],
-    ["Sunrise","സൂര്യോദയം","🌅"],
-    ["Dhuhr","ദുഹർ","☀️"],
-    ["Asr","അസർ","🌤️"],
-    ["Maghrib","മഗ്‌രിബ്","🌇"],
-    ["Isha","ഇശാ","🌌"]
-  ];
-
-  const timings=data.timings;
-  const now=new Date();
-  const nowMinutes=now.getHours()*60+now.getMinutes();
-  const keys=["Fajr","Dhuhr","Asr","Maghrib","Isha"];
-  const values=keys.map(key=>({
-    key,minutes:timeMinutes(timings[key])
-  }));
-
-  let current="Isha";
-  for(const item of values){
-    if(Number.isFinite(item.minutes)&&nowMinutes>=item.minutes){
-      current=item.key;
     }
-  }
 
-  $("prayerList").innerHTML=items.map(([key,ml,icon])=>{
-    const isCurrent=key!=="Sunrise"&&key===current;
-    return `<div class="prayer-row ${isCurrent?"current":""}">
-      <div class="prayer-icon">${icon}</div>
-      <div class="prayer-name">
-        <strong>${key}</strong><span>${ml}</span>
-      </div>
-      <div class="prayer-time">${cleanTime(timings[key])}</div>
-      ${isCurrent?'<span class="current-badge">NOW</span>':""}
-    </div>`;
-  }).join("");
+    const url =
+        "https://api.aladhan.com/v1/timingsByCity/" +
+        encodeURIComponent(localDate()) +
+        "?city=" + encodeURIComponent(city) +
+        "&country=" + encodeURIComponent(country) +
+        "&method=" + encodeURIComponent(method);
 
-  if(data.date){
-    if(data.date.gregorian){
-      $("gregorianDate").textContent=data.date.gregorian.date||"—";
-    }
-    if(data.date.hijri){
-      const h=data.date.hijri;
-      $("hijriDate").textContent=
-        h.day+" "+(h.month?.en||"")+" "+h.year+" AH";
-    }
-  }
+    fetchPrayerTimes(url, city + ", " + country);
 }
 
-function toRadians(n){return n*Math.PI/180}
-function toDegrees(n){return n*180/Math.PI}
-
-function calculateQibla(latitude,longitude){
-  const lat1=toRadians(latitude);
-  const lat2=toRadians(KAABA_LAT);
-  const delta=toRadians(KAABA_LON-longitude);
-  const y=Math.sin(delta)*Math.cos(lat2);
-  const x=Math.cos(lat1)*Math.sin(lat2)-
-    Math.sin(lat1)*Math.cos(lat2)*Math.cos(delta);
-
-  qiblaBearing=(toDegrees(Math.atan2(y,x))+360)%360;
-
-  $("qiblaDegree").textContent=Math.round(qiblaBearing)+"° from North";
-  $("qiblaInfo").textContent="കഅ്ബയിലേക്കുള്ള ഏകദേശ ദിശ";
-  $("compassArrow").style.transform=
-    "translate(-50%,-50%) rotate("+qiblaBearing+"deg)";
-}
-
-async function startCompass(){
-  if(!activeLocation)return;
-
-  if(!("DeviceOrientationEvent" in window)){
-    $("qiblaInfo").textContent=
-      "ഈ ഫോണിൽ Live Compass ലഭ്യമല്ല. മുകളിലെ ദിശ ഉപയോഗിക്കുക.";
-    return;
-  }
-
-  try{
-    if(typeof DeviceOrientationEvent.requestPermission==="function"){
-      const permission=await DeviceOrientationEvent.requestPermission();
-      if(permission!=="granted"){
-        $("qiblaInfo").textContent=
-          "Compass അനുവദിച്ചിട്ടില്ല. മുകളിലെ ദിശ ഉപയോഗിക്കുക.";
+function loadByLocation() {
+    if (!navigator.geolocation) {
+        showStatus("ഈ ഉപകരണത്തിൽ ലൊക്കേഷൻ സൗകര്യം ലഭ്യമല്ല.");
         return;
-      }
     }
 
-    if(!compassActive){
-      window.addEventListener("deviceorientation",handleOrientation,true);
-      compassActive=true;
+    showStatus("നിങ്ങളുടെ ലൊക്കേഷൻ കണ്ടെത്തുന്നു...");
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const method = document.getElementById("method").value;
+
+            const url =
+                "https://api.aladhan.com/v1/timings/" +
+                encodeURIComponent(localDate()) +
+                "?latitude=" + encodeURIComponent(lat) +
+                "&longitude=" + encodeURIComponent(lon) +
+                "&method=" + encodeURIComponent(method);
+
+            document.getElementById("cityInput").value = "";
+            document.getElementById("countryInput").value = "";
+
+            fetchPrayerTimes(
+                url,
+                "നിങ്ങളുടെ ലൊക്കേഷൻ (" +
+                lat.toFixed(3) + ", " + lon.toFixed(3) + ")"
+            );
+        },
+        function(error) {
+            showStatus(
+                "ലൊക്കേഷൻ ലഭിച്ചില്ല. അനുമതി നൽകി വീണ്ടും ശ്രമിക്കുക, " +
+                "അല്ലെങ്കിൽ നഗരം നൽകി സമയം കണ്ടെത്തുക."
+            );
+        },
+        { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 }
+    );
+}
+
+function goBack() {
+    if (document.referrer &&
+        new URL(document.referrer).origin === location.origin) {
+        history.back();
+    } else {
+        location.href = "./index.html";
     }
-
-    $("compassButton").textContent="🧭 Compass Active";
-    $("qiblaInfo").textContent="ഫോൺ തിരിക്കുമ്പോൾ ദിശ മാറും.";
-  }catch(error){
-    $("qiblaInfo").textContent=
-      "Live Compass ലഭ്യമല്ല. മുകളിലെ ദിശ ഉപയോഗിക്കുക.";
-  }
 }
 
-function handleOrientation(event){
-  let heading=null;
+document.getElementById("todayDate").textContent =
+    new Date().toLocaleDateString("ml-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
 
-  if(typeof event.webkitCompassHeading==="number"){
-    heading=event.webkitCompassHeading;
-  }else if(typeof event.alpha==="number"){
-    heading=360-event.alpha;
-  }
-
-  if(heading===null||qiblaBearing===null)return;
-
-  const relative=(qiblaBearing-heading+360)%360;
-  $("compassArrow").style.transform=
-    "translate(-50%,-50%) rotate("+relative+"deg)";
+if (localStorage.getItem("swalathDarkMode") === "true") {
+    document.body.classList.add("dark-mode");
 }
 
-function init(){
-  const saved=getSavedLocation();
-
-  if(saved){
-    setActiveLocation(saved,"");
-  }else{
-    setActiveLocation({...DOHA},"");
-  }
-
-  // GPS സ്വയം പരിശോധിക്കുന്നു; പരാജയപ്പെട്ടാൽ അനാവശ്യ popup ഇല്ല.
-  requestCurrentLocation();
-}
-
-init();
+loadByCity();
 </script>
 </body>
 </html>
