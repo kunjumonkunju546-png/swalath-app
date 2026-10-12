@@ -6,13 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123d34">
 <title>സ്വലാത്ത്</title>
-
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* =========================
-   SPLASH SCREEN
-========================= */
 #splashScreen {
     position: fixed;
     inset: 0;
@@ -24,39 +20,33 @@
     color: #f1dfb0;
     transition: opacity .6s ease, visibility .6s ease;
 }
-
 #splashScreen.hide {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
-
 .splash-content {
     width: 90%;
     max-width: 360px;
     text-align: center;
     padding: 30px 20px;
 }
-
 .splash-moon {
     font-size: 66px;
     margin-bottom: 18px;
     animation: moonFloat 2s ease-in-out infinite;
 }
-
 .splash-content h1 {
     font-size: 34px;
     margin: 0 0 14px;
     color: #f1dfb0;
 }
-
 .splash-content p {
     font-size: 15px;
     line-height: 1.9;
     margin: 0;
     color: #fff8e8;
 }
-
 .splash-loader {
     width: 38px;
     height: 38px;
@@ -66,19 +56,14 @@
     margin: 30px auto 0;
     animation: splashSpin .9s linear infinite;
 }
-
 @keyframes splashSpin {
     to { transform: rotate(360deg); }
 }
-
 @keyframes moonFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
 }
 
-/* =========================
-   NAZYAN TRAVELS POPUP
-========================= */
 .travel-ad-overlay {
     display: none;
     position: fixed;
@@ -90,7 +75,6 @@
     padding: 16px;
     box-sizing: border-box;
 }
-
 .travel-ad {
     position: relative;
     width: 100%;
@@ -106,18 +90,10 @@
     box-shadow: 0 15px 50px rgba(0,0,0,.3);
     animation: popupAppear .35s ease;
 }
-
 @keyframes popupAppear {
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(18px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
-
 .travel-ad-close {
     position: absolute;
     top: 9px;
@@ -132,25 +108,18 @@
     line-height: 1;
     cursor: pointer;
 }
-
-.travel-ad-moon {
-    font-size: 35px;
-    margin: 0 0 7px;
-}
-
+.travel-ad-moon { font-size: 35px; margin: 0 0 7px; }
 .travel-ad h2 {
     color: #123d34;
     font-size: 23px;
     margin: 5px 0 7px;
 }
-
 .travel-ad-tagline {
     color: #9b7932;
     font-size: 12px;
     letter-spacing: 1px;
     margin: 0 0 18px;
 }
-
 .travel-ad-services {
     border-top: 1px solid #e7dfcc;
     border-bottom: 1px solid #e7dfcc;
@@ -160,21 +129,18 @@
     line-height: 1.9;
     color: #29473c;
 }
-
 .travel-ad-countries {
     color: #666;
     font-size: 12px;
     line-height: 1.8;
     margin: 12px 0;
 }
-
 .travel-ad-message {
     color: #666;
     font-size: 12px;
     line-height: 1.8;
     margin: 13px 0;
 }
-
 .travel-ad-whatsapp {
     display: inline-block;
     background: #123d34;
@@ -186,45 +152,29 @@
     font-weight: bold;
     margin: 8px 0 12px;
 }
-
-.travel-ad-whatsapp:active {
-    transform: scale(.98);
-}
-
+.travel-ad-whatsapp:active { transform: scale(.98); }
 .travel-ad-dua {
     color: #8a6a2d;
     font-size: 12px;
     line-height: 1.8;
     margin: 8px 0 0;
 }
-
 body.dark-mode .travel-ad {
     background: #202720;
     color: #eee;
 }
-
-body.dark-mode .travel-ad h2 {
-    color: #f1dfb0;
-}
-
+body.dark-mode .travel-ad h2 { color: #f1dfb0; }
 body.dark-mode .travel-ad-services {
     color: #e4e4d8;
     border-color: #454b43;
 }
-
 body.dark-mode .travel-ad-countries,
-body.dark-mode .travel-ad-message {
-    color: #ccc;
-}
-
+body.dark-mode .travel-ad-message { color: #ccc; }
 body.dark-mode .travel-ad-close {
     background: #3b433b;
     color: #fff;
 }
 
-/* =========================
-   SEARCH
-========================= */
 .search-box {
     width: 100%;
     padding: 13px 16px;
@@ -237,21 +187,14 @@ body.dark-mode .travel-ad-close {
     color: #222;
     box-sizing: border-box;
 }
+.search-box:focus { border-color: #123d34; }
 
-.search-box:focus {
-    border-color: #123d34;
-}
-
-/* =========================
-   DARK BUTTON
-========================= */
 .feature-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-bottom: 18px;
 }
-
 .dark-button {
     border: none;
     background: #123d34;
@@ -262,20 +205,13 @@ body.dark-mode .travel-ad-close {
     font-size: 13px;
 }
 
-/* =========================
-   ADVERTISING PROGRAM
-========================= */
-.advertising-page {
-    display: none;
-}
-
+.advertising-page { display: none; }
 .advertising-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
 }
-
 .advertising-back {
     border: none;
     background: #123d34;
@@ -285,7 +221,6 @@ body.dark-mode .travel-ad-close {
     cursor: pointer;
     font-size: 13px;
 }
-
 .advertising-card {
     background: white;
     border: 1px solid #e6dfd0;
@@ -294,13 +229,11 @@ body.dark-mode .travel-ad-close {
     margin-bottom: 14px;
     box-shadow: 0 5px 18px rgba(18,61,52,.05);
 }
-
 .advertising-title {
     text-align: center;
     color: #123d34;
     margin-bottom: 8px;
 }
-
 .advertising-subtitle {
     text-align: center;
     color: #777;
@@ -308,32 +241,27 @@ body.dark-mode .travel-ad-close {
     line-height: 1.6;
     margin-bottom: 18px;
 }
-
 .advertising-card h3 {
     color: #123d34;
     font-size: 17px;
     margin-bottom: 12px;
 }
-
 .advertising-card p {
     font-size: 13px;
     line-height: 1.7;
     color: #555;
     margin-bottom: 10px;
 }
-
 .advertising-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .advertising-list li {
     font-size: 13px;
     line-height: 1.7;
     margin-bottom: 8px;
 }
-
 .advertising-contact {
     text-align: center;
     background: #123d34;
@@ -342,17 +270,8 @@ body.dark-mode .travel-ad-close {
     padding: 22px 15px;
     margin-bottom: 14px;
 }
-
-.advertising-contact h3 {
-    color: white;
-    margin-bottom: 12px;
-}
-
-.advertising-contact p {
-    color: white;
-    margin-bottom: 8px;
-}
-
+.advertising-contact h3 { color: white; margin-bottom: 12px; }
+.advertising-contact p { color: white; margin-bottom: 8px; }
 .advertising-contact a {
     display: inline-block;
     text-decoration: none;
@@ -364,7 +283,6 @@ body.dark-mode .travel-ad-close {
     font-weight: bold;
     margin-top: 8px;
 }
-
 .advertising-footer {
     text-align: center;
     padding: 10px 5px 20px;
@@ -373,134 +291,77 @@ body.dark-mode .travel-ad-close {
     line-height: 1.7;
 }
 
-/* =========================
-   DARK MODE
-========================= */
-body.dark-mode {
-    background: #111;
-    color: #eee;
-}
-
-body.dark-mode .app {
-    background: #181818;
-}
-
-body.dark-mode .welcome p {
-    color: #aaa;
-}
-
+body.dark-mode { background: #111; color: #eee; }
+body.dark-mode .app { background: #181818; }
+body.dark-mode .welcome p { color: #aaa; }
 body.dark-mode .menu-card {
     background: #222;
     border-color: #444;
     color: #eee;
 }
-
-body.dark-mode .menu-card span {
-    color: #aaa;
-}
-
+body.dark-mode .menu-card span { color: #aaa; }
 body.dark-mode .search-box {
     background: #222;
     color: white;
     border-color: #444;
 }
-
 body.dark-mode #collectionSection h2,
-body.dark-mode #favoritesSection h2 {
-    color: #fff;
-}
-
+body.dark-mode #favoritesSection h2 { color: #fff; }
 body.dark-mode .dark-button {
     background: #f1dfb0;
     color: #123d34;
 }
-
 body.dark-mode .favorite-item,
 body.dark-mode .collection-item {
     background: #222 !important;
     border-color: #444 !important;
     color: #fff !important;
 }
-
-body.dark-mode footer {
-    color: #777;
-}
-
+body.dark-mode footer { color: #777; }
 body.dark-mode .advertising-card {
     background: #222;
     border-color: #444;
 }
-
 body.dark-mode .advertising-title,
-body.dark-mode .advertising-card h3 {
-    color: #f1dfb0;
-}
-
+body.dark-mode .advertising-card h3 { color: #f1dfb0; }
 body.dark-mode .advertising-subtitle,
 body.dark-mode .advertising-card p,
-body.dark-mode .advertising-list li {
-    color: #ccc;
-}
-
-body.dark-mode .advertising-contact {
-    background: #123d34;
-}
+body.dark-mode .advertising-list li { color: #ccc; }
+body.dark-mode .advertising-contact { background: #123d34; }
 
 @media (max-width: 360px) {
-    .travel-ad {
-        padding: 25px 15px 18px;
-    }
-
-    .travel-ad h2 {
-        font-size: 21px;
-    }
+    .travel-ad { padding: 25px 15px 18px; }
+    .travel-ad h2 { font-size: 21px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     SPLASH SCREEN
-========================= -->
 <div id="splashScreen">
     <div class="splash-content">
         <div class="splash-moon">🌙</div>
         <h1>സ്വലാത്ത്</h1>
-        <p>
-            തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ
-            മനോഹരമായ വഴികൾ
-        </p>
+        <p>തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
         <div class="splash-loader"></div>
     </div>
 </div>
 
 <div class="app">
 
-<!-- =========================
-     HERO
-========================= -->
 <section class="hero">
     <div class="moon">🌙</div>
     <h1>സ്വലാത്ത്</h1>
-    <p>
-        തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ
-        മനോഹരമായ വഴികൾ
-    </p>
+    <p>തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
 </section>
 
 <main>
 
-<!-- WELCOME -->
 <section class="welcome">
     <h2>അസ്സലാമു അലൈക്കും</h2>
-    <p>
-        സ്വലാത്തുകൾ ചൊല്ലാനും
-        വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം
-    </p>
+    <p>സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p>
 </section>
 
-<!-- TODAY -->
 <section class="today">
     <div class="small-title">TODAY</div>
     <h2 id="count">0</h2>
@@ -508,16 +369,10 @@ body.dark-mode .advertising-contact {
     <button onclick="increaseCount()">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
 </section>
 
-<!-- DARK MODE -->
 <div class="feature-buttons">
-    <button
-        id="darkModeButton"
-        class="dark-button"
-        onclick="toggleDarkMode()"
-    >🌙 Dark Mode</button>
+    <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
 </div>
 
-<!-- MAIN MENU -->
 <div class="menu-grid">
 
     <div class="menu-card" onclick="openQuran()">
@@ -588,45 +443,23 @@ body.dark-mode .advertising-contact {
 
 </div>
 
-<!-- COLLECTION -->
 <section id="collectionSection" style="display:none;">
-
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-        <button
-            onclick="closeCollection()"
-            style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;"
-        >← Back</button>
-
+        <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;">← Back</button>
         <h2 style="margin:0;">സ്വലാത്തുകൾ</h2>
     </div>
-
-    <input
-        type="text"
-        id="searchSwalath"
-        class="search-box"
-        placeholder="🔍 സ്വലാത്ത് തിരയുക..."
-        oninput="searchSwalath()"
-    >
-
+    <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 സ്വലാത്ത് തിരയുക..." oninput="searchSwalath()">
     <div id="collectionList"></div>
 </section>
 
-<!-- FAVOURITES -->
 <section id="favoritesSection" style="display:none;">
-
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-        <button
-            onclick="closeFavorites()"
-            style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;"
-        >← Back</button>
-
+        <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;">← Back</button>
         <h2 style="margin:0;">❤️ My Favourites</h2>
     </div>
-
     <div id="favoritesList"></div>
 </section>
 
-<!-- ADVERTISING PROGRAM -->
 <section id="advertisingSection" class="advertising-page">
 
     <div class="advertising-header">
@@ -637,20 +470,8 @@ body.dark-mode .advertising-contact {
     <div class="advertising-card">
         <h2 class="advertising-title">📢 NAZYAN ADVERTISING PROGRAM</h2>
         <p class="advertising-subtitle">🌍 Reach a Wider Malayali Audience</p>
-
-        <p>
-            നിങ്ങളുടെ business-നെ Kerala, GCC രാജ്യങ്ങൾ,
-            ലോകമെമ്പാടുമുള്ള Malayali audience-ലേക്ക്
-            പരിചയപ്പെടുത്താൻ Swalaath app-ൽ
-            professional advertising അവസരം.
-        </p>
-
-        <p>
-            Swalaath ഒരു Islamic platform ആണ് —
-            Swalaath, Quran, Dua, Dhikr, Asmaul Husna
-            തുടങ്ങിയ Islamic content ഒരിടത്ത്
-            ലഭ്യമാക്കുന്ന app.
-        </p>
+        <p>നിങ്ങളുടെ business-നെ Kerala, GCC രാജ്യങ്ങൾ, ലോകമെമ്പാടുമുള്ള Malayali audience-ലേക്ക് പരിചയപ്പെടുത്താൻ Swalaath app-ൽ professional advertising അവസരം.</p>
+        <p>Swalaath ഒരു Islamic platform ആണ് — Swalaath, Quran, Dua, Dhikr, Asmaul Husna തുടങ്ങിയ Islamic content ഒരിടത്ത് ലഭ്യമാക്കുന്ന app.</p>
     </div>
 
     <div class="advertising-card">
@@ -683,101 +504,48 @@ body.dark-mode .advertising-contact {
     <div class="advertising-card">
         <h3>📦 Advertising Packages</h3>
         <ul class="advertising-list">
-            <li>1 Month</li>
-            <li>3 Months</li>
-            <li>6 Months</li>
-            <li>12 Months</li>
+            <li>1 Month</li><li>3 Months</li><li>6 Months</li><li>12 Months</li>
         </ul>
-
-        <p>
-            നിങ്ങളുടെ business-ന് അനുയോജ്യമായ
-            package, pricing, advertisement format,
-            placement എന്നിവയെക്കുറിച്ച് കൂടുതൽ അറിയാൻ
-            ഞങ്ങളെ contact ചെയ്യുക.
-        </p>
+        <p>നിങ്ങളുടെ business-ന് അനുയോജ്യമായ package, pricing, advertisement format, placement എന്നിവയെക്കുറിച്ച് കൂടുതൽ അറിയാൻ ഞങ്ങളെ contact ചെയ്യുക.</p>
     </div>
 
     <div class="advertising-card">
         <h3>💻 Need a Website or Mobile App?</h3>
-
-        <p>
-            നിങ്ങളുടെ business-ന് ഒരു professional
-            website അല്ലെങ്കിൽ mobile app ആവശ്യമുണ്ടോ?
-        </p>
-
-        <p>
-            നിങ്ങളുടെ business requirements അനുസരിച്ച്
-            modern websites & mobile applications
-            develop ചെയ്യാൻ ഞങ്ങളെ contact ചെയ്യുക.
-        </p>
-
-        <p style="text-align:center;font-weight:bold;color:#123d34;">
-            Your Business. Your Brand.
-            Your Digital Presence.
-        </p>
+        <p>നിങ്ങളുടെ business-ന് ഒരു professional website അല്ലെങ്കിൽ mobile app ആവശ്യമുണ്ടോ?</p>
+        <p>നിങ്ങളുടെ business requirements അനുസരിച്ച് modern websites & mobile applications develop ചെയ്യാൻ ഞങ്ങളെ contact ചെയ്യുക.</p>
+        <p style="text-align:center;font-weight:bold;color:#123d34;">Your Business. Your Brand. Your Digital Presence.</p>
     </div>
 
     <div class="advertising-contact">
         <h3>📲 Contact Us</h3>
-
         <p><strong>WhatsApp</strong></p>
         <p>+91 9946010375</p>
-
-        <a href="https://wa.me/919946010375" target="_blank" rel="noopener">
-            WhatsApp Us
-        </a>
-
+        <a href="https://wa.me/919946010375" target="_blank" rel="noopener">WhatsApp Us</a>
         <p style="margin-top:18px;"><strong>Website</strong></p>
         <p>www.nazyantravels.com</p>
-
         <p style="margin-top:18px;"><strong>Email</strong></p>
         <p>nazyantravels@gmail.com</p>
     </div>
 
     <div class="advertising-card">
         <h3>🛡️ Advertisement Policy</h3>
-
-        <p>
-            എല്ലാ advertisements-ഉം
-            publication-ന് മുമ്പ് manually reviewed
-            ചെയ്യുന്നതാണ്.
-        </p>
-
-        <p>
-            Suitable & permissible businesses
-            മാത്രമേ advertise ചെയ്യാൻ അനുവദിക്കൂ.
-        </p>
-
-        <p>
-            Swalaath-ന്റെ nature, values, audience
-            എന്നിവയ്ക്ക് അനുയോജ്യമല്ലാത്ത advertisements
-            reject ചെയ്യാനുള്ള അവകാശം NAZYAN TRAVELS-ൽ
-            ഉണ്ടായിരിക്കും.
-        </p>
+        <p>എല്ലാ advertisements-ഉം publication-ന് മുമ്പ് manually reviewed ചെയ്യുന്നതാണ്.</p>
+        <p>Suitable & permissible businesses മാത്രമേ advertise ചെയ്യാൻ അനുവദിക്കൂ.</p>
+        <p>Swalaath-ന്റെ nature, values, audience എന്നിവയ്ക്ക് അനുയോജ്യമല്ലാത്ത advertisements reject ചെയ്യാനുള്ള അവകാശം NAZYAN TRAVELS-ൽ ഉണ്ടായിരിക്കും.</p>
     </div>
 
     <div class="advertising-footer">
-        <strong>SWALAATH</strong>
-        <br>
+        <strong>SWALAATH</strong><br>
         Powered by NAZYAN TRAVELS
     </div>
 
 </section>
 
-<!-- NAZYAN TRAVELS SECTION -->
 <section id="travelSection" class="travel">
     <p>TRAVEL PARTNER</p>
     <h2>NAZYAN TRAVELS</h2>
-
-    <span>
-        Flight Tickets • Tour Packages
-        <br>
-        Visa • Umrah • Certificate Attestation
-    </span>
-
-    <a href="https://wa.me/919946010375" target="_blank" rel="noopener">
-        WhatsApp Enquiry
-    </a>
+    <span>Flight Tickets • Tour Packages<br>Visa • Umrah • Certificate Attestation</span>
+    <a href="https://wa.me/919946010375" target="_blank" rel="noopener">WhatsApp Enquiry</a>
 </section>
 
 </main>
@@ -789,34 +557,13 @@ body.dark-mode .advertising-contact {
 
 </div>
 
-<!-- =========================
-     NAZYAN TRAVELS POPUP
-========================= -->
-<div
-    id="travelAd"
-    class="travel-ad-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-label="NAZYAN TRAVELS advertisement"
->
+<div id="travelAd" class="travel-ad-overlay" role="dialog" aria-modal="true" aria-label="NAZYAN TRAVELS advertisement">
     <div class="travel-ad">
-
-        <button
-            class="travel-ad-close"
-            onclick="closeTravelAd()"
-            aria-label="Close advertisement"
-        >×</button>
-
+        <button class="travel-ad-close" onclick="closeTravelAd()" aria-label="Close advertisement">×</button>
         <div class="travel-ad-moon">🌙</div>
-
-        <p style="font-size:11px;letter-spacing:2px;color:#9b7932;margin:0;">
-            TRAVEL PARTNER
-        </p>
-
+        <p style="font-size:11px;letter-spacing:2px;color:#9b7932;margin:0;">TRAVEL PARTNER</p>
         <h2>NAZYAN TRAVELS</h2>
-
         <p class="travel-ad-tagline">YOUR JOURNEY, OUR CARE</p>
-
         <div class="travel-ad-services">
             ✈️ Flight Tickets<br>
             🌍 Tour Packages<br>
@@ -824,77 +571,42 @@ body.dark-mode .advertising-contact {
             🛂 Visa Services<br>
             📄 Certificate Attestation
         </div>
-
-        <p class="travel-ad-countries">
-            Qatar • UAE • Saudi Arabia<br>
-            Bahrain • Kuwait • India
-        </p>
-
-        <a
-            class="travel-ad-whatsapp"
-            href="https://wa.me/919946010375"
-            target="_blank"
-            rel="noopener"
-        >📲 WhatsApp: +91 9946010375</a>
-
-        <p class="travel-ad-message">
-            ഈ ആപ്പിലെ ഉള്ളടക്കത്തിൽ എന്തെങ്കിലും പിഴവുകൾ
-            ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി ക്ഷമിക്കുക.
-            മെച്ചപ്പെടുത്താൻ ഞങ്ങൾ പരിശ്രമിച്ചുകൊണ്ടിരിക്കുന്നു.
-        </p>
-
-        <p class="travel-ad-dua">
-            അല്ലാഹു നമ്മുടെ ഹലാലായ പരിശ്രമങ്ങൾ സ്വീകരിക്കട്ടെ.<br>
-            നിങ്ങൾക്കും കുടുംബത്തിനും ബറക്കത്ത് നൽകട്ടെ. ആമീൻ 🤲
-        </p>
-
+        <p class="travel-ad-countries">Qatar • UAE • Saudi Arabia<br>Bahrain • Kuwait • India</p>
+        <a class="travel-ad-whatsapp" href="https://wa.me/919946010375" target="_blank" rel="noopener">📲 WhatsApp: +91 9946010375</a>
+        <p class="travel-ad-message">ഈ ആപ്പിലെ ഉള്ളടക്കത്തിൽ എന്തെങ്കിലും പിഴവുകൾ ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി ക്ഷമിക്കുക. മെച്ചപ്പെടുത്താൻ ഞങ്ങൾ പരിശ്രമിച്ചുകൊണ്ടിരിക്കുന്നു.</p>
+        <p class="travel-ad-dua">അല്ലാഹു നമ്മുടെ ഹലാലായ പരിശ്രമങ്ങൾ സ്വീകരിക്കട്ടെ.<br>നിങ്ങൾക്കും കുടുംബത്തിനും ബറക്കത്ത് നൽകട്ടെ. ആമീൻ 🤲</p>
     </div>
 </div>
 
 <script>
-/* =========================
-   LOCAL DATE
-========================= */
+/* LOCAL DATE */
 function getLocalDateString() {
     const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    return year + "-" + month + "-" + day;
+    return now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
 }
 
-/* =========================
-   DAILY SWALATH COUNTER
-========================= */
+/* DAILY COUNTER */
 const todayDate = getLocalDateString();
-
 let savedDate = localStorage.getItem("swalathCountDate");
-
-let count = Number(
-    localStorage.getItem("swalathDailyCount") || 0
-);
+let count = Number(localStorage.getItem("swalathDailyCount") || 0);
 
 if (savedDate !== todayDate) {
     count = 0;
-
     localStorage.setItem("swalathCountDate", todayDate);
     localStorage.setItem("swalathDailyCount", "0");
 }
-
 document.getElementById("count").textContent = count;
 
 function increaseCount() {
     count++;
-
     document.getElementById("count").textContent = count;
-
     localStorage.setItem("swalathDailyCount", String(count));
     localStorage.setItem("swalathCountDate", getLocalDateString());
 }
 
-/* =========================
-   SWALATH NAMES - 21
-========================= */
+/* SWALATH NAMES */
 const swalathNames = {
     ibrahimiyya: "സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
     nariya: "സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
@@ -919,44 +631,17 @@ const swalathNames = {
     yaqutat: "സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്"
 };
 
-/* =========================
-   PAGE OPEN FUNCTIONS
-========================= */
-function openAsmaulHusna() {
-    window.location.href = "asmaul-husna.html";
-}
+/* OPEN OTHER PAGES */
+function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; }
+function openQuran() { window.location.href = "quran.html"; }
+function openQuranMP3() { window.location.href = "quran-mp3.html"; }
+function openQibla() { window.location.href = "qibla.html"; }
+function openUmrah() { window.location.href = "umrah.html"; }
+function openDua() { window.location.href = "dua.html"; }
+function openDhikr() { window.location.href = "dhikr.html"; }
+function openPrayerTime() { window.location.href = "prayer-time.html"; }
 
-function openQuran() {
-    window.location.href = "quran.html";
-}
-
-function openQuranMP3() {
-    window.location.href = "quran-mp3.html";
-}
-
-function openQibla() {
-    window.location.href = "qibla.html";
-}
-
-function openUmrah() {
-    window.location.href = "umrah.html";
-}
-
-function openDua() {
-    window.location.href = "dua.html";
-}
-
-function openDhikr() {
-    window.location.href = "dhikr.html";
-}
-
-function openPrayerTime() {
-    window.location.href = "prayer-time.html";
-}
-
-/* =========================
-   HOME VISIBILITY HELPERS
-========================= */
+/* HOME VISIBILITY */
 function hideHomeElements() {
     document.querySelector(".welcome").style.display = "none";
     document.querySelector(".today").style.display = "none";
@@ -977,10 +662,62 @@ function showHomeElements() {
     document.getElementById("advertisingSection").style.display = "none";
 }
 
-/* =========================
-   ADVERTISING PAGE
-========================= */
+/* INTERNAL SECTION BACK NAVIGATION */
+let currentInternalSection = null;
+
+function openInternalSection(sectionName) {
+    if (currentInternalSection === sectionName) return;
+
+    history.pushState(
+        { swalathInternalSection: sectionName },
+        "",
+        window.location.href
+    );
+
+    currentInternalSection = sectionName;
+}
+
+function closeInternalSectionUI() {
+    currentInternalSection = null;
+
+    document.getElementById("collectionSection").style.display = "none";
+    document.getElementById("favoritesSection").style.display = "none";
+    document.getElementById("advertisingSection").style.display = "none";
+
+    showHomeElements();
+    window.scrollTo(0, 0);
+}
+
+window.addEventListener("popstate", function(event) {
+    const sectionName =
+        event.state && event.state.swalathInternalSection;
+
+    if (sectionName) {
+        currentInternalSection = sectionName;
+        hideHomeElements();
+
+        document.getElementById("collectionSection").style.display =
+            sectionName === "collection" ? "block" : "none";
+        document.getElementById("favoritesSection").style.display =
+            sectionName === "favorites" ? "block" : "none";
+        document.getElementById("advertisingSection").style.display =
+            sectionName === "advertising" ? "block" : "none";
+
+        if (sectionName === "favorites") loadFavorites();
+        if (sectionName === "collection") loadCollection();
+
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    if (currentInternalSection) {
+        closeInternalSectionUI();
+    }
+});
+
+/* ADVERTISING PAGE */
 function openAdvertising() {
+    openInternalSection("advertising");
     hideHomeElements();
 
     document.getElementById("collectionSection").style.display = "none";
@@ -991,15 +728,18 @@ function openAdvertising() {
 }
 
 function closeAdvertising() {
-    document.getElementById("advertisingSection").style.display = "none";
-    showHomeElements();
-    window.scrollTo(0, 0);
+    if (currentInternalSection === "advertising" &&
+        history.state &&
+        history.state.swalathInternalSection === "advertising") {
+        history.back();
+        return;
+    }
+    closeInternalSectionUI();
 }
 
-/* =========================
-   COLLECTION
-========================= */
+/* COLLECTION */
 function openCollection() {
+    openInternalSection("collection");
     hideHomeElements();
 
     document.getElementById("favoritesSection").style.display = "none";
@@ -1007,15 +747,18 @@ function openCollection() {
     document.getElementById("collectionSection").style.display = "block";
 
     document.getElementById("searchSwalath").value = "";
-
     loadCollection();
     window.scrollTo(0, 0);
 }
 
 function closeCollection() {
-    document.getElementById("collectionSection").style.display = "none";
-    showHomeElements();
-    window.scrollTo(0, 0);
+    if (currentInternalSection === "collection" &&
+        history.state &&
+        history.state.swalathInternalSection === "collection") {
+        history.back();
+        return;
+    }
+    closeInternalSectionUI();
 }
 
 function loadCollection() {
@@ -1024,7 +767,6 @@ function loadCollection() {
 
     Object.keys(swalathNames).forEach(function(key) {
         const item = document.createElement("div");
-
         item.className = "collection-item";
         item.style.cssText = `
             background:white;
@@ -1036,14 +778,12 @@ function loadCollection() {
             color:#123d34;
             font-weight:bold;
         `;
-
         item.dataset.name = swalathNames[key].toLowerCase();
         item.textContent = "📖 " + swalathNames[key];
 
         item.onclick = function() {
             window.location.href = "swalath.html#" + key;
         };
-
         list.appendChild(item);
     });
 }
@@ -1057,10 +797,9 @@ function searchSwalath() {
     });
 }
 
-/* =========================
-   FAVOURITES
-========================= */
+/* FAVOURITES */
 function openFavorites() {
+    openInternalSection("favorites");
     hideHomeElements();
 
     document.getElementById("collectionSection").style.display = "none";
@@ -1072,9 +811,13 @@ function openFavorites() {
 }
 
 function closeFavorites() {
-    document.getElementById("favoritesSection").style.display = "none";
-    showHomeElements();
-    window.scrollTo(0, 0);
+    if (currentInternalSection === "favorites" &&
+        history.state &&
+        history.state.swalathInternalSection === "favorites") {
+        history.back();
+        return;
+    }
+    closeInternalSectionUI();
 }
 
 function loadFavorites() {
@@ -1084,13 +827,8 @@ function loadFavorites() {
     let favorites = [];
 
     try {
-        favorites = JSON.parse(
-            localStorage.getItem("swalathFavorites") || "[]"
-        );
-
-        if (!Array.isArray(favorites)) {
-            favorites = [];
-        }
+        favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
+        if (!Array.isArray(favorites)) favorites = [];
     } catch (error) {
         favorites = [];
     }
@@ -1103,23 +841,17 @@ function loadFavorites() {
                 color:#777;
                 background:white;
                 border-radius:14px;
-            ">
-                ഇതുവരെ Favourite ഒന്നുമില്ല ❤️
-            </div>
+            ">ഇതുവരെ Favourite ഒന്നുമില്ല ❤️</div>
         `;
         return;
     }
 
     favorites.forEach(function(key) {
         const name = swalathNames[key];
-
-        if (!name) {
-            return;
-        }
+        if (!name) return;
 
         const item = document.createElement("div");
         item.className = "favorite-item";
-
         item.style.cssText = `
             background:white;
             border:1px solid #e6dfd0;
@@ -1130,32 +862,25 @@ function loadFavorites() {
             color:#123d34;
             font-weight:bold;
         `;
-
         item.textContent = "❤️ " + name;
 
         item.onclick = function() {
             window.location.href = "swalath.html#" + key;
         };
-
         list.appendChild(item);
     });
 }
 
-/* =========================
-   DARK MODE
-========================= */
+/* DARK MODE */
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
-
     const enabled = document.body.classList.contains("dark-mode");
-
     localStorage.setItem("swalathDarkMode", String(enabled));
     updateDarkButton();
 }
 
 function updateDarkButton() {
     const button = document.getElementById("darkModeButton");
-
     if (!button) return;
 
     button.textContent = document.body.classList.contains("dark-mode")
@@ -1163,9 +888,7 @@ function updateDarkButton() {
         : "🌙 Dark Mode";
 }
 
-/* =========================
-   NAZYAN POPUP - ONCE DAILY
-========================= */
+/* NAZYAN POPUP - ONCE DAILY */
 function showTravelAdOnceDaily() {
     const popup = document.getElementById("travelAd");
     if (!popup) return;
@@ -1181,26 +904,16 @@ function showTravelAdOnceDaily() {
 function closeTravelAd() {
     const popup = document.getElementById("travelAd");
 
-    localStorage.setItem(
-        "nazyANTravelAdDate",
-        getLocalDateString()
-    );
+    localStorage.setItem("nazyANTravelAdDate", getLocalDateString());
 
-    if (popup) {
-        popup.style.display = "none";
-    }
+    if (popup) popup.style.display = "none";
 }
 
-/* Close popup if the user taps outside the card */
 document.getElementById("travelAd").addEventListener("click", function(event) {
-    if (event.target === this) {
-        closeTravelAd();
-    }
+    if (event.target === this) closeTravelAd();
 });
 
-/* =========================
-   SPLASH, DARK MODE & POPUP
-========================= */
+/* STARTUP */
 window.addEventListener("load", function() {
     const darkMode = localStorage.getItem("swalathDarkMode");
 
@@ -1213,9 +926,7 @@ window.addEventListener("load", function() {
     const splash = document.getElementById("splashScreen");
 
     window.setTimeout(function() {
-        if (splash) {
-            splash.classList.add("hide");
-        }
+        if (splash) splash.classList.add("hide");
     }, 1800);
 
     window.setTimeout(function() {
@@ -1223,9 +934,7 @@ window.addEventListener("load", function() {
     }, 2300);
 });
 
-/* =========================
-   SERVICE WORKER
-========================= */
+/* SERVICE WORKER */
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
         navigator.serviceWorker.register("./sw.js").catch(function(error) {
