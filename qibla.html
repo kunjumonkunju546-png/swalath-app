@@ -1,1 +1,597 @@
 
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
+<title>Qibla Direction | Swalath</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #eee8d9;
+    font-family: Arial, sans-serif;
+}
+
+.qibla-app {
+    max-width: 430px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffdf8;
+    box-shadow: 0 0 25px rgba(0,0,0,.08);
+    padding-bottom: 30px;
+}
+
+.qibla-header {
+    background: linear-gradient(145deg, #123d34, #1d5b4c);
+    color: white;
+    text-align: center;
+    padding: 28px 20px;
+    border-radius: 0 0 28px 28px;
+}
+
+.qibla-header h1 {
+    font-size: 27px;
+    margin: 0 0 8px;
+}
+
+.qibla-header p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.qibla-main {
+    padding: 20px;
+}
+
+.qibla-button {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 13px;
+    background: #123d34;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.qibla-button:disabled {
+    opacity: .65;
+}
+
+.qibla-card {
+    background: white;
+    border: 1px solid #e6dfd0;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.qibla-card h2 {
+    color: #123d34;
+    font-size: 19px;
+    margin: 0 0 12px;
+}
+
+.compass {
+    width: 260px;
+    height: 260px;
+    max-width: 100%;
+    position: relative;
+    margin: 18px auto;
+    border: 8px solid #123d34;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, #fffdf8 55%, #e7e0cd 100%);
+    box-shadow: 0 5px 18px rgba(0,0,0,.12);
+}
+
+.compass-label {
+    position: absolute;
+    font-weight: bold;
+    color: #123d34;
+    font-size: 17px;
+    z-index: 2;
+}
+
+.north {
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.east {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.south {
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.west {
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.compass-needle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: transform .25s ease;
+}
+
+.needle-north,
+.needle-south {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+}
+
+.needle-north {
+    top: 43px;
+    border-bottom: 72px solid #c73d32;
+}
+
+.needle-south {
+    top: 115px;
+    border-top: 72px solid #123d34;
+}
+
+.compass-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #d4ad54;
+    border: 3px solid white;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.kaaba-icon {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.direction-number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #123d34;
+    direction: ltr;
+    margin: 8px 0;
+}
+
+.info-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #555;
+}
+
+.status {
+    padding: 12px;
+    border-radius: 12px;
+    background: #f2efdf;
+    color: #123d34;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 12px;
+    overflow-wrap: anywhere;
+}
+
+body.dark-mode {
+    background: #111;
+}
+
+body.dark-mode .qibla-app {
+    background: #181818;
+}
+
+body.dark-mode .qibla-card {
+    background: #222;
+    border-color: #444;
+}
+
+body.dark-mode .qibla-card h2,
+body.dark-mode .direction-number {
+    color: #f1dfb0;
+}
+
+body.dark-mode .info-text {
+    color: #ccc;
+}
+
+body.dark-mode .compass {
+    background: radial-gradient(circle, #282828 55%, #383838 100%);
+    border-color: #f1dfb0;
+}
+
+body.dark-mode .compass-label {
+    color: #f1dfb0;
+}
+
+body.dark-mode .status {
+    background: #30352e;
+    color: #f1dfb0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="qibla-app">
+
+    <header class="qibla-header">
+        <h1>🧭 ഖിബ്‌ല ദിശ</h1>
+        <p>Qibla Direction</p>
+        <p>മക്കയിലെ കഅ്ബയുടെ ദിശ കണ്ടെത്തുക</p>
+    </header>
+
+    <main class="qibla-main">
+
+        <button class="qibla-button" onclick="goHome()">
+            ← Back to Home
+        </button>
+
+        <section class="qibla-card">
+            <h2>Compass</h2>
+
+            <div class="compass" aria-label="Qibla compass">
+
+                <span class="compass-label north">N</span>
+                <span class="compass-label east">E</span>
+                <span class="compass-label south">S</span>
+                <span class="compass-label west">W</span>
+
+                <div id="compassNeedle" class="compass-needle">
+                    <div class="needle-north"></div>
+                    <div class="needle-south"></div>
+                </div>
+
+                <div class="compass-center"></div>
+            </div>
+
+            <div class="kaaba-icon">🕋</div>
+
+            <div class="direction-number" id="bearingText">
+                --°
+            </div>
+
+            <div class="info-text" id="directionDescription">
+                നിങ്ങളുടെ സ്ഥലം കണ്ടെത്താൻ താഴെയുള്ള ബട്ടൺ അമർത്തുക.
+            </div>
+
+            <div class="status" id="statusMessage" role="status">
+                Location permission ആവശ്യമാണ്.
+            </div>
+        </section>
+
+        <section class="qibla-card">
+            <h2>Your Location</h2>
+
+            <div class="info-text" id="locationText">
+                Location not detected yet.
+            </div>
+
+            <button class="qibla-button" id="locationButton"
+                    onclick="getLocation()">
+                Find My Location
+            </button>
+
+            <button class="qibla-button" id="compassButton"
+                    onclick="enableCompass()">
+                Enable Phone Compass
+            </button>
+
+            <div class="info-text">
+                ഫോണിന്റെ Compass പ്രവർത്തിക്കാൻ അനുവദിച്ചിട്ടുണ്ടെന്ന്
+                ഉറപ്പാക്കുക. കൃത്യമായ ദിശ ലഭിക്കാൻ ഫോൺ കാന്തിക
+                വസ്തുക്കളിൽനിന്നും ലോഹങ്ങളിൽനിന്നും അകറ്റി പിടിക്കുക.
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+/* =========================
+   SETTINGS
+========================= */
+
+const KAABA_LAT = 21.422487;
+const KAABA_LON = 39.826206;
+
+const LOCATION_KEY = "swalath_prayer_location_v5";
+
+let qiblaBearing = null;
+let deviceHeading = null;
+let compassListening = false;
+
+/* =========================
+   HOME
+========================= */
+
+function goHome() {
+    window.location.href = "index.html";
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+window.addEventListener("load", function() {
+    if (localStorage.getItem("swalathDarkMode") === "true") {
+        document.body.classList.add("dark-mode");
+    }
+
+    loadSavedLocation();
+});
+
+/* =========================
+   QIBLA BEARING
+========================= */
+
+function calculateBearing(lat, lon) {
+    const toRadians = value => value * Math.PI / 180;
+    const toDegrees = value => value * 180 / Math.PI;
+
+    const lat1 = toRadians(lat);
+    const lat2 = toRadians(KAABA_LAT);
+    const deltaLon = toRadians(KAABA_LON - lon);
+
+    const y = Math.sin(deltaLon) * Math.cos(lat2);
+
+    const x =
+        Math.cos(lat1) * Math.sin(lat2) -
+        Math.sin(lat1) * Math.cos(lat2) * Math.cos(deltaLon);
+
+    return (toDegrees(Math.atan2(y, x)) + 360) % 360;
+}
+
+function updateQibla(lat, lon) {
+    qiblaBearing = calculateBearing(lat, lon);
+
+    document.getElementById("bearingText").textContent =
+        qiblaBearing.toFixed(1) + "°";
+
+    document.getElementById("directionDescription").textContent =
+        "വടക്കുനിന്ന് ഘടികാരദിശയിൽ " +
+        qiblaBearing.toFixed(1) +
+        "° തിരിഞ്ഞാൽ ഖിബ്‌ല ദിശ ലഭിക്കും.";
+
+    updateCompassDisplay();
+}
+
+/* =========================
+   LOCATION
+========================= */
+
+function getLocation() {
+    const status = document.getElementById("statusMessage");
+    const button = document.getElementById("locationButton");
+
+    if (!navigator.geolocation) {
+        status.textContent =
+            "ഈ browser-ൽ Location സൗകര്യം ലഭ്യമല്ല.";
+        return;
+    }
+
+    if (!window.isSecureContext) {
+        status.textContent =
+            "Location ലഭിക്കാൻ HTTPS വഴി തുറക്കുക.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Finding Location...";
+
+    status.textContent =
+        "ഫോണിന്റെ Location ലഭിക്കാൻ ശ്രമിക്കുന്നു. ദയവായി കാത്തിരിക്കുക.";
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            const locationData = {
+                latitude: lat,
+                longitude: lon
+            };
+
+            try {
+                localStorage.setItem(
+                    LOCATION_KEY,
+                    JSON.stringify(locationData)
+                );
+            } catch (error) {
+                // Continue even if storage is unavailable.
+            }
+
+            document.getElementById("locationText").textContent =
+                "Latitude: " + lat.toFixed(5) +
+                " | Longitude: " + lon.toFixed(5);
+
+            status.textContent =
+                "Location ലഭിച്ചു. ഖിബ്‌ല ദിശ കണക്കാക്കി.";
+
+            button.disabled = false;
+            button.textContent = "Refresh My Location";
+
+            updateQibla(lat, lon);
+        },
+        function(error) {
+            let message = "Location ലഭിച്ചില്ല.";
+
+            if (error.code === 1) {
+                message =
+                    "Location permission അനുവദിക്കുക. Phone Settings-ലും പരിശോധിക്കുക.";
+            } else if (error.code === 2) {
+                message =
+                    "Location കണ്ടെത്താനായില്ല. GPS ഓൺ ചെയ്ത് വീണ്ടും ശ്രമിക്കുക.";
+            } else if (error.code === 3) {
+                message =
+                    "Location ലഭിക്കാൻ കൂടുതൽ സമയം എടുത്തു. വീണ്ടും ശ്രമിക്കുക.";
+            }
+
+            status.textContent = message;
+            button.disabled = false;
+            button.textContent = "Try Location Again";
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 60000
+        }
+    );
+}
+
+function loadSavedLocation() {
+    try {
+        const saved = localStorage.getItem(LOCATION_KEY);
+
+        if (saved) {
+            const data = JSON.parse(saved);
+
+            if (
+                Number.isFinite(data.latitude) &&
+                Number.isFinite(data.longitude)
+            ) {
+                document.getElementById("locationText").textContent =
+                    "Saved location: " +
+                    data.latitude.toFixed(5) + ", " +
+                    data.longitude.toFixed(5);
+
+                updateQibla(data.latitude, data.longitude);
+
+                document.getElementById("statusMessage").textContent =
+                    "Saved location loaded. കൃത്യതയ്ക്കായി Location പുതുക്കാം.";
+
+                return;
+            }
+        }
+    } catch (error) {
+        // Ask for fresh location below.
+    }
+
+    getLocation();
+}
+
+/* =========================
+   PHONE COMPASS
+========================= */
+
+async function enableCompass() {
+    const status = document.getElementById("statusMessage");
+
+    if (!("DeviceOrientationEvent" in window)) {
+        status.textContent =
+            "ഈ ഫോണിലോ browser-ലോ Compass sensor ലഭ്യമല്ല.";
+        return;
+    }
+
+    try {
+        if (
+            typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+            const permission =
+                await DeviceOrientationEvent.requestPermission();
+
+            if (permission !== "granted") {
+                status.textContent =
+                    "Compass ഉപയോഗിക്കാൻ Sensor permission അനുവദിക്കണം.";
+                return;
+            }
+        }
+
+        if (!compassListening) {
+            window.addEventListener(
+                "deviceorientation",
+                handleOrientation,
+                true
+            );
+
+            compassListening = true;
+        }
+
+        status.textContent =
+            "Compass ആരംഭിച്ചു. ദിശ സ്ഥിരമാകാൻ ഫോൺ പതുക്കെ തിരിക്കുക.";
+    } catch (error) {
+        status.textContent =
+            "Compass ആരംഭിക്കാൻ കഴിഞ്ഞില്ല. വീണ്ടും ശ്രമിക്കുക.";
+    }
+}
+
+function handleOrientation(event) {
+    let heading = null;
+
+    if (typeof event.webkitCompassHeading === "number") {
+        heading = event.webkitCompassHeading;
+    } else if (
+        event.absolute === true &&
+        typeof event.alpha === "number"
+    ) {
+        heading = 360 - event.alpha;
+    }
+
+    if (heading === null || !Number.isFinite(heading)) {
+        document.getElementById("statusMessage").textContent =
+            "Compass heading ലഭ്യമല്ല. നിങ്ങളുടെ device sensor പിന്തുണ പരിശോധിക്കുക.";
+        return;
+    }
+
+    deviceHeading = (heading + 360) % 360;
+
+    updateCompassDisplay();
+}
+
+function updateCompassDisplay() {
+    const needle = document.getElementById("compassNeedle");
+
+    if (qiblaBearing === null) {
+        return;
+    }
+
+    if (deviceHeading === null) {
+        /*
+          Without a working compass sensor, the needle shows
+          the bearing relative to North, not the phone's direction.
+        */
+        needle.style.transform =
+            "rotate(" + qiblaBearing + "deg)";
+
+        return;
+    }
+
+    const relativeAngle =
+        (qiblaBearing - deviceHeading + 360) % 360;
+
+    needle.style.transform =
+        "rotate(" + relativeAngle + "deg)";
+}
+</script>
+
+</body>
+</html>
