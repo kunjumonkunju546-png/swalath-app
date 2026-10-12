@@ -2,139 +2,160 @@
     "use strict";
 
     const LANGUAGES = {
-        ml: {
-            name: "മലയാളം",
-            dir: "ltr",
-            original: true
-        },
+        ml: { name: "മലയാളം", dir: "ltr", translations: {} },
+
         en: {
-            name: "English",
-            dir: "ltr",
+            name: "English", dir: "ltr",
             translations: {
-                home: "Home",
-                quran: "Quran",
-                swalath: "Swalath",
-                quranMP3: "Quran MP3",
-                prayerTimes: "Prayer Times",
-                duas: "Duas",
-                dhikr: "Dhikr",
-                favourites: "My Favourites",
-                asma: "Asmaul Husna",
-                umrah: "Umrah",
-                advertising: "Advertise With Us",
-                language: "Language",
-                settings: "Settings",
-                back: "Back",
-                search: "Search",
-                save: "Save",
-                cancel: "Cancel",
-                selectLanguage: "Select Your Language",
-                continue: "Continue",
-                darkMode: "Dark Mode"
+                greeting: "Peace be upon you",
+                intro: "Start reading and reciting Swalaath here",
+                today: "TODAY",
+                todayCount: "Swalaath recited today",
+                saySwalaath: "Recite Swalaath",
+                darkMode: "🌙 Dark Mode",
+                lightMode: "☀️ Light Mode",
+                quranDesc: "The Holy Quran",
+                swalaathTitle: "Swalaaths",
+                swalaathDesc: "Read various Swalaaths",
+                mp3Title: "Quran MP3",
+                mp3Desc: "Listen to the Quran",
+                prayerTitle: "Prayer Times",
+                prayerDesc: "Prayer times and Adhan",
+                duasTitle: "Duas",
+                duasDesc: "Various supplications",
+                dhikrTitle: "Dhikr",
+                dhikrDesc: "Recite Dhikr",
+                favouritesTitle: "My Favourites",
+                favouritesDesc: "Your saved favourites",
+                umrahTitle: "Umrah",
+                umrahDesc: "Information about Umrah",
+                advertisingTitle: "Advertise With Us",
+                advertisingDesc: "Reach Malayali Audience",
+                language: "🌐 Language"
             }
         },
+
         ar: {
-            name: "العربية",
-            dir: "rtl",
+            name: "العربية", dir: "rtl",
             translations: {
-                home: "الرئيسية",
-                quran: "القرآن الكريم",
-                swalath: "الصلاة على النبي ﷺ",
-                quranMP3: "القرآن صوتي",
-                prayerTimes: "أوقات الصلاة",
-                duas: "الأدعية",
-                dhikr: "الأذكار",
-                favourites: "المفضلة",
-                asma: "أسماء الله الحسنى",
-                umrah: "العمرة",
-                advertising: "أعلن معنا",
-                language: "اللغة",
-                settings: "الإعدادات",
-                back: "رجوع",
-                search: "بحث",
-                save: "حفظ",
-                cancel: "إلغاء",
-                selectLanguage: "اختر لغتك",
-                continue: "متابعة",
-                darkMode: "الوضع الداكن"
+                greeting: "السلام عليكم",
+                intro: "ابدأ قراءة الصلاة على النبي وترديدها هنا",
+                today: "اليوم",
+                todayCount: "عدد الصلوات المقروءة اليوم",
+                saySwalaath: "صلِّ على النبي ﷺ",
+                darkMode: "🌙 الوضع الداكن",
+                lightMode: "☀️ الوضع الفاتح",
+                quranDesc: "القرآن الكريم",
+                swalaathTitle: "الصلوات",
+                swalaathDesc: "اقرأ صيغًا متنوعة من الصلاة",
+                mp3Title: "القرآن MP3",
+                mp3Desc: "استمع إلى القرآن",
+                prayerTitle: "مواقيت الصلاة",
+                prayerDesc: "مواقيت الصلاة والأذان",
+                duasTitle: "الأدعية",
+                duasDesc: "أدعية متنوعة",
+                dhikrTitle: "الذكر",
+                dhikrDesc: "ردّد الأذكار",
+                favouritesTitle: "المفضلة",
+                favouritesDesc: "العناصر المحفوظة",
+                umrahTitle: "العمرة",
+                umrahDesc: "معلومات عن العمرة",
+                advertisingTitle: "أعلن معنا",
+                advertisingDesc: "الوصول إلى الجمهور",
+                language: "🌐 اللغة"
             }
         },
+
         hi: {
-            name: "हिन्दी",
-            dir: "ltr",
+            name: "हिन्दी", dir: "ltr",
             translations: {
-                home: "होम",
-                quran: "क़ुरआन",
-                swalath: "स्वलात",
-                quranMP3: "क़ुरआन MP3",
-                prayerTimes: "नमाज़ का समय",
-                duas: "दुआएँ",
-                dhikr: "ज़िक्र",
-                favourites: "मेरी पसंद",
-                asma: "अस्माउल हुस्ना",
-                umrah: "उमरा",
-                advertising: "हमारे साथ विज्ञापन करें",
-                language: "भाषा",
-                settings: "सेटिंग्स",
-                back: "वापस",
-                search: "खोजें",
-                save: "सहेजें",
-                cancel: "रद्द करें",
-                selectLanguage: "अपनी भाषा चुनें",
-                continue: "जारी रखें",
-                darkMode: "डार्क मोड"
+                greeting: "आप पर सलामती हो",
+                intro: "यहाँ सलावत पढ़ना और सुनना शुरू करें",
+                today: "आज",
+                todayCount: "आज पढ़ी गई सलावतें",
+                saySwalaath: "सलावत पढ़ें",
+                darkMode: "🌙 डार्क मोड",
+                lightMode: "☀️ लाइट मोड",
+                quranDesc: "पवित्र कुरआन",
+                swalaathTitle: "सलावतें",
+                swalaathDesc: "विभिन्न सलावतें पढ़ें",
+                mp3Title: "कुरआन MP3",
+                mp3Desc: "कुरआन सुनें",
+                prayerTitle: "नमाज़ का समय",
+                prayerDesc: "नमाज़ का समय और अज़ान",
+                duasTitle: "दुआएँ",
+                duasDesc: "विभिन्न दुआएँ",
+                dhikrTitle: "ज़िक्र",
+                dhikrDesc: "ज़िक्र करें",
+                favouritesTitle: "मेरी पसंद",
+                favouritesDesc: "सहेजी गई पसंद",
+                umrahTitle: "उमराह",
+                umrahDesc: "उमराह की जानकारी",
+                advertisingTitle: "हमारे साथ विज्ञापन दें",
+                advertisingDesc: "मलयाली दर्शकों तक पहुँचें",
+                language: "🌐 भाषा"
             }
         },
+
         ur: {
-            name: "اردو",
-            dir: "rtl",
+            name: "اردو", dir: "rtl",
             translations: {
-                home: "ہوم",
-                quran: "قرآن کریم",
-                swalath: "درود و سلام",
-                quranMP3: "قرآن MP3",
-                prayerTimes: "نماز کے اوقات",
-                duas: "دعائیں",
-                dhikr: "ذکر",
-                favourites: "پسندیدہ",
-                asma: "اسماء الحسنیٰ",
-                umrah: "عمرہ",
-                advertising: "ہمارے ساتھ اشتہار دیں",
-                language: "زبان",
-                settings: "ترتیبات",
-                back: "واپس",
-                search: "تلاش",
-                save: "محفوظ کریں",
-                cancel: "منسوخ کریں",
-                selectLanguage: "اپنی زبان منتخب کریں",
-                continue: "جاری رکھیں",
-                darkMode: "ڈارک موڈ"
+                greeting: "السلام علیکم",
+                intro: "یہاں درود پڑھنا اور سننا شروع کریں",
+                today: "آج",
+                todayCount: "آج پڑھے گئے درود",
+                saySwalaath: "درود پڑھیں",
+                darkMode: "🌙 ڈارک موڈ",
+                lightMode: "☀️ لائٹ موڈ",
+                quranDesc: "قرآن مجید",
+                swalaathTitle: "درود شریف",
+                swalaathDesc: "مختلف درود پڑھیں",
+                mp3Title: "قرآن MP3",
+                mp3Desc: "قرآن سنیں",
+                prayerTitle: "نماز کے اوقات",
+                prayerDesc: "نماز کے اوقات اور اذان",
+                duasTitle: "دعائیں",
+                duasDesc: "مختلف دعائیں",
+                dhikrTitle: "ذکر",
+                dhikrDesc: "ذکر کریں",
+                favouritesTitle: "پسندیدہ",
+                favouritesDesc: "محفوظ کردہ پسندیدہ",
+                umrahTitle: "عمرہ",
+                umrahDesc: "عمرہ کے بارے میں معلومات",
+                advertisingTitle: "ہمارے ساتھ اشتہار دیں",
+                advertisingDesc: "ملیالم سامعین تک پہنچیں",
+                language: "🌐 زبان"
             }
         },
+
         ta: {
-            name: "தமிழ்",
-            dir: "ltr",
+            name: "தமிழ்", dir: "ltr",
             translations: {
-                home: "முகப்பு",
-                quran: "திருக்குர்ஆன்",
-                swalath: "ஸலவாத்துகள்",
-                quranMP3: "குர்ஆன் MP3",
-                prayerTimes: "தொழுகை நேரங்கள்",
-                duas: "துஆக்கள்",
-                dhikr: "திக்ர்",
-                favourites: "விருப்பமானவை",
-                asma: "அஸ்மாவுல் ஹுஸ்னா",
-                umrah: "உம்ரா",
-                advertising: "எங்களுடன் விளம்பரம் செய்யுங்கள்",
-                language: "மொழி",
-                settings: "அமைப்புகள்",
-                back: "பின் செல்ல",
-                search: "தேடுக",
-                save: "சேமி",
-                cancel: "ரத்து செய்",
-                selectLanguage: "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்",
-                continue: "தொடரவும்",
-                darkMode: "இருண்ட பயன்முறை"
+                greeting: "உங்கள் மீது சாந்தி உண்டாகட்டும்",
+                intro: "இங்கே ஸலவாத்தைப் படிக்கவும் ஓதவும் தொடங்குங்கள்",
+                today: "இன்று",
+                todayCount: "இன்று ஓதிய ஸலவாத்துகள்",
+                saySwalaath: "ஸலவாத் ஓதுங்கள்",
+                darkMode: "🌙 இருண்ட பயன்முறை",
+                lightMode: "☀️ ஒளி பயன்முறை",
+                quranDesc: "திருக்குர்ஆன்",
+                swalaathTitle: "ஸலவாத்துகள்",
+                swalaathDesc: "பல்வேறு ஸலவாத்துகளைப் படிக்கவும்",
+                mp3Title: "குர்ஆன் MP3",
+                mp3Desc: "குர்ஆனைக் கேளுங்கள்",
+                prayerTitle: "தொழுகை நேரங்கள்",
+                prayerDesc: "தொழுகை நேரமும் பாங்கும்",
+                duasTitle: "துஆக்கள்",
+                duasDesc: "பல்வேறு துஆக்கள்",
+                dhikrTitle: "திக்ர்",
+                dhikrDesc: "திக்ர் சொல்லுங்கள்",
+                favouritesTitle: "எனது விருப்பங்கள்",
+                favouritesDesc: "சேமித்த விருப்பங்கள்",
+                umrahTitle: "உம்ரா",
+                umrahDesc: "உம்ரா பற்றிய தகவல்கள்",
+                advertisingTitle: "எங்களுடன் விளம்பரம் செய்யுங்கள்",
+                advertisingDesc: "மலையாள மக்களைச் சென்றடையுங்கள்",
+                language: "🌐 மொழி"
             }
         }
     };
@@ -150,22 +171,32 @@
         document.documentElement.lang = code;
         document.documentElement.dir = lang.dir;
 
-        if (lang.original) return;
-
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
             const key = el.getAttribute("data-i18n");
-            const value = lang.translations && lang.translations[key];
+            const original = el.getAttribute("data-ml");
+            const translated = lang.translations[key];
 
-            if (value && el.children.length === 0) {
-                el.textContent = value;
+            if (code === "ml") {
+                if (original !== null) el.textContent = original;
+            } else if (translated) {
+                el.textContent = translated;
+            } else if (original !== null) {
+                el.textContent = original;
             }
         });
 
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
             const key = el.getAttribute("data-i18n-placeholder");
-            const value = lang.translations && lang.translations[key];
+            const original = el.getAttribute("data-ml-placeholder");
+            const translated = lang.translations[key];
 
-            if (value) el.placeholder = value;
+            if (code === "ml") {
+                if (original !== null) el.placeholder = original;
+            } else if (translated) {
+                el.placeholder = translated;
+            } else if (original !== null) {
+                el.placeholder = original;
+            }
         });
 
         document.dispatchEvent(new CustomEvent("swalath-language-changed", {
@@ -176,17 +207,19 @@
     window.SwalathLanguage = {
         supported: LANGUAGES,
         getCurrent: getLanguage,
+
         setLanguage: function (code) {
             if (!LANGUAGES[code]) return false;
-
             localStorage.setItem("swalath-language", code);
             applyLanguage(code);
             return true;
         },
+
         apply: applyLanguage,
+
         t: function (key) {
             const lang = LANGUAGES[getLanguage()];
-            return (lang.translations && lang.translations[key]) || key;
+            return lang.translations[key] || key;
         }
     };
 
