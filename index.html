@@ -333,6 +333,411 @@ body.dark-mode .advertising-contact { background: #123d34; }
     .travel-ad { padding: 25px 15px 18px; }
     .travel-ad h2 { font-size: 21px; }
 }
+    /* ===== SWALAATH PREMIUM HOME UI ===== */
+
+:root {
+    --sw-bg: #f5f5ed;
+    --sw-card: #fffef9;
+    --sw-green: #164b3b;
+    --sw-green-dark: #10392f;
+    --sw-gold: #b39452;
+    --sw-text: #23382f;
+    --sw-muted: #748078;
+    --sw-border: #e6e5d8;
+}
+
+body {
+    background: var(--sw-bg);
+    color: var(--sw-text);
+    font-family: "Noto Sans Malayalam", "Noto Sans",
+                 Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+    width: 100%;
+    max-width: 760px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: var(--sw-bg);
+    overflow: hidden;
+    box-shadow: 0 0 45px rgba(22, 75, 59, .06);
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 36px 20px 35px;
+    text-align: center;
+    color: #fff9e9;
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(212, 190, 126, .17),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #10372e,
+            #185340 65%,
+            #24654d
+        );
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 25px rgba(16, 57, 47, .14);
+}
+
+.hero .moon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(241, 223, 176, .35);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .07);
+    font-size: 38px !important;
+}
+
+.hero h1 {
+    margin: 4px 0 8px;
+    color: #f2dfac;
+    font-size: clamp(30px, 7vw, 38px);
+    font-weight: 800;
+    letter-spacing: .2px;
+}
+
+.hero p {
+    margin: 0;
+    color: #f4f1e5;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+main {
+    padding: 0 17px;
+}
+
+.welcome {
+    padding: 25px 5px 14px;
+    text-align: center;
+}
+
+.welcome h2 {
+    margin: 0 0 5px;
+    color: var(--sw-green);
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.welcome p {
+    margin: 0;
+    color: var(--sw-muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.today {
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0 18px;
+    padding: 23px 16px 22px;
+    text-align: center;
+    color: #fffaf0;
+    background:
+        radial-gradient(
+            circle at 100% 0,
+            rgba(241, 223, 176, .15),
+            transparent 40%
+        ),
+        linear-gradient(135deg, #164b3b, #21644c);
+    border: 1px solid rgba(179, 148, 82, .35);
+    border-radius: 23px;
+    box-shadow: 0 8px 22px rgba(22, 75, 59, .10);
+}
+
+.today .small-title {
+    color: #e5d3a1;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.today h2 {
+    margin: 1px 0 0;
+    color: #fff8e7;
+    font-size: 45px;
+    line-height: 1.35;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.today p {
+    margin: 2px 0 15px;
+    color: #e7eee8;
+    font-size: 13px;
+}
+
+.today button {
+    min-height: 45px;
+    padding: 11px 24px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 30px;
+    background: #f2dfac;
+    color: #173e31;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform .18s ease;
+}
+
+.today button:active {
+    transform: scale(.97);
+}
+
+.feature-buttons {
+    margin: 0 0 17px;
+    gap: 10px;
+}
+
+.dark-button {
+    min-height: 42px;
+    padding: 10px 19px;
+    border: 1px solid var(--sw-border);
+    border-radius: 25px;
+    background: var(--sw-card);
+    color: var(--sw-green);
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(22, 75, 59, .04);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    margin: 0 0 25px;
+}
+
+.menu-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 144px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 17px 10px;
+    box-sizing: border-box;
+    text-align: center;
+    background: var(--sw-card);
+    border: 1px solid var(--sw-border);
+    border-radius: 21px;
+    color: var(--sw-text);
+    box-shadow: 0 4px 14px rgba(25, 57, 43, .045);
+    cursor: pointer;
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+.menu-card > div:first-child {
+    display: flex;
+    width: 53px;
+    height: 53px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    border-radius: 17px;
+    background: #edf3e9;
+    font-size: 29px !important;
+}
+
+.menu-card strong {
+    display: block;
+    max-width: 100%;
+    color: var(--sw-green);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.menu-card span {
+    display: block;
+    color: var(--sw-muted);
+    font-size: 11px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.menu-card:active {
+    transform: scale(.975);
+    border-color: var(--sw-gold);
+    box-shadow: 0 2px 8px rgba(22, 75, 59, .08);
+}
+
+#collectionSection,
+#favoritesSection,
+#advertisingSection {
+    padding-top: 22px;
+    padding-bottom: 20px;
+}
+
+#collectionSection h2,
+#favoritesSection h2 {
+    color: var(--sw-green);
+    font-size: 20px;
+}
+
+.search-box {
+    min-height: 47px;
+    border-radius: 15px;
+    background: var(--sw-card);
+    border-color: var(--sw-border);
+}
+
+.search-box:focus {
+    border-color: var(--sw-gold);
+    box-shadow: 0 0 0 3px rgba(179, 148, 82, .12);
+}
+
+#travelSection {
+    margin: 18px 0 25px;
+    padding: 22px 16px;
+    border-radius: 22px;
+    box-shadow: 0 5px 18px rgba(22, 75, 59, .07);
+}
+
+footer {
+    padding: 18px 12px 25px;
+    text-align: center;
+    color: var(--sw-muted);
+    font-size: 12px;
+}
+
+body.dark-mode {
+    --sw-bg: #111a16;
+    --sw-card: #1c2821;
+    --sw-green: #e4d5a9;
+    --sw-green-dark: #d8c798;
+    --sw-text: #f0f1e9;
+    --sw-muted: #b3beb5;
+    --sw-border: #34443a;
+    background: var(--sw-bg);
+    color: var(--sw-text);
+}
+
+body.dark-mode .app {
+    background: var(--sw-bg);
+}
+
+body.dark-mode .hero {
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(212, 190, 126, .10),
+            transparent 35%
+        ),
+        linear-gradient(145deg, #0a211b, #123d30);
+}
+
+body.dark-mode .welcome h2,
+body.dark-mode .menu-card strong,
+body.dark-mode #collectionSection h2,
+body.dark-mode #favoritesSection h2 {
+    color: #e8d7a7;
+}
+
+body.dark-mode .welcome p,
+body.dark-mode .menu-card span {
+    color: #b8c3ba;
+}
+
+body.dark-mode .menu-card {
+    background: var(--sw-card);
+    border-color: var(--sw-border);
+    color: var(--sw-text);
+}
+
+body.dark-mode .menu-card > div:first-child {
+    background: #293b30;
+}
+
+body.dark-mode .today {
+    background: linear-gradient(135deg, #153e30, #1c4c38);
+}
+
+body.dark-mode .dark-button {
+    background: #26372c;
+    border-color: #3a4b3e;
+    color: #f1dfb0;
+}
+
+body.dark-mode .search-box {
+    background: #1c2821;
+    color: #fff;
+    border-color: #34443a;
+}
+
+body.dark-mode #travelSection {
+    background: #1c2821;
+}
+
+@media (min-width: 560px) {
+    .hero {
+        padding-top: 43px;
+        padding-bottom: 40px;
+    }
+
+    main {
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .menu-card {
+        min-height: 155px;
+    }
+}
+
+@media (max-width: 360px) {
+    main {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .menu-grid {
+        gap: 9px;
+    }
+
+    .menu-card {
+        min-height: 135px;
+        padding: 13px 7px;
+        border-radius: 17px;
+    }
+
+    .menu-card > div:first-child {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+    }
+
+    .menu-card strong {
+        font-size: 13px;
+    }
+
+    .menu-card span {
+        font-size: 10px;
+    }
+}
 </style>
 </head>
 
