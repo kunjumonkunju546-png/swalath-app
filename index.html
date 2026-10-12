@@ -1438,6 +1438,96 @@ if ("serviceWorker" in navigator) {
         });
     });
 }
+    /* LANGUAGE SELECTOR FUNCTIONALITY */
+(function () {
+    const screen = document.getElementById("languageScreen");
+    const continueButton = document.getElementById("languageContinue");
+    const heading = document.getElementById("languageHeading");
+    const subtitle = document.getElementById("languageSubtitle");
+    const options = document.querySelectorAll(".language-option");
+
+    if (!screen || !continueButton) return;
+
+    let selectedLanguage = localStorage.getItem("swalath-language") || "ml";
+
+    const labels = {
+        ml: {
+            heading: "ഭാഷ തിരഞ്ഞെടുക്കുക",
+            subtitle: "നിങ്ങൾക്ക് ഇഷ്ടമുള്ള ഭാഷ തിരഞ്ഞെടുക്കൂ",
+            button: "തുടരുക"
+        },
+        en: {
+            heading: "Select Your Language",
+            subtitle: "Choose your preferred language",
+            button: "Continue"
+        },
+        ar: {
+            heading: "اختر لغتك",
+            subtitle: "اختر اللغة التي تفضلها",
+            button: "متابعة"
+        },
+        hi: {
+            heading: "अपनी भाषा चुनें",
+            subtitle: "अपनी पसंदीदा भाषा चुनें",
+            button: "जारी रखें"
+        },
+        ur: {
+            heading: "اپنی زبان منتخب کریں",
+            subtitle: "اپنی پسند کی زبان منتخب کریں",
+            button: "جاری رکھیں"
+        },
+        ta: {
+            heading: "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்",
+            subtitle: "உங்களுக்கு விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்",
+            button: "தொடரவும்"
+        }
+    };
+
+    function updateSelection() {
+        options.forEach(function (option) {
+            const isSelected = option.dataset.lang === selectedLanguage;
+            option.classList.toggle("selected", isSelected);
+            option.setAttribute("aria-pressed", String(isSelected));
+        });
+
+        const text = labels[selectedLanguage] || labels.ml;
+        heading.textContent = text.heading;
+        subtitle.textContent = text.subtitle;
+        continueButton.textContent = text.button;
+    }
+
+    function showLanguageScreen() {
+        selectedLanguage = localStorage.getItem("swalath-language") || "ml";
+        updateSelection();
+        screen.style.display = "flex";
+    }
+
+    options.forEach(function (option) {
+        option.addEventListener("click", function () {
+            selectedLanguage = option.dataset.lang;
+            updateSelection();
+        });
+    });
+
+    continueButton.addEventListener("click", function () {
+        if (window.SwalathLanguage) {
+            window.SwalathLanguage.setLanguage(selectedLanguage);
+        } else {
+            localStorage.setItem("swalath-language", selectedLanguage);
+        }
+
+        localStorage.setItem("swalath-language-selected", "yes");
+        screen.style.display = "none";
+    });
+
+    window.openSwalathLanguageSelector = showLanguageScreen;
+
+    if (localStorage.getItem("swalath-language-selected") !== "yes") {
+        window.addEventListener("load", function () {
+            setTimeout(showLanguageScreen, 2000);
+        });
+    }
+})();
 </script>
 
 </body>
