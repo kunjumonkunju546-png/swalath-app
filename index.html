@@ -863,10 +863,10 @@ body.dark-mode #travelSection {
 </section>
     
 <section class="today">
-    <div class="small-title">TODAY</div>
+    <div class="small-title" data-i18n="today" data-ml="TODAY">TODAY</div>
     <h2 id="count">0</h2>
-    <p>ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
-    <button onclick="increaseCount()">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
+    <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
+    <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
 </section>
 
 <div class="feature-buttons">
@@ -878,49 +878,46 @@ body.dark-mode #travelSection {
 </div>
 
 <div class="menu-grid">
-
     <div class="menu-card" onclick="openQuran()">
         <div style="font-size:30px;">📖</div>
         <strong>القرآن الكريم</strong>
-        <span>ഖുർആൻ</span>
+        <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span>
     </div>
 
     <div class="menu-card" onclick="openCollection()">
         <div style="font-size:30px;">🕌</div>
-        <strong>സ്വലാത്തുകൾ</strong>
-        <span>വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
+        <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong>
+        <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
     </div>
 
     <div class="menu-card" onclick="openQuranMP3()">
         <div style="font-size:30px;">🎧</div>
-        <strong>Quran MP3</strong>
-        <span>ഖുർആൻ കേൾക്കാം</span>
+        <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong>
+        <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span>
     </div>
 
     <div class="menu-card" onclick="openPrayerTime()">
         <div style="font-size:30px;">🕐</div>
-        <strong>Prayer Times</strong>
-        <span>നമസ്കാര സമയവും Adhan-ഉം</span>
+        <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong>
+        <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span>
     </div>
 
     <div class="menu-card" onclick="openDua()">
         <div style="font-size:30px;">🤲</div>
-        <strong>ദുആകൾ</strong>
-        <span>വിവിധ ദുആകൾ</span>
+        <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong>
+        <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span>
     </div>
 
     <div class="menu-card" onclick="openDhikr()">
         <div style="font-size:30px;">📿</div>
-        <strong>ദിക്ർ</strong>
-        <span>ദിക്ർ ചൊല്ലാം</span>
+        <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong>
+        <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span>
     </div>
-
-   
 
     <div class="menu-card" onclick="openFavorites()">
         <div style="font-size:30px;">❤️</div>
-        <strong>My Favourites</strong>
-        <span>Favourite ആയി ചേർത്തവ</span>
+        <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong>
+        <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span>
     </div>
 
     <div class="menu-card" onclick="openAsmaulHusna()">
@@ -931,18 +928,16 @@ body.dark-mode #travelSection {
 
     <div class="menu-card" onclick="openUmrah()">
         <div style="font-size:30px;">🕋</div>
-        <strong>ഉംറ</strong>
-        <span>ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
+        <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong>
+        <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
     </div>
 
     <div class="menu-card" onclick="openAdvertising()">
         <div style="font-size:30px;">📢</div>
-        <strong>Advertise With Us</strong>
-        <span>Reach Malayali Audience</span>
+        <strong data-i18n="advertisingTitle" data-ml="Advertise With Us">Advertise With Us</strong>
+        <span data-i18n="advertisingDesc" data-ml="Reach Malayali Audience">Reach Malayali Audience</span>
     </div>
-
 </div>
-
 <section id="collectionSection" style="display:none;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
         <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;">← Back</button>
