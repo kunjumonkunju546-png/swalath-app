@@ -1378,9 +1378,38 @@ function updateDarkButton() {
     const button = document.getElementById("darkModeButton");
     if (!button) return;
 
-    button.textContent = document.body.classList.contains("dark-mode")
-        ? "☀️ Light Mode"
-        : "🌙 Dark Mode";
+    const isDark = document.body.classList.contains("dark-mode");
+    const lang = localStorage.getItem("swalath-language") || "ml";
+
+    const labels = {
+        ml: {
+            dark: "🌙 ഡാർക്ക് മോഡ്",
+            light: "☀️ ലൈറ്റ് മോഡ്"
+        },
+        en: {
+            dark: "🌙 Dark Mode",
+            light: "☀️ Light Mode"
+        },
+        ar: {
+            dark: "🌙 الوضع الداكن",
+            light: "☀️ الوضع الفاتح"
+        },
+        hi: {
+            dark: "🌙 डार्क मोड",
+            light: "☀️ लाइट मोड"
+        },
+        ur: {
+            dark: "🌙 ڈارک موڈ",
+            light: "☀️ لائٹ موڈ"
+        },
+        ta: {
+            dark: "🌙 இருண்ட பயன்முறை",
+            light: "☀️ ஒளி பயன்முறை"
+        }
+    };
+
+    const text = labels[lang] || labels.ml;
+    button.textContent = isDark ? text.light : text.dark;
 }
 
 /* NAZYAN POPUP - ONCE DAILY */
