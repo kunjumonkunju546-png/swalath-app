@@ -9,6 +9,7 @@
 <!-- COMMON SHARE CARD -->
 <link rel="stylesheet" href="share-card.css">
 <script src="share-card.js" defer></script>
+    <script src="language.js"></script>
 
 <style>
 * {
@@ -271,11 +272,11 @@ body.dark .dua-share-btn.save {
 
     <div class="icon">🤲</div>
 
-    <h1>ദുആകൾ</h1>
+    <h1 data-i18n="duaPageTitle" data-ml="ദുആകൾ">ദുആകൾ</h1>
 
-    <p>
-        ജീവിതത്തിലെ വിവിധ സാഹചര്യങ്ങൾക്ക് ഉപകാരപ്പെടുന്ന ദുആകൾ
-    </p>
+<p data-i18n="duaPageSubtitle" data-ml="ജീവിതത്തിലെ വിവിധ സാഹചര്യങ്ങൾക്ക് ഉപകാരപ്പെടുന്ന ദുആകൾ">
+    ജീവിതത്തിലെ വിവിധ സാഹചര്യങ്ങൾക്ക് ഉപകാരപ്പെടുന്ന ദുആകൾ
+</p>
 
 </div>
 
@@ -300,13 +301,13 @@ body.dark .dua-share-btn.save {
 
 <div class="intro">
 
-    <h2>🤲 നമ്മുടെ ജീവിതത്തിലെ ദുആകൾ</h2>
+<h2 data-i18n="duaIntroTitle" data-ml="🤲 നമ്മുടെ ജീവിതത്തിലെ ദുആകൾ">🤲 നമ്മുടെ ജീവിതത്തിലെ ദുആകൾ</h2>
 
-    <p>
-        അല്ലാഹുവിനോട് സഹായം തേടുകയും,
-        നമ്മുടെ എല്ലാ കാര്യങ്ങളിലും അവനിൽ
-        ഭരമേൽപ്പിക്കുകയും ചെയ്യാം.
-    </p>
+<p data-i18n="duaIntroText" data-ml="അല്ലാഹുവിനോട് സഹായം തേടുകയും, നമ്മുടെ എല്ലാ കാര്യങ്ങളിലും അവനിൽ ഭരമേൽപ്പിക്കുകയും ചെയ്യാം.">
+    അല്ലാഹുവിനോട് സഹായം തേടുകയും,
+    നമ്മുടെ എല്ലാ കാര്യങ്ങളിലും അവനിൽ
+    ഭരമേൽപ്പിക്കുകയും ചെയ്യാം.
+</p>
 
 </div>
 
@@ -314,7 +315,9 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= GENERAL ================= -->
 
-<div class="category">
+<div class="category"
+     data-i18n="duaGeneral"
+     data-ml="🌿 പൊതുവായ ദുആകൾ">
     🌿 പൊതുവായ ദുആകൾ
 </div>
 
@@ -373,7 +376,9 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= DEBT ================= -->
 
-<div class="category">
+<div class="category"
+     data-i18n="duaDebt"
+     data-ml="💰 കടവും സാമ്പത്തിക ബുദ്ധിമുട്ടുകളും">
     💰 കടവും സാമ്പത്തിക ബുദ്ധിമുട്ടുകളും
 </div>
 
@@ -418,10 +423,11 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= RIZQ ================= -->
 
-<div class="category">
+<div class="category"
+     data-i18n="duaRizq"
+     data-ml="💼 റിസ്കും ഉപജീവനവും">
     💼 റിസ്കും ഉപജീവനവും
 </div>
-
 
 <div class="dua-card">
 
@@ -461,7 +467,9 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= HOUSE ================= -->
 
-<div class="category">
+<div class="category"
+     data-i18n="duaHouse"
+     data-ml="🏠 വീട് & ജീവിത കാര്യങ്ങൾ">
     🏠 വീട് & ജീവിത കാര്യങ്ങൾ
 </div>
 
@@ -504,7 +512,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= VEHICLE ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaTravel" data-ml="🚗 വാഹനം & യാത്ര">
     🚗 വാഹനം & യാത്ര
 </div>
 
@@ -566,7 +574,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= WORRY ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaWorry" data-ml="😟 വിഷമം & ബുദ്ധിമുട്ടുകൾ">
     😟 വിഷമം & ബുദ്ധിമുട്ടുകൾ
 </div>
 
@@ -609,10 +617,9 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= PROTECTION ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaProtection" data-ml="🛡️ സംരക്ഷണം">
     🛡️ സംരക്ഷണം
 </div>
-
 
 <div class="dua-card">
 
@@ -651,7 +658,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= PARENTS ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaParents" data-ml="❤️ മാതാപിതാക്കൾക്കായി">
     ❤️ മാതാപിതാക്കൾക്കായി
 </div>
 
@@ -676,7 +683,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= HEALTH ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaHealth" data-ml="🤍 ആരോഗ്യം & രോഗം">
     🤍 ആരോഗ്യം & രോഗം
 </div>
 
@@ -721,7 +728,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= FORGIVENESS ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaForgiveness" data-ml="🤍 പാപമോചനവും തൗബയും">
     🤍 പാപമോചനവും തൗബയും
 </div>
 
@@ -765,7 +772,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= SLEEP ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaSleep" data-ml="🌙 ഉറങ്ങുന്നതിന് മുമ്പ്">
     🌙 ഉറങ്ങുന്നതിന് മുമ്പ്
 </div>
 
@@ -790,7 +797,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= MORNING ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaMorning" data-ml="🌅 രാവിലെ">
     🌅 രാവിലെ
 </div>
 
@@ -815,7 +822,7 @@ body.dark .dua-share-btn.save {
 
 <!-- ================= GOOD DEEDS ================= -->
 
-<div class="category">
+<div class="category" data-i18n="duaGoodLife" data-ml="🌿 നല്ല ജീവിതത്തിനായി">
     🌿 നല്ല ജീവിതത്തിനായി
 </div>
 
@@ -859,7 +866,7 @@ body.dark .dua-share-btn.save {
 
 <!-- HOME -->
 
-<a href="index.html" class="home-btn">
+<a href="index.html" class="home-btn" data-i18n="duaHome" data-ml="🏠 Swalath Home">
     🏠 Swalath Home
 </a>
 
@@ -873,7 +880,83 @@ body.dark .dua-share-btn.save {
 /* =====================================================
    HOME
    ===================================================== */
+    
+/* DUA PAGE LANGUAGE SUPPORT */
 
+function updateDuaPageLanguage() {
+    const lang = window.SwalathLanguage
+        ? window.SwalathLanguage.getCurrent()
+        : "ml";
+
+    const text = {
+        ml: {
+            home: "🏠 Home",
+            dark: "🌙 Dark",
+            light: "☀️ Light",
+            share: "📤 Share Card",
+            save: "🖼️ Save Image"
+        },
+        en: {
+            home: "🏠 Home",
+            dark: "🌙 Dark",
+            light: "☀️ Light",
+            share: "📤 Share Card",
+            save: "🖼️ Save Image"
+        },
+        ar: {
+            home: "🏠 الرئيسية",
+            dark: "🌙 الوضع الداكن",
+            light: "☀️ الوضع الفاتح",
+            share: "📤 مشاركة البطاقة",
+            save: "🖼️ حفظ الصورة"
+        },
+        hi: {
+            home: "🏠 होम",
+            dark: "🌙 डार्क मोड",
+            light: "☀️ लाइट मोड",
+            share: "📤 कार्ड साझा करें",
+            save: "🖼️ चित्र सहेजें"
+        },
+        ur: {
+            home: "🏠 ہوم",
+            dark: "🌙 ڈارک موڈ",
+            light: "☀️ لائٹ موڈ",
+            share: "📤 کارڈ شیئر کریں",
+            save: "🖼️ تصویر محفوظ کریں"
+        },
+        ta: {
+            home: "🏠 முகப்பு",
+            dark: "🌙 இருண்ட பயன்முறை",
+            light: "☀️ ஒளி பயன்முறை",
+            share: "📤 அட்டையைப் பகிரவும்",
+            save: "🖼️ படத்தைச் சேமிக்கவும்"
+        }
+    };
+
+    const t = text[lang] || text.ml;
+
+    const buttons = document.querySelectorAll(".top-btn");
+
+    if (buttons[0]) buttons[0].textContent = t.home;
+
+    if (buttons[1]) {
+        buttons[1].textContent =
+            document.body.classList.contains("dark")
+                ? t.light
+                : t.dark;
+    }
+
+    document.querySelectorAll(".dua-share-btn.share")
+        .forEach(button => button.textContent = t.share);
+
+    document.querySelectorAll(".dua-share-btn.save")
+        .forEach(button => button.textContent = t.save);
+}
+
+document.addEventListener(
+    "swalath-language-changed",
+    updateDuaPageLanguage
+);
 function goHome() {
     window.location.href = "index.html";
 }
