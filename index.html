@@ -938,10 +938,37 @@ body.dark-mode #travelSection {
         <span data-i18n="advertisingDesc" data-ml="Reach Malayali Audience">Reach Malayali Audience</span>
     </div>
 </div>
-<button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;" data-i18n="backButton" data-ml="← മടങ്ങുക">← Back</button>
-<h2 style="margin:0;" data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</h2>
+<section id="collectionSection" style="display:none;">
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+
+        <button
+            onclick="closeCollection()"
+            style="border:none;background:#123d34;color:white;padding:9px 15px;border-radius:10px;cursor:pointer;"
+            data-i18n="backButton"
+            data-ml="← മടങ്ങുക"
+        >← Back</button>
+
+        <h2
+            style="margin:0;"
+            data-i18n="swalaathTitle"
+            data-ml="സ്വലാത്തുകൾ"
+        >സ്വലാത്തുകൾ</h2>
+
     </div>
-   <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 സ്വലാത്ത് തിരയുക..." data-i18n-placeholder="searchSwalaath" data-ml-placeholder="🔍 സ്വലാത്ത് തിരയുക..." oninput="searchSwalath()">    <div id="collectionList"></div>
+
+    <input
+        type="text"
+        id="searchSwalath"
+        class="search-box"
+        placeholder="🔍 സ്വലാത്ത് തിരയുക..."
+        data-i18n-placeholder="searchSwalaath"
+        data-ml-placeholder="🔍 സ്വലാത്ത് തിരയുക..."
+        oninput="searchSwalath()"
+    >
+
+    <div id="collectionList"></div>
+
 </section>
 
 <section id="favoritesSection" style="display:none;">
