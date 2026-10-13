@@ -1300,6 +1300,15 @@ function setupDuaShareCards() {
 
 }
 
+    /* ദുആകളുടെ പേരുകൾ ഭാഷാമാറ്റത്തിന് ബന്ധിപ്പിക്കുക */
+document.querySelectorAll(".dua-title").forEach((element, index) => {
+    element.setAttribute("data-i18n", "duaTitle" + (index + 1));
+    element.setAttribute("data-ml", element.textContent.trim());
+});
+
+if (window.SwalathLanguage) {
+    window.SwalathLanguage.apply();
+}
 </script>
 
 
