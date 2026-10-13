@@ -12,6 +12,7 @@
 <!-- Share Card -->
 <link rel="stylesheet" href="share-card.css">
 <script src="share-card.js" defer></script>
+    <script src="language.js"></script>
 
 <style>
 
@@ -841,123 +842,373 @@ source:"സ്വലാത്ത് സമാഹാരങ്ങളിൽ കാ�
 
 
 /* =========================================================
+   MULTI-LANGUAGE DISPLAY
+   Malayalam selected = original Malayalam content
+   All other languages = English details
+   Arabic text remains unchanged
+   ========================================================= */
+
+const englishSwalathData = {
+ibrahimiyya:{
+name:"Swalath Ibrahimiyya",
+pronunciation:"Allahumma salli ala Muhammadin wa ala aali Muhammad, kama sallayta ala Ibrahima wa ala aali Ibrahim, innaka Hamidum Majid. Allahumma barik ala Muhammadin wa ala aali Muhammad, kama barakta ala Ibrahima wa ala aali Ibrahim, innaka Hamidum Majid.",
+meaning:"O Allah, send blessings upon Muhammad and the family of Muhammad, as You sent blessings upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Ibrahim and the family of Ibrahim.",
+fadheela:"This is a well-known form of sending blessings upon Prophet Muhammad ﷺ, taught in authentic hadith. Authentic hadith also describe the great reward of sending blessings upon the Prophet ﷺ.",
+source:"Sahih al-Bukhari and Sahih Muslim — narrations concerning Salat Ibrahimiyya."
+},
+nariya:{
+name:"Salat Nariya / Tafrijiyya",
+pronunciation:"Allahumma salli salatan kamilatan wa sallim salaman tamman ala Sayyidina Muhammadin, alladhi tanhallu bihil uqad, wa tanfariju bihil kurab, wa tuqda bihil hawaij, wa tunalu bihir raghaib wa husnul khawatim, wa yustasqal ghamamu bi wajhihil karim, wa ala alihi wa sahbihi fi kulli lamhatin wa nafasin bi adadi kulli malumin lak.",
+meaning:"O Allah, send complete blessings and perfect peace upon our master Muhammad, through whom difficulties are described as being relieved, needs fulfilled, and good endings sought. Bless his family and companions at every moment and with every breath, according to the extent of all that You know.",
+fadheela:"This is a widely recited traditional salawat used in supplication when seeking relief from difficulties. Specific promised outcomes should not be treated as guaranteed without reliable evidence.",
+source:"A well-known salawat in later devotional and scholarly traditions."
+},
+tunjina:{
+name:"Salat Tunjina / Munjiyya",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin salatan tunjina biha min jamiil ahwali wal afat, wa taqdi lana biha jami al hajaat, wa tutahhiruna biha min jamiis sayyiat, wa tarfauna biha indaka alad darajat, wa tuballighuna biha aqsal ghayati min jamiil khayrati fil hayati wa badal mamat.",
+meaning:"O Allah, send blessings upon our master Muhammad, through which we seek protection from fears and calamities, fulfillment of our needs, purification from wrongdoings, elevation in rank, and attainment of goodness in this life and after death.",
+fadheela:"Traditionally recited as a supplication seeking protection, relief, and the fulfillment of needs. Particular claims about its effects require reliable evidence.",
+source:"A well-known supplication and salawat in later devotional traditions."
+},
+fatih:{
+name:"Salat al-Fatih",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin al-fatihi lima ughliq, wal khatimi lima sabaq, nasiril haqqi bil haqq, wal hadi ila siratikal mustaqim, wa ala alihi haqqa qadrihi wa miqdarihil azim.",
+meaning:"O Allah, send blessings upon our master Muhammad, the opener of what was closed, the seal of what came before, the supporter of truth through truth, and the guide to Your straight path, and upon his family according to his immense worth.",
+fadheela:"This salawat is recited with special importance in some devotional traditions. Specific virtues attributed to it should be distinguished from authentically established hadith.",
+source:"A salawat well known in later spiritual and devotional traditions."
+},
+tibbiyya:{
+name:"Salat Tibbiyya / Shifa",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin tibbil quloobi wa dawa'iha, wa afiyatil abdani wa shifa'iha, wa nooril absari wa diya'iha, wa ala alihi wa sahbihi wa sallim.",
+meaning:"O Allah, send blessings upon our master Muhammad, described in this devotional prayer as a remedy for hearts, well-being and healing for bodies, and light and illumination for eyes, and send peace upon his family and companions.",
+fadheela:"Traditionally recited as a prayer while asking Allah for healing and well-being. It should not replace appropriate medical care.",
+source:"A well-known salawat in later devotional traditions."
+},
+nuraniyya:{
+name:"Salat Nuraniyya",
+pronunciation:"Allahumma salli wa sallim wa barik ala Sayyidina Muhammadin nooril anwar, wa sirril asrar, wa Sayyidil abrar, wa ala alihi wa sahbihi ajmaeen.",
+meaning:"O Allah, send blessings, peace, and grace upon our master Muhammad, described in this salawat as the light of lights and the leader of the righteous, and upon all his family and companions.",
+fadheela:"Recited as an expression of love and respect for Prophet Muhammad ﷺ. Any specific promised virtue should be supported by reliable evidence.",
+source:"A form found in later salawat collections and devotional traditions."
+},
+saadah:{
+name:"Salat Saadah",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin wa ala ali Sayyidina Muhammad, wa sallim tasliman kathira.",
+meaning:"O Allah, send blessings upon our master Muhammad and his family, and grant them abundant peace.",
+fadheela:"A concise prayer for sending abundant blessings and peace upon Prophet Muhammad ﷺ.",
+source:"A prayer form found in salawat collections."
+},
+kamaliyya:{
+name:"Salat Kamaliyya",
+pronunciation:"Allahumma salli wa sallim wa barik ala Sayyidina Muhammadin al-kamilil mukammal, wa ala alihi wa sahbihi ajmaeen.",
+meaning:"O Allah, send blessings, peace, and grace upon our master Muhammad, described in this devotional salawat as complete, and upon all his family and companions.",
+fadheela:"Recited as an expression of love and respect for Prophet Muhammad ﷺ.",
+source:"A form found in later salawat collections."
+},
+dhatiyya:{
+name:"Salat Dhatiyya",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin wa ala ali Sayyidina Muhammad, salatan taliqu bi-dhatikal karima, wa tuqarribuna biha ilayk.",
+meaning:"O Allah, send blessings upon our master Muhammad and his family in a manner befitting Your noble essence, and through them bring us nearer to You.",
+fadheela:"A devotional prayer recited with the intention of seeking closeness to Allah and expressing love for Prophet Muhammad ﷺ.",
+source:"A prayer form found in devotional salawat traditions."
+},
+jawharat:{
+name:"Jawharat al-Kamal",
+pronunciation:"Allahumma salli wa sallim ala aynir rahmatir rabbaniyya, wal yaqutat il mutahaqqiqa, wa nooril akwan, wa Sayyidina Muhammad, wa ala alihi wa sahbihi.",
+meaning:"O Allah, send blessings and peace upon the source of divine mercy, the realized ruby, the light of creation, our master Muhammad, and upon his family and companions.",
+fadheela:"Recited as a particular devotional litany in some spiritual traditions.",
+source:"Especially associated with the Tijaniyya tradition."
+},
+taj:{
+name:"Durood Taj",
+pronunciation:"Allahumma salli ala Sayyidina wa Mawlana Muhammadin, sahib at-taji wal-mi'raji wal-buraqi war-rayati, wa ala alihi wa sahbihi wa sallim.",
+meaning:"O Allah, send blessings upon our master and patron Muhammad, and send peace upon his family and companions.",
+fadheela:"A well-known devotional durood that recalls the honour and spiritual significance of Prophet Muhammad ﷺ.",
+source:"A durood known in later devotional traditions."
+},
+faraj:{
+name:"Salat al-Faraj",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin salatan tufarriju biha annal humuma wal kurub, wa taqdi bihal hawaij, wa ala alihi wa sahbihi wa sallim.",
+meaning:"O Allah, send blessings upon our master Muhammad, asking You to relieve our worries and distress and fulfil our needs, and send peace upon his family and companions.",
+fadheela:"Traditionally recited while asking Allah for relief during worry and hardship.",
+source:"A prayer form found in later devotional salawat traditions."
+},
+bashair:{
+name:"Bashairul Khairat",
+pronunciation:"Bismillahir Rahmanir Rahim.",
+meaning:"In the name of Allah, the Most Compassionate, the Most Merciful.",
+fadheela:"Bashairul Khairat is a longer collection of salawat. The complete recitation is provided through the PDF link below.",
+source:"Bashairul Khairat — open the full PDF using the button below."
+},
+ahlam:{
+name:"Salat al-Ahlam",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin, salatan taj'alu lana biha farajan min kulli hammin, wa makhrajan min kulli diq, wa ala alihi wa sahbihi wa sallim.",
+meaning:"O Allah, send blessings upon our master Muhammad, asking You to grant us relief from every worry and a way out of every difficulty, and send peace upon his family and companions.",
+fadheela:"A devotional salawat recited while asking Allah for relief and ease in difficult circumstances.",
+source:"A form found in devotional salawat traditions."
+},
+hulo:{
+name:"Salat al-Hulo",
+pronunciation:"Allahumma salli wa sallim wa barik ala Sayyidina Muhammadin, wa ala alihi wa sahbihi ajmaeen.",
+meaning:"O Allah, send blessings, peace, and grace upon our master Muhammad and upon all his family and companions.",
+fadheela:"A concise form for remembering Prophet Muhammad ﷺ and increasing the recitation of salawat.",
+source:"A prayer form used in salawat traditions."
+},
+friday:{
+name:"Friday Swalath",
+pronunciation:"Allahumma salli wa sallim wa barik ala Sayyidina Muhammadin, wa ala ali Sayyidina Muhammad.",
+meaning:"O Allah, send blessings, peace, and grace upon our master Muhammad and his family.",
+fadheela:"Hadith narrations encourage sending abundant blessings upon Prophet Muhammad ﷺ on Friday.",
+source:"Hadith narrations concerning increasing salawat on Friday are found in various hadith collections."
+},
+mashishiyya:{
+name:"Salat al-Mashishiyya",
+pronunciation:"Allahumma salli ala man minhu inshaqqatil asrar, wanfalaqatil anwar, wa fihirtaqatil haqa'iq, wa tanazzalat ulumu Adam fa a'jazal khala'iq. Wa lahu tada'alatil fuhum, falam yudrikhu minna sabiqun wa la lahiq.",
+meaning:"A devotional salawat upon Prophet Muhammad ﷺ, referring to the unveiling of spiritual mysteries, the emergence of lights, and the limits of human understanding.",
+fadheela:"This well-known salawat is associated with Abd al-Salam ibn Mashish and is recited as a devotional litany in some spiritual traditions.",
+source:"Salat al-Mashishiyya, attributed to Abd al-Salam ibn Mashish."
+},
+ummiyya:{
+name:"Salat al-Ummiyya",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin abdika wa nabiyyika wa rasoolikan-nabiyyil ummiyyi, wa ala alihi wa sahbihi, wa sallim taslima.",
+meaning:"O Allah, send blessings upon our master Muhammad, Your servant, prophet, and messenger, the unlettered Prophet, and upon his family and companions, and grant them peace.",
+fadheela:"A concise devotional form expressing love and respect for Prophet Muhammad ﷺ.",
+source:"A form found in various devotional litanies and salawat collections."
+},
+shadhiliyya:{
+name:"Salat al-Shadhiliyya",
+pronunciation:"Allahumma salli ala Sayyidina Muhammadin abdika wa rasoolikan-nabiyyil ummiyyi, wa ala alihi wa sahbihi, wa sallim tasliman biqadri azamati dhatika fi kulli waqtin wa heen.",
+meaning:"O Allah, send blessings upon our master Muhammad, Your servant and messenger, the unlettered Prophet, and upon his family and companions, at all times and in a manner befitting Your greatness.",
+fadheela:"A salawat form circulated in the Shadhiliyya devotional tradition.",
+source:"Found in devotional litanies associated with the Shadhiliyya tradition."
+},
+anwar:{
+name:"Salat al-Anwar",
+pronunciation:"Allahumma salli ala nooril anwar, wa sirril asrar, wa tiryaqil aghyar, wa miftahi babil yasar, Sayyidina Muhammadin al-mukhtar, wa alihil athar, wa ashabihil akhyar, adada ni'amillahi wa ifdalihi.",
+meaning:"O Allah, send blessings upon the light of lights and the chosen master Muhammad, and upon his pure family and excellent companions, in a number matching Allah's blessings and favours.",
+fadheela:"A traditional salawat recited in remembrance of the honour and love of Prophet Muhammad ﷺ.",
+source:"A form of Salat al-Anwar circulated in devotional traditions and associated with Imam Ahmad al-Badawi."
+},
+yaqutat:{
+name:"Salat Yaqutat al-Haqaiq",
+pronunciation:"Allahumma salli wa sallim wa barik ala Sayyidina wa Mawlana Muhammadin, yaqutat il-haqa'iq, wan-nooril asbaqi lil-khala'iq, salatan tu'arrifuna biha bihaqiqatihir-rabbaniyya, wa tuqarribuna min hadratihil-ahadiyya.",
+meaning:"O Allah, send blessings, peace, and grace upon our master Muhammad, described in this devotional prayer as the ruby of realities and the primordial light of creation. Help us understand his noble status, draw nearer to You, and reflect Prophetic character in our words and actions.",
+fadheela:"A salawat found in devotional spiritual traditions. Specific claims about its special virtues should be regarded as traditional unless supported by reliable evidence.",
+source:"A form known as Yaqutat al-Haqaiq in salawat collections."
+}
+};
+
+
+/* =========================================================
    STATE
    ========================================================= */
 
 let currentSwalath = null;
-
-
-/* =========================================================
-   SHARE CARD STATE
-   ========================================================= */
-
 let currentSwalathForShare = null;
 
+function getCurrentLanguage(){
+    try{
+        if(window.SwalathLanguage &&
+           typeof window.SwalathLanguage.getCurrent === "function"){
+            return window.SwalathLanguage.getCurrent() || "ml";
+        }
+    }catch(error){
+        console.warn("Language lookup:", error);
+    }
+    return localStorage.getItem("swalath-language") || "ml";
+}
+
+function isMalayalam(){
+    return getCurrentLanguage() === "ml";
+}
+
+function getDisplayData(name){
+    const original = swalathData[name];
+    if(!original) return null;
+
+    if(isMalayalam()){
+        return original;
+    }
+
+    const english = englishSwalathData[name] || {};
+    return {
+        name: english.name || original.name,
+        arabic: original.arabic,
+        pronunciation: english.pronunciation || original.pronunciation,
+        meaning: english.meaning || original.meaning,
+        fadheela: english.fadheela || original.fadheela,
+        source: english.source || original.source
+    };
+}
+
 
 /* =========================================================
-   PREPARE SHARE CARD
+   UPDATE PAGE LABELS AND COLLECTION NAMES
+   ========================================================= */
+
+function updateSwalathLanguage(){
+
+    const ml = isMalayalam();
+
+    document.documentElement.lang = ml ? "ml" : "en";
+
+    document.title = ml ? "സ്വലാത്ത് ശേഖരം" : "Swalath Collection";
+
+    const headerTitle = document.querySelector(".header h1");
+    if(headerTitle){
+        headerTitle.textContent = ml ? "🌿 സ്വലാത്ത് ശേഖരം" : "🌿 Swalath Collection";
+    }
+
+    const headerSubtitle = document.querySelector(".header p");
+    if(headerSubtitle){
+        headerSubtitle.textContent = ml
+            ? "സ്വലാത്തുകൾ • ദിക്ർ • ആത്മീയ സമാധാനം"
+            : "Salawat • Dhikr • Spiritual Peace";
+    }
+
+    const searchInput = document.getElementById("searchInput");
+    if(searchInput){
+        searchInput.placeholder = ml
+            ? "🔍 സ്വലാത്ത് തിരയുക..."
+            : "🔍 Search Swalath...";
+    }
+
+    const collectionTitle = document.querySelector(".collection-title");
+    if(collectionTitle){
+        collectionTitle.textContent = ml
+            ? "📖 21 സ്വലാത്തുകളുടെ ശേഖരം"
+            : "📖 Collection of 21 Salawat";
+    }
+
+    document.querySelectorAll(".swalath-card").forEach(function(card){
+        const heading = card.querySelector("h3");
+        const englishSpan = card.querySelector("span");
+        if(!heading || !englishSpan) return;
+
+        if(!heading.dataset.malayalamName){
+            heading.dataset.malayalamName = heading.textContent.trim();
+        }
+
+        if(ml){
+            heading.textContent = heading.dataset.malayalamName;
+            englishSpan.style.display = "block";
+        }else{
+            heading.textContent = englishSpan.textContent.trim();
+            englishSpan.style.display = "none";
+        }
+    });
+
+    const backButton = document.querySelector(".back-button");
+    if(backButton){
+        backButton.textContent = ml
+            ? "← സ്വലാത്തുകളുടെ പട്ടിക"
+            : "← Back to Salawat List";
+    }
+
+    const countButton = document.querySelector(".count-button");
+    if(countButton){
+        countButton.textContent = ml
+            ? "📿 ചൊല്ലി — Count കൂട്ടുക"
+            : "📿 Recited — Add Count";
+    }
+
+    const resetButton = document.querySelector(".reset-button");
+    if(resetButton) resetButton.textContent = "Reset";
+
+    const sectionTitles = document.querySelectorAll(".section-title");
+    const labelsMl = [
+        "🗣️ മലയാളം ഉച്ചാരണം",
+        "📖 മലയാളം അർത്ഥം",
+        "🌿 ചൊല്ലുന്നതിന്റെ ഗുണങ്ങൾ / ഫദീലത്ത്",
+        "📚 ഉറവിടം / കുറിപ്പ്"
+    ];
+    const labelsEn = [
+        "🗣️ Pronunciation",
+        "📖 Meaning",
+        "🌿 Virtues / Fadheela",
+        "📚 Source / Notes"
+    ];
+
+    sectionTitles.forEach(function(element, index){
+        if(index < 4){
+            element.textContent = ml ? labelsMl[index] : labelsEn[index];
+        }
+    });
+
+    const favoriteButton = document.getElementById("favoriteButton");
+    if(favoriteButton && currentSwalath){
+        updateFavoriteButtonText();
+    }
+
+    const footer = document.querySelector(".footer");
+    if(footer){
+        footer.innerHTML = ml
+            ? "🌿 സ്വലാത്ത് ശേഖരം<br>Allahumma Salli Ala Sayyidina Muhammad ﷺ"
+            : "🌿 Swalath Collection<br>Allahumma Salli Ala Sayyidina Muhammad ﷺ";
+    }
+
+    if(currentSwalath){
+        openSwalath(currentSwalath, false);
+    }
+
+    searchSwalath();
+}
+
+
+/* =========================================================
+   SHARE CARD
    ========================================================= */
 
 function prepareSwalathShare(data){
-
     currentSwalathForShare = {
-
-        title:data.name || "സ്വലാത്ത്",
-
-        arabic:data.arabic || "",
-
-        pronunciation:data.pronunciation || "",
-
-        meaning:data.meaning || "",
-
-        extra:data.fadheela || ""
-
+        title: data.name || "Swalath",
+        arabic: data.arabic || "",
+        pronunciation: data.pronunciation || "",
+        meaning: data.meaning || "",
+        extra: data.fadheela || ""
     };
-
 }
 
-
-/* =========================================================
-   SHARE CURRENT SWALATH
-   ========================================================= */
-
 async function shareCurrentSwalath(){
-
     if(!currentSwalathForShare){
-
-        alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
-
+        alert(isMalayalam()
+            ? "ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക."
+            : "Please select a salawat first.");
         return;
-
     }
 
     if(typeof shareIslamicCard === "function"){
-
         try{
-
-            await shareIslamicCard(
-                currentSwalathForShare
-            );
-
+            await shareIslamicCard(currentSwalathForShare);
         }catch(error){
-
-            console.error(
-                "Share Card Error:",
-                error
-            );
-
+            console.error("Share Card Error:", error);
         }
-
     }else{
-
-        alert(
-            "Share Card system load ആയിട്ടില്ല."
-        );
-
+        alert(isMalayalam()
+            ? "Share Card system load ആയിട്ടില്ല."
+            : "The Share Card system has not loaded.");
     }
-
 }
 
-
-/* =========================================================
-   SAVE CURRENT SWALATH CARD
-   ========================================================= */
-
 async function saveCurrentSwalathCard(){
-
     if(!currentSwalathForShare){
-
-        alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
-
+        alert(isMalayalam()
+            ? "ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക."
+            : "Please select a salawat first.");
         return;
-
     }
 
     if(typeof saveIslamicCard === "function"){
-
         try{
-
-            await saveIslamicCard(
-                currentSwalathForShare
-            );
-
+            await saveIslamicCard(currentSwalathForShare);
         }catch(error){
-
-            console.error(
-                "Save Card Error:",
-                error
-            );
-
+            console.error("Save Card Error:", error);
         }
-
     }else{
-
-        alert(
-            "Share Card system load ആയിട്ടില്ല."
-        );
-
+        alert(isMalayalam()
+            ? "Share Card system load ആയിട്ടില്ല."
+            : "The Share Card system has not loaded.");
     }
-
 }
 
 
@@ -965,440 +1216,191 @@ async function saveCurrentSwalathCard(){
    OPEN SWALATH
    ========================================================= */
 
-function openSwalath(name,addHistory=true){
+function openSwalath(name, addHistory = true){
 
-    if(!swalathData[name]){
+    if(!swalathData[name]) return;
 
-        return;
+    currentSwalath = name;
 
-    }
-
-    currentSwalath=name;
-
-    const data=swalathData[name];
-
+    const data = getDisplayData(name);
+    if(!data) return;
 
     prepareSwalathShare(data);
 
-
     if(addHistory){
-
-        const newUrl =
-            window.location.pathname +
-            "#" +
-            encodeURIComponent(name);
-
+        const newUrl = window.location.pathname + "#" + encodeURIComponent(name);
         history.pushState(
-            {
-                page:"swalath",
-                swalath:name
-            },
+            {page:"swalath", swalath:name},
             "",
             newUrl
         );
-
     }
 
+    document.getElementById("collectionPage").style.display = "none";
+    document.getElementById("detailPage").style.display = "block";
 
-    document.getElementById(
-        "collectionPage"
-    ).style.display="none";
+    document.getElementById("detailTitle").textContent = data.name;
+    document.getElementById("arabicText").textContent = swalathData[name].arabic;
+    document.getElementById("pronunciationText").textContent = data.pronunciation;
+    document.getElementById("meaningText").textContent = data.meaning;
+    document.getElementById("fadheelaText").textContent = data.fadheela;
+    document.getElementById("sourceText").textContent = data.source;
 
+    const count = localStorage.getItem("swalath_count_" + name) || "0";
+    document.getElementById("countNumber").textContent = count;
 
-    document.getElementById(
-        "detailPage"
-    ).style.display="block";
+    updateFavoriteButtonText();
 
+    const pdfArea = document.getElementById("pdfArea");
 
-    document.getElementById(
-        "detailTitle"
-    ).textContent=data.name;
-
-
-    document.getElementById(
-        "arabicText"
-    ).textContent=data.arabic;
-
-
-    document.getElementById(
-        "pronunciationText"
-    ).textContent=data.pronunciation;
-
-
-    document.getElementById(
-        "meaningText"
-    ).textContent=data.meaning;
-
-
-    document.getElementById(
-        "fadheelaText"
-    ).textContent=data.fadheela;
-
-
-    document.getElementById(
-        "sourceText"
-    ).textContent=data.source;
-
-
-    const count =
-        localStorage.getItem(
-            "swalath_count_"+name
-        ) || "0";
-
-
-    document.getElementById(
-        "countNumber"
-    ).textContent=count;
-
-
-    let favorites=[];
-
-
-    try{
-
-        favorites=JSON.parse(
-            localStorage.getItem(
-                "swalathFavorites"
-            ) || "[]"
-        );
-
-
-        if(!Array.isArray(favorites)){
-
-            favorites=[];
-
-        }
-
-    }catch(error){
-
-        favorites=[];
-
-    }
-
-
-    const isFavorite =
-        favorites.includes(name);
-
-
-    const button =
-        document.getElementById(
-            "favoriteButton"
-        );
-
-
-    if(isFavorite){
-
-        button.classList.add("active");
-
-        button.textContent =
-            "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്";
-
+    if(name === "bashair"){
+        pdfArea.innerHTML = `
+            <a href="bashairul-khairat.pdf"
+               target="_blank"
+               rel="noopener"
+               class="pdf-button">
+               📖 ${isMalayalam()
+                   ? "ബശാഇറുൽ ഖൈറാത്ത് — Full PDF"
+                   : "Bashairul Khairat — Full PDF"}
+            </a>`;
     }else{
-
-        button.classList.remove("active");
-
-        button.textContent =
-            "♡ Favourite ആയി ചേർക്കുക";
-
+        pdfArea.innerHTML = "";
     }
-
-
-    const pdfArea =
-        document.getElementById(
-            "pdfArea"
-        );
-
-
-    if(name==="bashair"){
-
-        pdfArea.innerHTML=`
-
-            <a
-                href="bashairul-khairat.pdf"
-                target="_blank"
-                rel="noopener"
-                class="pdf-button">
-
-                📖 ബശാഇറുൽ ഖൈറാത്ത് — Full PDF
-
-            </a>
-
-        `;
-
-    }else{
-
-        pdfArea.innerHTML="";
-
-    }
-
 }
 
 
 /* =========================================================
-   SHOW COLLECTION
+   FAVORITE BUTTON TEXT
+   ========================================================= */
+
+function updateFavoriteButtonText(){
+
+    const button = document.getElementById("favoriteButton");
+    if(!button || !currentSwalath) return;
+
+    let favorites = [];
+
+    try{
+        favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
+        if(!Array.isArray(favorites)) favorites = [];
+    }catch(error){
+        favorites = [];
+    }
+
+    const isFavorite = favorites.includes(currentSwalath);
+
+    if(isFavorite){
+        button.classList.add("active");
+        button.textContent = isMalayalam()
+            ? "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്"
+            : "❤️ Added to Favourites";
+    }else{
+        button.classList.remove("active");
+        button.textContent = isMalayalam()
+            ? "♡ Favourite ആയി ചേർക്കുക"
+            : "♡ Add to Favourites";
+    }
+}
+
+
+/* =========================================================
+   SHOW COLLECTION AND BACK NAVIGATION
    ========================================================= */
 
 function showCollection(){
 
-    document.getElementById(
-        "detailPage"
-    ).style.display="none";
+    document.getElementById("detailPage").style.display = "none";
+    document.getElementById("collectionPage").style.display = "block";
 
+    currentSwalath = null;
+    currentSwalathForShare = null;
 
-    document.getElementById(
-        "collectionPage"
-    ).style.display="block";
-
-
-    currentSwalath=null;
-
-    currentSwalathForShare=null;
-
-    document.title="സ്വലാത്ത് ശേഖരം";
-
+    document.title = isMalayalam() ? "സ്വലാത്ത് ശേഖരം" : "Swalath Collection";
 }
-
-
-/* =========================================================
-   BACK BUTTON
-   ========================================================= */
 
 function goBack(){
 
-    if(
-        window.location.hash &&
-        history.length>1
-    ){
-
+    if(window.location.hash && history.length > 1){
         history.back();
-
     }else{
-
         showCollection();
-
         history.replaceState(
-            {
-                page:"collection"
-            },
+            {page:"collection"},
             "",
             window.location.pathname
         );
-
     }
-
 }
 
+window.addEventListener("popstate", function(){
 
-/* =========================================================
-   ANDROID / BROWSER SYSTEM BACK
-   ========================================================= */
+    const hash = decodeURIComponent(window.location.hash.replace("#", ""));
 
-window.addEventListener(
-    "popstate",
-    function(){
-
-        const hash =
-            decodeURIComponent(
-                window.location.hash.replace(
-                    "#",
-                    ""
-                )
-            );
-
-
-        if(
-            hash &&
-            swalathData[hash]
-        ){
-
-            openSwalath(
-                hash,
-                false
-            );
-
-            return;
-
-        }
-
-
-        showCollection();
-
+    if(hash && swalathData[hash]){
+        openSwalath(hash, false);
+        return;
     }
-);
+
+    showCollection();
+});
 
 
 /* =========================================================
-   COUNT
+   COUNT AND RESET
    ========================================================= */
 
 function countSwalath(){
 
-    if(!currentSwalath){
+    if(!currentSwalath) return;
 
-        return;
+    const key = "swalath_count_" + currentSwalath;
+    let count = parseInt(localStorage.getItem(key) || "0", 10);
 
-    }
-
-
-    const key =
-        "swalath_count_"+currentSwalath;
-
-
-    let count =
-        parseInt(
-            localStorage.getItem(key) || "0",
-            10
-        );
-
-
-    if(isNaN(count)){
-
-        count=0;
-
-    }
-
+    if(isNaN(count)) count = 0;
 
     count++;
 
-
-    localStorage.setItem(
-        key,
-        String(count)
-    );
-
-
-    document.getElementById(
-        "countNumber"
-    ).textContent=count;
-
+    localStorage.setItem(key, String(count));
+    document.getElementById("countNumber").textContent = count;
 }
-
-
-/* =========================================================
-   RESET COUNT
-   ========================================================= */
 
 function resetCount(){
 
-    if(!currentSwalath){
+    if(!currentSwalath) return;
 
-        return;
-
-    }
-
-
-    const key =
-        "swalath_count_"+currentSwalath;
-
-
-    localStorage.setItem(
-        key,
-        "0"
-    );
-
-
-    document.getElementById(
-        "countNumber"
-    ).textContent="0";
-
+    const key = "swalath_count_" + currentSwalath;
+    localStorage.setItem(key, "0");
+    document.getElementById("countNumber").textContent = "0";
 }
 
 
 /* =========================================================
-   FAVOURITE
+   ADD / REMOVE FAVORITE
    ========================================================= */
 
 function favoriteSwalath(){
 
-    if(!currentSwalath){
+    if(!currentSwalath) return;
 
-        return;
-
-    }
-
-
-    let favorites=[];
-
+    let favorites = [];
 
     try{
-
-        favorites=JSON.parse(
-            localStorage.getItem(
-                "swalathFavorites"
-            ) || "[]"
-        );
-
-
-        if(!Array.isArray(favorites)){
-
-            favorites=[];
-
-        }
-
+        favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
+        if(!Array.isArray(favorites)) favorites = [];
     }catch(error){
-
-        favorites=[];
-
+        favorites = [];
     }
 
+    const index = favorites.indexOf(currentSwalath);
 
-    const index =
-        favorites.indexOf(
-            currentSwalath
-        );
-
-
-    const button =
-        document.getElementById(
-            "favoriteButton"
-        );
-
-
-    if(index!==-1){
-
-        favorites.splice(
-            index,
-            1
-        );
-
-
-        localStorage.setItem(
-            "swalathFavorites",
-            JSON.stringify(favorites)
-        );
-
-
-        button.classList.remove(
-            "active"
-        );
-
-
-        button.textContent =
-            "♡ Favourite ആയി ചേർക്കുക";
-
+    if(index !== -1){
+        favorites.splice(index, 1);
     }else{
-
-        favorites.push(
-            currentSwalath
-        );
-
-
-        localStorage.setItem(
-            "swalathFavorites",
-            JSON.stringify(favorites)
-        );
-
-
-        button.classList.add(
-            "active"
-        );
-
-
-        button.textContent =
-            "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്";
-
+        favorites.push(currentSwalath);
     }
 
+    localStorage.setItem("swalathFavorites", JSON.stringify(favorites));
+    updateFavoriteButtonText();
 }
 
 
@@ -1408,93 +1410,61 @@ function favoriteSwalath(){
 
 function searchSwalath(){
 
-    const input =
-        document.getElementById(
-            "searchInput"
-        )
-        .value
-        .toLowerCase()
-        .trim();
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".swalath-card");
 
+    cards.forEach(function(card){
 
-    const cards =
-        document.querySelectorAll(
-            ".swalath-card"
-        );
+        const text = card.textContent.toLowerCase();
 
-
-    cards.forEach(
-        function(card){
-
-            const text =
-                card.textContent
-                    .toLowerCase();
-
-
-            if(text.includes(input)){
-
-                card.style.display="block";
-
-            }else{
-
-                card.style.display="none";
-
-            }
-
-        }
-    );
-
+        card.style.display = text.includes(input) ? "block" : "none";
+    });
 }
 
 
 /* =========================================================
-   INITIAL PAGE LOAD
+   INITIAL PAGE LOAD AND LANGUAGE CHANGES
    ========================================================= */
 
-window.addEventListener(
-    "DOMContentLoaded",
-    function(){
+window.addEventListener("DOMContentLoaded", function(){
 
-        const hash =
-            decodeURIComponent(
-                window.location.hash.replace(
-                    "#",
-                    ""
-                )
-            );
+    const hash = decodeURIComponent(window.location.hash.replace("#", ""));
 
+    updateSwalathLanguage();
 
-        if(
-            hash &&
-            swalathData[hash]
-        ){
-
-            history.replaceState(
-                {
-                    page:"swalath",
-                    swalath:hash
-                },
-                "",
-                window.location.pathname +
-                "#" +
-                encodeURIComponent(hash)
-            );
-
-
-            openSwalath(
-                hash,
-                false
-            );
-
-        }else{
-
-            showCollection();
-
-        }
-
+    const searchInput = document.getElementById("searchInput");
+    if(searchInput){
+        searchInput.addEventListener("input", searchSwalath);
     }
-);
 
+    if(hash && swalathData[hash]){
+
+        history.replaceState(
+            {page:"swalath", swalath:hash},
+            "",
+            window.location.pathname + "#" + encodeURIComponent(hash)
+        );
+
+        openSwalath(hash, false);
+
+    }else{
+        showCollection();
+    }
+});
+
+
+/* Listen for language changes from language.js */
+
+window.addEventListener("swalath-language-changed", function(){
+    updateSwalathLanguage();
+});
+
+
+/* Also refresh when the page becomes active again */
+
+window.addEventListener("pageshow", function(){
+    updateSwalathLanguage();
+});
 </script>
 
 </body>
