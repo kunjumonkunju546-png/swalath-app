@@ -1148,7 +1148,20 @@ function updateSwalathLanguage(){
     }
 
 if(currentSwalath){
-    openSwalath(currentSwalath, false);
+    const data = getDisplayData(currentSwalath);
+
+    if(data){
+        prepareSwalathShare(data);
+
+        document.getElementById("detailTitle").textContent = data.name;
+        document.getElementById("arabicText").textContent = data.arabic;
+        document.getElementById("pronunciationText").textContent = data.pronunciation;
+        document.getElementById("meaningText").textContent = data.meaning;
+        document.getElementById("fadheelaText").textContent = data.fadheela;
+        document.getElementById("sourceText").textContent = data.source;
+    }
+
+    updateFavoriteButtonText();
 }
 
 searchSwalath();
