@@ -1147,21 +1147,11 @@ function updateSwalathLanguage(){
             : "🌿 Swalath Collection<br>Allahumma Salli Ala Sayyidina Muhammad ﷺ";
     }
 
-    if(currentSwalath){
-        openSwalath(currentSwalath, false);
-    }
-    if(currentSwalath){
-    const data = getDisplayData(currentSwalath);
-    const title = document.getElementById("detailTitle");
-
-    if(data && title){
-        title.textContent = isMalayalam()
-            ? swalathData[currentSwalath].name
-            : data.name;
-    }
+if(currentSwalath){
+    openSwalath(currentSwalath, false);
 }
 
-    searchSwalath();
+searchSwalath();
 }
 
 
