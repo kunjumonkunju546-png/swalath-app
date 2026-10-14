@@ -268,12 +268,8 @@ function getDisplayData(key){
 
  const en=englishSwalathData[key]||{};
 
- const arabicNames={
-  // പേരുകൾ ഇവിടെ ചേർക്കേണ്ടതുണ്ട്
- };
-
  return {
-  name:arabicNames[key]||d.name,
+  name:d.name,
   arabic:d.arabic,
   pronunciation:isMalayalam()?d.pronunciation:(en.pronunciation||d.pronunciation),
   meaning:isMalayalam()?d.meaning:(en.meaning||d.meaning),
@@ -281,6 +277,7 @@ function getDisplayData(key){
   source:isMalayalam()?d.source:(en.source||d.source)
  };
 }
+
 function openSwalath(key,addHistory=true){
  if(!swalathData[key])return;
 
