@@ -239,10 +239,29 @@ function getCurrentLanguage(){
 }
 function isMalayalam(){return getCurrentLanguage()==="ml"}
 function getDisplayData(key){
- const d=swalathData[key];if(!d)return null;
- if(isMalayalam())return d;
- const en=englishSwalathData[key]||{};
- return {name:en.name||d.name,arabic:d.arabic,pronunciation:en.pronunciation||d.pronunciation,meaning:en.meaning||d.meaning,fadheela:en.fadheela||d.fadheela,source:en.source||d.source};
+ const d = swalathData[key];
+ if(!d) return null;
+
+ const en = englishSwalathData[key] || {};
+
+ return {
+  name: document.querySelector(
+   '.swalath-card[onclick="openSwalath(\\'' + key + '\\')"] h3'
+  )?.textContent || d.name,
+  arabic: d.arabic,
+  pronunciation: isMalayalam()
+   ? d.pronunciation
+   : (en.pronunciation || d.pronunciation),
+  meaning: isMalayalam()
+   ? d.meaning
+   : (en.meaning || d.meaning),
+  fadheela: isMalayalam()
+   ? d.fadheela
+   : (en.fadheela || d.fadheela),
+  source: isMalayalam()
+   ? d.source
+   : (en.source || d.source)
+ };
 }
 function openSwalath(key,addHistory=true){
  if(!swalathData[key])return;
