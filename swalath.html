@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="ml">
 <head>
@@ -29,7 +30,7 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 .detail{display:none;padding:15px}
 .back-button{border:0;background:#07543f;color:white;padding:10px 15px;border-radius:10px;cursor:pointer;margin-bottom:15px;font-size:14px}
 .detail-card{background:white;border-radius:16px;padding:18px;border:1px solid #e4dccb;box-shadow:0 4px 15px rgba(0,0,0,.06)}
-.detail-title{text-align:center;color:#07543f;margin:0 0 20px;font-size:22px}
+.detail-title{text-align:center;color:#07543f;margin:0 0 20px;font-size:22px;direction:rtl}
 .arabic{direction:rtl;text-align:center;font-size:27px;line-height:2.1;color:#172b23;background:#faf7ef;padding:20px 12px;border-radius:14px;margin-bottom:12px;white-space:pre-line}
 .counter-box{text-align:center;background:#f1eadb;padding:15px;border-radius:14px;margin-bottom:18px}
 .count-number{font-size:30px;font-weight:bold;color:#07543f;margin-bottom:10px}
@@ -97,8 +98,8 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 <button class="back-button" onclick="goBack()">← സ്വലാത്തുകളുടെ പട്ടിക</button>
 
 <div class="detail-card">
-<h2 id="detailTitle" class="detail-title"></h2>
-<div id="arabicText" class="arabic"></div>
+<h2 id="detailTitle" class="detail-title" lang="ar" dir="rtl"></h2>
+<div id="arabicText" class="arabic" lang="ar" dir="rtl"></div>
 
 <div class="counter-box">
 <div id="countNumber" class="count-number">0</div>
@@ -126,6 +127,30 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 </div>
 
 <script>
+const swalathArabicNames = {
+ibrahimiyya:"الصلاة الإبراهيمية",
+nariya:"الصلاة النارية",
+tunjina:"الصلاة المنجية",
+fatih:"صلاة الفاتح",
+tibbiyya:"صلاة الطب القلوب",
+nuraniyya:"الصلاة النورانية",
+saadah:"صلاة السعادة",
+kamaliyya:"صلاة الكمالية",
+dhatiyya:"الصلاة الذاتية",
+jawharat:"جوهرة الكمال",
+taj:"صلاة التاج",
+faraj:"صلاة الفرج",
+bashair:"بشائر الخيرات",
+ahlam:"صلاة الأحلام",
+hulo:"صلاة الحضور",
+friday:"صلاة الجمعة",
+mashishiyya:"الصلاة المشيشية",
+ummiyya:"الصلاة الأمية",
+shadhiliyya:"الصلاة الشاذلية",
+anwar:"صلاة الأنوار",
+yaqutat:"ياقوتة الحقائق"
+};
+
 const swalathData = {
 ibrahimiyya:{name:"സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",arabic:`اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ،
 كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ،
@@ -224,7 +249,7 @@ yaqutat:{name:"സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹ
 };
 
 const englishSwalathData = {
-ibrahimiyya:{name:"Swalath Ibrahimiyya",pronunciation:"Allahumma salli ala Muhammadin wa ala aali Muhammad, kama sallayta ala Ibrahima wa ala aali Ibrahim, innaka Hamidum Majid.",meaning:"O Allah, send blessings upon Muhammad and the family of Muhammad, as You sent blessings upon Ibrahim and his family.",fadheela:"A well-known form of salawat taught in authentic hadith.",source:"Sahih al-Bukhari and Sahih Muslim."}
+ibrahimiyya:{pronunciation:"Allahumma salli ala Muhammadin wa ala aali Muhammad, kama sallayta ala Ibrahima wa ala aali Ibrahim, innaka Hamidum Majid.",meaning:"O Allah, send blessings upon Muhammad and the family of Muhammad, as You sent blessings upon Ibrahim and his family.",fadheela:"A well-known form of salawat taught in authentic hadith.",source:"Sahih al-Bukhari and Sahih Muslim."}
 };
 
 let currentSwalath=null;
@@ -237,63 +262,103 @@ function getCurrentLanguage(){
  }catch(e){}
  return localStorage.getItem("swalath-language")||"ml";
 }
-function isMalayalam(){return getCurrentLanguage()==="ml"}
-function getDisplayData(key){
- const d = swalathData[key];
- if(!d) return null;
 
- const en = englishSwalathData[key] || {};
+function isMalayalam(){
+ return getCurrentLanguage()==="ml";
+}
+
+function getDisplayData(key){
+ const d=swalathData[key];
+ if(!d)return null;
+
+ const en=englishSwalathData[key]||{};
 
  return {
-  name: document.querySelector(
-   '.swalath-card[onclick="openSwalath(\\'' + key + '\\')"] h3'
-  )?.textContent || d.name,
-  arabic: d.arabic,
-  pronunciation: isMalayalam()
-   ? d.pronunciation
-   : (en.pronunciation || d.pronunciation),
-  meaning: isMalayalam()
-   ? d.meaning
-   : (en.meaning || d.meaning),
-  fadheela: isMalayalam()
-   ? d.fadheela
-   : (en.fadheela || d.fadheela),
-  source: isMalayalam()
-   ? d.source
-   : (en.source || d.source)
+  name:swalathArabicNames[key]||d.name,
+  arabic:d.arabic,
+  pronunciation:isMalayalam()?d.pronunciation:(en.pronunciation||d.pronunciation),
+  meaning:isMalayalam()?d.meaning:(en.meaning||d.meaning),
+  fadheela:isMalayalam()?d.fadheela:(en.fadheela||d.fadheela),
+  source:isMalayalam()?d.source:(en.source||d.source)
  };
 }
+
 function openSwalath(key,addHistory=true){
  if(!swalathData[key])return;
+
  currentSwalath=key;
  const d=getDisplayData(key);
- currentSwalathForShare={title:d.name,arabic:d.arabic,pronunciation:d.pronunciation,meaning:d.meaning,extra:d.fadheela};
- if(addHistory)history.pushState({page:"swalath",swalath:key},"",location.pathname+"#"+encodeURIComponent(key));
+
+ currentSwalathForShare={
+  title:swalathArabicNames[key]||d.name,
+  arabic:d.arabic,
+  pronunciation:d.pronunciation,
+  meaning:d.meaning,
+  extra:d.fadheela
+ };
+
+ if(addHistory){
+  history.pushState(
+   {page:"swalath",swalath:key},
+   "",
+   location.pathname+"#"+encodeURIComponent(key)
+  );
+ }
+
  document.getElementById("collectionPage").style.display="none";
  document.getElementById("detailPage").style.display="block";
- document.getElementById("detailTitle").textContent=d.name;
- document.getElementById("arabicText").textContent=d.arabic;
+
+ const title=document.getElementById("detailTitle");
+ title.textContent=swalathArabicNames[key]||d.name;
+ title.setAttribute("lang","ar");
+ title.setAttribute("dir","rtl");
+
+ const arabicText=document.getElementById("arabicText");
+ arabicText.textContent=d.arabic;
+ arabicText.setAttribute("lang","ar");
+ arabicText.setAttribute("dir","rtl");
+
  document.getElementById("pronunciationText").textContent=d.pronunciation;
  document.getElementById("meaningText").textContent=d.meaning;
  document.getElementById("fadheelaText").textContent=d.fadheela;
  document.getElementById("sourceText").textContent=d.source;
- document.getElementById("countNumber").textContent=localStorage.getItem("swalath_count_"+key)||"0";
- document.getElementById("pdfArea").innerHTML=key==="bashair"?'<a href="bashairul-khairat.pdf" target="_blank" rel="noopener" class="pdf-button">📖 Bashairul Khairat — Full PDF</a>':"";
+
+ document.getElementById("countNumber").textContent=
+  localStorage.getItem("swalath_count_"+key)||"0";
+
+ document.getElementById("pdfArea").innerHTML=
+  key==="bashair"
+   ?'<a href="bashairul-khairat.pdf" target="_blank" rel="noopener" class="pdf-button">📖 Bashairul Khairat — Full PDF</a>'
+   :"";
+
  updateFavoriteButtonText();
 }
+
 function showCollection(){
  document.getElementById("detailPage").style.display="none";
  document.getElementById("collectionPage").style.display="block";
- currentSwalath=null;currentSwalathForShare=null;
+ currentSwalath=null;
+ currentSwalathForShare=null;
 }
+
 function goBack(){
- if(location.hash&&history.state&&history.state.page==="swalath"){history.back();}
- else{showCollection();history.replaceState({page:"collection"},"",location.pathname);}
+ if(location.hash&&history.state&&history.state.page==="swalath"){
+  history.back();
+ }else{
+  showCollection();
+  history.replaceState({page:"collection"},"",location.pathname);
+ }
 }
+
 window.addEventListener("popstate",()=>{
  const key=decodeURIComponent(location.hash.replace("#",""));
- if(key&&swalathData[key])openSwalath(key,false);else showCollection();
+ if(key&&swalathData[key]){
+  openSwalath(key,false);
+ }else{
+  showCollection();
+ }
 });
+
 function countSwalath(){
  if(!currentSwalath)return;
  const k="swalath_count_"+currentSwalath;
@@ -301,66 +366,127 @@ function countSwalath(){
  localStorage.setItem(k,String(n));
  document.getElementById("countNumber").textContent=n;
 }
+
 function resetCount(){
  if(!currentSwalath)return;
  localStorage.setItem("swalath_count_"+currentSwalath,"0");
  document.getElementById("countNumber").textContent="0";
 }
+
 function favoriteSwalath(){
  if(!currentSwalath)return;
- let a=[];try{a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}catch(e){}
+ let a=[];
+ try{a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}catch(e){}
  if(!Array.isArray(a))a=[];
+
  const i=a.indexOf(currentSwalath);
- if(i>=0)a.splice(i,1);else a.push(currentSwalath);
+ if(i>=0)a.splice(i,1);
+ else a.push(currentSwalath);
+
  localStorage.setItem("swalathFavorites",JSON.stringify(a));
  updateFavoriteButtonText();
 }
+
 function updateFavoriteButtonText(){
- const b=document.getElementById("favoriteButton");if(!b||!currentSwalath)return;
- let a=[];try{a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}catch(e){}
+ const b=document.getElementById("favoriteButton");
+ if(!b||!currentSwalath)return;
+
+ let a=[];
+ try{a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}catch(e){}
  if(!Array.isArray(a))a=[];
+
  const yes=a.includes(currentSwalath);
  b.classList.toggle("active",yes);
- b.textContent=yes?"❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്":"♡ Favourite ആയി ചേർക്കുക";
+ b.textContent=yes
+  ?"❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്"
+  :"♡ Favourite ആയി ചേർക്കുക";
 }
+
 function searchSwalath(){
  const input=document.getElementById("searchInput");
  if(!input)return;
+
  const q=input.value.toLowerCase().trim();
+
  document.querySelectorAll(".swalath-card").forEach(card=>{
   card.style.display=card.textContent.toLowerCase().includes(q)?"block":"none";
  });
 }
+
 async function shareCurrentSwalath(){
- if(!currentSwalathForShare){alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");return}
- if(typeof shareIslamicCard==="function")await shareIslamicCard(currentSwalathForShare);
- else alert("Share Card സംവിധാനം ലഭ്യമല്ല.");
+ if(!currentSwalathForShare){
+  alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
+  return;
+ }
+ if(typeof shareIslamicCard==="function"){
+  await shareIslamicCard(currentSwalathForShare);
+ }else{
+  alert("Share Card സംവിധാനം ലഭ്യമല്ല.");
+ }
 }
+
 async function saveCurrentSwalathCard(){
- if(!currentSwalathForShare){alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");return}
- if(typeof saveIslamicCard==="function")await saveIslamicCard(currentSwalathForShare);
- else alert("Save Image സംവിധാനം ലഭ്യമല്ല.");
+ if(!currentSwalathForShare){
+  alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
+  return;
+ }
+ if(typeof saveIslamicCard==="function"){
+  await saveIslamicCard(currentSwalathForShare);
+ }else{
+  alert("Save Image സംവിധാനം ലഭ്യമല്ല.");
+ }
 }
+
 function updateSwalathLanguage(){
  const ml=isMalayalam();
+
  document.documentElement.lang=ml?"ml":"en";
  document.title=ml?"സ്വലാത്ത് ശേഖരം":"Swalath Collection";
- document.querySelector(".header h1").textContent=ml?"🌿 സ്വലാത്ത് ശേഖരം":"🌿 Swalath Collection";
- document.querySelector(".header p").textContent=ml?"സ്വലാത്തുകൾ • ദിക്ർ • ആത്മീയ സമാധാനം":"Salawat • Dhikr • Spiritual Peace";
- document.getElementById("searchInput").placeholder=ml?"🔍 സ്വലാത്ത് തിരയുക...":"🔍 Search Swalath...";
- document.querySelector(".collection-title").textContent=ml?"📖 21 സ്വലാത്തുകളുടെ ശേഖരം":"📖 Collection of 21 Salawat";
- document.querySelector(".back-button").textContent=ml?"← സ്വലാത്തുകളുടെ പട്ടിക":"← Back to Salawat List";
- document.getElementById("pronunciationLabel").textContent=ml?"🗣️ മലയാളം ഉച്ചാരണം":"🗣️ Pronunciation";
- document.getElementById("meaningLabel").textContent=ml?"📖 മലയാളം അർത്ഥം":"📖 Meaning";
- document.getElementById("fadheelaLabel").textContent=ml?"🌿 ചൊല്ലുന്നതിന്റെ ഗുണങ്ങൾ / ഫദീലത്ത്":"🌿 Virtues / Fadheela";
- document.getElementById("sourceLabel").textContent=ml?"📚 ഉറവിടം / കുറിപ്പ്":"📚 Source / Notes";
- if(currentSwalath)openSwalath(currentSwalath,false);
+
+ document.querySelector(".header h1").textContent=
+  ml?"🌿 സ്വലാത്ത് ശേഖരം":"🌿 Swalath Collection";
+
+ document.querySelector(".header p").textContent=
+  ml?"സ്വലാത്തുകൾ • ദിക്ർ • ആത്മീയ സമാധാനം":"Salawat • Dhikr • Spiritual Peace";
+
+ document.getElementById("searchInput").placeholder=
+  ml?"🔍 സ്വലാത്ത് തിരയുക...":"🔍 Search Swalath...";
+
+ document.querySelector(".collection-title").textContent=
+  ml?"📖 21 സ്വലാത്തുകളുടെ ശേഖരം":"📖 Collection of 21 Salawat";
+
+ document.querySelector(".back-button").textContent=
+  ml?"← സ്വലാത്തുകളുടെ പട്ടിക":"← Back to Salawat List";
+
+ document.getElementById("pronunciationLabel").textContent=
+  ml?"🗣️ മലയാളം ഉച്ചാരണം":"🗣️ Pronunciation";
+
+ document.getElementById("meaningLabel").textContent=
+  ml?"📖 മലയാളം അർത്ഥം":"📖 Meaning";
+
+ document.getElementById("fadheelaLabel").textContent=
+  ml?"🌿 ചൊല്ലുന്നതിന്റെ ഗുണങ്ങൾ / ഫദീലത്ത്":"🌿 Virtues / Fadheela";
+
+ document.getElementById("sourceLabel").textContent=
+  ml?"📚 ഉറവിടം / കുറിപ്പ്":"📚 Source / Notes";
+
+ if(currentSwalath){
+  openSwalath(currentSwalath,false);
+ }
 }
+
 window.addEventListener("DOMContentLoaded",()=>{
  updateSwalathLanguage();
+
  const key=decodeURIComponent(location.hash.replace("#",""));
- if(key&&swalathData[key])openSwalath(key,false);else showCollection();
+
+ if(key&&swalathData[key]){
+  openSwalath(key,false);
+ }else{
+  showCollection();
+ }
 });
+
 window.addEventListener("swalath-language-changed",updateSwalathLanguage);
 window.addEventListener("pageshow",updateSwalathLanguage);
 </script>
