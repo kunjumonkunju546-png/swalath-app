@@ -309,7 +309,9 @@ function openSwalath(key,addHistory=true){
  document.getElementById("detailPage").style.display="block";
 
  const title=document.getElementById("detailTitle");
- title.textContent=swalathArabicNames[key]||d.name;
+ title.textContent = swalathArabicNames[key] || "";
+title.lang = "ar";
+title.dir = "rtl";
  title.setAttribute("lang","ar");
  title.setAttribute("dir","rtl");
 
