@@ -841,8 +841,8 @@ body.dark-mode #travelSection {
 <div id="splashScreen">
     <div class="splash-content">
         <div class="splash-moon">🌙</div>
-        <h1>സ്വലാത്ത്</h1>
-        <p>തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
+        <h1 data-i18n="swalaathTitle" data-ml="സ്വലാത്ത്">സ്വലാത്ത്</h1>
+        <p data-i18n="intro" data-ml="തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ മനോഹരമായ വഴികൾ">തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
         <div class="splash-loader"></div>
     </div>
 </div>
@@ -851,8 +851,8 @@ body.dark-mode #travelSection {
 
 <section class="hero">
     <div class="moon">🌙</div>
-    <h1>സ്വലാത്ത്</h1>
-    <p>തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
+    <h1 data-i18n="swalaathTitle" data-ml="സ്വലാത്ത്">സ്വലാത്ത്</h1>
+    <p data-i18n="intro" data-ml="തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ മനോഹരമായ വഴികൾ">തിരുനബി ﷺ യോടുള്ള സ്നേഹത്തിന്റെ<br>മനോഹരമായ വഴികൾ</p>
 </section>
 
 <main>
@@ -870,11 +870,9 @@ body.dark-mode #travelSection {
 </section>
 
 <div class="feature-buttons">
-<div class="feature-buttons">
     <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
-    <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()">🌐 Language</button>
-</div>
+    <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button>
 </div>
 
 <div class="menu-grid">
@@ -982,8 +980,8 @@ body.dark-mode #travelSection {
 <section id="advertisingSection" class="advertising-page">
 
     <div class="advertising-header">
-        <button class="advertising-back" onclick="closeAdvertising()">← Back</button>
-        <h2 style="margin:0;">Advertise With Us</h2>
+        <button class="advertising-back" onclick="closeAdvertising()" data-i18n="backButton" data-ml="← Back">← Back</button>
+        <h2 style="margin:0;" data-i18n="advertisingTitle" data-ml="Advertise With Us">Advertise With Us</h2>
     </div>
 
     <div class="advertising-card">
@@ -1125,29 +1123,29 @@ function increaseCount() {
     localStorage.setItem("swalathCountDate", getLocalDateString());
 }
 
-/* SWALATH NAMES */
+/* SWALATH ARABIC NAMES */
 const swalathNames = {
-    ibrahimiyya: "സ്വലാത്തുൽ ഇബ്രാഹീമിയ്യ",
-    nariya: "സ്വലാത്തുന്നാരിയ്യ / തഫ്രീജിയ്യ",
-    tunjina: "സ്വലാത്തുത്തുഞ്ജീന / മുനജ്ജിയ്യ",
-    fatih: "സ്വലാത്തുൽ ഫാതിഹ്",
-    tibbiyya: "സ്വലാത്തുത്തിബ്ബിയ്യ / ദുറൂദുശ്ശിഫാ",
-    nuraniyya: "സ്വലാത്തുന്നൂറാനിയ്യ",
-    saadah: "സ്വലാത്തുസ്സആദ",
-    kamaliyya: "സ്വലാത്തുൽ കമാലിയ്യ",
-    dhatiyya: "സ്വലാത്തുദ്ദാതിയ്യ",
-    jawharat: "ജൗഹറത്തുൽ കമാൽ",
-    taj: "ദുറൂദുത്താജ്",
-    faraj: "സ്വലാത്തുൽ ഫറജ്",
-    bashair: "ബശാഇറുൽ ഖൈറാത്ത്",
-    ahlam: "സ്വലാത്തുൽ അഹ്‌ലാം",
-    hulo: "സ്വലാത്തുൽ ഹുലൂർ",
-    friday: "വെള്ളിയാഴ്ചയിലെ സ്വലാത്ത്",
-    mashishiyya: "സ്വലാത്തുൽ മശീഷിയ്യ",
-    ummiyya: "സ്വലാത്തുൽ ഉമ്മിയ്യ",
-    shadhiliyya: "സ്വലാത്തുശ്ശാദിലിയ്യ",
-    anwar: "സ്വലാത്തുൽ അന്വാർ",
-    yaqutat: "സ്വലാത്തുൽ യാഖൂതത്തുൽ ഹഖാഇഖ്"
+    ibrahimiyya: "الصلاة الإبراهيمية",
+    nariya: "الصلاة النارية / التفريجية",
+    tunjina: "صلاة المنجية / التنجينا",
+    fatih: "صلاة الفاتح",
+    tibbiyya: "صلاة الطبية / درود الشفاء",
+    nuraniyya: "الصلاة النورانية",
+    saadah: "صلاة السعادة",
+    kamaliyya: "صلاة الكمالية",
+    dhatiyya: "صلاة الذاتية",
+    jawharat: "جوهرة الكمال",
+    taj: "درود تاج",
+    faraj: "صلاة الفرج",
+    bashair: "بشائر الخيرات",
+    ahlam: "صلاة الأحلام",
+    hulo: "صلاة الحلور",
+    friday: "صلاة يوم الجمعة",
+    mashishiyya: "الصلاة المشيشية",
+    ummiyya: "الصلاة الأمية",
+    shadhiliyya: "الصلاة الشاذلية",
+    anwar: "صلاة الأنوار",
+    yaqutat: "صلاة الياقوتة الحقائق"
 };
 
 /* OPEN OTHER PAGES */
@@ -1296,9 +1294,12 @@ function loadCollection() {
             cursor:pointer;
             color:#123d34;
             font-weight:bold;
+            direction:rtl;
+            text-align:center;
+            font-size:20px;
         `;
         item.dataset.name = swalathNames[key].toLowerCase();
-        item.textContent = "📖 " + swalathNames[key];
+        item.textContent = swalathNames[key];
 
         item.onclick = function() {
             window.location.href = "swalath.html#" + key;
@@ -1380,8 +1381,11 @@ function loadFavorites() {
             cursor:pointer;
             color:#123d34;
             font-weight:bold;
+            direction:rtl;
+            text-align:center;
+            font-size:20px;
         `;
-        item.textContent = "❤️ " + name;
+        item.textContent = name;
 
         item.onclick = function() {
             window.location.href = "swalath.html#" + key;
@@ -1503,11 +1507,11 @@ if ("serviceWorker" in navigator) {
     let selectedLanguage = localStorage.getItem("swalath-language") || "ml";
 
     const labels = {
-      ml: {
-    heading: "Select Your Language",
-    subtitle: "Choose your preferred language",
-    button: "Continue"
-},
+        ml: {
+            heading: "Select Your Language",
+            subtitle: "Choose your preferred language",
+            button: "Continue"
+        },
         en: {
             heading: "Select Your Language",
             subtitle: "Choose your preferred language",
@@ -1526,7 +1530,7 @@ if ("serviceWorker" in navigator) {
         ur: {
             heading: "اپنی زبان منتخب کریں",
             subtitle: "اپنی پسند کی زبان منتخب کریں",
-            button: "جاری رکھیں"
+            button: "جاری रखें"
         },
         ta: {
             heading: "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்",
