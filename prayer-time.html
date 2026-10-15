@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#103b30">
 <title>Prayer Times | സ്വലാത്ത്</title>
 
+<link rel="stylesheet" href="share-card.css">
+<script src="share-card.js" defer></script>
+<script src="language.js"></script>
+
 <style>
 :root {
     --bg:#f7f7f2;
@@ -322,7 +326,7 @@ body.dark-mode .prayer-row.next .prayer-indicator {
 </section>
 
 <div class="section-heading">
-    <h2>നമസ്കാര സമയങ്ങൾ</h2>
+    <h2 data-i18n="prayerTimesTitle">നമസ്കാര സമയങ്ങൾ</h2>
     <span id="updatedDate"></span>
 </div>
 
@@ -343,12 +347,12 @@ const CACHE_KEY = "swalathPrayerLocation";
 const CACHE_TIME_KEY = "swalathPrayerLocationTime";
 
 const prayerItems = [
-    {key:"Fajr",name:"ഫജ്റ്",ar:"الفجر"},
-    {key:"Sunrise",name:"സൂര്യോദയം",ar:"الشروق"},
-    {key:"Dhuhr",name:"ളുഹർ",ar:"الظهر"},
-    {key:"Asr",name:"അസർ",ar:"العصر"},
-    {key:"Maghrib",name:"മഗ്‌രിബ്",ar:"المغرب"},
-    {key:"Isha",name:"ഇശാഅ്",ar:"العشاء"}
+    {key:"Fajr",nameKey:"fajr",ar:"الفجر"},
+    {key:"Sunrise",nameKey:"sunrise",ar:"الشروق"},
+    {key:"Dhuhr",nameKey:"dhuhr",ar:"الظهر"},
+    {key:"Asr",nameKey:"asr",ar:"العصر"},
+    {key:"Maghrib",nameKey:"maghrib",ar:"المغرب"},
+    {key:"Isha",nameKey:"isha",ar:"العشاء"}
 ];
 
 const mainPrayers = prayerItems.filter(p => p.key !== "Sunrise");
@@ -356,6 +360,13 @@ const mainPrayers = prayerItems.filter(p => p.key !== "Sunrise");
 let coordinates = null;
 let locationRequestInProgress = false;
 let locationWatchId = null;
+
+function getPrayerName(prayer) {
+    if (window.SwalathLanguage && typeof window.SwalathLanguage.t === "function") {
+        return window.SwalathLanguage.t(prayer.nameKey);
+    }
+    return prayer.nameKey;
+}
 
 function dateString(date = new Date()) {
     return date.getFullYear() + "-" +
@@ -365,11 +376,24 @@ function dateString(date = new Date()) {
 
 function updateDates() {
     const now = new Date();
+    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
+        ? window.SwalathLanguage.getCurrent() : "ml";
 
-    document.getElementById("todayDate").textContent =
-        now.toLocaleDateString("ml-IN", {
-            weekday:"long",day:"numeric",month:"long",year:"numeric"
-        });
+    let locale = "ml-IN";
+    if (currentLang === "en") locale = "en-GB";
+    else if (currentLang === "ar") locale = "ar-SA";
+    else if (currentLang === "hi") locale = "hi-IN";
+    else if (currentLang === "ur") locale = "ur-PK";
+    else if (currentLang === "ta") locale = "ta-IN";
+
+    try {
+        document.getElementById("todayDate").textContent =
+            now.toLocaleDateString(locale, {
+                weekday:"long",day:"numeric",month:"long",year:"numeric"
+            });
+    } catch(e) {
+        document.getElementById("todayDate").textContent = now.toDateString();
+    }
 
     document.getElementById("updatedDate").textContent =
         now.toLocaleDateString("en-GB", {day:"2-digit",month:"short"});
@@ -405,11 +429,14 @@ function getNextPrayer(timings) {
     return mainPrayers[0];
 }
 
+let lastPrayerData = null;
+
 function renderPrayerTimes(data) {
+    lastPrayerData = data;
     const timings = data.timings;
     const next = getNextPrayer(timings);
 
-    document.getElementById("nextName").textContent = next.name;
+    document.getElementById("nextName").textContent = getPrayerName(next);
     document.getElementById("nextArabic").textContent = next.ar;
     document.getElementById("nextTime").textContent =
         formatTime(timings[next.key]);
@@ -439,7 +466,7 @@ function renderPrayerTimes(data) {
 
         const name = document.createElement("div");
         name.className = "prayer-name";
-        name.textContent = prayer.name;
+        name.textContent = getPrayerName(prayer);
 
         const arabic = document.createElement("div");
         arabic.className = "prayer-arabic";
@@ -450,7 +477,7 @@ function renderPrayerTimes(data) {
         if (prayer.key === next.key) {
             const tag = document.createElement("div");
             tag.className = "next-tag";
-            tag.textContent = "അടുത്ത നമസ്കാരം";
+            tag.textContent = window.SwalathLanguage && window.SwalathLanguage.getCurrent() === "ar" ? "الصلاة القادمة" : "അടുത്ത നമസ്കാരം";
             details.appendChild(tag);
         }
 
@@ -645,9 +672,7 @@ async function lookupCityName(lat,lon) {
         } else if (country) {
             document.getElementById("locationName").textContent = country;
         }
-    } catch (e) {
-        // Prayer-time calculation works directly from coordinates.
-    }
+    } catch (e) {}
 }
 
 function goBack() {
@@ -662,6 +687,13 @@ function goBack() {
 
     location.href = "./index.html";
 }
+
+document.addEventListener("swalath-language-changed", function() {
+    updateDates();
+    if (lastPrayerData) {
+        renderPrayerTimes(lastPrayerData);
+    }
+});
 
 try {
     if (localStorage.getItem("swalathDarkMode") === "true") {
