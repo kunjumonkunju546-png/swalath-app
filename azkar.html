@@ -15,6 +15,7 @@
       font-family: Arial, sans-serif;
       background: #eee8d9;
       color: #183c35;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     header {
@@ -85,38 +86,67 @@
       margin-bottom: 15px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
       border-left: 4px solid #1d5b4c;
+      transition: transform 0.1s ease;
     }
 
     .azkar-card h2 {
       margin-top: 0;
-      font-size: 19px;
+      font-size: 18px;
       color: #123d34;
     }
 
     .arabic {
       direction: rtl;
       text-align: right;
-      font-size: 25px;
+      font-size: 24px;
       line-height: 2;
       margin: 12px 0;
       color: #173f36;
     }
 
     .malayalam {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.9;
       color: #444;
+      margin-bottom: 15px;
     }
 
-    .count {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 7px 12px;
-      background: #f1dfb0;
-      color: #123d34;
-      border-radius: 20px;
-      font-size: 13px;
+    /* COUNTER & RESET STYLES */
+    .counter-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #e6dfd0;
+      padding-top: 12px;
+      margin-top: 10px;
+    }
+
+    .count-display {
+      font-size: 15px;
       font-weight: bold;
+      color: #123d34;
+      background: #f1dfb0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .count-display:active {
+      transform: scale(0.95);
+    }
+
+    .reset-btn {
+      background: #e74c3c;
+      color: white;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .reset-btn:active {
+      transform: scale(0.95);
     }
 
     footer {
@@ -127,7 +157,6 @@
     }
 
     /* DARK MODE */
-
     body.dark {
       background: #101816;
       color: #eeeeee;
@@ -152,7 +181,11 @@
       color: #dddddd;
     }
 
-    body.dark .count {
+    body.dark .counter-box {
+      border-color: #2e3d36;
+    }
+
+    body.dark .count-display {
       background: #314c43;
       color: #f1dfb0;
     }
@@ -180,197 +213,127 @@
 
   <div class="intro">
     🌿 <strong>ദിവസവും ഓർക്കാനും ചൊല്ലാനും</strong><br>
-    അല്ലാഹുവിനെ സ്മരിക്കുന്നതിനുള്ള ചില പ്രധാന ദിക്റുകൾ.
+    അല്ലാഹുവിനെ സ്മരിക്കുന്നതിനുള്ള ചില പ്രധാന ദിക്റുകൾ. (എണ്ണാൻ കൗണ്ടറിൽ ടാപ്പ് ചെയ്യുക)
   </div>
 
 
   <!-- 1 -->
-
   <div class="azkar-card">
-
     <h2>1️⃣ സുബ്ഹാനല്ലാഹി വബിഹംദിഹി</h2>
-
-    <div class="arabic">
-      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+    <div class="arabic">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div>
+    <div class="malayalam">സുബ്ഹാനല്ലാഹി വബിഹംദിഹി</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-0" onclick="incrementCount(0)">📿 കൗണ്ട്: <span id="num-0">0</span></div>
+      <button class="reset-btn" onclick="resetCount(0)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      സുബ്ഹാനല്ലാഹി വബിഹംദിഹി
-    </div>
-
-    <div class="count">
-      📿 100 തവണ
-    </div>
-
   </div>
 
 
   <!-- 2 -->
-
   <div class="azkar-card">
-
     <h2>2️⃣ സുബ്ഹാനല്ലാഹി വബിഹംദിഹി – സുബ്ഹാനല്ലാഹിൽ അസീം</h2>
-
-    <div class="arabic">
-      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ
+    <div class="arabic">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ</div>
+    <div class="malayalam">സുബ്ഹാനല്ലാഹി വബിഹംദിഹി, സുബ്ഹാനല്ലാഹിൽ അസീം</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-1" onclick="incrementCount(1)">📿 കൗണ്ട്: <span id="num-1">0</span></div>
+      <button class="reset-btn" onclick="resetCount(1)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      സുബ്ഹാനല്ലാഹി വബിഹംദിഹി, സുബ്ഹാനല്ലാഹിൽ അസീം
-    </div>
-
   </div>
 
 
   <!-- 3 -->
-
   <div class="azkar-card">
-
     <h2>3️⃣ ലാ ഇലാഹ ഇല്ലല്ലാഹ്</h2>
-
-    <div class="arabic">
-      لَا إِلَٰهَ إِلَّا اللَّهُ
+    <div class="arabic">لَا إِلَٰهَ إِلَّا اللَّهُ</div>
+    <div class="malayalam">ലാ ഇലാഹ ഇല്ലല്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-2" onclick="incrementCount(2)">📿 കൗണ്ട്: <span id="num-2">0</span></div>
+      <button class="reset-btn" onclick="resetCount(2)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      ലാ ഇലാഹ ഇല്ലല്ലാഹ്
-    </div>
-
-    <div class="count">
-      📿 കഴിയുന്നത്ര
-    </div>
-
   </div>
 
 
   <!-- 4 -->
-
   <div class="azkar-card">
-
     <h2>4️⃣ അസ്തഗ്ഫിറുല്ലാഹ്</h2>
-
-    <div class="arabic">
-      أَسْتَغْفِرُ اللَّهَ
+    <div class="arabic">أَسْتَغْفِرُ اللَّهَ</div>
+    <div class="malayalam">അസ്തഗ്ഫിറുല്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-3" onclick="incrementCount(3)">📿 കൗണ്ട്: <span id="num-3">0</span></div>
+      <button class="reset-btn" onclick="resetCount(3)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      അസ്തഗ്ഫിറുല്ലാഹ്
-    </div>
-
-    <div class="count">
-      📿 100 തവണ
-    </div>
-
   </div>
 
 
   <!-- 5 -->
-
   <div class="azkar-card">
-
     <h2>5️⃣ ലാ ഹൗല വലാ ഖുവ്വത ഇല്ലാ ബില്ലാഹ്</h2>
-
-    <div class="arabic">
-      لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ
+    <div class="arabic">لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</div>
+    <div class="malayalam">ലാ ഹൗല വലാ ഖുവ്വത ഇല്ലാ ബില്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-4" onclick="incrementCount(4)">📿 കൗണ്ട്: <span id="num-4">0</span></div>
+      <button class="reset-btn" onclick="resetCount(4)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      ലാ ഹൗല വലാ ഖുവ്വത ഇല്ലാ ബില്ലാഹ്
-    </div>
-
   </div>
 
 
   <!-- 6 -->
-
   <div class="azkar-card">
-
     <h2>6️⃣ ഹസ്ബിയല്ലാഹു</h2>
-
-    <div class="arabic">
-      حَسْبِيَ اللَّهُ
+    <div class="arabic">حَسْبِيَ اللَّهُ</div>
+    <div class="malayalam">ഹസ്ബിയല്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-5" onclick="incrementCount(5)">📿 കൗണ്ട്: <span id="num-5">0</span></div>
+      <button class="reset-btn" onclick="resetCount(5)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      ഹസ്ബിയല്ലാഹ്
-    </div>
-
   </div>
 
 
   <!-- 7 -->
-
   <div class="azkar-card">
-
     <h2>7️⃣ അല്ലാഹു അക്ബർ</h2>
-
-    <div class="arabic">
-      اللَّهُ أَكْبَرُ
+    <div class="arabic">اللَّهُ أَكْبَرُ</div>
+    <div class="malayalam">അല്ലാഹു അക്ബർ</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-6" onclick="incrementCount(6)">📿 കൗണ്ട്: <span id="num-6">0</span></div>
+      <button class="reset-btn" onclick="resetCount(6)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      അല്ലാഹു അക്ബർ
-    </div>
-
-    <div class="count">
-      📿 കഴിയുന്നത്ര
-    </div>
-
   </div>
 
 
   <!-- 8 -->
-
   <div class="azkar-card">
-
     <h2>8️⃣ അൽഹംദുലില്ലാഹ്</h2>
-
-    <div class="arabic">
-      الْحَمْدُ لِلَّهِ
+    <div class="arabic">الْحَمْدُ لِلَّهِ</div>
+    <div class="malayalam">അൽഹംദുലില്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-7" onclick="incrementCount(7)">📿 കൗണ്ട്: <span id="num-7">0</span></div>
+      <button class="reset-btn" onclick="resetCount(7)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      അൽഹംദുലില്ലാഹ്
-    </div>
-
   </div>
 
 
   <!-- 9 -->
-
   <div class="azkar-card">
-
     <h2>9️⃣ സുബ്ഹാനല്ലാഹ്</h2>
-
-    <div class="arabic">
-      سُبْحَانَ اللَّهِ
+    <div class="arabic">سُبْحَانَ اللَّهِ</div>
+    <div class="malayalam">സുബ്ഹാനല്ലാഹ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-8" onclick="incrementCount(8)">📿 കൗണ്ട്: <span id="num-8">0</span></div>
+      <button class="reset-btn" onclick="resetCount(8)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      സുബ്ഹാനല്ലാഹ്
-    </div>
-
   </div>
 
 
   <!-- 10 -->
-
   <div class="azkar-card">
-
     <h2>🔟 നബി ﷺ യുടെ മേൽ സ്വലാത്ത്</h2>
-
-    <div class="arabic">
-      اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ
+    <div class="arabic">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ</div>
+    <div class="malayalam">അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം അലാ നബിയ്യിനാ മുഹമ്മദ്</div>
+    <div class="counter-box">
+      <div class="count-display" id="count-9" onclick="incrementCount(9)">🤍 കൗണ്ട്: <span id="num-9">0</span></div>
+      <button class="reset-btn" onclick="resetCount(9)">Reset</button>
     </div>
-
-    <div class="malayalam">
-      അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം അലാ നബിയ്യിനാ മുഹമ്മദ്
-    </div>
-
-    <div class="count">
-      🤍 കഴിയുന്നത്ര
-    </div>
-
   </div>
 
 </div>
@@ -382,41 +345,54 @@
 
 
 <script>
-
   function goHome() {
     window.location.href = "index.html";
   }
 
-
   function toggleDark() {
-
     document.body.classList.toggle("dark");
-
     if (document.body.classList.contains("dark")) {
-
       localStorage.setItem("swalathDarkMode", "on");
-
     } else {
-
       localStorage.setItem("swalathDarkMode", "off");
-
     }
-
   }
 
+  // COUNTER FUNCTIONS
+  const totalAzkar = 10;
+
+  function getStorageKey(index) {
+    return "azkar_count_" + index;
+  }
+
+  function incrementCount(index) {
+    let current = Number(localStorage.getItem(getStorageKey(index)) || 0);
+    current++;
+    localStorage.setItem(getStorageKey(index), current);
+    document.getElementById("num-" + index).textContent = current;
+  }
+
+  function resetCount(index) {
+    localStorage.setItem(getStorageKey(index), 0);
+    document.getElementById("num-" + index).textContent = 0;
+  }
 
   window.onload = function() {
-
+    // Dark mode check
     const darkMode = localStorage.getItem("swalathDarkMode");
-
     if (darkMode === "on") {
-
       document.body.classList.add("dark");
-
     }
 
+    // Load saved counts
+    for (let i = 0; i < totalAzkar; i++) {
+      let savedCount = localStorage.getItem(getStorageKey(i)) || 0;
+      const numElem = document.getElementById("num-" + i);
+      if (numElem) {
+        numElem.textContent = savedCount;
+      }
+    }
   };
-
 </script>
 
 </body>
