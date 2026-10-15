@@ -25,7 +25,7 @@
         }
         .splash-content {
             width: 90%;
-            max-width: 360px;
+            max-width: 380px;
             text-align: center;
             padding: 30px 20px;
         }
@@ -35,16 +35,17 @@
             animation: moonFloat 2s ease-in-out infinite;
         }
         .splash-content h1 {
-            font-size: 34px;
-            margin: 0 0 14px;
+            font-size: 38px;
+            margin: 0 0 10px;
             color: #f1dfb0;
-            font-family: serif;
+            font-family: 'Amiri', serif;
         }
         .splash-content p {
             font-size: 16px;
             line-height: 2.2;
             margin: 0;
             color: #fff8e8;
+            font-family: 'Amiri', serif;
         }
         .splash-loader {
             width: 38px;
@@ -57,66 +58,6 @@
         }
         @keyframes splashSpin { to { transform: rotate(360deg); } }
         @keyframes moonFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-        .travel-ad-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: rgba(0,0,0,.72);
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            box-sizing: border-box;
-        }
-        .travel-ad {
-            position: relative;
-            width: 100%;
-            max-width: 390px;
-            max-height: 88vh;
-            overflow-y: auto;
-            box-sizing: border-box;
-            background: #fffdf7;
-            color: #25352e;
-            border-radius: 22px;
-            padding: 27px 20px 22px;
-            text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,.3);
-            animation: popupAppear .35s ease;
-        }
-        @keyframes popupAppear {
-            from { opacity: 0; transform: translateY(18px) scale(.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .travel-ad-close {
-            position: absolute;
-            top: 9px;
-            right: 11px;
-            width: 34px;
-            height: 34px;
-            border: none;
-            border-radius: 50%;
-            background: #e9e5da;
-            color: #123d34;
-            font-size: 23px;
-            line-height: 1;
-            cursor: pointer;
-        }
-        .travel-ad-moon { font-size: 35px; margin: 0 0 7px; }
-        .travel-ad h2 { color: #123d34; font-size: 23px; margin: 5px 0 7px; }
-        .travel-ad-tagline { color: #9b7932; font-size: 12px; letter-spacing: 1px; margin: 0 0 18px; }
-        .travel-ad-services { border-top: 1px solid #e7dfcc; border-bottom: 1px solid #e7dfcc; padding: 13px 5px; margin: 15px 0; font-size: 14px; line-height: 1.9; color: #29473c; }
-        .travel-ad-countries { color: #666; font-size: 12px; line-height: 1.8; margin: 12px 0; }
-        .travel-ad-message { color: #666; font-size: 12px; line-height: 1.8; margin: 13px 0; }
-        .travel-ad-whatsapp { display: inline-block; background: #123d34; color: #fff; text-decoration: none; padding: 12px 22px; border-radius: 30px; font-size: 14px; font-weight: bold; margin: 8px 0 12px; }
-        .travel-ad-whatsapp:active { transform: scale(.98); }
-        .travel-ad-dua { color: #8a6a2d; font-size: 12px; line-height: 1.8; margin: 8px 0 0; }
-
-        body.dark-mode .travel-ad { background: #202720; color: #eee; }
-        body.dark-mode .travel-ad h2 { color: #f1dfb0; }
-        body.dark-mode .travel-ad-services { color: #e4e4d8; border-color: #454b43; }
-        body.dark-mode .travel-ad-countries, body.dark-mode .travel-ad-message { color: #ccc; }
-        body.dark-mode .travel-ad-close { background: #3b433b; color: #fff; }
 
         .search-box {
             width: 100%;
@@ -139,8 +80,8 @@
         .advertising-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 10px; cursor: pointer; font-size: 13px; }
         .advertising-card { background: white; border: 1px solid #e6dfd0; border-radius: 20px; padding: 20px 17px; margin-bottom: 14px; box-shadow: 0 5px 18px rgba(18,61,52,.05); }
-        .advertising-title { text-align: center; color: #123d34; margin-bottom: 8px; }
-        .advertising-subtitle { text-align: center; color: #777; font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
+        .advertising-title { text-align: center; color: #123d34; margin-bottom: 8px; font-size: 18px; }
+        .advertising-subtitle { text-align: center; color: #9b7932; font-size: 13px; letter-spacing: .5px; margin-bottom: 18px; font-weight: bold; }
         .advertising-card h3 { color: #123d34; font-size: 17px; margin-bottom: 12px; }
         .advertising-card p { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 10px; }
         .advertising-list { list-style: none; padding: 0; margin: 0; }
@@ -216,28 +157,22 @@
             font-size: 38px !important;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .hero h1 {
-            margin: 4px 0 6px;
-            color: #f5e2b3;
-            font-size: clamp(32px, 7vw, 40px);
-            font-weight: 800;
-            letter-spacing: .3px;
-        }
-        .hero .arabic-title {
+        .hero .arabic-main-title {
             font-family: 'Amiri', 'Traditional Arabic', serif;
-            font-size: 22px;
-            color: #f1dfb0;
-            margin: 0 0 8px;
+            font-size: 38px;
+            color: #f5e2b3;
+            margin: 4px 0 10px;
             font-weight: bold;
         }
         .hero .arabic-ayah {
             font-family: 'Amiri', 'Traditional Arabic', serif;
-            font-size: 18px;
+            font-size: 19px;
             color: #fffaf0;
             margin: 0;
-            line-height: 2.1;
+            line-height: 2.2;
             direction: rtl;
-            opacity: 0.95;
+            opacity: 0.98;
+            padding: 0 10px;
         }
         main { padding: 0 18px; }
         .welcome { padding: 25px 5px 14px; text-align: center; }
@@ -425,7 +360,7 @@
         #languageButton { padding: 10px 14px; margin: 5px; border: 1px solid #c8a96e; border-radius: 10px; cursor: pointer; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <script src="language.js"></script>
+    <script src="language.js" defer></script>
 </head>
 <body>
 
@@ -450,9 +385,8 @@
     <div id="splashScreen">
         <div class="splash-content">
             <div class="splash-moon">🌙</div>
-            <h1 data-i18n="swalaathTitle" data-ml="സ്വലാത്ത്">സ്വലാത്ത്</h1>
-            <p style="font-family:'Amiri', serif; font-size:18px; direction:rtl; margin-bottom:6px;">الصلاة</p>
-            <p style="font-family:'Amiri', serif; font-size:16px; direction:rtl; line-height:1.9;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ</p>
+            <h1 style="font-family:'Amiri', serif; font-size:40px;">الصلاة</h1>
+            <p style="font-family:'Amiri', serif; font-size:16px; direction:rtl; line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا</p>
             <div class="splash-loader"></div>
         </div>
     </div>
@@ -460,9 +394,8 @@
     <div class="app">
         <section class="hero">
             <div class="moon">🌙</div>
-            <h1 data-i18n="swalaathTitle" data-ml="സ്വലാത്ത്">സ്വലാത്ത്</h1>
-            <div class="arabic-title">الصلاة</div>
-            <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ</div>
+            <div class="arabic-main-title">الصلاة</div>
+            <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا</div>
         </section>
 
         <main>
@@ -532,7 +465,7 @@
                 <div class="menu-card" onclick="openAdvertising()">
                     <div style="font-size:30px;">📢</div>
                     <strong data-i18n="advertisingTitle" data-ml="Advertise With Us">Advertise With Us</strong>
-                    <span data-i18n="advertisingDesc" data-ml="Reach Malayali Audience">Reach Malayali Audience</span>
+                    <span data-i18n="advertisingDesc" data-ml="Reach Global & GCC Audience">Reach Global Audience</span>
                 </div>
             </div>
 
@@ -563,17 +496,17 @@
                 </div>
                 <div class="advertising-card">
                     <h2 class="advertising-title">🌍 NAZYAN GLOBAL ADVERTISING</h2>
-                    <p class="advertising-subtitle">Reach Kerala, GCC & Worldwide Malayali Audience</p>
-                    <p>നിങ്ങളുടെ business-നെ Kerala, GCC രാജ്യങ്ങൾ, ലോകമെമ്പാടുമുള്ള Malayali audience-ലേക്ക് ഏറ്റവും professional ആയ രീതിയിൽ പരിചയപ്പെടുത്താം.</p>
+                    <p class="advertising-subtitle">Reach Global, GCC & Worldwide Audience</p>
+                    <p>നിങ്ങളുടെ business അല്ലെങ്കിൽ സ്ഥാപനത്തെ കേരളം, ജി.സി.സി (GCC) രാജ്യങ്ങൾ, കൂടാതെ ലോകമെമ്പാടുമുള്ള ആഗോള ഓഡിയൻസിലേക്ക് (Global Audience) ഏറ്റവും professional ആയ രീതിയിൽ എത്തിക്കാം.</p>
                 </div>
                 <div class="advertising-card">
                     <h3>✨ Why Partner With Us?</h3>
                     <ul class="advertising-list">
-                        <li>✅ Target audience across Kerala & GCC</li>
-                        <li>✅ High-trust Islamic platform</li>
-                        <li>✅ Direct WhatsApp & website integration</li>
-                        <li>✅ Flexible monthly/yearly packages</li>
-                        <li>✅ Manual quality review for brands</li>
+                        <li>✅ Global & GCC Target Audience Reach</li>
+                        <li>✅ High-trust Islamic & Spiritual Platform</li>
+                        <li>✅ Direct WhatsApp & Website Integration</li>
+                        <li>✅ Flexible Monthly / Yearly Packages</li>
+                        <li>✅ Professional Quality Review for Brands</li>
                     </ul>
                 </div>
                 <div class="advertising-card">
@@ -581,16 +514,16 @@
                     <ul class="advertising-list">
                         <li>🍽️ Halal Restaurants & Foods</li>
                         <li>🕋 Umrah & Hajj Services</li>
-                        <li>✈️ Halal Travel & Tourism</li>
+                        <li>✈️ Global Travel & Tourism</li>
                         <li>🧕 Modest Fashion & Abaya</li>
                         <li>🏨 Hotels & Hospitality</li>
-                        <li>📚 Islamic Books & Goods</li>
+                        <li>📚 Islamic Books & E-Commerce</li>
                     </ul>
                 </div>
                 <div class="advertising-card">
                     <h3>📦 Advertising Packages</h3>
                     <ul class="advertising-list">
-                        <li>1 Month — Flash Promo</li>
+                        <li>1 Month — Flash Global Promo</li>
                         <li>3 Months — Quarterly Growth</li>
                         <li>6 Months — Brand Authority</li>
                         <li>12 Months — Year-Round Dominance</li>
@@ -622,28 +555,6 @@
             <p>© 2026 Swalath</p>
             <p>Made with ❤️</p>
         </footer>
-    </div>
-
-    <!-- TRAVEL AD POPUP -->
-    <div id="travelAd" class="travel-ad-overlay" role="dialog" aria-modal="true" aria-label="NAZYAN TRAVELS advertisement">
-        <div class="travel-ad">
-            <button class="travel-ad-close" onclick="closeTravelAd()" aria-label="Close advertisement">×</button>
-            <div class="travel-ad-moon">🌙</div>
-            <p style="font-size:11px;letter-spacing:2px;color:#9b7932;margin:0;">TRAVEL PARTNER</p>
-            <h2>NAZYAN TRAVELS</h2>
-            <p class="travel-ad-tagline">YOUR JOURNEY, OUR CARE</p>
-            <div class="travel-ad-services">
-                ✈️ Flight Tickets<br>
-                🌍 Tour Packages<br>
-                🕋 Umrah Services<br>
-                🛂 Visa Services<br>
-                📄 Certificate Attestation
-            </div>
-            <p class="travel-ad-countries">Qatar • UAE • Saudi Arabia<br>Bahrain • Kuwait • India</p>
-            <a class="travel-ad-whatsapp" href="https://wa.me/919946010375" target="_blank" rel="noopener">📲 WhatsApp: +91 9946010375</a>
-            <p class="travel-ad-message">ഈ ആപ്പിലെ ഉള്ളടക്കത്തിൽ എന്തെങ്കിലും പിഴവുകൾ ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി ക്ഷമിക്കുക. മെച്ചപ്പെടുത്താൻ ഞങ്ങൾ പരിശ്രമിച്ചുകൊണ്ടിരിക്കുന്നു.</p>
-            <p class="travel-ad-dua">അല്ലാഹു നമ്മുടെ ഹലാലായ പരിശ്രമങ്ങൾ സ്വീകരിക്കട്ടെ.<br>നിങ്ങൾക്കും കുടുംബത്തിനും ബറക്കത്ത് നൽകട്ടെ. ആമീൻ 🤲</p>
-        </div>
     </div>
 
     <script>
@@ -682,7 +593,7 @@
             saadah: "صلاة السعادة",
             kamaliyya: "صلاة الكمالية",
             dhatiyya: "صلاة الذاتية",
-            jawharat: "جوهرة الكمال",
+            jawharات: "جوهرة الكمال",
             taj: "درود تاج",
             faraj: "صلاة الفرج",
             bashair: "بشائر الخيرات",
@@ -705,6 +616,12 @@
         function openDua() { window.location.href = "dua.html"; }
         function openDhikr() { window.location.href = "dhikr.html"; }
         function openPrayerTime() { window.location.href = "prayer-time.html"; }
+
+        /* LANGUAGE SELECTOR FIX */
+        function openSwalathLanguageSelector() {
+            const screen = document.getElementById("languageScreen");
+            if (screen) screen.style.display = "flex";
+        }
 
         /* HOME VISIBILITY */
         function hideHomeElements() {
@@ -879,25 +796,6 @@
             button.textContent = isDark ? text.light : text.dark;
         }
 
-        /* NAZYAN POPUP - ONCE DAILY */
-        function showTravelAdOnceDaily() {
-            const popup = document.getElementById("travelAd");
-            if (!popup) return;
-            const today = getLocalDateString();
-            const lastShownDate = localStorage.getItem("nazyANTravelAdDate");
-            if (lastShownDate !== today) {
-                popup.style.display = "flex";
-            }
-        }
-        function closeTravelAd() {
-            const popup = document.getElementById("travelAd");
-            localStorage.setItem("nazyANTravelAdDate", getLocalDateString());
-            if (popup) popup.style.display = "none";
-        }
-        document.getElementById("travelAd").addEventListener("click", function(event) {
-            if (event.target === this) closeTravelAd();
-        });
-
         /* STARTUP */
         window.addEventListener("load", function() {
             const darkMode = localStorage.getItem("swalathDarkMode");
@@ -907,7 +805,6 @@
             updateDarkButton();
             const splash = document.getElementById("splashScreen");
             window.setTimeout(function() { if (splash) splash.classList.add("hide"); }, 1800);
-            window.setTimeout(function() { showTravelAdOnceDaily(); }, 2300);
         });
 
         /* SERVICE WORKER */
