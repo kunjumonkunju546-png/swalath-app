@@ -132,6 +132,46 @@ main{
     font-size:13px;
 }
 
+/* COUNTER & RESET STYLES */
+.counter-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-top:1px solid #eee;
+    padding-top:12px;
+    margin-top:12px;
+}
+
+.count-display{
+    font-size:14px;
+    font-weight:bold;
+    color:#123d34;
+    background:#f1dfb0;
+    padding:6px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.count-display:active{
+    transform:scale(0.95);
+}
+
+.reset-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.reset-btn:active{
+    transform:scale(0.95);
+}
+
 /* =========================
    DHIKR SHARE CARD BUTTONS
 ========================= */
@@ -139,8 +179,8 @@ main{
 .dhikr-share-actions{
     display:flex;
     gap:8px;
-    margin-top:15px;
-    padding-top:12px;
+    margin-top:12px;
+    padding-top:10px;
     border-top:1px solid #eee;
 }
 
@@ -235,6 +275,15 @@ body.dark .count{
     color:#f1dfb0;
 }
 
+body.dark .counter-box{
+    border-color:#333;
+}
+
+body.dark .count-display{
+    background:#314c43;
+    color:#f1dfb0;
+}
+
 body.dark .dhikr-share-actions{
     border-color:#333;
 }
@@ -282,7 +331,7 @@ body.dark .dhikr-share-btn.save{
 
     <p data-i18n="dhikrIntroText" data-ml="നാവിനും ഹൃദയത്തിനും എളുപ്പമുള്ള അല്ലാഹുവിന്റെ സ്മരണകൾ.">
         നാവിനും ഹൃദയത്തിനും എളുപ്പമുള്ള
-        അല്ലാഹുവിന്റെ സ്മരണകൾ.
+        അല്ലാഹുവിന്റെ സ്മരണകൾ. (എണ്ണാൻ കൗണ്ടറിൽ ടാപ്പ് ചെയ്യുക)
     </p>
 
 </section>
@@ -308,6 +357,11 @@ body.dark .dhikr-share-btn.save{
         100 തവണ
     </div>
 
+    <div class="counter-box">
+        <div class="count-display" id="count-0" onclick="incrementCount(0)">📿 കൗണ്ട്: <span id="num-0">0</span></div>
+        <button class="reset-btn" onclick="resetCount(0)">Reset</button>
+    </div>
+
 </div>
 
 
@@ -326,6 +380,11 @@ body.dark .dhikr-share-btn.save{
     <div class="pronunciation">
         സുബ്ഹാനല്ലാഹി വബിഹംദിഹി,
         സുബ്ഹാനല്ലാഹിൽ അദ്വീം
+    </div>
+
+    <div class="counter-box">
+        <div class="count-display" id="count-1" onclick="incrementCount(1)">📿 കൗണ്ട്: <span id="num-1">0</span></div>
+        <button class="reset-btn" onclick="resetCount(1)">Reset</button>
     </div>
 
 </div>
@@ -352,6 +411,11 @@ body.dark .dhikr-share-btn.save{
         10 തവണ
     </div>
 
+    <div class="counter-box">
+        <div class="count-display" id="count-2" onclick="incrementCount(2)">📿 കൗണ്ട്: <span id="num-2">0</span></div>
+        <button class="reset-btn" onclick="resetCount(2)">Reset</button>
+    </div>
+
 </div>
 
 
@@ -369,6 +433,11 @@ body.dark .dhikr-share-btn.save{
 
     <div class="pronunciation">
         അസ്തഗ്ഫിറുല്ലാഹ്
+    </div>
+
+    <div class="counter-box">
+        <div class="count-display" id="count-3" onclick="incrementCount(3)">📿 കൗണ്ട്: <span id="num-3">0</span></div>
+        <button class="reset-btn" onclick="resetCount(3)">Reset</button>
     </div>
 
 </div>
@@ -390,6 +459,11 @@ body.dark .dhikr-share-btn.save{
         സുബ്ഹാനല്ലാഹ്
     </div>
 
+    <div class="counter-box">
+        <div class="count-display" id="count-4" onclick="incrementCount(4)">📿 കൗണ്ട്: <span id="num-4">0</span></div>
+        <button class="reset-btn" onclick="resetCount(4)">Reset</button>
+    </div>
+
 </div>
 
 
@@ -407,6 +481,11 @@ body.dark .dhikr-share-btn.save{
 
     <div class="pronunciation">
         അൽഹംദുലില്ലാഹ്
+    </div>
+
+    <div class="counter-box">
+        <div class="count-display" id="count-5" onclick="incrementCount(5)">📿 കൗണ്ട്: <span id="num-5">0</span></div>
+        <button class="reset-btn" onclick="resetCount(5)">Reset</button>
     </div>
 
 </div>
@@ -428,6 +507,11 @@ body.dark .dhikr-share-btn.save{
         അല്ലാഹു അക്ബർ
     </div>
 
+    <div class="counter-box">
+        <div class="count-display" id="count-6" onclick="incrementCount(6)">📿 കൗണ്ട്: <span id="num-6">0</span></div>
+        <button class="reset-btn" onclick="resetCount(6)">Reset</button>
+    </div>
+
 </div>
 
 
@@ -446,6 +530,11 @@ body.dark .dhikr-share-btn.save{
     <div class="pronunciation">
         അല്ലാഹുമ്മ സ്വല്ലി അലാ മുഹമ്മദിൻ
         വ അലാ ആലി മുഹമ്മദ്.
+    </div>
+
+    <div class="counter-box">
+        <div class="count-display" id="count-7" onclick="incrementCount(7)">🤍 കൗണ്ട്: <span id="num-7">0</span></div>
+        <button class="reset-btn" onclick="resetCount(7)">Reset</button>
     </div>
 
 </div>
@@ -482,6 +571,31 @@ function toggleDark(){
         localStorage.setItem("swalathDarkMode","off");
     }
 
+}
+
+
+/* =========================
+   DHIKR COUNTER SYSTEM
+========================= */
+
+const totalDhikrCount = 8;
+
+function getDhikrStorageKey(index){
+    return "dhikr_card_count_" + index;
+}
+
+function incrementCount(index){
+    let current = Number(localStorage.getItem(getDhikrStorageKey(index)) || 0);
+    current++;
+    localStorage.setItem(getDhikrStorageKey(index), current);
+    const elem = document.getElementById("num-" + index);
+    if(elem) elem.textContent = current;
+}
+
+function resetCount(index){
+    localStorage.setItem(getDhikrStorageKey(index), 0);
+    const elem = document.getElementById("num-" + index);
+    if(elem) elem.textContent = 0;
 }
 
 
@@ -712,6 +826,15 @@ window.addEventListener(
 
         }
 
+
+        // Load saved counts for all 8 Dhikr cards
+        for(let i = 0; i < totalDhikrCount; i++){
+            let saved = localStorage.getItem(getDhikrStorageKey(i)) || 0;
+            let elem = document.getElementById("num-" + i);
+            if(elem){
+                elem.textContent = saved;
+            }
+        }
 
         setupDhikrShareCards();
 
