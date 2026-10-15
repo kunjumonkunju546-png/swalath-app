@@ -56,6 +56,11 @@
                 maghrib: "Maghrib",
                 isha: "Isha",
 
+                dhikrPageTitle: "Dhikr",
+                dhikrSubtitle: "Remember Allah",
+                dhikrIntroHeading: "📿 Dhikr",
+                dhikrIntroText: "Easy remembrances of Allah for the tongue and heart.",
+
                 umrahPageTitle: "Umrah",
                 umrahSubtitle: "Umrah Guide & Information",
                 umrahIntroTitle: "How to Perform Umrah",
@@ -176,6 +181,11 @@
                 asr: "العصر",
                 maghrib: "المغرب",
                 isha: "العشاء",
+
+                dhikrPageTitle: "الذكر",
+                dhikrSubtitle: "اذكر الله",
+                dhikrIntroHeading: "📿 الأذكار",
+                dhikrIntroText: "أذكار سهلة للسان والقلب بذكر الله.",
 
                 umrahPageTitle: "العمرة",
                 umrahSubtitle: "دليل ومعلومات العمرة",
@@ -298,6 +308,11 @@
                 maghrib: "मग़रिब",
                 isha: "इशा",
 
+                dhikrPageTitle: "ज़िक्र",
+                dhikrSubtitle: "अल्लाह को याद करें",
+                dhikrIntroHeading: "📿 ज़िक्र",
+                dhikrIntroText: "ज़बान और दिल के लिए अल्लाह की आसान यादें।",
+
                 umrahPageTitle: "उमराह",
                 umrahSubtitle: "उमराह गाइड और जानकारी",
                 umrahIntroTitle: "उमराह करने का तरीका",
@@ -310,7 +325,7 @@
                 umrahStep3Title: "तवाफ़",
                 umrahStep3Desc: "काबा के सात चक्कर लगाकर तवाफ़ करें। संभव हो तो इसके बाद दो रकअत नमाज़ पढ़ें।",
                 umrahStep4Title: "सई",
-                umrahStep4Desc: "सफ़ा और मروہ के बीच सात फेरे पूरे करें। सफ़ा से शुरू होकर मروہ पर समाप्त होगा।",
+                umrahStep4Desc: "सफ़ा और مروہ के बीच सात फेरे पूरे करें। सफ़ा से शुरू होकर मروہ पर समाप्त होगा।",
                 umrahStep5Title: "बाल मुंडवाना या कतरवाना",
                 umrahStep5Desc: "सई पूरी करने के बाद पुरुष अपने बाल मुंडवाएँ या कतरवाएँ, और महिलाएँ अपने बालों के सिरे से थोड़ा काटें।",
                 umrahSuccess: "इसके साथ उमराह पूरा हो जाता है। एहराम की पाबंदियाँ समाप्त हो जाती हैं और सामान्य कपड़े पहने जा सकते हैं।",
@@ -418,6 +433,11 @@
                 asr: "عصر",
                 maghrib: "مغرب",
                 isha: "عشاء",
+
+                dhikrPageTitle: "ذکر",
+                dhikrSubtitle: "اللہ کو یاد کریں",
+                dhikrIntroHeading: "📿 ذکر",
+                dhikrIntroText: "زبان اور دل کے لیے اللہ کی آسان یادیں۔",
 
                 umrahPageTitle: "عمرہ",
                 umrahSubtitle: "عمرہ گائیڈ اور معلومات",
@@ -539,6 +559,11 @@
                 asr: "அஸர்",
                 maghrib: "மஃக்ரிப்",
                 isha: "இஷா",
+
+                dhikrPageTitle: "திக்ர்",
+                dhikrSubtitle: "அல்லாஹ்வை நினைவு கூருங்கள்",
+                dhikrIntroHeading: "📿 திக்ர்",
+                dhikrIntroText: "நாவிற்கும் உள்ளத்திற்கும் எளிதான அல்லாஹ்வின் நினைவுகள்.",
 
                 umrahPageTitle: "உம்ரா",
                 umrahSubtitle: "உம்ரா வழிகாட்டி மற்றும் தகவல்கள்",
