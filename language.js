@@ -5,7 +5,15 @@
         ml: {
             name: "മലയാളം",
             dir: "ltr",
-            translations: {}
+            translations: {
+                prayerTimesTitle: "പ്രാർത്ഥനാ സമയങ്ങൾ",
+                fajr: "ഫജ്ർ (സുബ്ഹ്)",
+                sunrise: "സൂര്യോദയം",
+                dhuhr: "ദുഹ്ർ",
+                asr: "അസർ",
+                maghrib: "മഗ്‌രിബ്",
+                isha: "ഇശാഅ്"
+            }
         },
 
         en: {
@@ -39,6 +47,14 @@
                 advertisingTitle: "Advertise With Us",
                 advertisingDesc: "Reach Malayali Audience",
                 language: "🌐 Language",
+
+                prayerTimesTitle: "Prayer Times",
+                fajr: "Fajr",
+                sunrise: "Sunrise",
+                dhuhr: "Dhuhr",
+                asr: "Asr",
+                maghrib: "Maghrib",
+                isha: "Isha",
 
                 duaPageTitle: "Duas",
                 duaPageSubtitle: "Supplications for different situations in life",
@@ -120,6 +136,14 @@
                 advertisingDesc: "الوصول إلى الجمهور",
                 language: "🌐 اللغة",
 
+                prayerTimesTitle: "مواقيت الصلاة",
+                fajr: "الفجر",
+                sunrise: "الشروق",
+                dhuhr: "الظهر",
+                asr: "العصر",
+                maghrib: "المغرب",
+                isha: "العشاء",
+
                 duaPageTitle: "الأدعية",
                 duaPageSubtitle: "أدعية لمختلف مواقف الحياة",
                 duaIntroTitle: "🤲 أدعية لحياتنا اليومية",
@@ -199,6 +223,14 @@
                 advertisingTitle: "हमारे साथ विज्ञापन दें",
                 advertisingDesc: "मलयाली दर्शकों तक पहुँचें",
                 language: "🌐 भाषा",
+
+                prayerTimesTitle: "नमाज़ का समय",
+                fajr: "ফজ्र / فجر",
+                sunrise: "सूर्योदय",
+                dhuhr: "जुहर",
+                asr: "असर",
+                maghrib: "मग़रिब",
+                isha: "इशा",
 
                 duaPageTitle: "दुआएँ",
                 duaPageSubtitle: "जीवन की विभिन्न परिस्थितियों के लिए दुआएँ",
@@ -280,6 +312,14 @@
                 advertisingDesc: "ملیالم سامعین تک پہنچیں",
                 language: "🌐 زبان",
 
+                prayerTimesTitle: "نماز کے اوقات",
+                fajr: "فجر",
+                sunrise: "طلوع آفتاب",
+                dhuhr: "ظہر",
+                asr: "عصر",
+                maghrib: "مغرب",
+                isha: "عشاء",
+
                 duaPageTitle: "دعائیں",
                 duaPageSubtitle: "زندگی کے مختلف حالات کے لیے دعائیں",
                 duaIntroTitle: "🤲 ہماری روزمرہ زندگی کی دعائیں",
@@ -359,6 +399,14 @@
                 advertisingTitle: "எங்களுடன் விளம்பரம் செய்யுங்கள்",
                 advertisingDesc: "மலையாள மக்களைச் சென்றடையுங்கள்",
                 language: "🌐 மொழி",
+
+                prayerTimesTitle: "தொழுகை நேரங்கள்",
+                fajr: "ஃபஜ்ர்",
+                sunrise: "சூரிய உதயம்",
+                dhuhr: "ளுஹ்ர்",
+                asr: "அஸர்",
+                maghrib: "மஃக்ரிப்",
+                isha: "இஷா",
 
                 duaPageTitle: "துஆக்கள்",
                 duaPageSubtitle: "வாழ்க்கையின் பல்வேறு சூழ்நிலைகளுக்கான துஆக்கள்",
