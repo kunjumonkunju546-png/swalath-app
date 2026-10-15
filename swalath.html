@@ -478,8 +478,6 @@ forceArabicCollection();
 }
 });
 
-window.addEventListener("popstate", function(){
-const key = decodeURIComponent(location.hash.replace("#", ""));
 
 if(key && swalathData[key]){
     openSwalath(key, false);
