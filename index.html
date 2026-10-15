@@ -864,9 +864,13 @@
                 });
             });
         }
-        function triggerAdhanSound() {
-            if (window.AndroidBridge) {
-                AndroidBridge.playAdhan();
+       function triggerAdhanSound() {
+            try {
+                if (typeof AndroidBridge !== "undefined" && AndroidBridge.playAdhan) {
+                    AndroidBridge.playAdhan();
+                }
+            } catch (e) {
+                console.log(e);
             }
         }
     </script>
