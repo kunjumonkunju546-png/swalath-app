@@ -42,7 +42,7 @@ body {
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 .top-left {
     display:flex;
@@ -87,6 +87,20 @@ body {
     text-overflow:ellipsis;
     white-space:nowrap;
 }
+
+/* OFFLINE BANNER */
+.offline-banner {
+    background: #e67e22;
+    color: white;
+    text-align: center;
+    font-size: 11px;
+    padding: 6px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: none;
+    font-weight: bold;
+}
+
 .hero {
     position:relative;
     overflow:hidden;
@@ -374,6 +388,9 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
     </button>
 </header>
 
+<!-- OFFLINE ALERT BANNER -->
+<div id="offlineBanner" class="offline-banner">⚠️ You are offline. Showing saved prayer times.</div>
+
 <section class="hero">
     <div class="hero-label">DAILY PRAYER</div>
     <div class="arabic-title">أَوْقَاتُ الصَّلَاة</div>
@@ -401,7 +418,7 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
     <div class="status">നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...</div>
 </section>
 
-<!-- ADHAN CONTROL & QUICK MUTE PANEL (Placed Below Prayer Times) -->
+<!-- ADHAN CONTROL & QUICK MUTE PANEL -->
 <section class="adhan-control-card">
     <div class="adhan-control-header">
         <h3>🕌 Adhan Sound Settings</h3>
@@ -448,6 +465,7 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
 const API = "https://api.aladhan.com/v1/";
 const CACHE_KEY = "swalathPrayerLocation";
 const CACHE_TIME_KEY = "swalathPrayerLocationTime";
+const CACHE_TIMINGS_KEY = "swalathCachedTimings";
 
 const prayerItems = [
     {key:"Fajr",nameKey:"fajr",ar:"الفجر"},
@@ -464,6 +482,18 @@ let coordinates = null;
 let locationRequestInProgress = false;
 let lastPrayerData = null;
 let lastPlayedMinuteKey = "";
+
+// Check online/offline status
+function checkNetworkStatus() {
+    const banner = document.getElementById("offlineBanner");
+    if (!navigator.onLine) {
+        if (banner) banner.style.display = "block";
+    } else {
+        if (banner) banner.style.display = "none";
+    }
+}
+window.addEventListener("online", checkNetworkStatus);
+window.addEventListener("offline", checkNetworkStatus);
 
 function toggleMasterMute() {
     let isMuted = localStorage.getItem("swalathMasterMute") === "true";
@@ -742,11 +772,27 @@ async function fetchPrayerTimes(lat, lon) {
             throw new Error("Prayer times unavailable");
         }
 
+        // Cache successful timings for offline use
+        localStorage.setItem(CACHE_TIMINGS_KEY, JSON.stringify(result.data));
+
         renderPrayerTimes(result.data);
         hideLocationStatus();
 
     } catch (error) {
-        showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല.");
+        // Fallback to cached timings if offline or error
+        const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+        if (cachedTimings) {
+            try {
+                const parsedData = JSON.parse(cachedTimings);
+                renderPrayerTimes(parsedData);
+                document.getElementById("offlineBanner").style.display = "block";
+                hideLocationStatus();
+                return;
+            } catch(e) {}
+        }
+
+        showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
+        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:() => fetchPrayerTimes(lat, lon)}]);
     }
 }
 
@@ -754,7 +800,7 @@ function startLocation() {
     if (locationRequestInProgress) return;
 
     if (!window.isSecureContext || !("geolocation" in navigator)) {
-        showLocationStatus("Location ലഭ്യമല്ല.");
+        showLocationStatus("Location സൗകര്യം ലഭ്യമല്ല.");
         return;
     }
 
@@ -774,7 +820,10 @@ function startLocation() {
         },
         error => {
             locationRequestInProgress = false;
-            showLocationStatus("GPS ഓൺ ആണെന്ന് ഉറപ്പാക്കുക.");
+            showLocationStatus(
+                "Location അനുമതി ലഭിച്ചില്ല. ഫോണിന്റെ Settings-ൽ Location അനുവദിച്ച് വീണ്ടും ശ്രമിക്കുക.",
+                [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:startLocation}]
+            );
         },
         { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 }
     );
@@ -808,12 +857,15 @@ document.addEventListener("swalath-language-changed", function() {
     if (lastPrayerData) renderPrayerTimes(lastPrayerData);
 });
 
+// System Theme Sync & Saved Dark Mode Check
 try {
-    if (localStorage.getItem("swalathDarkMode") === "true") {
+    const savedDark = localStorage.getItem("swalathDarkMode");
+    if (savedDark === "true" || (savedDark === null && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
         document.body.classList.add("dark-mode");
     }
 } catch (e) {}
 
+checkNetworkStatus();
 loadPreferences();
 updateDates();
 
@@ -821,12 +873,20 @@ const cached = loadCachedCoordinates();
 if (cached) {
     coordinates = cached;
     document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
+    
+    // Load offline cached timings instantly if available
+    const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+    if (cachedTimings) {
+        try {
+            renderPrayerTimes(JSON.parse(cachedTimings));
+        } catch(e) {}
+    }
+    
     fetchPrayerTimes(cached.lat, cached.lon);
 } else {
     showPrayerLoading("നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...");
+    startLocation();
 }
-
-startLocation();
 
 setInterval(() => {
     if (lastPrayerData && lastPrayerData.timings) {
