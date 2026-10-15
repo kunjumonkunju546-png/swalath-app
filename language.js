@@ -56,6 +56,39 @@
                 maghrib: "Maghrib",
                 isha: "Isha",
 
+                umrahPageTitle: "Umrah",
+                umrahSubtitle: "Umrah Guide & Information",
+                umrahIntroTitle: "How to Perform Umrah",
+                umrahIntroDesc: "Umrah is a great act of worship performed by visiting the House of Allah, the Kaaba, in a specific manner.",
+                umrahStepsTitle: "Main Steps of Umrah",
+                umrahStep1Title: "Wear Ihram",
+                umrahStep1Desc: "Enter Ihram and make the intention for Umrah before reaching the Miqat.",
+                umrahStep2Title: "Recite Talbiyah",
+                umrahStep2Desc: "After making the intention, proceed towards Masjid al-Haram while reciting Talbiyah.",
+                umrahStep3Title: "Tawaf",
+                umrahStep3Desc: "Perform Tawaf by circling the Kaaba seven times. Pray two Rak'ahs afterwards if possible.",
+                umrahStep4Title: "Sa'i",
+                umrahStep4Desc: "Complete seven rounds walking between Safa and Marwah, starting at Safa and ending at Marwah.",
+                umrahStep5Title: "Trim or Shave Hair",
+                umrahStep5Desc: "After completing Sa'i, men should shave or trim their hair, and women should cut a small portion of their hair.",
+                umrahSuccess: "Umrah is now complete. The restrictions of Ihram are lifted and you can change back into normal clothing.",
+                umrahBenefitsTitle: "Virtues and Benefits of Umrah",
+                umrahBenefit1Title: "Great Act of Worship",
+                umrahBenefit1Desc: "Visiting the Kaaba and performing rituals makes Umrah a supreme form of worship.",
+                umrahBenefit2Title: "Forgiveness of Sins",
+                umrahBenefit2Desc: "It is mentioned in Hadith that performing Umrah serves as an expiation for sins committed between it and the previous one.",
+                umrahBenefit3Title: "Closeness to Allah",
+                umrahBenefit3Desc: "It is a blessed opportunity to seek the nearness of Allah through supplication, Dhikr, and Tawaf.",
+                umrahBenefit4Title: "Visiting the Holy House",
+                umrahBenefit4Desc: "A rare opportunity to engage in worship inside Masjid al-Haram and near the Kaaba.",
+                umrahPackageTitle: "Umrah Packages",
+                umrahGroupPkg: "Group Umrah Package",
+                umrahGroupDesc: "Opportunity to perform Umrah under the guidance of experienced scholars.",
+                umrahIndPkg: "Individual Umrah Package",
+                umrahIndDesc: "Umrah travel arrangements tailored to individual needs.",
+                noteTitle: "Note:",
+                umrahNoteText: "Note: Seek proper guidance from reliable scholars and Ustadhlars to ensure every ritual of Umrah is performed correctly.",
+
                 duaPageTitle: "Duas",
                 duaPageSubtitle: "Supplications for different situations in life",
                 duaIntroTitle: "🤲 Duas for Our Daily Life",
@@ -144,6 +177,39 @@
                 maghrib: "المغرب",
                 isha: "العشاء",
 
+                umrahPageTitle: "العمرة",
+                umrahSubtitle: "دليل ومعلومات العمرة",
+                umrahIntroTitle: "كيفية أداء العمرة",
+                umrahIntroDesc: "العمرة عبادة عظيمة تؤاد بزيارة بيت الله الحرام والكعبة المشرفة على صفة مخصوصة.",
+                umrahStepsTitle: "🕋 خطوات العمرة الأساسية",
+                umrahStep1Title: "الإحرام",
+                umrahStep1Desc: "الدخول في الإحرام وعقد نية العمرة قبل الوصول إلى الميقات.",
+                umrahStep2Title: "التلبية",
+                umrahStep2Desc: "بعد عقد النية، التوجه نحو المسجد الحرام مع ترديد التلبية.",
+                umrahStep3Title: "الطواف",
+                umrahStep3Desc: "الطواف حول الكعبة سبعة أشواط، وصلاة ركعتين بعدها إن تيسر.",
+                umrahStep4Title: "السعي",
+                umrahStep4Desc: "السعي بين الصفا والمروة سبعة أشواط، تبدأ بالصفا وتنتهي بالمروة.",
+                umrahStep5Title: "حلق الشعر أو تقصيره",
+                umrahStep5Desc: "بعد إتمام السعي، يحلق الرجل رأسه أو يقصره، وتقص المرأة شيئاً من شعرها.",
+                umrahSuccess: "بهذا تتم العمرة، وتنتهي محظورات الإحرام ويجوز لبس الثياب العادية.",
+                umrahBenefitsTitle: "🌿 فضل العمرة وفوائدها",
+                umrahBenefit1Title: "🌿 عبادة عظيمة",
+                umrahBenefit1Desc: "زيارة بيت الله وأداء المناسك تجعل العمرة عبادة جليلة.",
+                umrahBenefit2Title: "🤲 تكفير الذنوب",
+                umrahBenefit2Desc: "ورد في الحديث أن العمرة إلى العمرة كفارة لما بينهما.",
+                umrahBenefit3Title: "❤️ القرب من الله",
+                umrahBenefit3Desc: "فرصة مباركة لطلب القرب من الله بالدعاء والذكر والطواف.",
+                umrahBenefit4Title: "🕋 زيارة البيت الحرام",
+                umrahBenefit4Desc: "فرصة نادرة للعبادة داخل المسجد الحرام وبالقرب من الكعبة.",
+                umrahPackageTitle: "🕋 باقات العمرة",
+                umrahGroupPkg: "باقة العمرة الجماعية",
+                umrahGroupDesc: "فرصة أداء العمرة بإشراف أساتذة ومشايخ ذوي خبرة.",
+                umrahIndPkg: "باقة العمرة الفردية",
+                umrahIndDesc: "ترتيبات سفر العمرة حسب الاحتياجات الشخصية.",
+                noteTitle: "ملاحظة:",
+                umrahNoteText: "ملاحظة: اطلب التوجيه اللازم من العلماء والمشايخ الثقات لضمان أداء كل مناسك العمرة بالشكل الصحيح.",
+
                 duaPageTitle: "الأدعية",
                 duaPageSubtitle: "أدعية لمختلف مواقف الحياة",
                 duaIntroTitle: "🤲 أدعية لحياتنا اليومية",
@@ -225,12 +291,45 @@
                 language: "🌐 भाषा",
 
                 prayerTimesTitle: "नमाज़ का समय",
-                fajr: "ফজ्र / فجر",
+                fajr: "फज्र",
                 sunrise: "सूर्योदय",
                 dhuhr: "जुहर",
                 asr: "असर",
                 maghrib: "मग़रिब",
                 isha: "इशा",
+
+                umrahPageTitle: "उमराह",
+                umrahSubtitle: "उमराह गाइड और जानकारी",
+                umrahIntroTitle: "उमराह करने का तरीका",
+                umrahIntroDesc: "अल्लाह के घर काबा की ज़ियारत करके विशेष तरीके से अदा की जाने वाली महान इबादत उमराह है।",
+                umrahStepsTitle: "🕋 उमराह के मुख्य चरण",
+                umrahStep1Title: "एहराम बाँधना",
+                umrahStep1Desc: "मीकात पर पहुँचने से पहले एहराम में प्रवेश करें और उमराह की नीयत करें।",
+                umrahStep2Title: "तल्बिया पढ़ना",
+                umrahStep2Desc: "नीयत करने के बाद तल्बिया पढ़ते हुए मस्जिदुल हराम की तरफ जाएँ।",
+                umrahStep3Title: "तवाफ़",
+                umrahStep3Desc: "काबा के सात चक्कर लगाकर तवाफ़ करें। संभव हो तो इसके बाद दो रकअत नमाज़ पढ़ें।",
+                umrahStep4Title: "सई",
+                umrahStep4Desc: "सफ़ा और मروہ के बीच सात फेरे पूरे करें। सफ़ा से शुरू होकर मروہ पर समाप्त होगा।",
+                umrahStep5Title: "बाल मुंडवाना या कतरवाना",
+                umrahStep5Desc: "सई पूरी करने के बाद पुरुष अपने बाल मुंडवाएँ या कतरवाएँ, और महिलाएँ अपने बालों के सिरे से थोड़ा काटें।",
+                umrahSuccess: "इसके साथ उमराह पूरा हो जाता है। एहराम की पाबंदियाँ समाप्त हो जाती हैं और सामान्य कपड़े पहने जा सकते हैं।",
+                umrahBenefitsTitle: "🌿 उमराह की फ़ज़ीलत और लाभ",
+                umrahBenefit1Title: "🌿 महान इबादत",
+                umrahBenefit1Desc: "काबा की ज़ियारत और इबादत करने से उमराह एक महान उपासना बनती है।",
+                umrahBenefit2Title: "🤲 गुनाहों की माफ़ी",
+                umrahBenefit2Desc: "हदीस में आया है कि एक उमराह से दूसरे उमराह के बीच के गुनाहों का कफ़्फ़ारा हो जाता है।",
+                umrahBenefit3Title: "❤️ अल्लाह के करीब होना",
+                umrahBenefit3Desc: "दुआ, ज़िक्र और तवाफ़ के ज़रिए अल्लाह का कुर्बत हासिल करने का बेहतरीन मौका है।",
+                umrahBenefit4Title: "🕋 पाक घर की ज़ियारत",
+                umrahBenefit4Desc: "मस्जिदुल हराम और काबा के करीब इबादत करने का दुर्लभ अवसर।",
+                umrahPackageTitle: "🕋 उमराह पैकेज",
+                umrahGroupPkg: "ग्रुप उमराह पैकेज",
+                umrahGroupDesc: "तजुर्बेकार उस्तादों की देखरेख में उमराह करने की सहूलियत।",
+                umrahIndPkg: "व्यक्तिगत उमराह पैकेज",
+                umrahIndDesc: "निजी ज़रूरतों के अनुसार उमराह यात्रा की व्यवस्था।",
+                noteTitle: "ध्यान दें:",
+                umrahNoteText: "ध्यान दें: उमराह का हर कर्म सही तरीके से अदा करने के लिए विश्वसनीय उलमा और उस्तादों से मार्गदर्शन लें।",
 
                 duaPageTitle: "दुआएँ",
                 duaPageSubtitle: "जीवन की विभिन्न परिस्थितियों के लिए दुआएँ",
@@ -320,6 +419,39 @@
                 maghrib: "مغرب",
                 isha: "عشاء",
 
+                umrahPageTitle: "عمرہ",
+                umrahSubtitle: "عمرہ گائیڈ اور معلومات",
+                umrahIntroTitle: "عمرہ ادا کرنے کا طریقہ",
+                umrahIntroDesc: "عمرہ ایک عظیم عبادت ہے جو بیت اللہ کی زیارت اور مخصوص طریقے سے ادا کی جاتی ہے۔",
+                umrahStepsTitle: "🕋 عمرہ کے اہم مراحل",
+                umrahStep1Title: "احرام باندھنا",
+                umrahStep1Desc: "میقات پر پہنچنے سے پہلے احرام میں داخل ہوں اور عمرہ کی نیت کریں۔",
+                umrahStep2Title: "تلبیہ پڑھنا",
+                umrahStep2Desc: "نیت کرنے کے بعد تلبیہ پڑھتے ہوئے مسجد الحرام کی طرف روانہ ہوں۔",
+                umrahStep3Title: "طواف",
+                umrahStep3Desc: "خانہ ک的ہ کا سات بار طواف کریں۔ اگر ممکن ہو تو دو رکعت نفل ادا کریں۔",
+                umrahStep4Title: "سعی",
+                umrahStep4Desc: "صفا اور مروہ کے درمیان سات چکر پورے کریں۔ صفا سے شروع ہوکر مروہ پر ختم ہوگا۔",
+                umrahStep5Title: "بال منڈوانا یا کتروانا",
+                umrahStep5Desc: "سعی مکمل کرنے کے بعد مرد اپنے بال منڈوائیں یا کتروائیں، اور خواتین اپنے بالوں کے سرے سے کچھ حصہ کاٹیں۔",
+                umrahSuccess: "اس کے ساتھ عمرہ مکمل ہوجاتا ہے۔ احرام کی پابندیاں ختم ہوجاتی ہیں اور عام لباس پہنا جاسکتا ہے۔",
+                umrahBenefitsTitle: "🌿 عمرہ کی فضیلت اور فوائد",
+                umrahBenefit1Title: "🌿 عظیم عبادت",
+                umrahBenefit1Desc: "بیت اللہ کی زیارت اور مناسک کی ادائیگی عمرہ کو ایک عظیم عبادت بناتی ہے۔",
+                umrahBenefit2Title: "🤲 گناہوں کی معافی",
+                umrahBenefit2Desc: "احادیث میں آیا ہے کہ ایک عمرہ سے دوسرا عمرہ درمیان کے گناہوں کا کفارہ بن جاتا ہے۔",
+                umrahBenefit3Title: "❤️ اللہ سے قربت",
+                umrahBenefit3Desc: "دعا، ذکر اور طواف کے ذریعے اللہ کا قرب حاصل کرنے کا بہترین موقع ہے۔",
+                umrahBenefit4Title: "🕋 مقدس گھر کی زیارت",
+                umrahBenefit4Desc: "مسجد الحرام اور خانہ کعبہ کے قریب عبادت کرنے کا نادر موقع۔",
+                umrahPackageTitle: "🕋 عمرہ پیکجز",
+                umrahGroupPkg: "گروپ عمرہ پیکج",
+                umrahGroupDesc: "تجربہ کار علماء اور اساتذہ کی نگرانی میں عمرہ ادائیگی کی سہولت۔",
+                umrahIndPkg: "انفرادی عمرہ پیکج",
+                umrahIndDesc: "ذاتی ضروریات کے مطابق عمرہ سفر کے انتظامات۔",
+                noteTitle: "وجہ توجہ / نوٹ:",
+                umrahNoteText: "نوٹ: عمرہ کا ہر رکن صحیح طریقے سے انجام دینے کے لیے قابل اعتماد علماء سے رہنمائی لیں۔",
+
                 duaPageTitle: "دعائیں",
                 duaPageSubtitle: "زندگی کے مختلف حالات کے لیے دعائیں",
                 duaIntroTitle: "🤲 ہماری روزمرہ زندگی کی دعائیں",
@@ -408,127 +540,37 @@
                 maghrib: "மஃக்ரிப்",
                 isha: "இஷா",
 
-                duaPageTitle: "துஆக்கள்",
-                duaPageSubtitle: "வாழ்க்கையின் பல்வேறு சூழ்நிலைகளுக்கான துஆக்கள்",
-                duaIntroTitle: "🤲 நம் அன்றாட வாழ்க்கைக்கான துஆக்கள்",
-                duaIntroText: "அல்லாஹ்விடம் உதவி கேட்டு, நமது எல்லா காரியங்களிலும் அவனையே நம்புவோம்.",
-                duaHome: "🏠 ஸலவாத் முகப்பு",
+                umrahPageTitle: "உம்ரா",
+                umrahSubtitle: "உம்ரா வழிகாட்டி மற்றும் தகவல்கள்",
+                umrahIntroTitle: "உம்ரா நிறைவேற்றும் முறை",
+                umrahIntroDesc: "அல்லாஹ்வின் இல்லமான கஅபாவை சந்தித்து குறிப்பிட்ட முறையில் நிறைவேற்றப்படும் மகத்தான வழிபாடு உம்ரா ஆகும்.",
+                umrahStepsTitle: "🕋 உம்ராவின் முக்கிய கட்டங்கள்",
+                umrahStep1Title: "இஹ்ராம் அணிவது",
+                umrahStep1Desc: "மீகாத்தை அடைவதற்கு முன் இஹ்ராமில் நுழைந்து உம்ராவிற்கான நிய்யத் செய்யவும்.",
+                umrahStep2Title: "தல்பியா ஓதுவது",
+                umrahStep2Desc: "நிய்யத் செய்த பின் தல்பியா ஓதிக்கொண்டு மஸ்ஜிதுல் ஹராமை நோக்கிச் செல்லவும்.",
+                umrahStep3Title: "த்வாஃப்",
+                umrahStep3Desc: "கஅபாவைச் சுற்றி ஏழு முறை த்வாஃப் செய்யவும். முடிந்தால் அதன் பிறகு இரண்டு ரக்அத் தொழுகை தொழுது கொள்ளவும்.",
+                umrahStep4Title: "ஸஃய்",
+                umrahStep4Desc: "ஸஃபா முதல் மர்வா வரையிலும், மர்வா முதல் ஸஃபா வரையிலும் நடந்து ஏழு சுற்றுகளை முடிக்கவும்.",
+                umrahStep5Title: "முடி வெட்டுவது / குறைப்பது",
+                umrahStep5Desc: "ஸஃய் முடிந்த பின் ஆண்கள் தலையை மழிக்கவோ அல்லது முடியைக் குறைக்கவோ வேண்டும். பெண்கள் தங்கள் முடியின் நுனியிலிருந்து சிறிது வெட்ட வேண்டும்.",
+                umrahSuccess: "இதனுடன் உம்ரா நிறைவடைகிறது. இஹ்ராமின் தடைகள் நீங்கி சாதாரண ஆடைகளுக்கு மாறலாம்.",
+                umrahBenefitsTitle: "🌿 உம்ராவின் சிறப்புகளும் பலன்களும்",
+                umrahBenefit1Title: "🌿 மகத்தான வழிபாடு",
+                umrahBenefit1Desc: "கஅபாவைச் சந்தித்து வணங்குவதன் மூலம் உம்ரா ஒரு சிறந்த வணக்கமாகிறது.",
+                umrahBenefit2Title: "🤲 பாவமன்னிப்பு",
+                umrahBenefit2Desc: "ஒரு உம்ராவிற்கும் அடுத்த உம்ராவிற்கும் இடையே ஏற்படும் பாவங்களுக்கே உம்ரா பரிகாரமாகும் என ஹதீஸில் வந்துள்ளது.",
+                umrahBenefit3Title: "❤️ அல்லாஹ்வை நெருங்குதல்",
+                umrahBenefit3Desc: "துஆ, திக்ர், த்வாஃப் மற்றும் ஸஃய் மூலம் அல்லாஹ்வின் நெருக்கத்தைப் பெற இது ஒரு அருமையான வாய்ப்பாகும்.",
+                umrahBenefit4Title: "🕋 புனித இல்லத்தின் தரிசனம்",
+                umrahBenefit4Desc: "மஸ்ஜிதுல் ஹராமிலும் கஅபாவின் அருகிலும் வணக்கத்தில் ஈடுபடுவதற்கான அரிய வாய்ப்பு.",
+                umrahPackageTitle: "🕋 உம்ரா தொகுப்புகள் (Packages)",
+                umrahGroupPkg: "குழு உம்ரா தொகுப்பு (Group Umrah Package)",
+                umrahGroupDesc: "அனுபவமிக்க உஸ்தாந்துகளின் வழிகாட்டுதலின் கீழ் உம்ரா நிறைவேற்றும் வசதி.",
+                umrahIndPkg: "தனிநபர் உம்ரா தொகுப்பு (Individual Umrah Package)",
+                umrahIndDesc: "தனிப்பட்ட தேவைகளுக்கு ஏற்ப உம்ரா பயண ஏற்பாடுகள்.",
+                noteTitle: "கவனிக்கவும்:",
+                umrahNoteText: "குறிப்பு: உம்ராவின் ஒவ்வொரு கிரியையையும் சரியான முறையில் நிறைவேற்ற நம்பகமான அறிஞர்கள் மற்றும் உஸ்தாந்துகளிடம் தேவையான வழிகாட்டுதலைப் பெறவும்.",
 
-                duaGeneral: "🌿 பொதுவான துஆக்கள்",
-                duaDebt: "💰 கடன் மற்றும் பொருளாதார சிரமங்கள்",
-                duaRizq: "💼 வாழ்வாதாரம் மற்றும் உணவாதாரம்",
-                duaHouse: "🏠 வீடு மற்றும் வாழ்க்கை",
-                duaTravel: "🚗 வாகனம் மற்றும் பயணம்",
-                duaWorry: "😟 கவலைகள் மற்றும் சிரமங்கள்",
-                duaProtection: "🛡️ பாதுகாப்பு",
-                duaParents: "❤️ பெற்றோருக்காக",
-                duaHealth: "🤍 ஆரோக்கியம் மற்றும் நோய்",
-                duaForgiveness: "🤍 மன்னிப்பும் தவ்பாவும்",
-                duaSleep: "🌙 உறங்குவதற்கு முன்",
-                duaMorning: "🌅 காலை",
-                duaGoodLife: "🌿 நல்ல வாழ்க்கைக்காக",
-
-                duaTitle1: "1. இம்மையிலும் மறுமையிலும் நன்மை",
-                duaTitle2: "2. அல்லாஹ்விடம் உதவி கேட்பது",
-                duaTitle3: "3. காரியங்கள் எளிதாக",
-                duaTitle4: "4. கடனை அடைத்து ஹலாலான செல்வம் பெற",
-                duaTitle5: "5. கடனிலிருந்து விடுபட",
-                duaTitle6: "6. நல்ல வாழ்வாதாரத்திற்காக",
-                duaTitle7: "7. பயனுள்ள கல்வியும் ஹலாலான வாழ்வாதாரமும்",
-                duaTitle8: "8. குடும்ப நலனுக்காக",
-                duaTitle9: "9. காரியங்கள் எளிதாக",
-                duaTitle10: "10. வாகனத்தில் ஏறும்போது",
-                duaTitle11: "11. பயணத்தைத் தொடங்கும்போது",
-                duaTitle12: "12. பயணத்தில் பாதுகாப்பிற்காக",
-                duaTitle13: "13. கவலையும் துன்பமும் ஏற்படும்போது",
-                duaTitle14: "14. சிரமத்தில் உதவி கேட்பது",
-                duaTitle15: "15. எல்லாத் தீமைகளிலிருந்தும் பாதுகாப்பு",
-                duaTitle16: "16. அல்லாஹ்வின் பாதுகாப்பைக் கோருதல்",
-                duaTitle17: "17. பெற்றோருக்கு அருள் வேண்டுதல்",
-                duaTitle18: "18. நல்ல ஆரோக்கியத்திற்காக",
-                duaTitle19: "19. நோய் குணமடைய",
-                duaTitle20: "20. பாவமன்னிப்புக் கோருதல்",
-                duaTitle21: "21. ஸய்யிதுல் இஸ்திக்ஃபார்",
-                duaTitle22: "22. உறங்குவதற்கு முன்",
-                duaTitle23: "23. காலையில் அல்லாஹ்வைப் புகழ்தல்",
-                duaTitle24: "24. உள்ளம் நிலைத்திருக்க",
-                duaTitle25: "25. திக்ர் மற்றும் வணக்கத்தில் உதவி"
-            }
-        }
-    };
-
-    function getLanguage() {
-        const saved = localStorage.getItem("swalath-language");
-        return LANGUAGES[saved] ? saved : "ml";
-    }
-
-    function applyLanguage(code) {
-        const lang = LANGUAGES[code] || LANGUAGES.ml;
-
-        document.documentElement.lang = code;
-        document.documentElement.dir = lang.dir;
-
-        document.querySelectorAll("[data-i18n]").forEach(function (el) {
-            const key = el.getAttribute("data-i18n");
-            const original = el.getAttribute("data-ml");
-            const translated = lang.translations[key];
-
-            if (code === "ml") {
-                if (original !== null) {
-                    el.textContent = original;
-                }
-            } else if (translated) {
-                el.textContent = translated;
-            } else if (original !== null) {
-                el.textContent = original;
-            }
-        });
-
-        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-            const key = el.getAttribute("data-i18n-placeholder");
-            const original = el.getAttribute("data-ml-placeholder");
-            const translated = lang.translations[key];
-
-            if (code === "ml") {
-                if (original !== null) {
-                    el.placeholder = original;
-                }
-            } else if (translated) {
-                el.placeholder = translated;
-            } else if (original !== null) {
-                el.placeholder = original;
-            }
-        });
-
-        document.dispatchEvent(new CustomEvent("swalath-language-changed", {
-            detail: { language: code }
-        }));
-    }
-
-    window.SwalathLanguage = {
-        supported: LANGUAGES,
-
-        getCurrent: getLanguage,
-
-        setLanguage: function (code) {
-            if (!LANGUAGES[code]) {
-                return false;
-            }
-
-            localStorage.setItem("swalath-language", code);
-            applyLanguage(code);
-            return true;
-        },
-
-        apply: applyLanguage,
-
-        t: function (key) {
-            const lang = LANGUAGES[getLanguage()];
-            return lang.translations[key] || key;
-        }
-    };
-
-    document.addEventListener("DOMContentLoaded", function () {
-        applyLanguage(getLanguage());
-    });
-})();
+                duaPageTitle: "
