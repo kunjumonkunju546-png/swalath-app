@@ -345,12 +345,11 @@ function showCollection(){
 }
 
 function goBack(){
-    if(location.hash && history.state && history.state.page === "swalath"){
-        history.back();
-    }else{
-        showCollection();
-        history.replaceState({page:"collection"}, "", location.pathname + location.search);
+    // ഹാഷ് നീക്കം ചെയ്ത് ലിസ്റ്റ് പേജിലേക്ക് മടങ്ങുക
+    if(location.hash){
+        history.pushState({page:"collection"}, "", location.pathname + location.search);
     }
+    showCollection();
 }
 
 function syncSwalathPage(){
