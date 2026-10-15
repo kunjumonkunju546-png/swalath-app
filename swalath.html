@@ -252,247 +252,243 @@ source:"Sahih al-Bukhari and Sahih Muslim."
 }
 };
 
-let currentSwalath=null;
-let currentSwalathForShare=null;
+let currentSwalath = null;
+let currentSwalathForShare = null;
 
 function getCurrentLanguage(){
- try{
-  if(window.SwalathLanguage&&typeof window.SwalathLanguage.getCurrent==="function"){
-   return window.SwalathLanguage.getCurrent()||"ml";
-  }
- }catch(e){}
- return localStorage.getItem("swalath-language")||"ml";
+    try{
+        if(window.SwalathLanguage &&
+           typeof window.SwalathLanguage.getCurrent === "function"){
+            return window.SwalathLanguage.getCurrent() || "ml";
+        }
+    }catch(e){}
+    return localStorage.getItem("swalath-language") || "ml";
 }
 
 function isMalayalam(){
- return getCurrentLanguage()==="ml";
+    return getCurrentLanguage() === "ml";
 }
 
 function getDisplayData(key){
- const d=swalathData[key];
- if(!d)return null;
+    const d = swalathData[key];
+    if(!d) return null;
 
- const en=englishSwalathData[key]||{};
+    const en = englishSwalathData[key] || {};
 
- return {
-  name:d.name,
-  arabic:d.arabic,
-  pronunciation:isMalayalam()?d.pronunciation:(en.pronunciation||d.pronunciation),
-  meaning:isMalayalam()?d.meaning:(en.meaning||d.meaning),
-  fadheela:isMalayalam()?d.fadheela:(en.fadheela||d.fadheela),
-  source:isMalayalam()?d.source:(en.source||d.source)
- };
+    return {
+        name: d.name,
+        arabic: d.arabic,
+        pronunciation: isMalayalam() ? d.pronunciation : (en.pronunciation || d.pronunciation),
+        meaning: isMalayalam() ? d.meaning : (en.meaning || d.meaning),
+        fadheela: isMalayalam() ? d.fadheela : (en.fadheela || d.fadheela),
+        source: isMalayalam() ? d.source : (en.source || d.source)
+    };
 }
 
-function openSwalath(key,addHistory=true){
- if(!swalathData[key])return;
+function openSwalath(key, addHistory = true){
+    if(!swalathData[key]) return;
 
- currentSwalath=key;
- const d=getDisplayData(key);
+    currentSwalath = key;
+    const d = getDisplayData(key);
 
- currentSwalathForShare={
-  title:d.name,
-  arabic:d.arabic,
-  pronunciation:d.pronunciation,
-  meaning:d.meaning,
-  extra:d.fadheela
- };
+    currentSwalathForShare = {
+        title: d.name,
+        arabic: d.arabic,
+        pronunciation: d.pronunciation,
+        meaning: d.meaning,
+        extra: d.fadheela
+    };
 
- if(addHistory){
-  history.pushState(
-   {page:"swalath",swalath:key},
-   "",
-   location.pathname+"#"+encodeURIComponent(key)
-  );
- }
+    if(addHistory){
+        history.pushState(
+            {page:"swalath", swalath:key},
+            "",
+            location.pathname + location.search + "#" + encodeURIComponent(key)
+        );
+    }
 
- document.getElementById("collectionPage").style.display="none";
- document.getElementById("detailPage").style.display="block";
+    document.getElementById("collectionPage").style.display = "none";
+    document.getElementById("detailPage").style.display = "block";
 
- const title=document.getElementById("detailTitle");
- title.textContent=d.name;
- title.lang="ar";
- title.dir="rtl";
+    const title = document.getElementById("detailTitle");
+    title.textContent = d.name;
+    title.lang = "ar";
+    title.dir = "rtl";
 
- const arabicText=document.getElementById("arabicText");
- arabicText.textContent=d.arabic;
- arabicText.lang="ar";
- arabicText.dir="rtl";
+    const arabicText = document.getElementById("arabicText");
+    arabicText.textContent = d.arabic;
+    arabicText.lang = "ar";
+    arabicText.dir = "rtl";
 
- document.getElementById("pronunciationText").textContent=d.pronunciation;
- document.getElementById("meaningText").textContent=d.meaning;
- document.getElementById("fadheelaText").textContent=d.fadheela;
- document.getElementById("sourceText").textContent=d.source;
+    document.getElementById("pronunciationText").textContent = d.pronunciation;
+    document.getElementById("meaningText").textContent = d.meaning;
+    document.getElementById("fadheelaText").textContent = d.fadheela;
+    document.getElementById("sourceText").textContent = d.source;
 
- document.getElementById("countNumber").textContent=
-  localStorage.getItem("swalath_count_"+key)||"0";
+    document.getElementById("countNumber").textContent =
+        localStorage.getItem("swalath_count_" + key) || "0";
 
- document.getElementById("pdfArea").innerHTML=
-  key==="bashair"
-   ?'<a href="bashairul-khairat.pdf" target="_blank" rel="noopener" class="pdf-button">📖 Bashairul Khairat — Full PDF</a>'
-   :"";
+    document.getElementById("pdfArea").innerHTML =
+        key === "bashair"
+        ? '<a href="bashairul-khairat.pdf" target="_blank" rel="noopener" class="pdf-button">📖 Bashairul Khairat — Full PDF</a>'
+        : "";
 
- updateFavoriteButtonText();
+    updateFavoriteButtonText();
 }
 
 function showCollection(){
- document.getElementById("detailPage").style.display="none";
- document.getElementById("collectionPage").style.display="block";
+    document.getElementById("detailPage").style.display = "none";
+    document.getElementById("collectionPage").style.display = "block";
 
- currentSwalath=null;
- currentSwalathForShare=null;
+    currentSwalath = null;
+    currentSwalathForShare = null;
 
- // പട്ടികയിലെ എല്ലാ സ്വലാത്ത് പേരുകളും അറബിയിൽ നിലനിർത്തുക
- document.querySelectorAll(".swalath-card h3, .swalath-card span").forEach(function(el){
-  el.setAttribute("lang","ar");
-  el.setAttribute("dir","rtl");
- });
-}
-
-function goBack(){
- if(location.hash && history.state && history.state.page==="swalath"){
-  history.back();
- }else{
-  showCollection();
-  history.replaceState({page:"collection"},"",location.pathname);
- }
-}
-
-window.addEventListener("popstate",function(){
- const key=decodeURIComponent(location.hash.replace("#",""));
-
- if(key && swalathData[key]){
-  openSwalath(key,false);
- }else{
-  showCollection();
- }
-});
-
-function countSwalath(){
- if(!currentSwalath)return;
-
- const k="swalath_count_"+currentSwalath;
- const n=parseInt(localStorage.getItem(k)||"0",10)+1;
-
- localStorage.setItem(k,String(n));
- document.getElementById("countNumber").textContent=n;
-}
-
-function resetCount(){
- if(!currentSwalath)return;
-
- localStorage.setItem("swalath_count_"+currentSwalath,"0");
- document.getElementById("countNumber").textContent="0";
-}
-
-function favoriteSwalath(){
- if(!currentSwalath)return;
-
- let a=[];
- try{
-  a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]");
- }catch(e){}
-
- if(!Array.isArray(a))a=[];
-
- const i=a.indexOf(currentSwalath);
- if(i>=0)a.splice(i,1);
- else a.push(currentSwalath);
-
- localStorage.setItem("swalathFavorites",JSON.stringify(a));
- updateFavoriteButtonText();
-}
-
-function updateFavoriteButtonText(){
- const b=document.getElementById("favoriteButton");
- if(!b||!currentSwalath)return;
-
- let a=[];
- try{
-  a=JSON.parse(localStorage.getItem("swalathFavorites")||"[]");
- }catch(e){}
-
- if(!Array.isArray(a))a=[];
-
- const yes=a.includes(currentSwalath);
- b.classList.toggle("active",yes);
- b.textContent=yes
-  ?"❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്"
-  :"♡ Favourite ആയി ചേർക്കുക";
-}
-
-function searchSwalath(){
- const input=document.getElementById("searchInput");
- if(!input)return;
-
- const q=input.value.toLowerCase().trim();
-
- document.querySelectorAll(".swalath-card").forEach(card=>{
-  card.style.display=card.textContent.toLowerCase().includes(q)?"block":"none";
- });
-}
-
-async function shareCurrentSwalath(){
- if(!currentSwalathForShare){
-  alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
-  return;
- }
-
- if(typeof shareIslamicCard==="function"){
-  await shareIslamicCard(currentSwalathForShare);
- }else{
-  alert("Share Card സംവിധാനം ലഭ്യമല്ല.");
- }
-}
-
-async function saveCurrentSwalathCard(){
- if(!currentSwalathForShare){
-  alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
-  return;
- }
-
- if(typeof saveIslamicCard==="function"){
-  await saveIslamicCard(currentSwalathForShare);
- }else{
-  alert("Save Image സംവിധാനം ലഭ്യമല്ല.");
- }
-}
-
-document.addEventListener("DOMContentLoaded", function(){
-showCollection();
-forceArabicCollection();
-});
-
-function forceArabicCollection(){
-document.querySelectorAll(".swalath-card h3, .swalath-card span").forEach(function(el){
-el.lang = "ar";
-el.dir = "rtl";
-el.style.direction = "rtl";
-});
-}
-
-window.addEventListener("pageshow", function(){
-if(!location.hash){
-showCollection();
-forceArabicCollection();
-}
-});
-
-
-if(key && swalathData[key]){
-    openSwalath(key, false);
-} else {
-    showCollection();
     forceArabicCollection();
 }
 
+function goBack(){
+    if(location.hash && history.state && history.state.page === "swalath"){
+        history.back();
+    }else{
+        showCollection();
+        history.replaceState({page:"collection"}, "", location.pathname + location.search);
+    }
+}
+
+function forceArabicCollection(){
+    document.querySelectorAll(".swalath-card h3, .swalath-card span")
+        .forEach(function(el){
+            el.setAttribute("lang", "ar");
+            el.setAttribute("dir", "rtl");
+            el.style.direction = "rtl";
+        });
+}
+
+function syncSwalathPage(){
+    let key = "";
+
+    try{
+        key = decodeURIComponent(location.hash.slice(1));
+    }catch(e){
+        key = "";
+    }
+
+    if(key && swalathData[key]){
+        openSwalath(key, false);
+    }else{
+        showCollection();
+    }
+}
+
+window.addEventListener("popstate", function(){
+    syncSwalathPage();
 });
 
-window.addEventListener("pageshow",function(){
- if(!location.hash){
-  showCollection();
- }
+document.addEventListener("DOMContentLoaded", function(){
+    syncSwalathPage();
 });
+
+window.addEventListener("pageshow", function(){
+    syncSwalathPage();
+});
+
+function countSwalath(){
+    if(!currentSwalath) return;
+
+    const k = "swalath_count_" + currentSwalath;
+    const n = parseInt(localStorage.getItem(k) || "0", 10) + 1;
+
+    localStorage.setItem(k, String(n));
+    document.getElementById("countNumber").textContent = n;
+}
+
+function resetCount(){
+    if(!currentSwalath) return;
+
+    localStorage.setItem("swalath_count_" + currentSwalath, "0");
+    document.getElementById("countNumber").textContent = "0";
+}
+
+function favoriteSwalath(){
+    if(!currentSwalath) return;
+
+    let a = [];
+
+    try{
+        a = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
+    }catch(e){}
+
+    if(!Array.isArray(a)) a = [];
+
+    const i = a.indexOf(currentSwalath);
+
+    if(i >= 0){
+        a.splice(i, 1);
+    }else{
+        a.push(currentSwalath);
+    }
+
+    localStorage.setItem("swalathFavorites", JSON.stringify(a));
+    updateFavoriteButtonText();
+}
+
+function updateFavoriteButtonText(){
+    const b = document.getElementById("favoriteButton");
+    if(!b || !currentSwalath) return;
+
+    let a = [];
+
+    try{
+        a = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
+    }catch(e){}
+
+    if(!Array.isArray(a)) a = [];
+
+    const yes = a.includes(currentSwalath);
+
+    b.classList.toggle("active", yes);
+    b.textContent = yes
+        ? "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്"
+        : "♡ Favourite ആയി ചേർക്കുക";
+}
+
+function searchSwalath(){
+    const input = document.getElementById("searchInput");
+    if(!input) return;
+
+    const q = input.value.toLowerCase().trim();
+
+    document.querySelectorAll(".swalath-card").forEach(function(card){
+        card.style.display =
+            card.textContent.toLowerCase().includes(q) ? "block" : "none";
+    });
+}
+
+async function shareCurrentSwalath(){
+    if(!currentSwalathForShare){
+        alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
+        return;
+    }
+
+    if(typeof shareIslamicCard === "function"){
+        await shareIslamicCard(currentSwalathForShare);
+    }else{
+        alert("Share Card സംവിധാനം ലഭ്യമല്ല.");
+    }
+}
+
+async function saveCurrentSwalathCard(){
+    if(!currentSwalathForShare){
+        alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
+        return;
+    }
+
+    if(typeof saveIslamicCard === "function"){
+        await saveIslamicCard(currentSwalathForShare);
+    }else{
+        alert("Save Image സംവിധാനം ലഭ്യമല്ല.");
+    }
+}
 </script>
 
 </body>
