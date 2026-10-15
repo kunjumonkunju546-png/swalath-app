@@ -458,8 +458,36 @@ async function saveCurrentSwalathCard(){
  }
 }
 
-document.addEventListener("DOMContentLoaded",function(){
- showCollection();
+document.addEventListener("DOMContentLoaded", function(){
+showCollection();
+forceArabicCollection();
+});
+
+function forceArabicCollection(){
+document.querySelectorAll(".swalath-card h3, .swalath-card span").forEach(function(el){
+el.lang = "ar";
+el.dir = "rtl";
+el.style.direction = "rtl";
+});
+}
+
+window.addEventListener("pageshow", function(){
+if(!location.hash){
+showCollection();
+forceArabicCollection();
+}
+});
+
+window.addEventListener("popstate", function(){
+const key = decodeURIComponent(location.hash.replace("#", ""));
+
+if(key && swalathData[key]){
+    openSwalath(key, false);
+} else {
+    showCollection();
+    forceArabicCollection();
+}
+
 });
 
 window.addEventListener("pageshow",function(){
