@@ -78,16 +78,16 @@
 
         .advertising-page { display: none; }
         .advertising-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 10px; cursor: pointer; font-size: 13px; }
+        .advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; }
         .advertising-card { background: white; border: 1px solid #e6dfd0; border-radius: 20px; padding: 20px 17px; margin-bottom: 14px; box-shadow: 0 5px 18px rgba(18,61,52,.05); }
         .advertising-title { text-align: center; color: #123d34; margin-bottom: 8px; font-size: 18px; }
         .advertising-subtitle { text-align: center; color: #9b7932; font-size: 13px; letter-spacing: .5px; margin-bottom: 18px; font-weight: bold; }
-        .advertising-card h3 { color: #123d34; font-size: 17px; margin-bottom: 12px; }
+        .advertising-card h3 { color: #123d34; font-size: 17px; margin-bottom: 12px; font-family: 'Amiri', serif; }
         .advertising-card p { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 10px; }
         .advertising-list { list-style: none; padding: 0; margin: 0; }
         .advertising-list li { font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
         .advertising-contact { text-align: center; background: #123d34; color: white; border-radius: 20px; padding: 22px 15px; margin-bottom: 14px; }
-        .advertising-contact h3 { color: white; margin-bottom: 12px; }
+        .advertising-contact h3 { color: white; margin-bottom: 12px; font-family: 'Amiri', serif; }
         .advertising-contact p { color: white; margin-bottom: 8px; }
         .advertising-contact a { display: inline-block; text-decoration: none; background: #f1dfb0; color: #123d34; padding: 11px 20px; border-radius: 25px; font-size: 13px; font-weight: bold; margin-top: 8px; }
         .advertising-footer { text-align: center; padding: 10px 5px 20px; color: #777; font-size: 12px; line-height: 1.7; }
@@ -179,25 +179,35 @@
         .welcome h2 { margin: 0 0 5px; color: var(--sw-green); font-size: 22px; font-weight: 800; }
         .welcome p { margin: 0; color: var(--sw-muted); font-size: 13px; line-height: 1.9; }
 
+        /* PREMIUM COUNTER DESIGN */
         .today {
             position: relative;
             overflow: hidden;
             margin: 12px 0 20px;
-            padding: 24px 16px 23px;
+            padding: 26px 16px 24px;
             text-align: center;
             color: #fffaf0;
-            background: radial-gradient(circle at 100% 0, rgba(241, 223, 176, .18), transparent 45%), linear-gradient(135deg, #123d34, #1b5648);
-            border: 1px solid rgba(197, 168, 104, .4);
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(18, 61, 52, .12);
+            background: radial-gradient(circle at 100% 0, rgba(241, 223, 176, .2), transparent 45%), linear-gradient(135deg, #0f362e, #185042);
+            border: 2px solid rgba(197, 168, 104, .5);
+            border-radius: 26px;
+            box-shadow: 0 12px 30px rgba(18, 61, 52, .18);
         }
-        .today .small-title { color: #f1dfb0; font-size: 11px; font-weight: 800; letter-spacing: 3px; }
-        .today h2 { margin: 2px 0 0; color: #fff; font-size: 48px; line-height: 1.35; font-weight: 800; font-variant-numeric: tabular-nums; }
-        .today p { margin: 2px 0 16px; color: #e7eee8; font-size: 13px; }
+        .today .small-title { color: #f1dfb0; font-size: 12px; font-weight: 800; letter-spacing: 3px; font-family: 'Amiri', serif; }
+        .today h2 { 
+            margin: 6px 0; 
+            color: #fff; 
+            font-size: 54px; 
+            line-height: 1.2; 
+            font-weight: 800; 
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            letter-spacing: 1px;
+        }
+        .today p { margin: 0 0 16px; color: #f0ecd9; font-size: 13px; font-weight: 600; }
         .today button {
             min-height: 46px;
-            padding: 12px 26px;
-            border: 1px solid rgba(255, 255, 255, .4);
+            padding: 12px 28px;
+            border: 1px solid rgba(255, 255, 255, .5);
             border-radius: 30px;
             background: #f5e2b3;
             color: #123d34;
@@ -205,7 +215,7 @@
             font-weight: 800;
             cursor: pointer;
             transition: transform .18s ease, box-shadow .18s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
         .today button:active { transform: scale(.97); }
 
@@ -284,7 +294,7 @@
         }
 
         #collectionSection, #favoritesSection, #advertisingSection { padding-top: 22px; padding-bottom: 20px; }
-        #collectionSection h2, #favoritesSection h2 { color: var(--sw-green); font-size: 20px; }
+        #collectionSection h2, #favoritesSection h2 { color: var(--sw-green); font-size: 22px; font-family: 'Amiri', serif; }
         .search-box { min-height: 48px; border-radius: 16px; background: var(--sw-card); border-color: var(--sw-border); }
         .search-box:focus { border-color: var(--sw-gold); box-shadow: 0 0 0 4px rgba(197, 168, 104, .15); }
         #travelSection { margin: 18px 0 25px; padding: 24px 18px; border-radius: 24px; box-shadow: 0 6px 20px rgba(18, 61, 52, .07); }
@@ -405,7 +415,7 @@
             </section>
 
             <section class="today">
-                <div class="small-title" data-i18n="today" data-ml="TODAY">TODAY</div>
+                <div class="small-title">مُعَدَّدُ الصَّلَوَات (COUNTER)</div>
                 <h2 id="count">0</h2>
                 <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
                 <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
@@ -473,7 +483,7 @@
             <section id="collectionSection" style="display:none;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
                     <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                    <h2 style="margin:0;">Swalath Collection</h2>
+                    <h2 style="margin:0; font-family:'Amiri', serif;">مَجْمُوعَةُ الصَّلَوَات</h2>
                 </div>
                 <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()">
                 <div id="collectionList"></div>
@@ -483,7 +493,7 @@
             <section id="favoritesSection" style="display:none;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
                     <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                    <h2 style="margin:0;">❤️ My Favourites</h2>
+                    <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2>
                 </div>
                 <div id="favoritesList"></div>
             </section>
@@ -492,15 +502,15 @@
             <section id="advertisingSection" class="advertising-page">
                 <div class="advertising-header">
                     <button class="advertising-back" onclick="closeAdvertising()">← Back</button>
-                    <h2 style="margin:0;">Advertise With Us</h2>
+                    <h2 style="margin:0; font-family:'Amiri', serif;">الإعلان معنا</h2>
                 </div>
                 <div class="advertising-card">
-                    <h2 class="advertising-title">🌍 NAZYAN GLOBAL ADVERTISING</h2>
+                    <h2 class="advertising-title" style="font-family:'Amiri', serif;">النَّزْيَان عَالَمِي لِلإِعْلَانَات</h2>
                     <p class="advertising-subtitle">Reach Global, GCC & Worldwide Audience</p>
                     <p>നിങ്ങളുടെ business അല്ലെങ്കിൽ സ്ഥാപനത്തെ കേരളം, ജി.സി.സി (GCC) രാജ്യങ്ങൾ, കൂടാതെ ലോകമെമ്പാടുമുള്ള ആഗോള ഓഡിയൻസിലേക്ക് (Global Audience) ഏറ്റവും professional ആയ രീതിയിൽ എത്തിക്കാം.</p>
                 </div>
                 <div class="advertising-card">
-                    <h3>✨ Why Partner With Us?</h3>
+                    <h3 style="font-family:'Amiri', serif;">✨ لماذا الشراكة معنا؟</h3>
                     <ul class="advertising-list">
                         <li>✅ Global & GCC Target Audience Reach</li>
                         <li>✅ High-trust Islamic & Spiritual Platform</li>
@@ -510,7 +520,7 @@
                     </ul>
                 </div>
                 <div class="advertising-card">
-                    <h3>🏢 Ideal Business Sectors</h3>
+                    <h3 style="font-family:'Amiri', serif;">🏢 القطاعات التجارية المستهدفة</h3>
                     <ul class="advertising-list">
                         <li>🍽️ Halal Restaurants & Foods</li>
                         <li>🕋 Umrah & Hajj Services</li>
@@ -521,7 +531,7 @@
                     </ul>
                 </div>
                 <div class="advertising-card">
-                    <h3>📦 Advertising Packages</h3>
+                    <h3 style="font-family:'Amiri', serif;">📦 باقات الإعلان</h3>
                     <ul class="advertising-list">
                         <li>1 Month — Flash Global Promo</li>
                         <li>3 Months — Quarterly Growth</li>
@@ -531,7 +541,7 @@
                     <p>കൂടുതൽ വിവരങ്ങൾക്കും പ്രൈസിംഗിനും ഞങ്ങളെ WhatsApp വഴി ബന്ധപ്പെടുക.</p>
                 </div>
                 <div class="advertising-contact">
-                    <h3>📲 Connect With Our Media Team</h3>
+                    <h3 style="font-family:'Amiri', serif;">📲 تواصل مع فريق الإعلام لدينا</h3>
                     <p><strong>WhatsApp</strong></p>
                     <p>+91 9946010375</p>
                     <a href="https://wa.me/919946010375?text=Hello,%20I%20want%20to%20advertise%20on%20Swalath%20App" target="_blank" rel="noopener">Chat on WhatsApp</a>
@@ -557,7 +567,7 @@
         </footer>
     </div>
 
-   <script>
+    <script>
         /* LOCAL DATE */
         function getLocalDateString() {
             const now = new Date();
@@ -652,10 +662,8 @@
                 const screen = document.getElementById("languageScreen");
                 if (screen) screen.style.display = "none";
                 
-                // Trigger language change event if supported by language.js
                 document.dispatchEvent(new CustomEvent("swalath-language-changed", { detail: selectedLang }));
                 
-                // If language.js has a apply function, call it
                 if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
                     window.SwalathLanguage.apply(selectedLang);
                 } else {
@@ -798,7 +806,7 @@
             } catch (error) { favorites = []; }
 
             if (favorites.length === 0) {
-                list.innerHTML = `<div style="text-align:center; padding:25px; color:#777; background:white; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.03);">ഇതുവരെ Favourite ഒന്നുമില്ല ❤️</div>`;
+                list.innerHTML = `<div style="text-align:center; padding:25px; color:#777; background:white; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.03); font-family:'Amiri', serif;">لا توجد مفضلات حتى الآن ❤️</div>`;
                 return;
             }
             favorites.forEach(function(key) {
