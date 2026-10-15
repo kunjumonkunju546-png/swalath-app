@@ -429,7 +429,7 @@
                 umrahStep2Title: "تلبیہ پڑھنا",
                 umrahStep2Desc: "نیت کرنے کے بعد تلبیہ پڑھتے ہوئے مسجد الحرام کی طرف روانہ ہوں۔",
                 umrahStep3Title: "طواف",
-                umrahStep3Desc: "خانہ ک的ہ کا سات بار طواف کریں۔ اگر ممکن ہو تو دو رکعت نفل ادا کریں۔",
+                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو তো دو رکعت نفل ادا کریں۔",
                 umrahStep4Title: "سعی",
                 umrahStep4Desc: "صفا اور مروہ کے درمیان سات چکر پورے کریں۔ صفا سے شروع ہوکر مروہ پر ختم ہوگا۔",
                 umrahStep5Title: "بال منڈوانا یا کتروانا",
@@ -449,7 +449,7 @@
                 umrahGroupDesc: "تجربہ کار علماء اور اساتذہ کی نگرانی میں عمرہ ادائیگی کی سہولت۔",
                 umrahIndPkg: "انفرادی عمرہ پیکج",
                 umrahIndDesc: "ذاتی ضروریات کے مطابق عمرہ سفر کے انتظامات۔",
-                noteTitle: "وجہ توجہ / نوٹ:",
+                noteTitle: "نوٹ:",
                 umrahNoteText: "نوٹ: عمرہ کا ہر رکن صحیح طریقے سے انجام دینے کے لیے قابل اعتماد علماء سے رہنمائی لیں۔",
 
                 duaPageTitle: "دعائیں",
@@ -573,4 +573,127 @@
                 noteTitle: "கவனிக்கவும்:",
                 umrahNoteText: "குறிப்பு: உம்ராவின் ஒவ்வொரு கிரியையையும் சரியான முறையில் நிறைவேற்ற நம்பகமான அறிஞர்கள் மற்றும் உஸ்தாந்துகளிடம் தேவையான வழிகாட்டுதலைப் பெறவும்.",
 
-                duaPageTitle: "
+                duaPageTitle: "துஆக்கள்",
+                duaPageSubtitle: "வாழ்க்கையின் பல்வேறு சூழ்நிலைகளுக்கான துஆக்கள்",
+                duaIntroTitle: "🤲 நம் அன்றாட வாழ்க்கைக்கான துஆக்கள்",
+                duaIntroText: "அல்லாஹ்விடம் உதவி கேட்டு, நமது எல்லா காரியங்களிலும் அவனையே நம்புவோம்.",
+                duaHome: "🏠 ஸலவாத் முகப்பு",
+
+                duaGeneral: "🌿 பொதுவான துஆக்கள்",
+                duaDebt: "💰 கடன் மற்றும் பொருளாதார சிரமங்கள்",
+                duaRizq: "💼 வாழ்வாதாரம் மற்றும் உணவாதாரம்",
+                duaHouse: "🏠 வீடு மற்றும் வாழ்க்கை",
+                duaTravel: "🚗 வாகனம் மற்றும் பயணம்",
+                duaWorry: "😟 கவலைகள் மற்றும் சிரமங்கள்",
+                duaProtection: "🛡️ பாதுகாப்பு",
+                duaParents: "❤️ பெற்றோருக்காக",
+                duaHealth: "🤍 ஆரோக்கியம் மற்றும் நோய்",
+                duaForgiveness: "🤍 மன்னிப்பும் தவ்பாவும்",
+                duaSleep: "🌙 உறங்குவதற்கு முன்",
+                duaMorning: "🌅 காலை",
+                duaGoodLife: "🌿 நல்ல வாழ்க்கைக்காக",
+
+                duaTitle1: "1. இம்மையிலும் மறுமையிலும் நன்மை",
+                duaTitle2: "2. அல்லாஹ்விடம் உதவி கேட்பது",
+                duaTitle3: "3. காரியங்கள் எளிதாக",
+                duaTitle4: "4. கடனை அடைத்து ஹலாலான செல்வம் பெற",
+                duaTitle5: "5. கடனிலிருந்து விடுபட",
+                duaTitle6: "6. நல்ல வாழ்வாதாரத்திற்காக",
+                duaTitle7: "7. பயனுள்ள கல்வியும் ஹலாலான வாழ்வாதாரமும்",
+                duaTitle8: "8. குடும்ப நலனுக்காக",
+                duaTitle9: "9. காரியங்கள் எளிதாக",
+                duaTitle10: "10. வாகனத்தில் ஏறும்போது",
+                duaTitle11: "11. பயணத்தைத் தொடங்கும்போது",
+                duaTitle12: "12. பயணத்தில் பாதுகாப்பிற்காக",
+                duaTitle13: "13. கவலையும் துன்பமும் ஏற்படும்போது",
+                duaTitle14: "14. சிரமத்தில் உதவி கேட்பது",
+                duaTitle15: "15. எல்லாத் தீமைகளிலிருந்தும் பாதுகாப்பு",
+                duaTitle16: "16. அல்லாஹ்வின் பாதுகாப்பைக் கோருதல்",
+                duaTitle17: "17. பெற்றோருக்கு அருள் வேண்டுதல்",
+                duaTitle18: "18. நல்ல ஆரோக்கியத்திற்காக",
+                duaTitle19: "19. நோய் குணமடைய",
+                duaTitle20: "20. பாவமன்னிப்புக் கோருதல்",
+                duaTitle21: "21. ஸய்யிதுல் இஸ்திக்ஃபார்",
+                duaTitle22: "22. உறங்குவதற்கு முன்",
+                duaTitle23: "23. காலையில் அல்லாஹ்வைப் புகழ்தல்",
+                duaTitle24: "24. உள்ளம் நிலைத்திருக்க",
+                duaTitle25: "25. திக்ர் மற்றும் வணக்கத்தில் உதவி"
+            }
+        }
+    };
+
+    function getLanguage() {
+        const saved = localStorage.getItem("swalath-language");
+        return LANGUAGES[saved] ? saved : "ml";
+    }
+
+    function applyLanguage(code) {
+        const lang = LANGUAGES[code] || LANGUAGES.ml;
+
+        document.documentElement.lang = code;
+        document.documentElement.dir = lang.dir;
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            const key = el.getAttribute("data-i18n");
+            const original = el.getAttribute("data-ml");
+            const translated = lang.translations[key];
+
+            if (code === "ml") {
+                if (original !== null) {
+                    el.textContent = original;
+                }
+            } else if (translated) {
+                el.textContent = translated;
+            } else if (original !== null) {
+                el.textContent = original;
+            }
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+            const key = el.getAttribute("data-i18n-placeholder");
+            const original = el.getAttribute("data-ml-placeholder");
+            const translated = lang.translations[key];
+
+            if (code === "ml") {
+                if (original !== null) {
+                    el.placeholder = original;
+                }
+            } else if (translated) {
+                el.placeholder = translated;
+            } else if (original !== null) {
+                el.placeholder = original;
+            }
+        });
+
+        document.dispatchEvent(new CustomEvent("swalath-language-changed", {
+            detail: { language: code }
+        }));
+    }
+
+    window.SwalathLanguage = {
+        supported: LANGUAGES,
+
+        getCurrent: getLanguage,
+
+        setLanguage: function (code) {
+            if (!LANGUAGES[code]) {
+                return false;
+            }
+
+            localStorage.setItem("swalath-language", code);
+            applyLanguage(code);
+            return true;
+        },
+
+        apply: applyLanguage,
+
+        t: function (key) {
+            const lang = LANGUAGES[getLanguage()];
+            return lang.translations[key] || key;
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+        applyLanguage(getLanguage());
+    });
+})();
