@@ -557,7 +557,7 @@
         </footer>
     </div>
 
-    <script>
+   <script>
         /* LOCAL DATE */
         function getLocalDateString() {
             const now = new Date();
@@ -617,10 +617,51 @@
         function openDhikr() { window.location.href = "dhikr.html"; }
         function openPrayerTime() { window.location.href = "prayer-time.html"; }
 
-        /* LANGUAGE SELECTOR FIX */
+        /* LANGUAGE SELECTOR LOGIC */
+        let selectedLang = localStorage.getItem("swalath-language") || "ml";
+
         function openSwalathLanguageSelector() {
             const screen = document.getElementById("languageScreen");
-            if (screen) screen.style.display = "flex";
+            if (screen) {
+                screen.style.display = "flex";
+                highlightSelectedLanguage(selectedLang);
+            }
+        }
+
+        function highlightSelectedLanguage(lang) {
+            document.querySelectorAll(".language-option").forEach(btn => {
+                if (btn.getAttribute("data-lang") === lang) {
+                    btn.classList.add("selected");
+                } else {
+                    btn.classList.remove("selected");
+                }
+            });
+        }
+
+        document.querySelectorAll(".language-option").forEach(btn => {
+            btn.addEventListener("click", function() {
+                selectedLang = this.getAttribute("data-lang");
+                highlightSelectedLanguage(selectedLang);
+            });
+        });
+
+        const continueBtn = document.getElementById("languageContinue");
+        if (continueBtn) {
+            continueBtn.addEventListener("click", function() {
+                localStorage.setItem("swalath-language", selectedLang);
+                const screen = document.getElementById("languageScreen");
+                if (screen) screen.style.display = "none";
+                
+                // Trigger language change event if supported by language.js
+                document.dispatchEvent(new CustomEvent("swalath-language-changed", { detail: selectedLang }));
+                
+                // If language.js has a apply function, call it
+                if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
+                    window.SwalathLanguage.apply(selectedLang);
+                } else {
+                    location.reload();
+                }
+            });
         }
 
         /* HOME VISIBILITY */
