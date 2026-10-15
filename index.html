@@ -864,6 +864,11 @@
                 });
             });
         }
+        function triggerAdhanSound() {
+            if (window.AndroidBridge) {
+                AndroidBridge.playAdhan();
+            }
+        }
     </script>
 </body>
 </html>
