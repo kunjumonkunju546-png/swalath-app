@@ -632,6 +632,15 @@ function checkAdhanTime(timings) {
 }
 
 function playAdhanAudio() {
+    try {
+        if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
+            AndroidAdhan.playAdhan();
+            return;
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
     const audio = document.getElementById("adhanAudio");
     if (audio) {
         audio.currentTime = 0;
