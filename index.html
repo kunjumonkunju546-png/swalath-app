@@ -864,10 +864,15 @@
                 });
             });
         }
-       function triggerAdhanSound() {
+
+        /* ADHAN SOUND BRIDGE TRIGGER */
+        function triggerAdhanSound() {
             try {
-                if (typeof AndroidBridge !== "undefined" && AndroidBridge.playAdhan) {
-                    AndroidBridge.playAdhan();
+                if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
+                    AndroidAdhan.playAdhan();
+                } else {
+                    let audio = new Audio('azan.mp3');
+                    audio.play().catch(e => console.log(e));
                 }
             } catch (e) {
                 console.log(e);
