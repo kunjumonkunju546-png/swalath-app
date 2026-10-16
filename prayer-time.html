@@ -583,4 +583,357 @@ function formatTime(value) {
     if (minutes === null) return "--:--";
 
     const date = new Date();
-    date.setHours(Math.floor(minutes
+    date.setHours(Math.floor(minutes/60),minutes%60,0,0);
+
+    return date.toLocaleTimeString("en-US", {
+        hour:"2-digit",minute:"2-digit",hour12:true
+    });
+}
+
+function getNextPrayer(timings) {
+    const now = new Date();
+    const current = now.getHours()*60 + now.getMinutes();
+
+    for (const prayer of mainPrayers) {
+        const minutes = parseTime(timings[prayer.key]);
+        if (minutes !== null && minutes > current) return prayer;
+    }
+
+    return mainPrayers[0];
+}
+
+function checkAdhanTime(timings) {
+    const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
+    if (isMasterMuted) return;
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentMinuteKey = dateString() + "_" + currentHour + "_" + currentMinute;
+
+    if (lastPlayedMinuteKey === currentMinuteKey) return;
+
+    mainPrayers.forEach(prayer => {
+        const timeStr = timings[prayer.key];
+        const pMinutes = parseTime(timeStr);
+        if (pMinutes === null) return;
+
+        const prayerHour = Math.floor(pMinutes / 60);
+        const prayerMin = pMinutes % 60;
+
+        if (currentHour === prayerHour && currentMinute === prayerMin) {
+            const isEnabled = localStorage.getItem("prayer_adhan_" + prayer.key);
+            if (isEnabled === "false") return;
+
+            lastPlayedMinuteKey = currentMinuteKey;
+            playAdhanAudio();
+        }
+    });
+}
+
+function playAdhanAudio() {
+    try {
+        if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
+            AndroidAdhan.playAdhan();
+            return;
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+    const audio = document.getElementById("adhanAudio");
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+            console.log("Audio autoplay restricted:", err);
+        });
+    }
+}
+
+function renderPrayerTimes(data) {
+    lastPrayerData = data;
+    const timings = data.timings;
+    const next = getNextPrayer(timings);
+
+    document.getElementById("nextName").textContent = getPrayerName(next);
+    document.getElementById("nextArabic").textContent = next.ar;
+    document.getElementById("nextTime").textContent =
+        formatTime(timings[next.key]);
+
+    if (data.date && data.date.hijri) {
+        const h = data.date.hijri;
+        document.getElementById("hijriDate").textContent =
+            h.day + " " + h.month.en + " " + h.year + " AH";
+    }
+
+    const list = document.getElementById("prayerList");
+    list.innerHTML = "";
+
+    prayerItems.forEach(prayer => {
+        const row = document.createElement("div");
+        row.className = "prayer-row";
+
+        if (prayer.key === next.key) row.classList.add("next");
+
+        const info = document.createElement("div");
+        info.className = "prayer-info";
+
+        const indicator = document.createElement("div");
+        indicator.className = "prayer-indicator";
+
+        const details = document.createElement("div");
+
+        const name = document.createElement("div");
+        name.className = "prayer-name";
+        name.textContent = getPrayerName(prayer);
+
+        const arabic = document.createElement("div");
+        arabic.className = "prayer-arabic";
+        arabic.textContent = prayer.ar;
+
+        details.append(name,arabic);
+
+        if (prayer.key === next.key) {
+            const tag = document.createElement("div");
+            tag.className = "next-tag";
+            tag.textContent = window.SwalathLanguage && window.SwalathLanguage.getCurrent() === "ar" ? "الصلاة القادمة" : "അടുത്ത നമസ്കാരം";
+            details.appendChild(tag);
+        }
+
+        info.append(indicator,details);
+
+        const time = document.createElement("div");
+        time.className = "prayer-time";
+        time.textContent = formatTime(timings[prayer.key]);
+
+        row.append(info,time);
+        list.appendChild(row);
+    });
+
+    checkAdhanTime(timings);
+}
+
+function showLocationStatus(message, actions = []) {
+    const box = document.getElementById("locationStatus");
+    box.hidden = false;
+    box.innerHTML = "";
+
+    const icon = document.createElement("div");
+    icon.className = "status-icon";
+    icon.textContent = "📍";
+    box.appendChild(icon);
+
+    const text = document.createElement("div");
+    text.textContent = message;
+    box.appendChild(text);
+
+    actions.forEach(action => {
+        const button = document.createElement("button");
+        button.className = "action-btn" + (action.secondary ? " secondary" : "");
+        button.textContent = action.label;
+        button.onclick = action.onClick;
+        box.appendChild(button);
+    });
+}
+
+function hideLocationStatus() {
+    document.getElementById("locationStatus").hidden = true;
+}
+
+function showPrayerLoading(message) {
+    document.getElementById("prayerList").innerHTML =
+        '<div class="status">' + message + '</div>';
+}
+
+function loadCachedCoordinates() {
+    try {
+        const saved = localStorage.getItem(CACHE_KEY);
+        if (!saved) return null;
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.lat !== "number" || typeof parsed.lon !== "number") return null;
+        return parsed;
+    } catch (e) {
+        return null;
+    }
+}
+
+function saveCoordinates(lat, lon) {
+    try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({lat,lon}));
+        localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
+    } catch (e) {}
+}
+
+async function fetchPrayerTimes(lat, lon) {
+    showPrayerLoading("നിങ്ങളുടെ സ്ഥലത്തെ നമസ്കാര സമയം ലഭ്യമാക്കുന്നു...");
+
+    const url = API + "timings/" + dateString() +
+        "?latitude=" + encodeURIComponent(lat) +
+        "&longitude=" + encodeURIComponent(lon) +
+        "&method=10";
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network error");
+
+        const result = await response.json();
+        if (result.code !== 200 || !result.data || !result.data.timings) {
+            throw new Error("Prayer times unavailable");
+        }
+
+        // Cache successful timings for offline use
+        localStorage.setItem(CACHE_TIMINGS_KEY, JSON.stringify(result.data));
+
+        renderPrayerTimes(result.data);
+        hideLocationStatus();
+
+    } catch (error) {
+        // Fallback to cached timings if offline or error
+        const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+        if (cachedTimings) {
+            try {
+                const parsedData = JSON.parse(cachedTimings);
+                renderPrayerTimes(parsedData);
+                document.getElementById("offlineBanner").style.display = "block";
+                hideLocationStatus();
+                return;
+            } catch(e) {}
+        }
+
+        showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
+        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:() => fetchPrayerTimes(lat, lon)}]);
+    }
+}
+
+function startLocation() {
+    if (locationRequestInProgress) return;
+
+    if (!window.isSecureContext && location.protocol !== "http:") {
+        showLocationStatus("Location സൗകര്യം ലഭ്യമല്ല.");
+        return;
+    }
+
+    locationRequestInProgress = true;
+    hideLocationStatus();
+    document.getElementById("locationName").textContent = "സ്ഥലം കണ്ടെത്തുന്നു...";
+
+    if (!("geolocation" in navigator)) {
+        locationRequestInProgress = false;
+        fallbackToDefaultLocation();
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async position => {
+            locationRequestInProgress = false;
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            coordinates = {lat,lon};
+            saveCoordinates(lat,lon);
+            await fetchPrayerTimes(lat,lon);
+            lookupCityName(lat,lon);
+        },
+        error => {
+            locationRequestInProgress = false;
+            console.log("Geolocation error:", error);
+            
+            const cached = loadCachedCoordinates();
+            if (cached) {
+                coordinates = cached;
+                fetchPrayerTimes(cached.lat, cached.lon);
+                document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
+                hideLocationStatus();
+            } else {
+                fallbackToDefaultLocation();
+            }
+        },
+        { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 }
+    );
+}
+
+function fallbackToDefaultLocation() {
+    locationRequestInProgress = false;
+    const defaultLat = 10.8505; 
+    const defaultLon = 76.2711;
+    coordinates = { lat: defaultLat, lon: defaultLon };
+    fetchPrayerTimes(defaultLat, defaultLon);
+    document.getElementById("locationName").textContent = "Kerala, India";
+    
+    showLocationStatus(
+        "കൃത്യമായ GPS ലൊക്കേഷൻ ലഭിച്ചില്ല. തൽക്കാലത്തേക്ക് ഡിഫോൾട്ട് സമയം കാണിക്കുന്നു. വീണ്ടും ശ്രമിക്കാൻ താഴെ ക്ലിക്ക് ചെയ്യുക.",
+        [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:startLocation}]
+    );
+}
+
+async function lookupCityName(lat, lon) {
+    try {
+        const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + lat + "&lon=" + lon;
+        const response = await fetch(url);
+        if (!response.ok) return;
+        const data = await response.json();
+        const address = data.address || {};
+        const city = address.city || address.town || address.village || address.state;
+        const country = address.country;
+        if (city && country) {
+            document.getElementById("locationName").textContent = city + ", " + country;
+        }
+    } catch (e) {}
+}
+
+function goBack() {
+    if (document.referrer && new URL(document.referrer).origin === location.origin) {
+        history.back();
+        return;
+    }
+    location.href = "./index.html";
+}
+
+document.addEventListener("swalath-language-changed", function() {
+    updateDates();
+    if (lastPrayerData) renderPrayerTimes(lastPrayerData);
+});
+
+// System Theme Sync & Saved Dark Mode Check
+try {
+    const savedDark = localStorage.getItem("swalathDarkMode");
+    if (savedDark === "true" || (savedDark === null && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.body.classList.add("dark-mode");
+    }
+} catch (e) {}
+
+checkNetworkStatus();
+loadPreferences();
+updateDates();
+
+// ലൊക്കേഷൻ കാഷെ ഉണ്ടെങ്കിൽ അത് പെട്ടെന്ന് ലോഡ് ചെയ്യുക, അല്ലെങ്കിൽ ഡിഫോൾട്ട് ലൊക്കേഷൻ സെറ്റ് ചെയ്ത് സമയം കാണിക്കുക
+const cached = loadCachedCoordinates();
+if (cached) {
+    coordinates = cached;
+    document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
+    
+    const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+    if (cachedTimings) {
+        try {
+            renderPrayerTimes(JSON.parse(cachedTimings));
+        } catch(e) {}
+    }
+    
+    fetchPrayerTimes(cached.lat, cached.lon);
+} else {
+    const defaultLat = 10.8505; 
+    const defaultLon = 76.2711;
+    fetchPrayerTimes(defaultLat, defaultLon);
+    document.getElementById("locationName").textContent = "Kerala, India";
+}
+
+// ബാക്ക്ഗ്രൗണ്ടിൽ പുതിയ ജിപിഎസ് ലൊക്കേഷൻ എടുക്കാൻ ശ്രമിക്കുക
+startLocation();
+
+setInterval(() => {
+    if (lastPrayerData && lastPrayerData.timings) {
+        checkAdhanTime(lastPrayerData.timings);
+    }
+}, 30000);
+</script>
+</body>
+</html>
