@@ -801,7 +801,7 @@ async function fetchPrayerTimes(lat, lon) {
         }
 
         showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
-        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:() => fetchPrayerTimes(lat, lon)}]);
+        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:() => fetchPrayerTimes(lat, lon)}];
     }
 }
 
@@ -878,12 +878,12 @@ checkNetworkStatus();
 loadPreferences();
 updateDates();
 
+// പേജ് ലോഡ് ആകുമ്പോൾത്തന്നെ ലൊക്കേഷൻ ഓട്ടോമാറ്റിക്കായി എടുക്കാൻ ശ്രമിക്കുക
 const cached = loadCachedCoordinates();
 if (cached) {
     coordinates = cached;
     document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
     
-    // Load offline cached timings instantly if available
     const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
     if (cachedTimings) {
         try {
@@ -894,8 +894,10 @@ if (cached) {
     fetchPrayerTimes(cached.lat, cached.lon);
 } else {
     showPrayerLoading("നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...");
-    startLocation();
 }
+
+// കാഷെ ഉണ്ടെങ്കിലും ഇല്ലെങ്കിലും ഓട്ടോമാറ്റിക്കായി പുതിയ ലൊക്കേഷൻ ഫെച്ച് ചെയ്യാൻ ശ്രമിക്കും
+startLocation();
 
 setInterval(() => {
     if (lastPrayerData && lastPrayerData.timings) {
