@@ -39,7 +39,6 @@ body.dark-mode footer { color: #777; }
 body.dark-mode .advertising-card { background: #222; border-color: #444; } 
 body.dark-mode .today-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
 body.dark-mode .today-card h3, body.dark-mode .today-card h2 { color: #f0deaf !important; }
-body.dark-mode .advertising-card { background: #222; border-color: #444; }
 
 /* ===== SWALAATH PREMIUM HOME UI ===== */ 
 :root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
@@ -135,7 +134,7 @@ main { padding: 0 18px; }
             <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button> 
         </div> 
 
-        <!-- MENU GRID (CLEANED: NO DUPLICATE HIJRI CARD HERE) -->
+        <!-- MENU GRID (WITH PREMIUM HIJRI CALENDAR CARD INCLUDED) -->
         <div class="menu-grid"> 
             <div class="menu-card" onclick="openQuran()"> 
                 <div style="font-size:30px;">📖</div> 
@@ -149,10 +148,13 @@ main { padding: 0 18px; }
                 <div style="font-size:30px;">🎧</div> 
                 <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong> <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span> 
             </div> 
+            
+            <!-- HIJRI CALENDAR CARD ADDED HERE ALONG WITH OTHER CARDS -->
             <div class="menu-card" onclick="openCalendar()"> 
                 <div style="font-size:30px;">🗓️</div> 
-                <strong>التقويم الهجري</strong> <span data-ml="ഹിജ്‌റ കലണ്ടർ & വിശേഷ ദിവസങ്ങൾ">ഹിജ്‌റ കലണ്ടർ & വിശേഷ ദിവസങ്ങൾ</span> 
+                <strong>التقويم الهجري</strong> <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span> 
             </div> 
+
             <div class="menu-card" onclick="openPrayerTime()"> 
                 <div style="font-size:30px;">🕐</div> 
                 <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong> <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span> 
@@ -200,28 +202,6 @@ main { padding: 0 18px; }
                 <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2> 
             </div> 
             <div id="favoritesList"></div> 
-        </section> 
-
-        <!-- CALENDAR FULL SECTION --> 
-        <section id="calendarSection" style="display:none;"> 
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
-                <button onclick="closeCalendar()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
-                <h2 style="margin:0; font-family:'Amiri', serif; color: var(--sw-green);">🗓️ التقويم الهجري والمناسبات</h2> 
-            </div> 
-            <div class="advertising-card"> 
-                <h3 style="color:var(--sw-green); font-family:'Amiri', serif; margin-top:0;">ഇന്നത്തെ തീയതി (Today's Date)</h3> 
-                <p style="font-size:16px; font-weight:bold; color:var(--sw-green); font-family:'Amiri', serif;">1448 جمادى الآخرة 05 — 17 October 2026</p> 
-            </div> 
-            <div class="advertising-card"> 
-                <h3 style="color:var(--sw-green); font-family:'Amiri', serif; margin-top:0;">പ്രധാന വിശേഷ ദിവസങ്ങൾ (Special Islamic Days)</h3> 
-                <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px; color:var(--sw-muted);"> 
-                    <li>🌙 <strong>റമദാൻ 1:</strong> വ്രതത്തിന്റെയും ഖുർആന്റെയും മാസം</li> 
-                    <li>🕋 <strong>അറഫാ ദിനം:</strong> ദുൽഹിജ്ജ 9 (ഹജ്ജിന്റെ പ്രധാന ദിനം)</li> 
-                    <li>🎉 <strong>പെരുന്നാൾ ദിനങ്ങൾ:</strong> ഈദുൽ ഫിത്ർ (ശവ്വാൽ 1) & ഈദുൽ അദ്ഹാ (ദുൽഹിജ്ജ 10)</li> 
-                    <li>✨ <strong>ലൈലത്തുൽ ഖദ്ർ:</strong> റമദാനിലെ അവസാന പത്തിലെ ഇരട്ടയാല്ലാത്ത രാവുകൾ</li> 
-                    <li>⭐ <strong>ആശൂറാഅ് ദിനം:</strong> മുഹർറം 10</li> 
-                </ul> 
-            </div> 
         </section> 
 
         <!-- ADVERTISING SECTION --> 
@@ -310,7 +290,7 @@ const swalathNames = {ibrahimiyya: "الصلاة الإبراهيمية", nariya
 function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; } 
 function openQuran() { window.location.href = "quran.html"; } 
 function openQuranMP3() { window.location.href = "quran-mp3.html"; } 
-function openQibla() { window.location.href = "qibla.html"; } 
+function openCalendar() { window.location.href = "calendar.html"; }  /* Direct navigation to full calendar page without dialogs */
 function openUmrah() { window.location.href = "umrah.html"; } 
 function openDua() { window.location.href = "dua.html"; } 
 function openDhikr() { window.location.href = "dhikr.html"; } 
@@ -333,7 +313,6 @@ function showHomeElements() {
     document.getElementById("travelSection").style.display = "block"; 
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
 } 
 
@@ -349,7 +328,6 @@ function closeInternalSectionUI() {
     currentInternalSection = null; 
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     showHomeElements(); 
     window.scrollTo(0, 0); 
@@ -362,7 +340,6 @@ window.addEventListener("popstate", function(event) {
         hideHomeElements(); 
         document.getElementById("collectionSection").style.display = sectionName === "collection" ? "block" : "none"; 
         document.getElementById("favoritesSection").style.display = sectionName === "favorites" ? "block" : "none"; 
-        document.getElementById("calendarSection").style.display = sectionName === "calendar" ? "block" : "none";
         document.getElementById("advertisingSection").style.display = sectionName === "advertising" ? "block" : "none"; 
         if (sectionName === "favorites") loadFavorites(); 
         if (sectionName === "collection") loadCollection(); 
@@ -374,32 +351,12 @@ window.addEventListener("popstate", function(event) {
     } 
 }); 
 
-/* CALENDAR SECTION */ 
-function openCalendar() {
-    openInternalSection("calendar"); 
-    hideHomeElements(); 
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("advertisingSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "block"; 
-    window.scrollTo(0, 0); 
-} 
-
-function closeCalendar() {
-    if (currentInternalSection === "calendar" && history.state && history.state.swalathInternalSection === "calendar") {
-        history.back(); 
-        return; 
-    } 
-    closeInternalSectionUI(); 
-} 
-
 /* ADVERTISING PAGE */ 
 function openAdvertising() {
     openInternalSection("advertising"); 
     hideHomeElements(); 
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "block"; 
     window.scrollTo(0, 0); 
 } 
@@ -417,7 +374,6 @@ function openCollection() {
     openInternalSection("collection"); 
     hideHomeElements(); 
     document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("collectionSection").style.display = "block"; 
     document.getElementById("searchSwalath").value = ""; 
@@ -459,7 +415,6 @@ function openFavorites() {
     openInternalSection("favorites"); 
     hideHomeElements(); 
     document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "block"; 
     loadFavorites(); 
