@@ -1,0 +1,54 @@
+<!-- HIJRI CALENDAR & SPECIAL DAYS CARD -->
+<div class="khatam-card" id="hijriCard" style="background: #ffffff; border: 2px solid #ddc486; border-radius: 18px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(18,61,52,0.06);">
+    <h3 id="hijriCardTitle" style="color: #123d34; font-size: 16px; margin: 0 0 12px 0;">🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</h3>
+    
+    <div class="target-box" style="background: #edf3eb; border: 1px dashed #123d34; border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 12px;">
+        <h4 id="hijriDateLabel" style="color: #123d34; margin: 0 0 4px 0; font-size: 13px;">ഇന്നത്തെ ഹിജ്‌റ തീയതി:</h4>
+        <p id="currentHijriText" style="font-size: 14px; color: #123d34; margin: 0; font-weight: bold;">1448 ജമാദുൽ ആഖിർ 05</p>
+    </div>
+
+    <div style="font-size: 13px;">
+        <strong id="specialDaysHeading" style="color: #123d34; display: block; margin-bottom: 6px;">പ്രധാനപ്പെട്ട അടുത്ത വിശേഷ ദിനങ്ങൾ:</strong>
+        <div style="background: #fffdf8; padding: 10px; border-radius: 10px; border: 1px solid #e6dfd0; line-height: 1.6; color: #333;">
+            <p id="ev1" style="margin: 4px 0;">🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം</p>
+            <p id="ev2" style="margin: 4px 0;">🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9</p>
+            <p id="ev3" style="margin: 4px 0;">🎉 പെരുന്നാൾ: ശവ്വാൽ 1</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Multilingual Support for Hijri Card
+function applyHijriCardLanguage() {
+    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
+        ? window.SwalathLanguage.getCurrent() : "ml";
+
+    if (currentLang === "en") {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ Hijri Calendar & Special Days";
+        document.getElementById('hijriDateLabel').textContent = "Today's Hijri Date:";
+        document.getElementById('specialDaysHeading').textContent = "Upcoming Special Days:";
+        document.getElementById('ev1').textContent = "🌙 Ramadan 1: Approx. in 2 months";
+        document.getElementById('ev2').textContent = "🕋 Day of Arafah: Dhul-Hijjah 9";
+        document.getElementById('ev3').textContent = "🎉 Eid Day: Shawwal 1";
+    } 
+    else if (currentLang === "ar") {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ التقويم الهجري والأيام المباركة";
+        document.getElementById('hijriDateLabel').textContent = "التاريخ الهجري اليوم:";
+        document.getElementById('specialDaysHeading').textContent = "الأيام المميزة القادمة:";
+        document.getElementById('ev1').textContent = "🌙 رمضان ١: تقريباً بعد شهرين";
+        document.getElementById('ev2').textContent = "🕋 يوم عرفة: ٩ ذو الحجة";
+        document.getElementById('ev3').textContent = "🎉 عيد الفطر: ١ شوال";
+    }
+    else {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും";
+        document.getElementById('hijriDateLabel').textContent = "ഇന്നത്തെ ഹിജ്‌റ തീയതി:";
+        document.getElementById('specialDaysHeading').textContent = "പ്രധാനപ്പെട്ട അടുത്ത വിശേഷ ദിനങ്ങൾ:";
+        document.getElementById('ev1').textContent = "🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം";
+        document.getElementById('ev2').textContent = "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9";
+        document.getElementById('ev3').textContent = "🎉 പെരുന്നാൾ: ശവ്വാൽ 1";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", applyHijriCardLanguage);
+document.addEventListener("swalath-language-changed", applyHijriCardLanguage);
+</script>
