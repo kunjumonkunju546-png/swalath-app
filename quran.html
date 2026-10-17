@@ -38,6 +38,12 @@
         .progress-bar-fill { background: #123d34; height: 100%; width: 0%; transition: width 0.3s ease; }
         .complete-btn { width: 100%; background: #123d34; color: white; border: none; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; }
 
+        /* PAGING CONTROLS */
+        .page-nav-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #e6dfd0; }
+        .page-nav-btn { background: #123d34; color: white; border: none; padding: 10px 16px; border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .page-nav-btn:active { opacity: 0.8; }
+        .page-indicator { font-size: 13px; font-weight: bold; color: #123d34; }
+
         .surah-list {display: none; } 
         .surah-item {background: white; border: 1px solid #e6dfd0; border-radius: 16px; padding: 15px; margin-bottom: 9px; cursor: pointer; } 
         .surah-item:hover {transform: translateY(-2px); } 
@@ -65,6 +71,7 @@
         body.dark-mode .duration-dropdown { background: #333; color: #fff; border-color: #555; }
         body.dark-mode .target-box { background: #1a2e28; border-color: #2b584b; }
         body.dark-mode .progress-info { background: #2a2a2a; color: #ccc; }
+        body.dark-mode .page-indicator { color: #f1dfb0; }
     </style>
 </head>
 <body>
@@ -189,6 +196,19 @@
             </div> 
         </section> 
 
+        <!-- TARGET RANGE READER VIEW (PAGE BY PAGE) --> 
+        <section id="targetView" class="surah-view"> 
+            <button class="back-button" onclick="backToPlanner()"> ← Back to Planner </button> 
+            <div id="targetContent"> 
+                <div class="loading">Loading Today's Target...</div> 
+            </div> 
+            <div class="page-nav-bar" id="pageNavBar" style="display:none;">
+                <button class="page-nav-btn" onclick="nextSubPage()">അടുത്ത പേജ് →</button>
+                <span class="page-indicator" id="pageIndicatorText">പേജ് 1 / 6</span>
+                <button class="page-nav-btn" onclick="prevSubPage()">← മുമ്പത്തെ പേജ്</button>
+            </div>
+        </section> 
+
         <!-- SURAH READER --> 
         <section id="surahView" class="surah-view"> 
             <button class="back-button" onclick="backToPlanner()"> ← Back to Planner </button> 
@@ -215,9 +235,9 @@ window.addEventListener("load", function() {
 }); 
 
 /* ========================= NAVIGATION STATE ========================= */ 
-let openedFromSurahList = false; 
 let openedFromPlanner = false; 
-let handlingBrowserBack = false; 
+let currentSubPageIndex = 0; 
+let dailyPagesList = []; 
 
 function goHome() {
     window.location.href = "index.html"; 
@@ -243,13 +263,15 @@ const TOTAL_PAGES = 604;
 let khatamData = JSON.parse(localStorage.getItem("swalathKhatamData") || JSON.stringify({
     duration: 120,
     currentDay: 1,
-    completedDays: []
+    completedDays: [],
+    savedSubPage: 0
 }));
 
 function openKhatamPlanner() {
     document.getElementById("mainQuran").style.display = "none";
     document.getElementById("surahList").style.display = "none";
     document.getElementById("surahView").style.display = "none";
+    document.getElementById("targetView").style.display = "none";
     document.getElementById("plannerView").style.display = "block";
     renderKhatam();
     window.scrollTo(0, 0);
@@ -258,17 +280,99 @@ function openKhatamPlanner() {
 function updateKhatamPlan() {
     const select = document.getElementById("durationSelect");
     khatamData.duration = parseInt(select.value);
+    khatamData.savedSubPage = 0;
     saveData();
     renderKhatam();
 }
 
+/* Split daily target into pages (~25 lines per page) */
 function openTodayTargetQuran() {
     openedFromPlanner = true;
+    document.getElementById("mainQuran").style.display = "none";
+    document.getElementById("plannerView").style.display = "none";
+    document.getElementById("surahList").style.display = "none";
+    document.getElementById("surahView").style.display = "none";
+    document.getElementById("targetView").style.display = "block";
+
     const totalDays = khatamData.duration;
     const pagesPerDay = Math.ceil(TOTAL_PAGES / totalDays);
     let startPage = ((khatamData.currentDay - 1) * pagesPerDay) + 1;
-    let targetSurah = Math.min(Math.max(Math.floor((startPage / 604) * 114) + 1, 1), 114);
-    openSurah(targetSurah);
+    let endPage = Math.min(khatamData.currentDay * pagesPerDay, TOTAL_PAGES);
+
+    const lines = getQuranLines();
+    if (lines.length === 0) return;
+
+    let startLineIndex = (startPage - 1) * 20;
+    let endLineIndex = endPage * 20;
+    let targetLines = lines.slice(Math.max(0, startLineIndex), Math.min(lines.length, endLineIndex));
+
+    // Divide targetLines into chunks of ~25 lines per sub-page
+    dailyPagesList = [];
+    let chunkSize = 25;
+    for (let i = 0; i < targetLines.length; i += chunkSize) {
+        dailyPagesList.push(targetLines.slice(i, i + chunkSize));
+    }
+
+    currentSubPageIndex = khatamData.savedSubPage || 0;
+    if (currentSubPageIndex >= dailyPagesList.length) currentSubPageIndex = 0;
+
+    renderSubPage();
+    window.scrollTo(0, 0);
+}
+
+function renderSubPage() {
+    const content = document.getElementById("targetContent");
+    const navBar = document.getElementById("pageNavBar");
+    content.innerHTML = `<h2 class="surah-title">ദിവസം ${khatamData.currentDay} (ഖത്മ് പ്ലാൻ)</h2>`;
+
+    if (dailyPagesList.length === 0) {
+        content.innerHTML += `<div class="error-box">No data for today.</div>`;
+        navBar.style.display = "none";
+        return;
+    }
+
+    let pageLines = dailyPagesList[currentSubPageIndex];
+    pageLines.forEach(function(line) {
+        const parts = line.split("|");
+        if (parts.length < 3) return;
+        const ayahNumber = parts[1];
+        const text = parts.slice(2).join("|");
+
+        const ayahDiv = document.createElement("div");
+        ayahDiv.className = "ayah";
+        ayahDiv.appendChild(document.createTextNode(text + " "));
+        
+        const numberSpan = document.createElement("span");
+        numberSpan.className = "ayah-number";
+        numberSpan.textContent = toArabicNumber(ayahNumber);
+        ayahDiv.appendChild(numberSpan);
+
+        content.appendChild(ayahDiv);
+    });
+
+    navBar.style.display = "flex";
+    document.getElementById("pageIndicatorText").textContent = `ഭാഗം ${currentSubPageIndex + 1} / ${dailyPagesList.length}`;
+    window.scrollTo(0, 0);
+}
+
+function nextSubPage() {
+    if (currentSubPageIndex < dailyPagesList.length - 1) {
+        currentSubPageIndex++;
+        khatamData.savedSubPage = currentSubPageIndex;
+        saveData();
+        renderSubPage();
+    } else {
+        alert("ഇന്നത്തെ ദിവസത്തെ എല്ലാ ഭാഗങ്ങളും വായിച്ചു കഴിഞ്ഞു! താഴെ 'ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു' എന്ന് നൽകുക.");
+    }
+}
+
+function prevSubPage() {
+    if (currentSubPageIndex > 0) {
+        currentSubPageIndex--;
+        khatamData.savedSubPage = currentSubPageIndex;
+        saveData();
+        renderSubPage();
+    }
 }
 
 function renderKhatam() {
@@ -299,9 +403,11 @@ function completeTodayTarget() {
         khatamData.currentDay++;
     }
     
+    khatamData.savedSubPage = 0; // Reset subpage for next day
     saveData();
     renderKhatam();
-    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്ക് അപ്ഡേറ്റ് ആയിട്ടുണ്ട്.");
+    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി പൂർത്തിയായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്കിലേക്ക് സ്വാഗതം!");
+    openKhatamPlanner();
 }
 
 function saveData() {
@@ -314,6 +420,7 @@ function showAllSurahs() {
     document.getElementById("mainQuran").style.display = "none"; 
     document.getElementById("plannerView").style.display = "none";
     document.getElementById("surahView").style.display = "none"; 
+    document.getElementById("targetView").style.display = "none";
     document.getElementById("surahList").style.display = "block"; 
     const container = document.getElementById("allSurahs"); 
     container.innerHTML = ""; 
@@ -352,11 +459,11 @@ function showAllSurahs() {
 
 /* ========================= OPEN OFFLINE SURAH ========================= */ 
 function openSurah(surahNumber) {
-    openedFromSurahList = document.getElementById("surahList").style.display === "block"; 
-    history.pushState({swalathQuran: true, surahNumber: surahNumber}, "", "#surah-" + surahNumber ); 
+    openedFromPlanner = false;
     document.getElementById("mainQuran").style.display = "none"; 
     document.getElementById("plannerView").style.display = "none";
     document.getElementById("surahList").style.display = "none"; 
+    document.getElementById("targetView").style.display = "none";
     document.getElementById("surahView").style.display = "block"; 
     const content = document.getElementById("surahContent"); 
     content.innerHTML = ` <div class="loading">Loading Surah...</div> `; 
@@ -408,6 +515,7 @@ function backToQuranHome() {
     document.getElementById("surahView").style.display = "none"; 
     document.getElementById("surahList").style.display = "none"; 
     document.getElementById("plannerView").style.display = "none";
+    document.getElementById("targetView").style.display = "none";
     document.getElementById("mainQuran").style.display = "block"; 
     window.scrollTo(0, 0); 
 } 
@@ -415,6 +523,7 @@ function backToQuranHome() {
 function backToPlanner() {
     document.getElementById("surahView").style.display = "none";
     document.getElementById("surahList").style.display = "none";
+    document.getElementById("targetView").style.display = "none";
     document.getElementById("mainQuran").style.display = "none";
     document.getElementById("plannerView").style.display = "block";
     window.scrollTo(0, 0);
@@ -424,21 +533,20 @@ function backToPlanner() {
 function backToPrevious() {
     if (openedFromPlanner) {
         backToPlanner();
-    } else if (openedFromSurahList) {
-        showAllSurahs();
     } else {
-        backToQuranHome();
+        showAllSurahs();
     }
 } 
 
 /* ========================= ANDROID / BROWSER BACK ========================= */ 
 window.addEventListener("popstate", function() {
     const surahView = document.getElementById("surahView"); 
+    const targetView = document.getElementById("targetView"); 
     const surahList = document.getElementById("surahList"); 
     const plannerView = document.getElementById("plannerView");
     const mainQuran = document.getElementById("mainQuran"); 
-    if (surahView.style.display === "block") {
-        backToPrevious(); 
+    if (surahView.style.display === "block" || targetView.style.display === "block") {
+        backToPlanner(); 
         return; 
     } 
     if (surahList.style.display === "block" || plannerView.style.display === "block") {
