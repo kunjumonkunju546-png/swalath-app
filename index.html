@@ -491,6 +491,44 @@ if ("serviceWorker" in navigator) {
         }); 
     }); 
 } 
+    /* LANGUAGE SELECTOR HANDLERS */
+function openSwalathLanguageSelector() {
+    const screen = document.getElementById("languageScreen");
+    if (screen) screen.style.display = "flex";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const languageScreen = document.getElementById("languageScreen");
+    const options = document.querySelectorAll(".language-option");
+    const continueBtn = document.getElementById("languageContinue");
+    
+    let selectedLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
+        ? window.SwalathLanguage.getCurrent() 
+        : (localStorage.getItem("swalath-language") || "ml");
+
+    options.forEach(opt => {
+        if (opt.getAttribute("data-lang") === selectedLang) {
+            opt.classList.add("selected");
+        }
+        opt.addEventListener("click", function () {
+            options.forEach(o => o.classList.remove("selected"));
+            this.classList.add("selected");
+            selectedLang = this.getAttribute("data-lang");
+        });
+    });
+
+    if (continueBtn) {
+        continueBtn.addEventListener("click", function () {
+            if (window.SwalathLanguage && typeof window.SwalathLanguage.setLanguage === "function") {
+                window.SwalathLanguage.setLanguage(selectedLang);
+            } else {
+                localStorage.setItem("swalath-language", selectedLang);
+                location.reload();
+            }
+            if (languageScreen) languageScreen.style.display = "none";
+        });
+    }
+});
 </script> 
 </body> 
 </html>
