@@ -13,31 +13,31 @@
         .back-btn { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
         
         /* KHATAM PLANNER SPECIAL CARD */
-        .khatam-card { background: #ffffff; border: 2px solid #ddc486; border-radius: 22px; padding: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); margin-bottom: 25px; }
-        .khatam-title { color: #123d34; font-size: 18px; margin: 0 0 10px 0; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-        .khatam-desc { color: #6a7971; font-size: 13px; margin: 0 0 15px 0; line-height: 1.6; }
+        .khatam-card { background: #ffffff; border: 2px solid #ddc486; border-radius: 20px; padding: 20px; box-shadow: 0 6px 20px rgba(18,61,52,0.08); margin-bottom: 25px; }
+        .khatam-title { color: #123d34; font-size: 17px; margin: 0 0 10px 0; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .khatam-desc { color: #555; font-size: 13px; margin: 0 0 15px 0; line-height: 1.6; }
         
         .duration-select-box { margin-bottom: 15px; }
         .duration-select-box label { display: block; font-size: 12px; font-weight: bold; color: #123d34; margin-bottom: 5px; }
         .duration-dropdown { width: 100%; padding: 12px; border: 1.5px solid #ddc486; border-radius: 12px; background: #fdfdfb; color: #123d34; font-size: 14px; font-weight: bold; outline: none; }
         
-        .target-box { background: #edf3eb; border: 1.5px solid #123d34; border-radius: 16px; padding: 16px; text-align: center; margin-bottom: 15px; cursor: pointer; transition: transform 0.1s; }
-        .target-box:active { transform: scale(0.99); }
-        .target-box h4 { margin: 0 0 8px 0; color: #123d34; font-size: 14px; font-weight: 700; }
-        .target-box p { margin: 0; color: #123d34; font-size: 16px; font-weight: bold; }
+        .target-box { background: #edf3eb; border: 1.5px solid #123d34; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 15px; cursor: pointer; }
+        .target-box h4 { margin: 0 0 6px 0; color: #123d34; font-size: 13px; font-weight: 600; }
+        .target-box p { margin: 0; color: #123d34; font-size: 15px; font-weight: bold; }
         
-        .progress-info { font-size: 13px; color: #6a7971; margin-bottom: 15px; line-height: 1.8; background: #f9f9f5; padding: 12px; border-radius: 12px; }
+        .progress-info { font-size: 13px; color: #555; margin-bottom: 15px; line-height: 1.8; background: #f9f9f5; padding: 12px; border-radius: 12px; }
         .progress-bar-container { width: 100%; background: #e0e0dc; border-radius: 10px; height: 10px; overflow: hidden; margin-top: 8px; }
         .progress-bar-fill { background: #123d34; height: 100%; width: 0%; transition: width 0.3s ease; }
         
-        .complete-btn { width: 100%; background: #123d34; color: white; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(18,61,52,0.2); }
+        .complete-btn { width: 100%; background: #123d34; color: white; border: none; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(18,61,52,0.2); }
 
-        /* TRADITIONAL QURAN SECTIONS */
-        .section-title { font-family: 'Amiri', serif; color: #123d34; font-size: 20px; margin: 20px 0 15px; border-bottom: 2px solid #ddc486; padding-bottom: 8px; }
-        .quran-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 25px; }
-        .quran-card { background: white; border: 1px solid #e6dfd0; border-radius: 18px; padding: 18px 12px; text-align: center; color: #123d34; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .quran-card strong { font-size: 15px; font-weight: 800; font-family: 'Amiri', serif; }
-        .quran-card span { font-size: 12px; color: #6a7971; }
+        /* RESTORED ORIGINAL QURAN STYLES */
+        .section-title { font-size: 17px; font-weight: 700; color: #123d34; margin: 25px 0 15px 0; border-bottom: 1px solid #e6dfd0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .quran-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .quran-card { background: #ffffff; border: 1px solid #e6dfd0; border-radius: 16px; padding: 16px 12px; text-align: center; color: #123d34; text-decoration: none; box-shadow: 0 3px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s; }
+        .quran-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(18,61,52,0.08); border-color: #ddc486; }
+        .quran-card strong { font-size: 15px; font-weight: 700; font-family: 'Amiri', serif; }
+        .quran-card span { font-size: 11px; color: #666; font-weight: 500; }
 
         body.dark-mode { background: #111; color: #eee; }
         body.dark-mode .khatam-card, body.dark-mode .quran-card { background: #222; border-color: #444; color: #eee; }
@@ -56,7 +56,7 @@
         <h2 style="margin:0; color: #123d34; font-family:'Amiri', serif;">القرآن الكريم (Quran)</h2>
     </div>
 
-    <!-- 1. NEW KHATAM PLANNER CARD -->
+    <!-- 1. KHATAM PLANNER CARD -->
     <div class="khatam-card">
         <div class="khatam-title">📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം</div>
         <p class="khatam-desc">നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് മുടങ്ങാതെ ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.</p>
@@ -72,7 +72,7 @@
         </div>
 
         <div class="target-box" onclick="showTodayTaskDetails()">
-            <h4 id="targetBoxHeading">ഇന്നത്തെ ലക്ഷ്യം (Today's Target) - ക്ലിക്ക് ചെയ്യുക:</h4>
+            <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target) - ക്ലിക്ക് ചെയ്യുക:</h4>
             <p id="todayTargetText">പേജ് 1 മുതൽ 6 വരെ (ഇന്ന് ഓതേണ്ടത്)</p>
         </div>
 
@@ -81,42 +81,42 @@
             <div class="progress-bar-container">
                 <div id="progressBarFill" class="progress-bar-fill"></div>
             </div>
-            <div style="margin-top: 8px;" id="statusText">നിങ്ങൾ അവസാനമായി നിർത്തിയത്: ദിവസം 1 / 120</div>
+            <div style="margin-top: 6px;" id="statusText">നിലവിലെ ദിവസം: ദിവസം 1 / 120 (~6 പേജുകൾ വീതം)</div>
         </div>
 
         <button class="complete-btn" onclick="completeTodayTarget()">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
     </div>
 
-    <!-- 2. UTHMANI QURAN & SPECIAL SURATHS (RESTORED AS BEFORE) -->
-    <h3 class="section-title">📖 ഉഥ്മാനിയ ഖുർആൻ & സ്പെഷ്യൽ സൂറത്തുകൾ</h3>
+    <!-- 2. RESTORED ORIGINAL QURAN & SPECIAL SURATHS SECTION -->
+    <div class="section-title">📖 ഉഥ്മാനിയ ഖുർആൻ & സ്പെഷ്യൽ സൂറത്തുകൾ</div>
     <div class="quran-grid">
         <a href="https://quran.com" target="_blank" class="quran-card">
-            <div style="font-size:28px;">🌐</div>
+            <div style="font-size:24px;">🌐</div>
             <strong>Quran.com</strong>
             <span>ഖുർആൻ ഓൺലൈനായി വായിക്കാം</span>
         </a>
         <a href="quran-mp3.html" class="quran-card">
-            <div style="font-size:28px;">🎧</div>
+            <div style="font-size:24px;">🎧</div>
             <strong>Quran MP3</strong>
             <span>ഖുർആൻ പാരായണം കേൾക്കാം</span>
         </a>
         <a href="surah-kahf.html" class="quran-card">
-            <div style="font-size:28px;">📜</div>
+            <div style="font-size:24px;">📜</div>
             <strong>سورة الكهف</strong>
             <span>സൂറത്തുൽ കഹ്ഫ്</span>
         </a>
         <a href="surah-mulk.html" class="quran-card">
-            <div style="font-size:28px;">🌟</div>
+            <div style="font-size:24px;">🌟</div>
             <strong>سورة الملك</strong>
             <span>സൂറത്തുൽ മുൽക്ക്</span>
         </a>
         <a href="surah-yaseen.html" class="quran-card">
-            <div style="font-size:28px;">💚</div>
+            <div style="font-size:24px;">💚</div>
             <strong>سورة يس</strong>
             <span>സൂറത്തു യാസീൻ</span>
         </a>
         <a href="surah-waqiah.html" class="quran-card">
-            <div style="font-size:28px;">✨</div>
+            <div style="font-size:24px;">✨</div>
             <strong>سورة الواقعة</strong>
             <span>സൂറത്തുൽ വാഖിഅ</span>
         </a>
