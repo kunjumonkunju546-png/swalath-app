@@ -27,9 +27,15 @@
         .khatam-desc { color: #666; font-size: 12px; margin: 0 0 10px 0; line-height: 1.4; }
         .duration-select-box label { display: block; font-size: 11px; font-weight: bold; color: #123d34; margin-bottom: 3px; }
         .duration-dropdown { width: 100%; padding: 10px; border: 1.5px solid #ddc486; border-radius: 12px; background: #fdfdfb; color: #123d34; font-size: 13px; font-weight: bold; outline: none; margin-bottom: 10px; }
-        .target-box { background: #edf3eb; border: 1.5px solid #123d34; border-radius: 12px; padding: 10px; text-align: center; margin-bottom: 10px; cursor: pointer; }
-        .target-box h4 { margin: 0 0 3px 0; color: #123d34; font-size: 11px; font-weight: bold; }
-        .target-box p { margin: 0; color: #123d34; font-size: 13px; font-weight: bold; }
+        
+        /* INLINE TARGET DETAILS BOX */
+        .target-display-box { background: #edf3eb; border: 1.5px solid #123d34; border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+        .target-display-box h4 { margin: 0 0 4px 0; color: #123d34; font-size: 12px; font-weight: bold; }
+        .target-display-box p { margin: 0 0 8px 0; color: #123d34; font-size: 14px; font-weight: bold; }
+        .repeat-options { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+        .repeat-btn { background: #fff; border: 1px solid #123d34; color: #123d34; padding: 5px 10px; font-size: 11px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .repeat-btn.active { background: #123d34; color: #fff; }
+
         .progress-info { font-size: 11px; color: #555; margin-bottom: 10px; line-height: 1.5; background: #f9f9f5; padding: 8px; border-radius: 10px; }
         .progress-bar-container { width: 100%; background: #e0e0dc; border-radius: 6px; height: 6px; overflow: hidden; margin-top: 5px; }
         .progress-bar-fill { background: #123d34; height: 100%; width: 0%; transition: width 0.3s ease; }
@@ -60,8 +66,10 @@
         body.dark-mode .tanzil-source {border-color: #444; color: #aaa; } 
         body.dark-mode .tanzil-source a {color: #f1dfb0; } 
         body.dark-mode .duration-dropdown { background: #333; color: #fff; border-color: #555; }
-        body.dark-mode .target-box { background: #1a2e28; border-color: #2b584b; }
-        body.dark-mode .target-box h4, body.dark-mode .target-box p { color: #f0deaf; }
+        body.dark-mode .target-display-box { background: #1a2e28; border-color: #2b584b; }
+        body.dark-mode .target-display-box h4, body.dark-mode .target-display-box p { color: #f0deaf; }
+        body.dark-mode .repeat-btn { background: #222; color: #f1dfb0; border-color: #f1dfb0; }
+        body.dark-mode .repeat-btn.active { background: #f1dfb0; color: #123d34; }
         body.dark-mode .progress-info { background: #2a2a2a; color: #ccc; }
     </style>
 </head>
@@ -95,9 +103,16 @@
                     </select>
                 </div>
 
-                <div class="target-box" onclick="showTodayTaskDetails()">
-                    <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target) - ക്ലിക്ക് ചെയ്യുക:</h4>
-                    <p id="todayTargetText">പേജ് 1 മുതൽ 6 വരെ (ഇന്ന് ഓതേണ്ടത്)</p>
+                <!-- INLINE TARGET BOX WITH MULTI-READ OPTIONS -->
+                <div class="target-display-box">
+                    <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target):</h4>
+                    <p id="todayTargetText">പേജ് 1 മുതൽ 6 വരെ</p>
+                    <div style="font-size: 11px; color: #555; margin-bottom: 4px;">ഈ ഭാഗം എത്ര തവണ ഓതി? (Repeats):</div>
+                    <div class="repeat-options">
+                        <button class="repeat-btn active" onclick="setRepeatCount(1)">1 പ്രാവശ്യം</button>
+                        <button class="repeat-btn" onclick="setRepeatCount(2)">2 പ്രാവശ്യം</button>
+                        <button class="repeat-btn" onclick="setRepeatCount(3)">3 പ്രാവശ്യം</button>
+                    </div>
                 </div>
 
                 <div class="progress-info">
@@ -231,7 +246,8 @@ const TOTAL_PAGES = 604;
 let khatamData = JSON.parse(localStorage.getItem("swalathKhatamData") || JSON.stringify({
     duration: 120,
     currentDay: 1,
-    completedDays: []
+    completedDays: [],
+    selectedRepeat: 1
 }));
 
 function updateKhatamPlan() {
@@ -241,8 +257,34 @@ function updateKhatamPlan() {
     renderKhatam();
 }
 
+function setRepeatCount(count) {
+    khatamData.selectedRepeat = count;
+    saveData();
+    
+    // Update active button UI
+    const buttons = document.querySelectorAll('.repeat-btn');
+    buttons.forEach((btn, index) => {
+        if ((index + 1) === count) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
 function renderKhatam() {
     document.getElementById("durationSelect").value = khatamData.duration;
+    
+    // Set repeat buttons state on load
+    const buttons = document.querySelectorAll('.repeat-btn');
+    buttons.forEach((btn, index) => {
+        if ((index + 1) === (khatamData.selectedRepeat || 1)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
     const totalDays = khatamData.duration;
     const pagesPerDay = Math.ceil(TOTAL_PAGES / totalDays);
     
@@ -252,7 +294,7 @@ function renderKhatam() {
     if (startPage > TOTAL_PAGES) {
         document.getElementById("todayTargetText").textContent = "അഭിനന്ദനങ്ങൾ! ഖുർആൻ ഖത്മ് പൂർത്തിയായി 🎉";
     } else {
-        document.getElementById("todayTargetText").textContent = `ദിവസം ${khatamData.currentDay}: പേജ് ${startPage} മുതൽ ${endPage} വരെ`;
+        document.getElementById("todayTargetText").textContent = `പേജ് ${startPage} മുതൽ ${endPage} വരെ (~${pagesPerDay} പേജുകൾ)`;
     }
 
     const completedCount = khatamData.completedDays.length;
@@ -260,22 +302,18 @@ function renderKhatam() {
     
     document.getElementById("progressPercent").textContent = progress + "%";
     document.getElementById("progressBarFill").style.width = progress + "%";
-    document.getElementById("statusText").textContent = `ദിവസം ${khatamData.currentDay} / ${totalDays} (~${pagesPerDay} പേജുകൾ)`;
-}
-
-function showTodayTaskDetails() {
-    const totalDays = khatamData.duration;
-    const pagesPerDay = Math.ceil(TOTAL_PAGES / totalDays);
-    let startPage = ((khatamData.currentDay - 1) * pagesPerDay) + 1;
-    let endPage = Math.min(khatamData.currentDay * pagesPerDay, TOTAL_PAGES);
-    
-    alert(`ഖത്മ് പ്ലാൻ വിശദാംശങ്ങൾ:\n\n📅 നിലവിലെ ദിവസം: ദിവസം ${khatamData.currentDay} (ആകെ ${totalDays} ദിവസങ്ങളിൽ)\n📖 ഇന്നത്തെ ടാസ്ക്: പേജ് ${startPage} മുതൽ പേജ് ${endPage} വരെ.\n\nഈ ഭാഗം ഓതി തീർത്ത ശേഷം '✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു' ബട്ടൺ അമർത്തുക.`);
+    document.getElementById("statusText").textContent = `ദിവസം ${khatamData.currentDay} / ${totalDays}`;
 }
 
 function completeTodayTarget() {
     const totalDays = khatamData.duration;
-    if (!khatamData.completedDays.includes(khatamData.currentDay)) {
-        khatamData.completedDays.push(khatamData.currentDay);
+    const repeatCount = khatamData.selectedRepeat || 1;
+    
+    // Add current day multiple times based on repeat count if needed, or mark as done
+    for (let i = 0; i < repeatCount; i++) {
+        if (!khatamData.completedDays.includes(khatamData.currentDay + "_" + i)) {
+            khatamData.completedDays.push(khatamData.currentDay + "_" + i);
+        }
     }
     
     if (khatamData.currentDay < totalDays) {
@@ -284,7 +322,7 @@ function completeTodayTarget() {
     
     saveData();
     renderKhatam();
-    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്ക് അപ്ഡേറ്റ് ആയിട്ടുണ്ട്.");
+    alert(`അൽഹംദുലില്ലാഹ്! ${repeatCount} പ്രാവശ്യം ഓതിയതായി വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്ക് അപ്ഡേറ്റ് ആയിട്ടുണ്ട്.`);
 }
 
 function saveData() {
