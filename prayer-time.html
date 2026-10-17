@@ -602,6 +602,35 @@ function getNextPrayer(timings) {
     return mainPrayers[0];
 }
 
+// ----------------------------------------------------
+// പുതിയത്: ആൻഡ്രോയിഡ് AlarmManager-ലേക്ക് സമയം ഷെഡ്യൂൾ ചെയ്യാൻ
+// ----------------------------------------------------
+function scheduleAllPrayersAndroid(timings) {
+    try {
+        if (typeof AndroidAdhan === "undefined" || !AndroidAdhan.scheduleAdhanAlarm) return;
+
+        const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
+        if (isMasterMuted) return;
+
+        mainPrayers.forEach(prayer => {
+            const timeStr = timings[prayer.key];
+            const pMinutes = parseTime(timeStr);
+            if (pMinutes === null) return;
+
+            const isEnabled = localStorage.getItem("prayer_adhan_" + prayer.key);
+            if (isEnabled === "false") return; // ഈ വാങ്ക് ഓഫ് ആണെങ്കിൽ അലാറം വെക്കില്ല
+
+            const hour = Math.floor(pMinutes / 60);
+            const min = pMinutes % 60;
+
+            // ആൻഡ്രോയിഡ് ആപ്പിലെ AlarmManager ഫങ്ഷൻ കോൾ ചെയ്യുന്നു
+            AndroidAdhan.scheduleAdhanAlarm(hour, min, prayer.key);
+        });
+    } catch (e) {
+        console.log("Alarm schedule error:", e);
+    }
+}
+
 function checkAdhanTime(timings) {
     const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
     if (isMasterMuted) return;
@@ -711,6 +740,9 @@ function renderPrayerTimes(data) {
     });
 
     checkAdhanTime(timings);
+    
+    // ടൈമിങ്സ് കിട്ടുമ്പോൾ തന്നെ ആൻഡ്രോയിഡ് അലാറം സെറ്റ് ചെയ്യുക
+    scheduleAllPrayersAndroid(timings);
 }
 
 function showLocationStatus(message, actions = []) {
