@@ -12,7 +12,7 @@
         .header-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .back-btn { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
         
-        /* KHTAM CARD DESIGN */
+        /* KHATAM CARD DESIGN */
         .khatam-card { background: #ffffff; border: 2px solid #ddc486; border-radius: 22px; padding: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); margin-bottom: 20px; }
         .khatam-title { color: #123d34; font-size: 18px; margin: 0 0 10px 0; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .khatam-desc { color: #6a7971; font-size: 13px; margin: 0 0 15px 0; line-height: 1.6; }
@@ -92,8 +92,6 @@ let khatamData = JSON.parse(localStorage.getItem("swalathKhatamData") || JSON.st
 function updateKhatamPlan() {
     const select = document.getElementById("durationSelect");
     khatamData.duration = parseInt(select.value);
-    
-    // Reset or adjust if duration changed
     saveData();
     renderKhatam();
 }
@@ -109,7 +107,6 @@ function renderKhatam() {
     if (startPage > TOTAL_PAGES) {
         document.getElementById("todayTargetText").textContent = "അഭിനന്ദനങ്ങൾ! നിങ്ങൾ ഖുർആൻ ഖത്മ് പൂർത്തിയാക്കിയിരിക്കുന്നു 🎉";
     } else {
-        document.getElementById("todayTargetTextanalytical") = "";
         document.getElementById("todayTargetText").textContent = `പേജ് ${startPage} മുതൽ ${endPage} വരെ (ഇന്ന് ഓതേണ്ടത്)`;
     }
 
@@ -133,7 +130,7 @@ function completeTodayTarget() {
     
     saveData();
     renderKhatam();
-    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷം വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ പേജുകൾ അപ്‌ഡേറ്റ് ആയിട്ടുണ്ട്.");
+    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ പേജുകൾ അപ്‌ഡേറ്റ് ആയിട്ടുണ്ട്.");
 }
 
 function saveData() {
