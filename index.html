@@ -39,10 +39,7 @@ body.dark-mode footer { color: #777; }
 body.dark-mode .advertising-card { background: #222; border-color: #444; } 
 body.dark-mode .today-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
 body.dark-mode .today-card h3, body.dark-mode .today-card h2 { color: #f0deaf !important; }
-body.dark-mode .khatam-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
-body.dark-mode .khatam-card h3, body.dark-mode .target-box h4 { color: #f0deaf !important; }
-body.dark-mode .target-box { background: #1a2e28 !important; border-color: #f0deaf !important; }
-body.dark-mode .target-box p { color: #fff !important; }
+body.dark-mode .advertising-card { background: #222; border-color: #444; }
 
 /* ===== SWALAATH PREMIUM HOME UI ===== */ 
 :root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
@@ -125,25 +122,6 @@ main { padding: 0 18px; }
             <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p> 
         </section> 
 
-        <!-- HIJRI CALENDAR & SPECIAL DAYS CARD -->
-        <div class="khatam-card" id="hijriCard" style="background: var(--sw-card, #ffffff); border: 2px solid var(--sw-gold, #c5a868); border-radius: 22px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.05);">
-            <h3 id="hijriCardTitle" style="color: var(--sw-green, #123d34); font-size: 16px; margin: 0 0 12px 0; font-family: 'Amiri', serif;">🗓️ التقويم الهجري والمناسبات</h3>
-            
-            <div class="target-box" style="background: #edf3eb; border: 1px dashed var(--sw-green, #123d34); border-radius: 14px; padding: 12px; text-align: center; margin-bottom: 12px;">
-                <h4 id="hijriDateLabel" style="color: var(--sw-green, #123d34); margin: 0 0 4px 0; font-size: 12px; font-weight: 600;">ഇന്നത്തെ തീയതി (Date):</h4>
-                <p id="currentHijriText" style="font-size: 15px; color: var(--sw-green, #123d34); margin: 0; font-weight: bold; font-family: 'Amiri', serif;">1448 جمادى الآخرة 05 — 17 October 2026</p>
-            </div>
-
-            <div style="font-size: 13px;">
-                <strong id="specialDaysHeading" style="color: var(--sw-green, #123d34); display: block; margin-bottom: 6px;">പ്രധാന വിശേഷ ദിവസങ്ങൾ (Special Days):</strong>
-                <div style="background: #fffdf8; padding: 10px 14px; border-radius: 12px; border: 1px solid #e6dfd0; line-height: 1.7; color: #333;">
-                    <p id="ev1" style="margin: 4px 0;">🌙 <strong>റമദാൻ 1:</strong> ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം</p>
-                    <p id="ev2" style="margin: 4px 0;">🕋 <strong>അറഫാ ദിനം:</strong> ദുൽഹിജ്ജ 9</p>
-                    <p id="ev3" style="margin: 4px 0;">🎉 <strong>പെരുന്നാൾ:</strong> ശവ്വാൽ 1</p>
-                </div>
-            </div>
-        </div>
-
         <!-- SEPARATE COUNTER CARD -->
         <div class="today-card">
             <h3 id="counterCardTitle">مُعَدَّدُ الصَّلَوَات (Swalath Counter)</h3>
@@ -157,6 +135,7 @@ main { padding: 0 18px; }
             <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button> 
         </div> 
 
+        <!-- MENU GRID (NOW INCLUDING HIJRI CALENDAR AS A SEPARATE CARD) -->
         <div class="menu-grid"> 
             <div class="menu-card" onclick="openQuran()"> 
                 <div style="font-size:30px;">📖</div> 
@@ -169,6 +148,10 @@ main { padding: 0 18px; }
             <div class="menu-card" onclick="openQuranMP3()"> 
                 <div style="font-size:30px;">🎧</div> 
                 <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong> <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span> 
+            </div> 
+            <div class="menu-card" onclick="openCalendar()"> 
+                <div style="font-size:30px;">🗓️</div> 
+                <strong>التقويم الهجري</strong> <span data-ml="ഹിജ്‌റ കലണ്ടർ & വിശേഷ ദിവസങ്ങൾ">ഹിജ്‌റ കലണ്ടർ & വിശേഷ ദിവസങ്ങൾ</span> 
             </div> 
             <div class="menu-card" onclick="openPrayerTime()"> 
                 <div style="font-size:30px;">🕐</div> 
@@ -217,6 +200,28 @@ main { padding: 0 18px; }
                 <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2> 
             </div> 
             <div id="favoritesList"></div> 
+        </section> 
+
+        <!-- CALENDAR FULL SECTION --> 
+        <section id="calendarSection" style="display:none;"> 
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
+                <button onclick="closeCalendar()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
+                <h2 style="margin:0; font-family:'Amiri', serif; color: var(--sw-green);">🗓️ التقويم الهجري والمناسبات</h2> 
+            </div> 
+            <div class="advertising-card"> 
+                <h3 style="color:var(--sw-green); font-family:'Amiri', serif; margin-top:0;">ഇന്നത്തെ തീയതി (Today's Date)</h3> 
+                <p style="font-size:16px; font-weight:bold; color:var(--sw-green); font-family:'Amiri', serif;">1448 جمادى الآخرة 05 — 17 October 2026</p> 
+            </div> 
+            <div class="advertising-card"> 
+                <h3 style="color:var(--sw-green); font-family:'Amiri', serif; margin-top:0;">പ്രധാന വിശേഷ ദിവസങ്ങൾ (Special Islamic Days)</h3> 
+                <ul style="list-style:none; padding:0; margin:0; line-height:2.2; font-size:14px; color:var(--sw-muted);"> 
+                    <li>🌙 <strong>റമദാൻ 1:</strong> വ്രതത്തിന്റെയും ഖുർആന്റെയും മാസം</li> 
+                    <li>🕋 <strong>അറഫാ ദിനം:</strong> ദുൽഹിജ്ജ 9 (ഹജ്ജിന്റെ പ്രധാന ദിനം)</li> 
+                    <li>🎉 <strong>പെരുന്നാൾ ദിനങ്ങൾ:</strong> ഈദുൽ ഫിത്ർ (ശവ്വാൽ 1) & ഈദുൽ അദ്ഹാ (ദുൽഹിജ്ജ 10)</li> 
+                    <li>✨ <strong>ലൈലത്തുൽ ഖദ്ർ:</strong> റമദാനിലെ അവസാന പത്തിലെ ഇരട്ടയാല്ലാത്ത രാവുകൾ</li> 
+                    <li>⭐ <strong>ആശൂറാഅ് ദിനം:</strong> മുഹർറം 10</li> 
+                </ul> 
+            </div> 
         </section> 
 
         <!-- ADVERTISING SECTION --> 
@@ -311,48 +316,6 @@ function openDua() { window.location.href = "dua.html"; }
 function openDhikr() { window.location.href = "dhikr.html"; } 
 function openPrayerTime() { window.location.href = "prayer-time.html"; } 
 
-/* LANGUAGE SELECTOR LOGIC */ 
-let selectedLang = localStorage.getItem("swalath-language") || "ml"; 
-function openSwalathLanguageSelector() {
-    const screen = document.getElementById("languageScreen"); 
-    if (screen) {
-        screen.style.display = "flex"; 
-        highlightSelectedLanguage(selectedLang); 
-    } 
-} 
-
-function highlightSelectedLanguage(lang) {
-    document.querySelectorAll(".language-option").forEach(btn => {
-        if (btn.getAttribute("data-lang") === lang) {
-            btn.classList.add("selected"); 
-        } else {
-            btn.classList.remove("selected"); 
-        } 
-    }); 
-} 
-
-document.querySelectorAll(".language-option").forEach(btn => {
-    btn.addEventListener("click", function() {
-        selectedLang = this.getAttribute("data-lang"); 
-        highlightSelectedLanguage(selectedLang); 
-    }); 
-}); 
-
-const continueBtn = document.getElementById("languageContinue"); 
-if (continueBtn) {
-    continueBtn.addEventListener("click", function() {
-        localStorage.setItem("swalath-language", selectedLang); 
-        const screen = document.getElementById("languageScreen"); 
-        if (screen) screen.style.display = "none"; 
-        document.dispatchEvent(new CustomEvent("swalath-language-changed", { detail: selectedLang })); 
-        if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
-            window.SwalathLanguage.apply(selectedLang); 
-        } else {
-            location.reload(); 
-        } 
-    }); 
-} 
-
 /* HOME VISIBILITY */ 
 function hideHomeElements() {
     document.querySelector(".welcome").style.display = "none"; 
@@ -360,8 +323,6 @@ function hideHomeElements() {
     document.querySelector(".menu-grid").style.display = "none"; 
     document.querySelector(".feature-buttons").style.display = "none"; 
     document.getElementById("travelSection").style.display = "none"; 
-    const hijriCard = document.getElementById("hijriCard");
-    if (hijriCard) hijriCard.style.display = "none";
 } 
 
 function showHomeElements() {
@@ -370,10 +331,9 @@ function showHomeElements() {
     document.querySelector(".menu-grid").style.display = "grid"; 
     document.querySelector(".feature-buttons").style.display = "flex"; 
     document.getElementById("travelSection").style.display = "block"; 
-    const hijriCard = document.getElementById("hijriCard");
-    if (hijriCard) hijriCard.style.display = "block";
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
 } 
 
@@ -389,6 +349,7 @@ function closeInternalSectionUI() {
     currentInternalSection = null; 
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     showHomeElements(); 
     window.scrollTo(0, 0); 
@@ -401,6 +362,7 @@ window.addEventListener("popstate", function(event) {
         hideHomeElements(); 
         document.getElementById("collectionSection").style.display = sectionName === "collection" ? "block" : "none"; 
         document.getElementById("favoritesSection").style.display = sectionName === "favorites" ? "block" : "none"; 
+        document.getElementById("calendarSection").style.display = sectionName === "calendar" ? "block" : "none";
         document.getElementById("advertisingSection").style.display = sectionName === "advertising" ? "block" : "none"; 
         if (sectionName === "favorites") loadFavorites(); 
         if (sectionName === "collection") loadCollection(); 
@@ -412,12 +374,32 @@ window.addEventListener("popstate", function(event) {
     } 
 }); 
 
+/* CALENDAR SECTION */ 
+function openCalendar() {
+    openInternalSection("calendar"); 
+    hideHomeElements(); 
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "block"; 
+    window.scrollTo(0, 0); 
+} 
+
+function closeCalendar() {
+    if (currentInternalSection === "calendar" && history.state && history.state.swalathInternalSection === "calendar") {
+        history.back(); 
+        return; 
+    } 
+    closeInternalSectionUI(); 
+} 
+
 /* ADVERTISING PAGE */ 
 function openAdvertising() {
     openInternalSection("advertising"); 
     hideHomeElements(); 
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "block"; 
     window.scrollTo(0, 0); 
 } 
@@ -435,6 +417,7 @@ function openCollection() {
     openInternalSection("collection"); 
     hideHomeElements(); 
     document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("collectionSection").style.display = "block"; 
     document.getElementById("searchSwalath").value = ""; 
@@ -476,6 +459,7 @@ function openFavorites() {
     openInternalSection("favorites"); 
     hideHomeElements(); 
     document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("calendarSection").style.display = "none";
     document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "block"; 
     loadFavorites(); 
@@ -530,43 +514,6 @@ function updateDarkButton() {
     const isDark = document.body.classList.contains("dark-mode"); 
     button.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode"; 
 } 
-
-/* MULTILINGUAL SUPPORT FOR HIJRI CARD */ 
-function applyHomeHijriCardLanguage() {
-    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() : "ml";
-
-    if (currentLang === "en") {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ Hijri Calendar & Special Days";
-        document.getElementById('hijriDateLabel').textContent = "Today's Date:";
-        document.getElementById('specialDaysHeading').textContent = "Upcoming Special Days:";
-        document.getElementById('counterCardTitle').textContent = "مُعَدَّدُ الصَّلَوَات (Swalath Counter)";
-        document.getElementById('ev1').textContent = "🌙 Ramadan 1: Approx. in 2 months";
-        document.getElementById('ev2').textContent = "🕋 Day of Arafah: Dhul-Hijjah 9";
-        document.getElementById('ev3').textContent = "🎉 Eid Day: Shawwal 1";
-    } 
-    else if (currentLang === "ar") {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ التقويم الهجري والأيام المباركة";
-        document.getElementById('hijriDateLabel').textContent = "تاريخ اليوم:";
-        document.getElementById('specialDaysHeading').textContent = "الأيام المميزة القادمة:";
-        document.getElementById('counterCardTitle').textContent = "مُعَدَّدُ الصَّلَوَات";
-        document.getElementById('ev1').textContent = "🌙 رمضان ١: تقريباً بعد شهرين";
-        document.getElementById('ev2').textContent = "🕋 يوم عرفة: ٩ ذو الحجة";
-        document.getElementById('ev3').textContent = "🎉 عيد الفطر: ١ شوال";
-    }
-    else {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും";
-        document.getElementById('hijriDateLabel').textContent = "ഇന്നത്തെ തീയതി (Date):";
-        document.getElementById('specialDaysHeading').textContent = "പ്രധാന വിശേഷ ദിവസങ്ങൾ:";
-        document.getElementById('counterCardTitle').textContent = "مُعَدَّدُ الصَّلَوَات (Swalath Counter)";
-        document.getElementById('ev1').textContent = "🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം";
-        document.getElementById('ev2').textContent = "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9";
-        document.getElementById('ev3').textContent = "🎉 പെരുന്നാൾ: ശവ്വാൽ 1";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", applyHomeHijriCardLanguage);
-document.addEventListener("swalath-language-changed", applyHomeHijriCardLanguage);
 
 /* STARTUP */ 
 window.addEventListener("load", function() {
