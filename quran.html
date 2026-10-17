@@ -78,13 +78,13 @@
 
 <div class="quran-app"> 
     <header class="quran-header"> 
-        <h1>القرآن الكريم</h1> 
-        <p>The Noble Quran</p> 
+        <h1 data-translate="quran_title">القرآن الكريم</h1> 
+        <p data-translate="quran_subtitle">The Noble Quran</p> 
     </header> 
     
     <main class="quran-main"> 
         <!-- BACK TO HOME --> 
-        <button class="back-button" onclick="goHome()"> ← Back to Home </button> 
+        <button class="back-button" onclick="goHome()" data-translate="back_home"> ← Back to Home </button> 
         
         <!-- MAIN QURAN PAGE --> 
         <div id="mainQuran"> 
@@ -97,13 +97,13 @@
             </div>
 
             <!-- ORIGINAL QURAN CARDS -->
-            <h2 class="section-title">The Holy Quran</h2> 
+            <h2 class="section-title" data-translate="holy_quran_title">The Holy Quran</h2> 
             <div class="quran-card" onclick="showAllSurahs()"> 
                 <div class="arabic">القرآن الكريم</div> 
-                <div class="name">All Surahs — 114 Chapters</div> 
+                <div class="name" data-translate="all_surahs_desc">All Surahs — 114 Chapters</div> 
             </div> 
             
-            <h2 class="section-title">Important Surahs</h2> 
+            <h2 class="section-title" data-translate="important_surahs_title">Important Surahs</h2> 
             <div class="quran-card" onclick="openSurah(36)"> 
                 <div class="arabic">سورة يس</div> 
                 <div class="name">Surah Yasin</div> 
@@ -156,7 +156,7 @@
 
         <!-- KHATAM PLANNER VIEW -->
         <section id="plannerView" class="planner-view">
-            <button class="back-button" onclick="backToQuranHome()"> ← Back to Quran Home </button>
+            <button class="back-button" onclick="backToQuranHome()" data-translate="back_to_quran"> ← Back to Quran Home </button>
             <div class="planner-container">
                 <div class="planner-title">📖 Easy Khatamul Quran Planner</div>
                 <p class="planner-desc">സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.</p>
@@ -189,14 +189,14 @@
 
         <!-- ALL SURAHS LIST --> 
         <section id="surahList" class="surah-list"> 
-            <button class="back-button" onclick="backToQuranHome()"> ← Back to Quran Home </button> 
-            <h2 class="section-title">All Surahs</h2> 
+            <button class="back-button" onclick="backToQuranHome()" data-translate="back_to_quran"> ← Back to Quran Home </button> 
+            <h2 class="section-title" data-translate="all_surahs_title">All Surahs</h2> 
             <div id="allSurahs"> 
                 <div class="loading">Loading Surahs...</div> 
             </div> 
         </section> 
 
-        <!-- TARGET RANGE READER VIEW (PAGE BY PAGE) --> 
+        <!-- TARGET RANGE READER VIEW --> 
         <section id="targetView" class="surah-view"> 
             <button class="back-button" onclick="backToPlanner()"> ← Back to Planner </button> 
             <div id="targetContent"> 
@@ -223,7 +223,8 @@
     </main> 
 </div> 
 
-<!-- OFFLINE QURAN DATA --> 
+<!-- EXTERNAL SCRIPTS -->
+<script src="language.js"></script>
 <script src="quran-data.js"></script> 
 <script> 
 /* ========================= DARK MODE ========================= */ 
@@ -285,7 +286,6 @@ function updateKhatamPlan() {
     renderKhatam();
 }
 
-/* Split daily target into pages (~25 lines per page) */
 function openTodayTargetQuran() {
     openedFromPlanner = true;
     document.getElementById("mainQuran").style.display = "none";
@@ -306,7 +306,6 @@ function openTodayTargetQuran() {
     let endLineIndex = endPage * 20;
     let targetLines = lines.slice(Math.max(0, startLineIndex), Math.min(lines.length, endLineIndex));
 
-    // Divide targetLines into chunks of ~25 lines per sub-page
     dailyPagesList = [];
     let chunkSize = 25;
     for (let i = 0; i < targetLines.length; i += chunkSize) {
@@ -403,7 +402,7 @@ function completeTodayTarget() {
         khatamData.currentDay++;
     }
     
-    khatamData.savedSubPage = 0; // Reset subpage for next day
+    khatamData.savedSubPage = 0; 
     saveData();
     renderKhatam();
     alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി പൂർത്തിയായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്കിലേക്ക് സ്വാഗതം!");
