@@ -113,7 +113,7 @@ body {
         radial-gradient(circle at 95% 5%,
         rgba(221,196,134,.15),transparent 32%),
         linear-gradient(145deg,#0b2d24,#164b3a 65%,#205640);
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 .hero::before {
     content:"☾";
@@ -185,7 +185,6 @@ body {
     border: 1px solid var(--line);
     border-radius: 20px;
     padding: 16px 18px;
-    margin-top: 25px;
     margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(16,59,48,0.04);
 }
@@ -409,16 +408,7 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
     </div>
 </section>
 
-<div class="section-heading">
-    <h2 data-i18n="prayerTimesTitle">നമസ്കാര സമയങ്ങൾ</h2>
-    <span id="updatedDate"></span>
-</div>
-
-<section id="prayerList">
-    <div class="status">നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...</div>
-</section>
-
-<!-- ADHAN CONTROL & QUICK MUTE PANEL -->
+<!-- ADHAN CONTROL & QUICK MUTE PANEL (Upcoming Prayer-inu thazhe aayi maatri vechathu) -->
 <section class="adhan-control-card">
     <div class="adhan-control-header">
         <h3>🕌 Adhan Sound Settings</h3>
@@ -447,7 +437,7 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
         </label>
     </div>
 
-    <!-- പുതിയതായി ചേർത്ത ബാറ്ററി സെറ്റിങ്സ് ബട്ടണും വിശദീകരണവും (ഭാഷ മാറുന്നതനുസരിച്ച് മാറും) -->
+    <!-- ബാറ്ററി സെറ്റിങ്സ് ബട്ടണും വിശദീകരണവും -->
     <div style="margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; text-align: center;">
         <button onclick="openBatterySettings()" style="background: transparent; border: 1px solid var(--green); color: var(--green); padding: 9px 14px; border-radius: 12px; font-size: 11px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s;">
             <span id="batteryBtnText">⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
@@ -456,6 +446,15 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
             ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.
         </div>
     </div>
+</section>
+
+<div class="section-heading">
+    <h2 data-i18n="prayerTimesTitle">നമസ്കാര സമയങ്ങൾ</h2>
+    <span id="updatedDate"></span>
+</div>
+
+<section id="prayerList">
+    <div class="status">നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...</div>
 </section>
 
 <section id="locationStatus" class="status" hidden></section>
@@ -493,7 +492,6 @@ let locationRequestInProgress = false;
 let lastPrayerData = null;
 let lastPlayedMinuteKey = "";
 
-// Check online/offline status
 function checkNetworkStatus() {
     const banner = document.getElementById("offlineBanner");
     if (!navigator.onLine) {
@@ -584,7 +582,6 @@ function updateDates() {
     updateBatteryText(currentLang);
 }
 
-// ഭാഷ മാറുന്നതനുസരിച്ച് ബാറ്ററി സെറ്റിങ്സ് ബട്ടൺ ടെക്സ്റ്റ് മാറ്റാൻ
 function updateBatteryText(lang) {
     const btnText = document.getElementById("batteryBtnText");
     const descText = document.getElementById("batteryDescText");
@@ -597,13 +594,11 @@ function updateBatteryText(lang) {
         btnText.textContent = "⚡ Click here for reliable Adhan when phone is locked";
         descText.textContent = "Enable this option to ensure Adhan plays on time even when the screen is off.";
     } else {
-        // Malayalam (Default)
         btnText.textContent = "⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക";
         descText.textContent = "ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.";
     }
 }
 
-// ആൻഡ്രോയിഡ് ആപ്പിലേക്ക് ബാറ്ററി സെറ്റിങ്സ് തുറക്കാൻ സിഗ്നൽ അയക്കുന്നു
 function openBatterySettings() {
     try {
         if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.openBatterySettings) {
@@ -961,7 +956,6 @@ document.addEventListener("swalath-language-changed", function() {
     if (lastPrayerData) renderPrayerTimes(lastPrayerData);
 });
 
-// System Theme Sync & Saved Dark Mode Check
 try {
     const savedDark = localStorage.getItem("swalathDarkMode");
     if (savedDark === "true" || (savedDark === null && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
