@@ -33,11 +33,12 @@
 
                 // Hijri Calendar Card Translations (Malayalam)
                 hijriCardTitle: "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും",
-                hijriDateLabel: "ഇന്നത്തെ തീയതി (Date):",
-                specialDaysHeading: "പ്രധാന വിശേഷ ദിവസങ്ങൾ:",
-                ev1Text: "🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം",
+                hijriDateLabel: "ഇന്നത്തെ ഹിജ്‌റ & ഇംഗ്ലീഷ് തീയതി:",
+                specialDaysHeading: "പ്രധാനപ്പെട്ട വിശേഷ ദിനങ്ങൾ:",
+                hijriBadge: "ഇസ്ലാമിക് കലണ്ടർ",
+                ev1Text: "🌙 റമദാൻ 1: വരാനിരിക്കുന്നു",
                 ev2Text: "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9",
-                ev3Text: "🎉 പെരുന്നാൾ: ശവ്വാൽ 1"
+                ev3Text: "🎉 പെരുന്നാൾ (ഈദുൽ ഫിത്ർ): ശവ്വാൽ 1"
             }
         },
 
@@ -100,11 +101,12 @@
 
                 // Hijri Calendar Card Translations (English)
                 hijriCardTitle: "🗓️ Hijri Calendar & Special Days",
-                hijriDateLabel: "Today's Date:",
+                hijriDateLabel: "Today's Hijri & English Date:",
                 specialDaysHeading: "Upcoming Special Days:",
-                ev1Text: "🌙 Ramadan 1: Approx. in 2 months",
+                hijriBadge: "Islamic Calendar",
+                ev1Text: "🌙 Ramadan 1: Upcoming",
                 ev2Text: "🕋 Day of Arafah: Dhul-Hijjah 9",
-                ev3Text: "🎉 Eid Day: Shawwal 1",
+                ev3Text: "🎉 Eid Al-Fitr: Shawwal 1",
 
                 dhikrPageTitle: "Dhikr",
                 dhikrSubtitle: "Remember Allah",
@@ -251,9 +253,10 @@
 
                 // Hijri Calendar Card Translations (Arabic)
                 hijriCardTitle: "🗓️ التقويم الهجري والأيام المباركة",
-                hijriDateLabel: "تاريخ اليوم:",
+                hijriDateLabel: "التاريخ الهجري والميلادي اليوم:",
                 specialDaysHeading: "الأيام المميزة القادمة:",
-                ev1Text: "🌙 رمضان ١: تقريباً بعد شهرين",
+                hijriBadge: "التقويم الإسلامي",
+                ev1Text: "🌙 رمضان ١: قريباً إن شاء الله",
                 ev2Text: "🕋 يوم عرفة: ٩ ذو الحجة",
                 ev3Text: "🎉 عيد الفطر: ١ شوال",
 
@@ -404,6 +407,7 @@
                 hijriCardTitle: "🗓️ हिजरी कैलेंडर और विशेष दिन",
                 hijriDateLabel: "आज की तिथि:",
                 specialDaysHeading: "आगामी विशेष दिन:",
+                hijriBadge: "इस्लामिक कैलेंडर",
                 ev1Text: "🌙 रमज़ान 1: लगभग 2 महीने बाद",
                 ev2Text: "🕋 अराफ़ा का दिन: ज़ुल-हिज्जा 9",
                 ev3Text: "🎉 ईद का दिन: शव्वाल 1",
@@ -515,6 +519,7 @@
                 hijriCardTitle: "🗓️ ہجری کیلنڈر اور خاص دن",
                 hijriDateLabel: "آج کی تاریخ:",
                 specialDaysHeading: "آنے والے خاص دن:",
+                hijriBadge: "اسلامی کیلنڈر",
                 ev1Text: "🌙 رمضان 1: تقریباً 2 مہینے کے بعد",
                 ev2Text: "🕋 یوم عرفہ: ذوالحجہ 9",
                 ev3Text: "🎉 عید الفطر: شوال 1",
@@ -534,7 +539,7 @@
                 umrahStep2Title: "تلبیہ پڑھنا",
                 umrahStep2Desc: "نیت کرنے کے بعد تلبیہ پڑھتے ہوئے مسجد الحرام کی طرف روانہ ہوں۔",
                 umrahStep3Title: "طواف",
-                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو તો دو رکعت نفل ادا کریں۔",
+                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو তো دو رکعت نفل ادا کریں۔",
                 umrahStep4Title: "سعی",
                 umrahStep4Desc: "صفا اور مروہ کے درمیان سات چکر پورے کریں۔ صفا سے شروع ہوکر مروہ پر ختم ہوگا۔",
                 umrahStep5Title: "بال منڈوانا یا کتروانا",
@@ -626,6 +631,7 @@
                 hijriCardTitle: "🗓️ ஹிஜ்ரி நாட்காட்டியும் சிறப்பு நாட்களும்",
                 hijriDateLabel: "இன்றைய தேதி:",
                 specialDaysHeading: "வரவிருக்கும் சிறப்பு நாட்கள்:",
+                hijriBadge: "இஸ்லாமிய நாட்காட்டி",
                 ev1Text: "🌙 ரமலான் 1: சுமார் 2 மாதங்களுக்குப் பிறகு",
                 ev2Text: "🕋 அரபா நாள்: துல்ஹுஜ்ஜா 9",
                 ev3Text: "🎉 பெருநாள்: ஷவ்வால் 1",
