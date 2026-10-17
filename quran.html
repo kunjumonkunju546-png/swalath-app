@@ -172,18 +172,18 @@
                 </div>
 
                 <div class="target-box">
-                    <button class="target-btn" onclick="openTodayTargetQuran()" data-i18n="openTargetBtn" data-ml="📖 ഇന്നത്തെ ലക്ഷ്യം ഓതുക (Open Today's Target)">📖 ഇന്നത്തെ ലക്ഷ്യം ഓതുക (Open Today's Target)</button>
+                    <button class="target-btn" onclick="openTodayTargetQuran()" id="openTargetBtnText">📖 ഇന്നത്തെ ലക്ഷ്യം ഓതുക</button>
                 </div>
 
                 <div class="progress-info">
-                    <div>മൊത്തം പുരോഗതി: <strong id="progressPercent">0%</strong> പൂർത്തിയായി</div>
+                    <div id="progressTextLabel">മൊത്തം പുരോഗതി: <strong id="progressPercent">0%</strong> പൂർത്തിയായി</div>
                     <div class="progress-bar-container">
                         <div id="progressBarFill" class="progress-bar-fill"></div>
                     </div>
                     <div style="margin-top: 6px;" id="statusText">ദിവസം 1 / 120</div>
                 </div>
 
-                <button class="complete-btn" onclick="completeTodayTarget()" data-i18n="markCompletedBtn" data-ml="✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
+                <button class="complete-btn" onclick="completeTodayTarget()" id="completeBtnText">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
             </div>
         </section>
 
@@ -203,9 +203,9 @@
                 <div class="loading">Loading Today's Target...</div> 
             </div> 
             <div class="page-nav-bar" id="pageNavBar" style="display:none;">
-                <button class="page-nav-btn" onclick="nextSubPage()">അടുത്ത പേജ് →</button>
+                <button class="page-nav-btn" onclick="nextSubPage()" id="nextPageBtnText">അടുത്ത പേജ് →</button>
                 <span class="page-indicator" id="pageIndicatorText">പേജ് 1 / 6</span>
-                <button class="page-nav-btn" onclick="prevSubPage()">← മുമ്പത്തെ പേജ്</button>
+                <button class="page-nav-btn" onclick="prevSubPage()" id="prevPageBtnText">← മുമ്പത്തെ പേജ്</button>
             </div>
         </section> 
 
@@ -232,8 +232,14 @@ window.addEventListener("load", function() {
     const darkMode = localStorage.getItem("swalathDarkMode"); 
     if (darkMode === "true") {
         document.body.classList.add("dark-mode"); 
-    } 
+    }
+    renderKhatam();
 }); 
+
+/* Listen to language change event from language.js */
+document.addEventListener("swalath-language-changed", function() {
+    renderKhatam();
+});
 
 /* ========================= NAVIGATION STATE ========================= */ 
 let openedFromPlanner = false; 
@@ -322,7 +328,12 @@ function openTodayTargetQuran() {
 function renderSubPage() {
     const content = document.getElementById("targetContent");
     const navBar = document.getElementById("pageNavBar");
-    content.innerHTML = `<h2 class="surah-title">ദിവസം ${khatamData.currentDay} (ഖത്മ് പ്ലാൻ)</h2>`;
+    
+    let currentLang = window.SwalathLanguage ? window.SwalathLanguage.getCurrent() : "ml";
+    let dayWord = currentLang === "ar" ? "اليوم" : (currentLang === "en" ? "Day" : "ദിവസം");
+    let planWord = currentLang === "ar" ? "خطة الختمة" : (currentLang === "en" ? "Khatam Plan" : "ഖത്മ് പ്ലാൻ");
+
+    content.innerHTML = `<h2 class="surah-title">${dayWord} ${khatamData.currentDay} (${planWord})</h2>`;
 
     if (dailyPagesList.length === 0) {
         content.innerHTML += `<div class="error-box">No data for today.</div>`;
@@ -350,7 +361,13 @@ function renderSubPage() {
     });
 
     navBar.style.display = "flex";
-    document.getElementById("pageIndicatorText").textContent = `ഭാഗം ${currentSubPageIndex + 1} / ${dailyPagesList.length}`;
+    let partWord = currentLang === "ar" ? "الجزء" : (currentLang === "en" ? "Part" : "ഭാഗം");
+    document.getElementById("pageIndicatorText").textContent = `${partWord} ${currentSubPageIndex + 1} / ${dailyPagesList.length}`;
+    
+    // Update navigation buttons text based on language
+    document.getElementById("nextPageBtnText").textContent = currentLang === "ar" ? "الصفحة التالية ←" : (currentLang === "en" ? "Next Page →" : "അടുത്ത പേജ് →");
+    document.getElementById("prevPageBtnText").textContent = currentLang === "ar" ? "→ الصفحة السابقة" : (currentLang === "en" ? "← Previous Page" : "← മുമ്പത്തെ പേജ്");
+    
     window.scrollTo(0, 0);
 }
 
@@ -361,7 +378,9 @@ function nextSubPage() {
         saveData();
         renderSubPage();
     } else {
-        alert("ഇന്നത്തെ ദിവസത്തെ എല്ലാ ഭാഗങ്ങളും വായിച്ചു കഴിഞ്ഞു! താഴെ 'ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു' എന്ന് നൽകുക.");
+        let currentLang = window.SwalathLanguage ? window.SwalathLanguage.getCurrent() : "ml";
+        let msg = currentLang === "ar" ? "لقد أكملت جميع أجزاء اليوم! يرجى الضغط على زر الإنجاز أدناه." : (currentLang === "en" ? "You have completed all parts for today! Please mark it as completed below." : "ഇന്നത്തെ ദിവസത്തെ എല്ലാ ഭാഗങ്ങളും വായിച്ചു കഴിഞ്ഞു! താഴെ 'ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു' എന്ന് നൽകുക.");
+        alert(msg);
     }
 }
 
@@ -388,7 +407,25 @@ function renderKhatam() {
     
     document.getElementById("progressPercent").textContent = progress + "%";
     document.getElementById("progressBarFill").style.width = progress + "%";
-    document.getElementById("statusText").textContent = `ദിവസം ${khatamData.currentDay} / ${totalDays} (ഇന്നത്തെ ലക്ഷ്യം: പേജ് ${startPage}-${endPage})`;
+    
+    let currentLang = window.SwalathLanguage ? window.SwalathLanguage.getCurrent() : "ml";
+    
+    if (currentLang === "ar") {
+        document.getElementById("progressTextLabel").innerHTML = `التقدم الإجمالي: <strong id="progressPercent">${progress}%</strong> مكتمل`;
+        document.getElementById("statusText").textContent = `اليوم ${khatamData.currentDay} / ${totalDays} (هدف اليوم: صفحة ${startPage}-${endPage})`;
+        document.getElementById("openTargetBtnText").textContent = "📖 قراءة ورد اليوم";
+        document.getElementById("completeBtnText").textContent = "✅ تم إنجاز ورد اليوم";
+    } else if (currentLang === "en") {
+        document.getElementById("progressTextLabel").innerHTML = `Total Progress: <strong id="progressPercent">${progress}%</strong> Completed`;
+        document.getElementById("statusText").textContent = `Day ${khatamData.currentDay} / ${totalDays} (Today's Target: Pages ${startPage}-${endPage})`;
+        document.getElementById("openTargetBtnText").textContent = "📖 Open Today's Target";
+        document.getElementById("completeBtnText").textContent = "✅ Mark Today's Portion as Completed";
+    } else {
+        document.getElementById("progressTextLabel").innerHTML = `മൊത്തം പുരോഗതി: <strong id="progressPercent">${progress}%</strong> പൂർത്തിയായി`;
+        document.getElementById("statusText").textContent = `ദിവസം ${khatamData.currentDay} / ${totalDays} (ഇന്നത്തെ ലക്ഷ്യം: പേജ് ${startPage}-${endPage})`;
+        document.getElementById("openTargetBtnText").textContent = "📖 ഇന്നത്തെ ലക്ഷ്യം ഓതുക";
+        document.getElementById("completeBtnText").textContent = "✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക";
+    }
 }
 
 function completeTodayTarget() {
@@ -405,7 +442,11 @@ function completeTodayTarget() {
     khatamData.savedSubPage = 0; 
     saveData();
     renderKhatam();
-    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി പൂർത്തിയായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ ടാസ്കിലേക്ക് സ്വാഗതം!");
+    
+    let currentLang = window.SwalathLanguage ? window.SwalathLanguage.getCurrent() : "ml";
+    let msg = currentLang === "ar" ? "الحمد لله! تم تسجيل إنجاز هدف اليوم بنجاح." : (currentLang === "en" ? "Alhamdulillah! Today's target has been successfully recorded." : "അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷ്യം വിജയകരമായി പൂർത്തിയായി രേഖപ്പെടുത്തിയിരിക്കുന്നു.");
+    alert(msg);
+    
     openKhatamPlanner();
 }
 
