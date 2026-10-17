@@ -1,540 +1,230 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="ml">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123d34">
-<title>Al-Quran | Swalath</title>
+<title>القرآن الكريم - Quran</title>
 <link rel="stylesheet" href="style.css">
 <style>
-body {background: #eee8d9; margin: 0; }
-.quran-app {max-width: 430px; min-height: 100vh; margin: auto; background: #fffdf8; box-shadow: 0 0 25px rgba(0,0,0,0.08); }
-.quran-header {text-align: center; padding: 32px 20px; background: linear-gradient(145deg, #123d34, #1d5b4c); color: white; border-radius: 0 0 30px 30px; }
-.quran-header h1 {font-size: 30px; margin: 0; }
-.quran-header p {margin-top: 8px; font-size: 14px; opacity: 0.9; }
-.quran-main {padding: 20px; }
-.back-button {display: block; width: 100%; border: none; background: #123d34; color: white; padding: 13px; border-radius: 14px; cursor: pointer; font-size: 15px; margin-bottom: 20px; text-align: center; }
-.back-button:active {opacity: 0.8; }
-.section-title {text-align: center; margin: 22px 0 15px; color: #123d34; font-size: 21px; }
+:root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5;}
+body {background: var(--sw-bg); color: var(--sw-text); font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif; margin: 0; padding: 0; line-height: 1.65;}
+.app {width: 100%; max-width: 760px; min-height: 100vh; margin: 0 auto; background: var(--sw-bg); padding-bottom: 30px; box-shadow: 0 0 50px rgba(18,61,52,.08);}
 
-/* KHATAM TRACKER STYLES */
-.khatam-card {
-    background: #ffffff;
-    border: 2px solid #ddc486;
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(18,61,52,0.06);
-    direction: ltr;
-}
-.khatam-card h3 {
-    color: #123d34;
-    font-size: 16px;
-    margin: 0 0 10px 0;
-    text-align: left;
-}
-.select-box {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid #e6dfd0;
-    border-radius: 10px;
-    font-size: 13px;
-    color: #222;
-    background: #fffdf8;
-    outline: none;
-    margin-bottom: 12px;
-}
-.target-box {
-    background: #edf3eb;
-    border: 1px dashed #123d34;
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-    margin-bottom: 12px;
-}
-.target-box h4 {
-    color: #123d34;
-    margin: 0 0 4px 0;
-    font-size: 13px;
-}
-.target-box p {
-    font-size: 13px;
-    color: #222;
-    margin: 0;
-    font-weight: bold;
-}
-.progress-container {
-    background: #e6dfd0;
-    border-radius: 10px;
-    height: 10px;
-    width: 100%;
-    overflow: hidden;
-    margin: 10px 0 6px 0;
-}
-.progress-bar {
-    background: #ddc486;
-    height: 100%;
-    width: 0%;
-    transition: width 0.4s ease;
-}
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: #777;
-}
-.btn-mark {
-    display: block;
-    width: 100%;
-    background: #123d34;
-    color: white;
-    text-align: center;
-    padding: 11px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    margin-top: 12px;
-}
-.btn-mark.completed {
-    background: #27ae60;
-}
-.virtues-box {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #444;
-    line-height: 1.6;
-    border-top: 1px dashed #e6dfd0;
-    padding-top: 12px;
-    text-align: left;
-}
-.virtues-box p {
-    margin: 6px 0;
-}
+.header {background: linear-gradient(145deg, #0d3229, #15473d 65%, #1f5d4f); color: #fff9e9; padding: 20px 18px; text-align: center; border-radius: 0 0 24px 24px; box-shadow: 0 6px 20px rgba(13,50,41,.15); position: relative;}
+.back-btn {position: absolute; left: 18px; top: 22px; background: rgba(255,255,255,0.15); border: none; color: white; padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 13px;}
+.header h1 {margin: 0; font-family: 'Amiri', serif; font-size: 28px; color: #f5e2b3;}
 
-/* STANDARD QURAN CARDS */
-.quran-card {background: white; border: 1px solid #e6dfd0; border-radius: 18px; padding: 17px; margin-bottom: 10px; cursor: pointer; text-align: center; }
-.quran-card:hover {transform: translateY(-2px); }
-.quran-card .arabic {font-size: 23px; font-weight: bold; color: #123d34; }
-.quran-card .name {margin-top: 7px; font-size: 12px; color: #777; direction: ltr; }
-.surah-list {display: none; }
-.surah-item {background: white; border: 1px solid #e6dfd0; border-radius: 16px; padding: 15px; margin-bottom: 9px; cursor: pointer; }
-.surah-item:hover {transform: translateY(-2px); }
-.surah-item strong {color: #123d34; font-size: 18px; }
-.surah-item small {display: block; margin-top: 5px; color: #777; direction: ltr; }
-.surah-view {display: none; }
-.surah-title {text-align: center; color: #123d34; font-size: 25px; margin: 15px 0 20px; }
-.ayah {font-family: "Amiri", "Noto Naskh Arabic", serif; font-size: 24px; line-height: 2.4; text-align: right; color: #222; margin-bottom: 22px; overflow-wrap: anywhere; }
-.ayah-number {display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid #123d34; border-radius: 50%; font-size: 14px; color: #123d34; margin-right: 7px; vertical-align: middle; flex-shrink: 0; }
-.loading {text-align: center; padding: 30px; color: #777; }
-.error-box {text-align: center; padding: 25px; background: #f7e7e7; border-radius: 15px; color: #8a3333; line-height: 1.8; }
-.tanzil-source {text-align: center; margin-top: 30px; padding: 15px; border-top: 1px solid #e6dfd0; color: #777; font-size: 11px; line-height: 1.8; }
-.tanzil-source a {color: #123d34; text-decoration: none; font-weight: bold; }
+.content-container {padding: 18px;}
 
-body.dark-mode {background: #111; }
-body.dark-mode .quran-app {background: #181818; }
-body.dark-mode .section-title, body.dark-mode .surah-title {color: #f1dfb0; }
-body.dark-mode .quran-card, body.dark-mode .surah-item, body.dark-mode .khatam-card {background: #222; border-color: #444; }
-body.dark-mode .quran-card .arabic, body.dark-mode .surah-item strong, body.dark-mode .khatam-card h3 {color: #f1dfb0; }
-body.dark-mode .quran-card .name, body.dark-mode .surah-item small {color: #aaa; }
-body.dark-mode .ayah {color: #eee; }
-body.dark-mode .ayah-number {border-color: #f1dfb0; color: #f1dfb0; }
-body.dark-mode .tanzil-source {border-color: #444; color: #aaa; }
-body.dark-mode .tanzil-source a {color: #f1dfb0; }
-body.dark-mode .target-box {background: #1a2e28; border-color: #f1dfb0; }
-body.dark-mode .target-box p, body.dark-mode .virtues-box {color: #ddd; }
+/* EASY KHATAM CARD DESIGN */
+.khatam-card {background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 22px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06);}
+.khatam-card h3 {color: var(--sw-green); font-size: 17px; margin: 0 0 8px 0; font-family: 'Amiri', serif;}
+.khatam-card p {color: var(--sw-muted); font-size: 13px; margin: 0 0 14px 0; line-height: 1.7;}
+
+.target-box {background: #edf3eb; border: 1px dashed var(--sw-green); border-radius: 16px; padding: 14px; text-align: center; margin-bottom: 14px;}
+.target-box h4 {color: var(--sw-green); margin: 0 0 6px 0; font-size: 13px; font-weight: bold;}
+.target-box p {color: var(--sw-green); font-size: 16px; margin: 0; font-weight: 800;}
+
+.duration-select {width: 100%; padding: 11px 14px; border: 1px solid var(--sw-border); border-radius: 12px; background: var(--sw-card); color: var(--sw-text); font-size: 13px; font-weight: bold; margin-bottom: 14px; outline: none;}
+
+/* PROGRESS BAR */
+.progress-container {background: #e6dfd0; border-radius: 10px; height: 12px; width: 100%; overflow: hidden; margin-bottom: 10px;}
+.progress-bar {background: var(--sw-green); height: 100%; width: 0%; transition: width 0.4s ease;}
+.progress-text {display: flex; justify-content: space-between; font-size: 12px; color: var(--sw-muted); font-weight: bold; margin-bottom: 14px;}
+
+.khatam-btn {width: 100%; min-height: 46px; background: var(--sw-green); color: white; border: none; border-radius: 16px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(18,61,52,0.2); transition: transform 0.15s;}
+.khatam-btn:active {transform: scale(0.98);}
+
+.quran-links-grid {display: grid; grid-template-columns: 1fr; gap: 12px;}
+.quran-link-card {background: var(--sw-card); border: 1px solid var(--sw-border); border-radius: 18px; padding: 16px; text-decoration: none; color: var(--sw-text); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(18,61,52,0.03); transition: border-color 0.2s;}
+.quran-link-card:hover {border-color: var(--sw-gold);}
+.quran-link-card strong {color: var(--sw-green); font-size: 15px; font-family: 'Amiri', serif;}
+.quran-link-card span {color: var(--sw-muted); font-size: 13px;}
+
+body.dark-mode {background: #111; color: #eee;}
+body.dark-mode .app {background: #181818;}
+body.dark-mode .khatam-card, body.dark-mode .quran-link-card {background: #222; border-color: #444; color: #eee;}
+body.dark-mode .khatam-card h3, body.dark-mode .target-box h4, body.dark-mode .target-box p, body.dark-mode .quran-link-card strong {color: #f0deaf !important;}
+body.dark-mode .target-box {background: #1a2e28; border-color: #f0deaf;}
+body.dark-mode .duration-select {background: #222; color: #fff; border-color: #444;}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<script src="language.js" defer></script>
 </head>
 <body>
-<div class="quran-app"> 
-    <header class="quran-header"> 
-        <h1 id="headerMainTitle">القرآن الكريم</h1> 
-        <p id="headerSubTitle">The Noble Quran</p> 
-    </header> 
-    
-    <main class="quran-main"> 
-        <!-- BACK TO HOME --> 
-        <button class="back-button" onclick="goHome()" id="backHomeBtn"> ← Back to Home </button> 
 
-        <!-- MAIN QURAN PAGE --> 
-        <div id="mainQuran"> 
+<div class="app">
+    <div class="header">
+        <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+        <h1 data-i18n="quranDesc" data-ml="ഖുർആൻ">القرآن الكريم</h1>
+    </div>
 
-            <!-- EASY KHATAM-UL-QURAN FEATURE CARD (PLACED AT TOP) -->
-            <div class="khatam-card">
-                <h3 id="khatamMainTitle">📖 Easy Khatam-ul-Quran</h3>
-                
-                <select id="durationSelect" class="select-box" onchange="updateTarget()">
-                    <option value="30" id="opt30">30 Days (~20 pages / 1 Juz daily)</option>
-                    <option value="60" id="opt60">60 Days (~10 pages daily)</option>
-                    <option value="90" id="opt90">90 Days (~7 pages daily)</option>
-                    <option value="120" id="opt120">120 Days (~5 pages daily)</option>
-                </select>
+    <div class="content-container">
+        
+        <!-- EASY KHATAM-UL-QURAN TRACKER CARD -->
+        <div class="khatam-card">
+            <h3 id="khatamTitle">📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം</h3>
+            <p id="khatamDesc">നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് മുടങ്ങാതെ ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.</p>
+            
+            <label style="font-size: 12px; font-weight: bold; color: var(--sw-muted); display: block; margin-bottom: 4px;">ഖത്മ് തീർക്കേണ്ട കാലാവധി (Duration):</label>
+            <select id="khatamDaysSelect" class="duration-select" onchange="updateKhatamPlan()">
+                <option value="30">30 ദിവസം (ദിവസം ~20 പേജ് / 1 ജുസ്അ്)</option>
+                <option value="60">60 ദിവസം (ദിവസം ~10 പേജ്)</option>
+                <option value="90">90 ദിവസം (ദിവസം ~7 പേജ്)</option>
+                <option value="120">120 ദിവസം (ദിവസം ~5 പേജ്)</option>
+            </select>
 
-                <div class="target-box">
-                    <h4 id="todayTargetLabel">Today's Target:</h4>
-                    <p id="dailyTargetText">Read approx. 20 pages daily</p>
-                </div>
-
-                <div class="progress-info">
-                    <span id="progressText">Target Duration: 30 Days</span>
-                    <span id="percentText">0%</span>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-
-                <button class="btn-mark" id="markBtn" onclick="toggleTodayMark()">✅ Mark Today's Portion as Completed</button>
-
-                <div class="virtues-box">
-                    <p id="v1">🌟 <strong>Inner Peace:</strong> Reciting Quran brings ultimate peace to the heart and relieves stress.</p>
-                    <p id="v2">🌟 <strong>Relief from Hardships:</strong> Connecting with Quran eases life difficulties and brings divine help.</p>
-                    <p id="v3">🌟 <strong>Immense Rewards:</strong> Countless blessings and rewards for every letter recited.</p>
-                </div>
+            <!-- TODAY'S TARGET BOX -->
+            <div class="target-box">
+                <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target):</h4>
+                <p id="todayTargetText">പേജ് 1 മുതൽ 20 വരെ</p>
             </div>
 
-            <h2 class="section-title" id="secTitle1">The Holy Quran</h2> 
-            <div class="quran-card" onclick="showAllSurahs()"> 
-                <div class="arabic">القرآن الكريم</div> 
-                <div class="name" id="allSurahsText">All Surahs — 114 Chapters</div> 
-            </div> 
+            <!-- OVERALL PROGRESS BAR -->
+            <div class="progress-text">
+                <span>മൊത്തം ഖുർആൻ പുരോഗതി (Overall Progress):</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
 
-            <h2 class="section-title" id="secTitle2">Important Surahs</h2> 
-            <div class="quran-card" onclick="openSurah(36)"> 
-                <div class="arabic">سورة يس</div> 
-                <div class="name">Surah Yasin</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(32)"> 
-                <div class="arabic">سورة السجدة</div> 
-                <div class="name">Surah As-Sajdah</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(55)"> 
-                <div class="arabic">سورة الرحمن</div> 
-                <div class="name">Surah Ar-Rahman</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(44)"> 
-                <div class="arabic">سورة الدخان</div> 
-                <div class="name">Surah Ad-Dukhan</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(48)"> 
-                <div class="arabic">سورة الفتح</div> 
-                <div class="name">Surah Al-Fath</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(59)"> 
-                <div class="arabic">سورة الحشر</div> 
-                <div class="name">Surah Al-Hashr</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(56)"> 
-                <div class="arabic">سورة الواقعة</div> 
-                <div class="name">Surah Al-Waqi'ah</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(67)"> 
-                <div class="arabic">سورة الملك</div> 
-                <div class="name">Surah Al-Mulk</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(18)"> 
-                <div class="arabic">سورة الكهف</div> 
-                <div class="name">Surah Al-Kahf</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(73)"> 
-                <div class="arabic">سورة المزمل</div> 
-                <div class="name">Surah Al-Muzzammil</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(62)"> 
-                <div class="arabic">سورة الجمعة</div> 
-                <div class="name">Surah Al-Jumu'ah</div> 
-            </div> 
-            <div class="quran-card" onclick="openSurah(63)"> 
-                <div class="arabic">سورة المنافقون</div> 
-                <div class="name">Surah Al-Munafiqun</div> 
-            </div> 
-        </div> 
+            <!-- LAST READ MEMORY & COMPLETE BUTTON -->
+            <p id="lastReadInfo" style="font-size: 12px; color: var(--sw-muted); margin-bottom: 14px; text-align: center; font-weight: 600;">ദിവസം 1 / 30 തീർന്നു</p>
+            <button id="markCompleteBtn" class="khatam-btn" onclick="markTodayCompleted()">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
+        </div>
 
-        <!-- ALL SURAHS LIST --> 
-        <section id="surahList" class="surah-list"> 
-            <button class="back-button" onclick="backToQuranHome()"> ← Back to Quran Home </button> 
-            <h2 class="section-title">All Surahs</h2> 
-            <div id="allSurahs"> 
-                <div class="loading">Loading Surahs...</div> 
-            </div> 
-        </section> 
+        <!-- QURAN LINKS -->
+        <div class="quran-links-grid">
+            <a href="https://quran.com" target="_blank" rel="noopener" class="quran-link-card">
+                <div>
+                    <strong>Quran.com (Reading & Tafseer)</strong><br>
+                    <span>ഓൺലൈൻ ഖുർആൻ വായനയും തഫ്സീറും</span>
+                </div>
+                <span>📖</span>
+            </a>
+            <a href="https://qurancentral.com" target="_blank" rel="noopener" class="quran-link-card">
+                <div>
+                    <strong>Quran Audio & Recitation</strong><br>
+                    <span>വിവിധ ഖാരിാക്കളുടെ പാരായണം കേൾക്കാം</span>
+                </div>
+                <span>🎧</span>
+            </a>
+        </div>
 
-        <!-- SURAH READER --> 
-        <section id="surahView" class="surah-view"> 
-            <button class="back-button" onclick="backToPrevious()"> ← Back </button> 
-            <div id="surahContent"> 
-                <div class="loading">Loading Surah...</div> 
-            </div> 
-        </section> 
+    </div>
+</div>
 
-        <div class="tanzil-source"> Quran text source: <a href="https://tanzil.net" target="_blank" rel="noopener"> Tanzil Project </a> </div> 
-    </main> 
-</div> 
+<script>
+/* ADVANCED KHATAM-UL-QURAN LOGIC */
+const TOTAL_PAGES = 604; // Standard Madani Quran total pages
 
-<!-- OFFLINE QURAN DATA --> 
-<script src="quran-data.js"></script> 
-<script src="language.js"></script>
-<script> 
-/* ========================= DARK MODE ========================= */ 
-window.addEventListener("load", function() {
-    const darkMode = localStorage.getItem("swalathDarkMode"); 
-    if (darkMode === "true") {
-        document.body.classList.add("dark-mode"); 
+function getSavedKhatamData() {
+    let data = localStorage.getItem("swalathKhatamDataAdvanced");
+    if (!data) {
+        return {
+            totalDays: 30,
+            completedDays: 0,
+            lastCompletedDate: ""
+        };
     }
-}); 
+    return JSON.parse(data);
+}
 
-/* ========================= NAVIGATION STATE ========================= */ 
-let openedFromSurahList = false; 
-let handlingBrowserBack = false; 
+function saveKhatamData(data) {
+    localStorage.setItem("swalathKhatamDataAdvanced", JSON.stringify(data));
+}
 
-function goHome() {
-    window.location.href = "index.html"; 
-} 
+function getLocalDateStr() {
+    const d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
 
-/* ========================= KHATAM TRACKER LOGIC ========================= */
-const TOTAL_PAGES = 604;
+function updateKhatamPlan() {
+    const select = document.getElementById("khatamDaysSelect");
+    let data = getSavedKhatamData();
+    data.totalDays = parseInt(select.value);
+    // Ensure completed days doesn't exceed total days if plan changes
+    if (data.completedDays > data.totalDays) {
+        data.completedDays = data.totalDays;
+    }
+    saveKhatamData(data);
+    renderKhatamUI();
+}
 
-function updateTarget() {
-    const days = parseInt(document.getElementById('durationSelect').value);
-    const pagesPerDay = Math.ceil(TOTAL_PAGES / days);
+function renderKhatamUI() {
+    let data = getSavedKhatamData();
+    const select = document.getElementById("khatamDaysSelect");
+    select.value = data.totalDays;
+
+    let pagesPerDay = Math.ceil(TOTAL_PAGES / data.totalDays);
     
-    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() : "ml";
+    // Current day user is on (completedDays + 1)
+    let currentDay = Math.min(data.completedDays + 1, data.totalDays);
+    if (data.completedDays >= data.totalDays) {
+        currentDay = data.totalDays; // Finished
+    }
 
-    if (currentLang === "ml") {
-        document.getElementById('dailyTargetText').textContent = `ദിവസവും ഏകദേശം ${pagesPerDay} പേജുകൾ ഓതുക`;
-        document.getElementById('progressText').textContent = `ആകെ ലക്ഷ്യം: ${days} ദിവസങ്ങൾ`;
-    } else if (currentLang === "ar") {
-        document.getElementById('dailyTargetText').textContent = `قراءة حوالي ${pagesPerDay} صفحة يومياً`;
-        document.getElementById('progressText').textContent = `المدة المستهدفة: ${days} يوماً`;
+    let startPage = ((currentDay - 1) * pagesPerDay) + 1;
+    let endPage = Math.min(currentDay * pagesPerDay, TOTAL_PAGES);
+    if (startPage > TOTAL_PAGES) startPage = TOTAL_PAGES;
+
+    // Update Today's Target Text
+    if (data.completedDays >= data.totalDays) {
+        document.getElementById("todayTargetText").textContent = "🎉 അല്ലാഹുവின் അനുഗ്രഹത്താൽ ഖത്മ് പൂർത്തിയായി!";
     } else {
-        document.getElementById('dailyTargetText').textContent = `Read approx. ${pagesPerDay} pages daily`;
-        document.getElementById('progressText').textContent = `Target Duration: ${days} Days`;
+        document.getElementById("todayTargetText").textContent = `പേജ് ${startPage} മുതൽ ${endPage} വരെ (ഇന്ന് ഓതേണ്ടത്)`;
+    }
+
+    // Update Last Read / Progress Info
+    document.getElementById("lastReadInfo").textContent = `നിങ്ങൾ അവസാനമായി നിർത്തിയത് / നിലവിലെ ലക്ഷ്യം: ദിവസം ${currentDay} / ${data.totalDays} (~${pagesPerDay} പേജുകൾ വീതം)`;
+
+    // Calculate Overall Percentage from Total Quran Pages read
+    let totalPagesReadSoFar = Math.min(data.completedDays * pagesPerDay, TOTAL_PAGES);
+    let percent = Math.round((totalPagesReadSoFar / TOTAL_PAGES) * 100);
+    if (percent > 100) percent = 100;
+
+    document.getElementById("progressBar").style.width = percent + "%";
+    document.getElementById("progressPercent").textContent = percent + "% പൂർത്തിയായി";
+
+    // Button Status for Today
+    let todayStr = getLocalDateStr();
+    let btn = document.getElementById("markCompleteBtn");
+    if (data.lastCompletedDate === todayStr) {
+        btn.textContent = "✔ ഇന്നത്തെ ലക്ഷ്യം പൂർത്തിയായി!";
+        btn.style.background = "#6a7971";
+        btn.disabled = true;
+    } else if (data.completedDays >= data.totalDays) {
+        btn.textContent = "🎉 ഖത്മ് പൂർത്തിയായി!";
+        btn.style.background = "#c5a868";
+        btn.disabled = true;
+    } else {
+        btn.textContent = "✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക";
+        btn.style.background = "var(--sw-green)";
+        btn.disabled = false;
     }
 }
 
-function toggleTodayMark() {
-    const btn = document.getElementById('markBtn');
-    const bar = document.getElementById('progressBar');
-    const percent = document.getElementById('percentText');
-    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() : "ml";
+function markTodayCompleted() {
+    let data = getSavedKhatamData();
+    let todayStr = getLocalDateStr();
     
-    if (!btn.classList.contains('completed')) {
-        btn.classList.add('completed');
-        btn.textContent = currentLang === "ml" ? "✔ ഇന്നത്തെ ലക്ഷ്യം പൂർത്തിയായി!" : (currentLang === "ar" ? "✔ تم إنجاز هدف اليوم!" : "✔ Today's Goal Completed!");
-        bar.style.width = "100%";
-        percent.textContent = "100%";
-    } else {
-        btn.classList.remove('completed');
-        btn.textContent = currentLang === "ml" ? "✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക" : (currentLang === "ar" ? "✅ تحديد الجزء كمنجز" : "✅ Mark Today's Portion as Completed");
-        bar.style.width = "0%";
-        percent.textContent = "0%";
+    if (data.lastCompletedDate !== todayStr && data.completedDays < data.totalDays) {
+        data.completedDays++;
+        data.lastCompletedDate = todayStr;
+        saveKhatamData(data);
+        renderKhatamUI();
     }
 }
 
-function applyQuranLanguage() {
-    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() : "ml";
-
-    if (currentLang === "ml") {
-        document.getElementById('headerMainTitle').textContent = "القرآن الكريم";
-        document.getElementById('headerSubTitle').textContent = "വിശുദ്ധ ഖുർആൻ";
-        document.getElementById('backHomeBtn').textContent = " ← ഹോം പേജിലേക്ക്";
-        document.getElementById('khatamMainTitle').textContent = "📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം";
-        document.getElementById('todayTargetLabel').textContent = "ഇന്നത്തെ ലക്ഷ്യം:";
-        document.getElementById('markBtn').textContent = "✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക";
-        
-        document.getElementById('opt30').textContent = "30 ദിവസം (ദിവസം ~20 പേജ് / 1 ജുസ്അ്)";
-        document.getElementById('opt60').textContent = "60 ദിവസം (ദിവസം ~10 പേജ്)";
-        document.getElementById('opt90').textContent = "90 ദിവസം (ദിവസം ~7 പേജ്)";
-        document.getElementById('opt120').textContent = "120 ദിവസം (ദിവസം ~5 പേജ്)";
-
-        document.getElementById('secTitle1').textContent = "വിശുദ്ധ ഖുർആൻ";
-        document.getElementById('allSurahsText').textContent = "എല്ലാ സൂറത്തുകളും — 114 അധ്യായങ്ങൾ";
-        document.getElementById('secTitle2').textContent = "പ്രധാനപ്പെട്ട സൂറത്തുകൾ";
-
-        document.getElementById('v1').innerHTML = "🌟 <strong>ഹൃദയശാന്തി:</strong> ഖുർആൻ പാരായണം മനസ്സിന് സമാധാനവും പിരിമുറുക്കങ്ങളിൽ നിന്ന് മോചനവും നൽകുന്നു.";
-        document.getElementById('v2').innerHTML = "🌟 <strong>പ്രയാസങ്ങളിൽ നിന്നുള്ള മോചനം:</strong> ജീവിതത്തിലെ ബുദ്ധിമുട്ടുകൾ എളുപ്പമാക്കാൻ ഖുർആനുമായുള്ള ബന്ധം സഹായിക്കും.";
-        document.getElementById('v3').innerHTML = "🌟 <strong>ഇരട്ടി പ്രതിഫലം:</strong> ഓതുന്ന ഓരോ അക്ഷരത്തിനും വലിയ പ്രതിഫലമുണ്ട്.";
-    } 
-    else if (currentLang === "ar") {
-        document.getElementById('headerMainTitle').textContent = "القرآن الكريم";
-        document.getElementById('headerSubTitle').textContent = "المصحف الشريف";
-        document.getElementById('backHomeBtn').textContent = " ← العودة إلى الرئيسية";
-        document.getElementById('khatamMainTitle').textContent = "📖 ختم القرآن الكريم بسهولة";
-        document.getElementById('todayTargetLabel').textContent = "هدف اليوم:";
-        document.getElementById('markBtn').textContent = "✅ تم إنجاز ورد اليوم";
-
-        document.getElementById('opt30').textContent = "30 يوماً (~20 صفحة / جزء واحد يومياً)";
-        document.getElementById('opt60').textContent = "60 يوماً (~10 صفحات يومياً)";
-        document.getElementById('opt90').textContent = "90 يوماً (~7 صفحات يومياً)";
-        document.getElementById('opt120').textContent = "120 يوماً (~5 صفحات يومياً)";
-
-        document.getElementById('secTitle1').textContent = "القرآن الكريم";
-        document.getElementById('allSurahsText').textContent = "جميع السور — 114 سورة";
-        document.getElementById('secTitle2').textContent = "السور المختارة";
-
-        document.getElementById('v1').innerHTML = "🌟 <strong>السكينة والاطمئنان:</strong> تلاوة القرآن تمنح القلب طمأنينة وتزيل الهموم.";
-        document.getElementById('v2').innerHTML = "🌟 <strong>الفرج من الشدائد:</strong> الارتباط بالقرآن يسهل مصاعب الحياة.";
-        document.getElementById('v3').innerHTML = "🌟 <strong>الأجر العظيم:</strong> لكل حرف من القرآن حسنة.";
+document.addEventListener("DOMContentLoaded", function() {
+    renderKhatamUI();
+    
+    if (localStorage.getItem("swalathDarkMode") === "true") {
+        document.body.classList.add("dark-mode");
     }
-    else {
-        document.getElementById('headerMainTitle').textContent = "القرآن الكريم";
-        document.getElementById('headerSubTitle').textContent = "The Noble Quran";
-        document.getElementById('backHomeBtn').textContent = " ← Back to Home";
-        document.getElementById('khatamMainTitle').textContent = "📖 Easy Khatam-ul-Quran";
-        document.getElementById('todayTargetLabel').textContent = "Today's Target:";
-        document.getElementById('markBtn').textContent = "✅ Mark Today's Portion as Completed";
-
-        document.getElementById('opt30').textContent = "30 Days (~20 pages / 1 Juz daily)";
-        document.getElementById('opt60').textContent = "60 Days (~10 pages daily)";
-        document.getElementById('opt90').textContent = "90 Days (~7 pages daily)";
-        document.getElementById('opt120').textContent = "120 Days (~5 pages daily)";
-
-        document.getElementById('secTitle1').textContent = "The Holy Quran";
-        document.getElementById('allSurahsText').textContent = "All Surahs — 114 Chapters";
-        document.getElementById('secTitle2').textContent = "Important Surahs";
-
-        document.getElementById('v1').innerHTML = "🌟 <strong>Inner Peace:</strong> Reciting Quran brings ultimate peace to the heart and relieves stress.";
-        document.getElementById('v2').innerHTML = "🌟 <strong>Relief from Hardships:</strong> Connecting with Quran eases life difficulties and brings divine help.";
-        document.getElementById('v3').innerHTML = "🌟 <strong>Immense Rewards:</strong> Countless blessings and rewards for every letter recited.";
-    }
-    updateTarget();
-}
-
-document.addEventListener("DOMContentLoaded", applyQuranLanguage);
-document.addEventListener("swalath-language-changed", applyQuranLanguage);
-
-/* ========================= SURAH NAMES ========================= */ 
-const surahNames = {1:"الفاتحة", 2:"البقرة", 3:"آل عمران", 4:"النساء", 5:"المائدة", 6:"الأنعام", 7:"الأعراف", 8:"الأنفال", 9:"التوبة", 10:"يونس", 11:"هود", 12:"يوسف", 13:"الرعد", 14:"إبراهيم", 15:"الحجر", 16:"النحل", 17:"الإسراء", 18:"الكهف", 19:"مريم", 20:"طه", 21:"الأنبياء", 22:"الحج", 23:"المؤمنون", 24:"النور", 25:"الفرقان", 26:"الشعراء", 27:"النمل", 28:"القصص", 29:"العنكبوت", 30:"الروم", 31:"لقمان", 32:"السجدة", 33:"الأحزاب", 34:"سبأ", 35:"فاطر", 36:"يس", 37:"الصافات", 38:"ص", 39:"الزمر", 40:"غافر", 41:"فصلت", 42:"الشورى", 43:"الزخرف", 44:"الدخان", 45:"الجاثية", 46:"الأحقاف", 47:"محمد", 48:"الفتح", 49:"الحجرات", 50:"ق", 51:"الذاريات", 52:"الطور", 53:"النجم", 54:"القمر", 55:"الرحمن", 56:"الواقعة", 57:"الحديد", 58:"المجادلة", 59:"الحشر", 60:"الممتحنة", 61:"الصف", 62:"الجمعة", 63:"المنافقون", 64:"التغابن", 65:"الطلاق", 66:"التحريم", 67:"الملك", 68:"القلم", 69:"الحاقة", 70:"المعارج", 71:"نوح", 72:"الجن", 73:"المزمل", 74:"المدثر", 75:"القيامة", 76:"الإنسان", 77:"المرسلات", 78:"النبأ", 79:"النازعات", 80:"عبس", 81:"التكوير", 82:"الانفطار", 83:"المطففين", 84:"الانشقاق", 85:"البروج", 86:"الطارق", 87:"الأعلى", 88:"الغاشية", 89:"الفجر", 90:"البلد", 91:"الشمس", 92:"الليل", 93:"الضحى", 94:"الشرح", 95:"التين", 96:"العلق", 97:"القدر", 98:"البينة", 99:"الزلزلة", 100:"العاديات", 101:"القارعة", 102:"التكاثر", 103:"العصر", 104:"الهمزة", 105:"الفيل", 106:"قريش", 107:"الماعون", 108:"الكوثر", 109:"الكافرون", 110:"النصر", 111:"المسد", 112:"الإخلاص", 113:"الفلق", 114:"الناس" }; 
-
-/* ========================= GET OFFLINE QURAN DATA ========================= */ 
-function getQuranLines() {
-    if (typeof quranText === "undefined") {return []; } 
-    return quranText.split(/\r?\n/).map(function(line) {return line.trim(); }).filter(function(line) {return line !== "" && !line.startsWith("#"); }); 
-} 
-
-/* ========================= SHOW ALL SURAHS ========================= */ 
-function showAllSurahs() {
-    document.getElementById("mainQuran").style.display = "none"; 
-    document.getElementById("surahView").style.display = "none"; 
-    document.getElementById("surahList").style.display = "block"; 
-    const container = document.getElementById("allSurahs"); 
-    container.innerHTML = ""; 
-    const lines = getQuranLines(); 
-    if (lines.length === 0) {
-        container.innerHTML = `<div class="error-box"> Quran data is not available. <br><br> Please check quran-data.js. </div>`; 
-        window.scrollTo(0, 0); 
-        return; 
-    } 
-    const counts = {}; 
-    lines.forEach(function(line) {
-        const parts = line.split("|"); 
-        if (parts.length < 3) return; 
-        const number = Number(parts[0]); 
-        if (!counts[number]) {counts[number] = 0; } 
-        counts[number]++; 
-    }); 
-    for (let number = 1; number <= 114; number++) {
-        const item = document.createElement("div"); 
-        item.className = "surah-item"; 
-        const name = document.createElement("strong"); 
-        name.textContent = number + ". " + surahNames[number]; 
-        const count = document.createElement("small"); 
-        count.textContent = (counts[number] || 0) + " Ayahs"; 
-        item.appendChild(name); 
-        item.appendChild(count); 
-        item.addEventListener("click", function() {openSurah(number); }); 
-        container.appendChild(item); 
-    } 
-    window.scrollTo(0, 0); 
-} 
-
-/* ========================= OPEN OFFLINE SURAH ========================= */ 
-function openSurah(surahNumber) {
-    openedFromSurahList = document.getElementById("surahList").style.display === "block"; 
-    history.pushState({swalathQuran: true, surahNumber: surahNumber, fromList: openedFromSurahList }, "", "#surah-" + surahNumber); 
-    document.getElementById("mainQuran").style.display = "none"; 
-    document.getElementById("surahList").style.display = "none"; 
-    document.getElementById("surahView").style.display = "block"; 
-    const content = document.getElementById("surahContent"); 
-    content.innerHTML = `<div class="loading">Loading Surah...</div>`; 
-    const lines = getQuranLines(); 
-    const ayahs = []; 
-    lines.forEach(function(line) {
-        const parts = line.split("|"); 
-        if (parts.length < 3) return; 
-        const number = Number(parts[0]); 
-        const ayahNumber = Number(parts[1]); 
-        const text = parts.slice(2).join("|"); 
-        if (number === surahNumber) {ayahs.push({number: ayahNumber, text: text }); } 
-    }); 
-    if (ayahs.length === 0) {
-        content.innerHTML = `<div class="error-box"> Surah data not found. <br><br> Please check quran-data.js. </div>`; 
-        window.scrollTo(0, 0); 
-        return; 
-    } 
-    const title = document.createElement("h2"); 
-    title.className = "surah-title"; 
-    title.textContent = "سورة " + surahNames[surahNumber]; 
-    content.innerHTML = ""; 
-    content.appendChild(title); 
-    ayahs.forEach(function(ayah) {
-        const ayahDiv = document.createElement("div"); 
-        ayahDiv.className = "ayah"; 
-        ayahDiv.appendChild(document.createTextNode(ayah.text + " ")); 
-        const numberSpan = document.createElement("span"); 
-        numberSpan.className = "ayah-number"; 
-        numberSpan.textContent = toArabicNumber(ayah.number); 
-        ayahDiv.appendChild(numberSpan); 
-        content.appendChild(ayahDiv); 
-    }); 
-    window.scrollTo(0, 0); 
-} 
-
-/* ========================= ARABIC NUMBERS ========================= */ 
-function toArabicNumber(number) {
-    const arabicNumbers = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"]; 
-    return String(number).split("").map(function(digit) {return arabicNumbers[Number(digit)]; }).join(""); 
-} 
-
-/* ========================= BACK TO QURAN HOME ========================= */ 
-function backToQuranHome() {
-    document.getElementById("surahView").style.display = "none"; 
-    document.getElementById("surahList").style.display = "none"; 
-    document.getElementById("mainQuran").style.display = "block"; 
-    window.scrollTo(0, 0); 
-} 
-
-/* ========================= BACK FROM SURAH ========================= */ 
-function backToPrevious() {
-    document.getElementById("surahView").style.display = "none"; 
-    if (openedFromSurahList) {
-        document.getElementById("mainQuran").style.display = "none"; 
-        document.getElementById("surahList").style.display = "block"; 
-    } else {
-        document.getElementById("surahList").style.display = "none"; 
-        document.getElementById("mainQuran").style.display = "block"; 
-    } 
-    window.scrollTo(0, 0); 
-} 
-
-/* ========================= ANDROID / BROWSER BACK ========================= */ 
-window.addEventListener("popstate", function() {
-    const surahView = document.getElementById("surahView"); 
-    const surahList = document.getElementById("surahList"); 
-    const mainQuran = document.getElementById("mainQuran"); 
-    if (surahView.style.display === "block") {
-        backToPrevious(); 
-        return; 
-    } 
-    if (surahList.style.display === "block") {
-        backToQuranHome(); 
-        return; 
-    } 
-    window.location.href = "index.html"; 
-}); 
-</script> 
-</body> 
+});
+</script>
+</body>
 </html>
