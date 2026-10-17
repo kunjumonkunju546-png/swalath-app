@@ -369,3 +369,19 @@ body.dark-mode .advertising-card {
     background: #222;
     border-color: #444;
 }
+
+/* ===== DARK MODE FIXES FOR HIJRI CALENDAR CARD ===== */
+body.dark-mode #hijriCard {
+    background: #222 !important;
+    border-color: #444 !important;
+    color: #eee !important;
+}
+
+body.dark-mode #hijriCardTitle {
+    color: #f0deaf !important;
+}
+
+body.dark-mode #currentHijriText,
+body.dark-mode #currentEnglishText {
+    color: #fff !important;
+}
