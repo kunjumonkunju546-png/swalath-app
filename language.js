@@ -29,7 +29,15 @@
                 virtuesTitle: "✨ ഖുർആൻ പാരായണത്തിന്റെ മഹത്വവും ജീവിത വിജയവും",
                 v1Text: "🌟 <strong>ഹൃദയശാന്തി:</strong> ഖുർആൻ പാരായണം മനസ്സിന് സമാധാനവും പിരിമുറുക്കങ്ങളിൽ നിന്ന് മോചനവും നൽകുന്നു.",
                 v2Text: "🌟 <strong>പ്രയാസങ്ങളിൽ നിന്നുള്ള മോചനം:</strong> ജീവിതത്തിലെ ബുദ്ധിമുട്ടുകൾ എളുപ്പമാക്കാൻ ഖുർആനുമായുള്ള ബന്ധം സഹായിക്കും.",
-                v3Text: "🌟 <strong>ഇരട്ടി പ്രതിഫലം:</strong> ഓതുന്ന ഓരോ അക്ഷരത്തിനും വലിയ പ്രതിഫലമുണ്ട്."
+                v3Text: "🌟 <strong>ഇരട്ടി പ്രതിഫലം:</strong> ഓതുന്ന ഓരോ അക്ഷരത്തിനും വലിയ പ്രതിഫലമുണ്ട്.",
+
+                // Hijri Calendar Card Translations (Malayalam)
+                hijriCardTitle: "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും",
+                hijriDateLabel: "ഇന്നത്തെ ഹിജ്‌റ തീയതി:",
+                specialDaysHeading: "പ്രധാനപ്പെട്ട അടുത്ത വിശേഷ ദിനങ്ങൾ:",
+                ev1Text: "🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം",
+                ev2Text: "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9",
+                ev3Text: "🎉 പെരുന്നാൾ: ശവ്വാൽ 1"
             }
         },
 
@@ -89,6 +97,14 @@
                 v1Text: "🌟 <strong>Inner Peace:</strong> Reciting Quran brings ultimate peace to the heart and relieves stress.",
                 v2Text: "🌟 <strong>Relief from Hardships:</strong> Connecting with Quran eases life difficulties and brings divine help.",
                 v3Text: "🌟 <strong>Immense Rewards:</strong> Countless blessings and rewards for every letter recited.",
+
+                // Hijri Calendar Card Translations (English)
+                hijriCardTitle: "🗓️ Hijri Calendar & Special Days",
+                hijriDateLabel: "Today's Hijri Date:",
+                specialDaysHeading: "Upcoming Special Days:",
+                ev1Text: "🌙 Ramadan 1: Approx. in 2 months",
+                ev2Text: "🕋 Day of Arafah: Dhul-Hijjah 9",
+                ev3Text: "🎉 Eid Day: Shawwal 1",
 
                 dhikrPageTitle: "Dhikr",
                 dhikrSubtitle: "Remember Allah",
@@ -233,6 +249,14 @@
                 v2Text: "🌟 <strong>الفرج من الشدائد:</strong> الارتباط بالقرآن يسهل مصاعب الحياة.",
                 v3Text: "🌟 <strong>الأجر العظيم:</strong> لكل حرف من القرآن حسنة.",
 
+                // Hijri Calendar Card Translations (Arabic)
+                hijriCardTitle: "🗓️ التقويم الهجري والأيام المباركة",
+                hijriDateLabel: "التاريخ الهجري اليوم:",
+                specialDaysHeading: "الأيام المميزة القادمة:",
+                ev1Text: "🌙 رمضان ١: تقريباً بعد شهرين",
+                ev2Text: "🕋 يوم عرفة: ٩ ذو الحجة",
+                ev3Text: "🎉 عيد الفطر: ١ شوال",
+
                 dhikrPageTitle: "الذكر",
                 dhikrSubtitle: "اذكر الله",
                 dhikrIntroHeading: "📿 الأذكار",
@@ -374,7 +398,15 @@
                 virtuesTitle: "✨ क़ुरआन की फ़ज़ीलत और सफलता",
                 v1Text: "🌟 <strong>दिल का सुकून:</strong> क़ुरआन पढ़ने से दिल को शांति मिलती है और तनाव दूर होता है।",
                 v2Text: "🌟 <strong>मुश्किलों से राहत:</strong> क़ुरआन से जुड़ने से जीवन की कठिनाइयाँ आसान होती हैं।",
-                v3Text: "🌟 <strong>बेहिसाब सवाब:</strong> पढ़े जाने वाले हर हर्फ़ पर कई गुना नेकियों मिलती हैं।",
+                v3Text: "🌟 <strong>बेहिसाब सवाब:</strong> पढ़े जाने वाले हर हर्फ़ पर कई गुना नेकियों मिलती हैं。",
+
+                // Hijri Calendar Card Translations (Hindi)
+                hijriCardTitle: "🗓️ हिजरी कैलेंडर और विशेष दिन",
+                hijriDateLabel: "आज की हिजरी तिथि:",
+                specialDaysHeading: "आगामी विशेष दिन:",
+                ev1Text: "🌙 रमज़ान 1: लगभग 2 महीने बाद",
+                ev2Text: "🕋 अराफ़ा का दिन: ज़ुल-हिज्जा 9",
+                ev3Text: "🎉 ईद का दिन: शव्वाल 1",
 
                 dhikrPageTitle: "ज़िक्र",
                 dhikrSubtitle: "अल्लाह को याद करें",
@@ -519,6 +551,14 @@
                 v2Text: "🌟 <strong>مشکلات سے نجات:</strong> قرآن سے تعلق زندگی کی دشواریوں کو آسان کرتا ہے۔",
                 v3Text: "🌟 <strong>دگنا اجر:</strong> پڑھے جانے والے ہر حرف پر بے شمار نیکیاں ہیں۔",
 
+                // Hijri Calendar Card Translations (Urdu)
+                hijriCardTitle: "🗓️ ہجری کیلنڈر اور خاص دن",
+                hijriDateLabel: "آج کی ہجری تاریخ:",
+                specialDaysHeading: "آنے والے خاص دن:",
+                ev1Text: "🌙 رمضان 1: تقریباً 2 مہینے کے بعد",
+                ev2Text: "🕋 یوم عرفہ: ذوالحجہ 9",
+                ev3Text: "🎉 عید الفطر: شوال 1",
+
                 dhikrPageTitle: "ذکر",
                 dhikrSubtitle: "اللہ کو یاد کریں",
                 dhikrIntroHeading: "📿 ذکر",
@@ -534,7 +574,7 @@
                 umrahStep2Title: "تلبیہ پڑھنا",
                 umrahStep2Desc: "نیت کرنے کے بعد تلبیہ پڑھتے ہوئے مسجد الحرام کی طرف روانہ ہوں۔",
                 umrahStep3Title: "طواف",
-                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو तो دو رکعت نفل ادا کریں۔",
+                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو তো دو رکعت نفل ادا کریں۔",
                 umrahStep4Title: "سعی",
                 umrahStep4Desc: "صفا اور مروہ کے درمیان سات چکر پورے کریں۔ صفا سے شروع ہوکر مروہ پر ختم ہوگا۔",
                 umrahStep5Title: "بال منڈوانا یا کتروانا",
@@ -661,6 +701,14 @@
                 v1Text: "🌟 <strong>உள்ள அமைதி:</strong> குர்ஆன் ஓதுவது இதயத்திற்கு அமைதியையும் கவலைகளில் இருந்து விடுதலையையும் தருகிறது.",
                 v2Text: "🌟 <strong>சிரமங்களிலிருந்து நிவாரணம்:</strong> குர்ஆனுடன் இணைந்திருப்பது வாழ்க்கையின் கடினங்களை எளிதாக்குகிறது.",
                 v3Text: "🌟 <strong>மடங்கு நன்மைகள்:</strong> ஓதும் ஒவ்வொரு எழுத்துக்கும் எண்ணற்ற நன்மைகள் உண்டு.",
+
+                // Hijri Calendar Card Translations (Tamil)
+                hijriCardTitle: "🗓️ ஹிஜ்ரி நாட்காட்டியும் சிறப்பு நாட்களும்",
+                hijriDateLabel: "இன்றைய ஹிஜ்ரி தேதி:",
+                specialDaysHeading: "வரவிருக்கும் சிறப்பு நாட்கள்:",
+                ev1Text: "🌙 ரமலான் 1: சுமார் 2 மாதங்களுக்குப் பிறகு",
+                ev2Text: "🕋 அரபா நாள்: துல்ஹுஜ்ஜா 9",
+                ev3Text: "🎉 பெருநாள்: ஷவ்வால் 1",
 
                 dhikrPageTitle: "திக்ர்",
                 dhikrSubtitle: "அல்லாஹ்வை நினைவு கூருங்கள்",
