@@ -1,883 +1,639 @@
 <!DOCTYPE html>
 <html lang="ml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#123d34">
-    <title>സ്വലാത്ത് - Swalath</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        #splashScreen {
-            position: fixed;
-            inset: 0;
-            z-index: 100000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(145deg, #092b25, #123d34, #1d5143);
-            color: #f1dfb0;
-            transition: opacity .6s ease, visibility .6s ease;
-        }
-        #splashScreen.hide {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .splash-content {
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        .splash-moon {
-            font-size: 66px;
-            margin-bottom: 18px;
-            animation: moonFloat 2s ease-in-out infinite;
-        }
-        .splash-content h1 {
-            font-size: 38px;
-            margin: 0 0 10px;
-            color: #f1dfb0;
-            font-family: 'Amiri', serif;
-        }
-        .splash-content p {
-            font-size: 16px;
-            line-height: 2.2;
-            margin: 0;
-            color: #fff8e8;
-            font-family: 'Amiri', serif;
-        }
-        .splash-loader {
-            width: 38px;
-            height: 38px;
-            border: 3px solid rgba(241,223,176,.25);
-            border-top-color: #f1dfb0;
-            border-radius: 50%;
-            margin: 30px auto 0;
-            animation: splashSpin .9s linear infinite;
-        }
-        @keyframes splashSpin { to { transform: rotate(360deg); } }
-        @keyframes moonFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
+<title>സ്വലാത്ത് - Swalath</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#splashScreen {position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; transition: opacity .6s ease, visibility .6s ease; }
+#splashScreen.hide {opacity: 0; visibility: hidden; pointer-events: none; }
+.splash-content {width: 90%; max-width: 380px; text-align: center; padding: 30px 20px; }
+.splash-moon {font-size: 66px; margin-bottom: 18px; animation: moonFloat 2s ease-in-out infinite; }
+.splash-content h1 {font-size: 38px; margin: 0 0 10px; color: #f1dfb0; font-family: 'Amiri', serif; }
+.splash-content p {font-size: 16px; line-height: 2.2; margin: 0; color: #fff8e8; font-family: 'Amiri', serif; }
+.splash-loader {width: 38px; height: 38px; border: 3px solid rgba(241,223,176,.25); border-top-color: #f1dfb0; border-radius: 50%; margin: 30px auto 0; animation: splashSpin .9s linear infinite; }
+@keyframes splashSpin { to { transform: rotate(360deg); } }
+@keyframes moonFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.search-box {width: 100%; padding: 13px 16px; border: 1px solid #e6dfd0; border-radius: 14px; outline: none; font-size: 14px; margin-bottom: 15px; background: white; color: #222; box-sizing: border-box; }
+.search-box:focus { border-color: #123d34; }
+.feature-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+.dark-button { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.advertising-page { display: none; }
+.advertising-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.advertising-card { background: white; border: 1px solid #e6dfd0; border-radius: 20px; padding: 20px 17px; margin-bottom: 14px; box-shadow: 0 5px 18px rgba(18,61,52,.05); }
+.advertising-title { text-align: center; color: #123d34; margin-bottom: 8px; font-size: 18px; }
+.advertising-subtitle { text-align: center; color: #9b7932; font-size: 13px; letter-spacing: .5px; margin-bottom: 18px; font-weight: bold; }
+.advertising-card h3 { color: #123d34; font-size: 17px; margin-bottom: 12px; font-family: 'Amiri', serif; }
+.advertising-card p { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 10px; }
+.advertising-list { list-style: none; padding: 0; margin: 0; }
+.advertising-list li { font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+.advertising-contact { text-align: center; background: #123d34; color: white; border-radius: 20px; padding: 22px 15px; margin-bottom: 14px; }
+.advertising-contact h3 { color: white; margin-bottom: 12px; font-family: 'Amiri', serif; }
+.advertising-contact p { color: white; margin-bottom: 8px; }
+.advertising-contact a { display: inline-block; text-decoration: none; background: #f1dfb0; color: #123d34; padding: 11px 20px; border-radius: 25px; font-size: 13px; font-weight: bold; margin-top: 8px; }
+.advertising-footer { text-align: center; padding: 10px 5px 20px; color: #777; font-size: 12px; line-height: 1.7; }
+body.dark-mode { background: #111; color: #eee; } 
+body.dark-mode .app { background: #181818; } 
+body.dark-mode .welcome p { color: #aaa; } 
+body.dark-mode .menu-card { background: #222; border-color: #444; color: #eee; } 
+body.dark-mode .menu-card span { color: #aaa; } 
+body.dark-mode .search-box { background: #222; color: white; border-color: #444; } 
+body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2 { color: #fff; } 
+body.dark-mode .dark-button { background: #f1dfb0; color: #123d34; } 
+body.dark-mode .favorite-item, body.dark-mode .collection-item { background: #222 !important; border-color: #444 !important; color: #fff !important; } 
+body.dark-mode footer { color: #777; } 
+body.dark-mode .advertising-card { background: #222; border-color: #444; } 
+body.dark-mode .advertising-title, body.dark-mode .advertising-card h3 { color: #f1dfb0; } 
+body.dark-mode .advertising-subtitle, body.dark-mode .advertising-card p, body.dark-mode .advertising-list li { color: #ccc; } 
+body.dark-mode .advertising-contact { background: #123d34; } 
+body.dark-mode .khatam-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
+body.dark-mode .khatam-card h3, body.dark-mode .target-box h4 { color: #f0deaf !important; }
+body.dark-mode .target-box { background: #1a2e28 !important; border-color: #f0deaf !important; }
+body.dark-mode .target-box p { color: #fff !important; }
 
-        .search-box {
-            width: 100%;
-            padding: 13px 16px;
-            border: 1px solid #e6dfd0;
-            border-radius: 14px;
-            outline: none;
-            font-size: 14px;
-            margin-bottom: 15px;
-            background: white;
-            color: #222;
-            box-sizing: border-box;
-        }
-        .search-box:focus { border-color: #123d34; }
+/* ===== SWALAATH PREMIUM HOME UI ===== */ 
+:root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
+body {background: var(--sw-bg); color: var(--sw-text); font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif; line-height: 1.65; -webkit-tap-highlight-color: transparent; } 
+.app {width: 100%; max-width: 760px; min-height: 100vh; margin: 0 auto; background: var(--sw-bg); overflow: hidden; box-shadow: 0 0 50px rgba(18, 61, 52, .08); } 
+.hero {position: relative; overflow: hidden; padding: 38px 20px 36px; text-align: center; color: #fff9e9; background: radial-gradient(circle at 85% 15%, rgba(212, 190, 126, .2), transparent 40%), linear-gradient(145deg, #0d3229, #15473d 65%, #1f5d4f); border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(13, 50, 41, .16); } 
+.hero .moon {display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; margin-bottom: 10px; border: 1px solid rgba(241, 223, 176, .4); border-radius: 50%; background: rgba(255, 255, 255, .08); font-size: 38px !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1); } 
+.hero .arabic-main-title {font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 38px; color: #f5e2b3; margin: 4px 0 10px; font-weight: bold; } 
+.hero .arabic-ayah {font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 19px; color: #fffaf0; margin: 0; line-height: 2.2; direction: rtl; opacity: 0.98; padding: 0 10px; } 
+main { padding: 0 18px; } 
+.welcome { padding: 25px 5px 14px; text-align: center; } 
+.welcome h2 { margin: 0 0 5px; color: var(--sw-green); font-size: 22px; font-weight: 800; } 
+.welcome p { margin: 0; color: var(--sw-muted); font-size: 13px; line-height: 1.9; } 
 
-        .feature-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
-        .dark-button { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: 600; }
+/* PREMIUM COUNTER DESIGN */ 
+.today {position: relative; overflow: hidden; margin: 12px 0 20px; padding: 26px 16px 24px; text-align: center; color: #fffaf0; background: radial-gradient(circle at 100% 0, rgba(241, 223, 176, .2), transparent 45%), linear-gradient(135deg, #0f362e, #185042); border: 2px solid rgba(197, 168, 104, .5); border-radius: 26px; box-shadow: 0 12px 30px rgba(18, 61, 52, .18); } 
+.today .small-title { color: #f1dfb0; font-size: 12px; font-weight: 800; letter-spacing: 3px; font-family: 'Amiri', serif; } 
+.today h2 {margin: 6px 0; color: #fff; font-size: 54px; line-height: 1.2; font-weight: 800; font-variant-numeric: tabular-nums; text-shadow: 0 3px 10px rgba(0,0,0,0.25); letter-spacing: 1px; } 
+.today p { margin: 0 0 16px; color: #f0ecd9; font-size: 13px; font-weight: 600; } 
+.today button {min-height: 46px; padding: 12px 28px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 30px; background: #f5e2b3; color: #123d34; font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.15); } 
+.today button:active { transform: scale(.97); } 
+.feature-buttons { margin: 0 0 18px; gap: 10px; } 
+.dark-button {min-height: 44px; padding: 10px 20px; border: 1px solid var(--sw-border); border-radius: 25px; background: var(--sw-card); color: var(--sw-green); font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(18, 61, 52, .05); cursor: pointer; } 
+.menu-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 25px; } 
+.menu-card {position: relative; display: flex; min-width: 0; min-height: 150px; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 18px 12px; box-sizing: border-box; text-align: center; background: var(--sw-card); border: 1px solid var(--sw-border); border-radius: 22px; color: var(--sw-text); box-shadow: 0 6px 18px rgba(18, 61, 52, .05); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; } 
+.menu-card > div:first-child {display: flex; width: 56px; height: 56px; align-items: center; justify-content: center; margin-bottom: 3px; border-radius: 18px; background: #f0f5ed; font-size: 30px !important; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); } 
+.menu-card strong {display: block; max-width: 100%; color: var(--sw-green); font-size: 14px; font-weight: 800; line-height: 1.6; overflow-wrap: anywhere; } 
+.menu-card span {display: block; color: var(--sw-muted); font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; } 
+.menu-card:active {transform: scale(.975); border-color: var(--sw-gold); box-shadow: 0 3px 10px rgba(18, 61, 52, .1); } 
+#collectionSection, #favoritesSection, #advertisingSection { padding-top: 22px; padding-bottom: 20px; } 
+#collectionSection h2, #favoritesSection h2 { color: var(--sw-green); font-size: 22px; font-family: 'Amiri', serif; } 
+.search-box { min-height: 48px; border-radius: 16px; background: var(--sw-card); border-color: var(--sw-border); } 
+.search-box:focus { border-color: var(--sw-gold); box-shadow: 0 0 0 4px rgba(197, 168, 104, .15); } 
+#travelSection { margin: 18px 0 25px; padding: 24px 18px; border-radius: 24px; box-shadow: 0 6px 20px rgba(18, 61, 52, .07); } 
+footer { padding: 18px 12px 25px; text-align: center; color: var(--sw-muted); font-size: 12px; } 
 
-        .advertising-page { display: none; }
-        .advertising-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; }
-        .advertising-card { background: white; border: 1px solid #e6dfd0; border-radius: 20px; padding: 20px 17px; margin-bottom: 14px; box-shadow: 0 5px 18px rgba(18,61,52,.05); }
-        .advertising-title { text-align: center; color: #123d34; margin-bottom: 8px; font-size: 18px; }
-        .advertising-subtitle { text-align: center; color: #9b7932; font-size: 13px; letter-spacing: .5px; margin-bottom: 18px; font-weight: bold; }
-        .advertising-card h3 { color: #123d34; font-size: 17px; margin-bottom: 12px; font-family: 'Amiri', serif; }
-        .advertising-card p { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 10px; }
-        .advertising-list { list-style: none; padding: 0; margin: 0; }
-        .advertising-list li { font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
-        .advertising-contact { text-align: center; background: #123d34; color: white; border-radius: 20px; padding: 22px 15px; margin-bottom: 14px; }
-        .advertising-contact h3 { color: white; margin-bottom: 12px; font-family: 'Amiri', serif; }
-        .advertising-contact p { color: white; margin-bottom: 8px; }
-        .advertising-contact a { display: inline-block; text-decoration: none; background: #f1dfb0; color: #123d34; padding: 11px 20px; border-radius: 25px; font-size: 13px; font-weight: bold; margin-top: 8px; }
-        .advertising-footer { text-align: center; padding: 10px 5px 20px; color: #777; font-size: 12px; line-height: 1.7; }
+/* LANGUAGE SELECTOR */ 
+#languageScreen {position: fixed; inset: 0; z-index: 100001; display: none; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; } 
+#languageScreen .language-box {width: 100%; max-width: 400px; padding: 24px; border: 1px solid #c8a96e; border-radius: 22px; background: #fffaf0; color: #123d34; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.25); } 
+#languageScreen h2 { margin: 0 0 8px; font-size: 23px; } 
+#languageScreen p { margin: 0 0 18px; color: #52645d; } 
+.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; } 
+.language-option { padding: 13px 8px; border: 1px solid #d7c69e; border-radius: 12px; background: #fff; color: #123d34; font-size: 16px; cursor: pointer; } 
+.language-option.selected { border: 2px solid #123d34; background: #e8f0e9; font-weight: bold; } 
+#languageContinue { width: 100%; padding: 13px; border: none; border-radius: 12px; background: #123d34; color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; } 
+#languageButton { padding: 10px 14px; margin: 5px; border: 1px solid #c8a96e; border-radius: 10px; cursor: pointer; } 
+</style> 
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"> 
+<script src="language.js" defer></script> 
+</head> 
+<body> 
 
-        body.dark-mode { background: #111; color: #eee; }
-        body.dark-mode .app { background: #181818; }
-        body.dark-mode .welcome p { color: #aaa; }
-        body.dark-mode .menu-card { background: #222; border-color: #444; color: #eee; }
-        body.dark-mode .menu-card span { color: #aaa; }
-        body.dark-mode .search-box { background: #222; color: white; border-color: #444; }
-        body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2 { color: #fff; }
-        body.dark-mode .dark-button { background: #f1dfb0; color: #123d34; }
-        body.dark-mode .favorite-item, body.dark-mode .collection-item { background: #222 !important; border-color: #444 !important; color: #fff !important; }
-        body.dark-mode footer { color: #777; }
-        body.dark-mode .advertising-card { background: #222; border-color: #444; }
-        body.dark-mode .advertising-title, body.dark-mode .advertising-card h3 { color: #f1dfb0; }
-        body.dark-mode .advertising-subtitle, body.dark-mode .advertising-card p, body.dark-mode .advertising-list li { color: #ccc; }
-        body.dark-mode .advertising-contact { background: #123d34; }
+<!-- LANGUAGE SELECTION SCREEN --> 
+<div id="languageScreen"> 
+    <div class="language-box"> 
+        <h2 id="languageHeading">Select Your Language</h2> 
+        <p id="languageSubtitle">Choose your preferred language</p> 
+        <div class="language-options"> 
+            <button type="button" class="language-option" data-lang="ml">മലയാളം</button> 
+            <button type="button" class="language-option" data-lang="en">English</button> 
+            <button type="button" class="language-option" data-lang="ar">العربية</button> 
+            <button type="button" class="language-option" data-lang="hi">हिन्दी</button> 
+            <button type="button" class="language-option" data-lang="ur">اردو</button> 
+            <button type="button" class="language-option" data-lang="ta">தமிழ்</button> 
+        </div> 
+        <button type="button" id="languageContinue">Continue</button> 
+    </div> 
+</div> 
 
-        /* ===== SWALAATH PREMIUM HOME UI ===== */
-        :root {
-            --sw-bg: #f8f8f4;
-            --sw-card: #ffffff;
-            --sw-green: #123d34;
-            --sw-green-dark: #092b25;
-            --sw-gold: #c5a868;
-            --sw-text: #22352c;
-            --sw-muted: #6a7971;
-            --sw-border: #eae5d5;
-        }
-        body {
-            background: var(--sw-bg);
-            color: var(--sw-text);
-            font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif;
-            line-height: 1.65;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .app {
-            width: 100%;
-            max-width: 760px;
-            min-height: 100vh;
-            margin: 0 auto;
-            background: var(--sw-bg);
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(18, 61, 52, .08);
-        }
-        .hero {
-            position: relative;
-            overflow: hidden;
-            padding: 38px 20px 36px;
-            text-align: center;
-            color: #fff9e9;
-            background: radial-gradient(circle at 85% 15%, rgba(212, 190, 126, .2), transparent 40%), linear-gradient(145deg, #0d3229, #15473d 65%, #1f5d4f);
-            border-radius: 0 0 32px 32px;
-            box-shadow: 0 10px 30px rgba(13, 50, 41, .16);
-        }
-        .hero .moon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 72px;
-            height: 72px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(241, 223, 176, .4);
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .08);
-            font-size: 38px !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .hero .arabic-main-title {
-            font-family: 'Amiri', 'Traditional Arabic', serif;
-            font-size: 38px;
-            color: #f5e2b3;
-            margin: 4px 0 10px;
-            font-weight: bold;
-        }
-        .hero .arabic-ayah {
-            font-family: 'Amiri', 'Traditional Arabic', serif;
-            font-size: 19px;
-            color: #fffaf0;
-            margin: 0;
-            line-height: 2.2;
-            direction: rtl;
-            opacity: 0.98;
-            padding: 0 10px;
-        }
-        main { padding: 0 18px; }
-        .welcome { padding: 25px 5px 14px; text-align: center; }
-        .welcome h2 { margin: 0 0 5px; color: var(--sw-green); font-size: 22px; font-weight: 800; }
-        .welcome p { margin: 0; color: var(--sw-muted); font-size: 13px; line-height: 1.9; }
+<!-- SPLASH SCREEN --> 
+<div id="splashScreen"> 
+    <div class="splash-content"> 
+        <div class="splash-moon">🌙</div> 
+        <h1 style="font-family:'Amiri', serif; font-size:40px;">الصلاة</h1> 
+        <p style="font-family:'Amiri', serif; font-size:16px; direction:rtl; line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</p> 
+        <div class="splash-loader"></div> 
+    </div> 
+</div> 
 
-        /* PREMIUM COUNTER DESIGN */
-        .today {
-            position: relative;
-            overflow: hidden;
-            margin: 12px 0 20px;
-            padding: 26px 16px 24px;
-            text-align: center;
-            color: #fffaf0;
-            background: radial-gradient(circle at 100% 0, rgba(241, 223, 176, .2), transparent 45%), linear-gradient(135deg, #0f362e, #185042);
-            border: 2px solid rgba(197, 168, 104, .5);
-            border-radius: 26px;
-            box-shadow: 0 12px 30px rgba(18, 61, 52, .18);
-        }
-        .today .small-title { color: #f1dfb0; font-size: 12px; font-weight: 800; letter-spacing: 3px; font-family: 'Amiri', serif; }
-        .today h2 { 
-            margin: 6px 0; 
-            color: #fff; 
-            font-size: 54px; 
-            line-height: 1.2; 
-            font-weight: 800; 
-            font-variant-numeric: tabular-nums;
-            text-shadow: 0 3px 10px rgba(0,0,0,0.25);
-            letter-spacing: 1px;
-        }
-        .today p { margin: 0 0 16px; color: #f0ecd9; font-size: 13px; font-weight: 600; }
-        .today button {
-            min-height: 46px;
-            padding: 12px 28px;
-            border: 1px solid rgba(255, 255, 255, .5);
-            border-radius: 30px;
-            background: #f5e2b3;
-            color: #123d34;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: transform .18s ease, box-shadow .18s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .today button:active { transform: scale(.97); }
+<div class="app"> 
+    <section class="hero"> 
+        <div class="moon">🌙</div> 
+        <div class="arabic-main-title">الصلاة</div> 
+        <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</div> 
+    </section> 
 
-        .feature-buttons { margin: 0 0 18px; gap: 10px; }
-        .dark-button {
-            min-height: 44px;
-            padding: 10px 20px;
-            border: 1px solid var(--sw-border);
-            border-radius: 25px;
-            background: var(--sw-card);
-            color: var(--sw-green);
-            font-size: 13px;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(18, 61, 52, .05);
-            cursor: pointer;
-        }
+    <main> 
+        <section class="welcome"> 
+            <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2> 
+            <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p> 
+        </section> 
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin: 0 0 25px;
-        }
-        .menu-card {
-            position: relative;
-            display: flex;
-            min-width: 0;
-            min-height: 150px;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 18px 12px;
-            box-sizing: border-box;
-            text-align: center;
-            background: var(--sw-card);
-            border: 1px solid var(--sw-border);
-            border-radius: 22px;
-            color: var(--sw-text);
-            box-shadow: 0 6px 18px rgba(18, 61, 52, .05);
-            cursor: pointer;
-            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        }
-        .menu-card > div:first-child {
-            display: flex;
-            width: 56px;
-            height: 56px;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 3px;
-            border-radius: 18px;
-            background: #f0f5ed;
-            font-size: 30px !important;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .menu-card strong {
-            display: block;
-            max-width: 100%;
-            color: var(--sw-green);
-            font-size: 14px;
-            font-weight: 800;
-            line-height: 1.6;
-            overflow-wrap: anywhere;
-        }
-        .menu-card span {
-            display: block;
-            color: var(--sw-muted);
-            font-size: 11px;
-            line-height: 1.65;
-            overflow-wrap: anywhere;
-        }
-        .menu-card:active {
-            transform: scale(.975);
-            border-color: var(--sw-gold);
-            box-shadow: 0 3px 10px rgba(18, 61, 52, .1);
-        }
-
-        #collectionSection, #favoritesSection, #advertisingSection { padding-top: 22px; padding-bottom: 20px; }
-        #collectionSection h2, #favoritesSection h2 { color: var(--sw-green); font-size: 22px; font-family: 'Amiri', serif; }
-        .search-box { min-height: 48px; border-radius: 16px; background: var(--sw-card); border-color: var(--sw-border); }
-        .search-box:focus { border-color: var(--sw-gold); box-shadow: 0 0 0 4px rgba(197, 168, 104, .15); }
-        #travelSection { margin: 18px 0 25px; padding: 24px 18px; border-radius: 24px; box-shadow: 0 6px 20px rgba(18, 61, 52, .07); }
-        
-        footer { padding: 18px 12px 25px; text-align: center; color: var(--sw-muted); font-size: 12px; }
-
-        body.dark-mode {
-            --sw-bg: #101814;
-            --sw-card: #19251f;
-            --sw-green: #f0deaf;
-            --sw-green-dark: #e2cca0;
-            --sw-text: #f2f3ec;
-            --sw-muted: #abb8af;
-            --sw-border: #2a3b32;
-            background: var(--sw-bg);
-            color: var(--sw-text);
-        }
-        body.dark-mode .app { background: var(--sw-bg); }
-        body.dark-mode .hero { background: radial-gradient(circle at 85% 15%, rgba(212, 190, 126, .12), transparent 40%), linear-gradient(145deg, #081d18, #11352b); }
-        body.dark-mode .welcome h2, body.dark-mode .menu-card strong, body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2 { color: #f0deaf; }
-        body.dark-mode .welcome p, body.dark-mode .menu-card span { color: #b8c5bc; }
-        body.dark-mode .menu-card { background: var(--sw-card); border-color: var(--sw-border); color: var(--sw-text); }
-        body.dark-mode .menu-card > div:first-child { background: #23342b; }
-        body.dark-mode .today { background: linear-gradient(135deg, #12382e, #1a483c); }
-        body.dark-mode .dark-button { background: #22342b; border-color: #354a3f; color: #f1dfb0; }
-        body.dark-mode .search-box { background: #19251f; color: #fff; border-color: #32463b; }
-        body.dark-mode #travelSection { background: #19251f; }
-
-        @media (min-width: 560px) {
-            .hero { padding-top: 45px; padding-bottom: 42px; }
-            main { padding-right: 25px; padding-left: 25px; }
-            .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-            .menu-card { min-height: 160px; }
-        }
-        @media (max-width: 360px) {
-            main { padding-right: 12px; padding-left: 12px; }
-            .menu-grid { gap: 10px; }
-            .menu-card { min-height: 140px; padding: 14px 8px; border-radius: 18px; }
-            .menu-card > div:first-child { width: 48px; height: 48px; border-radius: 15px; }
-            .menu-card strong { font-size: 13px; }
-            .menu-card span { font-size: 10px; }
-        }
-
-        /* LANGUAGE SELECTOR */
-        #languageScreen {
-            position: fixed;
-            inset: 0;
-            z-index: 100001;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(145deg, #092b25, #123d34, #1d5143);
-            color: #f1dfb0;
-        }
-        #languageScreen .language-box {
-            width: 100%;
-            max-width: 400px;
-            padding: 24px;
-            border: 1px solid #c8a96e;
-            border-radius: 22px;
-            background: #fffaf0;
-            color: #123d34;
-            text-align: center;
-            box-shadow: 0 12px 35px rgba(0,0,0,.25);
-        }
-        #languageScreen h2 { margin: 0 0 8px; font-size: 23px; }
-        #languageScreen p { margin: 0 0 18px; color: #52645d; }
-        .language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-        .language-option { padding: 13px 8px; border: 1px solid #d7c69e; border-radius: 12px; background: #fff; color: #123d34; font-size: 16px; cursor: pointer; }
-        .language-option.selected { border: 2px solid #123d34; background: #e8f0e9; font-weight: bold; }
-        #languageContinue { width: 100%; padding: 13px; border: none; border-radius: 12px; background: #123d34; color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; }
-        #languageButton { padding: 10px 14px; margin: 5px; border: 1px solid #c8a96e; border-radius: 10px; cursor: pointer; }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <script src="language.js" defer></script>
-</head>
-<body>
-
-    <!-- LANGUAGE SELECTION SCREEN -->
-    <div id="languageScreen">
-        <div class="language-box">
-            <h2 id="languageHeading">Select Your Language</h2>
-            <p id="languageSubtitle">Choose your preferred language</p>
-            <div class="language-options">
-                <button type="button" class="language-option" data-lang="ml">മലയാളം</button>
-                <button type="button" class="language-option" data-lang="en">English</button>
-                <button type="button" class="language-option" data-lang="ar">العربية</button>
-                <button type="button" class="language-option" data-lang="hi">हिन्दी</button>
-                <button type="button" class="language-option" data-lang="ur">اردو</button>
-                <button type="button" class="language-option" data-lang="ta">தமிழ்</button>
+        <!-- HIJRI CALENDAR & SPECIAL DAYS CARD -->
+        <div class="khatam-card" id="hijriCard" style="background: #ffffff; border: 2px solid #ddc486; border-radius: 18px; padding: 18px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(18,61,52,0.06);">
+            <h3 id="hijriCardTitle" style="color: #123d34; font-size: 16px; margin: 0 0 12px 0;">🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</h3>
+            
+            <div class="target-box" style="background: #edf3eb; border: 1px dashed #123d34; border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 12px;">
+                <h4 id="hijriDateLabel" style="color: #123d34; margin: 0 0 4px 0; font-size: 13px;">ഇന്നത്തെ ഹിജ്‌റ തീയതി:</h4>
+                <p id="currentHijriText" style="font-size: 14px; color: #123d34; margin: 0; font-weight: bold;">1448 ജമാദുൽ ആഖിർ 05</p>
             </div>
-            <button type="button" id="languageContinue">Continue</button>
+
+            <div style="font-size: 13px;">
+                <strong id="specialDaysHeading" style="color: #123d34; display: block; margin-bottom: 6px;">പ്രധാനപ്പെട്ട അടുത്ത വിശേഷ ദിനങ്ങൾ:</strong>
+                <div style="background: #fffdf8; padding: 10px; border-radius: 10px; border: 1px solid #e6dfd0; line-height: 1.6; color: #333;">
+                    <p id="ev1" style="margin: 4px 0;">🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം</p>
+                    <p id="ev2" style="margin: 4px 0;">🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9</p>
+                    <p id="ev3" style="margin: 4px 0;">🎉 പെരുന്നാൾ: ശവ്വാൽ 1</p>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- SPLASH SCREEN -->
-    <div id="splashScreen">
-        <div class="splash-content">
-            <div class="splash-moon">🌙</div>
-            <h1 style="font-family:'Amiri', serif; font-size:40px;">الصلاة</h1>
-            <p style="font-family:'Amiri', serif; font-size:16px; direction:rtl; line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا</p>
-            <div class="splash-loader"></div>
-        </div>
-    </div>
+        <section class="today"> 
+            <div class="small-title">مُعَدَّدُ الصَّلَوَات (COUNTER)</div> 
+            <h2 id="count">0</h2> 
+            <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p> 
+            <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button> 
+        </section> 
 
-    <div class="app">
-        <section class="hero">
-            <div class="moon">🌙</div>
-            <div class="arabic-main-title">الصلاة</div>
-            <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا</div>
-        </section>
+        <div class="feature-buttons"> 
+            <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button> 
+            <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button> 
+        </div> 
 
-        <main>
-            <section class="welcome">
-                <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2>
-                <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p>
-            </section>
+        <div class="menu-grid"> 
+            <div class="menu-card" onclick="openQuran()"> 
+                <div style="font-size:30px;">📖</div> 
+                <strong>القرآن الكريم</strong> <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span> 
+            </div> 
+            <div class="menu-card" onclick="openCollection()"> 
+                <div style="font-size:30px;">🕌</div> 
+                <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong> <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span> 
+            </div> 
+            <div class="menu-card" onclick="openQuranMP3()"> 
+                <div style="font-size:30px;">🎧</div> 
+                <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong> <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span> 
+            </div> 
+            <div class="menu-card" onclick="openPrayerTime()"> 
+                <div style="font-size:30px;">🕐</div> 
+                <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong> <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span> 
+            </div> 
+            <div class="menu-card" onclick="openDua()"> 
+                <div style="font-size:30px;">🤲</div> 
+                <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong> <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span> 
+            </div> 
+            <div class="menu-card" onclick="openDhikr()"> 
+                <div style="font-size:30px;">📿</div> 
+                <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong> <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span> 
+            </div> 
+            <div class="menu-card" onclick="openFavorites()"> 
+                <div style="font-size:30px;">❤️</div> 
+                <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong> <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span> 
+            </div> 
+            <div class="menu-card" onclick="openAsmaulHusna()"> 
+                <div style="font-size:30px;">⭐</div> 
+                <strong>أَسْمَاءُ الْحُسْنَى</strong> <span>أسماء الله الحسنى</span> 
+            </div> 
+            <div class="menu-card" onclick="openUmrah()"> 
+                <div style="font-size:30px;">🕋</div> 
+                <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong> <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span> 
+            </div> 
+            <div class="menu-card" onclick="openAdvertising()"> 
+                <div style="font-size:30px;">📢</div> 
+                <strong data-i18n="advertisingTitle" data-ml="Advertise With Us">Advertise With Us</strong> <span data-i18n="advertisingDesc" data-ml="Reach Global & GCC Audience">Reach Global Audience</span> 
+            </div> 
+        </div> 
 
-            <section class="today">
-                <div class="small-title">مُعَدَّدُ الصَّلَوَات (COUNTER)</div>
-                <h2 id="count">0</h2>
-                <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
-                <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
-            </section>
+        <!-- COLLECTION SECTION --> 
+        <section id="collectionSection" style="display:none;"> 
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
+                <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
+                <h2 style="margin:0; font-family:'Amiri', serif;">مَجْمُوعَةُ الصَّلَوَات</h2> 
+            </div> 
+            <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()"> 
+            <div id="collectionList"></div> 
+        </section> 
 
-            <div class="feature-buttons">
-                <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-                <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button>
-            </div>
+        <!-- FAVORITES SECTION --> 
+        <section id="favoritesSection" style="display:none;"> 
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
+                <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
+                <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2> 
+            </div> 
+            <div id="favoritesList"></div> 
+        </section> 
 
-            <div class="menu-grid">
-                <div class="menu-card" onclick="openQuran()">
-                    <div style="font-size:30px;">📖</div>
-                    <strong>القرآن الكريم</strong>
-                    <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span>
-                </div>
-                <div class="menu-card" onclick="openCollection()">
-                    <div style="font-size:30px;">🕌</div>
-                    <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong>
-                    <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
-                </div>
-                <div class="menu-card" onclick="openQuranMP3()">
-                    <div style="font-size:30px;">🎧</div>
-                    <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong>
-                    <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span>
-                </div>
-                <div class="menu-card" onclick="openPrayerTime()">
-                    <div style="font-size:30px;">🕐</div>
-                    <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong>
-                    <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span>
-                </div>
-                <div class="menu-card" onclick="openDua()">
-                    <div style="font-size:30px;">🤲</div>
-                    <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong>
-                    <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span>
-                </div>
-                <div class="menu-card" onclick="openDhikr()">
-                    <div style="font-size:30px;">📿</div>
-                    <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong>
-                    <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span>
-                </div>
-                <div class="menu-card" onclick="openFavorites()">
-                    <div style="font-size:30px;">❤️</div>
-                    <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong>
-                    <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span>
-                </div>
-                <div class="menu-card" onclick="openAsmaulHusna()">
-                    <div style="font-size:30px;">⭐</div>
-                    <strong>أَسْمَاءُ الْحُسْنَى</strong>
-                    <span>أسماء الله الحسنى</span>
-                </div>
-                <div class="menu-card" onclick="openUmrah()">
-                    <div style="font-size:30px;">🕋</div>
-                    <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong>
-                    <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
-                </div>
-                <div class="menu-card" onclick="openAdvertising()">
-                    <div style="font-size:30px;">📢</div>
-                    <strong data-i18n="advertisingTitle" data-ml="Advertise With Us">Advertise With Us</strong>
-                    <span data-i18n="advertisingDesc" data-ml="Reach Global & GCC Audience">Reach Global Audience</span>
-                </div>
-            </div>
+        <!-- ADVERTISING SECTION --> 
+        <section id="advertisingSection" class="advertising-page"> 
+            <div class="advertising-header"> 
+                <button class="advertising-back" onclick="closeAdvertising()">← Back</button> 
+                <h2 style="margin:0; font-family:'Amiri', serif;">الإعلان معنا</h2> 
+            </div> 
+            <div class="advertising-card"> 
+                <h2 class="advertising-title" style="font-family:'Amiri', serif;">النَّزْيَان عَالَمِي لِلإِعْلَانَات</h2> 
+                <p class="advertising-subtitle">Reach Global, GCC & Worldwide Audience</p> 
+                <p>നിങ്ങളുടെ business അല്ലെങ്കിൽ സ്ഥാപനത്തെ കേരളം, ജി.സി.സി (GCC) രാജ്യങ്ങൾ, കൂടാതെ ലോകമെമ്പാടുമുള്ള ആഗോള ഓഡിയൻസിലേക്ക് (Global Audience) ഏറ്റവും professional ആയ രീതിയിൽ എത്തിക്കാം.</p> 
+            </div> 
+            <div class="advertising-card"> 
+                <h3 style="font-family:'Amiri', serif;">✨ لماذا الشراكة معنا؟</h3> 
+                <ul class="advertising-list"> 
+                    <li>✅ Global & GCC Target Audience Reach</li> 
+                    <li>✅ High-trust Islamic & Spiritual Platform</li> 
+                    <li>✅ Direct WhatsApp & Website Integration</li> 
+                    <li>✅ Flexible Monthly / Yearly Packages</li> 
+                    <li>✅ Professional Quality Review for Brands</li> 
+                </ul> 
+            </div> 
+            <div class="advertising-card"> 
+                <h3 style="font-family:'Amiri', serif;">🏢 القطاعات التجارية المستهدفة</h3> 
+                <ul class="advertising-list"> 
+                    <li>🍽️ Halal Restaurants & Foods</li> 
+                    <li>🕋 Umrah & Hajj Services</li> 
+                    <li>✈️ Global Travel & Tourism</li> 
+                    <li>🧕 Modest Fashion & Abaya</li> 
+                    <li>🏨 Hotels & Hospitality</li> 
+                    <li>📚 Islamic Books & E-Commerce</li> 
+                </ul> 
+            </div> 
+            <div class="advertising-card"> 
+                <h3 style="font-family:'Amiri', serif;">📦 باقات الإعلان</h3> 
+                <ul class="advertising-list"> 
+                    <li>1 Month — Flash Global Promo</li> 
+                    <li>3 Months — Quarterly Growth</li> 
+                    <li>6 Months — Brand Authority</li> 
+                    <li>12 Months — Year-Round Dominance</li> 
+                </ul> 
+                <p>കൂടുതൽ വിവരങ്ങൾക്കും പ്രൈസിംഗിനും ഞങ്ങളെ WhatsApp വഴി ബന്ധപ്പെടുക.</p> 
+            </div> 
+            <div class="advertising-contact"> 
+                <h3 style="font-family:'Amiri', serif;">📲 تواصل مع فريق الإعلام لدينا</h3> 
+                <p><strong>WhatsApp</strong></p> 
+                <p>+91 9946010375</p> 
+                <a href="https://wa.me/919946010375?text=Hello,%20I%20want%20to%20advertise%20on%20Swalath%20App" target="_blank" rel="noopener">Chat on WhatsApp</a> 
+                <p style="margin-top:15px;"><strong>Website:</strong> www.nazyantravels.com</p> 
+                <p><strong>Email:</strong> nazyantravels@gmail.com</p> 
+            </div> 
+            <div class="advertising-footer"> 
+                <strong>NAZYAN TRAVELS & MEDIA</strong><br> Empowering Brands Across Borders 
+            </div> 
+        </section> 
 
-            <!-- COLLECTION SECTION -->
-            <section id="collectionSection" style="display:none;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-                    <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                    <h2 style="margin:0; font-family:'Amiri', serif;">مَجْمُوعَةُ الصَّلَوَات</h2>
-                </div>
-                <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()">
-                <div id="collectionList"></div>
-            </section>
+        <section id="travelSection" class="travel" style="background:var(--sw-card); border:1px solid var(--sw-border); text-align:center; border-radius:22px; padding:22px;"> 
+            <p style="color:#c5a868; font-size:11px; font-weight:bold; letter-spacing:2px; margin:0 0 5px;">TRAVEL PARTNER</p> 
+            <h2 style="color:var(--sw-green); font-size:20px; margin:0 0 8px;">NAZYAN TRAVELS</h2> 
+            <span style="font-size:13px; color:var(--sw-muted); display:block; line-height:1.7; margin-bottom:14px;">Flight Tickets • Tour Packages<br>Visa • Umrah • Certificate Attestation</span> 
+            <a href="https://wa.me/919946010375" target="_blank" rel="noopener" style="display:inline-block; background:var(--sw-green); color:#fff; text-decoration:none; padding:10px 22px; border-radius:20px; font-size:13px; font-weight:bold;">WhatsApp Enquiry</a> 
+        </section> 
+    </main> 
 
-            <!-- FAVORITES SECTION -->
-            <section id="favoritesSection" style="display:none;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-                    <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                    <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2>
-                </div>
-                <div id="favoritesList"></div>
-            </section>
+    <footer> 
+        <p>© 2026 Swalath</p> 
+        <p>Made with ❤️</p> 
+    </footer> 
+</div> 
 
-            <!-- ADVERTISING SECTION -->
-            <section id="advertisingSection" class="advertising-page">
-                <div class="advertising-header">
-                    <button class="advertising-back" onclick="closeAdvertising()">← Back</button>
-                    <h2 style="margin:0; font-family:'Amiri', serif;">الإعلان معنا</h2>
-                </div>
-                <div class="advertising-card">
-                    <h2 class="advertising-title" style="font-family:'Amiri', serif;">النَّزْيَان عَالَمِي لِلإِعْلَانَات</h2>
-                    <p class="advertising-subtitle">Reach Global, GCC & Worldwide Audience</p>
-                    <p>നിങ്ങളുടെ business അല്ലെങ്കിൽ സ്ഥാപനത്തെ കേരളം, ജി.സി.സി (GCC) രാജ്യങ്ങൾ, കൂടാതെ ലോകമെമ്പാടുമുള്ള ആഗോള ഓഡിയൻസിലേക്ക് (Global Audience) ഏറ്റവും professional ആയ രീതിയിൽ എത്തിക്കാം.</p>
-                </div>
-                <div class="advertising-card">
-                    <h3 style="font-family:'Amiri', serif;">✨ لماذا الشراكة معنا؟</h3>
-                    <ul class="advertising-list">
-                        <li>✅ Global & GCC Target Audience Reach</li>
-                        <li>✅ High-trust Islamic & Spiritual Platform</li>
-                        <li>✅ Direct WhatsApp & Website Integration</li>
-                        <li>✅ Flexible Monthly / Yearly Packages</li>
-                        <li>✅ Professional Quality Review for Brands</li>
-                    </ul>
-                </div>
-                <div class="advertising-card">
-                    <h3 style="font-family:'Amiri', serif;">🏢 القطاعات التجارية المستهدفة</h3>
-                    <ul class="advertising-list">
-                        <li>🍽️ Halal Restaurants & Foods</li>
-                        <li>🕋 Umrah & Hajj Services</li>
-                        <li>✈️ Global Travel & Tourism</li>
-                        <li>🧕 Modest Fashion & Abaya</li>
-                        <li>🏨 Hotels & Hospitality</li>
-                        <li>📚 Islamic Books & E-Commerce</li>
-                    </ul>
-                </div>
-                <div class="advertising-card">
-                    <h3 style="font-family:'Amiri', serif;">📦 باقات الإعلان</h3>
-                    <ul class="advertising-list">
-                        <li>1 Month — Flash Global Promo</li>
-                        <li>3 Months — Quarterly Growth</li>
-                        <li>6 Months — Brand Authority</li>
-                        <li>12 Months — Year-Round Dominance</li>
-                    </ul>
-                    <p>കൂടുതൽ വിവരങ്ങൾക്കും പ്രൈസിംഗിനും ഞങ്ങളെ WhatsApp വഴി ബന്ധപ്പെടുക.</p>
-                </div>
-                <div class="advertising-contact">
-                    <h3 style="font-family:'Amiri', serif;">📲 تواصل مع فريق الإعلام لدينا</h3>
-                    <p><strong>WhatsApp</strong></p>
-                    <p>+91 9946010375</p>
-                    <a href="https://wa.me/919946010375?text=Hello,%20I%20want%20to%20advertise%20on%20Swalath%20App" target="_blank" rel="noopener">Chat on WhatsApp</a>
-                    <p style="margin-top:15px;"><strong>Website:</strong> www.nazyantravels.com</p>
-                    <p><strong>Email:</strong> nazyantravels@gmail.com</p>
-                </div>
-                <div class="advertising-footer">
-                    <strong>NAZYAN TRAVELS & MEDIA</strong><br> Empowering Brands Across Borders
-                </div>
-            </section>
+<script> 
+/* LOCAL DATE */ 
+function getLocalDateString() {
+    const now = new Date(); 
+    return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); 
+} 
 
-            <section id="travelSection" class="travel" style="background:var(--sw-card); border:1px solid var(--sw-border); text-align:center; border-radius:22px; padding:22px;">
-                <p style="color:#c5a868; font-size:11px; font-weight:bold; letter-spacing:2px; margin:0 0 5px;">TRAVEL PARTNER</p>
-                <h2 style="color:var(--sw-green); font-size:20px; margin:0 0 8px;">NAZYAN TRAVELS</h2>
-                <span style="font-size:13px; color:var(--sw-muted); display:block; line-height:1.7; margin-bottom:14px;">Flight Tickets • Tour Packages<br>Visa • Umrah • Certificate Attestation</span>
-                <a href="https://wa.me/919946010375" target="_blank" rel="noopener" style="display:inline-block; background:var(--sw-green); color:#fff; text-decoration:none; padding:10px 22px; border-radius:20px; font-size:13px; font-weight:bold;">WhatsApp Enquiry</a>
-            </section>
-        </main>
+/* DAILY COUNTER */ 
+const todayDate = getLocalDateString(); 
+let savedDate = localStorage.getItem("swalathCountDate"); 
+let count = Number(localStorage.getItem("swalathDailyCount") || 0); 
+if (savedDate !== todayDate) {
+    count = 0; 
+    localStorage.setItem("swalathCountDate", todayDate); 
+    localStorage.setItem("swalathDailyCount", "0"); 
+} 
+document.getElementById("count").textContent = count; 
 
-        <footer>
-            <p>© 2026 Swalath</p>
-            <p>Made with ❤️</p>
-        </footer>
-    </div>
+function increaseCount() {
+    count++; 
+    document.getElementById("count").textContent = count; 
+    localStorage.setItem("swalathDailyCount", String(count)); 
+    localStorage.setItem("swalathCountDate", getLocalDateString()); 
+} 
 
-    <script>
-        /* LOCAL DATE */
-        function getLocalDateString() {
-            const now = new Date();
-            return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
-        }
+/* SWALATH ARABIC NAMES */ 
+const swalathNames = {ibrahimiyya: "الصلاة الإبراهيمية", nariya: "الصلاة النارية / التفريجية", tunjina: "صلاة المنجية / التنجينا", fatih: "صلاة الفاتح", tibbiyya: "صلاة الطبية / درود الشفاء", nuraniyya: "الصلاة النورانية", saadah: "صلاة السعادة", kamaliyya: "صلاة الكمالية", dhatiyya: "صلاة الذاتية", jawharات: "جوهرة الكمال", taj: "درود تاج", faraj: "صلاة الفرج", bashair: "بشائر الخيرات", ahlam: "صلاة الأحلام", hulo: "صلاة الحلور", friday: "صلاة يوم الجمعة", mashishiyya: "الصلاة المشيشية", ummiyya: "الصلاة الأمية", shadhiliyya: "الصلاة الشاذلية", anwar: "صلاة الأنوار", yaqutat: "صلاة الياقوتة الحقائق" }; 
 
-        /* DAILY COUNTER */
-        const todayDate = getLocalDateString();
-        let savedDate = localStorage.getItem("swalathCountDate");
-        let count = Number(localStorage.getItem("swalathDailyCount") || 0);
-        if (savedDate !== todayDate) {
-            count = 0;
-            localStorage.setItem("swalathCountDate", todayDate);
-            localStorage.setItem("swalathDailyCount", "0");
-        }
-        document.getElementById("count").textContent = count;
+/* OPEN OTHER PAGES */ 
+function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; } 
+function openQuran() { window.location.href = "quran.html"; } 
+function openQuranMP3() { window.location.href = "quran-mp3.html"; } 
+function openQibla() { window.location.href = "qibla.html"; } 
+function openUmrah() { window.location.href = "umrah.html"; } 
+function openDua() { window.location.href = "dua.html"; } 
+function openDhikr() { window.location.href = "dhikr.html"; } 
+function openPrayerTime() { window.location.href = "prayer-time.html"; } 
 
-        function increaseCount() {
-            count++;
-            document.getElementById("count").textContent = count;
-            localStorage.setItem("swalathDailyCount", String(count));
-            localStorage.setItem("swalathCountDate", getLocalDateString());
-        }
+/* LANGUAGE SELECTOR LOGIC */ 
+let selectedLang = localStorage.getItem("swalath-language") || "ml"; 
+function openSwalathLanguageSelector() {
+    const screen = document.getElementById("languageScreen"); 
+    if (screen) {
+        screen.style.display = "flex"; 
+        highlightSelectedLanguage(selectedLang); 
+    } 
+} 
 
-        /* SWALATH ARABIC NAMES */
-        const swalathNames = {
-            ibrahimiyya: "الصلاة الإبراهيمية",
-            nariya: "الصلاة النارية / التفريجية",
-            tunjina: "صلاة المنجية / التنجينا",
-            fatih: "صلاة الفاتح",
-            tibbiyya: "صلاة الطبية / درود الشفاء",
-            nuraniyya: "الصلاة النورانية",
-            saadah: "صلاة السعادة",
-            kamaliyya: "صلاة الكمالية",
-            dhatiyya: "صلاة الذاتية",
-            jawharات: "جوهرة الكمال",
-            taj: "درود تاج",
-            faraj: "صلاة الفرج",
-            bashair: "بشائر الخيرات",
-            ahlam: "صلاة الأحلام",
-            hulo: "صلاة الحلور",
-            friday: "صلاة يوم الجمعة",
-            mashishiyya: "الصلاة المشيشية",
-            ummiyya: "الصلاة الأمية",
-            shadhiliyya: "الصلاة الشاذلية",
-            anwar: "صلاة الأنوار",
-            yaqutat: "صلاة الياقوتة الحقائق"
-        };
+function highlightSelectedLanguage(lang) {
+    document.querySelectorAll(".language-option").forEach(btn => {
+        if (btn.getAttribute("data-lang") === lang) {
+            btn.classList.add("selected"); 
+        } else {
+            btn.classList.remove("selected"); 
+        } 
+    }); 
+} 
 
-        /* OPEN OTHER PAGES */
-        function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; }
-        function openQuran() { window.location.href = "quran.html"; }
-        function openQuranMP3() { window.location.href = "quran-mp3.html"; }
-        function openQibla() { window.location.href = "qibla.html"; }
-        function openUmrah() { window.location.href = "umrah.html"; }
-        function openDua() { window.location.href = "dua.html"; }
-        function openDhikr() { window.location.href = "dhikr.html"; }
-        function openPrayerTime() { window.location.href = "prayer-time.html"; }
+document.querySelectorAll(".language-option").forEach(btn => {
+    btn.addEventListener("click", function() {
+        selectedLang = this.getAttribute("data-lang"); 
+        highlightSelectedLanguage(selectedLang); 
+    }); 
+}); 
 
-        /* LANGUAGE SELECTOR LOGIC */
-        let selectedLang = localStorage.getItem("swalath-language") || "ml";
+const continueBtn = document.getElementById("languageContinue"); 
+if (continueBtn) {
+    continueBtn.addEventListener("click", function() {
+        localStorage.setItem("swalath-language", selectedLang); 
+        const screen = document.getElementById("languageScreen"); 
+        if (screen) screen.style.display = "none"; 
+        document.dispatchEvent(new CustomEvent("swalath-language-changed", { detail: selectedLang })); 
+        if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
+            window.SwalathLanguage.apply(selectedLang); 
+        } else {
+            location.reload(); 
+        } 
+    }); 
+} 
 
-        function openSwalathLanguageSelector() {
-            const screen = document.getElementById("languageScreen");
-            if (screen) {
-                screen.style.display = "flex";
-                highlightSelectedLanguage(selectedLang);
-            }
-        }
+/* HOME VISIBILITY */ 
+function hideHomeElements() {
+    document.querySelector(".welcome").style.display = "none"; 
+    document.querySelector(".today").style.display = "none"; 
+    document.querySelector(".menu-grid").style.display = "none"; 
+    document.querySelector(".feature-buttons").style.display = "none"; 
+    document.getElementById("travelSection").style.display = "none"; 
+    const hijriCard = document.getElementById("hijriCard");
+    if (hijriCard) hijriCard.style.display = "none";
+} 
 
-        function highlightSelectedLanguage(lang) {
-            document.querySelectorAll(".language-option").forEach(btn => {
-                if (btn.getAttribute("data-lang") === lang) {
-                    btn.classList.add("selected");
-                } else {
-                    btn.classList.remove("selected");
-                }
-            });
-        }
+function showHomeElements() {
+    document.querySelector(".welcome").style.display = "block"; 
+    document.querySelector(".today").style.display = "block"; 
+    document.querySelector(".menu-grid").style.display = "grid"; 
+    document.querySelector(".feature-buttons").style.display = "flex"; 
+    document.getElementById("travelSection").style.display = "block"; 
+    const hijriCard = document.getElementById("hijriCard");
+    if (hijriCard) hijriCard.style.display = "block";
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "none"; 
+} 
 
-        document.querySelectorAll(".language-option").forEach(btn => {
-            btn.addEventListener("click", function() {
-                selectedLang = this.getAttribute("data-lang");
-                highlightSelectedLanguage(selectedLang);
-            });
-        });
+/* INTERNAL SECTION BACK NAVIGATION */ 
+let currentInternalSection = null; 
+function openInternalSection(sectionName) {
+    if (currentInternalSection === sectionName) return; 
+    history.pushState({ swalathInternalSection: sectionName }, "", window.location.href); 
+    currentInternalSection = sectionName; 
+} 
 
-        const continueBtn = document.getElementById("languageContinue");
-        if (continueBtn) {
-            continueBtn.addEventListener("click", function() {
-                localStorage.setItem("swalath-language", selectedLang);
-                const screen = document.getElementById("languageScreen");
-                if (screen) screen.style.display = "none";
-                
-                document.dispatchEvent(new CustomEvent("swalath-language-changed", { detail: selectedLang }));
-                
-                if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
-                    window.SwalathLanguage.apply(selectedLang);
-                } else {
-                    location.reload();
-                }
-            });
-        }
+function closeInternalSectionUI() {
+    currentInternalSection = null; 
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "none"; 
+    showHomeElements(); 
+    window.scrollTo(0, 0); 
+} 
 
-        /* HOME VISIBILITY */
-        function hideHomeElements() {
-            document.querySelector(".welcome").style.display = "none";
-            document.querySelector(".today").style.display = "none";
-            document.querySelector(".menu-grid").style.display = "none";
-            document.querySelector(".feature-buttons").style.display = "none";
-            document.getElementById("travelSection").style.display = "none";
-        }
-        function showHomeElements() {
-            document.querySelector(".welcome").style.display = "block";
-            document.querySelector(".today").style.display = "block";
-            document.querySelector(".menu-grid").style.display = "grid";
-            document.querySelector(".feature-buttons").style.display = "flex";
-            document.getElementById("travelSection").style.display = "block";
-            document.getElementById("collectionSection").style.display = "none";
-            document.getElementById("favoritesSection").style.display = "none";
-            document.getElementById("advertisingSection").style.display = "none";
-        }
+window.addEventListener("popstate", function(event) {
+    const sectionName = event.state && event.state.swalathInternalSection; 
+    if (sectionName) {
+        currentInternalSection = sectionName; 
+        hideHomeElements(); 
+        document.getElementById("collectionSection").style.display = sectionName === "collection" ? "block" : "none"; 
+        document.getElementById("favoritesSection").style.display = sectionName === "favorites" ? "block" : "none"; 
+        document.getElementById("advertisingSection").style.display = sectionName === "advertising" ? "block" : "none"; 
+        if (sectionName === "favorites") loadFavorites(); 
+        if (sectionName === "collection") loadCollection(); 
+        window.scrollTo(0, 0); 
+        return; 
+    } 
+    if (currentInternalSection) {
+        closeInternalSectionUI(); 
+    } 
+}); 
 
-        /* INTERNAL SECTION BACK NAVIGATION */
-        let currentInternalSection = null;
-        function openInternalSection(sectionName) {
-            if (currentInternalSection === sectionName) return;
-            history.pushState({ swalathInternalSection: sectionName }, "", window.location.href);
-            currentInternalSection = sectionName;
-        }
-        function closeInternalSectionUI() {
-            currentInternalSection = null;
-            document.getElementById("collectionSection").style.display = "none";
-            document.getElementById("favoritesSection").style.display = "none";
-            document.getElementById("advertisingSection").style.display = "none";
-            showHomeElements();
-            window.scrollTo(0, 0);
-        }
-        window.addEventListener("popstate", function(event) {
-            const sectionName = event.state && event.state.swalathInternalSection;
-            if (sectionName) {
-                currentInternalSection = sectionName;
-                hideHomeElements();
-                document.getElementById("collectionSection").style.display = sectionName === "collection" ? "block" : "none";
-                document.getElementById("favoritesSection").style.display = sectionName === "favorites" ? "block" : "none";
-                document.getElementById("advertisingSection").style.display = sectionName === "advertising" ? "block" : "none";
-                if (sectionName === "favorites") loadFavorites();
-                if (sectionName === "collection") loadCollection();
-                window.scrollTo(0, 0);
-                return;
-            }
-            if (currentInternalSection) {
-                closeInternalSectionUI();
-            }
-        });
+/* ADVERTISING PAGE */ 
+function openAdvertising() {
+    openInternalSection("advertising"); 
+    hideHomeElements(); 
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "block"; 
+    window.scrollTo(0, 0); 
+} 
 
-        /* ADVERTISING PAGE */
-        function openAdvertising() {
-            openInternalSection("advertising");
-            hideHomeElements();
-            document.getElementById("collectionSection").style.display = "none";
-            document.getElementById("favoritesSection").style.display = "none";
-            document.getElementById("advertisingSection").style.display = "block";
-            window.scrollTo(0, 0);
-        }
-        function closeAdvertising() {
-            if (currentInternalSection === "advertising" && history.state && history.state.swalathInternalSection === "advertising") {
-                history.back();
-                return;
-            }
-            closeInternalSectionUI();
-        }
+function closeAdvertising() {
+    if (currentInternalSection === "advertising" && history.state && history.state.swalathInternalSection === "advertising") {
+        history.back(); 
+        return; 
+    } 
+    closeInternalSectionUI(); 
+} 
 
-        /* COLLECTION */
-        function openCollection() {
-            openInternalSection("collection");
-            hideHomeElements();
-            document.getElementById("favoritesSection").style.display = "none";
-            document.getElementById("advertisingSection").style.display = "none";
-            document.getElementById("collectionSection").style.display = "block";
-            document.getElementById("searchSwalath").value = "";
-            loadCollection();
-            window.scrollTo(0, 0);
-        }
-        function closeCollection() {
-            if (currentInternalSection === "collection" && history.state && history.state.swalathInternalSection === "collection") {
-                history.back();
-                return;
-            }
-            closeInternalSectionUI();
-        }
-        function loadCollection() {
-            const list = document.getElementById("collectionList");
-            list.innerHTML = "";
-            Object.keys(swalathNames).forEach(function(key) {
-                const item = document.createElement("div");
-                item.className = "collection-item";
-                item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`;
-                item.dataset.name = swalathNames[key].toLowerCase();
-                item.textContent = swalathNames[key];
-                item.onclick = function() { window.location.href = "swalath.html#" + key; };
-                list.appendChild(item);
-            });
-        }
-        function searchSwalath() {
-            const input = document.getElementById("searchSwalath").value.toLowerCase().trim();
-            document.querySelectorAll(".collection-item").forEach(function(card) {
-                card.style.display = card.dataset.name.includes(input) ? "block" : "none";
-            });
-        }
+/* COLLECTION */ 
+function openCollection() {
+    openInternalSection("collection"); 
+    hideHomeElements(); 
+    document.getElementById("favoritesSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "none"; 
+    document.getElementById("collectionSection").style.display = "block"; 
+    document.getElementById("searchSwalath").value = ""; 
+    loadCollection(); 
+    window.scrollTo(0, 0); 
+} 
 
-        /* FAVOURITES */
-        function openFavorites() {
-            openInternalSection("favorites");
-            hideHomeElements();
-            document.getElementById("collectionSection").style.display = "none";
-            document.getElementById("advertisingSection").style.display = "none";
-            document.getElementById("favoritesSection").style.display = "block";
-            loadFavorites();
-            window.scrollTo(0, 0);
-        }
-        function closeFavorites() {
-            if (currentInternalSection === "favorites" && history.state && history.state.swalathInternalSection === "favorites") {
-                history.back();
-                return;
-            }
-            closeInternalSectionUI();
-        }
-        function loadFavorites() {
-            const list = document.getElementById("favoritesList");
-            list.innerHTML = "";
-            let favorites = [];
-            try {
-                favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]");
-                if (!Array.isArray(favorites)) favorites = [];
-            } catch (error) { favorites = []; }
+function closeCollection() {
+    if (currentInternalSection === "collection" && history.state && history.state.swalathInternalSection === "collection") {
+        history.back(); 
+        return; 
+    } 
+    closeInternalSectionUI(); 
+} 
 
-            if (favorites.length === 0) {
-                list.innerHTML = `<div style="text-align:center; padding:25px; color:#777; background:white; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.03); font-family:'Amiri', serif;">لا توجد مفضلات حتى الآن ❤️</div>`;
-                return;
-            }
-            favorites.forEach(function(key) {
-                const name = swalathNames[key];
-                if (!name) return;
-                const item = document.createElement("div");
-                item.className = "favorite-item";
-                item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`;
-                item.textContent = name;
-                item.onclick = function() { window.location.href = "swalath.html#" + key; };
-                list.appendChild(item);
-            });
-        }
+function loadCollection() {
+    const list = document.getElementById("collectionList"); 
+    list.innerHTML = ""; 
+    Object.keys(swalathNames).forEach(function(key) {
+        const item = document.createElement("div"); 
+        item.className = "collection-item"; 
+        item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
+        item.dataset.name = swalathNames[key].toLowerCase(); 
+        item.textContent = swalathNames[key]; 
+        item.onclick = function() { window.location.href = "swalath.html#" + key; }; 
+        list.appendChild(item); 
+    }); 
+} 
 
-        /* DARK MODE */
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            const enabled = document.body.classList.contains("dark-mode");
-            localStorage.setItem("swalathDarkMode", String(enabled));
-            updateDarkButton();
-        }
-        function updateDarkButton() {
-            const button = document.getElementById("darkModeButton");
-            if (!button) return;
-            const isDark = document.body.classList.contains("dark-mode");
-            const lang = localStorage.getItem("swalath-language") || "ml";
-            const labels = {
-                ml: { dark: "🌙 ഡാർക്ക് മോഡ്", light: "☀️ ലൈറ്റ് മോഡ്" },
-                en: { dark: "🌙 Dark Mode", light: "☀️ Light Mode" },
-                ar: { dark: "🌙 الوضع الداكن", light: "☀️ الوضع الفاتح" },
-                hi: { dark: "🌙 डार्क मोड", light: "☀️ लाइट मोड" },
-                ur: { dark: "🌙 ڈارک موڈ", light: "☀️ لائٹ موڈ" },
-                ta: { dark: "🌙 இருண்ட பயன்முறை", light: "☀️ ஒளி பயன்முறை" }
-            };
-            const text = labels[lang] || labels.ml;
-            button.textContent = isDark ? text.light : text.dark;
-        }
+function searchSwalath() {
+    const input = document.getElementById("searchSwalath").value.toLowerCase().trim(); 
+    document.querySelectorAll(".collection-item").forEach(function(card) {
+        card.style.display = card.dataset.name.includes(input) ? "block" : "none"; 
+    }); 
+} 
 
-        /* STARTUP */
-        window.addEventListener("load", function() {
-            const darkMode = localStorage.getItem("swalathDarkMode");
-            if (darkMode === "true") {
-                document.body.classList.add("dark-mode");
-            }
-            updateDarkButton();
-            const splash = document.getElementById("splashScreen");
-            window.setTimeout(function() { if (splash) splash.classList.add("hide"); }, 1800);
-        });
+/* FAVOURITES */ 
+function openFavorites() {
+    openInternalSection("favorites"); 
+    hideHomeElements(); 
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("advertisingSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "block"; 
+    loadFavorites(); 
+    window.scrollTo(0, 0); 
+} 
 
-        /* SERVICE WORKER */
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function() {
-                navigator.serviceWorker.register("./sw.js").catch(function(error) {
-                    console.log("Service worker registration failed:", error);
-                });
-            });
-        }
+function closeFavorites() {
+    if (currentInternalSection === "favorites" && history.state && history.state.swalathInternalSection === "favorites") {
+        history.back(); 
+        return; 
+    } 
+    closeInternalSectionUI(); 
+} 
 
-        /* ADHAN SOUND BRIDGE TRIGGER */
-        function triggerAdhanSound() {
-            try {
-                if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
-                    AndroidAdhan.playAdhan();
-                } else {
-                    let audio = new Audio('azan.mp3');
-                    audio.play().catch(e => console.log(e));
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    </script>
-</body>
+function loadFavorites() {
+    const list = document.getElementById("favoritesList"); 
+    list.innerHTML = ""; 
+    let favorites = []; 
+    try {
+        favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]"); 
+        if (!Array.isArray(favorites)) favorites = []; 
+    } catch (error) { 
+        favorites = []; 
+    } 
+    if (favorites.length === 0) {
+        list.innerHTML = `<div style="text-align:center; padding:25px; color:#777; background:white; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.03); font-family:'Amiri', serif;">لا توجد مفضلات حتى الآن ❤️</div>`; 
+        return; 
+    } 
+    favorites.forEach(function(key) {
+        const name = swalathNames[key]; 
+        if (!name) return; 
+        const item = document.createElement("div"); 
+        item.className = "favorite-item"; 
+        item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
+        item.textContent = name; 
+        item.onclick = function() { window.location.href = "swalath.html#" + key; }; 
+        list.appendChild(item); 
+    }); 
+} 
+
+/* DARK MODE (ALWAYS IN ENGLISH ACROSS ALL LANGUAGES) */ 
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode"); 
+    const enabled = document.body.classList.contains("dark-mode"); 
+    localStorage.setItem("swalathDarkMode", String(enabled)); 
+    updateDarkButton(); 
+} 
+
+function updateDarkButton() {
+    const button = document.getElementById("darkModeButton"); 
+    if (!button) return; 
+    const isDark = document.body.classList.contains("dark-mode"); 
+    button.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode"; 
+} 
+
+/* MULTILINGUAL SUPPORT FOR HIJRI CARD ON HOME PAGE */ 
+function applyHomeHijriCardLanguage() {
+    const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
+        ? window.SwalathLanguage.getCurrent() : "ml";
+
+    if (currentLang === "en") {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ Hijri Calendar & Special Days";
+        document.getElementById('hijriDateLabel').textContent = "Today's Hijri Date:";
+        document.getElementById('specialDaysHeading').textContent = "Upcoming Special Days:";
+        document.getElementById('ev1').textContent = "🌙 Ramadan 1: Approx. in 2 months";
+        document.getElementById('ev2').textContent = "🕋 Day of Arafah: Dhul-Hijjah 9";
+        document.getElementById('ev3').textContent = "🎉 Eid Day: Shawwal 1";
+    } 
+    else if (currentLang === "ar") {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ التقويم الهجري والأيام المباركة";
+        document.getElementById('hijriDateLabel').textContent = "التاريخ الهجري اليوم:";
+        document.getElementById('specialDaysHeading').textContent = "الأيام المميزة القادمة:";
+        document.getElementById('ev1').textContent = "🌙 رمضان ١: تقريباً بعد شهرين";
+        document.getElementById('ev2').textContent = "🕋 يوم عرفة: ٩ ذو الحجة";
+        document.getElementById('ev3').textContent = "🎉 عيد الفطر: ١ شوال";
+    }
+    else {
+        document.getElementById('hijriCardTitle').textContent = "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും";
+        document.getElementById('hijriDateLabel').textContent = "ഇന്നത്തെ ഹിജ്‌റ തീയതി:";
+        document.getElementById('specialDaysHeading').textContent = "പ്രധാനപ്പെട്ട അടുത്ത വിശേഷ ദിനങ്ങൾ:";
+        document.getElementById('ev1').textContent = "🌙 റമദാൻ 1: ഏകദേശം 2 മാസങ്ങൾക്ക് ശേഷം";
+        document.getElementById('ev2').textContent = "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9";
+        document.getElementById('ev3').textContent = "🎉 പെരുന്നാൾ: ശവ്വാൽ 1";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", applyHomeHijriCardLanguage);
+document.addEventListener("swalath-language-changed", applyHomeHijriCardLanguage);
+
+/* STARTUP */ 
+window.addEventListener("load", function() {
+    const darkMode = localStorage.getItem("swalathDarkMode"); 
+    if (darkMode === "true") {
+        document.body.classList.add("dark-mode"); 
+    } 
+    updateDarkButton(); 
+    const splash = document.getElementById("splashScreen"); 
+    window.setTimeout(function() { 
+        if (splash) splash.classList.add("hide"); 
+    }, 1800); 
+}); 
+
+/* SERVICE WORKER */ 
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("./sw.js").catch(function(error) {
+            console.log("Service worker registration failed:", error); 
+        }); 
+    }); 
+} 
+
+/* ADHAN SOUND BRIDGE TRIGGER */ 
+function triggerAdhanSound() {
+    try {
+        if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
+            AndroidAdhan.playAdhan(); 
+        } else {
+            let audio = new Audio('azan.mp3'); 
+            audio.play().catch(e => console.log(e)); 
+        } 
+    } catch (e) {
+        console.log(e); 
+    } 
+} 
+</script> 
+</body> 
 </html>
