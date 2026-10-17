@@ -446,6 +446,16 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
             <input type="checkbox" id="ishaAdhan" checked onchange="savePrayerPreference('Isha')">
         </label>
     </div>
+
+    <!-- പുതിയതായി ചേർത്ത ബാറ്ററി സെറ്റിങ്സ് ബട്ടണും വിശദീകരണവും (ഭാഷ മാറുന്നതനുസരിച്ച് മാറും) -->
+    <div style="margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; text-align: center;">
+        <button onclick="openBatterySettings()" style="background: transparent; border: 1px solid var(--green); color: var(--green); padding: 9px 14px; border-radius: 12px; font-size: 11px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s;">
+            <span id="batteryBtnText">⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
+        </button>
+        <div id="batteryDescText" style="font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.4;">
+            ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.
+        </div>
+    </div>
 </section>
 
 <section id="locationStatus" class="status" hidden></section>
@@ -570,6 +580,40 @@ function updateDates() {
 
     document.getElementById("updatedDate").textContent =
         now.toLocaleDateString("en-GB", {day:"2-digit",month:"short"});
+
+    updateBatteryText(currentLang);
+}
+
+// ഭാഷ മാറുന്നതനുസരിച്ച് ബാറ്ററി സെറ്റിങ്സ് ബട്ടൺ ടെക്സ്റ്റ് മാറ്റാൻ
+function updateBatteryText(lang) {
+    const btnText = document.getElementById("batteryBtnText");
+    const descText = document.getElementById("batteryDescText");
+    if (!btnText || !descText) return;
+
+    if (lang === "ar") {
+        btnText.textContent = "⚡ اضغط هنا لضمان عمل الأذان عند إيقاف تشغيل الهاتف";
+        descText.textContent = "قم بتفعيل هذا الخيار لضمان سماع الأذان في وقته حتى لو كان الهاتف مقفلاً.";
+    } else if (lang === "en") {
+        btnText.textContent = "⚡ Click here for reliable Adhan when phone is locked";
+        descText.textContent = "Enable this option to ensure Adhan plays on time even when the screen is off.";
+    } else {
+        // Malayalam (Default)
+        btnText.textContent = "⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക";
+        descText.textContent = "ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.";
+    }
+}
+
+// ആൻഡ്രോയിഡ് ആപ്പിലേക്ക് ബാറ്ററി സെറ്റിങ്സ് തുറക്കാൻ സിഗ്നൽ അയക്കുന്നു
+function openBatterySettings() {
+    try {
+        if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.openBatterySettings) {
+            AndroidAdhan.openBatterySettings();
+        } else {
+            alert("ഈ ഫീച്ചർ ആപ്പിൽ മാത്രമേ ലഭ്യമാകൂ.");
+        }
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function parseTime(value) {
@@ -602,9 +646,6 @@ function getNextPrayer(timings) {
     return mainPrayers[0];
 }
 
-// ----------------------------------------------------
-// പുതിയത്: ആൻഡ്രോയിഡ് AlarmManager-ലേക്ക് സമയം ഷെഡ്യൂൾ ചെയ്യാൻ
-// ----------------------------------------------------
 function scheduleAllPrayersAndroid(timings) {
     try {
         if (typeof AndroidAdhan === "undefined" || !AndroidAdhan.scheduleAdhanAlarm) return;
@@ -618,12 +659,11 @@ function scheduleAllPrayersAndroid(timings) {
             if (pMinutes === null) return;
 
             const isEnabled = localStorage.getItem("prayer_adhan_" + prayer.key);
-            if (isEnabled === "false") return; // ഈ വാങ്ക് ഓഫ് ആണെങ്കിൽ അലാറം വെക്കില്ല
+            if (isEnabled === "false") return;
 
             const hour = Math.floor(pMinutes / 60);
             const min = pMinutes % 60;
 
-            // ആൻഡ്രോയിഡ് ആപ്പിലെ AlarmManager ഫങ്ഷൻ കോൾ ചെയ്യുന്നു
             AndroidAdhan.scheduleAdhanAlarm(hour, min, prayer.key);
         });
     } catch (e) {
@@ -740,8 +780,6 @@ function renderPrayerTimes(data) {
     });
 
     checkAdhanTime(timings);
-    
-    // ടൈമിങ്സ് കിട്ടുമ്പോൾ തന്നെ ആൻഡ്രോയിഡ് അലാറം സെറ്റ് ചെയ്യുക
     scheduleAllPrayersAndroid(timings);
 }
 
@@ -813,14 +851,12 @@ async function fetchPrayerTimes(lat, lon) {
             throw new Error("Prayer times unavailable");
         }
 
-        // Cache successful timings for offline use
         localStorage.setItem(CACHE_TIMINGS_KEY, JSON.stringify(result.data));
 
         renderPrayerTimes(result.data);
         hideLocationStatus();
 
     } catch (error) {
-        // Fallback to cached timings if offline or error
         const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
         if (cachedTimings) {
             try {
@@ -937,7 +973,6 @@ checkNetworkStatus();
 loadPreferences();
 updateDates();
 
-// ലൊക്കേഷൻ കാഷെ ഉണ്ടെങ്കിൽ അത് പെട്ടെന്ന് ലോഡ് ചെയ്യുക, അല്ലെങ്കിൽ ഡിഫോൾട്ട് ലൊക്കേഷൻ സെറ്റ് ചെയ്ത് സമയം കാണിക്കുക
 const cached = loadCachedCoordinates();
 if (cached) {
     coordinates = cached;
@@ -958,7 +993,6 @@ if (cached) {
     document.getElementById("locationName").textContent = "Kerala, India";
 }
 
-// ബാക്ക്ഗ്രൗണ്ടിൽ പുതിയ ജിപിഎസ് ലൊക്കേഷൻ എടുക്കാൻ ശ്രമിക്കുക
 startLocation();
 
 setInterval(() => {
