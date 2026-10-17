@@ -1,226 +1,147 @@
 <!DOCTYPE html>
 <html lang="ml">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#123d34">
-<title>القرآن الكريم - Quran</title>
-<link rel="stylesheet" href="style.css">
-<style>
-:root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5;}
-body {background: var(--sw-bg); color: var(--sw-text); font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif; margin: 0; padding: 0; line-height: 1.65;}
-.app {width: 100%; max-width: 760px; min-height: 100vh; margin: 0 auto; background: var(--sw-bg); padding-bottom: 30px; box-shadow: 0 0 50px rgba(18,61,52,.08);}
-
-.header {background: linear-gradient(145deg, #0d3229, #15473d 65%, #1f5d4f); color: #fff9e9; padding: 20px 18px; text-align: center; border-radius: 0 0 24px 24px; box-shadow: 0 6px 20px rgba(13,50,41,.15); position: relative;}
-.back-btn {position: absolute; left: 18px; top: 22px; background: rgba(255,255,255,0.15); border: none; color: white; padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 13px;}
-.header h1 {margin: 0; font-family: 'Amiri', serif; font-size: 28px; color: #f5e2b3;}
-
-.content-container {padding: 18px;}
-
-/* EASY KHATAM CARD DESIGN */
-.khatam-card {background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 22px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06);}
-.khatam-card h3 {color: var(--sw-green); font-size: 17px; margin: 0 0 8px 0; font-family: 'Amiri', serif;}
-.khatam-card p {color: var(--sw-muted); font-size: 13px; margin: 0 0 14px 0; line-height: 1.7;}
-
-.target-box {background: #edf3eb; border: 1px dashed var(--sw-green); border-radius: 16px; padding: 14px; text-align: center; margin-bottom: 14px;}
-.target-box h4 {color: var(--sw-green); margin: 0 0 6px 0; font-size: 13px; font-weight: bold;}
-.target-box p {color: var(--sw-green); font-size: 16px; margin: 0; font-weight: 800;}
-
-.duration-select {width: 100%; padding: 11px 14px; border: 1px solid var(--sw-border); border-radius: 12px; background: var(--sw-card); color: var(--sw-text); font-size: 13px; font-weight: bold; margin-bottom: 14px; outline: none;}
-
-/* PROGRESS BAR */
-.progress-container {background: #e6dfd0; border-radius: 10px; height: 12px; width: 100%; overflow: hidden; margin-bottom: 10px;}
-.progress-bar {background: var(--sw-green); height: 100%; width: 0%; transition: width 0.4s ease;}
-.progress-text {display: flex; justify-content: space-between; font-size: 12px; color: var(--sw-muted); font-weight: bold; margin-bottom: 14px;}
-
-.khatam-btn {width: 100%; min-height: 46px; background: var(--sw-green); color: white; border: none; border-radius: 16px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(18,61,52,0.2); transition: transform 0.15s;}
-.khatam-btn:active {transform: scale(0.98);}
-
-.quran-links-grid {display: grid; grid-template-columns: 1fr; gap: 12px;}
-.quran-link-card {background: var(--sw-card); border: 1px solid var(--sw-border); border-radius: 18px; padding: 16px; text-decoration: none; color: var(--sw-text); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(18,61,52,0.03); transition: border-color 0.2s;}
-.quran-link-card:hover {border-color: var(--sw-gold);}
-.quran-link-card strong {color: var(--sw-green); font-size: 15px; font-family: 'Amiri', serif;}
-.quran-link-card span {color: var(--sw-muted); font-size: 13px;}
-
-body.dark-mode {background: #111; color: #eee;}
-body.dark-mode .app {background: #181818;}
-body.dark-mode .khatam-card, body.dark-mode .quran-link-card {background: #222; border-color: #444; color: #eee;}
-body.dark-mode .khatam-card h3, body.dark-mode .target-box h4, body.dark-mode .target-box p, body.dark-mode .quran-link-card strong {color: #f0deaf !important;}
-body.dark-mode .target-box {background: #1a2e28; border-color: #f0deaf;}
-body.dark-mode .duration-select {background: #222; color: #fff; border-color: #444;}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-<script src="language.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#123d34">
+    <title>ഖുർആൻ ഖത്മ് പ്ലാനർ - Quran Khatam Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: var(--sw-bg, #f8f8f4); color: var(--sw-text, #22352c); font-family: "Noto Sans Malayalam", sans-serif; margin: 0; padding: 15px; }
+        .quran-container { max-width: 700px; margin: 0 auto; }
+        .header-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .back-btn { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 12px; cursor: pointer; font-weight: 600; }
+        
+        /* KHTAM CARD DESIGN */
+        .khatam-card { background: #ffffff; border: 2px solid #ddc486; border-radius: 22px; padding: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); margin-bottom: 20px; }
+        .khatam-title { color: #123d34; font-size: 18px; margin: 0 0 10px 0; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+        .khatam-desc { color: #6a7971; font-size: 13px; margin: 0 0 15px 0; line-height: 1.6; }
+        
+        .duration-select-box { margin-bottom: 15px; }
+        .duration-select-box label { display: block; font-size: 12px; font-weight: bold; color: #123d34; margin-bottom: 5px; }
+        .duration-dropdown { width: 100%; padding: 12px; border: 1.5px solid #ddc486; border-radius: 12px; background: #fdfdfb; color: #123d34; font-size: 14px; font-weight: bold; outline: none; }
+        
+        .target-box { background: #edf3eb; border: 1.5px solid #123d34; border-radius: 16px; padding: 16px; text-align: center; margin-bottom: 15px; }
+        .target-box h4 { margin: 0 0 8px 0; color: #123d34; font-size: 14px; font-weight: 700; }
+        .target-box p { margin: 0; color: #123d34; font-size: 16px; font-weight: bold; }
+        
+        .progress-info { font-size: 13px; color: #6a7971; margin-bottom: 15px; line-height: 1.8; background: #f9f9f5; padding: 12px; border-radius: 12px; }
+        .progress-bar-container { width: 100%; background: #e0e0dc; border-radius: 10px; height: 10px; overflow: hidden; margin-top: 8px; }
+        .progress-bar-fill { background: #123d34; height: 100%; width: 0%; transition: width 0.3s ease; }
+        
+        .complete-btn { width: 100%; background: #123d34; color: white; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(18,61,52,0.2); transition: background 0.2s; }
+        .complete-btn:active { transform: scale(0.98); }
+        
+        body.dark-mode { background: #111; color: #eee; }
+        body.dark-mode .khatam-card { background: #222; border-color: #444; color: #eee; }
+        body.dark-mode .duration-dropdown { background: #333; color: #fff; border-color: #555; }
+        body.dark-mode .target-box { background: #1a2e28; border-color: #2b584b; }
+        body.dark-mode .target-box h4, body.dark-mode .target-box p { color: #f0deaf; }
+        body.dark-mode .progress-info { background: #2a2a2a; color: #ccc; }
+    </style>
 </head>
 <body>
 
-<div class="app">
-    <div class="header">
-        <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
-        <h1 data-i18n="quranDesc" data-ml="ഖുർആൻ">القرآن الكريم</h1>
+<div class="quran-container">
+    <div class="header-bar">
+        <button class="back-btn" onclick="history.back()">← Back</button>
+        <h2 style="margin:0; color: #123d34; font-family:'Amiri', serif;">القرآن الكريم (Quran Khatam Planner)</h2>
     </div>
 
-    <div class="content-container">
+    <!-- KHATAM SPECIAL CARD -->
+    <div class="khatam-card">
+        <div class="khatam-title">📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം</div>
+        <p class="khatam-desc">നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് മുടങ്ങാതെ ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.</p>
         
-        <!-- EASY KHATAM-UL-QURAN TRACKER CARD -->
-        <div class="khatam-card">
-            <h3 id="khatamTitle">📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം</h3>
-            <p id="khatamDesc">നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് മുടങ്ങാതെ ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.</p>
-            
-            <label style="font-size: 12px; font-weight: bold; color: var(--sw-muted); display: block; margin-bottom: 4px;">ഖത്മ് തീർക്കേണ്ട കാലാവധി (Duration):</label>
-            <select id="khatamDaysSelect" class="duration-select" onchange="updateKhatamPlan()">
+        <div class="duration-select-box">
+            <label>ഖത്മ് തീർക്കേണ്ട കാലാവധി (Duration):</label>
+            <select id="durationSelect" class="duration-dropdown" onchange="updateKhatamPlan()">
                 <option value="30">30 ദിവസം (ദിവസം ~20 പേജ് / 1 ജുസ്അ്)</option>
                 <option value="60">60 ദിവസം (ദിവസം ~10 പേജ്)</option>
                 <option value="90">90 ദിവസം (ദിവസം ~7 പേജ്)</option>
-                <option value="120">120 ദിവസം (ദിവസം ~5 പേജ്)</option>
+                <option value="120" selected>120 ദിവസം (ദിവസം ~5 പേജ്)</option>
             </select>
-
-            <!-- TODAY'S TARGET BOX -->
-            <div class="target-box">
-                <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target):</h4>
-                <p id="todayTargetText">പേജ് 1 മുതൽ 20 വരെ</p>
-            </div>
-
-            <!-- OVERALL PROGRESS BAR -->
-            <div class="progress-text">
-                <span>മൊത്തം ഖുർആൻ പുരോഗതി (Overall Progress):</span>
-                <span id="progressPercent">0%</span>
-            </div>
-            <div class="progress-container">
-                <div id="progressBar" class="progress-bar"></div>
-            </div>
-
-            <!-- LAST READ MEMORY & COMPLETE BUTTON -->
-            <p id="lastReadInfo" style="font-size: 12px; color: var(--sw-muted); margin-bottom: 14px; text-align: center; font-weight: 600;">ദിവസം 1 / 30 തീർന്നു</p>
-            <button id="markCompleteBtn" class="khatam-btn" onclick="markTodayCompleted()">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
         </div>
 
-        <!-- QURAN LINKS -->
-        <div class="quran-links-grid">
-            <a href="https://quran.com" target="_blank" rel="noopener" class="quran-link-card">
-                <div>
-                    <strong>Quran.com (Reading & Tafseer)</strong><br>
-                    <span>ഓൺലൈൻ ഖുർആൻ വായനയും തഫ്സീറും</span>
-                </div>
-                <span>📖</span>
-            </a>
-            <a href="https://qurancentral.com" target="_blank" rel="noopener" class="quran-link-card">
-                <div>
-                    <strong>Quran Audio & Recitation</strong><br>
-                    <span>വിവിധ ഖാരിാക്കളുടെ പാരായണം കേൾക്കാം</span>
-                </div>
-                <span>🎧</span>
-            </a>
+        <div class="target-box">
+            <h4>ഇന്നത്തെ ലക്ഷ്യം (Today's Target):</h4>
+            <p id="todayTargetText">പേജ് 1 മുതൽ 6 വരെ (ഇന്ന് ഓതേണ്ടത്)</p>
         </div>
 
+        <div class="progress-info">
+            <div>മൊത്തം ഖുർആൻ പുരോഗതി (Overall Progress): <strong id="progressPercent">0%</strong> പൂർത്തിയായി</div>
+            <div class="progress-bar-container">
+                <div id="progressBarFill" class="progress-bar-fill"></div>
+            </div>
+            <div style="margin-top: 8px;" id="statusText">നിങ്ങൾ അവസാനമായി നിർത്തിയത്: ദിവസം 1 / 120</div>
+        </div>
+
+        <button class="complete-btn" onclick="completeTodayTarget()">✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക</button>
     </div>
 </div>
 
+<script src="language.js"></script>
 <script>
-/* ADVANCED KHATAM-UL-QURAN LOGIC */
-const TOTAL_PAGES = 604; // Standard Madani Quran total pages
-
-function getSavedKhatamData() {
-    let data = localStorage.getItem("swalathKhatamDataAdvanced");
-    if (!data) {
-        return {
-            totalDays: 30,
-            completedDays: 0,
-            lastCompletedDate: ""
-        };
-    }
-    return JSON.parse(data);
-}
-
-function saveKhatamData(data) {
-    localStorage.setItem("swalathKhatamDataAdvanced", JSON.stringify(data));
-}
-
-function getLocalDateStr() {
-    const d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-}
+const TOTAL_PAGES = 604; // Quran total pages standard
+let khatamData = JSON.parse(localStorage.getItem("swalathKhatamData") || JSON.stringify({
+    duration: 120,
+    currentDay: 1,
+    completedDays: []
+}));
 
 function updateKhatamPlan() {
-    const select = document.getElementById("khatamDaysSelect");
-    let data = getSavedKhatamData();
-    data.totalDays = parseInt(select.value);
-    // Ensure completed days doesn't exceed total days if plan changes
-    if (data.completedDays > data.totalDays) {
-        data.completedDays = data.totalDays;
-    }
-    saveKhatamData(data);
-    renderKhatamUI();
+    const select = document.getElementById("durationSelect");
+    khatamData.duration = parseInt(select.value);
+    
+    // Reset or adjust if duration changed
+    saveData();
+    renderKhatam();
 }
 
-function renderKhatamUI() {
-    let data = getSavedKhatamData();
-    const select = document.getElementById("khatamDaysSelect");
-    select.value = data.totalDays;
-
-    let pagesPerDay = Math.ceil(TOTAL_PAGES / data.totalDays);
+function renderKhatam() {
+    document.getElementById("durationSelect").value = khatamData.duration;
+    const totalDays = khatamData.duration;
+    const pagesPerDay = Math.ceil(TOTAL_PAGES / totalDays);
     
-    // Current day user is on (completedDays + 1)
-    let currentDay = Math.min(data.completedDays + 1, data.totalDays);
-    if (data.completedDays >= data.totalDays) {
-        currentDay = data.totalDays; // Finished
-    }
+    let startPage = ((khatamData.currentDay - 1) * pagesPerDay) + 1;
+    let endPage = Math.min(khatamData.currentDay * pagesPerDay, TOTAL_PAGES);
 
-    let startPage = ((currentDay - 1) * pagesPerDay) + 1;
-    let endPage = Math.min(currentDay * pagesPerDay, TOTAL_PAGES);
-    if (startPage > TOTAL_PAGES) startPage = TOTAL_PAGES;
-
-    // Update Today's Target Text
-    if (data.completedDays >= data.totalDays) {
-        document.getElementById("todayTargetText").textContent = "🎉 അല്ലാഹുവின் അനുഗ്രഹത്താൽ ഖത്മ് പൂർത്തിയായി!";
+    if (startPage > TOTAL_PAGES) {
+        document.getElementById("todayTargetText").textContent = "അഭിനന്ദനങ്ങൾ! നിങ്ങൾ ഖുർആൻ ഖത്മ് പൂർത്തിയാക്കിയിരിക്കുന്നു 🎉";
     } else {
+        document.getElementById("todayTargetTextanalytical") = "";
         document.getElementById("todayTargetText").textContent = `പേജ് ${startPage} മുതൽ ${endPage} വരെ (ഇന്ന് ഓതേണ്ടത്)`;
     }
 
-    // Update Last Read / Progress Info
-    document.getElementById("lastReadInfo").textContent = `നിങ്ങൾ അവസാനമായി നിർത്തിയത് / നിലവിലെ ലക്ഷ്യം: ദിവസം ${currentDay} / ${data.totalDays} (~${pagesPerDay} പേജുകൾ വീതം)`;
-
-    // Calculate Overall Percentage from Total Quran Pages read
-    let totalPagesReadSoFar = Math.min(data.completedDays * pagesPerDay, TOTAL_PAGES);
-    let percent = Math.round((totalPagesReadSoFar / TOTAL_PAGES) * 100);
-    if (percent > 100) percent = 100;
-
-    document.getElementById("progressBar").style.width = percent + "%";
-    document.getElementById("progressPercent").textContent = percent + "% പൂർത്തിയായി";
-
-    // Button Status for Today
-    let todayStr = getLocalDateStr();
-    let btn = document.getElementById("markCompleteBtn");
-    if (data.lastCompletedDate === todayStr) {
-        btn.textContent = "✔ ഇന്നത്തെ ലക്ഷ്യം പൂർത്തിയായി!";
-        btn.style.background = "#6a7971";
-        btn.disabled = true;
-    } else if (data.completedDays >= data.totalDays) {
-        btn.textContent = "🎉 ഖത്മ് പൂർത്തിയായി!";
-        btn.style.background = "#c5a868";
-        btn.disabled = true;
-    } else {
-        btn.textContent = "✅ ഇന്നത്തെ ഭാഗം ഓതിതീർത്തു എന്ന് അടയാളപ്പെടുത്തുക";
-        btn.style.background = "var(--sw-green)";
-        btn.disabled = false;
-    }
+    const completedCount = khatamData.completedDays.length;
+    const progress = Math.min(Math.round((completedCount / totalDays) * 100), 100);
+    
+    document.getElementById("progressPercent").textContent = progress + "%";
+    document.getElementById("progressBarFill").style.width = progress + "%";
+    document.getElementById("statusText").textContent = `നിങ്ങൾ അവസാനമായി നിർത്തിയത് / നിലവിലെ ലക്ഷ്യം: ദിവസം ${khatamData.currentDay} / ${totalDays} (~${pagesPerDay} പേജുകൾ വീതം)`;
 }
 
-function markTodayCompleted() {
-    let data = getSavedKhatamData();
-    let todayStr = getLocalDateStr();
-    
-    if (data.lastCompletedDate !== todayStr && data.completedDays < data.totalDays) {
-        data.completedDays++;
-        data.lastCompletedDate = todayStr;
-        saveKhatamData(data);
-        renderKhatamUI();
+function completeTodayTarget() {
+    const totalDays = khatamData.duration;
+    if (!khatamData.completedDays.includes(khatamData.currentDay)) {
+        khatamData.completedDays.push(khatamData.currentDay);
     }
+    
+    if (khatamData.currentDay < totalDays) {
+        khatamData.currentDay++;
+    }
+    
+    saveData();
+    renderKhatam();
+    alert("അൽഹംദുലില്ലാഹ്! ഇന്നത്തെ ലക്ഷം വിജയകരമായി രേഖപ്പെടുത്തിയിരിക്കുന്നു. അടുത്ത ദിവസത്തെ പേജുകൾ അപ്‌ഡേറ്റ് ആയിട്ടുണ്ട്.");
+}
+
+function saveData() {
+    localStorage.setItem("swalathKhatamData", JSON.stringify(khatamData));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    renderKhatamUI();
-    
+    renderKhatam();
     if (localStorage.getItem("swalathDarkMode") === "true") {
         document.body.classList.add("dark-mode");
     }
