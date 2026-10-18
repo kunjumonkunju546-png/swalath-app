@@ -280,6 +280,10 @@ function openKhatamPlanner() {
     document.getElementById("surahView").style.display = "none";
     document.getElementById("targetView").style.display = "none";
     document.getElementById("plannerView").style.display = "block";
+    
+    // ഹിസ്റ്ററി സ്റ്റേറ്റ് ആഡ് ചെയ്യുന്നു
+    history.pushState({ page: "plannerView" }, "", "#planner");
+
     renderKhatam();
     window.scrollTo(0, 0);
 }
@@ -299,6 +303,9 @@ function openTodayTargetQuran() {
     document.getElementById("surahList").style.display = "none";
     document.getElementById("surahView").style.display = "none";
     document.getElementById("targetView").style.display = "block";
+
+    // ഹിസ്റ്ററി സ്റ്റേറ്റ് ആഡ് ചെയ്യുന്നു
+    history.pushState({ page: "targetView" }, "", "#target");
 
     const totalDays = khatamData.duration;
     const pagesPerDay = Math.ceil(TOTAL_PAGES / totalDays);
@@ -462,6 +469,10 @@ function showAllSurahs() {
     document.getElementById("surahView").style.display = "none"; 
     document.getElementById("targetView").style.display = "none";
     document.getElementById("surahList").style.display = "block"; 
+    
+    // ഹിസ്റ്ററി സ്റ്റേറ്റ് ആഡ് ചെയ്യുന്നു
+    history.pushState({ page: "surahList" }, "", "#surah-list");
+
     const container = document.getElementById("allSurahs"); 
     container.innerHTML = ""; 
     const lines = getQuranLines(); 
@@ -505,6 +516,10 @@ function openSurah(surahNumber) {
     document.getElementById("surahList").style.display = "none"; 
     document.getElementById("targetView").style.display = "none";
     document.getElementById("surahView").style.display = "block"; 
+    
+    // ഹിസ്റ്ററി സ്റ്റേറ്റ് ആഡ് ചെയ്യുന്നു
+    history.pushState({ page: "surahView", id: surahNumber }, "", "#surah");
+
     const content = document.getElementById("surahContent"); 
     content.innerHTML = ` <div class="loading">Loading Surah...</div> `; 
     const lines = getQuranLines(); 
@@ -579,12 +594,23 @@ function backToPrevious() {
 } 
 
 /* ========================= ANDROID / BROWSER BACK ========================= */ 
-window.addEventListener("popstate", function() {
+window.addEventListener("popstate", function(event) {
+    if (event.state && event.state.page) {
+        if (event.state.page === "surahView" || event.state.page === "targetView") {
+            backToPlanner();
+            return;
+        } else if (event.state.page === "surahList" || event.state.page === "plannerView") {
+            backToQuranHome();
+            return;
+        }
+    }
+    
+    // ഡിഫോൾട്ടായി ഹോം പേജിലേക്ക് അല്ലെങ്കിൽ മെയിൻ ഖുർആൻ പേജിലേക്ക് പോകും
     const surahView = document.getElementById("surahView"); 
     const targetView = document.getElementById("targetView"); 
     const surahList = document.getElementById("surahList"); 
     const plannerView = document.getElementById("plannerView");
-    const mainQuran = document.getElementById("mainQuran"); 
+    
     if (surahView.style.display === "block" || targetView.style.display === "block") {
         backToPlanner(); 
         return; 
