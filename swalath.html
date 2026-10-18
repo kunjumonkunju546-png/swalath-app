@@ -344,12 +344,18 @@ function showCollection(){
     currentSwalathForShare = null;
 }
 
-function goBack(){
-    // ഹാഷ് നീക്കം ചെയ്ത് ലിസ്റ്റ് പേജിലേക്ക് മടങ്ങുക
-    if(location.hash){
-        history.pushState({page:"collection"}, "", location.pathname + location.search);
+function goBack() {
+    if (location.hash && history.state &&
+        history.state.page === "swalath") {
+        history.back();
+    } else {
+        history.replaceState(
+            { page: "collection" },
+            "",
+            location.pathname + location.search
+        );
+        showCollection();
     }
-    showCollection();
 }
 
 function syncSwalathPage(){
@@ -368,28 +374,25 @@ function syncSwalathPage(){
     }
 }
 
-window.addEventListener("popstate", function(event){
+window.addEventListener("popstate", function () {
     let key = "";
-    try{
+
+    try {
         key = decodeURIComponent(location.hash.slice(1));
-    }catch(e){
+    } catch (e) {
         key = "";
     }
 
-    // യൂസർ ഏതെങ്കിലും സ്വലാത്ത് ഡീറ്റെയിൽ പേജിലാണെങ്കിൽ (ഹാഷ് ഉണ്ടെങ്കിൽ) ബാക്ക് അടിക്കുമ്പോൾ ലിസ്റ്റ് പേജിലേക്ക് വരിക
-    if(key && swalathData[key]){
+    if (key && swalathData[key]) {
         openSwalath(key, false);
     } else {
-        // ഹാഷ് ഒന്നും ഇല്ലെങ്കിൽ (അതായത് ലിസ്റ്റ് പേജിലാണ് നിൽക്കുന്നതെങ്കിൽ) ഹോം പേജിലേക്ക് പോവുക
         const detailPage = document.getElementById("detailPage");
+
         if (detailPage && detailPage.style.display === "block") {
             showCollection();
-        } else {
-            window.location.href = "index.html";
         }
     }
 });
-
 document.addEventListener("DOMContentLoaded", function(){
     syncSwalathPage();
 });
