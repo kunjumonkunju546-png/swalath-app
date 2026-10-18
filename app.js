@@ -6,7 +6,7 @@ function increaseCount() {
 }
 
 function showMessage(section) {
-    alert(section + " will be available soon, InshaAllah.");
+    // അനാവശ്യമായ പോപ്-അപ്പ് ഒഴിവാക്കാൻ ഇത് ഒഴിവാക്കിയിരിക്കുന്നു
 }
 
 function searchSwalath() {
