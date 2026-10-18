@@ -134,7 +134,7 @@ main { padding: 0 18px; }
             <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button> 
         </div> 
 
-        <!-- MENU GRID (WITH PREMIUM HIJRI CALENDAR CARD INCLUDED) -->
+        <!-- MENU GRID -->
         <div class="menu-grid"> 
             <div class="menu-card" onclick="openQuran()"> 
                 <div style="font-size:30px;">📖</div> 
@@ -148,13 +148,10 @@ main { padding: 0 18px; }
                 <div style="font-size:30px;">🎧</div> 
                 <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong> <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span> 
             </div> 
-            
-            <!-- HIJRI CALENDAR CARD ADDED HERE ALONG WITH OTHER CARDS -->
             <div class="menu-card" onclick="openCalendar()"> 
                 <div style="font-size:30px;">🗓️</div> 
                 <strong>التقويم الهجري</strong> <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span> 
             </div> 
-
             <div class="menu-card" onclick="openPrayerTime()"> 
                 <div style="font-size:30px;">🕐</div> 
                 <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong> <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span> 
@@ -290,33 +287,13 @@ const swalathNames = {ibrahimiyya: "الصلاة الإبراهيمية", nariya
 function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; } 
 function openQuran() { window.location.href = "quran.html"; } 
 function openQuranMP3() { window.location.href = "quran-mp3.html"; } 
-function openCalendar() { window.location.href = "calendar.html"; }  /* Direct navigation to full calendar page without dialogs */
+function openCalendar() { window.location.href = "calendar.html"; } 
 function openUmrah() { window.location.href = "umrah.html"; } 
 function openDua() { window.location.href = "dua.html"; } 
 function openDhikr() { window.location.href = "dhikr.html"; } 
 function openPrayerTime() { window.location.href = "prayer-time.html"; } 
 
-/* HOME VISIBILITY */ 
-function hideHomeElements() {
-    document.querySelector(".welcome").style.display = "none"; 
-    document.querySelector(".today-card").style.display = "none"; 
-    document.querySelector(".menu-grid").style.display = "none"; 
-    document.querySelector(".feature-buttons").style.display = "none"; 
-    document.getElementById("travelSection").style.display = "none"; 
-} 
-
-function showHomeElements() {
-    document.querySelector(".welcome").style.display = "block"; 
-    document.querySelector(".today-card").style.display = "block"; 
-    document.querySelector(".menu-grid").style.display = "grid"; 
-    document.querySelector(".feature-buttons").style.display = "flex"; 
-    document.getElementById("travelSection").style.display = "block"; 
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("advertisingSection").style.display = "none"; 
-} 
-
-/* INTERNAL SECTION BACK NAVIGATION (Optimized without lag) */ 
+/* CLEAN HOME VISIBILITY & NAVIGATION (Optimized without lag) */ 
 let currentInternalSection = null; 
 
 function hideHomeElements() {
@@ -336,13 +313,14 @@ function showHomeElements() {
     document.getElementById("collectionSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "none"; 
     document.getElementById("advertisingSection").style.display = "none"; 
+    currentInternalSection = null;
 } 
 
 /* ADVERTISING PAGE */ 
 function openAdvertising() {
+    currentInternalSection = "advertising";
+    history.pushState({ section: "advertising" }, "");
     hideHomeElements(); 
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("favoritesSection").style.display = "none"; 
     document.getElementById("advertisingSection").style.display = "block"; 
     window.scrollTo(0, 0); 
 } 
@@ -354,9 +332,9 @@ function closeAdvertising() {
 
 /* COLLECTION */ 
 function openCollection() {
+    currentInternalSection = "collection";
+    history.pushState({ section: "collection" }, "");
     hideHomeElements(); 
-    document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("collectionSection").style.display = "block"; 
     document.getElementById("searchSwalath").value = ""; 
     loadCollection(); 
@@ -370,9 +348,9 @@ function closeCollection() {
 
 /* FAVOURITES */ 
 function openFavorites() {
+    currentInternalSection = "favorites";
+    history.pushState({ section: "favorites" }, "");
     hideHomeElements(); 
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("advertisingSection").style.display = "none"; 
     document.getElementById("favoritesSection").style.display = "block"; 
     loadFavorites(); 
     window.scrollTo(0, 0); 
@@ -382,6 +360,35 @@ function closeFavorites() {
     showHomeElements();
     window.scrollTo(0, 0); 
 }
+
+/* BROWSER BACK BUTTON SUPPORT */
+window.addEventListener("popstate", function() {
+    if (currentInternalSection) {
+        showHomeElements();
+    }
+});
+
+function loadCollection() {
+    const list = document.getElementById("collectionList"); 
+    list.innerHTML = ""; 
+    Object.keys(swalathNames).forEach(function(key) {
+        const item = document.createElement("div"); 
+        item.className = "collection-item"; 
+        item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
+        item.dataset.name = swalathNames[key].toLowerCase(); 
+        item.textContent = swalathNames[key]; 
+        item.onclick = function() { window.location.href = "swalath.html#" + key; }; 
+        list.appendChild(item); 
+    }); 
+} 
+
+function searchSwalath() {
+    const input = document.getElementById("searchSwalath").value.toLowerCase().trim(); 
+    document.querySelectorAll(".collection-item").forEach(function(card) {
+        card.style.display = card.dataset.name.includes(input) ? "block" : "none"; 
+    }); 
+} 
+
 function loadFavorites() {
     const list = document.getElementById("favoritesList"); 
     list.innerHTML = ""; 
@@ -444,7 +451,8 @@ if ("serviceWorker" in navigator) {
         }); 
     }); 
 } 
-    /* LANGUAGE SELECTOR HANDLERS */
+
+/* LANGUAGE SELECTOR HANDLERS */
 function openSwalathLanguageSelector() {
     const screen = document.getElementById("languageScreen");
     if (screen) screen.style.display = "flex";
