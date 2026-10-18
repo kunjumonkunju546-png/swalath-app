@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="ml" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ഹിജ്‌റ കലണ്ടർ - Swalath App</title>
-  <!-- നിങ്ങളുടെ ആപ്പിലെ മെയിൻ CSS ഫയൽ ലിങ്ക് ചെയ്യുക -->
+  <title>التقويم الهجري - Swalath App</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
       background-color: #f4f7f6;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Amiri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 15px;
     }
@@ -30,184 +29,142 @@
 </head>
 <body>
 
-  <!-- Back Button to Return Home -->
-  <button class="back-btn" onclick="window.location.href='index.html'">⬅ തിരികെ (Back)</button>
+  <!-- Back Button -->
+  <button class="back-btn" onclick="window.location.href='index.html'">⬅ [Back] തിരികെ</button>
 
-  <!-- COMPLETE FULL FUNCTIONAL HIJRI CALENDAR & RAMADAN COUNTER CARD -->
-  <div class="khatam-card" id="hijriCard" style="background: linear-gradient(135deg, #ffffff 0%, #f7f9f6 100%); border: 2px solid #ddc486; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(18,61,52,0.08);">
+  <!-- HIJRI CALENDAR CARD -->
+  <div class="khatam-card" style="background: linear-gradient(135deg, #ffffff 0%, #f7f9f6 100%); border: 2px solid #ddc486; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(18,61,52,0.08);">
     
     <!-- Header -->
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #e6dfd0; padding-bottom: 10px;">
-      <h3 id="hijriCardTitle" style="color: #123d34; font-size: 17px; margin: 0; font-weight: 700;">🗓️ പൂർണ്ണ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</h3>
-      <span style="background: #123d34; color: #ddc486; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: bold;" id="hijriBadge">Islamic Calendar</span>
+      <h3 style="color: #123d34; font-size: 18px; margin: 0; font-weight: 700;">🗓️ التقويم الهجري المبارك</h3>
+      <span style="background: #123d34; color: #ddc486; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: bold;">التقويم الإسلامي</span>
     </div>
 
     <!-- Ramadan Countdown Section -->
-    <div style="background: #123d34; color: #fff; border-radius: 14px; padding: 12px; text-align: center; margin-bottom: 15px;">
-      <p style="margin: 0 0 5px 0; font-size: 12px; color: #ddc486; font-weight: 600;" id="countdownLabel">🌙 റമദാനിലേക്കുള്ള കൗണ്ട്ഡൗൺ:</p>
-      <div id="ramadanCountdownTimer" style="font-size: 14px; font-weight: bold; letter-spacing: 0.5px;">ലോഡ് ചെയ്യുന്നു...</div>
+    <div style="background: #123d34; color: #fff; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(18,61,52,0.15);">
+      <p style="margin: 0 0 6px 0; font-size: 13px; color: #ddc486; font-weight: 600;">🌙 العد التنازلي لشهر رمضان المبارك:</p>
+      <div id="ramadanCountdownTimer" style="font-size: 15px; font-weight: bold; letter-spacing: 0.5px; color: #fff;">جاري التحميل...</div>
     </div>
 
-    <!-- Date Display Box & Month Navigation -->
-    <div class="target-box" style="background: #edf3eb; border: 1.5px solid #123d34; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 15px; box-shadow: inset 0 2px 5px rgba(18,61,52,0.03);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <button onclick="changeMonth(-1)" style="background: #123d34; color: #ddc486; border: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; font-weight: bold;">◀</button>
-        <h4 id="currentHijriMonthYear" style="color: #123d34; margin: 0; font-size: 15px; font-weight: bold;">ലോഡ് ചെയ്യുന്നു...</h4>
-        <button onclick="changeMonth(1)" style="background: #123d34; color: #ddc486; border: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; font-weight: bold;">▶</button>
+    <!-- Month Navigation -->
+    <div style="background: #edf3eb; border: 1.5px solid #123d34; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 15px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <button onclick="changeHijriMonth(-1)" style="background: #123d34; color: #ddc486; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">▶</button>
+        <h4 id="hijriMonthYearTitle" style="color: #123d34; margin: 0; font-size: 16px; font-weight: bold;">جاري التحميل...</h4>
+        <button onclick="changeHijriMonth(1)" style="background: #123d34; color: #ddc486; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">◀</button>
       </div>
-      <p id="currentEnglishText" style="font-size: 12px; color: #555; margin: 0; font-weight: 500;"></p>
+      <p id="gregorianEquivalentText" style="font-size: 12px; color: #555; margin: 0; font-weight: 500;"></p>
     </div>
 
-    <!-- Full Monthly Days Grid -->
+    <!-- Days Grid Header (Arabic Weekdays) -->
     <div style="margin-bottom: 15px;">
-      <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 11px; font-weight: bold; color: #123d34; margin-bottom: 6px;" id="weekDaysHeader">
-        <span>ഞായർ</span><span>തിങ്കൾ</span><span>ചൊവ്വ</span><span>ബുധൻ</span><span>വ്യാഴം</span><span>വെള്ളി</span><span>ശനി</span>
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 12px; font-weight: bold; color: #123d34; margin-bottom: 6px;">
+        <span>الأحد</span><span>الإثنين</span><span>الثلاثاء</span><span>الأربعاء</span><span>الخميس</span><span>الجمعة</span><span>السبت</span>
       </div>
-      <div id="calendarDaysGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px;"></div>
+      <div id="hijriDaysGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-size: 13px;"></div>
     </div>
 
     <!-- Special Days Section -->
     <div style="font-size: 13px;">
-      <strong id="specialDaysHeading" style="color: #123d34; display: block; margin-bottom: 8px; font-weight: 600;">പ്രധാനപ്പെട്ട വിശേഷ ദിനങ്ങൾ (Special Days):</strong>
+      <strong style="color: #123d34; display: block; margin-bottom: 8px; font-weight: 600;">الأيام المباركة والمناسبات:</strong>
       <div style="background: #fffdf8; padding: 12px; border-radius: 12px; border: 1.5px dashed #ddc486; line-height: 1.6; color: #333;">
-        <p id="ev1" style="margin: 4px 0;">🌙 <span style="font-weight: 600;">റമദാൻ 1:</span> വരാനിരിക്കുന്നു</p>
-        <p id="ev2" style="margin: 4px 0;">🕋 <span style="font-weight: 600;">അറഫാ ദിനം:</span> ദുൽഹിജ്ജ 9</p>
-        <p id="ev3" style="margin: 4px 0;">🎉 <span style="font-weight: 600;">പെരുന്നാൾ:</span> ശവ്വാൽ 1</p>
-        <p id="ev4" style="margin: 4px 0;">✨ <span style="font-weight: 600;">ആശൂറ ദിനം:</span> മുഹറം 10</p>
-        <p id="ev5" style="margin: 4px 0;">🌟 <span style="font-weight: 600;">ബറാഅത്ത് രാവ്:</span> ശഅ്ബാൻ 15</p>
+        <p style="margin: 4px 0;">🌙 <b>رمضان ١:</b> بداية الشهر الفضيل</p>
+        <p style="margin: 4px 0;">🕋 <b>يوم عرفة:</b> ٩ ذو الحجة</p>
+        <p style="margin: 4px 0;">🎉 <b>عيد الفطر:</b> ١ شوال</p>
+        <p style="margin: 4px 0;">✨ <b>عاشوراء:</b> ١٠ محرم</p>
+        <p style="margin: 4px 0;">🌟 <b>ليلة البراءة:</b> ١٥ شعبان</p>
       </div>
     </div>
   </div>
 
   <script>
-    let offsetMonth = 0;
-    const weekDaysData = {
-      ml: ['ഞായർ', 'തിങ്കൾ', 'ചൊവ്വ', 'ബുധൻ', 'വ്യാഴം', 'വെള്ളി', 'ശനി'],
-      en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      ar: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
-    };
+    let hijriMonthOffset = 0;
 
-    function renderFullCalendar() {
-      const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() 
-        : (localStorage.getItem('swalath_lang') || 'ml');
+    function renderHijriCalendar() {
+      const now = new Date();
+      now.setMonth(now.getMonth() + hijriMonthOffset);
 
-      const targetDate = new Date();
-      targetDate.setMonth(targetDate.getMonth() + offsetMonth);
-
-      const engOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-      const engLocale = currentLang === 'ar' ? 'ar-SA' : (currentLang === 'en' ? 'en-US' : 'ml-IN');
-      document.getElementById('currentEnglishText').textContent = targetDate.toLocaleDateString(engLocale, engOptions);
-
+      // Format Hijri Date using Umm al-Qura calendar
       try {
-        const hijriFormatter = new Intl.DateTimeFormat(
-          currentLang === 'ar' ? 'ar-SA-u-ca-islamic' : (currentLang === 'en' ? 'en-US-u-ca-islamic' : 'ar-SA-u-ca-islamic-umalqura'), 
-          { day: 'numeric', month: 'long', year: 'numeric' }
-        );
-        document.getElementById('currentHijriMonthYear').textContent = hijriFormatter.format(targetDate);
+        const hijriFormatter = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+        document.getElementById('hijriMonthYearTitle').textContent = hijriFormatter.format(now);
       } catch (e) {
-        document.getElementById('currentHijriMonthYear').textContent = "1448 ഹിജ്‌റ";
+        document.getElementById('hijriMonthYearTitle').textContent = "رَمَضَان 1447 هـ";
       }
 
-      const headerContainer = document.getElementById('weekDaysHeader');
-      headerContainer.innerHTML = '';
-      const daysList = weekDaysData[currentLang] || weekDaysData['ml'];
-      daysList.forEach(day => {
-        const span = document.createElement('span');
-        span.textContent = day;
-        headerContainer.appendChild(span);
-      });
+      // Gregorian equivalent text
+      const gregFormatter = new Intl.DateTimeFormat('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('gregorianEquivalentText').textContent = "الموافق: " + gregFormatter.format(now);
 
-      const grid = document.getElementById('calendarDaysGrid');
+      // Render 30 Hijri Days Grid
+      const grid = document.getElementById('hijriDaysGrid');
       grid.innerHTML = '';
+
+      // Get current day for highlighting if in current month
+      const todayHijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', { day: 'numeric' }).format(new Date());
+      
       for (let i = 1; i <= 30; i++) {
         const dayBox = document.createElement('div');
         dayBox.textContent = i;
-        dayBox.style.padding = '6px 0';
-        dayBox.style.borderRadius = '6px';
-        dayBox.style.background = i === 15 ? '#123d34' : '#f7f9f6';
-        dayBox.style.color = i === 15 ? '#ddc486' : '#333';
-        dayBox.style.fontWeight = i === 15 ? 'bold' : 'normal';
+        dayBox.style.padding = '8px 0';
+        dayBox.style.borderRadius = '8px';
+        
+        // Highlight today if offset is 0 and day matches
+        if (hijriMonthOffset === 0 && parseInt(todayHijri) === i) {
+          dayBox.style.background = '#123d34';
+          dayBox.style.color = '#ddc486';
+          dayBox.style.fontWeight = 'bold';
+        } else {
+          dayBox.style.background = '#f7f9f6';
+          dayBox.style.color = '#333';
+          dayBox.style.fontWeight = '500';
+        }
         grid.appendChild(dayBox);
       }
-
-      if (currentLang === "en") {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ Full Hijri Calendar & Special Days";
-        document.getElementById('hijriBadge').textContent = "Islamic Calendar";
-        document.getElementById('countdownLabel').textContent = "🌙 Countdown to Ramadan:";
-        document.getElementById('specialDaysHeading').textContent = "Upcoming Special Days:";
-        document.getElementById('ev1').innerHTML = "🌙 <b>Ramadan 1:</b> Upcoming";
-        document.getElementById('ev2').innerHTML = "🕋 <b>Day of Arafah:</b> Dhul-Hijjah 9";
-        document.getElementById('ev3').innerHTML = "🎉 <b>Eid Al-Fitr:</b> Shawwal 1";
-        document.getElementById('ev4').innerHTML = "✨ <b>Ashura:</b> Muharram 10";
-        document.getElementById('ev5').innerHTML = "🌟 <b>Laylat al-Bara'at:</b> Sha'ban 15";
-      } else if (currentLang === "ar") {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ التقويم الهجري الكامل والأيام المباركة";
-        document.getElementById('hijriBadge').textContent = "التقويم الإسلامي";
-        document.getElementById('countdownLabel').textContent = "🌙 العد التنازلي لرمضان:";
-        document.getElementById('specialDaysHeading').textContent = "الأيام المميزة:";
-        document.getElementById('ev1').innerHTML = "🌙 <b>رمضان ١:</b> قريباً";
-        document.getElementById('ev2').innerHTML = "🕋 <b>يوم عرفة:</b> ٩ ذو الحجة";
-        document.getElementById('ev3').innerHTML = "🎉 <b>عيد الفطر:</b> ١ شوال";
-        document.getElementById('ev4').innerHTML = "✨ <b>عاشوراء:</b> ١٠ محرم";
-        document.getElementById('ev5').innerHTML = "🌟 <b>ليلة البراءة:</b> ١٥ شعبان";
-      } else {
-        document.getElementById('hijriCardTitle').textContent = "🗓️ പൂർണ്ണ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും";
-        document.getElementById('hijriBadge').textContent = "ഇസ്ലാമിക് കലണ്ടർ";
-        document.getElementById('countdownLabel').textContent = "🌙 റമദാനിലേക്കുള്ള കൗണ്ട്ഡൗൺ:";
-        document.getElementById('specialDaysHeading').textContent = "പ്രധാനപ്പെട്ട വിശേഷ ദിനങ്ങൾ:";
-        document.getElementById('ev1').innerHTML = "🌙 <b>റമദാൻ 1:</b> വരാനിരിക്കുന്നു";
-        document.getElementById('ev2').innerHTML = "🕋 <b>അറഫാ ദിനം:</b> ദുൽഹിജ്ജ 9";
-        document.getElementById('ev3').innerHTML = "🎉 <b>പെരുന്നാൾ (ഈദുൽ ഫിത്ർ):</b> ശവ്വാൽ 1";
-        document.getElementById('ev4').innerHTML = "✨ <b>ആശൂറ ദിനം:</b> മുഹറം 10";
-        document.getElementById('ev5').innerHTML = "🌟 <b>ബറാഅത്ത് രാവ്:</b> ശഅ്ബാൻ 15";
-      }
     }
 
-    function changeMonth(direction) {
-      offsetMonth += direction;
-      renderFullCalendar();
+    function changeHijriMonth(direction) {
+      hijriMonthOffset += direction;
+      renderHijriCalendar();
     }
 
+    // Accurate Ramadan Countdown Calculation (1st Ramadan 1447/1448 approx or calculated)
     function updateRamadanCountdown() {
-      const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() 
-        : (localStorage.getItem('swalath_lang') || 'ml');
-
-      const ramadanDate = new Date('March 1, 2025 00:00:00');
+      // Target upcoming Ramadan date (e.g., February/March 2025/2026 UTC target)
+      // Setting target dynamically or to the next upcoming Ramadan
+      const ramadanTarget = new Date('February 18, 2026 00:00:00'); 
       const now = new Date();
-      const diff = ramadanDate - now;
+      
+      // If past 2026 Ramadan, target next year's Ramadan
+      if (now > ramadanTarget) {
+        ramadanTarget.setFullYear(ramadanTarget.getFullYear() + 1);
+      }
+
+      const diff = ramadanTarget - now;
 
       if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        
-        if (currentLang === 'en') {
-          document.getElementById('ramadanCountdownTimer').textContent = `${days} Days, ${hours} Hours, ${minutes} Minutes`;
-        } else if (currentLang === 'ar') {
-          document.getElementById('ramadanCountdownTimer').textContent = `${days} يوم، ${hours} ساعة، ${minutes} دقيقة`;
-        } else {
-          document.getElementById('ramadanCountdownTimer').textContent = `${days} ദിവസം, ${hours} മണിക്കൂർ, ${minutes} മിനിറ്റ്`;
-        }
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('ramadanCountdownTimer').textContent = 
+          `${days} يوماً, ${hours} ساعة, ${minutes} دقيقة, ${seconds} ثانية`;
       } else {
-        if (currentLang === 'en') {
-          document.getElementById('ramadanCountdownTimer').textContent = "Ramadan has arrived!";
-        } else if (currentLang === 'ar') {
-          document.getElementById('ramadanCountdownTimer').textContent = "قد حل شهر رمضان المبارك!";
-        } else {
-          document.getElementById('ramadanCountdownTimer').textContent = "റമദാൻ സമാഗതമായി!";
-        }
+        document.getElementById('ramadanCountdownTimer').textContent = "🎉 قد حل شهر رمضان المبارك!";
       }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      renderFullCalendar();
+      renderHijriCalendar();
       updateRamadanCountdown();
-      setInterval(updateRamadanCountdown, 60000);
+      setInterval(updateRamadanCountdown, 1000); // Update every second for live countdown
     });
-
-    document.addEventListener("swalath-language-changed", renderFullCalendar);
   </script>
 </body>
 </html>
