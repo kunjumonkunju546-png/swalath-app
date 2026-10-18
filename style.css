@@ -385,3 +385,18 @@ body.dark-mode #currentHijriText,
 body.dark-mode #currentEnglishText {
     color: #fff !important;
 }
+/* ഖുർആൻ വായനയ്ക്കുള്ള സെപിയ (Sepia) തീം */
+.quran-container {
+    background-color: #fbf0d9 !important; /* ഇളം സെപിയ ക്രീം പശ്ചാത്തലം */
+    color: #2c221e !important;            /* കണ്ണിന് അനുയോജ്യമായ ഡാർക്ക് ബ്രൗൺ/കറുപ്പ് ടെക്സ്റ്റ് */
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.quran-text {
+    font-family: 'Amiri', 'Traditional Arabic', serif;
+    font-size: 24px;
+    line-height: 2.6;
+    direction: rtl;
+    text-align: right;
+}
