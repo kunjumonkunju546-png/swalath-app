@@ -362,11 +362,53 @@ function closeFavorites() {
 }
 
 /* BROWSER BACK BUTTON SUPPORT */
-window.addEventListener("popstate", function() {
-    if (currentInternalSection) {
+window.addEventListener("popstate", function(event) {
+
+    const section = event.state && event.state.section;
+
+    if (section === "collection") {
+
+        hideHomeElements();
+
+        document.getElementById("collectionSection").style.display = "block";
+        document.getElementById("favoritesSection").style.display = "none";
+        document.getElementById("advertisingSection").style.display = "none";
+
+        currentInternalSection = "collection";
+
+        if (!document.getElementById("collectionList").children.length) {
+            loadCollection();
+        }
+
+    } else if (section === "favorites") {
+
+        hideHomeElements();
+
+        document.getElementById("collectionSection").style.display = "none";
+        document.getElementById("favoritesSection").style.display = "block";
+        document.getElementById("advertisingSection").style.display = "none";
+
+        currentInternalSection = "favorites";
+        loadFavorites();
+
+    } else if (section === "advertising") {
+
+        hideHomeElements();
+
+        document.getElementById("collectionSection").style.display = "none";
+        document.getElementById("favoritesSection").style.display = "none";
+        document.getElementById("advertisingSection").style.display = "block";
+
+        currentInternalSection = "advertising";
+
+    } else {
+
         showHomeElements();
-        window.scrollTo(0, 0);
+
     }
+
+    window.scrollTo(0, 0);
+
 });
 
 function loadCollection() {
