@@ -900,8 +900,9 @@ window.addEventListener(
             document.body.classList.add("dark");
         }
 
+        // 👇 ഈ കോഡാണ് പേജ് ലോഡ് ആകുമ്പോൾ ലാംഗ്വേജ് അപ്ഡേറ്റ് ചെയ്യുന്നത്
         if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
-            window.SwalathLanguage.apply();
+            window.SwalathLanguage.apply(window.SwalathLanguage.getCurrent());
         }
         updateDuaPageLanguage();
     }
@@ -910,7 +911,7 @@ window.addEventListener(
 // ലാംഗ്വേജ് മാറുമ്പോൾ പേജ് ഓട്ടോമാറ്റിക്കായി അപ്ഡേറ്റ് ചെയ്യാൻ
 document.addEventListener("swalath-language-changed", function() {
     if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
-        window.SwalathLanguage.apply();
+        window.SwalathLanguage.apply(window.SwalathLanguage.getCurrent());
     }
     updateDuaPageLanguage();
 });
