@@ -345,16 +345,17 @@ function showCollection(){
 }
 
 function goBack() {
-    if (location.hash && history.state &&
-        history.state.page === "swalath") {
-        history.back();
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('ref') === 'favorites') {
+        // ഫേവറിറ്റിൽ നിന്നാണ് വന്നതെങ്കിൽ തിരിച്ച് ഇൻഡക്സ് പേജിലെ ഫേവറിറ്റ് സെക്ഷനിലേക്ക് പോകും
+        window.location.href = "index.html#favorites";
     } else {
-        history.replaceState(
-            { page: "collection" },
-            "",
-            location.pathname + location.search
-        );
-        showCollection();
+        // സാധാരണ ലിസ്റ്റിൽ നിന്നാണെങ്കിൽ പഴയതുപോലെ ബാക്ക് അടിക്കാം
+        if (location.hash && history.state && history.state.page === "swalath") {
+            history.back();
+        } else {
+            window.location.href = "index.html";
+        }
     }
 }
 
