@@ -349,12 +349,12 @@ function closeCollection() {
 /* FAVOURITES */ 
 function openFavorites() {
     currentInternalSection = "favorites";
-    history.pushState({ section: "favorites" }, "");
+    history.pushState({ section: "favorites" }, "", "#favorites"); // URL hash അല്ലെങ്കിൽ state വഴി ട്രാക്ക് ചെയ്യാം
     hideHomeElements(); 
     document.getElementById("favoritesSection").style.display = "block"; 
     loadFavorites(); 
     window.scrollTo(0, 0); 
-} 
+}
 
 function closeFavorites() {
     showHomeElements();
@@ -453,11 +453,14 @@ function loadFavorites() {
         item.className = "favorite-item"; 
         item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
         item.textContent = name; 
-        item.onclick = function() { window.location.href = "swalath.html#" + key; }; 
+        
+        // ഇവിടെ ഫേവറിറ്റിൽ നിന്നാണ് പോകുന്നതെന്ന് അറിയാൻ 'ref=favorites' എന്ന് പാസ് ചെയ്യാം
+        item.onclick = function() { 
+            window.location.href = "swalath.html?ref=favorites#" + key; 
+        }; 
         list.appendChild(item); 
     }); 
-} 
-
+}
 /* DARK MODE */ 
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode"); 
