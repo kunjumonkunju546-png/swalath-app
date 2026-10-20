@@ -699,7 +699,7 @@ body.dark .dua-title {
     </div>
 
     <div class="malayalam">
-        അല്ലാഹുമ്മ അന്ത റബ്ബീ ലാ ഇലാഹ ഇല്ലാ അന്ത,
+        അല്ലാഹുമ്മ അന്ത റബ്ബീ ലാ ഇല്ലാ അന്ത,
         ഖലഖ്തനീ വ അനാ അബ്ദുക.
     </div>
 
@@ -900,12 +900,20 @@ window.addEventListener(
             document.body.classList.add("dark");
         }
 
-        if (window.SwalathLanguage) {
+        if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
             window.SwalathLanguage.apply();
         }
         updateDuaPageLanguage();
     }
 );
+
+// ലാംഗ്വേജ് മാറുമ്പോൾ പേജ് ഓട്ടോമാറ്റിക്കായി അപ്ഡേറ്റ് ചെയ്യാൻ
+document.addEventListener("swalath-language-changed", function() {
+    if (window.SwalathLanguage && typeof window.SwalathLanguage.apply === "function") {
+        window.SwalathLanguage.apply();
+    }
+    updateDuaPageLanguage();
+});
 
 </script>
 
