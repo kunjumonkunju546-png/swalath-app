@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123d34">
-<title>സ്വലാത്ത് - Swalath</title>
+<title>Al-Salath: Quran, Azhan & Dua</title>
 <link rel="stylesheet" href="style.css">
 <style>
 #splashScreen {position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; transition: opacity .6s ease, visibility .6s ease; }
@@ -37,8 +37,8 @@ body.dark-mode .dark-button { background: #f1dfb0; color: #123d34; }
 body.dark-mode .favorite-item, body.dark-mode .collection-item { background: #222 !important; border-color: #444 !important; color: #fff !important; } 
 body.dark-mode footer { color: #777; } 
 body.dark-mode .advertising-card { background: #222; border-color: #444; } 
-body.dark-mode .today-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
-body.dark-mode .today-card h3, body.dark-mode .today-card h2 { color: #f0deaf !important; }
+body.dark-mode .today-card, body.dark-mode .home-status-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
+body.dark-mode .today-card h3, body.dark-mode .today-card h2, body.dark-mode .home-status-card h3 { color: #f0deaf !important; }
 
 /* ===== SWALAATH PREMIUM HOME UI ===== */ 
 :root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
@@ -60,6 +60,13 @@ main { padding: 0 18px; }
 .today-card p { margin: 0 0 14px; color: var(--sw-muted); font-size: 13px; font-weight: 600; }
 .today-card button { min-height: 44px; padding: 10px 24px; border: none; border-radius: 25px; background: var(--sw-green); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(18,61,52,0.2); }
 
+/* HOME DAILY STATUS CARD */
+.home-status-card { background: var(--sw-card); border: 1px solid var(--sw-gold); border-radius: 22px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); }
+.home-status-card h3 { color: var(--sw-green); font-size: 15px; margin: 0 0 8px 0; font-family: 'Amiri', serif; }
+.home-status-card .quote-text { font-size: 17px; font-weight: bold; color: var(--sw-green); margin: 10px 0; font-family: 'Amiri', serif; line-height: 1.8; }
+.home-status-card .quote-source { font-size: 12px; color: var(--sw-muted); margin-bottom: 14px; font-style: italic; }
+.home-status-card button { min-height: 40px; padding: 8px 20px; border: none; border-radius: 20px; background: #25D366; color: #fff; font-size: 13px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+
 .feature-buttons { margin: 0 0 18px; gap: 10px; } 
 .dark-button {min-height: 44px; padding: 10px 20px; border: 1px solid var(--sw-border); border-radius: 25px; background: var(--sw-card); color: var(--sw-green); font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(18, 61, 52, .05); cursor: pointer; } 
 .menu-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 25px; } 
@@ -75,6 +82,21 @@ main { padding: 0 18px; }
 .language-option { padding: 13px 8px; border: 1px solid #d7c69e; border-radius: 12px; background: #fff; color: #123d34; font-size: 16px; cursor: pointer; } 
 .language-option.selected { border: 2px solid #123d34; background: #e8f0e9; font-weight: bold; } 
 #languageContinue { width: 100%; padding: 13px; border: none; border-radius: 12px; background: #123d34; color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; } 
+
+/* POPUP MODAL STYLES */
+#quotePopupOverlay { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); }
+.quote-popup-box { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.3); animation: popupScale .3s ease; }
+@keyframes popupScale { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.quote-popup-box h3 { color: var(--sw-green); font-size: 16px; margin: 0 0 12px 0; font-family: 'Amiri', serif; }
+.quote-popup-box .popup-text { font-size: 19px; font-weight: bold; color: var(--sw-green); margin: 12px 0; font-family: 'Amiri', serif; line-height: 1.8; }
+.quote-popup-box .popup-source { font-size: 13px; color: var(--sw-muted); margin-bottom: 18px; font-style: italic; }
+.quote-popup-actions { display: flex; gap: 10px; justify-content: center; }
+.quote-popup-actions button { padding: 10px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; border: none; }
+.btn-share-wa { background: #25D366; color: white; flex: 1; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+.btn-close-popup { background: #e0e0e0; color: #333; }
+body.dark-mode .quote-popup-box { background: #222; border-color: #444; color: #fff; }
+body.dark-mode .quote-popup-box h3, body.dark-mode .quote-popup-box .popup-text { color: #f0deaf; }
+body.dark-mode .btn-close-popup { background: #444; color: #fff; }
 </style> 
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"> 
 <script src="language.js" defer></script> 
@@ -108,6 +130,19 @@ main { padding: 0 18px; }
     </div> 
 </div> 
 
+<!-- DAILY QUOTE POPUP MODAL -->
+<div id="quotePopupOverlay">
+    <div class="quote-popup-box">
+        <h3>✨ ഇന്നത്തെ ഇസ്ലാമിക് ചിന്ത</h3>
+        <p class="popup-text" id="popupQuoteText">ലോഡ് ആകുന്നു...</p>
+        <p class="popup-source" id="popupQuoteSource"></p>
+        <div class="quote-popup-actions">
+            <button class="btn-share-wa" onclick="triggerShareStatus()">📲 സ്റ്റാറ്റസ് വെക്കാം</button>
+            <button class="btn-close-popup" onclick="closeQuotePopup()">മറക്കുക</button>
+        </div>
+    </div>
+</div>
+
 <div class="app"> 
     <section class="hero"> 
         <div class="moon">🌙</div> 
@@ -127,6 +162,14 @@ main { padding: 0 18px; }
             <h2 id="count">0</h2>
             <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
             <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
+        </div>
+
+        <!-- HOME PAGE DAILY STATUS CARD -->
+        <div class="home-status-card">
+            <h3>📖 ഇന്നത്തെ ഇസ്ലാമിക് കോട്ട്</h3>
+            <div class="quote-text" id="homeQuoteText">ലോഡ് ആകുന്നു...</div>
+            <div class="quote-source" id="homeQuoteSource"></div>
+            <button onclick="triggerShareStatus()">📲 സ്റ്റാറ്റസ് വെക്കാം</button>
         </div>
 
         <div class="feature-buttons"> 
@@ -280,6 +323,67 @@ function increaseCount() {
     localStorage.setItem("swalathCountDate", getLocalDateString()); 
 } 
 
+/* DYNAMIC DAILY QUOTES LOADER FOR HOME & POPUP */
+document.addEventListener("DOMContentLoaded", function() {
+    loadDailyQuoteData();
+    
+    // ആപ്പ് ഫസ്റ്റ് ഓപ്പൺ ചെയ്യുമ്പോൾ ഒരു തവണ മാത്രം ഡെയിലി പോപ്പ്-അപ്പ് കാണിക്കാൻ (ഓരോ ദിവസവും പുതിയത് വരും)
+    const lastPopupDate = localStorage.getItem("swalathPopupDate");
+    if (lastPopupDate !== todayDate) {
+        setTimeout(function() {
+            openQuotePopup();
+            localStorage.setItem("swalathPopupDate", todayDate);
+        }, 1500); // സ്പ്ലാഷ് സ്‌ക്രീൻ കഴിഞ്ഞയുടൻ പോപ്പ്-അപ്പ് വരും
+    }
+});
+
+function loadDailyQuoteData() {
+    // ഇൻലൈൻ ആയി കോട്ടുകൾ കൊടുത്തിരിക്കുന്നു (ഇത് quotes.json ഫയലിൽ നിന്നും എടുക്കും)
+    fetch('quotes.json')
+      .then(response => response.json())
+      .then(data => {
+          const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+          const todayQuote = data[dayOfYear % data.length];
+          const lang = localStorage.getItem("swalath-language") || "ml";
+          
+          const qText = todayQuote.quote[lang] || todayQuote.quote["en"];
+          const qSource = todayQuote.source[lang] || todayQuote.source["en"];
+          
+          // ഹോം പേജ് കാർഡിലേക്ക് സെറ്റ് ചെയ്യുന്നു
+          document.getElementById("homeQuoteText").textContent = qText;
+          document.getElementById("homeQuoteSource").textContent = qSource;
+          
+          // പോപ്പ്-അപ്പ് ബോക്സിലേക്ക് സെറ്റ് ചെയ്യുന്നു
+          document.getElementById("popupQuoteText").textContent = qText;
+          document.getElementById("popupQuoteSource").textContent = qSource;
+      })
+      .catch(err => {
+          // ഫാൾബാക്ക് ഡാറ്റ (ഫയൽ കിട്ടിയില്ലെങ്കിൽ)
+          const fallbackText = "തീർച്ചയായും, പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.";
+          const fallbackSource = "വിശുദ്ധ ഖുർആൻ (94:6)";
+          document.getElementById("homeQuoteText").textContent = fallbackText;
+          document.getElementById("homeQuoteSource").textContent = fallbackSource;
+          document.getElementById("popupQuoteText").textContent = fallbackText;
+          document.getElementById("popupQuoteSource").textContent = fallbackSource;
+      });
+}
+
+function openQuotePopup() {
+    document.getElementById("quotePopupOverlay").style.display = "flex";
+}
+
+function closeQuotePopup() {
+    document.getElementById("quotePopupOverlay").style.display = "none";
+}
+
+function triggerShareStatus() {
+    if (window.AndroidAdhan && typeof window.AndroidAdhan.shareDailyStatus === 'function') {
+        window.AndroidAdhan.shareDailyStatus();
+    } else {
+        alert("WhatsApp സ്റ്റാറ്റസ് ഫീച്ചർ സ്വലാത്ത് ആപ്പിനുള്ളിൽ മാത്രമേ പ്രവർത്തിക്കുകയുള്ളൂ.");
+    }
+}
+
 /* SWALATH ARABIC NAMES */ 
 const swalathNames = {ibrahimiyya: "الصلاة الإبراهيمية", nariya: "الصلاة النارية / التفريجية", tunjina: "صلاة المنجية / التنجينا", fatih: "صلاة الفاتح", tibbiyya: "صلاة الطبية / درود الشفاء", nuraniyya: "الصلاة النورانية", saadah: "صلاة السعادة", kamaliyya: "صلاة الكمالية", dhatiyya: "صلاة الذاتية", jawharات: "جوهرة الكمال", taj: "درود تاج", faraj: "صلاة الفرج", bashair: "بشائر الخيرات", ahlam: "صلاة الأحلام", hulo: "صلاة الحلور", friday: "صلاة يوم الجمعة", mashishiyya: "الصلاة المشيشية", ummiyya: "الصلاة الأمية", shadhiliyya: "الصلاة الشاذلية", anwar: "صلاة الأنوار", yaqutat: "صلاة الياقوتة الحقائق" }; 
 
@@ -299,6 +403,7 @@ let currentInternalSection = null;
 function hideHomeElements() {
     document.querySelector(".welcome").style.display = "none"; 
     document.querySelector(".today-card").style.display = "none"; 
+    document.querySelector(".home-status-card").style.display = "none";
     document.querySelector(".menu-grid").style.display = "none"; 
     document.querySelector(".feature-buttons").style.display = "none"; 
     document.getElementById("travelSection").style.display = "none"; 
@@ -307,6 +412,7 @@ function hideHomeElements() {
 function showHomeElements() {
     document.querySelector(".welcome").style.display = "block"; 
     document.querySelector(".today-card").style.display = "block"; 
+    document.querySelector(".home-status-card").style.display = "block";
     document.querySelector(".menu-grid").style.display = "grid"; 
     document.querySelector(".feature-buttons").style.display = "flex"; 
     document.getElementById("travelSection").style.display = "block"; 
@@ -326,7 +432,7 @@ function openAdvertising() {
 } 
 
 function closeAdvertising() {
-    history.back(); // ഹിസ്റ്ററി വഴി ബാക്ക് അടിക്കുമ്പോൾ popstate വഴി ഹോം പേജ് ലോഡ് ആകും
+    history.back();
 } 
 
 /* COLLECTION */ 
@@ -454,7 +560,7 @@ function updateDarkButton() {
     button.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode"; 
 } 
 
-/* STARTUP (സ്പ്ലാഷ് സ്‌ക്രീൻ ആപ്പ് ഒന്നിച്ച് തുറക്കുമ്പോൾ മാത്രം 1 തവണ വരുന്ന രീതിയിൽ ഫിക്സ് ചെയ്തു) */ 
+/* STARTUP */ 
 window.addEventListener("load", function() {
     const darkMode = localStorage.getItem("swalathDarkMode"); 
     if (darkMode === "true") {
