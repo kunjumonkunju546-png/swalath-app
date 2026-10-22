@@ -21,10 +21,6 @@
 .search-box:focus { border-color: #123d34; }
 .feature-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
 .dark-button { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: 600; }
-.advertising-page { display: none; }
-.advertising-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.advertising-back { border: none; background: #123d34; color: white; padding: 9px 15px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 600; }
-.advertising-card { background: white; border: 1px solid #e6dfd0; border-radius: 20px; padding: 20px 17px; margin-bottom: 14px; box-shadow: 0 5px 18px rgba(18,61,52,.05); }
 
 body.dark-mode { background: #111; color: #eee; } 
 body.dark-mode .app { background: #181818; } 
@@ -32,13 +28,10 @@ body.dark-mode .welcome p { color: #aaa; }
 body.dark-mode .menu-card { background: #222; border-color: #444; color: #eee; } 
 body.dark-mode .menu-card span { color: #aaa; } 
 body.dark-mode .search-box { background: #222; color: white; border-color: #444; } 
-body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2 { color: #fff; } 
+body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2, body.dark-mode #myDayPage h2 { color: #fff; } 
 body.dark-mode .dark-button { background: #f1dfb0; color: #123d34; } 
-body.dark-mode .favorite-item, body.dark-mode .collection-item { background: #222 !important; border-color: #444 !important; color: #fff !important; } 
+body.dark-mode .favorite-item, body.dark-mode .collection-item, body.dark-mode .routine-item { background: #222 !important; border-color: #444 !important; color: #fff !important; } 
 body.dark-mode footer { color: #777; } 
-body.dark-mode .advertising-card { background: #222; border-color: #444; } 
-body.dark-mode .today-card, body.dark-mode .home-status-card { background: #222 !important; border-color: #444 !important; color: #eee !important; }
-body.dark-mode .today-card h3, body.dark-mode .today-card h2, body.dark-mode .home-status-card h3 { color: #f0deaf !important; }
 
 /* ===== SWALAATH PREMIUM HOME UI ===== */ 
 :root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
@@ -53,19 +46,11 @@ main { padding: 0 18px; }
 .welcome h2 { margin: 0 0 5px; color: var(--sw-green); font-size: 22px; font-weight: 800; } 
 .welcome p { margin: 0; color: var(--sw-muted); font-size: 13px; line-height: 1.9; } 
 
-/* SEPARATE COUNTER CARD DESIGN */ 
 .today-card { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 22px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); }
 .today-card h3 { color: var(--sw-green); font-size: 16px; margin: 0 0 10px 0; font-family: 'Amiri', serif; }
 .today-card h2 { margin: 5px 0; color: var(--sw-green); font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; }
 .today-card p { margin: 0 0 14px; color: var(--sw-muted); font-size: 13px; font-weight: 600; }
 .today-card button { min-height: 44px; padding: 10px 24px; border: none; border-radius: 25px; background: var(--sw-green); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(18,61,52,0.2); }
-
-/* HOME DAILY STATUS CARD */
-.home-status-card { background: var(--sw-card); border: 1px solid var(--sw-gold); border-radius: 22px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); }
-.home-status-card h3 { color: var(--sw-green); font-size: 15px; margin: 0 0 8px 0; font-family: 'Amiri', serif; }
-.home-status-card .quote-text { font-size: 17px; font-weight: bold; color: var(--sw-green); margin: 10px 0; font-family: 'Amiri', serif; line-height: 1.8; }
-.home-status-card .quote-source { font-size: 12px; color: var(--sw-muted); margin-bottom: 14px; font-style: italic; }
-.home-status-card button { min-height: 40px; padding: 8px 20px; border: none; border-radius: 20px; background: #25D366; color: #fff; font-size: 13px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
 
 .feature-buttons { margin: 0 0 18px; gap: 10px; } 
 .dark-button {min-height: 44px; padding: 10px 20px; border: 1px solid var(--sw-border); border-radius: 25px; background: var(--sw-card); color: var(--sw-green); font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(18, 61, 52, .05); cursor: pointer; } 
@@ -75,6 +60,17 @@ main { padding: 0 18px; }
 .menu-card strong {display: block; max-width: 100%; color: var(--sw-green); font-size: 14px; font-weight: 800; line-height: 1.6; overflow-wrap: anywhere; } 
 .menu-card span {display: block; color: var(--sw-muted); font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; } 
 
+/* ROUTINE CHECKLIST ITEMS */
+.routine-item { display: flex; align-items: center; justify-content: space-between; background: white; border: 1px solid var(--sw-border); border-radius: 16px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s ease; }
+.routine-item.active { border-color: #25D366; background: #f0fdf4; }
+.routine-item .checkbox-icon { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; transition: all 0.2s ease; }
+.routine-item.active .checkbox-icon { background: #25D366; border-color: #25D366; }
+
+/* POPUP MODAL STYLES */
+#quotePopupOverlay, #congratulationOverlay { position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.quote-popup-box { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.4); animation: popupScale .3s ease; }
+@keyframes popupScale { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
 /* LANGUAGE SELECTOR */ 
 #languageScreen {position: fixed; inset: 0; z-index: 100001; display: none; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; } 
 #languageScreen .language-box {width: 100%; max-width: 400px; padding: 24px; border: 1px solid #c8a96e; border-radius: 22px; background: #fffaf0; color: #123d34; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.25); } 
@@ -82,21 +78,6 @@ main { padding: 0 18px; }
 .language-option { padding: 13px 8px; border: 1px solid #d7c69e; border-radius: 12px; background: #fff; color: #123d34; font-size: 16px; cursor: pointer; } 
 .language-option.selected { border: 2px solid #123d34; background: #e8f0e9; font-weight: bold; } 
 #languageContinue { width: 100%; padding: 13px; border: none; border-radius: 12px; background: #123d34; color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; } 
-
-/* POPUP MODAL STYLES */
-#quotePopupOverlay { position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); }
-.quote-popup-box { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.3); animation: popupScale .3s ease; }
-@keyframes popupScale { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.quote-popup-box h3 { color: var(--sw-green); font-size: 16px; margin: 0 0 12px 0; font-family: 'Amiri', serif; }
-.quote-popup-box .popup-text { font-size: 19px; font-weight: bold; color: var(--sw-green); margin: 12px 0; font-family: 'Amiri', serif; line-height: 1.8; }
-.quote-popup-box .popup-source { font-size: 13px; color: var(--sw-muted); margin-bottom: 18px; font-style: italic; }
-.quote-popup-actions { display: flex; gap: 10px; justify-content: center; }
-.quote-popup-actions button { padding: 10px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; border: none; }
-.btn-share-wa { background: #25D366; color: white; flex: 1; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
-.btn-close-popup { background: #e0e0e0; color: #333; }
-body.dark-mode .quote-popup-box { background: #222; border-color: #444; color: #fff; }
-body.dark-mode .quote-popup-box h3, body.dark-mode .quote-popup-box .popup-text { color: #f0deaf; }
-body.dark-mode .btn-close-popup { background: #444; color: #fff; }
 </style> 
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"> 
 <script src="language.js" defer></script> 
@@ -130,16 +111,30 @@ body.dark-mode .btn-close-popup { background: #444; color: #fff; }
     </div> 
 </div> 
 
-<!-- DAILY QUOTE POPUP MODAL -->
+<!-- 🌟 DAILY STATUS SUB-PAGE MODAL -->
 <div id="quotePopupOverlay">
     <div class="quote-popup-box">
-        <h3>✨ ഇന്നത്തെ ഇസ്ലാമിക് ചിന്ത</h3>
-        <p class="popup-text" id="popupQuoteText">ലോഡ് ആകുന്നു...</p>
-        <p class="popup-source" id="popupQuoteSource"></p>
-        <div class="quote-popup-actions">
-            <button class="btn-share-wa" onclick="triggerShareStatus()">📲 സ്റ്റാറ്റസ് വെക്കാം</button>
-            <button class="btn-close-popup" onclick="closeQuotePopup()">മറക്കുക</button>
+        <h3 style="color:var(--sw-green); font-size:17px; margin-bottom:10px;">✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</h3>
+        <p id="popupQuoteText" style="font-size:18px; font-weight:bold; color:var(--sw-green); font-family:'Amiri', serif; line-height:1.8; margin:15px 0;">ലോഡ് ആകുന്നു...</p>
+        <p id="popupQuoteSource" style="font-size:12px; color:var(--sw-muted); margin-bottom:20px; font-style:italic;"></p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="triggerShareStatus()" style="flex:1; padding:12px; border-radius:20px; background:#25D366; color:white; border:none; font-weight:bold; cursor:pointer;">📲 Status ഷെയർ ചെയ്യാം</button>
+            <button onclick="closeQuotePopup()" style="padding:12px 18px; border-radius:20px; background:#e0e0e0; color:#333; border:none; cursor:pointer;">Back</button>
         </div>
+    </div>
+</div>
+
+<!-- 🎁 CONGRATULATION GIFT OVERLAY (100% TASK COMPLETED) -->
+<div id="congratulationOverlay">
+    <div class="quote-popup-box" style="border-color: #25D366; background: #fff8e8;">
+        <div style="font-size: 60px; margin-bottom: 10px;">🎁</div>
+        <h2 style="color: var(--sw-green); margin: 0 0 8px; font-size: 22px;">അൽഹംദുലില്ലാഹ്! 🎉</h2>
+        <p style="font-size: 14px; color: var(--sw-text); line-height: 1.7; margin-bottom: 20px;">
+            ഇന്നത്തെ എല്ലാ ഇസ്ലാമിക് ആത്മീയ കാര്യങ്ങളും നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു. അല്ലാഹു സ്വീകരിക്കുമാറാകട്ടെ!
+        </p>
+        <button onclick="closeCongratulationModal()" style="width: 100%; padding: 12px; border-radius: 20px; background: var(--sw-green); color: white; border: none; font-weight: bold; cursor: pointer;">
+            സന്തോഷം! (Close)
+        </button>
     </div>
 </div>
 
@@ -164,12 +159,16 @@ body.dark-mode .btn-close-popup { background: #444; color: #fff; }
             <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
         </div>
 
-        <!-- HOME PAGE DAILY STATUS CARD -->
-        <div class="home-status-card">
-            <h3>📖 ഇന്നത്തെ ഇസ്ലാമിക് കോട്ട്</h3>
-            <div class="quote-text" id="homeQuoteText">ലോഡ് ആകുന്നു...</div>
-            <div class="quote-source" id="homeQuoteSource"></div>
-            <button onclick="triggerShareStatus()">📲 സ്റ്റാറ്റസ് വെക്കാം</button>
+        <!-- 🌟 "ഇന്നത്തെ എന്റെ ദിവസം" MAIN HOME CARD -->
+        <div class="menu-card" onclick="openMyDayPage()" style="grid-column: span 2; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px; background: linear-gradient(135deg, #092b25, #123d34); color: #fff; border: 1.5px solid var(--sw-gold); margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 36px; background: rgba(255,255,255,0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 16px;">✨</div>
+                <div style="text-align: left;">
+                    <strong style="color: #f5e2b3; font-size: 16px;">ഇന്നത്തെ എന്റെ ദിവസം</strong>
+                    <span style="color: #ddd; font-size: 12px;">ഡെയിലി റൂട്ടീൻ പ്രോഗ്രസും സ്റ്റാറ്റസും കാണാം</span>
+                </div>
+            </div>
+            <div style="background: var(--sw-gold); color: #092b25; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 13px;">Open</div>
         </div>
 
         <div class="feature-buttons"> 
@@ -225,6 +224,78 @@ body.dark-mode .btn-close-popup { background: #444; color: #fff; }
             </div> 
         </div> 
 
+        <!-- 🌟 "ഇന്നത്തെ എന്റെ ദിവസം" PAGE SECTION -->
+        <section id="myDayPage" style="display:none;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+                <button onclick="closeMyDayPage()" style="border:none; background:#123d34; color:white; padding:10px 16px; border-radius:12px; cursor:pointer; font-weight:600;">← Back</button>
+                <h2 style="margin:0; font-family:'Amiri', serif; color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+            </div>
+
+            <!-- 1. TOP STATUS CARD HEADING -->
+            <div onclick="openQuotePopup()" style="background: linear-gradient(135deg, #123d34, #092b25); color: white; border: 1.5px solid var(--sw-gold); border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="font-size: 32px;">📲</div>
+                    <div>
+                        <strong style="font-size: 16px; color: #f5e2b3; display:block;">ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</strong>
+                        <span style="font-size: 12px; color: #ddd;">അൾട്രാ എച്ച്ഡി സ്റ്റാറ്റസ് കണ്ട് ഷെയർ ചെയ്യാം</span>
+                    </div>
+                </div>
+                <div style="background: #25D366; color: white; padding: 6px 14px; border-radius: 15px; font-size: 12px; font-weight: bold;">ക്ലിക്ക് ചെയ്യൂ</div>
+            </div>
+
+            <!-- 2. DAILY ROUTINE CHECKLIST -->
+            <h3 style="color:var(--sw-green); font-size:16px; margin-bottom:12px; font-family:'Amiri', serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
+
+            <div class="routine-item" id="task_quran" onclick="toggleRoutine('task_quran')">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:22px;">📖</span>
+                    <div><strong>ഇന്നത്തെ ഖുർആൻ ഓത്ത്</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം ഓതി തീർത്തു</span></div>
+                </div>
+                <div class="checkbox-icon">✓</div>
+            </div>
+
+            <div class="routine-item" id="task_swalath" onclick="toggleRoutine('task_swalath')">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:22px;">📿</span>
+                    <div><strong>ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span style="font-size:11px; color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                </div>
+                <div class="checkbox-icon">✓</div>
+            </div>
+
+            <div class="routine-item" id="task_prayers" onclick="toggleRoutine('task_prayers')">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:22px;">🕌</span>
+                    <div><strong>5 സമയത്തെ നിസ്കാരം</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ കൃത്യമായി നിർവ്വഹിച്ചു</span></div>
+                </div>
+                <div class="checkbox-icon">✓</div>
+            </div>
+
+            <div class="routine-item" id="task_dhikr" onclick="toggleRoutine('task_dhikr')">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:22px;">✨</span>
+                    <div><strong>രാവിലെയും വൈകുന്നേരത്തെയുമുള്ള ദിക്റുകൾ</strong><br><span style="font-size:11px; color:#777;">ദിക്റുകൾ ചൊല്ലി</span></div>
+                </div>
+                <div class="checkbox-icon">✓</div>
+            </div>
+
+            <div class="routine-item" id="task_dua" onclick="toggleRoutine('task_dua')">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:22px;">🤲</span>
+                    <div><strong>പ്രത്യേക ദുആ നിർവ്വഹണം</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ ദുആകൾ ചെയ്തു</span></div>
+                </div>
+                <div class="checkbox-icon">✓</div>
+            </div>
+
+            <!-- 3. PROGRESS BAR SECTION -->
+            <div style="background:var(--sw-card); border:1px solid var(--sw-gold); border-radius:20px; padding:20px; margin-top:20px; text-align:center;">
+                <h4 style="margin:0 0 8px; color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
+                <div style="background:#e0e0e0; border-radius:10px; height:16px; overflow:hidden; margin:12px 0;">
+                    <div id="routineProgressBar" style="background:linear-gradient(90deg, #123d34, #25D366); height:100%; width:0%; transition:width 0.4s ease;"></div>
+                </div>
+                <p id="routineProgressText" style="margin:0; font-weight:bold; color:var(--sw-green); font-size:14px;">0% പൂർത്തിയായി</p>
+            </div>
+        </section>
+
         <!-- COLLECTION SECTION --> 
         <section id="collectionSection" style="display:none;"> 
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
@@ -242,53 +313,6 @@ body.dark-mode .btn-close-popup { background: #444; color: #fff; }
                 <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2> 
             </div> 
             <div id="favoritesList"></div> 
-        </section> 
-
-        <!-- ADVERTISING SECTION --> 
-        <section id="advertisingSection" class="advertising-page"> 
-            <div class="advertising-header"> 
-                <button class="advertising-back" onclick="closeAdvertising()">← Back</button> 
-                <h2 style="margin:0; font-family:'Amiri', serif; color: var(--sw-green);">Advertise With Us</h2> 
-            </div> 
-            <div class="advertising-card"> 
-                <h2 style="text-align:center; color:var(--sw-green); margin-bottom:6px; font-family:'Amiri', serif; font-size:20px;">Nazyan Global Media & Ads</h2> 
-                <p style="text-align:center; color:var(--sw-gold); font-size:12px; font-weight:bold; letter-spacing:1px; margin-bottom:16px;">REACH GLOBAL, GCC & WORLDWIDE AUDIENCE</p> 
-                <p style="font-size:13px; line-height:1.8; color:var(--sw-text); text-align:center; margin:0;">Promote your business, brand, or institution to a targeted audience across Kerala, GCC countries, and international platforms with professional presentation.</p> 
-            </div> 
-            <div class="advertising-card"> 
-                <h3 style="color:var(--sw-green); font-size:16px; margin-bottom:12px; font-family:'Amiri', serif;">Why Partner With Us?</h3> 
-                <ul style="list-style:none; padding:0; margin:0; font-size:13px; line-height:2; color:var(--sw-muted);"> 
-                    <li>✅ Global & GCC Target Audience Reach</li> 
-                    <li>✅ High-Trust Islamic & Spiritual Platform</li> 
-                    <li>✅ Direct WhatsApp & Website Integration</li> 
-                    <li>✅ Flexible Monthly & Yearly Packages</li> 
-                    <li>✅ Professional Quality Review for Brands</li> 
-                </ul> 
-            </div> 
-            <div class="advertising-card"> 
-                <h3 style="color:var(--sw-green); font-size:16px; margin-bottom:12px; font-family:'Amiri', serif;">Target Business Sectors</h3> 
-                <ul style="list-style:none; padding:0; margin:0; font-size:13px; line-height:2; color:var(--sw-muted);"> 
-                    <li>🍽️ Halal Restaurants & Foods</li> 
-                    <li>🕋 Umrah & Hajj Services</li> 
-                    <li>✈️ Global Travel & Tourism</li> 
-                    <li>🧕 Modest Fashion & Abaya</li> 
-                    <li>🏨 Hotels & Hospitality</li> 
-                    <li>📚 Islamic Books & E-Commerce</li> 
-                </ul> 
-            </div> 
-            <div class="advertising-card" style="text-align:center; background:var(--sw-green); color:white; border-radius:20px; padding:24px 16px;"> 
-                <h3 style="color:white; margin-bottom:10px; font-family:'Amiri', serif;">Get in Touch With Our Media Team</h3> 
-                <p style="margin:4px 0; font-size:13px;"><strong>WhatsApp:</strong> +91 9946010375</p> 
-                <p style="margin:4px 0 14px; font-size:13px;"><strong>Email:</strong> nazyantravels@gmail.com</p> 
-                <a href="https://wa.me/919946010375" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none; background:#f5e2b3; color:var(--sw-green); padding:11px 24px; border-radius:25px; font-size:13px; font-weight:bold;">Chat on WhatsApp</a> 
-            </div> 
-        </section> 
-
-        <section id="travelSection" class="travel" style="background:var(--sw-card); border:1px solid var(--sw-border); text-align:center; border-radius:22px; padding:22px; margin-top:20px;"> 
-            <p style="color:#c5a868; font-size:11px; font-weight:bold; letter-spacing:2px; margin:0 0 5px;">TRAVEL PARTNER</p> 
-            <h2 style="color:var(--sw-green); font-size:20px; margin:0 0 8px;">NAZYAN TRAVELS</h2> 
-            <span style="font-size:13px; color:var(--sw-muted); display:block; line-height:1.7; margin-bottom:14px;">Flight Tickets • Tour Packages<br>Visa • Umrah • Certificate Attestation</span> 
-            <a href="https://wa.me/919946010375" target="_blank" rel="noopener" style="display:inline-block; background:var(--sw-green); color:#fff; text-decoration:none; padding:10px 22px; border-radius:20px; font-size:13px; font-weight:bold;">WhatsApp Enquiry</a> 
         </section> 
     </main> 
 
@@ -323,22 +347,12 @@ function increaseCount() {
     localStorage.setItem("swalathCountDate", getLocalDateString()); 
 } 
 
-/* DYNAMIC DAILY QUOTES LOADER FOR HOME & POPUP */
+/* 🌟 DYNAMIC DAILY QUOTES LOADER */
 document.addEventListener("DOMContentLoaded", function() {
     loadDailyQuoteData();
-    
-    // ആപ്പ് ഫസ്റ്റ് ഓപ്പൺ ചെയ്യുമ്പോൾ ഒരു തവണ മാത്രം ഡെയിലി പോപ്പ്-അപ്പ് കാണിക്കാൻ (ഓരോ ദിവസവും പുതിയത് വരും)
-    const lastPopupDate = localStorage.getItem("swalathPopupDate");
-    if (lastPopupDate !== todayDate) {
-        setTimeout(function() {
-            openQuotePopup();
-            localStorage.setItem("swalathPopupDate", todayDate);
-        }, 1500); // സ്പ്ലാഷ് സ്‌ക്രീൻ കഴിഞ്ഞയുടൻ പോപ്പ്-അപ്പ് വരും
-    }
 });
 
 function loadDailyQuoteData() {
-    // ഇൻലൈൻ ആയി കോട്ടുകൾ കൊടുത്തിരിക്കുന്നു (ഇത് quotes.json ഫയലിൽ നിന്നും എടുക്കും)
     fetch('quotes.json')
       .then(response => response.json())
       .then(data => {
@@ -346,23 +360,15 @@ function loadDailyQuoteData() {
           const todayQuote = data[dayOfYear % data.length];
           const lang = localStorage.getItem("swalath-language") || "ml";
           
-          const qText = todayQuote.quote[lang] || todayQuote.quote["en"];
+          const qText = todayQuote.translation[lang] || todayQuote.translation["en"];
           const qSource = todayQuote.source[lang] || todayQuote.source["en"];
           
-          // ഹോം പേജ് കാർഡിലേക്ക് സെറ്റ് ചെയ്യുന്നു
-          document.getElementById("homeQuoteText").textContent = qText;
-          document.getElementById("homeQuoteSource").textContent = qSource;
-          
-          // പോപ്പ്-അപ്പ് ബോക്സിലേക്ക് സെറ്റ് ചെയ്യുന്നു
           document.getElementById("popupQuoteText").textContent = qText;
           document.getElementById("popupQuoteSource").textContent = qSource;
       })
       .catch(err => {
-          // ഫാൾബാക്ക് ഡാറ്റ (ഫയൽ കിട്ടിയില്ലെങ്കിൽ)
           const fallbackText = "തീർച്ചയായും, പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.";
           const fallbackSource = "വിശുദ്ധ ഖുർആൻ (94:6)";
-          document.getElementById("homeQuoteText").textContent = fallbackText;
-          document.getElementById("homeQuoteSource").textContent = fallbackSource;
           document.getElementById("popupQuoteText").textContent = fallbackText;
           document.getElementById("popupQuoteSource").textContent = fallbackSource;
       });
@@ -384,10 +390,104 @@ function triggerShareStatus() {
     }
 }
 
-/* SWALATH ARABIC NAMES */ 
-const swalathNames = {ibrahimiyya: "الصلاة الإبراهيمية", nariya: "الصلاة النارية / التفريجية", tunjina: "صلاة المنجية / التنجينا", fatih: "صلاة الفاتح", tibbiyya: "صلاة الطبية / درود الشفاء", nuraniyya: "الصلاة النورانية", saadah: "صلاة السعادة", kamaliyya: "صلاة الكمالية", dhatiyya: "صلاة الذاتية", jawharات: "جوهرة الكمال", taj: "درود تاج", faraj: "صلاة الفرج", bashair: "بشائر الخيرات", ahlam: "صلاة الأحلام", hulo: "صلاة الحلور", friday: "صلاة يوم الجمعة", mashishiyya: "الصلاة المشيشية", ummiyya: "الصلاة الأمية", shadhiliyya: "الصلاة الشاذلية", anwar: "صلاة الأنوار", yaqutat: "صلاة الياقوتة الحقائق" }; 
+/* 🌟 "ഇന്നത്തെ എന്റെ ദിവസം" NAVIGATION & ROUTINE SYSTEM */
+const totalTasks = 5;
+let completedTasks = {};
 
-/* OPEN OTHER PAGES */ 
+function loadRoutineState() {
+    const savedRoutineDate = localStorage.getItem("routineDate");
+    if (savedRoutineDate !== todayDate) {
+        localStorage.setItem("routineDate", todayDate);
+        localStorage.setItem("routineState", JSON.stringify({}));
+        completedTasks = {};
+    } else {
+        try {
+            completedTasks = JSON.parse(localStorage.getItem("routineState") || "{}");
+        } catch(e) { completedTasks = {}; }
+    }
+    updateRoutineUI();
+}
+
+function toggleRoutine(taskId) {
+    completedTasks[taskId] = !completedTasks[taskId];
+    localStorage.setItem("routineState", JSON.stringify(completedTasks));
+    updateRoutineUI();
+}
+
+function updateRoutineUI() {
+    let activeCount = 0;
+    const taskIds = ['task_quran', 'task_swalath', 'task_prayers', 'task_dhikr', 'task_dua'];
+    
+    taskIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            if (completedTasks[id]) {
+                el.classList.add("active");
+                activeCount++;
+            } else {
+                el.classList.remove("active");
+            }
+        }
+    });
+
+    const percent = Math.round((activeCount / totalTasks) * 100);
+    const progressBar = document.getElementById("routineProgressBar");
+    const progressText = document.getElementById("routineProgressText");
+
+    if (progressBar) progressBar.style.width = percent + "%";
+    if (progressText) {
+        if (percent === 100) {
+            progressText.textContent = "🎉 100% പൂർത്തിയായി! അൽഹംദുലില്ലാഹ്!";
+            // Show Congratulation Gift Box if just completed
+            if (!sessionStorage.getItem("congratulationShown")) {
+                sessionStorage.setItem("congratulationShown", "true");
+                document.getElementById("congratulationOverlay").style.display = "flex";
+            }
+        } else {
+            progressText.textContent = percent + "% പൂർത്തിയായി";
+        }
+    }
+}
+
+function closeCongratulationModal() {
+    document.getElementById("congratulationOverlay").style.display = "none";
+}
+
+function openMyDayPage() {
+    history.pushState({ section: "myDay" }, "");
+    hideHomeElements();
+    document.getElementById("myDayPage").style.display = "block";
+    loadRoutineState();
+    window.scrollTo(0, 0);
+}
+
+function closeMyDayPage() {
+    history.back();
+}
+
+/* CLEAN HOME VISIBILITY & NAVIGATION */
+function hideHomeElements() {
+    document.querySelector(".welcome").style.display = "none"; 
+    document.querySelector(".today-card").style.display = "none"; 
+    const myDayCard = document.querySelector(".menu-card[onclick='openMyDayPage()']");
+    if (myDayCard) myDayCard.style.display = "none";
+    document.querySelector(".menu-grid").style.display = "none"; 
+    document.querySelector(".feature-buttons").style.display = "none"; 
+} 
+
+function showHomeElements() {
+    document.querySelector(".welcome").style.display = "block"; 
+    document.querySelector(".today-card").style.display = "block"; 
+    const myDayCard = document.querySelector(".menu-card[onclick='openMyDayPage()']");
+    if (myDayCard) myDayCard.style.display = "flex";
+    document.querySelector(".menu-grid").style.display = "grid"; 
+    document.querySelector(".feature-buttons").style.display = "flex"; 
+    document.getElementById("myDayPage").style.display = "none";
+    document.getElementById("collectionSection").style.display = "none"; 
+    document.getElementById("favoritesSection").style.display = "none"; 
+} 
+
+/* OPEN PAGES */ 
 function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; } 
 function openQuran() { window.location.href = "quran.html"; } 
 function openQuranMP3() { window.location.href = "quran-mp3.html"; } 
@@ -397,153 +497,38 @@ function openDua() { window.location.href = "dua.html"; }
 function openDhikr() { window.location.href = "dhikr.html"; } 
 function openPrayerTime() { window.location.href = "prayer-time.html"; } 
 
-/* CLEAN HOME VISIBILITY & NAVIGATION */ 
-let currentInternalSection = null; 
-
-function hideHomeElements() {
-    document.querySelector(".welcome").style.display = "none"; 
-    document.querySelector(".today-card").style.display = "none"; 
-    document.querySelector(".home-status-card").style.display = "none";
-    document.querySelector(".menu-grid").style.display = "none"; 
-    document.querySelector(".feature-buttons").style.display = "none"; 
-    document.getElementById("travelSection").style.display = "none"; 
-} 
-
-function showHomeElements() {
-    document.querySelector(".welcome").style.display = "block"; 
-    document.querySelector(".today-card").style.display = "block"; 
-    document.querySelector(".home-status-card").style.display = "block";
-    document.querySelector(".menu-grid").style.display = "grid"; 
-    document.querySelector(".feature-buttons").style.display = "flex"; 
-    document.getElementById("travelSection").style.display = "block"; 
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("favoritesSection").style.display = "none"; 
-    document.getElementById("advertisingSection").style.display = "none"; 
-    currentInternalSection = null;
-} 
-
-/* ADVERTISING PAGE */ 
-function openAdvertising() {
-    currentInternalSection = "advertising";
-    history.pushState({ section: "advertising" }, "");
-    hideHomeElements(); 
-    document.getElementById("advertisingSection").style.display = "block"; 
-    window.scrollTo(0, 0); 
-} 
-
-function closeAdvertising() {
-    history.back();
-} 
-
-/* COLLECTION */ 
 function openCollection() {
-    currentInternalSection = "collection";
     history.pushState({ section: "collection" }, "");
     hideHomeElements(); 
     document.getElementById("collectionSection").style.display = "block"; 
-    document.getElementById("searchSwalath").value = ""; 
     loadCollection(); 
-    window.scrollTo(0, 0); 
 } 
+function closeCollection() { history.back(); } 
 
-function closeCollection() {
-    history.back();
-} 
-
-/* FAVOURITES */ 
 function openFavorites() {
-    currentInternalSection = "favorites";
     history.pushState({ section: "favorites" }, "");
     hideHomeElements(); 
     document.getElementById("favoritesSection").style.display = "block"; 
     loadFavorites(); 
-    window.scrollTo(0, 0); 
 }
+function closeFavorites() { history.back(); }
 
-function closeFavorites() {
-    history.back();
-}
-
-/* BROWSER BACK BUTTON SUPPORT */
 window.addEventListener("popstate", function(event) {
     const section = event.state && event.state.section;
-
-    if (section === "collection") {
+    if (section === "myDay") {
+        hideHomeElements();
+        document.getElementById("myDayPage").style.display = "block";
+        loadRoutineState();
+    } else if (section === "collection") {
         hideHomeElements();
         document.getElementById("collectionSection").style.display = "block";
-        document.getElementById("favoritesSection").style.display = "none";
-        document.getElementById("advertisingSection").style.display = "none";
-        currentInternalSection = "collection";
-        if (!document.getElementById("collectionList").children.length) {
-            loadCollection();
-        }
     } else if (section === "favorites") {
         hideHomeElements();
-        document.getElementById("collectionSection").style.display = "none";
         document.getElementById("favoritesSection").style.display = "block";
-        document.getElementById("advertisingSection").style.display = "none";
-        currentInternalSection = "favorites";
-        loadFavorites();
-    } else if (section === "advertising") {
-        hideHomeElements();
-        document.getElementById("collectionSection").style.display = "none";
-        document.getElementById("favoritesSection").style.display = "none";
-        document.getElementById("advertisingSection").style.display = "block";
-        currentInternalSection = "advertising";
     } else {
         showHomeElements();
     }
-    window.scrollTo(0, 0);
 });
-
-function loadCollection() {
-    const list = document.getElementById("collectionList"); 
-    list.innerHTML = ""; 
-    Object.keys(swalathNames).forEach(function(key) {
-        const item = document.createElement("div"); 
-        item.className = "collection-item"; 
-        item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
-        item.dataset.name = swalathNames[key].toLowerCase(); 
-        item.textContent = swalathNames[key]; 
-        item.onclick = function() { window.location.href = "swalath.html#" + key; }; 
-        list.appendChild(item); 
-    }); 
-} 
-
-function searchSwalath() {
-    const input = document.getElementById("searchSwalath").value.toLowerCase().trim(); 
-    document.querySelectorAll(".collection-item").forEach(function(card) {
-        card.style.display = card.dataset.name.includes(input) ? "block" : "none"; 
-    }); 
-} 
-
-function loadFavorites() {
-    const list = document.getElementById("favoritesList"); 
-    list.innerHTML = ""; 
-    let favorites = []; 
-    try {
-        favorites = JSON.parse(localStorage.getItem("swalathFavorites") || "[]"); 
-        if (!Array.isArray(favorites)) favorites = []; 
-    } catch (error) { 
-        favorites = []; 
-    } 
-    if (favorites.length === 0) {
-        list.innerHTML = `<div style="text-align:center; padding:25px; color:#777; background:white; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.03); font-family:'Amiri', serif;">لا توجد مفضلات حتى الآن ❤️</div>`; 
-        return; 
-    } 
-    favorites.forEach(function(key) {
-        const name = swalathNames[key]; 
-        if (!name) return; 
-        const item = document.createElement("div"); 
-        item.className = "favorite-item"; 
-        item.style.cssText = `background:white; border:1px solid #e6dfd0; border-radius:18px; padding:16px; margin-bottom:10px; cursor:pointer; color:#123d34; font-weight:bold; direction:rtl; text-align:center; font-size:20px; font-family:'Amiri', serif; box-shadow:0 3px 10px rgba(0,0,0,0.03);`; 
-        item.textContent = name; 
-        item.onclick = function() { 
-            window.location.href = "swalath.html?ref=favorites#" + key; 
-        }; 
-        list.appendChild(item); 
-    }); 
-}
 
 /* DARK MODE */ 
 function toggleDarkMode() {
@@ -556,70 +541,24 @@ function toggleDarkMode() {
 function updateDarkButton() {
     const button = document.getElementById("darkModeButton"); 
     if (!button) return; 
-    const isDark = document.body.classList.contains("dark-mode"); 
-    button.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode"; 
+    button.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode"; 
 } 
 
 /* STARTUP */ 
 window.addEventListener("load", function() {
-    const darkMode = localStorage.getItem("swalathDarkMode"); 
-    if (darkMode === "true") {
+    if (localStorage.getItem("swalathDarkMode") === "true") {
         document.body.classList.add("dark-mode"); 
     } 
     updateDarkButton(); 
     const splash = document.getElementById("splashScreen"); 
-    window.setTimeout(function() { 
-        if (splash) splash.classList.add("hide"); 
-    }, 1200); 
+    window.setTimeout(function() { if (splash) splash.classList.add("hide"); }, 1200); 
 }); 
 
-/* SERVICE WORKER */ 
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function() {
-        navigator.serviceWorker.register("./sw.js").catch(function(error) {
-            console.log("Service worker registration failed:", error); 
-        }); 
-    }); 
-} 
-
-/* LANGUAGE SELECTOR HANDLERS */
+/* LANGUAGE SELECTOR */
 function openSwalathLanguageSelector() {
     const screen = document.getElementById("languageScreen");
     if (screen) screen.style.display = "flex";
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    const languageScreen = document.getElementById("languageScreen");
-    const options = document.querySelectorAll(".language-option");
-    const continueBtn = document.getElementById("languageContinue");
-    
-    let selectedLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
-        ? window.SwalathLanguage.getCurrent() 
-        : (localStorage.getItem("swalath-language") || "ml");
-
-    options.forEach(opt => {
-        if (opt.getAttribute("data-lang") === selectedLang) {
-            opt.classList.add("selected");
-        }
-        opt.addEventListener("click", function () {
-            options.forEach(o => o.classList.remove("selected"));
-            this.classList.add("selected");
-            selectedLang = this.getAttribute("data-lang");
-        });
-    });
-
-    if (continueBtn) {
-        continueBtn.addEventListener("click", function () {
-            if (window.SwalathLanguage && typeof window.SwalathLanguage.setLanguage === "function") {
-                window.SwalathLanguage.setLanguage(selectedLang);
-            } else {
-                localStorage.setItem("swalath-language", selectedLang);
-                location.reload();
-            }
-            if (languageScreen) languageScreen.style.display = "none";
-        });
-    }
-});
 </script> 
 </body> 
 </html>
