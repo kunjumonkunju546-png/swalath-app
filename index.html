@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="ml">
 <head>
 <meta charset="UTF-8">
@@ -514,11 +514,8 @@ function openDhikr() { window.location.href = "dhikr.html"; }
 function openPrayerTime() { window.location.href = "prayer-time.html"; } 
 
 function openCollection() {
-    history.pushState({ section: "collection" }, "");
-    hideHomeElements(); 
-    document.getElementById("collectionSection").style.display = "block"; 
-    loadCollection(); 
-} 
+    window.location.href = "swalath.html";
+}
 function closeCollection() { history.back(); } 
 
 function openFavorites() {
