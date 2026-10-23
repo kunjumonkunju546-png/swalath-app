@@ -570,7 +570,39 @@ window.addEventListener("load", function() {
 /* LANGUAGE SELECTOR */
 function openSwalathLanguageSelector() {
     const screen = document.getElementById("languageScreen");
-    if (screen) screen.style.display = "flex";
+    const options = document.querySelectorAll(".language-option");
+    const continueButton = document.getElementById("languageContinue");
+
+    if (!screen || !continueButton || !window.SwalathLanguage) {
+        return;
+    }
+
+    let selectedLanguage = window.SwalathLanguage.getCurrent();
+
+    options.forEach(function (button) {
+        button.classList.toggle(
+            "selected",
+            button.dataset.lang === selectedLanguage
+        );
+
+        button.onclick = function () {
+            selectedLanguage = button.dataset.lang;
+
+            options.forEach(function (option) {
+                option.classList.toggle(
+                    "selected",
+                    option.dataset.lang === selectedLanguage
+                );
+            });
+        };
+    });
+
+    continueButton.onclick = function () {
+        window.SwalathLanguage.setLanguage(selectedLanguage);
+        screen.style.display = "none";
+    };
+
+    screen.style.display = "flex";
 }
 </script> 
 </body> 
