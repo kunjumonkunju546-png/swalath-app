@@ -674,6 +674,17 @@ window.addEventListener("popstate", function(event) {
         showHomeElements();
     }
 });
+    window.addEventListener("pageshow", function() {
+    if (location.hash === "#favorites") {
+        hideHomeElements();
+
+        document.getElementById("myDayPage").style.display = "none";
+        document.getElementById("collectionSection").style.display = "none";
+        document.getElementById("favoritesSection").style.display = "block";
+
+        loadFavorites();
+    }
+});
 
 /* DARK MODE */
 function toggleDarkMode() {
