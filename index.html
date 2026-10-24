@@ -1,851 +1,747 @@
 <!DOCTYPE html>
 <html lang="ml">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#123d34">
-<title>Al-Salath: Quran, Azhan & Dua</title>
-<link rel="stylesheet" href="style.css">
-
-<style>
-#splashScreen{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0;transition:opacity .6s ease,visibility .6s ease}
-#splashScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
-.splash-content{width:90%;max-width:380px;text-align:center;padding:30px 20px}
-.splash-moon{font-size:66px;margin-bottom:18px;animation:moonFloat 2s ease-in-out infinite}
-.splash-content h1{font-size:38px;margin:0 0 10px;color:#f1dfb0;font-family:'Amiri',serif}
-.splash-content p{font-size:16px;line-height:2.2;margin:0;color:#fff8e8;font-family:'Amiri',serif}
-.splash-loader{width:38px;height:38px;border:3px solid rgba(241,223,176,.25);border-top-color:#f1dfb0;border-radius:50%;margin:30px auto 0;animation:splashSpin .9s linear infinite}
-@keyframes splashSpin{to{transform:rotate(360deg)}}
-@keyframes moonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.search-box{width:100%;padding:13px 16px;border:1px solid #e6dfd0;border-radius:14px;outline:none;font-size:14px;margin-bottom:15px;background:white;color:#222;box-sizing:border-box}
-.search-box:focus{border-color:#123d34}
-.feature-buttons{display:flex;justify-content:center;gap:10px;margin-bottom:18px}
-.dark-button{border:none;background:#123d34;color:white;padding:10px 16px;border-radius:25px;cursor:pointer;font-size:13px;font-weight:600}
-body.dark-mode{background:#111;color:#eee}
-body.dark-mode .app{background:#181818}
-body.dark-mode .welcome p{color:#aaa}
-body.dark-mode .menu-card{background:#222;border-color:#444;color:#eee}
-body.dark-mode .menu-card span{color:#aaa}
-body.dark-mode .search-box{background:#222;color:white;border-color:#444}
-body.dark-mode #collectionSection h2,body.dark-mode #favoritesSection h2,body.dark-mode #myDayPage h2{color:#fff}
-body.dark-mode .dark-button{background:#f1dfb0;color:#123d34}
-body.dark-mode .favorite-item,body.dark-mode .collection-item,body.dark-mode .routine-item{background:#222!important;border-color:#444!important;color:#fff!important}
-body.dark-mode footer{color:#777}
-:root{--sw-bg:#f8f8f4;--sw-card:#ffffff;--sw-green:#123d34;--sw-green-dark:#092b25;--sw-gold:#c5a868;--sw-text:#22352c;--sw-muted:#6a7971;--sw-border:#eae5d5}
-body{background:var(--sw-bg);color:var(--sw-text);font-family:"Noto Sans Malayalam","Noto Sans",Arial,sans-serif;line-height:1.65;-webkit-tap-highlight-color:transparent}
-.app{width:100%;max-width:760px;min-height:100vh;margin:0 auto;background:var(--sw-bg);overflow:hidden;box-shadow:0 0 50px rgba(18,61,52,.08)}
-.hero{position:relative;overflow:hidden;padding:38px 20px 36px;text-align:center;color:#fff9e9;background:radial-gradient(circle at 85% 15%,rgba(212,190,126,.2),transparent 40%),linear-gradient(145deg,#0d3229,#15473d 65%,#1f5d4f);border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(13,50,41,.16)}
-.hero .moon{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:10px;border:1px solid rgba(241,223,176,.4);border-radius:50%;background:rgba(255,255,255,.08);font-size:38px!important;box-shadow:0 4px 15px rgba(0,0,0,.1)}
-.hero .arabic-main-title{font-family:'Amiri','Traditional Arabic',serif;font-size:38px;color:#f5e2b3;margin:4px 0 10px;font-weight:bold}
-.hero .arabic-ayah{font-family:'Amiri','Traditional Arabic',serif;font-size:19px;color:#fffaf0;margin:0;line-height:2.2;direction:rtl;opacity:.98;padding:0 10px}
-main{padding:0 18px}
-.welcome{padding:25px 5px 14px;text-align:center}
-.welcome h2{margin:0 0 5px;color:var(--sw-green);font-size:22px;font-weight:800}
-.welcome p{margin:0;color:var(--sw-muted);font-size:13px;line-height:1.9}
-.today-card{background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:22px;padding:20px;text-align:center;margin-bottom:20px;box-shadow:0 6px 18px rgba(18,61,52,.06)}
-.today-card h3{color:var(--sw-green);font-size:16px;margin:0 0 10px;font-family:'Amiri',serif}
-.today-card h2{margin:5px 0;color:var(--sw-green);font-size:42px;font-weight:800;font-variant-numeric:tabular-nums}
-.today-card p{margin:0 0 14px;color:var(--sw-muted);font-size:13px;font-weight:600}
-.today-card button{min-height:44px;padding:10px 24px;border:none;border-radius:25px;background:var(--sw-green);color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(18,61,52,.2)}
-.feature-buttons{margin:0 0 18px;gap:10px}
-.dark-button{min-height:44px;padding:10px 20px;border:1px solid var(--sw-border);border-radius:25px;background:var(--sw-card);color:var(--sw-green);font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(18,61,52,.05);cursor:pointer}
-.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 25px}
-.menu-card{position:relative;display:flex;min-width:0;min-height:140px;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 12px;box-sizing:border-box;text-align:center;background:var(--sw-card);border:1px solid var(--sw-border);border-radius:22px;color:var(--sw-text);box-shadow:0 6px 18px rgba(18,61,52,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.menu-card>div:first-child{display:flex;width:56px;height:56px;align-items:center;justify-content:center;margin-bottom:3px;border-radius:18px;background:#f0f5ed;font-size:30px!important;box-shadow:inset 0 2px 5px rgba(0,0,0,.02)}
-.menu-card strong{display:block;max-width:100%;color:var(--sw-green);font-size:14px;font-weight:800;line-height:1.6}
-.menu-card span{display:block;color:var(--sw-muted);font-size:11px;line-height:1.65}
-.my-day-card{background:linear-gradient(135deg,#092b25,#123d34)!important;color:#fff!important;border:1.5px solid var(--sw-gold)!important;border-radius:22px!important;padding:16px 20px!important;margin-bottom:20px!important;cursor:pointer;box-shadow:0 6px 18px rgba(18,61,52,.15)!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;text-align:left!important;box-sizing:border-box!important;width:100%!important}
-.routine-item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border:1px solid var(--sw-border);border-radius:16px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:all .2s ease}
-.routine-item.active{border-color:#25D366;background:#f0fdf4}
-.routine-item .checkbox-icon{width:26px;height:26px;flex-shrink:0;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;transition:all .2s ease}
-.routine-item.active .checkbox-icon{background:#25D366;border-color:#25D366}
-#quotePopupOverlay,#congratulationOverlay{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.quote-popup-box{background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:24px;width:100%;max-width:380px;padding:24px;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,.4);animation:popupScale .3s ease;box-sizing:border-box}
-@keyframes popupScale{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-#languageScreen{position:fixed;inset:0;z-index:100001;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0}
-#languageScreen .language-box{width:100%;max-width:400px;padding:24px;border:1px solid #c8a96e;border-radius:22px;background:#fffaf0;color:#123d34;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,.25)}
-.language-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.language-option{padding:13px 8px;border:1px solid #d7c69e;border-radius:12px;background:#fff;color:#123d34;font-size:16px;cursor:pointer}
-.language-option.selected{border:2px solid #123d34;background:#e8f0e9;font-weight:bold}
-#languageContinue{width:100%;padding:13px;border:none;border-radius:12px;background:#123d34;color:#fff;font-size:16px;cursor:pointer;font-weight:bold}
-</style>
-
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-<script src="language.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#123d34">
+    <title>Al-Salath: Quran, Azhan & Dua</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #splashScreen{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0;transition:opacity .6s ease,visibility .6s ease}
+        #splashScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
+        .splash-content{width:90%;max-width:380px;text-align:center;padding:30px 20px}
+        .splash-moon{font-size:66px;margin-bottom:18px;animation:moonFloat 2s ease-in-out infinite}
+        .splash-content h1{font-size:38px;margin:0 0 10px;color:#f1dfb0;font-family:'Amiri',serif}
+        .splash-content p{font-size:16px;line-height:2.2;margin:0;color:#fff8e8;font-family:'Amiri',serif}
+        .splash-loader{width:38px;height:38px;border:3px solid rgba(241,223,176,.25);border-top-color:#f1dfb0;border-radius:50%;margin:30px auto 0;animation:splashSpin .9s linear infinite}
+        @keyframes splashSpin{to{transform:rotate(360deg)}}
+        @keyframes moonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        .search-box{width:100%;padding:13px 16px;border:1px solid #e6dfd0;border-radius:14px;outline:none;font-size:14px;margin-bottom:15px;background:white;color:#222;box-sizing:border-box}
+        .search-box:focus{border-color:#123d34}
+        .feature-buttons{display:flex;justify-content:center;gap:10px;margin-bottom:18px}
+        .dark-button{border:none;background:#123d34;color:white;padding:10px 16px;border-radius:25px;cursor:pointer;font-size:13px;font-weight:600}
+        body.dark-mode{background:#111;color:#eee}
+        body.dark-mode .app{background:#181818}
+        body.dark-mode .welcome p{color:#aaa}
+        body.dark-mode .menu-card{background:#222;border-color:#444;color:#eee}
+        body.dark-mode .menu-card span{color:#aaa}
+        body.dark-mode .search-box{background:#222;color:white;border-color:#444}
+        body.dark-mode #collectionSection h2,body.dark-mode #favoritesSection h2,body.dark-mode #myDayPage h2{color:#fff}
+        body.dark-mode .dark-button{background:#f1dfb0;color:#123d34}
+        body.dark-mode .favorite-item,body.dark-mode .collection-item,body.dark-mode .routine-item{background:#222!important;border-color:#444!important;color:#fff!important}
+        body.dark-mode footer{color:#777}
+        :root{--sw-bg:#f8f8f4;--sw-card:#ffffff;--sw-green:#123d34;--sw-green-dark:#092b25;--sw-gold:#c5a868;--sw-text:#22352c;--sw-muted:#6a7971;--sw-border:#eae5d5}
+        body{background:var(--sw-bg);color:var(--sw-text);font-family:"Noto Sans Malayalam","Noto Sans",Arial,sans-serif;line-height:1.65;-webkit-tap-highlight-color:transparent}
+        .app{width:100%;max-width:760px;min-height:100vh;margin:0 auto;background:var(--sw-bg);overflow:hidden;box-shadow:0 0 50px rgba(18,61,52,.08)}
+        .hero{position:relative;overflow:hidden;padding:38px 20px 36px;text-align:center;color:#fff9e9;background:radial-gradient(circle at 85% 15%,rgba(212,190,126,.2),transparent 40%),linear-gradient(145deg,#0d3229,#15473d 65%,#1f5d4f);border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(13,50,41,.16)}
+        .hero .moon{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:10px;border:1px solid rgba(241,223,176,.4);border-radius:50%;background:rgba(255,255,255,.08);font-size:38px!important;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+        .hero .arabic-main-title{font-family:'Amiri','Traditional Arabic',serif;font-size:38px;color:#f5e2b3;margin:4px 0 10px;font-weight:bold}
+        .hero .arabic-ayah{font-family:'Amiri','Traditional Arabic',serif;font-size:19px;color:#fffaf0;margin:0;line-height:2.2;direction:rtl;opacity:.98;padding:0 10px}
+        main{padding:0 18px}
+        .welcome{padding:25px 5px 14px;text-align:center}
+        .welcome h2{margin:0 0 5px;color:var(--sw-green);font-size:22px;font-weight:800}
+        .welcome p{margin:0;color:var(--sw-muted);font-size:13px;line-height:1.9}
+        .today-card{background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:22px;padding:20px;text-align:center;margin-bottom:20px;box-shadow:0 6px 18px rgba(18,61,52,.06)}
+        .today-card h3{color:var(--sw-green);font-size:16px;margin:0 0 10px;font-family:'Amiri',serif}
+        .today-card h2{margin:5px 0;color:var(--sw-green);font-size:42px;font-weight:800;font-variant-numeric:tabular-nums}
+        .today-card p{margin:0 0 14px;color:var(--sw-muted);font-size:13px;font-weight:600}
+        .today-card button{min-height:44px;padding:10px 24px;border:none;border-radius:25px;background:var(--sw-green);color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(18,61,52,.2)}
+        .feature-buttons{margin:0 0 18px;gap:10px}
+        .dark-button{min-height:44px;padding:10px 20px;border:1px solid var(--sw-border);border-radius:25px;background:var(--sw-card);color:var(--sw-green);font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(18,61,52,.05);cursor:pointer}
+        .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 25px}
+        .menu-card{position:relative;display:flex;min-width:0;min-height:140px;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 12px;box-sizing:border-box;text-align:center;background:var(--sw-card);border:1px solid var(--sw-border);border-radius:22px;color:var(--sw-text);box-shadow:0 6px 18px rgba(18,61,52,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+        .menu-card>div:first-child{display:flex;width:56px;height:56px;align-items:center;justify-content:center;margin-bottom:3px;border-radius:18px;background:#f0f5ed;font-size:30px!important;box-shadow:inset 0 2px 5px rgba(0,0,0,.02)}
+        .menu-card strong{display:block;max-width:100%;color:var(--sw-green);font-size:14px;font-weight:800;line-height:1.6}
+        .menu-card span{display:block;color:var(--sw-muted);font-size:11px;line-height:1.65}
+        .my-day-card{background:linear-gradient(135deg,#092b25,#123d34)!important;color:#fff!important;border:1.5px solid var(--sw-gold)!important;border-radius:22px!important;padding:16px 20px!important;margin-bottom:20px!important;cursor:pointer;box-shadow:0 6px 18px rgba(18,61,52,.15)!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;text-align:left!important;box-sizing:border-box!important;width:100%!important}
+        .routine-item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border:1px solid var(--sw-border);border-radius:16px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:all .2s ease}
+        .routine-item.active{border-color:#25D366;background:#f0fdf4}
+        .routine-item .checkbox-icon{width:26px;height:26px;flex-shrink:0;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;transition:all .2s ease}
+        .routine-item.active .checkbox-icon{background:#25D366;border-color:#25D366}
+        #quotePopupOverlay,#congratulationOverlay{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+        .quote-popup-box{background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:24px;width:100%;max-width:380px;padding:24px;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,.4);animation:popupScale .3s ease;box-sizing:border-box}
+        @keyframes popupScale{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+        #languageScreen{position:fixed;inset:0;z-index:100001;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0}
+        #languageScreen .language-box{width:100%;max-width:400px;padding:24px;border:1px solid #c8a96e;border-radius:22px;background:#fffaf0;color:#123d34;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,.25)}
+        .language-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+        .language-option{padding:13px 8px;border:1px solid #d7c69e;border-radius:12px;background:#fff;color:#123d34;font-size:16px;cursor:pointer}
+        .language-option.selected{border:2px solid #123d34;background:#e8f0e9;font-weight:bold}
+        #languageContinue{width:100%;padding:13px;border:none;border-radius:12px;background:#123d34;color:#fff;font-size:16px;cursor:pointer;font-weight:bold}
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <script src="language.js" defer></script>
 </head>
-
 <body>
-
-<div id="languageScreen">
-    <div class="language-box">
-        <h2 id="languageHeading">Select Your Language</h2>
-        <p id="languageSubtitle">Choose your preferred language</p>
-        <div class="language-options">
-            <button type="button" class="language-option" data-lang="ml">മലയാളം</button>
-            <button type="button" class="language-option" data-lang="en">English</button>
-            <button type="button" class="language-option" data-lang="ar">العربية</button>
-            <button type="button" class="language-option" data-lang="hi">हिन्दी</button>
-            <button type="button" class="language-option" data-lang="ur">اردو</button>
-            <button type="button" class="language-option" data-lang="ta">தமிழ்</button>
-        </div>
-        <button type="button" id="languageContinue">Continue</button>
-    </div>
-</div>
-
-<div id="splashScreen">
-    <div class="splash-content">
-        <div class="splash-moon">🌙</div>
-        <h1 style="font-family:'Amiri',serif;font-size:40px;">الصلاة</h1>
-        <p style="font-family:'Amiri',serif;font-size:16px;direction:rtl;line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</p>
-        <div class="splash-loader"></div>
-    </div>
-</div>
-
-<div id="quotePopupOverlay">
-    <div class="quote-popup-box">
-        <h3 style="color:var(--sw-green);font-size:18px;margin-bottom:12px;font-family:'Amiri',serif;">✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</h3>
-        <div style="background:#f8f8f4;border:1px solid var(--sw-gold);border-radius:16px;padding:16px;margin-bottom:18px;">
-            <p id="popupQuoteArabic" lang="ar" dir="rtl" style="font-size:28px;font-weight:bold;color:var(--sw-green);font-family:'Amiri',serif;line-height:2;margin:0 0 10px;text-align:center;"></p>
-            <p id="popupQuoteText" style="font-size:16px;font-weight:600;color:var(--sw-green);font-family:'Amiri',serif;line-height:1.8;margin:0 0 8px;text-align:center;"></p>
-            <p id="popupQuoteSource" style="font-size:12px;color:var(--sw-muted);margin:0;font-style:italic;"></p>
-        </div>
-        <div style="display:flex;gap:10px;justify-content:center;">
-            <button onclick="triggerShareStatus()" style="flex:1;padding:12px;border-radius:20px;background:#25D366;color:white;border:none;font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(37,211,102,.3);">📲 Status ഷെയർ ചെയ്യാം</button>
-            <button onclick="closeQuotePopup()" style="padding:12px 18px;border-radius:20px;background:#e0e0e0;color:#333;border:none;font-size:13px;cursor:pointer;">Back</button>
+    <div id="languageScreen">
+        <div class="language-box">
+            <h2 id="languageHeading">Select Your Language</h2>
+            <p id="languageSubtitle">Choose your preferred language</p>
+            <div class="language-options">
+                <button type="button" class="language-option" data-lang="ml">മലയാളം</button>
+                <button type="button" class="language-option" data-lang="en">English</button>
+                <button type="button" class="language-option" data-lang="ar">العربية</button>
+                <button type="button" class="language-option" data-lang="hi">हिन्दी</button>
+                <button type="button" class="language-option" data-lang="ur">اردو</button>
+                <button type="button" class="language-option" data-lang="ta">தமிழ்</button>
+            </div>
+            <button type="button" id="languageContinue">Continue</button>
         </div>
     </div>
-</div>
 
-<div id="congratulationOverlay">
-    <div class="quote-popup-box" style="border-color:#25D366;background:#fff8e8;">
-        <div style="font-size:60px;margin-bottom:10px;">🎁</div>
-        <h2 style="color:var(--sw-green);margin:0 0 8px;font-size:22px;">അൽഹംദുലില്ലാഹ്! 🎉</h2>
-        <p style="font-size:14px;color:var(--sw-text);line-height:1.7;margin-bottom:20px;">ഇന്നത്തെ എല്ലാ ഇസ്ലാമിക് ആത്മീയ കാര്യങ്ങളും നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു. അല്ലാഹു സ്വീകരിക്കുമാറാകട്ടെ!</p>
-        <button onclick="closeCongratulationModal()" style="width:100%;padding:12px;border-radius:20px;background:var(--sw-green);color:white;border:none;font-weight:bold;cursor:pointer;">സന്തോഷം! (Close)</button>
+    <div id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-moon">🌙</div>
+            <h1 style="font-family:'Amiri',serif;font-size:40px;">الصلاة</h1>
+            <p style="font-family:'Amiri',serif;font-size:16px;direction:rtl;line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</p>
+            <div class="splash-loader"></div>
+        </div>
     </div>
-</div>
 
-<div class="app">
-    <section class="hero">
-        <div class="moon">🌙</div>
-        <div class="arabic-main-title">الصلاة</div>
-        <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</div>
-    </section>
+    <div id="quotePopupOverlay">
+        <div class="quote-popup-box">
+            <h3 style="color:var(--sw-green);font-size:18px;margin-bottom:12px;font-family:'Amiri',serif;">✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</h3>
+            <div style="background:#f8f8f4;border:1px solid var(--sw-gold);border-radius:16px;padding:16px;margin-bottom:18px;">
+                <p id="popupQuoteArabic" lang="ar" dir="rtl" style="font-size:28px;font-weight:bold;color:var(--sw-green);font-family:'Amiri',serif;line-height:2;margin:0 0 10px;text-align:center;"></p>
+                <p id="popupQuoteText" style="font-size:16px;font-weight:600;color:var(--sw-green);font-family:'Amiri',serif;line-height:1.8;margin:0 0 8px;text-align:center;"></p>
+                <p id="popupQuoteSource" style="font-size:12px;color:var(--sw-muted);margin:0;font-style:italic;"></p>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:center;">
+                <button onclick="triggerShareStatus()" style="flex:1;padding:12px;border-radius:20px;background:#25D366;color:white;border:none;font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(37,211,102,.3);">📲 Status ഷെയർ ചെയ്യാം</button>
+                <button onclick="closeQuotePopup()" style="padding:12px 18px;border-radius:20px;background:#e0e0e0;color:#333;border:none;font-size:13px;cursor:pointer;">Back</button>
+            </div>
+        </div>
+    </div>
 
-    <main>
-        <section class="welcome">
-            <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2>
-            <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p>
+    <div id="congratulationOverlay">
+        <div class="quote-popup-box" style="border-color:#25D366;background:#fff8e8;">
+            <div style="font-size:60px;margin-bottom:10px;">🎁</div>
+            <h2 style="color:var(--sw-green);margin:0 0 8px;font-size:22px;">അൽഹംദുലില്ലാഹ്! 🎉</h2>
+            <p style="font-size:14px;color:var(--sw-text);line-height:1.7;margin-bottom:20px;">ഇന്നത്തെ എല്ലാ ഇസ്ലാമിക് ആത്മീയ കാര്യങ്ങളും നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു. അല്ലാഹു സ്വീകരിക്കുമാറാകട്ടെ!</p>
+            <button onclick="closeCongratulationModal()" style="width:100%;padding:12px;border-radius:20px;background:var(--sw-green);color:white;border:none;font-weight:bold;cursor:pointer;">സന്തോഷം! (Close)</button>
+        </div>
+    </div>
+
+    <div class="app">
+        <section class="hero">
+            <div class="moon">🌙</div>
+            <div class="arabic-main-title">الصلاة</div>
+            <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</div>
         </section>
 
-        <div class="today-card">
-            <h3 id="counterCardTitle">مُعَدَّدُ الصَّلَوَات (Swalath Counter)</h3>
-            <h2 id="count">0</h2>
-            <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
-            <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
-        </div>
+        <main>
+            <section class="welcome">
+                <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2>
+                <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p>
+            </section>
 
-        <div class="my-day-card" onclick="openMyDayPage()">
-            <div style="display:flex;align-items:center;gap:14px;">
-                <div style="font-size:32px;background:rgba(255,255,255,.12);width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:16px;flex-shrink:0;">✨</div>
-                <div>
-                    <strong style="color:#f5e2b3;font-size:16px;display:block;margin-bottom:2px;">ഇന്നത്തെ എന്റെ ദിവസം</strong>
-                    <span style="color:#ddd;font-size:12px;display:block;">ഡെയിലി റൂട്ടീൻ പ്രോഗ്രസും സ്റ്റാറ്റസും</span>
-                </div>
-            </div>
-            <div style="background:var(--sw-gold);color:#092b25;padding:8px 16px;border-radius:20px;font-weight:bold;font-size:13px;flex-shrink:0;margin-left:10px;">Open</div>
-        </div>
-
-        <div class="feature-buttons">
-            <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-            <button id="languageButton" class="dark-button" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button>
-        </div>
-
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openQuran()">
-                <div style="font-size:30px;">📖</div><strong>القرآن الكريم</strong>
-                <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span>
-            </div>
-            <div class="menu-card" onclick="openCollection()">
-                <div style="font-size:30px;">🕌</div>
-                <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong>
-                <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
-            </div>
-            <div class="menu-card" onclick="openQuranMP3()">
-                <div style="font-size:30px;">🎧</div>
-                <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong>
-                <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span>
-            </div>
-            <div class="menu-card" onclick="openCalendar()">
-                <div style="font-size:30px;">🗓️</div><strong>التقويم الهجري</strong>
-                <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span>
-            </div>
-            <div class="menu-card" onclick="openPrayerTime()">
-                <div style="font-size:30px;">🕐</div>
-                <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong>
-                <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span>
-            </div>
-            <div class="menu-card" onclick="openDua()">
-                <div style="font-size:30px;">🤲</div>
-                <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong>
-                <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span>
-            </div>
-            <div class="menu-card" onclick="openDhikr()">
-                <div style="font-size:30px;">📿</div>
-                <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong>
-                <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span>
-            </div>
-            <div class="menu-card" onclick="openFavorites()">
-                <div style="font-size:30px;">❤️</div>
-                <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong>
-                <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span>
-            </div>
-            <div class="menu-card" onclick="openAsmaulHusna()">
-                <div style="font-size:30px;">⭐</div><strong>أَسْمَاءُ الْحُسْنَى</strong><span>أسماء الله الحسنى</span>
-            </div>
-            <div class="menu-card" onclick="openUmrah()">
-                <div style="font-size:30px;">🕋</div>
-                <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong>
-                <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
-            </div>
-            <div class="menu-card" onclick="openAdvertise()">
-                <div style="font-size:30px;">📢</div><strong>Advertise with us</strong><span>Reach Worldwide users</span>
-            </div>
-        </div>
-
-        <!-- ഇന്നത്തെ എന്റെ ദിവസം -->
-        <section id="myDayPage" style="display:none;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-                <button onclick="closeMyDayPage()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                <h2 data-i18n="myDayTitle" data-ml="✨ ഇന്നത്തെ എന്റെ ദിവസം" style="margin:0;font-family:'Amiri',serif;color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+            <div class="today-card">
+                <h3 id="counterCardTitle">مُعَدَّدُ الصَّلَوَات (Swalath Counter)</h3>
+                <h2 id="count">0</h2>
+                <p data-i18n="todayCount" data-ml="ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ">ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ</p>
+                <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
             </div>
 
-            <div onclick="openQuotePopup()" style="background:linear-gradient(135deg,#123d34,#092b25);color:white;border:1.5px solid var(--sw-gold);border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.15);">
+            <!-- അപ്ഡേറ്റ് ചെയ്ത My Day Card (data-i18n ചേർത്തത്) -->
+            <div class="my-day-card" onclick="openMyDayPage()">
                 <div style="display:flex;align-items:center;gap:14px;">
-                    <div style="font-size:32px;">📲</div>
+                    <div style="font-size:32px;background:rgba(255,255,255,.12);width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:16px;flex-shrink:0;">✨</div>
                     <div>
-                        <strong data-i18n="statusTitle" data-ml="ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്" style="font-size:16px;color:#f5e2b3;display:block;">ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്</strong>
-                        <span data-i18n="statusSubtitle" data-ml="മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ" style="font-size:12px;color:#ddd;">മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ</span>
+                        <strong data-i18n="myDayTitle" style="color:#f5e2b3;font-size:16px;display:block;margin-bottom:2px;">ഇന്നത്തെ എന്റെ ദിവസം</strong>
+                        <span data-i18n="statusSubtitle" style="color:#ddd;font-size:12px;display:block;">ഡെയിലി റൂട്ടീൻ പ്രോഗ്രസും സ്റ്റാറ്റസും</span>
                     </div>
                 </div>
-                <div data-i18n="statusTap" data-ml="തുറക്കാൻ അമർത്തുക" style="background:#25D366;color:white;padding:6px 14px;border-radius:15px;font-size:12px;font-weight:bold;flex-shrink:0;">തുറക്കാൻ അമർത്തുക</div>
+                <div data-i18n="statusTap" style="background:var(--sw-gold);color:#092b25;padding:8px 16px;border-radius:20px;font-weight:bold;font-size:13px;flex-shrink:0;margin-left:10px;">Open</div>
             </div>
 
-            <h3 data-i18n="routineTitle" data-ml="📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ" style="color:var(--sw-green);font-size:16px;margin-bottom:12px;font-family:'Amiri',serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
+            <div class="feature-buttons">
+                <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+                <button id="languageButton" class="dark-button" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button>
+            </div>
 
-            <div class="routine-item" id="task_quran" onclick="toggleRoutine('task_quran')">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:22px;">📖</span>
-                    <div><strong data-i18n="routineQuranTitle" data-ml="ഇന്നത്തെ ഖുർആൻ പാരായണം">ഇന്നത്തെ ഖുർആൻ പാരായണം</strong><br><span data-i18n="routineQuranDesc" data-ml="ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു</span></div>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="openQuran()">
+                    <div style="font-size:30px;">📖</div><strong>القرآن الكريم</strong>
+                    <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span>
                 </div>
-                <div class="checkbox-icon">✓</div>
-            </div>
-
-            <div class="routine-item" id="task_swalath" onclick="toggleRoutine('task_swalath')">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:22px;">📿</span>
-                    <div><strong data-i18n="routineSwalathTitle" data-ml="ഇന്നത്തെ സ്വലാത്തുകൾ">ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span data-i18n="routineSwalathDesc" data-ml="സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                <div class="menu-card" onclick="openCollection()">
+                    <div style="font-size:30px;">🕌</div>
+                    <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong>
+                    <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
                 </div>
-                <div class="checkbox-icon">✓</div>
-            </div>
-
-            <div class="routine-item" id="task_prayers" onclick="toggleRoutine('task_prayers')">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:22px;">🕌</span>
-                    <div><strong data-i18n="routinePrayersTitle" data-ml="അഞ്ച് നേരത്തെ നിസ്കാരം">അഞ്ച് നേരത്തെ നിസ്കാരം</strong><br><span data-i18n="routinePrayersDesc" data-ml="ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു</span></div>
+                <div class="menu-card" onclick="openQuranMP3()">
+                    <div style="font-size:30px;">🎧</div>
+                    <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong>
+                    <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span>
                 </div>
-                <div class="checkbox-icon">✓</div>
-            </div>
-
-            <div class="routine-item" id="task_dhikr" onclick="toggleRoutine('task_dhikr')">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:22px;">✨</span>
-                    <div><strong data-i18n="routineDhikrTitle" data-ml="രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ">രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ</strong><br><span data-i18n="routineDhikrDesc" data-ml="ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                <div class="menu-card" onclick="openCalendar()">
+                    <div style="font-size:30px;">🗓️</div><strong>التقويم الهجري</strong>
+                    <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span>
                 </div>
-                <div class="checkbox-icon">✓</div>
-            </div>
-
-            <div class="routine-item" id="task_dua" onclick="toggleRoutine('task_dua')">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:22px;">🤲</span>
-                    <div><strong data-i18n="routineDuaTitle" data-ml="പ്രത്യേക ദുആകൾ">പ്രത്യേക ദുആകൾ</strong><br><span data-i18n="routineDuaDesc" data-ml="ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                <div class="menu-card" onclick="openPrayerTime()">
+                    <div style="font-size:30px;">🕐</div>
+                    <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong>
+                    <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span>
                 </div>
-                <div class="checkbox-icon">✓</div>
-            </div>
-
-            <div style="background:var(--sw-card);border:1px solid var(--sw-gold);border-radius:20px;padding:20px;margin-top:20px;text-align:center;">
-                <h4 data-i18n="routineProgressTitle" data-ml="🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി" style="margin:0 0 8px;color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
-                <div style="background:#e0e0e0;border-radius:10px;height:16px;overflow:hidden;margin:12px 0;">
-                    <div id="routineProgressBar" style="background:linear-gradient(90deg,#123d34,#25D366);height:100%;width:0%;transition:width .4s ease;"></div>
+                <div class="menu-card" onclick="openDua()">
+                    <div style="font-size:30px;">🤲</div>
+                    <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong>
+                    <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span>
                 </div>
-                <p id="routineProgressText" data-i18n="routineProgressText" data-ml="0% പൂർത്തിയായി" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">0% പൂർത്തിയായി</p>
+                <div class="menu-card" onclick="openDhikr()">
+                    <div style="font-size:30px;">📿</div>
+                    <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong>
+                    <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span>
+                </div>
+                <div class="menu-card" onclick="openFavorites()">
+                    <div style="font-size:30px;">❤️</div>
+                    <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong>
+                    <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span>
+                </div>
+                <div class="menu-card" onclick="openAsmaulHusna()">
+                    <div style="font-size:30px;">⭐</div><strong>أَسْمَاءُ الْحُسْنَى</strong><span>أسماء الله الحسنى</span>
+                </div>
+                <div class="menu-card" onclick="openUmrah()">
+                    <div style="font-size:30px;">🕋</div>
+                    <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong>
+                    <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
+                </div>
+                <div class="menu-card" onclick="openAdvertise()">
+                    <div style="font-size:30px;">📢</div><strong>Advertise with us</strong><span>Reach Worldwide users</span>
+                </div>
             </div>
-        </section>
 
-        <section id="collectionSection" style="display:none;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-                <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                <h2 style="margin:0;font-family:'Amiri',serif;">مَجْمُوعَةُ الصَّلَوَات</h2>
-            </div>
-            <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()">
-            <div id="collectionList"></div>
-        </section>
+            <!-- ഇന്നത്തെ എന്റെ ദിവസം പേജ് -->
+            <section id="myDayPage" style="display:none;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                    <button onclick="closeMyDayPage()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                    <h2 data-i18n="myDayTitle" data-ml="✨ ഇന്നത്തെ എന്റെ ദിവസം" style="margin:0;font-family:'Amiri',serif;color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+                </div>
 
-        <section id="favoritesSection" style="display:none;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-                <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                <h2 style="margin:0;font-family:'Amiri',serif;">المفضلات</h2>
-            </div>
-            <div id="favoritesList"></div>
-        </section>
-    </main>
+                <div onclick="openQuotePopup()" style="background:linear-gradient(135deg,#123d34,#092b25);color:white;border:1.5px solid var(--sw-gold);border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.15);">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div style="font-size:32px;">📲</div>
+                        <div>
+                            <strong data-i18n="statusTitle" data-ml="ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്" style="font-size:16px;color:#f5e2b3;display:block;">ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്</strong>
+                            <span data-i18n="statusSubtitle" data-ml="മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ" style="font-size:12px;color:#ddd;">മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ</span>
+                        </div>
+                    </div>
+                    <div data-i18n="statusTap" data-ml="തുറക്കാൻ അമർത്തുക" style="background:#25D366;color:white;padding:6px 14px;border-radius:15px;font-size:12px;font-weight:bold;flex-shrink:0;">തുറക്കാൻ അമർത്തുക</div>
+                </div>
 
-    <footer><p>© 2026 Swalath</p><p>Made with ❤️</p></footer>
-</div>
+                <h3 data-i18n="routineTitle" data-ml="📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ" style="color:var(--sw-green);font-size:16px;margin-bottom:12px;font-family:'Amiri',serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
 
-<script>
-function getLocalDateString(){
-    const now=new Date();
-    return now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
-}
+                <div class="routine-item" id="task_quran" onclick="toggleRoutine('task_quran')">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:22px;">📖</span>
+                        <div><strong data-i18n="routineQuranTitle" data-ml="ഇന്നത്തെ ഖുർആൻ പാരായണം">ഇന്നത്തെ ഖുർആൻ പാരായണം</strong><br><span data-i18n="routineQuranDesc" data-ml="ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു</span></div>
+                    </div>
+                    <div class="checkbox-icon">✓</div>
+                </div>
 
-const todayDate=getLocalDateString();
-let savedDate=localStorage.getItem("swalathCountDate");
-let count=Number(localStorage.getItem("swalathDailyCount")||0);
+                <div class="routine-item" id="task_swalath" onclick="toggleRoutine('task_swalath')">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:22px;">📿</span>
+                        <div><strong data-i18n="routineSwalathTitle" data-ml="ഇന്നത്തെ സ്വലാത്തുകൾ">ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span data-i18n="routineSwalathDesc" data-ml="സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                    </div>
+                    <div class="checkbox-icon">✓</div>
+                </div>
 
-if(savedDate!==todayDate){
-    count=0;
-    localStorage.setItem("swalathCountDate",todayDate);
-    localStorage.setItem("swalathDailyCount","0");
-}
-document.getElementById("count").textContent=count;
+                <div class="routine-item" id="task_prayers" onclick="toggleRoutine('task_prayers')">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:22px;">🕌</span>
+                        <div><strong data-i18n="routinePrayersTitle" data-ml="അഞ്ച് നേരത്തെ നിസ്കാരം">അഞ്ച് നേരത്തെ നിസ്കാരം</strong><br><span data-i18n="routinePrayersDesc" data-ml="ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു</span></div>
+                    </div>
+                    <div class="checkbox-icon">✓</div>
+                </div>
 
-function increaseCount(){
-    count++;
-    document.getElementById("count").textContent=count;
-    localStorage.setItem("swalathDailyCount",String(count));
-    localStorage.setItem("swalathCountDate",getLocalDateString());
-}
+                <div class="routine-item" id="task_dhikr" onclick="toggleRoutine('task_dhikr')">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:22px;">✨</span>
+                        <div><strong data-i18n="routineDhikrTitle" data-ml="രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ">രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ</strong><br><span data-i18n="routineDhikrDesc" data-ml="ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                    </div>
+                    <div class="checkbox-icon">✓</div>
+                </div>
 
-document.addEventListener("DOMContentLoaded",loadDailyQuoteData);
+                <div class="routine-item" id="task_dua" onclick="toggleRoutine('task_dua')">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:22px;">🤲</span>
+                        <div><strong data-i18n="routineDuaTitle" data-ml="പ്രത്യേക ദുആകൾ">പ്രത്യേക ദുആകൾ</strong><br><span data-i18n="routineDuaDesc" data-ml="ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                    </div>
+                    <div class="checkbox-icon">✓</div>
+                </div>
 
-function loadDailyQuoteData(){
-    const lang=(window.SwalathLanguage&&window.SwalathLanguage.getCurrent)
-        ?window.SwalathLanguage.getCurrent()
-        :(localStorage.getItem("swalath-language")||"ml");
+                <div style="background:var(--sw-card);border:1px solid var(--sw-gold);border-radius:20px;padding:20px;margin-top:20px;text-align:center;">
+                    <h4 data-i18n="routineProgressTitle" data-ml="🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി" style="margin:0 0 8px;color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
+                    <div style="background:#e0e0e0;border-radius:10px;height:16px;overflow:hidden;margin:12px 0;">
+                        <div id="routineProgressBar" style="background:linear-gradient(90deg,#123d34,#25D366);height:100%;width:0%;transition:width .4s ease;"></div>
+                    </div>
+                    <p id="routineProgressText" data-i18n="routineProgressText" data-ml="0% പൂർത്തിയായി" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">0% പൂർത്തിയായി</p>
+                </div>
+            </section>
 
-    const quotes=[
-        {
-            arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
-            meaning:{
-                ml:"തീർച്ചയായും പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.",
-                en:"Surely, with hardship comes ease.",
-                ar:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
-                hi:"निश्चय ही कठिनाई के साथ आसानी है।",
-                ur:"بے شک مشکل کے ساتھ آسانی ہے۔",
-                ta:"நிச்சயமாக, சிரமத்துடன் இலகுவும் உள்ளது."
-            },
-            source:{
-                ml:"വിശുദ്ധ ഖുർആൻ (94:6)",en:"The Holy Quran (94:6)",
-                ar:"القرآن الكريم (94:6)",hi:"पवित्र क़ुरआन (94:6)",
-                ur:"قرآن کریم (94:6)",ta:"திருக்குர்ஆன் (94:6)"
-            }
-        },
-        {
-            arabic:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
-            meaning:{
-                ml:"അല്ലാഹു ഒരാളെയും അവന്റെ കഴിവിനതീതമായി ബാധ്യതപ്പെടുത്തുകയില്ല.",
-                en:"Allah does not burden a soul beyond what it can bear.",
-                ar:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
-                hi:"अल्लाह किसी प्राणी पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
-                ur:"اللہ کسی جان پر اس کی طاقت سے بڑھ کر بوجھ نہیں ڈالتا۔",
-                ta:"அல்லாஹ் எந்த ஆன்மாவிற்கும் அதன் சக்திக்கு மீறிய சுமையைச் சுமத்துவதில்லை."
-            },
-            source:{
-                ml:"വിശുദ്ധ ഖുർആൻ (2:286)",en:"The Holy Quran (2:286)",
-                ar:"القرآن الكريم (2:286)",hi:"पवित्र क़ुरआन (2:286)",
-                ur:"قرآن کریم (2:286)",ta:"திருக்குர்ஆன் (2:286)"
-            }
-        },
-        {
-            arabic:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
-            meaning:{
-                ml:"അല്ലാഹുവിന്റെ സ്മരണയിലൂടെയാണ് ഹൃദയങ്ങൾക്ക് സമാധാനം ലഭിക്കുന്നത്.",
-                en:"Surely, in the remembrance of Allah hearts find comfort.",
-                ar:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
-                hi:"अल्लाह के स्मरण से दिलों को सुकून मिलता है।",
-                ur:"اللہ کے ذکر سے دلوں کو اطمینان ملتا ہے۔",
-                ta:"அல்லாஹ்வை நினைவுகூர்வதால் இதயங்கள் அமைதி பெறுகின்றன."
-            },
-            source:{
-                ml:"വിശുദ്ധ ഖുർആൻ (13:28)",en:"The Holy Quran (13:28)",
-                ar:"القرآن الكريم (13:28)",hi:"पवित्र क़ुरआन (13:28)",
-                ur:"قرآن کریم (13:28)",ta:"திருக்குர்ஆன் (13:28)"
-            }
+            <section id="collectionSection" style="display:none;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                    <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                    <h2 style="margin:0;font-family:'Amiri',serif;">مَجْمُوعَةُ الصَّلَوَات</h2>
+                </div>
+                <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()">
+                <div id="collectionList"></div>
+            </section>
+
+            <section id="favoritesSection" style="display:none;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                    <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                    <h2 style="margin:0;font-family:'Amiri',serif;">المفضلات</h2>
+                </div>
+                <div id="favoritesList"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Swalath</p>
+            <p>Made with ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        function getLocalDateString(){
+            const now=new Date();
+            return now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
         }
-    ];
-
-    const dayNumber=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000);
-    const quote=quotes[dayNumber%quotes.length];
-    const arabicElement=document.getElementById("popupQuoteArabic");
-    const meaningElement=document.getElementById("popupQuoteText");
-    const sourceElement=document.getElementById("popupQuoteSource");
-
-    if(!arabicElement||!meaningElement||!sourceElement)return;
-
-    arabicElement.textContent=quote.arabic;
-    meaningElement.textContent=quote.meaning[lang]||quote.meaning.ml;
-    sourceElement.textContent=quote.source[lang]||quote.source.ml;
-
-    meaningElement.style.display=lang==="ar"?"none":"block";
-    sourceElement.style.display=lang==="ar"?"none":"block";
-}
-
-function openQuotePopup(){
-    loadDailyQuoteData();
-    document.getElementById("quotePopupOverlay").style.display="flex";
-}
-function closeQuotePopup(){document.getElementById("quotePopupOverlay").style.display="none"}
-
-function triggerShareStatus(){
-    if(window.AndroidAdhan&&typeof window.AndroidAdhan.shareDailyStatus==="function"){
-        window.AndroidAdhan.shareDailyStatus();
-    }else{
-        alert("WhatsApp സ്റ്റാറ്റസ് ഫീച്ചർ സ്വലാത്ത് ആപ്പിനുള്ളിൽ മാത്രമേ പ്രവർത്തിക്കുകയുള്ളൂ.");
-    }
-}
-
-/* DAILY ROUTINE */
-const totalTasks=5;
-let completedTasks={};
-
-function loadRoutineState(){
-    const savedRoutineDate=localStorage.getItem("routineDate");
-    if(savedRoutineDate!==getLocalDateString()){
-        localStorage.setItem("routineDate",getLocalDateString());
-        localStorage.setItem("routineState",JSON.stringify({}));
-        completedTasks={};
-    }else{
-        try{completedTasks=JSON.parse(localStorage.getItem("routineState")||"{}")}
-        catch(e){completedTasks={}}
-    }
-    updateRoutineUI();
-}
-
-function toggleRoutine(taskId){
-    completedTasks[taskId]=!completedTasks[taskId];
-    localStorage.setItem("routineState",JSON.stringify(completedTasks));
-    updateRoutineUI();
-}
-
-function getCurrentLanguage(){
-    if(window.SwalathLanguage&&typeof window.SwalathLanguage.getCurrent==="function"){
-        return window.SwalathLanguage.getCurrent();
-    }
-    return localStorage.getItem("swalath-language")||"ml";
-}
-
-function updateRoutineUI(){
-    let activeCount=0;
-    const taskIds=["task_quran","task_swalath","task_prayers","task_dhikr","task_dua"];
-
-    taskIds.forEach(function(id){
-        const el=document.getElementById(id);
-        if(!el)return;
-        if(completedTasks[id]){
-            el.classList.add("active");
-            activeCount++;
-        }else{
-            el.classList.remove("active");
+        const todayDate=getLocalDateString();
+        let savedDate=localStorage.getItem("swalathCountDate");
+        let count=Number(localStorage.getItem("swalathDailyCount")||0);
+        if(savedDate!==todayDate){
+            count=0;
+            localStorage.setItem("swalathCountDate",todayDate);
+            localStorage.setItem("swalathDailyCount","0");
         }
-    });
-
-    const percent=Math.round((activeCount/totalTasks)*100);
-    const progressBar=document.getElementById("routineProgressBar");
-    const progressText=document.getElementById("routineProgressText");
-
-    if(progressBar)progressBar.style.width=percent+"%";
-
-    const progressWords={
-        ml:"പൂർത്തിയായി",
-        en:"completed",
-        ar:"مكتمل",
-        hi:"पूरा हुआ",
-        ur:"مکمل",
-        ta:"நிறைவு"
-    };
-    const lang=getCurrentLanguage();
-    if(progressText){
-        progressText.textContent=percent+"% "+(progressWords[lang]||progressWords.ml);
-    }
-
-    if(percent===100&&!sessionStorage.getItem("congratulationShown")){
-        sessionStorage.setItem("congratulationShown","true");
-        const modal=document.getElementById("congratulationOverlay");
-        if(modal)modal.style.display="flex";
-    }
-}
-
-function closeCongratulationModal(){
-    document.getElementById("congratulationOverlay").style.display="none";
-}
-
-function openMyDayPage(){
-    if(document.getElementById("myDayPage").style.display==="block")return;
-    history.pushState({section:"myDay"},"");
-    hideHomeElements();
-    document.getElementById("myDayPage").style.display="block";
-    loadRoutineState();
-    window.scrollTo(0,0);
-}
-
-function closeMyDayPage(){history.back()}
-
-function hideHomeElements(){
-    document.querySelector(".welcome").style.display="none";
-    document.querySelector(".today-card").style.display="none";
-    const myDayCard=document.querySelector(".my-day-card");
-    if(myDayCard)myDayCard.style.display="none";
-    document.querySelector(".menu-grid").style.display="none";
-    document.querySelector(".feature-buttons").style.display="none";
-}
-
-function showHomeElements(){
-    document.querySelector(".welcome").style.display="block";
-    document.querySelector(".today-card").style.display="block";
-    const myDayCard=document.querySelector(".my-day-card");
-    if(myDayCard)myDayCard.style.display="flex";
-    document.querySelector(".menu-grid").style.display="grid";
-    document.querySelector(".feature-buttons").style.display="flex";
-    document.getElementById("myDayPage").style.display="none";
-    document.getElementById("collectionSection").style.display="none";
-    document.getElementById("favoritesSection").style.display="none";
-}
-
-/* OPEN PAGES */
-function openAsmaulHusna(){window.location.href="asmaul-husna.html"}
-function openQuran(){window.location.href="quran.html"}
-function openQuranMP3(){window.location.href="quran-mp3.html"}
-function openCalendar(){window.location.href="calendar.html"}
-function openUmrah(){window.location.href="umrah.html"}
-function openDua(){window.location.href="dua.html"}
-function openDhikr(){window.location.href="dhikr.html"}
-function openPrayerTime(){window.location.href="prayer-time.html"}
-function openAdvertise(){window.location.href="advertise.html"}
-function openCollection(){window.location.href="swalath.html"}
-function closeCollection(){history.back()}
-
-function loadFavorites(){
-    const list=document.getElementById("favoritesList");
-    if(!list)return;
-    list.replaceChildren();
-
-    let favorites=[];
-    try{favorites=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}
-    catch(error){favorites=[]}
-    if(!Array.isArray(favorites))favorites=[];
-
-    const names={
-        ibrahimiyya:"الصلاة الإبراهيمية",nariya:"الصلاة النارية",
-        tunjina:"الصلاة المنجية",fatih:"صلاة الفاتح",
-        tibbiyya:"صلاة طب القلوب",nuraniyya:"الصلاة النورانية",
-        saadah:"صلاة السعادة",kamaliyya:"صلاة الكمالية",
-        dhatiyya:"الصلاة الذاتية",jawharat:"جوهرة الكمال",
-        taj:"صلاة التاج",faraj:"صلاة الفرج",
-        bashair:"بشائر الخيرات",ahlam:"صلاة الأحلام",
-        hulo:"صلاة الحضور",friday:"صلاة الجمعة",
-        mashishiyya:"الصلاة المشيشية",ummiyya:"الصلاة الأمية",
-        shadhiliyya:"الصلاة الشاذلية",anwar:"صلاة الأنوار",
-        yaqutat:"ياقوتة الحقائق"
-    };
-
-    const validFavorites=favorites.filter(key=>names[key]);
-    if(validFavorites.length===0){
-        const message=document.createElement("p");
-        message.textContent="ഇതുവരെ ഫേവറൈറ്റായി ഒന്നും ചേർത്തിട്ടില്ല.";
-        message.style.textAlign="center";
-        message.style.padding="20px";
-        list.appendChild(message);
-        return;
-    }
-
-    validFavorites.forEach(function(key){
-        const item=document.createElement("button");
-        item.type="button";
-        item.className="favorite-item";
-        item.textContent="❤️  "+names[key];
-        item.style.cssText="display:block;width:100%;padding:16px;margin-bottom:10px;border:1px solid #c5a868;border-radius:12px;background:#fff;color:#123d34;font-size:18px;text-align:right;cursor:pointer;";
-        item.dir="rtl";
-        item.onclick=function(){
-            window.location.href="swalath.html?ref=favorites#"+encodeURIComponent(key);
-        };
-        list.appendChild(item);
-    });
-}
-
-function openFavorites(){
-    history.pushState({section:"favorites"},"","#favorites");
-    hideHomeElements();
-    document.getElementById("favoritesSection").style.display="block";
-    loadFavorites();
-}
-
-function closeFavorites(){
-    if(location.hash==="#favorites"){
-        history.back();
-    }else{
-        history.back();
-    }
-}
-
-window.addEventListener("popstate",function(event){
-    if(location.hash==="#favorites"){
-        hideHomeElements();
-        document.getElementById("favoritesSection").style.display="block";
-        loadFavorites();
-        return;
-    }
-
-    const section=event.state&&event.state.section;
-    if(section==="myDay"){
-        hideHomeElements();
-        document.getElementById("myDayPage").style.display="block";
-        loadRoutineState();
-    }else if(section==="collection"){
-        hideHomeElements();
-        document.getElementById("collectionSection").style.display="block";
-    }else if(section==="favorites"){
-        hideHomeElements();
-        document.getElementById("favoritesSection").style.display="block";
-        loadFavorites();
-    }else{
-        showHomeElements();
-    }
-});
-
-window.addEventListener("pageshow",function(){
-    if(location.hash==="#favorites"){
-        hideHomeElements();
-        document.getElementById("myDayPage").style.display="none";
-        document.getElementById("collectionSection").style.display="none";
-        document.getElementById("favoritesSection").style.display="block";
-        loadFavorites();
-    }
-});
-
-/* DARK MODE */
-function toggleDarkMode(){
-    document.body.classList.toggle("dark-mode");
-    const enabled=document.body.classList.contains("dark-mode");
-    localStorage.setItem("swalathDarkMode",String(enabled));
-    updateDarkButton();
-}
-
-function updateDarkButton(){
-    const button=document.getElementById("darkModeButton");
-    if(!button)return;
-    button.textContent=document.body.classList.contains("dark-mode")?"☀️ Light Mode":"🌙 Dark Mode";
-}
-
-/* STARTUP */
-window.addEventListener("load",function(){
-    if(localStorage.getItem("swalathDarkMode")==="true"){
-        document.body.classList.add("dark-mode");
-    }
-    updateDarkButton();
-    loadRoutineState();
-
-    const splash=document.getElementById("splashScreen");
-    window.setTimeout(function(){
-        if(splash)splash.classList.add("hide");
-    },1200);
-});
-
-/* LANGUAGE SELECTOR */
-function openSwalathLanguageSelector(){
-    const screen=document.getElementById("languageScreen");
-    const options=document.querySelectorAll(".language-option");
-    const continueButton=document.getElementById("languageContinue");
-
-    if(!screen||!continueButton||!window.SwalathLanguage)return;
-
-    let selectedLanguage=window.SwalathLanguage.getCurrent();
-
-    options.forEach(function(button){
-        button.classList.toggle("selected",button.dataset.lang===selectedLanguage);
-        button.onclick=function(){
-            selectedLanguage=button.dataset.lang;
-            options.forEach(function(option){
-                option.classList.toggle("selected",option.dataset.lang===selectedLanguage);
-            });
-        };
-    });
-
-    continueButton.onclick=function(){
-        window.SwalathLanguage.setLanguage(selectedLanguage);
-        screen.style.display="none";
-        loadDailyQuoteData();
-        updateRoutineUI();
-    };
-
-    screen.style.display="flex";
-}
-</script>
-
-<script>
-(function(){
-    const translations={
-        ml:{
-            myDayTitle:"✨ ഇന്നത്തെ എന്റെ ദിവസം",
-            statusTitle:"ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്",
-            statusSubtitle:"മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ",
-            statusTap:"തുറക്കാൻ അമർത്തുക",
-            routineTitle:"📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ",
-            routineQuranTitle:"ഇന്നത്തെ ഖുർആൻ പാരായണം",
-            routineQuranDesc:"ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു",
-            routineSwalathTitle:"ഇന്നത്തെ സ്വലാത്തുകൾ",
-            routineSwalathDesc:"സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി",
-            routinePrayersTitle:"അഞ്ച് നേരത്തെ നിസ്കാരം",
-            routinePrayersDesc:"ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു",
-            routineDhikrTitle:"രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ",
-            routineDhikrDesc:"ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി",
-            routineDuaTitle:"പ്രത്യേക ദുആകൾ",
-            routineDuaDesc:"ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി",
-            routineProgressTitle:"🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി",
-            routineProgressText:"പൂർത്തിയായി"
-        },
-        en:{
-            myDayTitle:"✨ My Day",
-            statusTitle:"Today's WhatsApp Status",
-            statusSubtitle:"View and share beautiful Islamic status designs",
-            statusTap:"Tap to open",
-            routineTitle:"📌 Today's Spiritual Routine",
-            routineQuranTitle:"Today's Quran Reading",
-            routineQuranDesc:"Complete today's planned reading",
-            routineSwalathTitle:"Today's Salawat",
-            routineSwalathDesc:"Complete your Salawat recitation",
-            routinePrayersTitle:"Five Daily Prayers",
-            routinePrayersDesc:"Complete today's prayers",
-            routineDhikrTitle:"Morning and Evening Dhikr",
-            routineDhikrDesc:"Complete your Dhikr",
-            routineDuaTitle:"Special Duas",
-            routineDuaDesc:"Complete today's Duas",
-            routineProgressTitle:"🎯 Today's Goal Progress",
-            routineProgressText:"completed"
-        },
-        ar:{
-            myDayTitle:"✨ يومي",
-            statusTitle:"حالة واتساب اليوم",
-            statusSubtitle:"شاهد وشارك تصاميم إسلامية جميلة",
-            statusTap:"اضغط للفتح",
-            routineTitle:"📌 برنامج اليوم الإيماني",
-            routineQuranTitle:"قراءة القرآن اليوم",
-            routineQuranDesc:"أكمل ورد القرآن المحدد اليوم",
-            routineSwalathTitle:"الصلوات على النبي اليوم",
-            routineSwalathDesc:"أكمل قراءة الصلوات",
-            routinePrayersTitle:"الصلوات الخمس",
-            routinePrayersDesc:"أدِّ صلوات اليوم",
-            routineDhikrTitle:"أذكار الصباح والمساء",
-            routineDhikrDesc:"أكمل الأذكار",
-            routineDuaTitle:"أدعية مختارة",
-            routineDuaDesc:"أكمل أدعية اليوم",
-            routineProgressTitle:"🎯 إنجاز أهداف اليوم",
-            routineProgressText:"مكتمل"
-        },
-        hi:{
-            myDayTitle:"✨ मेरा दिन",
-            statusTitle:"आज का व्हाट्सऐप स्टेटस",
-            statusSubtitle:"सुंदर इस्लामी स्टेटस देखें और साझा करें",
-            statusTap:"खोलने के लिए दबाएँ",
-            routineTitle:"📌 आज की आध्यात्मिक दिनचर्या",
-            routineQuranTitle:"आज का कुरआन पाठ",
-            routineQuranDesc:"आज का निर्धारित पाठ पूरा करें",
-            routineSwalathTitle:"आज की सलवात",
-            routineSwalathDesc:"सलवात पढ़ना पूरा करें",
-            routinePrayersTitle:"पाँच वक्त की नमाज़",
-            routinePrayersDesc:"आज की नमाज़ें अदा करें",
-            routineDhikrTitle:"सुबह और शाम के ज़िक्र",
-            routineDhikrDesc:"ज़िक्र पूरा करें",
-            routineDuaTitle:"विशेष दुआएँ",
-            routineDuaDesc:"आज की दुआएँ पढ़ें",
-            routineProgressTitle:"🎯 आज के लक्ष्य की प्रगति",
-            routineProgressText:"पूरा हुआ"
-        },
-        ur:{
-            myDayTitle:"✨ میرا دن",
-            statusTitle:"آج کا واٹس ایپ اسٹیٹس",
-            statusSubtitle:"خوبصورت اسلامی اسٹیٹس دیکھیں اور شیئر کریں",
-            statusTap:"کھولنے کے لیے دبائیں",
-            routineTitle:"📌 آج کا روحانی معمول",
-            routineQuranTitle:"آج کی قرآن خوانی",
-            routineQuranDesc:"آج کا مقررہ حصہ مکمل کریں",
-            routineSwalathTitle:"آج کے صلوٰۃ",
-            routineSwalathDesc:"صلوٰۃ پڑھنا مکمل کریں",
-            routinePrayersTitle:"پانچ وقت کی نماز",
-            routinePrayersDesc:"آج کی نمازیں ادا کریں",
-            routineDhikrTitle:"صبح و شام کے اذکار",
-            routineDhikrDesc:"اذکار مکمل کریں",
-            routineDuaTitle:"خصوصی دعائیں",
-            routineDuaDesc:"آج کی دعائیں پڑھیں",
-            routineProgressTitle:"🎯 آج کے اہداف کی پیش رفت",
-            routineProgressText:"مکمل"
-        },
-        ta:{
-            myDayTitle:"✨ எனது நாள்",
-            statusTitle:"இன்றைய வாட்ஸ்அப் நிலை",
-            statusSubtitle:"அழகான இஸ்லாமிய நிலைகளைப் பார்த்துப் பகிருங்கள்",
-            statusTap:"திறக்கத் தட்டவும்",
-            routineTitle:"📌 இன்றைய ஆன்மிக வழக்கம்",
-            routineQuranTitle:"இன்றைய குர்ஆன் ஓதல்",
-            routineQuranDesc:"இன்றைய நிர்ணயிக்கப்பட்ட பகுதியை ஓதவும்",
-            routineSwalathTitle:"இன்றைய ஸலவாத்",
-            routineSwalathDesc:"ஸலவாத் ஓதலை நிறைவு செய்யவும்",
-            routinePrayersTitle:"ஐவேளைத் தொழுகை",
-            routinePrayersDesc:"இன்றைய தொழுகைகளை நிறைவேற்றவும்",
-            routineDhikrTitle:"காலை மற்றும் மாலை திக்ர்",
-            routineDhikrDesc:"திக்ரை நிறைவு செய்யவும்",
-            routineDuaTitle:"சிறப்புத் துஆக்கள்",
-            routineDuaDesc:"இன்றைய துஆக்களை ஓதவும்",
-            routineProgressTitle:"🎯 இன்றைய இலக்கு முன்னேற்றம்",
-            routineProgressText:"நிறைவு"
+        document.getElementById("count").textContent=count;
+        function increaseCount(){
+            count++;
+            document.getElementById("count").textContent=count;
+            localStorage.setItem("swalathDailyCount",String(count));
+            localStorage.setItem("swalathCountDate",getLocalDateString());
         }
-    };
 
-    function applyMyDayTranslations(language){
-        const lang=translations[language]||translations.ml;
+        document.addEventListener("DOMContentLoaded",loadDailyQuoteData);
 
-        document.querySelectorAll("[data-i18n]").forEach(function(element){
-            const key=element.getAttribute("data-i18n");
-            if(!Object.prototype.hasOwnProperty.call(lang,key))return;
+        function loadDailyQuoteData(){
+            const lang=(window.SwalathLanguage&&window.SwalathLanguage.getCurrent)?window.SwalathLanguage.getCurrent():(localStorage.getItem("swalath-language")||"ml");
+            const quotes=[
+                {arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", meaning:{ml:"തീർച്ചയായും പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.", en:"Surely, with hardship comes ease.", ar:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", hi:"निश्चय ही कठिनाई के साथ आसानी है।", ur:"بے شک مشکل کے ساتھ آسانی ہے۔", ta:"நிச்சயமாக, சிரமத்துடன் இலகுவும் உள்ளது."}, source:{ml:"വിശുദ്ധ ഖുർആൻ (94:6)",en:"The Holy Quran (94:6)", ar:"القرآن الكريم (94:6)",hi:"पवित्र क़ुरआन (94:6)", ur:"قرآن کریم (94:6)",ta:"திருக்குர்ஆன் (94:6)"}},
+                {arabic:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", meaning:{ml:"അല്ലാഹു ഒരാളെയും അവന്റെ കഴിവിനതീതമായി ബാധ്യതപ്പെടുത്തുകയില്ല.", en:"Allah does not burden a soul beyond what it can bear.", ar:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", hi:"अल्लाह किसी प्राणी पर उसकी क्षमता से अधिक बोझ नहीं डालता।", ur:"اللہ کسی جان پر اس کی طاقت سے بڑھ کر بوجھ نہیں ڈالتا.", ta:"அல்லாஹ் எந்த ஆன்மாவிற்கும் அதன் சக்திக்கு மீறிய சுமையைச் சுமத்துவதில்லை."}, source:{ml:"വിശുദ്ധ ഖുർആൻ (2:286)",en:"The Holy Quran (2:286)", ar:"القرآن الكريم (2:286)",hi:"पवित्र क़ुरआन (2:286)", ur:"قرآن کریم (2:286)",ta:"திருக்குர்ஆன் (2:286)"}},
+                {arabic:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", meaning:{ml:"അല്ലാഹുവിന്റെ സ്മരണയിലൂടെയാണ് ഹൃദയങ്ങൾക്ക് സമാധാനം ലഭിക്കുന്നത്.", en:"Surely, in the remembrance of Allah hearts find comfort.", ar:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", hi:"अल्लाह के स्मरण से दिलों को सुकून मिलता है।", ur:"اللہ کے ذکر سے دلوں کو اطمینان ملتا ہے۔", ta:"அல்லாஹ்வை நினைவுகூர்வதால் இதயங்கள் அமைதி பெறுகின்றன."}, source:{ml:"വിശുദ്ധ ഖുർആൻ (13:28)",en:"The Holy Quran (13:28)", ar:"القرآن الكريم (13:28)",hi:"पवित्र क़ुरआन (13:28)", ur:"قرآن کریم (13:28)",ta:"திருக்குர்ஆன் (13:28)"}}
+            ];
+            const dayNumber=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000);
+            const quote=quotes[dayNumber%quotes.length];
+            const arabicElement=document.getElementById("popupQuoteArabic");
+            const meaningElement=document.getElementById("popupQuoteText");
+            const sourceElement=document.getElementById("popupQuoteSource");
+            if(!arabicElement||!meaningElement||!sourceElement)return;
+            arabicElement.textContent=quote.arabic;
+            meaningElement.textContent=quote.meaning[lang]||quote.meaning.ml;
+            sourceElement.textContent=quote.source[lang]||quote.source.ml;
+            meaningElement.style.display=lang==="ar"?"none":"block";
+            sourceElement.style.display=lang==="ar"?"none":"block";
+        }
 
-            if(key==="routineProgressText"){
-                const match=element.textContent.match(/\d+/);
-                const percent=match?match[0]:"0";
-                element.textContent=percent+"% "+lang[key];
+        function openQuotePopup(){
+            loadDailyQuoteData();
+            document.getElementById("quotePopupOverlay").style.display="flex";
+        }
+        function closeQuotePopup(){
+            document.getElementById("quotePopupOverlay").style.display="none";
+        }
+        function triggerShareStatus(){
+            if(window.AndroidAdhan&&typeof window.AndroidAdhan.shareDailyStatus==="function"){
+                window.AndroidAdhan.shareDailyStatus();
             }else{
-                element.textContent=lang[key];
+                alert("WhatsApp സ്റ്റാറ്റസ് ഫീച്ചർ സ്വലാത്ത് ആപ്പിനുള്ളിൽ മാത്രമേ പ്രവർത്തിക്കുകയുള്ളൂ.");
+            }
+        }
+
+        /* DAILY ROUTINE */
+        const totalTasks=5;
+        let completedTasks={};
+        function loadRoutineState(){
+            const savedRoutineDate=localStorage.getItem("routineDate");
+            if(savedRoutineDate!==getLocalDateString()){
+                localStorage.setItem("routineDate",getLocalDateString());
+                localStorage.setItem("routineState",JSON.stringify({}));
+                completedTasks={};
+            }else{
+                try{completedTasks=JSON.parse(localStorage.getItem("routineState")||"{}")}
+                catch(e){completedTasks={}}
+            }
+            updateRoutineUI();
+        }
+        function toggleRoutine(taskId){
+            completedTasks[taskId]=!completedTasks[taskId];
+            localStorage.setItem("routineState",JSON.stringify(completedTasks));
+            updateRoutineUI();
+        }
+        function getCurrentLanguage(){
+            if(window.SwalathLanguage&&typeof window.SwalathLanguage.getCurrent==="function"){
+                return window.SwalathLanguage.getCurrent();
+            }
+            return localStorage.getItem("swalath-language")||"ml";
+        }
+        function updateRoutineUI(){
+            let activeCount=0;
+            const taskIds=["task_quran","task_swalath","task_prayers","task_dhikr","task_dua"];
+            taskIds.forEach(function(id){
+                const el=document.getElementById(id);
+                if(!el)return;
+                if(completedTasks[id]){
+                    el.classList.add("active");
+                    activeCount++;
+                }else{
+                    el.classList.remove("active");
+                }
+            });
+            const percent=Math.round((activeCount/totalTasks)*100);
+            const progressBar=document.getElementById("routineProgressBar");
+            const progressText=document.getElementById("routineProgressText");
+            if(progressBar)progressBar.style.width=percent+"%";
+            const progressWords={ml:"പൂർത്തിയായി", en:"completed", ar:"مكتمل", hi:"पूरा हुआ", ur:"مکمل", ta:"நிறைவு"};
+            const lang=getCurrentLanguage();
+            if(progressText){
+                progressText.textContent=percent+"% "+(progressWords[lang]||progressWords.ml);
+            }
+            if(percent===100&&!sessionStorage.getItem("congratulationShown")){
+                sessionStorage.setItem("congratulationShown","true");
+                const modal=document.getElementById("congratulationOverlay");
+                if(modal)modal.style.display="flex";
+            }
+        }
+        function closeCongratulationModal(){
+            document.getElementById("congratulationOverlay").style.display="none";
+        }
+        function openMyDayPage(){
+            if(document.getElementById("myDayPage").style.display==="block")return;
+            history.pushState({section:"myDay"},"");
+            hideHomeElements();
+            document.getElementById("myDayPage").style.display="block";
+            loadRoutineState();
+            window.scrollTo(0,0);
+        }
+        function closeMyDayPage(){history.back()}
+        function hideHomeElements(){
+            document.querySelector(".welcome").style.display="none";
+            document.querySelector(".today-card").style.display="none";
+            const myDayCard=document.querySelector(".my-day-card");
+            if(myDayCard)myDayCard.style.display="none";
+            document.querySelector(".menu-grid").style.display="none";
+            document.querySelector(".feature-buttons").style.display="none";
+        }
+        function showHomeElements(){
+            document.querySelector(".welcome").style.display="block";
+            document.querySelector(".today-card").style.display="block";
+            const myDayCard=document.querySelector(".my-day-card");
+            if(myDayCard)myDayCard.style.display="flex";
+            document.querySelector(".menu-grid").style.display="grid";
+            document.querySelector(".feature-buttons").style.display="flex";
+            document.getElementById("myDayPage").style.display="none";
+            document.getElementById("collectionSection").style.display="none";
+            document.getElementById("favoritesSection").style.display="none";
+        }
+
+        /* OPEN PAGES */
+        function openAsmaulHusna(){window.location.href="asmaul-husna.html"}
+        function openQuran(){window.location.href="quran.html"}
+        function openQuranMP3(){window.location.href="quran-mp3.html"}
+        function openCalendar(){window.location.href="calendar.html"}
+        function openUmrah(){window.location.href="umrah.html"}
+        function openDua(){window.location.href="dua.html"}
+        function openDhikr(){window.location.href="dhikr.html"}
+        function openPrayerTime(){window.location.href="prayer-time.html"}
+        function openAdvertise(){window.location.href="advertise.html"}
+        function openCollection(){window.location.href="swalath.html"}
+        function closeCollection(){history.back()}
+
+        function loadFavorites(){
+            const list=document.getElementById("favoritesList");
+            if(!list)return;
+            list.replaceChildren();
+            let favorites=[];
+            try{favorites=JSON.parse(localStorage.getItem("swalathFavorites")||"[]")}
+            catch(error){favorites=[]}
+            if(!Array.isArray(favorites))favorites=[];
+            const names={ibrahimiyya:"الصلاة الإبراهيمية",nariya:"الصلاة النارية",tunjina:"الصلاة المنجية",fatih:"صلاة الفاتح",tibbiyya:"صلاة طب القلوب",nuraniyya:"الصلاة النورانية",saadah:"صلاة السعادة",kamaliyya:"صلاة الكمالية",dhatiyya:"الصلاة الذاتية",jawharat:"جوهرة الكمال",taj:"صلاة التاج",faraj:"صلاة الفرج",bashair:"بشائر الخيرات",ahlam:"صلاة الأحلام",hulo:"صلاة الحضور",friday:"صلاة الجمعة",mashishiyya:"الصلاة المشيشية",ummiyya:"الصلاة الأمية",shadhiliyya:"الصلاة الشاذلية",anwar:"صلاة الأنوار",yaqutat:"ياقوتة الحقائق"};
+            const validFavorites=favorites.filter(key=>names[key]);
+            if(validFavorites.length===0){
+                const message=document.createElement("p");
+                message.textContent="ഇതുവരെ ഫേവറൈറ്റായി ഒന്നും ചേർത്തിട്ടില്ല.";
+                message.style.textAlign="center";
+                message.style.padding="20px";
+                list.appendChild(message);
+                return;
+            }
+            validFavorites.forEach(function(key){
+                const item=document.createElement("button");
+                item.type="button";
+                item.className="favorite-item";
+                item.textContent="❤️  "+names[key];
+                item.style.cssText="display:block;width:100%;padding:16px;margin-bottom:10px;border:1px solid #c5a868;border-radius:12px;background:#fff;color:#123d34;font-size:18px;text-align:right;cursor:pointer;";
+                item.dir="rtl";
+                item.onclick=function(){
+                    window.location.href="swalath.html?ref=favorites#"+encodeURIComponent(key);
+                };
+                list.appendChild(item);
+            });
+        }
+        function openFavorites(){
+            history.pushState({section:"favorites"},"","#favorites");
+            hideHomeElements();
+            document.getElementById("favoritesSection").style.display="block";
+            loadFavorites();
+        }
+        function closeFavorites(){
+            if(location.hash==="#favorites"){history.back();}
+            else{history.back();}
+        }
+
+        window.addEventListener("popstate",function(event){
+            if(location.hash==="#favorites"){
+                hideHomeElements();
+                document.getElementById("favoritesSection").style.display="block";
+                loadFavorites();
+                return;
+            }
+            const section=event.state&&event.state.section;
+            if(section==="myDay"){
+                hideHomeElements();
+                document.getElementById("myDayPage").style.display="block";
+                loadRoutineState();
+            }else if(section==="collection"){
+                hideHomeElements();
+                document.getElementById("collectionSection").style.display="block";
+            }else if(section==="favorites"){
+                hideHomeElements();
+                document.getElementById("favoritesSection").style.display="block";
+                loadFavorites();
+            }else{
+                showHomeElements();
             }
         });
-    }
 
-    document.addEventListener("swalath-language-changed",function(event){
-        const language=event.detail&&event.detail.language
-            ?event.detail.language
-            :(localStorage.getItem("swalath-language")||"ml");
-        applyMyDayTranslations(language);
-        if(typeof updateRoutineUI==="function")updateRoutineUI();
-        if(typeof loadDailyQuoteData==="function")loadDailyQuoteData();
-    });
-
-    if(document.readyState==="loading"){
-        document.addEventListener("DOMContentLoaded",function(){
-            applyMyDayTranslations(localStorage.getItem("swalath-language")||"ml");
+        window.addEventListener("pageshow",function(){
+            if(location.hash==="#favorites"){
+                hideHomeElements();
+                document.getElementById("myDayPage").style.display="none";
+                document.getElementById("collectionSection").style.display="none";
+                document.getElementById("favoritesSection").style.display="block";
+                loadFavorites();
+            }
         });
-    }else{
-        applyMyDayTranslations(localStorage.getItem("swalath-language")||"ml");
-    }
-})();
-</script>
 
+        /* DARK MODE */
+        function toggleDarkMode(){
+            document.body.classList.toggle("dark-mode");
+            const enabled=document.body.classList.contains("dark-mode");
+            localStorage.setItem("swalathDarkMode",String(enabled));
+            updateDarkButton();
+        }
+        function updateDarkButton(){
+            const button=document.getElementById("darkModeButton");
+            if(!button)return;
+            button.textContent=document.body.classList.contains("dark-mode")?"☀️ Light Mode":"🌙 Dark Mode";
+        }
+
+        /* STARTUP */
+        window.addEventListener("load",function(){
+            if(localStorage.getItem("swalathDarkMode")==="true"){
+                document.body.classList.add("dark-mode");
+            }
+            updateDarkButton();
+            loadRoutineState();
+            const splash=document.getElementById("splashScreen");
+            window.setTimeout(function(){if(splash)splash.classList.add("hide");},1200);
+        });
+
+        /* LANGUAGE SELECTOR */
+        function openSwalathLanguageSelector(){
+            const screen=document.getElementById("languageScreen");
+            const options=document.querySelectorAll(".language-option");
+            const continueButton=document.getElementById("languageContinue");
+            if(!screen||!continueButton||!window.SwalathLanguage)return;
+            let selectedLanguage=window.SwalathLanguage.getCurrent();
+            options.forEach(function(button){
+                button.classList.toggle("selected",button.dataset.lang===selectedLanguage);
+                button.onclick=function(){
+                    selectedLanguage=button.dataset.lang;
+                    options.forEach(function(option){
+                        option.classList.toggle("selected",option.dataset.lang===selectedLanguage);
+                    });
+                };
+            });
+            continueButton.onclick=function(){
+                window.SwalathLanguage.setLanguage(selectedLanguage);
+                screen.style.display="none";
+                loadDailyQuoteData();
+                updateRoutineUI();
+            };
+            screen.style.display="flex";
+        }
+    </script>
+
+    <script>
+        (function(){
+            const translations={
+                ml:{
+                    myDayTitle:"✨ ഇന്നത്തെ എന്റെ ദിവസം",
+                    statusTitle:"ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്",
+                    statusSubtitle:"മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ",
+                    statusTap:"തുറക്കാൻ അമർത്തുക",
+                    routineTitle:"📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ",
+                    routineQuranTitle:"ഇന്നത്തെ ഖുർആൻ പാരായണം",
+                    routineQuranDesc:"ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു",
+                    routineSwalathTitle:"ഇന്നത്തെ സ്വലാത്തുകൾ",
+                    routineSwalathDesc:"സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി",
+                    routinePrayersTitle:"അഞ്ച് നേരത്തെ നിസ്കാരം",
+                    routinePrayersDesc:"ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു",
+                    routineDhikrTitle:"രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ",
+                    routineDhikrDesc:"ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി",
+                    routineDuaTitle:"പ്രത്യേക ദുആകൾ",
+                    routineDuaDesc:"ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി",
+                    routineProgressTitle:"🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി",
+                    routineProgressText:"പൂർത്തിയായി"
+                },
+                en:{
+                    myDayTitle:"✨ My Day",
+                    statusTitle:"Today's WhatsApp Status",
+                    statusSubtitle:"View and share beautiful Islamic status designs",
+                    statusTap:"Tap to open",
+                    routineTitle:"📌 Today's Spiritual Routine",
+                    routineQuranTitle:"Today's Quran Reading",
+                    routineQuranDesc:"Complete today's planned reading",
+                    routineSwalathTitle:"Today's Salawat",
+                    routineSwalathDesc:"Complete your Salawat recitation",
+                    routinePrayersTitle:"Five Daily Prayers",
+                    routinePrayersDesc:"Complete today's prayers",
+                    routineDhikrTitle:"Morning and Evening Dhikr",
+                    routineDhikrDesc:"Complete your Dhikr",
+                    routineDuaTitle:"Special Duas",
+                    routineDuaDesc:"Complete today's Duas",
+                    routineProgressTitle:"🎯 Today's Goal Progress",
+                    routineProgressText:"completed"
+                },
+                ar:{
+                    myDayTitle:"✨ يومي",
+                    statusTitle:"حالة واتساب اليوم",
+                    statusSubtitle:"شاهد وشارك تصاميم إسلامية جميلة",
+                    statusTap:"اضغط للفتح",
+                    routineTitle:"📌 برنامج اليوم الإيماني",
+                    routineQuranTitle:"قراءة القرآن اليوم",
+                    routineQuranDesc:"أكمل ورد القرآن المحدد اليوم",
+                    routineSwalathTitle:"الصلوات على النبي اليوم",
+                    routineSwalathDesc:"أكمل قراءة الصلوات",
+                    routinePrayersTitle:"الصلوات الخمس",
+                    routinePrayersDesc:"أدِّ صلوات اليوم",
+                    routineDhikrTitle:"أذكار الصباح والمساء",
+                    routineDhikrDesc:"أكمل الأذكار",
+                    routineDuaTitle:"أدعية مختارة",
+                    routineDuaDesc:"أكمل أدعية اليوم",
+                    routineProgressTitle:"🎯 إنجاز أهداف اليوم",
+                    routineProgressText:"مكتمل"
+                },
+                hi:{
+                    myDayTitle:"✨ मेरा दिन",
+                    statusTitle:"आज का व्हाट्सऐप स्टेटस",
+                    statusSubtitle:"सुंदर इस्लामी स्टेटस देखें और साझा करें",
+                    statusTap:"खोलने के लिए दबाएँ",
+                    routineTitle:"📌 आज की आध्यात्मिक दिनचर्या",
+                    routineQuranTitle:"आज का कुरआन पाठ",
+                    routineQuranDesc:"आज का निर्धारित पाठ पूरा करें",
+                    routineSwalathTitle:"आज की सलवात",
+                    routineSwalathDesc:"सलवात पढ़ना पूरा करें",
+                    routinePrayersTitle:"पाँच वक्त की नमाज़",
+                    routinePrayersDesc:"आज की नमाज़ें अदा करें",
+                    routineDhikrTitle:"सुबह और शाम के ज़िक्र",
+                    routineDhikrDesc:"ज़िक्र पूरा करें",
+                    routineDuaTitle:"विशेष दुआएँ",
+                    routineDuaDesc:"आज की दुआएँ पढ़ें",
+                    routineProgressTitle:"🎯 आज के लक्ष्य की प्रगति",
+                    routineProgressText:"पूरा हुआ"
+                },
+                ur:{
+                    myDayTitle:"✨ میرا دن",
+                    statusTitle:"آج کا واٹس ایپ اسٹیٹس",
+                    statusSubtitle:"خوبصورت اسلامی اسٹیٹس دیکھیں اور شیئر کریں",
+                    statusTap:"کھولنے کے لیے دبائیں",
+                    routineTitle:"📌 آج کا روحانی معمول",
+                    routineQuranTitle:"آج کی قرآن خوانی",
+                    routineQuranDesc:"آج کا مقررہ حصہ مکمل کریں",
+                    routineSwalathTitle:"آج کے صلوٰۃ",
+                    routineSwalathDesc:"صلوٰۃ پڑھنا مکمل کریں",
+                    routinePrayersTitle:"پانچ وقت کی نماز",
+                    routinePrayersDesc:"آج کی نمازیں ادا کریں",
+                    routineDhikrTitle:"صبح و شام کے اذکار",
+                    routineDhikrDesc:"اذکار مکمل کریں",
+                    routineDuaTitle:"خصوصی دعائیں",
+                    routineDuaDesc:"آج کی دعائیں پڑھیں",
+                    routineProgressTitle:"🎯 آج کے اہداف کی پیش رفت",
+                    routineProgressText:"مکمل"
+                },
+                ta:{
+                    myDayTitle:"✨ எனது நாள்",
+                    statusTitle:"இன்றைய வாட்ஸ்அப் நிலை",
+                    statusSubtitle:"அழகான இஸ்லாமிய நிலைகளைப் பார்த்துப் பகிருங்கள்",
+                    statusTap:"திறக்கத் தட்டவும்",
+                    routineTitle:"📌 இன்றைய ஆன்மிக வழக்கம்",
+                    routineQuranTitle:"இன்றைய குர்ஆன் ஓதல்",
+                    routineQuranDesc:"இன்றைய நிர்ணயிக்கப்பட்ட பகுதியை ஓதவும்",
+                    routineSwalathTitle:"இன்றைய ஸலவாத்",
+                    routineSwalathDesc:"ஸலவாத் ஓதலை நிறைவு செய்யவும்",
+                    routinePrayersTitle:"ஐவேளைத் தொழுகை",
+                    routinePrayersDesc:"இன்றைய தொழுகைகளை நிறைவேற்றவும்",
+                    routineDhikrTitle:"காலை மற்றும் மாலை திக்ர்",
+                    routineDhikrDesc:"திக்ரை நிறைவு செய்யவும்",
+                    routineDuaTitle:"சிறப்புத் துஆக்கள்",
+                    routineDuaDesc:"இன்றைய துஆக்களை ஓதவும்",
+                    routineProgressTitle:"🎯 இன்றைய இலக்கு முன்னேற்றம்",
+                    routineProgressText:"நிறைவு"
+                }
+            };
+
+            function applyMyDayTranslations(language){
+                const lang=translations[language]||translations.ml;
+                document.querySelectorAll("[data-i18n]").forEach(function(element){
+                    const key=element.getAttribute("data-i18n");
+                    if(!Object.prototype.hasOwnProperty.call(lang,key))return;
+                    if(key==="routineProgressText"){
+                        const match=element.textContent.match(/\d+/);
+                        const percent=match?match[0]:"0";
+                        element.textContent=percent+"% "+lang[key];
+                    }else{
+                        element.textContent=lang[key];
+                    }
+                });
+            }
+
+            function getCurrentLang() {
+                if (window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function") {
+                    return window.SwalathLanguage.getCurrent();
+                }
+                return localStorage.getItem("swalath-language") || "ml";
+            }
+
+            document.addEventListener("swalath-language-changed",function(event){
+                const language=event.detail&&event.detail.language?event.detail.language:getCurrentLang();
+                applyMyDayTranslations(language);
+                if(typeof updateRoutineUI==="function")updateRoutineUI();
+                if(typeof loadDailyQuoteData==="function")loadDailyQuoteData();
+            });
+
+            if(document.readyState==="loading"){
+                document.addEventListener("DOMContentLoaded",function(){
+                    applyMyDayTranslations(getCurrentLang());
+                });
+            }else{
+                applyMyDayTranslations(getCurrentLang());
+            }
+        })();
+    </script>
 </body>
 </html>
