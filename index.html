@@ -372,22 +372,96 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function loadDailyQuoteData() {
-    fetch("quotes.json")
-        .then(response => response.json())
-        .then(data => {
-            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            const todayQuote = data[dayOfYear % data.length];
-            const lang = localStorage.getItem("swalath-language") || "ml";
-            const qText = todayQuote.translation[lang] || todayQuote.translation["en"];
-            const qSource = todayQuote.source[lang] || todayQuote.source["en"];
+    const lang = (window.SwalathLanguage &&
+        window.SwalathLanguage.getCurrent)
+        ? window.SwalathLanguage.getCurrent()
+        : (localStorage.getItem("swalath-language") || "ml");
 
-            document.getElementById("popupQuoteText").textContent = qText;
-            document.getElementById("popupQuoteSource").textContent = qSource;
-        })
-        .catch(err => {
-            document.getElementById("popupQuoteText").textContent = "തീർച്ചയായും, പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.";
-            document.getElementById("popupQuoteSource").textContent = "വിശുദ്ധ ഖുർആൻ (94:6)";
-        });
+    const quotes = [
+        {
+            arabic: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
+            meaning: {
+                ml: "തീർച്ചയായും പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.",
+                en: "Surely, with hardship comes ease.",
+                ar: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
+                hi: "निश्चय ही कठिनाई के साथ आसानी है।",
+                ur: "بے شک مشکل کے ساتھ آسانی ہے۔",
+                ta: "நிச்சயமாக, சிரமத்துடன் இலகுவும் உள்ளது."
+            },
+            source: {
+                ml: "വിശുദ്ധ ഖുർആൻ (94:6)",
+                en: "The Holy Quran (94:6)",
+                ar: "القرآن الكريم (94:6)",
+                hi: "पवित्र क़ुरआन (94:6)",
+                ur: "قرآن کریم (94:6)",
+                ta: "திருக்குர்ஆன் (94:6)"
+            }
+        },
+        {
+            arabic: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+            meaning: {
+                ml: "അല്ലാഹു ഒരാളെയും അവന്റെ കഴിവിനതീതമായി ബാധ്യതപ്പെടുത്തുകയില്ല.",
+                en: "Allah does not burden a soul beyond what it can bear.",
+                ar: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+                hi: "अल्लाह किसी प्राणी पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
+                ur: "اللہ کسی جان پر اس کی طاقت سے بڑھ کر بوجھ نہیں ڈالتا۔",
+                ta: "அல்லாஹ் எந்த ஆன்மாவிற்கும் அதன் சக்திக்கு மீறிய சுமையைச் சுமத்துவதில்லை."
+            },
+            source: {
+                ml: "വിശുദ്ധ ഖുർആൻ (2:286)",
+                en: "The Holy Quran (2:286)",
+                ar: "القرآن الكريم (2:286)",
+                hi: "पवित्र क़ुरआन (2:286)",
+                ur: "قرآن کریم (2:286)",
+                ta: "திருக்குர்ஆன் (2:286)"
+            }
+        },
+        {
+            arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+            meaning: {
+                ml: "അല്ലാഹുവിന്റെ സ്മരണയിലൂടെയാണ് ഹൃദയങ്ങൾക്ക് സമാധാനം ലഭിക്കുന്നത്.",
+                en: "Surely, in the remembrance of Allah hearts find comfort.",
+                ar: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+                hi: "अल्लाह के स्मरण से दिलों को सुकून मिलता है।",
+                ur: "اللہ کے ذکر سے دلوں کو اطمینان ملتا ہے۔",
+                ta: "அல்லாஹ்வை நினைவுகூர்வதால் இதயங்கள் அமைதி பெறுகின்றன."
+            },
+            source: {
+                ml: "വിശുദ്ധ ഖുർആൻ (13:28)",
+                en: "The Holy Quran (13:28)",
+                ar: "القرآن الكريم (13:28)",
+                hi: "पवित्र क़ुरआन (13:28)",
+                ur: "قرآن کریم (13:28)",
+                ta: "திருக்குர்ஆன் (13:28)"
+            }
+        }
+    ];
+
+    const dayNumber = Math.floor(
+        (new Date() - new Date(new Date().getFullYear(), 0, 0))
+        / 86400000
+    );
+
+    const quote = quotes[dayNumber % quotes.length];
+    const arabicElement = document.getElementById("popupQuoteArabic");
+    const meaningElement = document.getElementById("popupQuoteText");
+    const sourceElement = document.getElementById("popupQuoteSource");
+
+    if (!arabicElement || !meaningElement || !sourceElement) {
+        return;
+    }
+
+    arabicElement.textContent = quote.arabic;
+    meaningElement.textContent = quote.meaning[lang] || quote.meaning.ml;
+    sourceElement.textContent = quote.source[lang] || quote.source.ml;
+
+    if (lang === "ar") {
+        meaningElement.style.display = "none";
+        sourceElement.style.display = "none";
+    } else {
+        meaningElement.style.display = "block";
+        sourceElement.style.display = "block";
+    }
 }
 
 function openQuotePopup() {
