@@ -652,8 +652,14 @@ function closeFavorites() {
     }
 }
 window.addEventListener("popstate", function(event) {
-    const section = event.state && event.state.section;
+    if (location.hash === "#favorites") {
+        hideHomeElements();
+        document.getElementById("favoritesSection").style.display = "block";
+        loadFavorites();
+        return;
+    }
 
+    const section = event.state && event.state.section;
     if (section === "myDay") {
         hideHomeElements();
         document.getElementById("myDayPage").style.display = "block";
