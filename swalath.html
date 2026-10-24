@@ -62,11 +62,19 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 
 <div id="collectionPage">
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="🔍 സ്വലാത്ത് തിരയുക..." oninput="searchSwalath()">
+<input type="text" id="searchInput" 
+       placeholder="🔍 സ്വലാത്ത് തിരയുക..." 
+       data-placeholder-ml="🔍 സ്വലാത്ത് തിരയുക..." 
+       data-placeholder-en="🔍 Search Swalath..." 
+       data-placeholder-ar="🔍 البحث عن الصلوات..." 
+       oninput="searchSwalath()">
 </div>
 
 <div class="collection">
-<div class="collection-title">📖 21 സ്വലാത്തുകളുടെ ശേഖരം</div>
+<div class="collection-title" id="collectionTitle" 
+     data-ml="📖 21 സ്വലാത്തുകളുടെ ശേഖരം" 
+     data-en="📖 Collection of 21 Swalath" 
+     data-ar="📖 مجموعة 21 صلاة">📖 21 സ്വലാത്തുകളുടെ ശേഖരം</div>
 
 <div class="swalath-card" onclick="openSwalath('ibrahimiyya')"><h3 lang="ar" dir="rtl">الصلاة الإبراهيمية</h3><span lang="ar" dir="rtl">الصلاة الإبراهيمية</span></div>
 <div class="swalath-card" onclick="openSwalath('nariya')"><h3 lang="ar" dir="rtl">الصلاة النارية</h3><span lang="ar" dir="rtl">الصلاة النارية</span></div>
@@ -269,6 +277,27 @@ function isMalayalam(){
     return getCurrentLanguage() === "ml";
 }
 
+// ഭാഷ മാറ്റത്തിനനുസരിച്ച് പേജിലെ ടെക്സ്റ്റുകൾ അപ്ഡേറ്റ് ചെയ്യുന്ന ഫങ്ഷൻ
+function updateSwalathPageLanguage() {
+    const lang = getCurrentLanguage();
+    
+    // സെർച്ച് പ്ലേസ്ഹോൾഡർ മാറ്റാൻ
+    const searchInput = document.getElementById("searchInput");
+    if(searchInput) {
+        if(lang === 'en') searchInput.placeholder = searchInput.getAttribute("data-placeholder-en");
+        else if(lang === 'ar') searchInput.placeholder = searchInput.getAttribute("data-placeholder-ar");
+        else searchInput.placeholder = searchInput.getAttribute("data-placeholder-ml");
+    }
+
+    // കളക്ഷൻ ടൈറ്റിൽ മാറ്റാൻ
+    const collectionTitle = document.getElementById("collectionTitle");
+    if(collectionTitle) {
+        if(lang === 'en') collectionTitle.textContent = collectionTitle.getAttribute("data-en");
+        else if(lang === 'ar') collectionTitle.textContent = collectionTitle.getAttribute("data-ar");
+        else collectionTitle.textContent = collectionTitle.getAttribute("data-ml");
+    }
+}
+
 function getDisplayData(key){
     const d = swalathData[key];
     if(!d) return null;
@@ -347,10 +376,8 @@ function showCollection(){
 function goBack() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('ref') === 'favorites') {
-        // ഫേവറിറ്റിൽ നിന്നാണ് വന്നതെങ്കിൽ തിരിച്ച് ഇൻഡക്സ് പേജിലെ ഫേവറിറ്റ് സെക്ഷനിലേക്ക് പോകും
         window.location.href = "index.html#favorites";
     } else {
-        // സാധാരണ ലിസ്റ്റിൽ നിന്നാണെങ്കിൽ പഴയതുപോലെ ബാക്ക് അടിക്കാം
         if (location.hash && history.state && history.state.page === "swalath") {
             history.back();
         } else {
@@ -394,11 +421,14 @@ window.addEventListener("popstate", function () {
         }
     }
 });
+
 document.addEventListener("DOMContentLoaded", function(){
+    updateSwalathPageLanguage();
     syncSwalathPage();
 });
 
 window.addEventListener("pageshow", function(){
+    updateSwalathPageLanguage();
     syncSwalathPage();
 });
 
