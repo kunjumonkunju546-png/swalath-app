@@ -250,26 +250,46 @@ main {padding:0 18px}
         <section id="myDayPage" style="display:none;">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
                 <button onclick="closeMyDayPage()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
-                <h2 style="margin:0;font-family:'Amiri',serif;color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+               <h2 data-i18n="myDayTitle"
+    data-ml="✨ ഇന്നത്തെ എന്റെ ദിവസം"
+    style="margin:0;font-family:'Amiri',serif;color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
             </div>
 
             <div onclick="openQuotePopup()" style="background:linear-gradient(135deg,#123d34,#092b25);color:white;border:1.5px solid var(--sw-gold);border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.15);">
                 <div style="display:flex;align-items:center;gap:14px;">
                     <div style="font-size:32px;">📲</div>
                     <div>
-                        <strong style="font-size:16px;color:#f5e2b3;display:block;">ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</strong>
-                        <span style="font-size:12px;color:#ddd;">അൾട്രാ എച്ച്ഡി സ്റ്റാറ്റസ് കണ്ട് ഷെയർ ചെയ്യാം</span>
+                       <strong data-i18n="statusTitle"
+        data-ml="ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്"
+        style="font-size:16px;color:#f5e2b3;display:block;">
+    ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്
+</strong>
+
+<span data-i18n="statusSubtitle"
+      data-ml="മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ"
+      style="font-size:12px;color:#ddd;">
+    മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ
+</span>
                     </div>
                 </div>
-                <div style="background:#25D366;color:white;padding:6px 14px;border-radius:15px;font-size:12px;font-weight:bold;">ക്ലിക്ക് ചെയ്യൂ</div>
-            </div>
+                <div data-i18n="statusTap"
+     data-ml="തുറക്കാൻ അമർത്തുക"
+     style="background:#25D366;color:white;padding:6px 14px;border-radius:15px;font-size:12px;font-weight:bold;">
+    തുറക്കാൻ അമർത്തുക
+</div>
 
-            <h3 style="color:var(--sw-green);font-size:16px;margin-bottom:12px;font-family:'Amiri',serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
-
+           <h3 data-i18n="routineTitle"
+    data-ml="📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ"
+    style="color:var(--sw-green);font-size:16px;margin-bottom:12px;font-family:'Amiri',serif;">
+    📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ
+</h3>
             <div class="routine-item" id="task_quran" onclick="toggleRoutine('task_quran')">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">📖</span>
-                    <div><strong>ഇന്നത്തെ ഖുർആൻ ഓത്ത്</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം ഓതി തീർത്തു</span></div>
+<div>
+  <strong data-i18n="routineQuranTitle" data-ml="ഇന്നത്തെ ഖുർആൻ പാരായണം">ഇന്നത്തെ ഖുർആൻ പാരായണം</strong><br>
+  <span data-i18n="routineQuranDesc" data-ml="ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു</span>
+</div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
@@ -277,7 +297,10 @@ main {padding:0 18px}
             <div class="routine-item" id="task_swalath" onclick="toggleRoutine('task_swalath')">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">📿</span>
-                    <div><strong>ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span style="font-size:11px;color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                   <div>
+  <strong data-i18n="routineSwalathTitle" data-ml="ഇന്നത്തെ സ്വലാത്തുകൾ">ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br>
+  <span data-i18n="routineSwalathDesc" data-ml="സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span>
+</div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
@@ -285,34 +308,47 @@ main {padding:0 18px}
             <div class="routine-item" id="task_prayers" onclick="toggleRoutine('task_prayers')">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">🕌</span>
-                    <div><strong>5 സമയത്തെ നിസ്കാരം</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ കൃത്യമായി നിർവ്വഹിച്ചു</span></div>
-                </div>
+                   <div>
+  <strong data-i18n="routinePrayersTitle" data-ml="അഞ്ച് നേരത്തെ നിസ്കാരം">അഞ്ച് നേരത്തെ നിസ്കാരം</strong><br>
+  <span data-i18n="routinePrayersDesc" data-ml="ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു" style="font-size:11px;color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു</span>
+</div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_dhikr" onclick="toggleRoutine('task_dhikr')">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">✨</span>
-                    <div><strong>രാവിലെയും വൈകുന്നേരത്തെയുമുള്ള ദിക്റുകൾ</strong><br><span style="font-size:11px;color:#777;">ദിക്റുകൾ ചൊല്ലി</span></div>
-                </div>
+                    <div>
+  <strong data-i18n="routineDhikrTitle" data-ml="രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ">രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ</strong><br>
+  <span data-i18n="routineDhikrDesc" data-ml="ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി</span>
+</div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_dua" onclick="toggleRoutine('task_dua')">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">🤲</span>
-                    <div><strong>പ്രത്യേക ദുആ നിർവ്വഹണം</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ ദുആകൾ ചെയ്തു</span></div>
+                    <div>
+  <strong data-i18n="routineDuaTitle" data-ml="പ്രത്യേക ദുആകൾ">പ്രത്യേക ദുആകൾ</strong><br>
+  <span data-i18n="routineDuaDesc" data-ml="ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി" style="font-size:11px;color:#777;">ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി</span>
+</div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div style="background:var(--sw-card);border:1px solid var(--sw-gold);border-radius:20px;padding:20px;margin-top:20px;text-align:center;">
-                <h4 style="margin:0 0 8px;color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
+<h4 data-i18n="routineProgressTitle"
+    data-ml="🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി"
+    style="margin:0 0 8px;color:var(--sw-green);">
+    🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി
+</h4>
                 <div style="background:#e0e0e0;border-radius:10px;height:16px;overflow:hidden;margin:12px 0;">
                     <div id="routineProgressBar" style="background:linear-gradient(90deg,#123d34,#25D366);height:100%;width:0%;transition:width .4s ease;"></div>
                 </div>
-                <p id="routineProgressText" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">0% പൂർത്തിയായി</p>
-            </div>
+<p id="routineProgressText"
+   data-i18n="routineProgressText"
+   data-ml="0% പൂർത്തിയായി"
+   style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">0% പൂർത്തിയായി</p>
         </section>
 
         <section id="collectionSection" style="display:none;">
@@ -825,6 +861,165 @@ function openSwalathLanguageSelector() {
 
     screen.style.display = "flex";
 }
+</script>
+                <script>
+(function () {
+  const translations = {
+    ml: {
+      myDayTitle: "✨ ഇന്നത്തെ എന്റെ ദിവസം",
+      statusTitle: "ഇന്നത്തെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസ്",
+      statusSubtitle: "മനോഹരമായ ഇസ്‌ലാമിക സ്റ്റാറ്റസ് കാണുകയും പങ്കിടുകയും ചെയ്യൂ",
+      statusTap: "തുറക്കാൻ അമർത്തുക",
+      routineTitle: "📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ",
+      routineQuranTitle: "ഇന്നത്തെ ഖുർആൻ പാരായണം",
+      routineQuranDesc: "ഇന്നത്തെ നിശ്ചിത ഭാഗം പാരായണം ചെയ്തു",
+      routineSwalathTitle: "ഇന്നത്തെ സ്വലാത്തുകൾ",
+      routineSwalathDesc: "സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി",
+      routinePrayersTitle: "അഞ്ച് നേരത്തെ നിസ്കാരം",
+      routinePrayersDesc: "ഇന്നത്തെ നിസ്കാരങ്ങൾ നിർവഹിച്ചു",
+      routineDhikrTitle: "രാവിലെയും വൈകുന്നേരത്തെയും ദിക്റുകൾ",
+      routineDhikrDesc: "ദിക്റുകൾ ചൊല്ലി പൂർത്തിയാക്കി",
+      routineDuaTitle: "പ്രത്യേക ദുആകൾ",
+      routineDuaDesc: "ഇന്നത്തെ ദുആകൾ ചൊല്ലി പൂർത്തിയാക്കി",
+      routineProgressTitle: "🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി",
+      routineProgressText: "പൂർത്തിയായി"
+    },
+    en: {
+      myDayTitle: "✨ My Day",
+      statusTitle: "Today's WhatsApp Status",
+      statusSubtitle: "View and share beautiful Islamic status designs",
+      statusTap: "Tap to open",
+      routineTitle: "📌 Today's Spiritual Routine",
+      routineQuranTitle: "Today's Quran Reading",
+      routineQuranDesc: "Complete today's planned reading",
+      routineSwalathTitle: "Today's Salawat",
+      routineSwalathDesc: "Complete your Salawat recitation",
+      routinePrayersTitle: "Five Daily Prayers",
+      routinePrayersDesc: "Complete today's prayers",
+      routineDhikrTitle: "Morning and Evening Dhikr",
+      routineDhikrDesc: "Complete your Dhikr",
+      routineDuaTitle: "Special Duas",
+      routineDuaDesc: "Complete today's Duas",
+      routineProgressTitle: "🎯 Today's Goal Progress",
+      routineProgressText: "completed"
+    },
+    ar: {
+      myDayTitle: "✨ يومي",
+      statusTitle: "حالة واتساب اليوم",
+      statusSubtitle: "شاهد وشارك تصاميم إسلامية جميلة",
+      statusTap: "اضغط للفتح",
+      routineTitle: "📌 برنامج اليوم الإيماني",
+      routineQuranTitle: "قراءة القرآن اليوم",
+      routineQuranDesc: "أكمل ورد القرآن المحدد اليوم",
+      routineSwalathTitle: "الصلوات على النبي اليوم",
+      routineSwalathDesc: "أكمل قراءة الصلوات",
+      routinePrayersTitle: "الصلوات الخمس",
+      routinePrayersDesc: "أدِّ صلوات اليوم",
+      routineDhikrTitle: "أذكار الصباح والمساء",
+      routineDhikrDesc: "أكمل الأذكار",
+      routineDuaTitle: "أدعية مختارة",
+      routineDuaDesc: "أكمل أدعية اليوم",
+      routineProgressTitle: "🎯 إنجاز أهداف اليوم",
+      routineProgressText: "مكتمل"
+    },
+    hi: {
+      myDayTitle: "✨ मेरा दिन",
+      statusTitle: "आज का व्हाट्सऐप स्टेटस",
+      statusSubtitle: "सुंदर इस्लामी स्टेटस देखें और साझा करें",
+      statusTap: "खोलने के लिए दबाएँ",
+      routineTitle: "📌 आज की आध्यात्मिक दिनचर्या",
+      routineQuranTitle: "आज का कुरआन पाठ",
+      routineQuranDesc: "आज का निर्धारित पाठ पूरा करें",
+      routineSwalathTitle: "आज की सलवात",
+      routineSwalathDesc: "सलवात पढ़ना पूरा करें",
+      routinePrayersTitle: "पाँच वक्त की नमाज़",
+      routinePrayersDesc: "आज की नमाज़ें अदा करें",
+      routineDhikrTitle: "सुबह और शाम के ज़िक्र",
+      routineDhikrDesc: "ज़िक्र पूरा करें",
+      routineDuaTitle: "विशेष दुआएँ",
+      routineDuaDesc: "आज की दुआएँ पढ़ें",
+      routineProgressTitle: "🎯 आज के लक्ष्य की प्रगति",
+      routineProgressText: "पूरा हुआ"
+    },
+    ur: {
+      myDayTitle: "✨ میرا دن",
+      statusTitle: "آج کا واٹس ایپ اسٹیٹس",
+      statusSubtitle: "خوبصورت اسلامی اسٹیٹس دیکھیں اور شیئر کریں",
+      statusTap: "کھولنے کے لیے دبائیں",
+      routineTitle: "📌 آج کا روحانی معمول",
+      routineQuranTitle: "آج کی قرآن خوانی",
+      routineQuranDesc: "آج کا مقررہ حصہ مکمل کریں",
+      routineSwalathTitle: "آج کے صلوٰۃ",
+      routineSwalathDesc: "صلوٰۃ پڑھنا مکمل کریں",
+      routinePrayersTitle: "پانچ وقت کی نماز",
+      routinePrayersDesc: "آج کی نمازیں ادا کریں",
+      routineDhikrTitle: "صبح و شام کے اذکار",
+      routineDhikrDesc: "اذکار مکمل کریں",
+      routineDuaTitle: "خصوصی دعائیں",
+      routineDuaDesc: "آج کی دعائیں پڑھیں",
+      routineProgressTitle: "🎯 آج کے اہداف کی پیش رفت",
+      routineProgressText: "مکمل"
+    },
+    ta: {
+      myDayTitle: "✨ எனது நாள்",
+      statusTitle: "இன்றைய வாட்ஸ்அப் நிலை",
+      statusSubtitle: "அழகான இஸ்லாமிய நிலைகளைப் பார்த்துப் பகிருங்கள்",
+      statusTap: "திறக்கத் தட்டவும்",
+      routineTitle: "📌 இன்றைய ஆன்மிக வழக்கம்",
+      routineQuranTitle: "இன்றைய குர்ஆன் ஓதல்",
+      routineQuranDesc: "இன்றைய நிர்ணயிக்கப்பட்ட பகுதியை ஓதவும்",
+      routineSwalathTitle: "இன்றைய ஸலவாத்",
+      routineSwalathDesc: "ஸலவாத் ஓதலை நிறைவு செய்யவும்",
+      routinePrayersTitle: "ஐவேளைத் தொழுகை",
+      routinePrayersDesc: "இன்றைய தொழுகைகளை நிறைவேற்றவும்",
+      routineDhikrTitle: "காலை மற்றும் மாலை திக்ர்",
+      routineDhikrDesc: "திக்ரை நிறைவு செய்யவும்",
+      routineDuaTitle: "சிறப்புத் துஆக்கள்",
+      routineDuaDesc: "இன்றைய துஆக்களை ஓதவும்",
+      routineProgressTitle: "🎯 இன்றைய இலக்கு முன்னேற்றம்",
+      routineProgressText: "நிறைவு"
+    }
+  };
+
+  function applyMyDayTranslations(language) {
+    const lang = translations[language] || translations.ml;
+
+    document.querySelectorAll("[data-i18n]").forEach(function (element) {
+      const key = element.getAttribute("data-i18n");
+
+      if (Object.prototype.hasOwnProperty.call(lang, key)) {
+        if (key === "routineProgressText") {
+          const match = element.textContent.match(/\d+/);
+          const percent = match ? match[0] : "0";
+          element.textContent = percent + "% " + lang[key];
+        } else {
+          element.textContent = lang[key];
+        }
+      }
+    });
+  }
+
+  document.addEventListener("swalath-language-changed", function (event) {
+    const language =
+      event.detail && event.detail.language
+        ? event.detail.language
+        : localStorage.getItem("swalath-language") || "ml";
+
+    applyMyDayTranslations(language);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      applyMyDayTranslations(
+        localStorage.getItem("swalath-language") || "ml"
+      );
+    });
+  } else {
+    applyMyDayTranslations(
+      localStorage.getItem("swalath-language") || "ml"
+    );
+  }
+})();
 </script>
 
 </body>
