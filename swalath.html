@@ -62,11 +62,11 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 
 <div id="collectionPage">
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="🔍 സ്വലാത്ത് തിരയുക..." data-i18n-placeholder="searchSwalaath" oninput="searchSwalath()">
+<input type="text" id="searchInput" placeholder="🔍 സ്വലാത്ത് തിരയുക..." oninput="searchSwalath()">
 </div>
 
 <div class="collection">
-<div class="collection-title" id="collectionTitle">📖 21 സ്വലാത്തുകളുടെ ശേഖരം</div>
+<div class="collection-title">📖 21 സ്വലാത്തുകളുടെ ശേഖരം</div>
 
 <div class="swalath-card" onclick="openSwalath('ibrahimiyya')"><h3 lang="ar" dir="rtl">الصلاة الإبراهيمية</h3><span lang="ar" dir="rtl">الصلاة الإبراهيمية</span></div>
 <div class="swalath-card" onclick="openSwalath('nariya')"><h3 lang="ar" dir="rtl">الصلاة النارية</h3><span lang="ar" dir="rtl">الصلاة النارية</span></div>
@@ -243,15 +243,6 @@ yaqutat:{name:"ياقوتة الحقائق",arabic:`اللَّهُمَّ صَل�
 وَعَلَىٰ آلِهِ وَصَحْبِهِ.`,pronunciation:"അല്ലാഹുമ്മ സ്വല്ലി വസല്ലിം വബാരിക് അലാ സയ്യിദിനാ വമൗലാനാ മുഹമ്മദിൻ.",meaning:"നബി ﷺ യുടെ മഹത്വവും സ്നേഹവും നമ്മുടെ സ്വഭാവത്തിൽ പ്രതിഫലിപ്പിക്കണമെന്ന പ്രാർത്ഥനാരൂപത്തിലുള്ള സ്വലാത്ത്.",fadheela:"ആത്മീയ പാരമ്പര്യത്തിൽ പ്രചരിക്കുന്ന സ്വലാത്ത് രൂപം.",source:"യാഖൂതത്തുൽ ഹഖാഇഖ് എന്ന പേരിൽ കാണപ്പെടുന്ന രൂപം."}
 };
 
-const englishSwalathData = {
-ibrahimiyya:{
-pronunciation:"Allahumma salli ala Muhammadin wa ala aali Muhammad, kama sallayta ala Ibrahima wa ala aali Ibrahim, innaka Hamidum Majid.",
-meaning:"O Allah, send blessings upon Muhammad and the family of Muhammad, as You sent blessings upon Ibrahim and his family.",
-fadheela:"A well-known form of salawat taught in authentic hadith.",
-source:"Sahih al-Bukhari and Sahih Muslim."
-}
-};
-
 let currentSwalath = null;
 let currentSwalathForShare = null;
 
@@ -273,15 +264,13 @@ function getDisplayData(key){
     const d = swalathData[key];
     if(!d) return null;
 
-    const en = englishSwalathData[key] || {};
-
     return {
         name: d.name,
         arabic: d.arabic,
-        pronunciation: isMalayalam() ? d.pronunciation : (en.pronunciation || d.pronunciation),
-        meaning: isMalayalam() ? d.meaning : (en.meaning || d.meaning),
-        fadheela: isMalayalam() ? d.fadheela : (en.fadheela || d.fadheela),
-        source: isMalayalam() ? d.source : (en.source || d.source)
+        pronunciation: d.pronunciation,
+        meaning: d.meaning,
+        fadheela: d.fadheela,
+        source: d.source
     };
 }
 
@@ -474,6 +463,7 @@ function searchSwalath(){
 }
 
 async function shareCurrentSwalath(){
+    g=currentSwalathForShare; // safe fallback
     if(!currentSwalathForShare){
         alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
         return;
@@ -488,7 +478,7 @@ async function shareCurrentSwalath(){
 
 async function saveCurrentSwalathCard(){
     if(!currentSwalathForShare){
-        alert("ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.");
+        alert="ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.";
         return;
     }
 
