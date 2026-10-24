@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ml">
 <head>
 <meta charset="UTF-8">
@@ -6,173 +6,150 @@
 <meta name="theme-color" content="#123d34">
 <title>Al-Salath: Quran, Azhan & Dua</title>
 <link rel="stylesheet" href="style.css">
+
 <style>
-#splashScreen {position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; transition: opacity .6s ease, visibility .6s ease; }
-#splashScreen.hide {opacity: 0; visibility: hidden; pointer-events: none; }
-.splash-content {width: 90%; max-width: 380px; text-align: center; padding: 30px 20px; }
-.splash-moon {font-size: 66px; margin-bottom: 18px; animation: moonFloat 2s ease-in-out infinite; }
-.splash-content h1 {font-size: 38px; margin: 0 0 10px; color: #f1dfb0; font-family: 'Amiri', serif; }
-.splash-content p {font-size: 16px; line-height: 2.2; margin: 0; color: #fff8e8; font-family: 'Amiri', serif; }
-.splash-loader {width: 38px; height: 38px; border: 3px solid rgba(241,223,176,.25); border-top-color: #f1dfb0; border-radius: 50%; margin: 30px auto 0; animation: splashSpin .9s linear infinite; }
-@keyframes splashSpin { to { transform: rotate(360deg); } }
-@keyframes moonFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+#splashScreen {position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0;transition:opacity .6s ease,visibility .6s ease}
+#splashScreen.hide {opacity:0;visibility:hidden;pointer-events:none}
+.splash-content {width:90%;max-width:380px;text-align:center;padding:30px 20px}
+.splash-moon {font-size:66px;margin-bottom:18px;animation:moonFloat 2s ease-in-out infinite}
+.splash-content h1 {font-size:38px;margin:0 0 10px;color:#f1dfb0;font-family:'Amiri',serif}
+.splash-content p {font-size:16px;line-height:2.2;margin:0;color:#fff8e8;font-family:'Amiri',serif}
+.splash-loader {width:38px;height:38px;border:3px solid rgba(241,223,176,.25);border-top-color:#f1dfb0;border-radius:50%;margin:30px auto 0;animation:splashSpin .9s linear infinite}
+@keyframes splashSpin {to{transform:rotate(360deg)}}
+@keyframes moonFloat {0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-.search-box {width: 100%; padding: 13px 16px; border: 1px solid #e6dfd0; border-radius: 14px; outline: none; font-size: 14px; margin-bottom: 15px; background: white; color: #222; box-sizing: border-box; }
-.search-box:focus { border-color: #123d34; }
-.feature-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
-.dark-button { border: none; background: #123d34; color: white; padding: 10px 16px; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.search-box {width:100%;padding:13px 16px;border:1px solid #e6dfd0;border-radius:14px;outline:none;font-size:14px;margin-bottom:15px;background:white;color:#222;box-sizing:border-box}
+.search-box:focus {border-color:#123d34}
+.feature-buttons {display:flex;justify-content:center;gap:10px;margin-bottom:18px}
+.dark-button {border:none;background:#123d34;color:white;padding:10px 16px;border-radius:25px;cursor:pointer;font-size:13px;font-weight:600}
 
-body.dark-mode { background: #111; color: #eee; } 
-body.dark-mode .app { background: #181818; } 
-body.dark-mode .welcome p { color: #aaa; } 
-body.dark-mode .menu-card { background: #222; border-color: #444; color: #eee; } 
-body.dark-mode .menu-card span { color: #aaa; } 
-body.dark-mode .search-box { background: #222; color: white; border-color: #444; } 
-body.dark-mode #collectionSection h2, body.dark-mode #favoritesSection h2, body.dark-mode #myDayPage h2 { color: #fff; } 
-body.dark-mode .dark-button { background: #f1dfb0; color: #123d34; } 
-body.dark-mode .favorite-item, body.dark-mode .collection-item, body.dark-mode .routine-item { background: #222 !important; border-color: #444 !important; color: #fff !important; } 
-body.dark-mode footer { color: #777; } 
+body.dark-mode {background:#111;color:#eee}
+body.dark-mode .app {background:#181818}
+body.dark-mode .welcome p {color:#aaa}
+body.dark-mode .menu-card {background:#222;border-color:#444;color:#eee}
+body.dark-mode .menu-card span {color:#aaa}
+body.dark-mode .search-box {background:#222;color:white;border-color:#444}
+body.dark-mode #collectionSection h2,
+body.dark-mode #favoritesSection h2,
+body.dark-mode #myDayPage h2 {color:#fff}
+body.dark-mode .dark-button {background:#f1dfb0;color:#123d34}
+body.dark-mode .favorite-item,
+body.dark-mode .collection-item,
+body.dark-mode .routine-item {background:#222!important;border-color:#444!important;color:#fff!important}
+body.dark-mode footer {color:#777}
 
-/* ===== SWALAATH PREMIUM HOME UI ===== */ 
-:root {--sw-bg: #f8f8f4; --sw-card: #ffffff; --sw-green: #123d34; --sw-green-dark: #092b25; --sw-gold: #c5a868; --sw-text: #22352c; --sw-muted: #6a7971; --sw-border: #eae5d5; } 
-body {background: var(--sw-bg); color: var(--sw-text); font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif; line-height: 1.65; -webkit-tap-highlight-color: transparent; } 
-.app {width: 100%; max-width: 760px; min-height: 100vh; margin: 0 auto; background: var(--sw-bg); overflow: hidden; box-shadow: 0 0 50px rgba(18, 61, 52, .08); } 
-.hero {position: relative; overflow: hidden; padding: 38px 20px 36px; text-align: center; color: #fff9e9; background: radial-gradient(circle at 85% 15%, rgba(212, 190, 126, .2), transparent 40%), linear-gradient(145deg, #0d3229, #15473d 65%, #1f5d4f); border-radius: 0 0 32px 32px; box-shadow: 0 10px 30px rgba(13, 50, 41, .16); } 
-.hero .moon {display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; margin-bottom: 10px; border: 1px solid rgba(241, 223, 176, .4); border-radius: 50%; background: rgba(255, 255, 255, .08); font-size: 38px !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1); } 
-.hero .arabic-main-title {font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 38px; color: #f5e2b3; margin: 4px 0 10px; font-weight: bold; } 
-.hero .arabic-ayah {font-family: 'Amiri', 'Traditional Arabic', serif; font-size: 19px; color: #fffaf0; margin: 0; line-height: 2.2; direction: rtl; opacity: 0.98; padding: 0 10px; } 
-main { padding: 0 18px; } 
-.welcome { padding: 25px 5px 14px; text-align: center; } 
-.welcome h2 { margin: 0 0 5px; color: var(--sw-green); font-size: 22px; font-weight: 800; } 
-.welcome p { margin: 0; color: var(--sw-muted); font-size: 13px; line-height: 1.9; } 
+:root {--sw-bg:#f8f8f4;--sw-card:#ffffff;--sw-green:#123d34;--sw-green-dark:#092b25;--sw-gold:#c5a868;--sw-text:#22352c;--sw-muted:#6a7971;--sw-border:#eae5d5}
+body {background:var(--sw-bg);color:var(--sw-text);font-family:"Noto Sans Malayalam","Noto Sans",Arial,sans-serif;line-height:1.65;-webkit-tap-highlight-color:transparent}
+.app {width:100%;max-width:760px;min-height:100vh;margin:0 auto;background:var(--sw-bg);overflow:hidden;box-shadow:0 0 50px rgba(18,61,52,.08)}
+.hero {position:relative;overflow:hidden;padding:38px 20px 36px;text-align:center;color:#fff9e9;background:radial-gradient(circle at 85% 15%,rgba(212,190,126,.2),transparent 40%),linear-gradient(145deg,#0d3229,#15473d 65%,#1f5d4f);border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(13,50,41,.16)}
+.hero .moon {display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:10px;border:1px solid rgba(241,223,176,.4);border-radius:50%;background:rgba(255,255,255,.08);font-size:38px!important;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.hero .arabic-main-title {font-family:'Amiri','Traditional Arabic',serif;font-size:38px;color:#f5e2b3;margin:4px 0 10px;font-weight:bold}
+.hero .arabic-ayah {font-family:'Amiri','Traditional Arabic',serif;font-size:19px;color:#fffaf0;margin:0;line-height:2.2;direction:rtl;opacity:.98;padding:0 10px}
+main {padding:0 18px}
+.welcome {padding:25px 5px 14px;text-align:center}
+.welcome h2 {margin:0 0 5px;color:var(--sw-green);font-size:22px;font-weight:800}
+.welcome p {margin:0;color:var(--sw-muted);font-size:13px;line-height:1.9}
 
-.today-card { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 22px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(18,61,52,0.06); }
-.today-card h3 { color: var(--sw-green); font-size: 16px; margin: 0 0 10px 0; font-family: 'Amiri', serif; }
-.today-card h2 { margin: 5px 0; color: var(--sw-green); font-size: 42px; font-weight: 800; font-variant-numeric: tabular-nums; }
-.today-card p { margin: 0 0 14px; color: var(--sw-muted); font-size: 13px; font-weight: 600; }
-.today-card button { min-height: 44px; padding: 10px 24px; border: none; border-radius: 25px; background: var(--sw-green); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(18,61,52,0.2); }
+.today-card {background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:22px;padding:20px;text-align:center;margin-bottom:20px;box-shadow:0 6px 18px rgba(18,61,52,.06)}
+.today-card h3 {color:var(--sw-green);font-size:16px;margin:0 0 10px;font-family:'Amiri',serif}
+.today-card h2 {margin:5px 0;color:var(--sw-green);font-size:42px;font-weight:800;font-variant-numeric:tabular-nums}
+.today-card p {margin:0 0 14px;color:var(--sw-muted);font-size:13px;font-weight:600}
+.today-card button {min-height:44px;padding:10px 24px;border:none;border-radius:25px;background:var(--sw-green);color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(18,61,52,.2)}
 
-.feature-buttons { margin: 0 0 18px; gap: 10px; } 
-.dark-button {min-height: 44px; padding: 10px 20px; border: 1px solid var(--sw-border); border-radius: 25px; background: var(--sw-card); color: var(--sw-green); font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(18, 61, 52, .05); cursor: pointer; } 
-.menu-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 25px; } 
-.menu-card {position: relative; display: flex; min-width: 0; min-height: 140px; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 18px 12px; box-sizing: border-box; text-align: center; background: var(--sw-card); border: 1px solid var(--sw-border); border-radius: 22px; color: var(--sw-text); box-shadow: 0 6px 18px rgba(18, 61, 52, .05); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; } 
-.menu-card > div:first-child {display: flex; width: 56px; height: 56px; align-items: center; justify-content: center; margin-bottom: 3px; border-radius: 18px; background: #f0f5ed; font-size: 30px !important; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); } 
-.menu-card strong {display: block; max-width: 100%; color: var(--sw-green); font-size: 14px; font-weight: 800; line-height: 1.6; } 
-.menu-card span {display: block; color: var(--sw-muted); font-size: 11px; line-height: 1.65; } 
+.feature-buttons {margin:0 0 18px;gap:10px}
+.dark-button {min-height:44px;padding:10px 20px;border:1px solid var(--sw-border);border-radius:25px;background:var(--sw-card);color:var(--sw-green);font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(18,61,52,.05);cursor:pointer}
+.menu-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 25px}
+.menu-card {position:relative;display:flex;min-width:0;min-height:140px;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 12px;box-sizing:border-box;text-align:center;background:var(--sw-card);border:1px solid var(--sw-border);border-radius:22px;color:var(--sw-text);box-shadow:0 6px 18px rgba(18,61,52,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.menu-card>div:first-child {display:flex;width:56px;height:56px;align-items:center;justify-content:center;margin-bottom:3px;border-radius:18px;background:#f0f5ed;font-size:30px!important;box-shadow:inset 0 2px 5px rgba(0,0,0,.02)}
+.menu-card strong {display:block;max-width:100%;color:var(--sw-green);font-size:14px;font-weight:800;line-height:1.6}
+.menu-card span {display:block;color:var(--sw-muted);font-size:11px;line-height:1.65}
 
-/* 🛠️ FIX FOR "INNATHE ENTE DIVASAM" CARD */
-.my-day-card {
-    background: linear-gradient(135deg, #092b25, #123d34) !important;
-    color: #fff !important;
-    border: 1.5px solid var(--sw-gold) !important;
-    border-radius: 22px !important;
-    padding: 16px 20px !important;
-    margin-bottom: 20px !important;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(18,61,52,0.15) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    text-align: left !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-}
+.my-day-card {background:linear-gradient(135deg,#092b25,#123d34)!important;color:#fff!important;border:1.5px solid var(--sw-gold)!important;border-radius:22px!important;padding:16px 20px!important;margin-bottom:20px!important;cursor:pointer;box-shadow:0 6px 18px rgba(18,61,52,.15)!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;text-align:left!important;box-sizing:border-box!important;width:100%!important}
 
-/* ROUTINE CHECKLIST ITEMS */
-.routine-item { display: flex; align-items: center; justify-content: space-between; background: white; border: 1px solid var(--sw-border); border-radius: 16px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s ease; }
-.routine-item.active { border-color: #25D366; background: #f0fdf4; }
-.routine-item .checkbox-icon { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; transition: all 0.2s ease; }
-.routine-item.active .checkbox-icon { background: #25D366; border-color: #25D366; }
+.routine-item {display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid var(--sw-border);border-radius:16px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:all .2s ease}
+.routine-item.active {border-color:#25D366;background:#f0fdf4}
+.routine-item .checkbox-icon {width:26px;height:26px;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;transition:all .2s ease}
+.routine-item.active .checkbox-icon {background:#25D366;border-color:#25D366}
 
-/* POPUP MODAL STYLES FIX */
-#quotePopupOverlay, #congratulationOverlay { position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
-.quote-popup-box { background: var(--sw-card); border: 2px solid var(--sw-gold); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.4); animation: popupScale .3s ease; box-sizing: border-box; }
-@keyframes popupScale { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+#quotePopupOverlay,#congratulationOverlay {position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.quote-popup-box {background:var(--sw-card);border:2px solid var(--sw-gold);border-radius:24px;width:100%;max-width:380px;padding:24px;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,.4);animation:popupScale .3s ease;box-sizing:border-box}
+@keyframes popupScale {from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* LANGUAGE SELECTOR */ 
-#languageScreen {position: fixed; inset: 0; z-index: 100001; display: none; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(145deg, #092b25, #123d34, #1d5143); color: #f1dfb0; } 
-#languageScreen .language-box {width: 100%; max-width: 400px; padding: 24px; border: 1px solid #c8a96e; border-radius: 22px; background: #fffaf0; color: #123d34; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.25); } 
-.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; } 
-.language-option { padding: 13px 8px; border: 1px solid #d7c69e; border-radius: 12px; background: #fff; color: #123d34; font-size: 16px; cursor: pointer; } 
-.language-option.selected { border: 2px solid #123d34; background: #e8f0e9; font-weight: bold; } 
-#languageContinue { width: 100%; padding: 13px; border: none; border-radius: 12px; background: #123d34; color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; } 
-</style> 
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"> 
-<script src="language.js" defer></script> 
-</head> 
-<body> 
+#languageScreen {position:fixed;inset:0;z-index:100001;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#092b25,#123d34,#1d5143);color:#f1dfb0}
+#languageScreen .language-box {width:100%;max-width:400px;padding:24px;border:1px solid #c8a96e;border-radius:22px;background:#fffaf0;color:#123d34;text-align:center;box-shadow:0 12px 35px rgba(0,0,0,.25)}
+.language-options {display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.language-option {padding:13px 8px;border:1px solid #d7c69e;border-radius:12px;background:#fff;color:#123d34;font-size:16px;cursor:pointer}
+.language-option.selected {border:2px solid #123d34;background:#e8f0e9;font-weight:bold}
+#languageContinue {width:100%;padding:13px;border:none;border-radius:12px;background:#123d34;color:#fff;font-size:16px;cursor:pointer;font-weight:bold}
+</style>
 
-<!-- LANGUAGE SELECTION SCREEN --> 
-<div id="languageScreen"> 
-    <div class="language-box"> 
-        <h2 id="languageHeading">Select Your Language</h2> 
-        <p id="languageSubtitle">Choose your preferred language</p> 
-        <div class="language-options"> 
-            <button type="button" class="language-option" data-lang="ml">മലയാളം</button> 
-            <button type="button" class="language-option" data-lang="en">English</button> 
-            <button type="button" class="language-option" data-lang="ar">العربية</button> 
-            <button type="button" class="language-option" data-lang="hi">हिन्दी</button> 
-            <button type="button" class="language-option" data-lang="ur">اردو</button> 
-            <button type="button" class="language-option" data-lang="ta">தமிழ்</button> 
-        </div> 
-        <button type="button" id="languageContinue">Continue</button> 
-    </div> 
-</div> 
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<script src="language.js" defer></script>
+</head>
 
-<!-- SPLASH SCREEN --> 
-<div id="splashScreen"> 
-    <div class="splash-content"> 
-        <div class="splash-moon">🌙</div> 
-        <h1 style="font-family:'Amiri', serif; font-size:40px;">الصلاة</h1> 
-        <p style="font-family:'Amiri', serif; font-size:16px; direction:rtl; line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</p> 
-        <div class="splash-loader"></div> 
-    </div> 
-</div> 
+<body>
 
-<!-- 🌟 DAILY STATUS SUB-PAGE MODAL -->
+<div id="languageScreen">
+    <div class="language-box">
+        <h2 id="languageHeading">Select Your Language</h2>
+        <p id="languageSubtitle">Choose your preferred language</p>
+        <div class="language-options">
+            <button type="button" class="language-option" data-lang="ml">മലയാളം</button>
+            <button type="button" class="language-option" data-lang="en">English</button>
+            <button type="button" class="language-option" data-lang="ar">العربية</button>
+            <button type="button" class="language-option" data-lang="hi">हिन्दी</button>
+            <button type="button" class="language-option" data-lang="ur">اردو</button>
+            <button type="button" class="language-option" data-lang="ta">தமிழ்</button>
+        </div>
+        <button type="button" id="languageContinue">Continue</button>
+    </div>
+</div>
+
+<div id="splashScreen">
+    <div class="splash-content">
+        <div class="splash-moon">🌙</div>
+        <h1 style="font-family:'Amiri',serif;font-size:40px;">الصلاة</h1>
+        <p style="font-family:'Amiri',serif;font-size:16px;direction:rtl;line-height:2;">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</p>
+        <div class="splash-loader"></div>
+    </div>
+</div>
+
 <div id="quotePopupOverlay">
     <div class="quote-popup-box">
-        <h3 style="color:var(--sw-green); font-size:18px; margin-bottom:12px; font-family:'Amiri', serif;">✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</h3>
-        <div style="background: #f8f8f4; border: 1px solid var(--sw-gold); border-radius: 16px; padding: 16px; margin-bottom: 18px;">
-            <p id="popupQuoteText" style="font-size:18px; font-weight:bold; color:var(--sw-green); font-family:'Amiri', serif; line-height:1.8; margin:0 0 8px 0;">ലോഡ് ആകുന്നു...</p>
-            <p id="popupQuoteSource" style="font-size:12px; color:var(--sw-muted); margin:0; font-style:italic;"></p>
+        <h3 style="color:var(--sw-green);font-size:18px;margin-bottom:12px;font-family:'Amiri',serif;">✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</h3>
+        <div style="background:#f8f8f4;border:1px solid var(--sw-gold);border-radius:16px;padding:16px;margin-bottom:18px;">
+            <p id="popupQuoteText" style="font-size:18px;font-weight:bold;color:var(--sw-green);font-family:'Amiri',serif;line-height:1.8;margin:0 0 8px 0;">ലോഡ് ആകുന്നു...</p>
+            <p id="popupQuoteSource" style="font-size:12px;color:var(--sw-muted);margin:0;font-style:italic;"></p>
         </div>
-        <div style="display:flex; gap:10px; justify-content: center;">
-            <button onclick="triggerShareStatus()" style="flex:1; padding:12px; border-radius:20px; background:#25D366; color:white; border:none; font-weight:bold; font-size:13px; cursor:pointer; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">📲 Status ഷെയർ ചെയ്യാം</button>
-            <button onclick="closeQuotePopup()" style="padding:12px 18px; border-radius:20px; background:#e0e0e0; color:#333; border:none; font-size:13px; cursor:pointer;">Back</button>
+        <div style="display:flex;gap:10px;justify-content:center;">
+            <button onclick="triggerShareStatus()" style="flex:1;padding:12px;border-radius:20px;background:#25D366;color:white;border:none;font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(37,211,102,.3);">📲 Status ഷെയർ ചെയ്യാം</button>
+            <button onclick="closeQuotePopup()" style="padding:12px 18px;border-radius:20px;background:#e0e0e0;color:#333;border:none;font-size:13px;cursor:pointer;">Back</button>
         </div>
     </div>
 </div>
 
-<!-- 🎁 CONGRATULATION GIFT OVERLAY -->
 <div id="congratulationOverlay">
-    <div class="quote-popup-box" style="border-color: #25D366; background: #fff8e8;">
-        <div style="font-size: 60px; margin-bottom: 10px;">🎁</div>
-        <h2 style="color: var(--sw-green); margin: 0 0 8px; font-size: 22px;">അൽഹംദുലില്ലാഹ്! 🎉</h2>
-        <p style="font-size: 14px; color: var(--sw-text); line-height: 1.7; margin-bottom: 20px;">
-            ഇന്നത്തെ എല്ലാ ഇസ്ലാമിക് ആത്മീയ കാര്യങ്ങളും നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു. അല്ലാഹു സ്വീകരിക്കുമാറാകട്ടെ!
-        </p>
-        <button onclick="closeCongratulationModal()" style="width: 100%; padding: 12px; border-radius: 20px; background: var(--sw-green); color: white; border: none; font-weight: bold; cursor: pointer;">
-            സന്തോഷം! (Close)
-        </button>
+    <div class="quote-popup-box" style="border-color:#25D366;background:#fff8e8;">
+        <div style="font-size:60px;margin-bottom:10px;">🎁</div>
+        <h2 style="color:var(--sw-green);margin:0 0 8px;font-size:22px;">അൽഹംദുലില്ലാഹ്! 🎉</h2>
+        <p style="font-size:14px;color:var(--sw-text);line-height:1.7;margin-bottom:20px;">ഇന്നത്തെ എല്ലാ ഇസ്ലാമിക് ആത്മീയ കാര്യങ്ങളും നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു. അല്ലാഹു സ്വീകരിക്കുമാറാകട്ടെ!</p>
+        <button onclick="closeCongratulationModal()" style="width:100%;padding:12px;border-radius:20px;background:var(--sw-green);color:white;border:none;font-weight:bold;cursor:pointer;">സന്തോഷം! (Close)</button>
     </div>
 </div>
 
-<div class="app"> 
-    <section class="hero"> 
-        <div class="moon">🌙</div> 
-        <div class="arabic-main-title">الصلاة</div> 
-        <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</div> 
-    </section> 
+<div class="app">
+    <section class="hero">
+        <div class="moon">🌙</div>
+        <div class="arabic-main-title">الصلاة</div>
+        <div class="arabic-ayah">إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلَُّوا عَلَيْهِ وَسَلَّمُوا تَسْلِيمًا</div>
+    </section>
 
-    <main> 
-        <section class="welcome"> 
-            <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2> 
-            <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p> 
-        </section> 
+    <main>
+        <section class="welcome">
+            <h2 data-i18n="greeting" data-ml="അസ്സലാമു അലൈക്കും">അസ്സലാമു അലൈക്കും</h2>
+            <p data-i18n="intro" data-ml="സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം">സ്വലാത്തുകൾ ചൊല്ലാനും വായിക്കാനും ഇവിടെ നിന്ന് തുടങ്ങാം</p>
+        </section>
 
-        <!-- SEPARATE COUNTER CARD -->
         <div class="today-card">
             <h3 id="counterCardTitle">مُعَدَّدُ الصَّلَوَات (Swalath Counter)</h3>
             <h2 id="count">0</h2>
@@ -180,215 +157,234 @@ main { padding: 0 18px; }
             <button onclick="increaseCount()" data-i18n="saySwalaath" data-ml="ﷺ സ്വലാത്ത് ചൊല്ലി">ﷺ സ്വലാത്ത് ചൊല്ലി</button>
         </div>
 
-        <!-- 🌟 FIX: "ഇന്നത്തെ എന്റെ ദിവസം" MAIN HOME CARD -->
         <div class="my-day-card" onclick="openMyDayPage()">
-            <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="font-size: 32px; background: rgba(255,255,255,0.12); width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 16px; flex-shrink: 0;">✨</div>
+            <div style="display:flex;align-items:center;gap:14px;">
+                <div style="font-size:32px;background:rgba(255,255,255,.12);width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:16px;flex-shrink:0;">✨</div>
                 <div>
-                    <strong style="color: #f5e2b3; font-size: 16px; display: block; margin-bottom: 2px;">ഇന്നത്തെ എന്റെ ദിവസം</strong>
-                    <span style="color: #ddd; font-size: 12px; display: block;">ഡെയിലി റൂട്ടീൻ പ്രോഗ്രസും സ്റ്റാറ്റസും</span>
+                    <strong style="color:#f5e2b3;font-size:16px;display:block;margin-bottom:2px;">ഇന്നത്തെ എന്റെ ദിവസം</strong>
+                    <span style="color:#ddd;font-size:12px;display:block;">ഡെയിലി റൂട്ടീൻ പ്രോഗ്രസും സ്റ്റാറ്റസും</span>
                 </div>
             </div>
-            <div style="background: var(--sw-gold); color: #092b25; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 13px; flex-shrink: 0; margin-left: 10px;">Open</div>
+            <div style="background:var(--sw-gold);color:#092b25;padding:8px 16px;border-radius:20px;font-weight:bold;font-size:13px;flex-shrink:0;margin-left:10px;">Open</div>
         </div>
 
-        <div class="feature-buttons"> 
-            <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button> 
-            <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button> 
-        </div> 
+        <div class="feature-buttons">
+            <button id="darkModeButton" class="dark-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            <button id="languageButton" type="button" onclick="openSwalathLanguageSelector()" data-i18n="language" data-ml="🌐 Language">🌐 Language</button>
+        </div>
 
-        <!-- MENU GRID -->
-        <div class="menu-grid"> 
-            <div class="menu-card" onclick="openQuran()"> 
-                <div style="font-size:30px;">📖</div> 
-                <strong>القرآن الكريم</strong> <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span> 
-            </div> 
-            <div class="menu-card" onclick="openCollection()"> 
-                <div style="font-size:30px;">🕌</div> 
-                <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong> <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span> 
-            </div> 
-            <div class="menu-card" onclick="openQuranMP3()"> 
-                <div style="font-size:30px;">🎧</div> 
-                <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong> <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span> 
-            </div> 
-            <div class="menu-card" onclick="openCalendar()"> 
-                <div style="font-size:30px;">🗓️</div> 
-                <strong>التقويم الهجري</strong> <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span> 
-            </div> 
-            <div class="menu-card" onclick="openPrayerTime()"> 
-                <div style="font-size:30px;">🕐</div> 
-                <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong> <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span> 
-            </div> 
-            <div class="menu-card" onclick="openDua()"> 
-                <div style="font-size:30px;">🤲</div> 
-                <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong> <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span> 
-            </div> 
-            <div class="menu-card" onclick="openDhikr()"> 
-                <div style="font-size:30px;">📿</div> 
-                <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong> <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span> 
-            </div> 
-            <div class="menu-card" onclick="openFavorites()"> 
-                <div style="font-size:30px;">❤️</div> 
-                <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong> <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span> 
-            </div> 
-            <div class="menu-card" onclick="openAsmaulHusna()"> 
-                <div style="font-size:30px;">⭐</div> 
-                <strong>أَسْمَاءُ الْحُسْنَى</strong> <span>أسماء الله الحسنى</span> 
-            </div> 
-            <div class="menu-card" onclick="openUmrah()"> 
-                <div style="font-size:30px;">🕋</div> 
-                <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong> <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span> 
-            </div> 
-        </div> 
-
-        <!-- 🌟 "ഇന്നത്തെ എന്റെ ദിവസം" PAGE SECTION -->
-        <section id="myDayPage" style="display:none;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
-                <button onclick="closeMyDayPage()" style="border:none; background:#123d34; color:white; padding:10px 16px; border-radius:12px; cursor:pointer; font-weight:600;">← Back</button>
-                <h2 style="margin:0; font-family:'Amiri', serif; color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+        <!-- ഹോം പേജ് മെനു കാർഡുകൾ -->
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openQuran()">
+                <div style="font-size:30px;">📖</div>
+                <strong>القرآن الكريم</strong>
+                <span data-i18n="quranDesc" data-ml="ഖുർആൻ">ഖുർആൻ</span>
             </div>
 
-            <!-- 1. TOP STATUS CARD HEADING -->
-            <div onclick="openQuotePopup()" style="background: linear-gradient(135deg, #123d34, #092b25); color: white; border: 1.5px solid var(--sw-gold); border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">
-                <div style="display:flex; align-items:center; gap:14px;">
-                    <div style="font-size: 32px;">📲</div>
+            <div class="menu-card" onclick="openCollection()">
+                <div style="font-size:30px;">🕌</div>
+                <strong data-i18n="swalaathTitle" data-ml="സ്വലാത്തുകൾ">സ്വലാത്തുകൾ</strong>
+                <span data-i18n="swalaathDesc" data-ml="വിവിധ സ്വലാത്തുകൾ വായിക്കാം">വിവിധ സ്വലാത്തുകൾ വായിക്കാം</span>
+            </div>
+
+            <div class="menu-card" onclick="openQuranMP3()">
+                <div style="font-size:30px;">🎧</div>
+                <strong data-i18n="mp3Title" data-ml="Quran MP3">Quran MP3</strong>
+                <span data-i18n="mp3Desc" data-ml="ഖുർആൻ കേൾക്കാം">ഖുർആൻ കേൾക്കാം</span>
+            </div>
+
+            <div class="menu-card" onclick="openCalendar()">
+                <div style="font-size:30px;">🗓️</div>
+                <strong>التقويم الهجري</strong>
+                <span data-ml="ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും">ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും</span>
+            </div>
+
+            <div class="menu-card" onclick="openPrayerTime()">
+                <div style="font-size:30px;">🕐</div>
+                <strong data-i18n="prayerTitle" data-ml="Prayer Times">Prayer Times</strong>
+                <span data-i18n="prayerDesc" data-ml="നമസ്കാര സമയവും Adhan-ഉം">നമസ്കാര സമയവും Adhan-ഉം</span>
+            </div>
+
+            <div class="menu-card" onclick="openDua()">
+                <div style="font-size:30px;">🤲</div>
+                <strong data-i18n="duasTitle" data-ml="ദുആകൾ">ദുആകൾ</strong>
+                <span data-i18n="duasDesc" data-ml="വിവിധ ദുആകൾ">വിവിധ ദുആകൾ</span>
+            </div>
+
+            <div class="menu-card" onclick="openDhikr()">
+                <div style="font-size:30px;">📿</div>
+                <strong data-i18n="dhikrTitle" data-ml="ദിക്ർ">ദിക്ർ</strong>
+                <span data-i18n="dhikrDesc" data-ml="ദിക്ർ ചൊല്ലാം">ദിക്ർ ചൊല്ലാം</span>
+            </div>
+
+            <div class="menu-card" onclick="openFavorites()">
+                <div style="font-size:30px;">❤️</div>
+                <strong data-i18n="favouritesTitle" data-ml="My Favourites">My Favourites</strong>
+                <span data-i18n="favouritesDesc" data-ml="Favourite ആയി ചേർത്തവ">Favourite ആയി ചേർത്തവ</span>
+            </div>
+
+            <div class="menu-card" onclick="openAsmaulHusna()">
+                <div style="font-size:30px;">⭐</div>
+                <strong>أَسْمَاءُ الْحُسْنَى</strong>
+                <span>أسماء الله الحسنى</span>
+            </div>
+
+            <div class="menu-card" onclick="openUmrah()">
+                <div style="font-size:30px;">🕋</div>
+                <strong data-i18n="umrahTitle" data-ml="ഉംറ">ഉംറ</strong>
+                <span data-i18n="umrahDesc" data-ml="ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ">ഉംറയെ കുറിച്ചുള്ള വിവരങ്ങൾ</span>
+            </div>
+
+            <!-- പരസ്യ കാർഡ്: menu-grid-ന്റെ അകത്ത് തന്നെയാണ് -->
+<!-- Advertise with us card -->
+<div class="menu-card" onclick="openAdvertise()">
+    <div style="font-size:30px;">📢</div>
+    <strong>Advertise with us</strong>
+    <span>Reach Worldwide users</span>
+</div>
+        </div>
+
+        <section id="myDayPage" style="display:none;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                <button onclick="closeMyDayPage()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                <h2 style="margin:0;font-family:'Amiri',serif;color:var(--sw-green);">✨ ഇന്നത്തെ എന്റെ ദിവസം</h2>
+            </div>
+
+            <div onclick="openQuotePopup()" style="background:linear-gradient(135deg,#123d34,#092b25);color:white;border:1.5px solid var(--sw-gold);border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.15);">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div style="font-size:32px;">📲</div>
                     <div>
-                        <strong style="font-size: 16px; color: #f5e2b3; display:block;">ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</strong>
-                        <span style="font-size: 12px; color: #ddd;">അൾട്രാ എച്ച്ഡി സ്റ്റാറ്റസ് കണ്ട് ഷെയർ ചെയ്യാം</span>
+                        <strong style="font-size:16px;color:#f5e2b3;display:block;">ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്</strong>
+                        <span style="font-size:12px;color:#ddd;">അൾട്രാ എച്ച്ഡി സ്റ്റാറ്റസ് കണ്ട് ഷെയർ ചെയ്യാം</span>
                     </div>
                 </div>
-                <div style="background: #25D366; color: white; padding: 6px 14px; border-radius: 15px; font-size: 12px; font-weight: bold;">ക്ലിക്ക് ചെയ്യൂ</div>
+                <div style="background:#25D366;color:white;padding:6px 14px;border-radius:15px;font-size:12px;font-weight:bold;">ക്ലിക്ക് ചെയ്യൂ</div>
             </div>
 
-            <!-- 2. DAILY ROUTINE CHECKLIST -->
-            <h3 style="color:var(--sw-green); font-size:16px; margin-bottom:12px; font-family:'Amiri', serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
+            <h3 style="color:var(--sw-green);font-size:16px;margin-bottom:12px;font-family:'Amiri',serif;">📌 ഇന്നത്തെ ആത്മീയ റൂട്ടീൻ</h3>
 
             <div class="routine-item" id="task_quran" onclick="toggleRoutine('task_quran')">
-                <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">📖</span>
-                    <div><strong>ഇന്നത്തെ ഖുർആൻ ഓത്ത്</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം ഓതി തീർത്തു</span></div>
+                    <div><strong>ഇന്നത്തെ ഖുർആൻ ഓത്ത്</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ നിശ്ചിത ഭാഗം ഓതി തീർത്തു</span></div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_swalath" onclick="toggleRoutine('task_swalath')">
-                <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">📿</span>
-                    <div><strong>ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span style="font-size:11px; color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
+                    <div><strong>ഇന്നത്തെ സ്വലാത്തുകൾ</strong><br><span style="font-size:11px;color:#777;">സ്വലാത്ത് ചൊല്ലി പൂർത്തിയാക്കി</span></div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_prayers" onclick="toggleRoutine('task_prayers')">
-                <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">🕌</span>
-                    <div><strong>5 സമയത്തെ നിസ്കാരം</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ കൃത്യമായി നിർവ്വഹിച്ചു</span></div>
+                    <div><strong>5 സമയത്തെ നിസ്കാരം</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ നിസ്കാരങ്ങൾ കൃത്യമായി നിർവ്വഹിച്ചു</span></div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_dhikr" onclick="toggleRoutine('task_dhikr')">
-                <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">✨</span>
-                    <div><strong>രാവിലെയും വൈകുന്നേരത്തെയുമുള്ള ദിക്റുകൾ</strong><br><span style="font-size:11px; color:#777;">ദിക്റുകൾ ചൊല്ലി</span></div>
+                    <div><strong>രാവിലെയും വൈകുന്നേരത്തെയുമുള്ള ദിക്റുകൾ</strong><br><span style="font-size:11px;color:#777;">ദിക്റുകൾ ചൊല്ലി</span></div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
             <div class="routine-item" id="task_dua" onclick="toggleRoutine('task_dua')">
-                <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <span style="font-size:22px;">🤲</span>
-                    <div><strong>പ്രത്യേക ദുആ നിർവ്വഹണം</strong><br><span style="font-size:11px; color:#777;">ഇന്നത്തെ ദുആകൾ ചെയ്തു</span></div>
+                    <div><strong>പ്രത്യേക ദുആ നിർവ്വഹണം</strong><br><span style="font-size:11px;color:#777;">ഇന്നത്തെ ദുആകൾ ചെയ്തു</span></div>
                 </div>
                 <div class="checkbox-icon">✓</div>
             </div>
 
-            <!-- 3. PROGRESS BAR SECTION -->
-            <div style="background:var(--sw-card); border:1px solid var(--sw-gold); border-radius:20px; padding:20px; margin-top:20px; text-align:center;">
-                <h4 style="margin:0 0 8px; color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
-                <div style="background:#e0e0e0; border-radius:10px; height:16px; overflow:hidden; margin:12px 0;">
-                    <div id="routineProgressBar" style="background:linear-gradient(90deg, #123d34, #25D366); height:100%; width:0%; transition:width 0.4s ease;"></div>
+            <div style="background:var(--sw-card);border:1px solid var(--sw-gold);border-radius:20px;padding:20px;margin-top:20px;text-align:center;">
+                <h4 style="margin:0 0 8px;color:var(--sw-green);">🎯 ഇന്നത്തെ ലക്ഷ്യ പുരോഗതി</h4>
+                <div style="background:#e0e0e0;border-radius:10px;height:16px;overflow:hidden;margin:12px 0;">
+                    <div id="routineProgressBar" style="background:linear-gradient(90deg,#123d34,#25D366);height:100%;width:0%;transition:width .4s ease;"></div>
                 </div>
-                <p id="routineProgressText" style="margin:0; font-weight:bold; color:var(--sw-green); font-size:14px;">0% പൂർത്തിയായി</p>
+                <p id="routineProgressText" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">0% പൂർത്തിയായി</p>
             </div>
         </section>
 
-        <!-- COLLECTION SECTION --> 
-        <section id="collectionSection" style="display:none;"> 
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
-                <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
-                <h2 style="margin:0; font-family:'Amiri', serif;">مَجْمُوعَةُ الصَّلَوَات</h2> 
-            </div> 
-            <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()"> 
-            <div id="collectionList"></div> 
-        </section> 
+        <section id="collectionSection" style="display:none;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                <button onclick="closeCollection()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                <h2 style="margin:0;font-family:'Amiri',serif;">مَجْمُوعَةُ الصَّلَوَات</h2>
+            </div>
+            <input type="text" id="searchSwalath" class="search-box" placeholder="🔍 Search Swalath..." oninput="searchSwalath()">
+            <div id="collectionList"></div>
+        </section>
 
-        <!-- FAVORITES SECTION --> 
-        <section id="favoritesSection" style="display:none;"> 
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"> 
-                <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button> 
-                <h2 style="margin:0; font-family:'Amiri', serif;">المفضلات</h2> 
-            </div> 
-            <div id="favoritesList"></div> 
-        </section> 
-    </main> 
+        <section id="favoritesSection" style="display:none;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+                <button onclick="closeFavorites()" style="border:none;background:#123d34;color:white;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;">← Back</button>
+                <h2 style="margin:0;font-family:'Amiri',serif;">المفضلات</h2>
+            </div>
+            <div id="favoritesList"></div>
+        </section>
+    </main>
 
-    <footer> 
-        <p>© 2026 Swalath</p> 
-        <p>Made with ❤️</p> 
-    </footer> 
-</div> 
+    <footer>
+        <p>© 2026 Swalath</p>
+        <p>Made with ❤️</p>
+    </footer>
+</div>
 
-<script> 
-/* LOCAL DATE */ 
+<script>
+/* LOCAL DATE */
 function getLocalDateString() {
-    const now = new Date(); 
-    return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); 
-} 
+    const now = new Date();
+    return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+}
 
-/* DAILY COUNTER */ 
-const todayDate = getLocalDateString(); 
-let savedDate = localStorage.getItem("swalathCountDate"); 
-let count = Number(localStorage.getItem("swalathDailyCount") || 0); 
+/* DAILY COUNTER */
+const todayDate = getLocalDateString();
+let savedDate = localStorage.getItem("swalathCountDate");
+let count = Number(localStorage.getItem("swalathDailyCount") || 0);
+
 if (savedDate !== todayDate) {
-    count = 0; 
-    localStorage.setItem("swalathCountDate", todayDate); 
-    localStorage.setItem("swalathDailyCount", "0"); 
-} 
-document.getElementById("count").textContent = count; 
+    count = 0;
+    localStorage.setItem("swalathCountDate", todayDate);
+    localStorage.setItem("swalathDailyCount", "0");
+}
+
+document.getElementById("count").textContent = count;
 
 function increaseCount() {
-    count++; 
-    document.getElementById("count").textContent = count; 
-    localStorage.setItem("swalathDailyCount", String(count)); 
-    localStorage.setItem("swalathCountDate", getLocalDateString()); 
-} 
+    count++;
+    document.getElementById("count").textContent = count;
+    localStorage.setItem("swalathDailyCount", String(count));
+    localStorage.setItem("swalathCountDate", getLocalDateString());
+}
 
-/* 🌟 DYNAMIC DAILY QUOTES LOADER */
+/* DAILY QUOTES */
 document.addEventListener("DOMContentLoaded", function() {
     loadDailyQuoteData();
 });
 
 function loadDailyQuoteData() {
-    fetch('quotes.json')
-      .then(response => response.json())
-      .then(data => {
-          const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-          const todayQuote = data[dayOfYear % data.length];
-          const lang = localStorage.getItem("swalath-language") || "ml";
-          
-          const qText = todayQuote.translation[lang] || todayQuote.translation["en"];
-          const qSource = todayQuote.source[lang] || todayQuote.source["en"];
-          
-          document.getElementById("popupQuoteText").textContent = qText;
-          document.getElementById("popupQuoteSource").textContent = qSource;
-      })
-      .catch(err => {
-          const fallbackText = "തീർച്ചയായും, പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.";
-          const fallbackSource = "വിശുദ്ധ ഖുർആൻ (94:6)";
-          document.getElementById("popupQuoteText").textContent = fallbackText;
-          document.getElementById("popupQuoteSource").textContent = fallbackSource;
-      });
+    fetch("quotes.json")
+        .then(response => response.json())
+        .then(data => {
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const todayQuote = data[dayOfYear % data.length];
+            const lang = localStorage.getItem("swalath-language") || "ml";
+            const qText = todayQuote.translation[lang] || todayQuote.translation["en"];
+            const qSource = todayQuote.source[lang] || todayQuote.source["en"];
+
+            document.getElementById("popupQuoteText").textContent = qText;
+            document.getElementById("popupQuoteSource").textContent = qSource;
+        })
+        .catch(err => {
+            document.getElementById("popupQuoteText").textContent = "തീർച്ചയായും, പ്രയാസത്തോടൊപ്പം എളുപ്പവുമുണ്ട്.";
+            document.getElementById("popupQuoteSource").textContent = "വിശുദ്ധ ഖുർആൻ (94:6)";
+        });
 }
 
 function openQuotePopup() {
@@ -400,19 +396,20 @@ function closeQuotePopup() {
 }
 
 function triggerShareStatus() {
-    if (window.AndroidAdhan && typeof window.AndroidAdhan.shareDailyStatus === 'function') {
+    if (window.AndroidAdhan && typeof window.AndroidAdhan.shareDailyStatus === "function") {
         window.AndroidAdhan.shareDailyStatus();
     } else {
         alert("WhatsApp സ്റ്റാറ്റസ് ഫീച്ചർ സ്വലാത്ത് ആപ്പിനുള്ളിൽ മാത്രമേ പ്രവർത്തിക്കുകയുള്ളൂ.");
     }
 }
 
-/* 🌟 "ഇന്നത്തെ എന്റെ ദിവസം" NAVIGATION & ROUTINE SYSTEM */
+/* DAILY ROUTINE */
 const totalTasks = 5;
 let completedTasks = {};
 
 function loadRoutineState() {
     const savedRoutineDate = localStorage.getItem("routineDate");
+
     if (savedRoutineDate !== todayDate) {
         localStorage.setItem("routineDate", todayDate);
         localStorage.setItem("routineState", JSON.stringify({}));
@@ -420,8 +417,11 @@ function loadRoutineState() {
     } else {
         try {
             completedTasks = JSON.parse(localStorage.getItem("routineState") || "{}");
-        } catch(e) { completedTasks = {}; }
+        } catch (e) {
+            completedTasks = {};
+        }
     }
+
     updateRoutineUI();
 }
 
@@ -433,10 +433,11 @@ function toggleRoutine(taskId) {
 
 function updateRoutineUI() {
     let activeCount = 0;
-    const taskIds = ['task_quran', 'task_swalath', 'task_prayers', 'task_dhikr', 'task_dua'];
-    
+    const taskIds = ["task_quran", "task_swalath", "task_prayers", "task_dhikr", "task_dua"];
+
     taskIds.forEach(id => {
         const el = document.getElementById(id);
+
         if (el) {
             if (completedTasks[id]) {
                 el.classList.add("active");
@@ -452,9 +453,11 @@ function updateRoutineUI() {
     const progressText = document.getElementById("routineProgressText");
 
     if (progressBar) progressBar.style.width = percent + "%";
+
     if (progressText) {
         if (percent === 100) {
             progressText.textContent = "🎉 100% പൂർത്തിയായി! അൽഹംദുലില്ലാഹ്!";
+
             if (!sessionStorage.getItem("congratulationShown")) {
                 sessionStorage.setItem("congratulationShown", "true");
                 document.getElementById("congratulationOverlay").style.display = "flex";
@@ -470,7 +473,7 @@ function closeCongratulationModal() {
 }
 
 function openMyDayPage() {
-    history.pushState({ section: "myDay" }, "");
+    history.pushState({section:"myDay"}, "");
     hideHomeElements();
     document.getElementById("myDayPage").style.display = "block";
     loadRoutineState();
@@ -481,53 +484,93 @@ function closeMyDayPage() {
     history.back();
 }
 
-/* CLEAN HOME VISIBILITY & NAVIGATION */
+/* HOME VISIBILITY */
 function hideHomeElements() {
-    document.querySelector(".welcome").style.display = "none"; 
-    document.querySelector(".today-card").style.display = "none"; 
+    document.querySelector(".welcome").style.display = "none";
+    document.querySelector(".today-card").style.display = "none";
+
     const myDayCard = document.querySelector(".my-day-card");
     if (myDayCard) myDayCard.style.display = "none";
-    document.querySelector(".menu-grid").style.display = "none"; 
-    document.querySelector(".feature-buttons").style.display = "none"; 
-} 
+
+    document.querySelector(".menu-grid").style.display = "none";
+    document.querySelector(".feature-buttons").style.display = "none";
+}
 
 function showHomeElements() {
-    document.querySelector(".welcome").style.display = "block"; 
-    document.querySelector(".today-card").style.display = "block"; 
+    document.querySelector(".welcome").style.display = "block";
+    document.querySelector(".today-card").style.display = "block";
+
     const myDayCard = document.querySelector(".my-day-card");
     if (myDayCard) myDayCard.style.display = "flex";
-    document.querySelector(".menu-grid").style.display = "grid"; 
-    document.querySelector(".feature-buttons").style.display = "flex"; 
-    document.getElementById("myDayPage").style.display = "none";
-    document.getElementById("collectionSection").style.display = "none"; 
-    document.getElementById("favoritesSection").style.display = "none"; 
-} 
 
-/* OPEN PAGES */ 
-function openAsmaulHusna() { window.location.href = "asmaul-husna.html"; } 
-function openQuran() { window.location.href = "quran.html"; } 
-function openQuranMP3() { window.location.href = "quran-mp3.html"; } 
-function openCalendar() { window.location.href = "calendar.html"; } 
-function openUmrah() { window.location.href = "umrah.html"; } 
-function openDua() { window.location.href = "dua.html"; } 
-function openDhikr() { window.location.href = "dhikr.html"; } 
-function openPrayerTime() { window.location.href = "prayer-time.html"; } 
+    document.querySelector(".menu-grid").style.display = "grid";
+    document.querySelector(".feature-buttons").style.display = "flex";
+
+    document.getElementById("myDayPage").style.display = "none";
+    document.getElementById("collectionSection").style.display = "none";
+    document.getElementById("favoritesSection").style.display = "none";
+}
+
+/* OPEN PAGES */
+function openAsmaulHusna() {
+    window.location.href = "asmaul-husna.html";
+}
+
+function openQuran() {
+    window.location.href = "quran.html";
+}
+
+function openQuranMP3() {
+    window.location.href = "quran-mp3.html";
+}
+
+function openCalendar() {
+    window.location.href = "calendar.html";
+}
+
+function openUmrah() {
+    window.location.href = "umrah.html";
+}
+
+function openDua() {
+    window.location.href = "dua.html";
+}
+
+function openDhikr() {
+    window.location.href = "dhikr.html";
+}
+
+function openPrayerTime() {
+    window.location.href = "prayer-time.html";
+}
+
+/* പരസ്യ പേജിലേക്കുള്ള കണക്ഷൻ */
+function openAdvertise() {
+    window.location.href = "advertise.html";
+}
 
 function openCollection() {
     window.location.href = "swalath.html";
 }
-function closeCollection() { history.back(); } 
+
+function closeCollection() {
+    history.back();
+}
 
 function openFavorites() {
-    history.pushState({ section: "favorites" }, "");
-    hideHomeElements(); 
-    document.getElementById("favoritesSection").style.display = "block"; 
-    loadFavorites(); 
+    history.pushState({section:"favorites"}, "");
+    hideHomeElements();
+    document.getElementById("favoritesSection").style.display = "block";
+    loadFavorites();
 }
-function closeFavorites() { history.back(); }
+
+function closeFavorites() {
+    history.back();
+}
 
 window.addEventListener("popstate", function(event) {
     const section = event.state && event.state.section;
+
     if (section === "myDay") {
         hideHomeElements();
         document.getElementById("myDayPage").style.display = "block";
@@ -543,29 +586,36 @@ window.addEventListener("popstate", function(event) {
     }
 });
 
-/* DARK MODE */ 
+/* DARK MODE */
 function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode"); 
-    const enabled = document.body.classList.contains("dark-mode"); 
-    localStorage.setItem("swalathDarkMode", String(enabled)); 
-    updateDarkButton(); 
-} 
+    document.body.classList.toggle("dark-mode");
+    const enabled = document.body.classList.contains("dark-mode");
+    localStorage.setItem("swalathDarkMode", String(enabled));
+    updateDarkButton();
+}
 
 function updateDarkButton() {
-    const button = document.getElementById("darkModeButton"); 
-    if (!button) return; 
-    button.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode"; 
-} 
+    const button = document.getElementById("darkModeButton");
+    if (!button) return;
 
-/* STARTUP */ 
+    button.textContent = document.body.classList.contains("dark-mode")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+}
+
+/* STARTUP */
 window.addEventListener("load", function() {
     if (localStorage.getItem("swalathDarkMode") === "true") {
-        document.body.classList.add("dark-mode"); 
-    } 
-    updateDarkButton(); 
-    const splash = document.getElementById("splashScreen"); 
-    window.setTimeout(function() { if (splash) splash.classList.add("hide"); }, 1200); 
-}); 
+        document.body.classList.add("dark-mode");
+    }
+
+    updateDarkButton();
+
+    const splash = document.getElementById("splashScreen");
+    window.setTimeout(function() {
+        if (splash) splash.classList.add("hide");
+    }, 1200);
+});
 
 /* LANGUAGE SELECTOR */
 function openSwalathLanguageSelector() {
@@ -579,31 +629,26 @@ function openSwalathLanguageSelector() {
 
     let selectedLanguage = window.SwalathLanguage.getCurrent();
 
-    options.forEach(function (button) {
-        button.classList.toggle(
-            "selected",
-            button.dataset.lang === selectedLanguage
-        );
+    options.forEach(function(button) {
+        button.classList.toggle("selected", button.dataset.lang === selectedLanguage);
 
-        button.onclick = function () {
+        button.onclick = function() {
             selectedLanguage = button.dataset.lang;
 
-            options.forEach(function (option) {
-                option.classList.toggle(
-                    "selected",
-                    option.dataset.lang === selectedLanguage
-                );
+            options.forEach(function(option) {
+                option.classList.toggle("selected", option.dataset.lang === selectedLanguage);
             });
         };
     });
 
-    continueButton.onclick = function () {
+    continueButton.onclick = function() {
         window.SwalathLanguage.setLanguage(selectedLanguage);
         screen.style.display = "none";
     };
 
     screen.style.display = "flex";
 }
-</script> 
-</body> 
+</script>
+
+</body>
 </html>
