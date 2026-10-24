@@ -557,17 +557,100 @@ function closeCollection() {
     history.back();
 }
 
+function loadFavorites() {
+    const list = document.getElementById("favoritesList");
+    if (!list) return;
+
+    list.replaceChildren();
+
+    let favorites = [];
+
+    try {
+        favorites = JSON.parse(
+            localStorage.getItem("swalathFavorites") || "[]"
+        );
+    } catch (error) {
+        favorites = [];
+    }
+
+    if (!Array.isArray(favorites)) favorites = [];
+
+    const names = {
+        ibrahimiyya: "الصلاة الإبراهيمية",
+        nariya: "الصلاة النارية",
+        tunjina: "الصلاة المنجية",
+        fatih: "صلاة الفاتح",
+        tibbiyya: "صلاة طب القلوب",
+        nuraniyya: "الصلاة النورانية",
+        saadah: "صلاة السعادة",
+        kamaliyya: "صلاة الكمالية",
+        dhatiyya: "الصلاة الذاتية",
+        jawharat: "جوهرة الكمال",
+        taj: "صلاة التاج",
+        faraj: "صلاة الفرج",
+        bashair: "بشائر الخيرات",
+        ahlam: "صلاة الأحلام",
+        hulo: "صلاة الحضور",
+        friday: "صلاة الجمعة",
+        mashishiyya: "الصلاة المشيشية",
+        ummiyya: "الصلاة الأمية",
+        shadhiliyya: "الصلاة الشاذلية",
+        anwar: "صلاة الأنوار",
+        yaqutat: "ياقوتة الحقائق"
+    };
+
+    const validFavorites = favorites.filter(key => names[key]);
+
+    if (validFavorites.length === 0) {
+        const message = document.createElement("p");
+        message.textContent = "ഇതുവരെ ഫേവറൈറ്റായി ഒന്നും ചേർത്തിട്ടില്ല.";
+        message.style.textAlign = "center";
+        message.style.padding = "20px";
+        list.appendChild(message);
+        return;
+    }
+
+    validFavorites.forEach(key => {
+        const item = document.createElement("button");
+
+        item.type = "button";
+        item.className = "favorite-item";
+        item.textContent = "❤️  " + names[key];
+        item.style.cssText =
+            "display:block;width:100%;padding:16px;margin-bottom:10px;" +
+            "border:1px solid #c5a868;border-radius:12px;" +
+            "background:#fff;color:#123d34;font-size:18px;" +
+            "text-align:right;cursor:pointer;";
+
+        item.dir = "rtl";
+
+        item.onclick = function () {
+            window.location.href =
+                "swalath.html?ref=favorites#" + encodeURIComponent(key);
+        };
+
+        list.appendChild(item);
+    });
+}
+
 function openFavorites() {
-    history.pushState({section:"favorites"}, "");
+    history.pushState({ section: "favorites" }, "", "#favorites");
+
     hideHomeElements();
+
     document.getElementById("favoritesSection").style.display = "block";
+
     loadFavorites();
 }
 
 function closeFavorites() {
-    history.back();
+    if (location.hash === "#favorites") {
+        history.replaceState(null, "", location.pathname);
+        showHomeElements();
+    } else {
+        history.back();
+    }
 }
-
 window.addEventListener("popstate", function(event) {
     const section = event.state && event.state.section;
 
