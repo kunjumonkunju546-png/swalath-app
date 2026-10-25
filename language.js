@@ -967,7 +967,10 @@
         document.documentElement.lang = code;
         document.documentElement.dir = lang.dir;
 
-        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    if (el.closest("#swalathHijriPremium")) {
+        return;
+    }
             const key = el.getAttribute("data-i18n");
             const original = el.getAttribute("data-ml");
             const translated = lang.translations[key];
@@ -983,7 +986,10 @@
             }
         });
 
-        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+    if (el.closest("#swalathHijriPremium")) {
+        return;
+    }
             const key = el.getAttribute("data-i18n-placeholder");
             const original = el.getAttribute("data-ml-placeholder");
             const translated = lang.translations[key];
