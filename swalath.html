@@ -97,31 +97,29 @@ body{margin:0;font-family:Arial,"Noto Sans Malayalam",sans-serif;background:#f5f
 <button class="back-button" onclick="goBack()">← സ്വലാത്തുകളുടെ പട്ടിക</button>
 
 <div class="detail-card">
-<h2 id="detailTitle" class="detail-title" lang="ar" dir="rtl"></h2>
-<div id="arabicText" class="arabic" lang="ar" dir="rtl"></div>
 
-<div class="counter-box">
-<div id="countNumber" class="count-number">0</div>
-<button class="count-button" onclick="countSwalath()">📿 ചൊല്ലി — Count കൂട്ടുക</button>
-<button class="reset-button" onclick="resetCount()">Reset</button>
+    <div id="arabicText"
+         class="arabic"
+         lang="ar"
+         dir="rtl"></div>
+
+    <div class="counter-box">
+
+        <div id="countNumber" class="count-number">0</div>
+
+        <button class="count-button"
+                onclick="countSwalath()">
+            📿 ചൊല്ലി — Count കൂട്ടുക
+        </button>
+
+        <button class="reset-button"
+                onclick="resetCount()">
+            Reset
+        </button>
+
+    </div>
+
 </div>
-
-<div class="section"><div class="section-title" id="pronunciationLabel">🗣️ മലയാളം ഉച്ചാരണം</div><div id="pronunciationText" class="section-content"></div></div>
-<div class="section"><div class="section-title" id="meaningLabel">📖 മലയാളം അർത്ഥം</div><div id="meaningText" class="section-content"></div></div>
-<div class="section"><div class="section-title" id="fadheelaLabel">🌿 ചൊല്ലുന്നതിന്റെ ഗുണങ്ങൾ / ഫദീലത്ത്</div><div id="fadheelaText" class="section-content fadheela"></div></div>
-<div class="section"><div class="section-title" id="sourceLabel">📚 ഉറവിടം / കുറിപ്പ്</div><div id="sourceText" class="section-content"></div></div>
-
-<button id="favoriteButton" class="favorite-button" onclick="favoriteSwalath()">♡ Favourite ആയി ചേർക്കുക</button>
-
-<div class="share-card-actions">
-<button type="button" class="share-card-btn share-card-share" onclick="shareCurrentSwalath()">📤 Share Card</button>
-<button type="button" class="share-card-btn share-card-save" onclick="saveCurrentSwalathCard()">🖼️ Save Image</button>
-</div>
-
-<div id="pdfArea"></div>
-</div>
-</div>
-
 <div class="footer">🌿 സ്വലാത്ത് ശേഖരം<br>Allahumma Salli Ala Sayyidina Muhammad ﷺ</div>
 </div>
 
@@ -299,20 +297,14 @@ function openSwalath(key, addHistory = true){
     document.getElementById("collectionPage").style.display = "none";
     document.getElementById("detailPage").style.display = "block";
 
-    const title = document.getElementById("detailTitle");
-    title.textContent = d.name;
-    title.lang = "ar";
-    title.dir = "rtl";
+    
 
     const arabicText = document.getElementById("arabicText");
     arabicText.textContent = d.arabic;
     arabicText.lang = "ar";
     arabicText.dir = "rtl";
 
-    document.getElementById("pronunciationText").textContent = d.pronunciation;
-    document.getElementById("meaningText").textContent = d.meaning;
-    document.getElementById("fadheelaText").textContent = d.fadheela;
-    document.getElementById("sourceText").textContent = d.source;
+   
 
     document.getElementById("countNumber").textContent =
         localStorage.getItem("swalath_count_" + key) || "0";
