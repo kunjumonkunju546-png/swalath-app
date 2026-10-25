@@ -1,184 +1,617 @@
-<!-- SWALATH PREMIUM HIJRI CALENDAR -->
-<section id="hijriCalendarPremium" lang="ml">
+<!-- SWALATH PREMIUM HIJRI CALENDAR — NEW VERSION -->
+<section id="swalathHijriPremium" lang="en">
 <style>
-#hijriCalendarPremium{--hc-green:#123d34;--hc-green2:#1b5145;--hc-gold:#c5a868;--hc-bg:#f7f8f4;--hc-text:#24342e;--hc-muted:#718078;color:var(--hc-text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0 0 22px}
-#hijriCalendarPremium *{box-sizing:border-box}
-#hijriCalendarPremium .hc-shell{overflow:hidden;border:1px solid #ddc991;border-radius:22px;background:var(--hc-bg);box-shadow:0 8px 26px #123d3410}
-#hijriCalendarPremium .hc-hero{background:linear-gradient(135deg,#123d34,#1c5145);color:#fff;padding:22px 18px;position:relative}
-#hijriCalendarPremium .hc-kicker{color:#e6d4a2;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase}
-#hijriCalendarPremium .hc-title{font-size:21px;line-height:1.45;margin:7px 0;font-weight:800;color:#fff}
-#hijriCalendarPremium .hc-subtitle{font-size:12px;color:#e3eae5;margin:0}
-#hijriCalendarPremium .hc-today{margin-top:17px;padding:14px;border:1px solid #ffffff38;border-radius:15px;background:#ffffff0d}
-#hijriCalendarPremium .hc-today-label{font-size:12px;color:#e8d7a8;margin-bottom:5px}
-#hijriCalendarPremium .hc-today-hijri{font-size:23px;font-weight:800;line-height:1.6}
-#hijriCalendarPremium .hc-today-greg{font-size:12px;color:#e1e8e3;margin-top:3px}
-#hijriCalendarPremium .hc-body{padding:15px}
-#hijriCalendarPremium .hc-countdown{background:#fff;border:1px solid #e5dcc4;border-radius:16px;padding:15px;margin-bottom:15px}
-#hijriCalendarPremium .hc-section-title{font-size:14px;font-weight:800;color:var(--hc-green);margin:0 0 10px}
-#hijriCalendarPremium .hc-countdown-text{font-size:12px;color:var(--hc-muted);margin:0 0 10px}
-#hijriCalendarPremium .hc-count-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-#hijriCalendarPremium .hc-count-unit{background:#edf3eb;border-radius:11px;padding:10px 3px;text-align:center;min-width:0}
-#hijriCalendarPremium .hc-count-number{display:block;font-size:23px;font-weight:800;color:var(--hc-green)}
-#hijriCalendarPremium .hc-count-label{font-size:10px;color:var(--hc-muted)}
-#hijriCalendarPremium .hc-note{font-size:10px;line-height:1.6;color:var(--hc-muted);margin:10px 0 0}
-#hijriCalendarPremium .hc-panel{background:#fff;border:1px solid #e6e9e2;border-radius:16px;padding:12px;margin-bottom:15px}
-#hijriCalendarPremium .hc-nav{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;gap:8px;align-items:center}
-#hijriCalendarPremium button,#hijriCalendarPremium select,#hijriCalendarPremium input,#hijriCalendarPremium textarea{font:inherit}
-#hijriCalendarPremium .hc-btn{border:1px solid #d9dfd7;border-radius:10px;background:#fff;color:var(--hc-green);padding:9px 10px;cursor:pointer;font-size:13px;font-weight:700;min-height:40px}
-#hijriCalendarPremium .hc-btn:focus-visible,#hijriCalendarPremium select:focus-visible,#hijriCalendarPremium input:focus-visible,#hijriCalendarPremium textarea:focus-visible{outline:2px solid var(--hc-gold);outline-offset:2px}
-#hijriCalendarPremium .hc-month{text-align:center;font-size:16px;font-weight:800;color:var(--hc-green);line-height:1.5}
-#hijriCalendarPremium .hc-greg-month{font-size:11px;color:var(--hc-muted);font-weight:500;text-align:center}
-#hijriCalendarPremium .hc-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-#hijriCalendarPremium .hc-actions .hc-btn{flex:1}
-#hijriCalendarPremium .hc-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
-#hijriCalendarPremium .hc-weekday{text-align:center;font-size:10px;font-weight:800;color:var(--hc-muted);padding:7px 0 9px}
-#hijriCalendarPremium .hc-day{border:1px solid transparent;border-radius:10px;min-width:0;min-height:43px;padding:5px 1px;background:#f3f6f1;color:var(--hc-text);cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-#hijriCalendarPremium .hc-day-number{font-size:13px;font-weight:700;line-height:1.2}
-#hijriCalendarPremium .hc-day-greg{font-size:9px;color:var(--hc-muted);line-height:1.1}
-#hijriCalendarPremium .hc-day.hc-today-cell{border:2px solid var(--hc-gold);background:#fff9e9}
-#hijriCalendarPremium .hc-day.hc-selected{background:var(--hc-green);color:#fff;border-color:var(--hc-green)}
-#hijriCalendarPremium .hc-day.hc-selected .hc-day-greg{color:#e2eae4}
-#hijriCalendarPremium .hc-day.hc-today-cell.hc-selected{box-shadow:inset 0 0 0 2px var(--hc-gold)}
-#hijriCalendarPremium .hc-day.hc-event:after{content:"";width:4px;height:4px;border-radius:50%;background:var(--hc-gold);display:block}
-#hijriCalendarPremium .hc-day.hc-selected:after{background:#fff}
-#hijriCalendarPremium .hc-empty{min-height:42px}
-#hijriCalendarPremium .hc-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;color:var(--hc-muted);font-size:10px}
-#hijriCalendarPremium .hc-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:4px;background:var(--hc-gold)}
-#hijriCalendarPremium .hc-today-key{display:inline-block;width:9px;height:9px;border:2px solid var(--hc-gold);border-radius:3px;margin-inline-end:4px}
-#hijriCalendarPremium .hc-detail-date{font-size:19px;font-weight:800;color:var(--hc-green);line-height:1.6}
-#hijriCalendarPremium .hc-detail-greg{color:var(--hc-muted);font-size:12px;margin-top:2px}
-#hijriCalendarPremium .hc-detail-event{margin-top:10px;padding:10px;border-radius:10px;background:#f8f3e5;font-size:12px;line-height:1.7}
-#hijriCalendarPremium .hc-detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-#hijriCalendarPremium .hc-detail-actions .hc-btn{flex:1}
-#hijriCalendarPremium .hc-events-list{display:grid;gap:8px}
-#hijriCalendarPremium .hc-event-row{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #e8e9e2;border-radius:12px;padding:11px;cursor:pointer}
-#hijriCalendarPremium .hc-event-icon{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#edf3eb;font-size:17px}
-#hijriCalendarPremium .hc-event-name{font-size:12px;font-weight:800;color:var(--hc-green)}
-#hijriCalendarPremium .hc-event-date{font-size:11px;color:var(--hc-muted);margin-top:3px}
-#hijriCalendarPremium .hc-convert-grid{display:grid;grid-template-columns:1fr;gap:10px}
-#hijriCalendarPremium .hc-field-label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:var(--hc-green)}
-#hijriCalendarPremium .hc-input{width:100%;min-width:0;border:1px solid #d9dfd7;border-radius:10px;background:#fff;padding:11px;color:var(--hc-text);font-size:13px}
-#hijriCalendarPremium .hc-note-area{resize:vertical;min-height:76px}
-#hijriCalendarPremium .hc-muted{font-size:11px;color:var(--hc-muted);line-height:1.7}
-#hijriCalendarPremium .hc-footer{text-align:center;font-size:10px;color:var(--hc-muted);line-height:1.7;padding:0 8px 5px}
-#hijriCalendarPremium [hidden]{display:none!important}
-#hijriCalendarPremium[dir="rtl"] .hc-title,#hijriCalendarPremium[dir="rtl"] .hc-subtitle,#hijriCalendarPremium[dir="rtl"] .hc-section-title,#hijriCalendarPremium[dir="rtl"] .hc-detail-date{text-align:start}
-@media(min-width:520px){#hijriCalendarPremium .hc-body{padding:20px}#hijriCalendarPremium .hc-day{min-height:53px}#hijriCalendarPremium .hc-day-number{font-size:15px}#hijriCalendarPremium .hc-day-greg{font-size:10px}#hijriCalendarPremium .hc-convert-grid{grid-template-columns:1fr 1fr}}
+#swalathHijriPremium {
+  --hc-green:#123d34;
+  --hc-deep:#0b2c26;
+  --hc-gold:#c5a868;
+  --hc-cream:#f8f5ec;
+  --hc-text:#233b34;
+  --hc-muted:#77847d;
+  --hc-border:#e8e5da;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--hc-text);
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  box-sizing:border-box;
+  line-height:1.5;
+}
+#swalathHijriPremium * {
+  box-sizing:border-box;
+}
+#swalathHijriPremium .hc-shell {
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--hc-border);
+  border-radius:23px;
+  box-shadow:0 10px 35px rgba(18,61,52,.09);
+}
+#swalathHijriPremium .hc-hero {
+  position:relative;
+  padding:27px 20px 25px;
+  color:#fff;
+  text-align:center;
+  background:
+    radial-gradient(circle at 90% 5%,rgba(197,168,104,.18),transparent 35%),
+    linear-gradient(145deg,var(--hc-green),var(--hc-deep));
+}
+#swalathHijriPremium .hc-kicker {
+  margin:0 0 8px;
+  color:#e4d1a1;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+}
+#swalathHijriPremium .hc-today-label {
+  color:#e7e9e3;
+  font-size:13px;
+}
+#swalathHijriPremium .hc-day-number {
+  margin:8px 0 0;
+  color:#f0d99f;
+  font-size:clamp(56px,15vw,82px);
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:-2px;
+}
+#swalathHijriPremium .hc-hijri-month {
+  margin:5px 0 2px;
+  font-size:clamp(22px,6vw,30px);
+  font-weight:700;
+}
+#swalathHijriPremium .hc-hijri-year {
+  color:#e7e9e3;
+  font-size:14px;
+}
+#swalathHijriPremium .hc-gregorian {
+  margin-top:17px;
+  padding-top:15px;
+  border-top:1px solid rgba(255,255,255,.18);
+  font-size:14px;
+}
+#swalathHijriPremium .hc-today-badge {
+  display:inline-block;
+  margin-top:12px;
+  padding:5px 12px;
+  border:1px solid rgba(226,205,151,.5);
+  border-radius:30px;
+  color:#f3dfac;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+#swalathHijriPremium .hc-countdown {
+  position:relative;
+  margin:15px;
+  padding:19px 16px;
+  border:1px solid #e8ddbd;
+  border-radius:17px;
+  background:linear-gradient(135deg,#fbf8ef,#f5efdc);
+  text-align:center;
+}
+#swalathHijriPremium .hc-countdown-label {
+  margin:0;
+  color:#746039;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+#swalathHijriPremium .hc-ramadan-title {
+  margin:5px 0 0;
+  color:var(--hc-green);
+  font-size:23px;
+  font-weight:700;
+}
+#swalathHijriPremium .hc-count-number {
+  margin:7px 0 0;
+  color:#a17d35;
+  font-size:clamp(43px,12vw,60px);
+  font-weight:800;
+  line-height:1.12;
+}
+#swalathHijriPremium .hc-count-caption {
+  margin:2px 0 0;
+  color:#746039;
+  font-size:13px;
+}
+#swalathHijriPremium .hc-ramadan-date {
+  margin:10px 0 0;
+  color:#596b5e;
+  font-size:12px;
+}
+#swalathHijriPremium .hc-calendar {
+  padding:6px 15px 19px;
+}
+#swalathHijriPremium .hc-month-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:8px 0 17px;
+}
+#swalathHijriPremium .hc-month-title {
+  flex:1;
+  text-align:center;
+  color:var(--hc-green);
+  font-size:18px;
+  font-weight:700;
+}
+#swalathHijriPremium .hc-nav-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:39px;
+  height:39px;
+  flex-shrink:0;
+  padding:0;
+  border:1px solid var(--hc-border);
+  border-radius:12px;
+  background:#fff;
+  color:var(--hc-green);
+  font-size:22px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+#swalathHijriPremium .hc-nav-btn:active {
+  background:var(--hc-cream);
+}
+#swalathHijriPremium .hc-weekdays,
+#swalathHijriPremium .hc-days {
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:4px;
+}
+#swalathHijriPremium .hc-weekday {
+  padding:7px 0;
+  color:var(--hc-muted);
+  text-align:center;
+  font-size:10px;
+  font-weight:700;
+}
+#swalathHijriPremium .hc-day {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:53px;
+  padding:4px 1px;
+  border:1px solid transparent;
+  border-radius:11px;
+  background:#fff;
+  color:var(--hc-text);
+  text-align:center;
+}
+#swalathHijriPremium .hc-day-number-small {
+  font-size:15px;
+  font-weight:600;
+  line-height:1.3;
+}
+#swalathHijriPremium .hc-day-gregorian {
+  margin-top:3px;
+  color:#9aa29b;
+  font-size:9px;
+  line-height:1.2;
+}
+#swalathHijriPremium .hc-day.hc-today {
+  border-color:var(--hc-gold);
+  background:var(--hc-green);
+  color:#fff;
+  box-shadow:0 3px 9px rgba(18,61,52,.14);
+}
+#swalathHijriPremium .hc-day.hc-today .hc-day-gregorian {
+  color:#ead9ad;
+}
+#swalathHijriPremium .hc-day.hc-friday:not(.hc-today) {
+  background:#f8f5ec;
+}
+#swalathHijriPremium .hc-day.hc-empty {
+  min-height:53px;
+  background:transparent;
+}
+#swalathHijriPremium .hc-legend {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+  margin-top:15px;
+  color:var(--hc-muted);
+  font-size:11px;
+}
+#swalathHijriPremium .hc-legend-item {
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+#swalathHijriPremium .hc-dot {
+  width:9px;
+  height:9px;
+  border-radius:3px;
+  background:var(--hc-green);
+}
+#swalathHijriPremium .hc-dot-gold {
+  border:1px solid var(--hc-gold);
+  background:#f3e8c8;
+}
+#swalathHijriPremium .hc-note {
+  margin:0;
+  padding:13px 17px;
+  border-top:1px solid var(--hc-border);
+  background:#fcfbf8;
+  color:#7b827b;
+  text-align:center;
+  font-size:10px;
+  line-height:1.7;
+}
+#swalathHijriPremium .hc-status {
+  padding:15px;
+  color:#8b4935;
+  text-align:center;
+  font-size:13px;
+}
+@media(max-width:380px) {
+  #swalathHijriPremium .hc-hero {
+    padding:23px 14px;
+  }
+  #swalathHijriPremium .hc-calendar {
+    padding-right:9px;
+    padding-left:9px;
+  }
+  #swalathHijriPremium .hc-weekdays,
+  #swalathHijriPremium .hc-days {
+    gap:2px;
+  }
+  #swalathHijriPremium .hc-day {
+    min-height:46px;
+    border-radius:8px;
+  }
+  #swalathHijriPremium .hc-day-number-small {
+    font-size:14px;
+  }
+  #swalathHijriPremium .hc-day-gregorian {
+    font-size:8px;
+  }
+}
 </style>
+
 <div class="hc-shell">
-<header class="hc-hero">
-<div class="hc-kicker" data-hc="eyebrow">ISLAMIC CALENDAR</div>
-<h2 class="hc-title" data-hc="title">പ്രീമിയം ഹിജ്‌റ കലണ്ടർ</h2>
-<p class="hc-subtitle" data-hc="subtitle">ഹിജ്‌റയും ഇംഗ്ലീഷ് തീയതികളും ഒരുമിച്ച്</p>
-<div class="hc-today"><div class="hc-today-label" data-hc="today">ഇന്നത്തെ ഹിജ്‌റ തീയതി</div><div class="hc-today-hijri" id="hcTodayHijri">—</div><div class="hc-today-greg" id="hcTodayGreg">—</div></div>
-</header>
-<div class="hc-body">
-<section class="hc-countdown" aria-live="polite"><h3 class="hc-section-title" data-hc="ramadanTitle">🌙 റമദാൻ കൗണ്ട്ഡൗൺ</h3><p class="hc-countdown-text" id="hcRamadanStatus">—</p><div class="hc-count-grid"><div class="hc-count-unit"><span class="hc-count-number" id="hcDays">—</span><span class="hc-count-label" data-hc="days">ദിവസം</span></div><div class="hc-count-unit"><span class="hc-count-number" id="hcHours">—</span><span class="hc-count-label" data-hc="hours">മണിക്കൂർ</span></div><div class="hc-count-unit"><span class="hc-count-number" id="hcMinutes">—</span><span class="hc-count-label" data-hc="minutes">മിനിറ്റ്</span></div></div><p class="hc-note" data-hc="ramadanNote">ഇത് കണക്കാക്കിയ തീയതിയാണ്. പ്രാദേശിക ചന്ദ്രദർശനപ്രകാരം തീയതി മാറാം.</p></section>
-<section class="hc-panel"><div class="hc-nav"><button class="hc-btn" id="hcPrev" type="button" aria-label="Previous month">‹</button><div><div class="hc-month" id="hcMonthTitle">—</div><div class="hc-greg-month" id="hcGregMonth">—</div></div><button class="hc-btn" id="hcNext" type="button" aria-label="Next month">›</button></div><div class="hc-actions"><button class="hc-btn" id="hcTodayBtn" type="button" data-hc="goToday">ഇന്ന്</button><button class="hc-btn" id="hcShareBtn" type="button" data-hc="share">പങ്കുവയ്ക്കുക</button></div></section>
-<section class="hc-panel" aria-label="Monthly calendar"><div class="hc-calendar" id="hcWeekdays"></div><div class="hc-calendar" id="hcGrid" role="group" aria-label="Calendar days"></div><div class="hc-legend"><span><i class="hc-dot"></i><span data-hc="specialLegend">പ്രധാനപ്പെട്ട ദിവസം</span></span><span><i class="hc-today-key"></i><span data-hc="todayLegend">ഇന്ന്</span></span><span>■ <span data-hc="selectedLegend">തിരഞ്ഞെടുത്ത ദിവസം</span></span></div></section>
-<section class="hc-panel" aria-live="polite"><h3 class="hc-section-title" data-hc="selectedTitle">തിരഞ്ഞെടുത്ത തീയതി</h3><div class="hc-detail-date" id="hcSelectedHijri">—</div><div class="hc-detail-greg" id="hcSelectedGreg">—</div><div class="hc-detail-event" id="hcSelectedEvent" hidden></div><div class="hc-detail-actions"><button class="hc-btn" id="hcAddNote" type="button" data-hc="addNote">കുറിപ്പ് ചേർക്കുക</button><button class="hc-btn" id="hcViewNote" type="button" data-hc="viewNote">കുറിപ്പ് കാണുക</button></div><label class="hc-field-label" for="hcNote" data-hc="noteLabel" style="margin-top:12px">വ്യക്തിഗത കുറിപ്പ്</label><textarea class="hc-input hc-note-area" id="hcNote" data-hc-placeholder="notePlaceholder" placeholder="ഈ തീയതിക്കായി കുറിപ്പ് എഴുതുക"></textarea><div class="hc-actions"><button class="hc-btn" id="hcSaveNote" type="button" data-hc="saveNote">കുറിപ്പ് സംരക്ഷിക്കുക</button><button class="hc-btn" id="hcDeleteNote" type="button" data-hc="deleteNote">കുറിപ്പ് നീക്കുക</button></div><p class="hc-muted" data-hc="notePrivacy">കുറിപ്പുകൾ ഈ ഉപകരണത്തിലെ ബ്രൗസർ സംഭരണത്തിലാണ് സൂക്ഷിക്കുന്നത്.</p></section>
-<section class="hc-panel"><h3 class="hc-section-title" data-hc="eventsTitle">പ്രധാന ഇസ്‌ലാമിക ദിനങ്ങൾ</h3><div class="hc-events-list" id="hcEvents"></div><p class="hc-note" data-hc="eventsNote">പ്രധാന ദിനങ്ങളുടെ തീയതികൾ കണക്കാക്കിയവയാണ്; പ്രാദേശിക ഔദ്യോഗിക അറിയിപ്പുകൾ പരിശോധിക്കുക.</p></section>
-<section class="hc-panel"><h3 class="hc-section-title" data-hc="convertTitle">തീയതി പരിവർത്തനം</h3><div class="hc-convert-grid"><div><label class="hc-field-label" for="hcGregorianInput" data-hc="gregorianLabel">ഇംഗ്ലീഷ് തീയതി</label><input class="hc-input" type="date" id="hcGregorianInput"><button class="hc-btn" style="width:100%;margin-top:7px" id="hcConvertToHijri" type="button" data-hc="convertHijri">ഹിജ്‌റ തീയതി കാണുക</button></div><div><label class="hc-field-label" for="hcHijriDay" data-hc="hijriLabel">ഹിജ്‌റ തീയതി</label><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px"><input class="hc-input" id="hcHijriDay" type="number" min="1" max="30" placeholder="ദിവസം" aria-label="Hijri day"><select class="hc-input" id="hcHijriMonth" aria-label="Hijri month"></select><input class="hc-input" id="hcHijriYear" type="number" min="1300" max="1600" placeholder="വർഷം" aria-label="Hijri year"></div><button class="hc-btn" style="width:100%;margin-top:7px" id="hcConvertToGregorian" type="button" data-hc="convertGregorian">ഇംഗ്ലീഷ് തീയതി കാണുക</button></div></div><p class="hc-muted" id="hcConversionResult" aria-live="polite" style="margin-top:12px"></p></section>
-<p class="hc-footer" data-hc="footer">സ്വലാത്ത് • ഹിജ്‌റ തീയതികൾ കണക്കാക്കിയ കലണ്ടർ രീതിയെ ആശ്രയിച്ചിരിക്കുന്നു.</p>
-</div></div></section>
+  <header class="hc-hero">
+    <p class="hc-kicker">SWALATH • ISLAMIC CALENDAR</p>
+    <div class="hc-today-label">TODAY'S HIJRI DATE</div>
+    <div class="hc-day-number" id="hcTodayDay">--</div>
+    <div class="hc-hijri-month" id="hcTodayMonth">Loading...</div>
+    <div class="hc-hijri-year" id="hcTodayYear">Hijri year</div>
+    <div class="hc-gregorian" id="hcGregorianToday">Loading Gregorian date...</div>
+    <div class="hc-today-badge">TODAY</div>
+  </header>
+
+  <section class="hc-countdown" aria-live="polite">
+    <p class="hc-countdown-label">YOUR NEXT BLESSED MONTH</p>
+    <h2 class="hc-ramadan-title">Ramadan</h2>
+    <div class="hc-count-number" id="hcRamadanDays">--</div>
+    <p class="hc-count-caption" id="hcCountdownCaption">days remaining</p>
+    <p class="hc-ramadan-date" id="hcRamadanDate">Calculating expected date...</p>
+  </section>
+
+  <div class="hc-calendar">
+    <div class="hc-month-nav">
+      <button class="hc-nav-btn" id="hcPrevMonth"
+        type="button" aria-label="Previous Hijri month">&#8249;</button>
+      <div class="hc-month-title" id="hcCalendarMonth">Loading calendar...</div>
+      <button class="hc-nav-btn" id="hcNextMonth"
+        type="button" aria-label="Next Hijri month">&#8250;</button>
+    </div>
+
+    <div class="hc-weekdays" aria-hidden="true">
+      <div class="hc-weekday">SUN</div>
+      <div class="hc-weekday">MON</div>
+      <div class="hc-weekday">TUE</div>
+      <div class="hc-weekday">WED</div>
+      <div class="hc-weekday">THU</div>
+      <div class="hc-weekday">FRI</div>
+      <div class="hc-weekday">SAT</div>
+    </div>
+
+    <div class="hc-days" id="hcCalendarDays"
+      role="grid" aria-label="Hijri month dates"></div>
+
+    <div class="hc-legend">
+      <div class="hc-legend-item">
+        <span class="hc-dot"></span>
+        <span>Today's date</span>
+      </div>
+      <div class="hc-legend-item">
+        <span class="hc-dot hc-dot-gold"></span>
+        <span>Current day highlight</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="hc-note">
+    Dates calculated using the Umm al-Qura Hijri calendar.
+    Actual month beginnings may differ according to local moon sighting
+    and official announcements.
+  </p>
+</div>
+
+<div class="hc-status" id="hcError" hidden>
+  The Hijri calendar is not supported by this browser.
+  Please update your browser and try again.
+</div>
+
 <script>
-(function(){
-"use strict";
-const root=document.getElementById("hijriCalendarPremium");
-if(!root||root.dataset.initialized==="yes")return;
-root.dataset.initialized="yes";
-const $=id=>root.querySelector("#"+id);
-const storeKey="swalath-hijri-notes-v1";
-const hijriLocale="en-u-ca-islamic-umalqura-nu-latn";
-const gregLocales={ml:"ml-IN",en:"en-GB",ar:"ar-SA",hi:"hi-IN",ur:"ur-PK",ta:"ta-IN"};
-const hijriLocales={ml:"ml-IN-u-ca-islamic-umalqura",en:"en-GB-u-ca-islamic-umalqura",ar:"ar-SA-u-ca-islamic-umalqura",hi:"hi-IN-u-ca-islamic-umalqura",ur:"ur-PK-u-ca-islamic-umalqura",ta:"ta-IN-u-ca-islamic-umalqura"};
-const I18N={
-ml:{eyebrow:"ഇസ്‌ലാമിക കലണ്ടർ",title:"പ്രീമിയം ഹിജ്‌റ കലണ്ടർ",subtitle:"ഹിജ്‌റയും ഗ്രിഗോറിയൻ തീയതികളും ഒരുമിച്ച്",today:"ഇന്നത്തെ ഹിജ്‌റ തീയതി",ramadanTitle:"🌙 റമദാൻ കൗണ്ട്ഡൗൺ",days:"ദിവസം",hours:"മണിക്കൂർ",minutes:"മിനിറ്റ്",ramadanNote:"ഇത് കണക്കാക്കിയ തീയതിയാണ്. പ്രാദേശിക ചന്ദ്രദർശനപ്രകാരം തീയതി മാറാം.",goToday:"ഇന്ന്",share:"പങ്കുവയ്ക്കുക",specialLegend:"പ്രധാനപ്പെട്ട ദിവസം",todayLegend:"ഇന്ന്",selectedLegend:"തിരഞ്ഞെടുത്ത ദിവസം",selectedTitle:"തിരഞ്ഞെടുത്ത തീയതി",addNote:"കുറിപ്പ് ചേർക്കുക",viewNote:"കുറിപ്പ് കാണുക",noteLabel:"വ്യക്തിഗത കുറിപ്പ്",notePlaceholder:"ഈ തീയതിക്കായി കുറിപ്പ് എഴുതുക",saveNote:"കുറിപ്പ് സംരക്ഷിക്കുക",deleteNote:"കുറിപ്പ് നീക്കുക",notePrivacy:"കുറിപ്പുകൾ ഈ ഉപകരണത്തിലെ ബ്രൗസർ സംഭരണത്തിലാണ് സൂക്ഷിക്കുന്നത്.",eventsTitle:"പ്രധാന ഇസ്‌ലാമിക ദിനങ്ങൾ",eventsNote:"പ്രധാന ദിനങ്ങളുടെ തീയതികൾ കണക്കാക്കിയവയാണ്; പ്രാദേശിക ഔദ്യോഗിക അറിയിപ്പുകൾ പരിശോധിക്കുക.",convertTitle:"തീയതി പരിവർത്തനം",gregorianLabel:"ഗ്രിഗോറിയൻ തീയതി",hijriLabel:"ഹിജ്‌റ തീയതി",convertHijri:"ഹിജ്‌റ തീയതി കാണുക",convertGregorian:"ഗ്രിഗോറിയൻ തീയതി കാണുക",footer:"സ്വലാത്ത് • ഹിജ്‌റ തീയതികൾ കണക്കാക്കിയ കലണ്ടർ രീതിയെ ആശ്രയിച്ചിരിക്കുന്നു.",ramadanStarted:"റമദാൻ മാസം ആരംഭിച്ചിരിക്കുന്നു.",ramadanNext:"അടുത്ത റമദാനിലേക്കുള്ള സമയം",ramadanToday:"ഇന്ന് കണക്കാക്കിയ റമദാൻ ഒന്നാം തീയതിയാണ്.",noNote:"ഈ തീയതിക്ക് കുറിപ്പില്ല.",saved:"കുറിപ്പ് സംരക്ഷിച്ചു.",deleted:"കുറിപ്പ് നീക്കി.",enterNote:"ആദ്യം ഒരു കുറിപ്പ് എഴുതുക.",noSpecial:"ഈ തീയതിക്ക് പട്ടികപ്പെടുത്തിയ വിശേഷദിനമില്ല.",invalidHijri:"ശരിയായ ഹിജ്‌റ തീയതി നൽകുക.",shareUnavailable:"ഈ തീയതി പങ്കുവയ്ക്കാൻ കഴിയുന്നില്ല.",events:["റമദാൻ ആരംഭം","ലൈലത്തുൽ ഖദ്ർ (പ്രതീക്ഷിക്കുന്ന രാത്രി)","ഈദുൽ ഫിത്ർ","അറഫാ ദിനം","ഈദുൽ അദ്ഹാ","ഇസ്‌ലാമിക പുതുവർഷം","ആശൂറ","മൗലിദുന്നബി","ശഅ്ബാൻ 15"],months:["മുഹറം","സഫർ","റബീഉൽ അവ്വൽ","റബീഉൽ ആഖിർ","ജുമാദൽ ഊലാ","ജുമാദൽ ആഖിറ","റജബ്","ശഅ്ബാൻ","റമദാൻ","ശവ്വാൽ","ദുൽഖഅ്ദ","ദുൽഹിജ്ജ"],weekdays:["ഞാ","തി","ചൊ","ബു","വ്യാ","വെ","ശ"],ramadan:"റമദാൻ",laylat:"ലൈലത്തുൽ ഖദ്ർ (പ്രതീക്ഷിക്കുന്ന രാത്രി)",eidfitr:"ഈദുൽ ഫിത്ർ",arafah:"അറഫാ ദിനം",eidadha:"ഈദുൽ അദ്ഹാ",newyear:"ഇസ്‌ലാമിക പുതുവർഷം",ashura:"ആശൂറ",mawlid:"മൗലിദുന്നബി",baraat:"ശഅ്ബാൻ 15"},
-en:{eyebrow:"ISLAMIC CALENDAR",title:"Premium Hijri Calendar",subtitle:"Hijri and Gregorian dates together",today:"Today's Hijri date",ramadanTitle:"🌙 Ramadan countdown",days:"Days",hours:"Hours",minutes:"Minutes",ramadanNote:"Calculated date only. Local moon sighting may change the date.",goToday:"Today",share:"Share",specialLegend:"Special day",todayLegend:"Today",selectedLegend:"Selected day",selectedTitle:"Selected date",addNote:"Add note",viewNote:"View note",noteLabel:"Personal note",notePlaceholder:"Write a note for this date",saveNote:"Save note",deleteNote:"Delete note",notePrivacy:"Notes are stored in this device's browser storage.",eventsTitle:"Important Islamic dates",eventsNote:"Dates are calculated estimates. Check local official announcements.",convertTitle:"Date converter",gregorianLabel:"Gregorian date",hijriLabel:"Hijri date",convertHijri:"Show Hijri date",convertGregorian:"Show Gregorian date",footer:"Swalath • Hijri dates depend on the calendar calculation method.",ramadanStarted:"Ramadan is currently in progress.",ramadanNext:"Time until the next Ramadan",ramadanToday:"Today is the estimated first day of Ramadan.",noNote:"No note for this date.",saved:"Note saved.",deleted:"Note deleted.",enterNote:"Write a note first.",noSpecial:"No listed special event on this date.",invalidHijri:"Enter a valid Hijri date.",shareUnavailable:"This date could not be shared.",events:["Start of Ramadan","Laylat al-Qadr (expected night)","Eid al-Fitr","Day of Arafah","Eid al-Adha","Islamic New Year","Ashura","Mawlid an-Nabi","15 Sha'ban"],months:["Muharram","Safar","Rabi al-Awwal","Rabi al-Thani","Jumada al-Ula","Jumada al-Akhirah","Rajab","Sha'ban","Ramadan","Shawwal","Dhul-Qadah","Dhul-Hijjah"],weekdays:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],ramadan:"Ramadan",laylat:"Laylat al-Qadr (expected night)",eidfitr:"Eid al-Fitr",arafah:"Day of Arafah",eidadha:"Eid al-Adha",newyear:"Islamic New Year",ashura:"Ashura",mawlid:"Mawlid an-Nabi",baraat:"15 Sha'ban"},
-ar:{eyebrow:"التقويم الإسلامي",title:"التقويم الهجري المميز",subtitle:"التاريخ الهجري والميلادي معًا",today:"التاريخ الهجري اليوم",ramadanTitle:"🌙 العد التنازلي لرمضان",days:"يوم",hours:"ساعة",minutes:"دقيقة",ramadanNote:"تاريخ تقديري؛ قد يختلف حسب رؤية الهلال المحلية.",goToday:"اليوم",share:"مشاركة",specialLegend:"مناسبة مهمة",todayLegend:"اليوم",selectedLegend:"اليوم المحدد",selectedTitle:"التاريخ المحدد",addNote:"إضافة ملاحظة",viewNote:"عرض الملاحظة",noteLabel:"ملاحظة شخصية",notePlaceholder:"اكتب ملاحظة لهذا التاريخ",saveNote:"حفظ الملاحظة",deleteNote:"حذف الملاحظة",notePrivacy:"تُحفظ الملاحظات في متصفح هذا الجهاز.",eventsTitle:"المناسبات الإسلامية المهمة",eventsNote:"التواريخ تقديرية؛ يرجى مراجعة الإعلانات الرسمية المحلية.",convertTitle:"تحويل التاريخ",gregorianLabel:"التاريخ الميلادي",hijriLabel:"التاريخ الهجري",convertHijri:"عرض التاريخ الهجري",convertGregorian:"عرض التاريخ الميلادي",footer:"صلوات • تعتمد التواريخ الهجرية على طريقة التقويم المستخدمة.",ramadanStarted:"شهر رمضان جارٍ حاليًا.",ramadanNext:"الوقت المتبقي حتى رمضان القادم",ramadanToday:"اليوم هو أول رمضان حسب الحساب التقريبي.",noNote:"لا توجد ملاحظة لهذا التاريخ.",saved:"تم حفظ الملاحظة.",deleted:"تم حذف الملاحظة.",enterNote:"اكتب ملاحظة أولًا.",noSpecial:"لا توجد مناسبة مدرجة لهذا التاريخ.",invalidHijri:"أدخل تاريخًا هجريًا صحيحًا.",shareUnavailable:"تعذرت مشاركة هذا التاريخ.",events:["بداية رمضان","ليلة القدر (ليلة متوقعة)","عيد الفطر","يوم عرفة","عيد الأضحى","رأس السنة الهجرية","عاشوراء","المولد النبوي","١٥ شعبان"],months:["محرم","صفر","ربيع الأول","ربيع الآخر","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"],weekdays:["أحد","إثن","ثلا","أرب","خمي","جمع","سبت"],ramadan:"رمضان",laylat:"ليلة القدر (ليلة متوقعة)",eidfitr:"عيد الفطر",arafah:"يوم عرفة",eidadha:"عيد الأضحى",newyear:"رأس السنة الهجرية",ashura:"عاشوراء",mawlid:"المولد النبوي",baraat:"١٥ شعبان"},
-hi:{eyebrow:"इस्लामी कैलेंडर",title:"प्रीमियम हिजरी कैलेंडर",subtitle:"हिजरी और ग्रेगोरियन तारीखें साथ में",today:"आज की हिजरी तारीख",ramadanTitle:"🌙 रमज़ान काउंटडाउन",days:"दिन",hours:"घंटे",minutes:"मिनट",ramadanNote:"यह अनुमानित तारीख है। स्थानीय चाँद दिखने के अनुसार बदल सकती है।",goToday:"आज",share:"साझा करें",specialLegend:"विशेष दिन",todayLegend:"आज",selectedLegend:"चुना गया दिन",selectedTitle:"चुनी गई तारीख",addNote:"नोट जोड़ें",viewNote:"नोट देखें",noteLabel:"व्यक्तिगत नोट",notePlaceholder:"इस तारीख के लिए नोट लिखें",saveNote:"नोट सहेजें",deleteNote:"नोट हटाएँ",notePrivacy:"नोट इसी डिवाइस के ब्राउज़र में सहेजे जाते हैं।",eventsTitle:"महत्वपूर्ण इस्लामी दिन",eventsNote:"तारीखें अनुमानित हैं। स्थानीय आधिकारिक घोषणा देखें।",convertTitle:"तारीख बदलें",gregorianLabel:"ग्रेगोरियन तारीख",hijriLabel:"हिजरी तारीख",convertHijri:"हिजरी तारीख दिखाएँ",convertGregorian:"ग्रेगोरियन तारीख दिखाएँ",footer:"स्वलात • हिजरी तारीखें इस्तेमाल की गई कैलेंडर पद्धति पर निर्भर करती हैं।",ramadanStarted:"रमज़ान का महीना चल रहा है।",ramadanNext:"अगले रमज़ान तक का समय",ramadanToday:"आज अनुमानित पहला रमज़ान है।",noNote:"इस तारीख के लिए कोई नोट नहीं।",saved:"नोट सहेजा गया।",deleted:"नोट हटा दिया गया।",enterNote:"पहले नोट लिखें।",noSpecial:"इस तारीख के लिए कोई सूचीबद्ध विशेष दिन नहीं।",invalidHijri:"सही हिजरी तारीख दर्ज करें।",shareUnavailable:"यह तारीख साझा नहीं की जा सकी।",events:["रमज़ान की शुरुआत","लैलतुल क़द्र (अनुमानित रात)","ईद उल-फ़ित्र","अरफ़ा का दिन","ईद उल-अज़हा","इस्लामी नववर्ष","आशूरा","मौलिदुन्नबी","15 शाबान"],months:["मुहर्रम","सफ़र","रबीउल अव्वल","रबीउस्सानी","जुमादल ऊला","जुमादल आख़िरा","रजब","शाबान","रमज़ान","शव्वाल","ज़ुलक़ादा","ज़ुलहिज्जा"],weekdays:["रवि","सोम","मंगल","बुध","गुरु","शुक्र","शनि"],ramadan:"रमज़ान",laylat:"लैलतुल क़द्र (अनुमानित रात)",eidfitr:"ईद उल-फ़ित्र",arafah:"अरफ़ा का दिन",eidadha:"ईद उल-अज़हा",newyear:"इस्लामी नववर्ष",ashura:"आशूरा",mawlid:"मौलिदुन्नबी",baraat:"15 शाबान"},
-ur:{eyebrow:"اسلامی کیلنڈر",title:"پریمیم ہجری کیلنڈر",subtitle:"ہجری اور عیسوی تاریخیں ایک ساتھ",today:"آج کی ہجری تاریخ",ramadanTitle:"🌙 رمضان کی الٹی گنتی",days:"دن",hours:"گھنٹے",minutes:"منٹ",ramadanNote:"یہ تخمینی تاریخ ہے؛ مقامی رویتِ ہلال کے مطابق فرق ہوسکتا ہے۔",goToday:"آج",share:"شیئر کریں",specialLegend:"اہم دن",todayLegend:"آج",selectedLegend:"منتخب دن",selectedTitle:"منتخب تاریخ",addNote:"نوٹ شامل کریں",viewNote:"نوٹ دیکھیں",noteLabel:"ذاتی نوٹ",notePlaceholder:"اس تاریخ کے لیے نوٹ لکھیں",saveNote:"نوٹ محفوظ کریں",deleteNote:"نوٹ حذف کریں",notePrivacy:"نوٹس اسی آلے کے براؤزر میں محفوظ ہوتے ہیں۔",eventsTitle:"اہم اسلامی ایام",eventsNote:"تاریخیں تخمینی ہیں؛ مقامی سرکاری اعلان دیکھیں۔",convertTitle:"تاریخ تبدیل کریں",gregorianLabel:"عیسوی تاریخ",hijriLabel:"ہجری تاریخ",convertHijri:"ہجری تاریخ دکھائیں",convertGregorian:"عیسوی تاریخ دکھائیں",footer:"صلوات • ہجری تاریخیں استعمال شدہ کیلنڈر کے طریقے پر منحصر ہیں۔",ramadanStarted:"رمضان کا مہینہ جاری ہے۔",ramadanNext:"اگلے رمضان تک کا وقت",ramadanToday:"آج حساب کے مطابق پہلا رمضان ہے۔",noNote:"اس تاریخ کے لیے کوئی نوٹ نہیں۔",saved:"نوٹ محفوظ ہوگیا۔",deleted:"نوٹ حذف ہوگیا۔",enterNote:"پہلے نوٹ لکھیں۔",noSpecial:"اس تاریخ کے لیے کوئی درج شدہ خاص دن نہیں۔",invalidHijri:"درست ہجری تاریخ درج کریں۔",shareUnavailable:"یہ تاریخ شیئر نہیں ہوسکی۔",events:["رمضان کا آغاز","لیلۃ القدر (متوقع رات)","عیدالفطر","یومِ عرفہ","عیدالاضحی","اسلامی نیا سال","عاشوراء","میلاد النبی","۱۵ شعبان"],months:["محرم","صفر","ربیع الاول","ربیع الآخر","جمادی الاولٰی","جمادی الآخرہ","رجب","شعبان","رمضان","شوال","ذوالقعدہ","ذوالحجہ"],weekdays:["اتوار","پیر","منگل","بدھ","جمعرات","جمعہ","ہفتہ"],ramadan:"رمضان",laylat:"لیلۃ القدر (متوقع رات)",eidfitr:"عیدالفطر",arafah:"یومِ عرفہ",eidadha:"عیدالاضحی",newyear:"اسلامی نیا سال",ashura:"عاشوراء",mawlid:"میلاد النبی",baraat:"۱۵ شعبان"},
-ta:{eyebrow:"இஸ்லாமிய நாட்காட்டி",title:"பிரீமியம் ஹிஜ்ரி நாட்காட்டி",subtitle:"ஹிஜ்ரி மற்றும் கிரிகோரியன் தேதிகள்",today:"இன்றைய ஹிஜ்ரி தேதி",ramadanTitle:"🌙 ரமலான் கவுண்ட்டவுன்",days:"நாட்கள்",hours:"மணி",minutes:"நிமிடங்கள்",ramadanNote:"இது கணிக்கப்பட்ட தேதி. உள்ளூர் பிறை காண்பதன் அடிப்படையில் மாறலாம்.",goToday:"இன்று",share:"பகிர்",specialLegend:"சிறப்பு நாள்",todayLegend:"இன்று",selectedLegend:"தேர்ந்தெடுத்த நாள்",selectedTitle:"தேர்ந்தெடுத்த தேதி",addNote:"குறிப்பு சேர்",viewNote:"குறிப்பைக் காண்",noteLabel:"தனிப்பட்ட குறிப்பு",notePlaceholder:"இந்தத் தேதிக்கான குறிப்பை எழுதவும்",saveNote:"குறிப்பைச் சேமி",deleteNote:"குறிப்பை நீக்கு",notePrivacy:"குறிப்புகள் இந்தச் சாதனத்தின் உலாவியில் சேமிக்கப்படும்.",eventsTitle:"முக்கிய இஸ்லாமிய நாட்கள்",eventsNote:"தேதிகள் கணிக்கப்பட்டவை. உள்ளூர் அதிகாரப்பூர்வ அறிவிப்பைச் சரிபார்க்கவும்.",convertTitle:"தேதி மாற்றி",gregorianLabel:"கிரிகோரியன் தேதி",hijriLabel:"ஹிஜ்ரி தேதி",convertHijri:"ஹிஜ்ரி தேதியைக் காண்",convertGregorian:"கிரிகோரியன் தேதியைக் காண்",footer:"ஸலவாத் • ஹிஜ்ரி தேதிகள் பயன்படுத்தப்படும் நாட்காட்டி முறையைப் பொறுத்தது.",ramadanStarted:"ரமலான் மாதம் தற்போது நடைபெறுகிறது.",ramadanNext:"அடுத்த ரமலானுக்கான நேரம்",ramadanToday:"இன்று கணிக்கப்பட்ட முதல் ரமலான் நாள்.",noNote:"இந்தத் தேதிக்கு குறிப்பு இல்லை.",saved:"குறிப்பு சேமிக்கப்பட்டது.",deleted:"குறிப்பு நீக்கப்பட்டது.",enterNote:"முதலில் குறிப்பை எழுதவும்.",noSpecial:"இந்தத் தேதிக்கு பட்டியலிடப்பட்ட சிறப்பு நாள் இல்லை.",invalidHijri:"சரியான ஹிஜ்ரி தேதியை உள்ளிடவும்.",shareUnavailable:"இந்தத் தேதியைப் பகிர முடியவில்லை.",events:["ரமலான் தொடக்கம்","லைலத்துல் கத்ர் (எதிர்பார்க்கப்படும் இரவு)","ஈதுல் ஃபித்ர்","அரஃபா நாள்","ஈதுல் அத்ஹா","இஸ்லாமியப் புத்தாண்டு","ஆஷுரா","மௌலிதுந்நபி","ஷஅபான் 15"],months:["முஹர்ரம்","ஸஃபர்","ரபீஉல் அவ்வல்","ரபீஉஸ் ஸானி","ஜுமாதல் ஊலா","ஜுமாதல் ஆகிரா","ரஜப்","ஷஅபான்","ரமலான்","ஷவ்வால்","துல்கஃதா","துல்ஹிஜ்ஜா"],weekdays:["ஞாயி","திங்","செவ்","புத","வியா","வெள்","சனி"],ramadan:"ரமலான்",laylat:"லைலத்துல் கத்ர் (எதிர்பார்க்கப்படும் இரவு)",eidfitr:"ஈதுல் ஃபித்ர்",arafah:"அரஃபா நாள்",eidadha:"ஈதுல் அத்ஹா",newyear:"இஸ்லாமியப் புத்தாண்டு",ashura:"ஆஷுரா",mawlid:"மௌலிதுந்நபி",baraat:"ஷஅபான் 15"}
-};
-const events=[{month:1,day:1,key:"newyear",icon:"🌙"},{month:1,day:10,key:"ashura",icon:"✨"},{month:3,day:12,key:"mawlid",icon:"🕌"},{month:8,day:15,key:"baraat",icon:"🌟"},{month:9,day:1,key:"ramadan",icon:"🌙"},{month:9,day:27,key:"laylat",icon:"✨"},{month:10,day:1,key:"eidfitr",icon:"🎉"},{month:12,day:9,key:"arafah",icon:"🕋"},{month:12,day:10,key:"eidadha",icon:"🎉"}];
-let lang="ml",selectedDate=startOfDay(new Date()),viewYear=null,viewMonth=null,notes=readNotes(),countdownInterval=null;
-function startOfDay(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate(),12)}
-function dateKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function fromKey(s){const p=s.split("-").map(Number);return new Date(p[0],p[1]-1,p[2],12)}
-function shiftDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
-function sameDay(a,b){return dateKey(a)===dateKey(b)}
-function t(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k}
-function safeHijri(d){const f=new Intl.DateTimeFormat(hijriLocale,{day:"numeric",month:"numeric",year:"numeric",timeZone:"UTC"});const p={};f.formatToParts(new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),12))).forEach(x=>{if(x.type!=="literal")p[x.type]=Number(x.value)});return{day:p.day,month:p.month,year:p.year}}
-function dateLocale(d,options){return new Intl.DateTimeFormat(gregLocales[lang]||"en-GB",options).format(d)}
-function formatHijri(d){return new Intl.DateTimeFormat(hijriLocales[lang]||hijriLocale,{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(d)}
-function monthName(m){return I18N[lang].months[m-1]||String(m)}
-function readNotes(){try{return JSON.parse(localStorage.getItem(storeKey)||"{}")||{}}catch(e){return{}}}
-function writeNotes(){try{localStorage.setItem(storeKey,JSON.stringify(notes));return true}catch(e){return false}}
-function getHijriEvents(h){return events.filter(e=>e.month===h.month&&e.day===h.day)}
-function eventText(e){return t(e.key)}
-function findGregorianForHijri(y,m,d){
- const guess=new Date(Date.UTC(y+622,0,1,12)),start=new Date(guess.getTime()-1000*86400000);
- for(let i=0;i<1000;i++){const candidate=shiftDays(start,i),h=safeHijri(candidate);if(h.year===y&&h.month===m&&h.day===d)return startOfDay(candidate)}
- return null
-}
-function getMonthDates(y,m){
- const seed=selectedDate,seedH=safeHijri(seed),delta=(y-seedH.year)*12+(m-seedH.month);
- const approx=shiftDays(seed,Math.round(delta*29.530588));let first=null;
- for(let i=-40;i<=40;i++){const d=shiftDays(approx,i),h=safeHijri(d);if(h.year===y&&h.month===m&&h.day===1){first=startOfDay(d);break}}
- if(!first)first=findGregorianForHijri(y,m,1);
- if(!first)return null;
- const dates=[];for(let i=0;i<31;i++){const d=shiftDays(first,i),h=safeHijri(d);if(h.year!==y||h.month!==m)break;dates.push(startOfDay(d))}
- return dates.length?{first,dates}:null
-}
-function getViewMonth(){const h=safeHijri(selectedDate);if(viewYear===null){viewYear=h.year;viewMonth=h.month}return{year:viewYear,month:viewMonth}}
-function applyLanguage(){
- let current=null;
- try{current=window.SwalathLanguage&&typeof window.SwalathLanguage.getCurrent==="function"?window.SwalathLanguage.getCurrent():null}catch(e){}
- if(typeof current!=="string"||!I18N[current]){try{current=localStorage.getItem("swalath-language")}catch(e){}}
- lang=I18N[current]?current:"ml";root.lang=lang;root.dir=(lang==="ar"||lang==="ur")?"rtl":"ltr";
- root.querySelectorAll("[data-hc]").forEach(el=>{const key=el.dataset.hc;if(I18N[lang][key])el.textContent=I18N[lang][key]});
- root.querySelectorAll("[data-hc-placeholder]").forEach(el=>{const key=el.dataset.hcPlaceholder;if(I18N[lang][key])el.placeholder=I18N[lang][key]});
- $("hcPrev").setAttribute("aria-label",lang==="ar"?"الشهر السابق":lang==="ml"?"മുൻ മാസം":lang==="hi"?"पिछला महीना":lang==="ur"?"پچھلا مہینہ":lang==="ta"?"முந்தைய மாதம்":"Previous month");
- $("hcNext").setAttribute("aria-label",lang==="ar"?"الشهر التالي":lang==="ml"?"അടുത്ത മാസം":lang==="hi"?"अगला महीना":lang==="ur"?"اگلا مہینہ":lang==="ta"?"அடுத்த மாதம்":"Next month");
- fillHijriMonthSelect();renderAll()
-}
-function fillHijriMonthSelect(){const select=$("hcHijriMonth"),previous=Number(select.value)||safeHijri(selectedDate).month;select.replaceChildren();I18N[lang].months.forEach((name,i)=>{const o=document.createElement("option");o.value=String(i+1);o.textContent=name;select.appendChild(o)});select.value=String(previous)}
-function renderToday(){const now=startOfDay(new Date());$("hcTodayHijri").textContent=formatHijri(now);$("hcTodayGreg").textContent=dateLocale(now,{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
-function renderMonth(){
- const v=getViewMonth(),result=getMonthDates(v.year,v.month);$("hcMonthTitle").textContent=monthName(v.month)+" "+v.year;
- const weekdays=$("hcWeekdays");weekdays.replaceChildren();I18N[lang].weekdays.forEach(name=>{const el=document.createElement("div");el.className="hc-weekday";el.textContent=name;weekdays.appendChild(el)});
- const grid=$("hcGrid");grid.replaceChildren();
- if(!result){$("hcGregMonth").textContent="—";return}
- $("hcGregMonth").textContent=dateLocale(result.first,{month:"long",year:"numeric"})+" – "+dateLocale(result.dates[result.dates.length-1],{month:"long",year:"numeric"});
- for(let i=0;i<result.first.getDay();i++){const empty=document.createElement("div");empty.className="hc-empty";empty.setAttribute("aria-hidden","true");grid.appendChild(empty)}
- const today=startOfDay(new Date());
- result.dates.forEach(d=>{const h=safeHijri(d),button=document.createElement("button");button.type="button";button.className="hc-day";button.setAttribute("aria-label",formatHijri(d)+" — "+dateLocale(d,{dateStyle:"full"}));if(sameDay(d,today))button.classList.add("hc-today-cell");if(sameDay(d,selectedDate))button.classList.add("hc-selected");if(getHijriEvents(h).length)button.classList.add("hc-event");const n=document.createElement("span");n.className="hc-day-number";n.textContent=h.day;const g=document.createElement("span");g.className="hc-day-greg";g.textContent=dateLocale(d,{day:"numeric"});button.append(n,g);button.addEventListener("click",()=>{selectedDate=startOfDay(d);renderAll()});grid.appendChild(button)})
-}
-function renderSelected(){const h=safeHijri(selectedDate);$("hcSelectedHijri").textContent=formatHijri(selectedDate);$("hcSelectedGreg").textContent=dateLocale(selectedDate,{weekday:"long",day:"numeric",month:"long",year:"numeric"});const list=getHijriEvents(h),box=$("hcSelectedEvent");if(list.length){box.hidden=false;box.textContent=list.map(e=>e.icon+" "+eventText(e)).join(" • ")}else{box.hidden=true;box.textContent=""}$("hcNote").value=notes[dateKey(selectedDate)]||"";$("hcHijriDay").value=h.day;$("hcHijriMonth").value=String(h.month);$("hcHijriYear").value=h.year;$("hcGregorianInput").value=dateKey(selectedDate)}
-function renderEvents(){const list=$("hcEvents");list.replaceChildren();const today=startOfDay(new Date()),items=[];for(let i=0;i<430;i++){const d=shiftDays(today,i),h=safeHijri(d);getHijriEvents(h).forEach(e=>items.push({date:d,event:e}));if(items.length>=5)break}if(!items.length){const p=document.createElement("p");p.className="hc-muted";p.textContent=t("noSpecial");list.appendChild(p);return}items.slice(0,5).forEach(item=>{const row=document.createElement("div");row.className="hc-event-row";row.tabIndex=0;row.setAttribute("role","button");row.setAttribute("aria-label",eventText(item.event)+" — "+dateLocale(item.date,{dateStyle:"full"}));const icon=document.createElement("div");icon.className="hc-event-icon";icon.textContent=item.event.icon;const content=document.createElement("div"),name=document.createElement("div");name.className="hc-event-name";name.textContent=eventText(item.event);const date=document.createElement("div");date.className="hc-event-date";date.textContent=formatHijri(item.date)+" · "+dateLocale(item.date,{day:"numeric",month:"short",year:"numeric"});content.append(name,date);row.append(icon,content);const choose=()=>{selectedDate=startOfDay(item.date);const h=safeHijri(item.date);viewYear=h.year;viewMonth=h.month;renderAll()};row.addEventListener("click",choose);row.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();choose()}});list.appendChild(row)})}
-function nextRamadan(){
- const today=startOfDay(new Date()),h=safeHijri(today);
- if(h.month===9&&h.day===1)return{date:today,today:true,inProgress:true};
- if(h.month===9&&h.day>1){const next=findGregorianForHijri(h.year+1,9,1);return{date:next||shiftDays(today,354),today:false,inProgress:true}}
- if(h.month>9){const date=findGregorianForHijri(h.year+1,9,1);return{date:date||shiftDays(today,354),today:false,inProgress:false}}
- const date=findGregorianForHijri(h.year,9,1);if(date&&date>=today)return{date,today:false,inProgress:false};
- const later=findGregorianForHijri(h.year+1,9,1);return{date:later||shiftDays(today,354),today:false,inProgress:false}
-}
-function updateCountdown(){const info=nextRamadan(),now=new Date(),h=safeHijri(startOfDay(now));$("hcRamadanStatus").textContent=info.today?t("ramadanToday"):info.inProgress?t("ramadanStarted"):t("ramadanNext");const target=new Date(info.date.getFullYear(),info.date.getMonth(),info.date.getDate());const diff=Math.max(0,target.getTime()-now.getTime());$("hcDays").textContent=Math.floor(diff/86400000);$("hcHours").textContent=Math.floor(diff%86400000/3600000);$("hcMinutes").textContent=Math.floor(diff%3600000/60000)}
-function renderAll(){renderToday();renderMonth();renderSelected();renderEvents();updateCountdown()}
-function navigateMonth(delta){const v=getViewMonth();let y=v.year,m=v.month+delta;if(m<1){m=12;y--}else if(m>12){m=1;y++}const result=getMonthDates(y,m);if(!result){$("hcConversionResult").textContent=t("invalidHijri");return}viewYear=y;viewMonth=m;selectedDate=startOfDay(result.first);renderAll()}
-$("hcPrev").addEventListener("click",()=>navigateMonth(-1));$("hcNext").addEventListener("click",()=>navigateMonth(1));
-$("hcTodayBtn").addEventListener("click",()=>{selectedDate=startOfDay(new Date());const h=safeHijri(selectedDate);viewYear=h.year;viewMonth=h.month;$("hcConversionResult").textContent="";renderAll()});
-$("hcAddNote").addEventListener("click",()=>$("hcNote").focus());
-$("hcViewNote").addEventListener("click",()=>{const value=notes[dateKey(selectedDate)]||"";alert(value||t("noNote"))});
-$("hcSaveNote").addEventListener("click",()=>{const value=$("hcNote").value.trim();if(!value){alert(t("enterNote"));return}notes[dateKey(selectedDate)]=value;if(writeNotes())alert(t("saved"));else alert(t("shareUnavailable"))});
-$("hcDeleteNote").addEventListener("click",()=>{delete notes[dateKey(selectedDate)];$("hcNote").value="";if(writeNotes())alert(t("deleted"));else alert(t("shareUnavailable"))});
-$("hcShareBtn").addEventListener("click",async()=>{const text=formatHijri(selectedDate)+"\n"+dateLocale(selectedDate,{dateStyle:"full"})+"\nSwalath";try{if(navigator.share)await navigator.share({title:t("title"),text});else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);alert(text)}else alert(text)}catch(e){if(e&&e.name!=="AbortError")alert(t("shareUnavailable"))}});
-$("hcConvertToHijri").addEventListener("click",()=>{const value=$("hcGregorianInput").value;if(!value)return;const d=fromKey(value);if(Number.isNaN(d.getTime())||dateKey(d)!==value){$("hcConversionResult").textContent=t("invalidHijri");return}$("hcConversionResult").textContent=formatHijri(d)+" · "+dateLocale(d,{dateStyle:"full"});selectedDate=startOfDay(d);const h=safeHijri(d);viewYear=h.year;viewMonth=h.month;renderAll()});
-$("hcConvertToGregorian").addEventListener("click",()=>{const day=Number($("hcHijriDay").value),month=Number($("hcHijriMonth").value),year=Number($("hcHijriYear").value);if(!day||!month||!year||day<1||day>30||month<1||month>12||year<1300||year>1600){$("hcConversionResult").textContent=t("invalidHijri");return}const d=findGregorianForHijri(year,month,day);if(!d){$("hcConversionResult").textContent=t("invalidHijri");return}const h=safeHijri(d);if(h.year!==year||h.month!==month||h.day!==day){$("hcConversionResult").textContent=t("invalidHijri");return}$("hcConversionResult").textContent=dateLocale(d,{dateStyle:"full"});selectedDate=startOfDay(d);viewYear=year;viewMonth=month;renderAll()});
-function initialize(){try{const now=startOfDay(new Date()),h=safeHijri(now);viewYear=h.year;viewMonth=h.month;fillHijriMonthSelect();applyLanguage();if(countdownInterval)clearInterval(countdownInterval);countdownInterval=setInterval(updateCountdown,60000)}catch(error){$("hcMonthTitle").textContent="Calendar unavailable";$("hcRamadanStatus").textContent="Please use a browser with Islamic calendar support.";if(window.console&&console.error)console.error("Hijri calendar initialization failed:",error)}}
-document.addEventListener("swalath-language-changed",applyLanguage);
-window.addEventListener("storage",e=>{if(e.key==="swalath-language")applyLanguage()});
-initialize();
+(function () {
+  "use strict";
+
+  const root = document.getElementById("swalathHijriPremium");
+  if (!root || root.dataset.hcInitialized === "true") return;
+  root.dataset.hcInitialized = "true";
+
+  const $ = function (id) {
+    return root.querySelector("#" + id);
+  };
+
+  const hijriFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura-nu-latn",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }
+  );
+
+  const gregorianFormatter = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+
+  const ramadanDateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+
+  const monthFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura-nu-latn",
+    { month: "long", year: "numeric" }
+  );
+
+  const dayFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura-nu-latn",
+    { day: "numeric" }
+  );
+
+  const monthOnlyFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura-nu-latn",
+    { month: "numeric" }
+  );
+
+  const yearOnlyFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura-nu-latn",
+    { year: "numeric" }
+  );
+
+  function localDate(date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  function addDays(date, amount) {
+    const result = localDate(date);
+    result.setDate(result.getDate() + amount);
+    return result;
+  }
+
+  function dateKey(date) {
+    return date.getFullYear() + "-" +
+      String(date.getMonth() + 1).padStart(2, "0") + "-" +
+      String(date.getDate()).padStart(2, "0");
+  }
+
+  function hijriParts(date) {
+    const parts = hijriFormatter.formatToParts(date);
+    const result = {};
+
+    parts.forEach(function (part) {
+      if (part.type !== "literal") result[part.type] = part.value;
+    });
+
+    return {
+      day: Number(result.day),
+      month: result.month,
+      year: Number(result.year),
+      monthNumber: Number(monthOnlyFormatter.format(date))
+    };
+  }
+
+  function sameHijriMonth(a, b) {
+    const x = hijriParts(a);
+    const y = hijriParts(b);
+    return x.monthNumber === y.monthNumber && x.year === y.year;
+  }
+
+  function findMonthStart(anchor) {
+    const target = localDate(anchor);
+
+    for (let i = 0; i <= 35; i++) {
+      const candidate = addDays(target, -i);
+      const parts = hijriParts(candidate);
+
+      if (parts.day === 1 && sameHijriMonth(candidate, target)) {
+        return candidate;
+      }
+    }
+
+    throw new Error("Could not determine the Hijri month start.");
+  }
+
+  function findNextRamadan(today) {
+    const start = localDate(today);
+
+    for (let i = 0; i <= 370; i++) {
+      const candidate = addDays(start, i);
+      const parts = hijriParts(candidate);
+
+      if (parts.monthNumber === 9 && parts.day === 1) {
+        return candidate;
+      }
+    }
+
+    throw new Error("Could not determine the next Ramadan.");
+  }
+
+  function renderToday(today) {
+    const parts = hijriParts(today);
+
+    $("hcTodayDay").textContent = parts.day;
+    $("hcTodayMonth").textContent = parts.month;
+    $("hcTodayYear").textContent = parts.year + " AH";
+    $("hcGregorianToday").textContent = gregorianFormatter.format(today);
+  }
+
+  function renderRamadan(today) {
+    const ramadanStart = findNextRamadan(today);
+    const difference = Math.round(
+      (ramadanStart.getTime() - localDate(today).getTime()) / 86400000
+    );
+
+    $("hcRamadanDays").textContent = difference;
+
+    if (difference === 0) {
+      $("hcCountdownCaption").textContent = "Ramadan begins today";
+    } else if (difference === 1) {
+      $("hcCountdownCaption").textContent = "day remaining";
+    } else {
+      $("hcCountdownCaption").textContent = "days remaining";
+    }
+
+    $("hcRamadanDate").textContent =
+      "Expected start: " + ramadanDateFormatter.format(ramadanStart);
+  }
+
+  let displayedMonthStart;
+
+  function renderMonth() {
+    const start = displayedMonthStart;
+    const monthParts = hijriParts(start);
+    const today = localDate(new Date());
+    const todayKey = dateKey(today);
+
+    $("hcCalendarMonth").textContent =
+      monthFormatter.format(start);
+
+    const grid = $("hcCalendarDays");
+    grid.replaceChildren();
+
+    const offset = start.getDay();
+
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement("div");
+      empty.className = "hc-day hc-empty";
+      empty.setAttribute("aria-hidden", "true");
+      grid.appendChild(empty);
+    }
+
+    let current = localDate(start);
+
+    for (let i = 0; i < 31; i++) {
+      const parts = hijriParts(current);
+
+      if (parts.year !== monthParts.year ||
+          parts.monthNumber !== monthParts.monthNumber) {
+        break;
+      }
+
+      const cell = document.createElement("div");
+      cell.className = "hc-day";
+
+      const isToday = dateKey(current) === todayKey;
+      if (isToday) {
+        cell.classList.add("hc-today");
+        cell.setAttribute("aria-current", "date");
+      }
+
+      if (current.getDay() === 5) {
+        cell.classList.add("hc-friday");
+      }
+
+      const hijriDay = document.createElement("span");
+      hijriDay.className = "hc-day-number-small";
+      hijriDay.textContent = parts.day;
+
+      const gregorianDay = document.createElement("span");
+      gregorianDay.className = "hc-day-gregorian";
+      gregorianDay.textContent = current.getDate();
+
+      cell.setAttribute(
+        "aria-label",
+        parts.month + " " + parts.day + ", " + parts.year +
+        " AH; " + gregorianFormatter.format(current)
+      );
+
+      cell.appendChild(hijriDay);
+      cell.appendChild(gregorianDay);
+      grid.appendChild(cell);
+
+      current = addDays(current, 1);
+    }
+  }
+
+  function initialise() {
+    if (typeof Intl === "undefined" ||
+        typeof Intl.DateTimeFormat !== "function") {
+      throw new Error("International date formatting is unavailable.");
+    }
+
+    // Confirm that the requested calendar works in this browser.
+    const test = hijriParts(new Date());
+    if (!test.day || !test.monthNumber || !test.year) {
+      throw new Error("Hijri calendar data is unavailable.");
+    }
+
+    const today = localDate(new Date());
+    renderToday(today);
+    renderRamadan(today);
+    displayedMonthStart = findMonthStart(today);
+    renderMonth();
+  }
+
+  $("hcPrevMonth").addEventListener("click", function () {
+    displayedMonthStart = findMonthStart(
+      addDays(displayedMonthStart, -1)
+    );
+    renderMonth();
+  });
+
+  $("hcNextMonth").addEventListener("click", function () {
+    displayedMonthStart = findMonthStart(
+      addDays(displayedMonthStart, 40)
+    );
+    renderMonth();
+  });
+
+  try {
+    initialise();
+  } catch (error) {
+    console.error("Swalath Hijri calendar:", error);
+    $("hcError").hidden = false;
+    $("hcError").style.display = "block";
+    $("hcTodayMonth").textContent = "Calendar unavailable";
+    $("hcTodayDay").textContent = "--";
+    $("hcTodayYear").textContent = "";
+    $("hcGregorianToday").textContent = "";
+    $("hcRamadanDays").textContent = "--";
+    $("hcCountdownCaption").textContent =
+      "Please update your browser";
+    $("hcRamadanDate").textContent =
+      "Hijri calendar data could not be loaded.";
+  }
 })();
 </script>
+</section>
+<!-- END SWALATH PREMIUM HIJRI CALENDAR -->
