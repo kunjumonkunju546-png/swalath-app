@@ -298,14 +298,9 @@
     cell.className="hc-day";
     const isToday=key(d)===key(today);
 
-    if(isToday){
- cell.classList.add("hc-today");
- cell.setAttribute("aria-current","date");
-
- const todayMark = document.createElement("span");
- todayMark.className = "hc-today-mark";
- todayMark.textContent = "TODAY";
- cell.appendChild(todayMark);
+if (isToday) {
+    cell.classList.add("hc-today");
+    cell.setAttribute("aria-current", "date");
 }
     if(d.getDay()===5)cell.classList.add("hc-friday");
 
@@ -319,8 +314,16 @@
 
     cell.setAttribute("aria-label",
      p.month+" "+p.day+", "+p.year+" AH; "+gregorian.format(d));
-    cell.append(h,g);
-    grid.appendChild(cell);
+cell.append(h, g);
+
+if (isToday) {
+    const todayMark = document.createElement("span");
+    todayMark.className = "hc-today-mark";
+    todayMark.textContent = "TODAY";
+    cell.appendChild(todayMark);
+}
+
+grid.appendChild(cell);
     d=addDays(d,1);
    }
   }
