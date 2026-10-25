@@ -309,10 +309,14 @@ function openSwalath(key, addHistory = true){
     document.getElementById("countNumber").textContent =
         localStorage.getItem("swalath_count_" + key) || "0";
 
-    document.getElementById("pdfArea").innerHTML =
+const pdfArea = document.getElementById("pdfArea");
+
+if (pdfArea) {
+    pdfArea.innerHTML =
         key === "bashair"
         ? '<a href="bashairul-khairat.pdf" target="_blank" rel="noopener" class="pdf-button">📖 Bashairul Khairat — Full PDF</a>'
         : "";
+}
 
     updateFavoriteButtonText();
 }
@@ -482,5 +486,249 @@ async function saveCurrentSwalathCard(){
 }
 </script>
 
+    <script>
+(function () {
+    "use strict";
+
+    const UI_TRANSLATIONS = {
+        ml: {
+            pageTitle: "സ്വലാത്ത് ശേഖരം",
+            subtitle: "സ്വലാത്തുകൾ • ദിക്ർ • ആത്മീയ സമാധാനം",
+            home: "🏠 Home",
+            search: "🔍 സ്വലാത്ത് തിരയുക...",
+            collectionTitle: "📖 21 സ്വലാത്തുകളുടെ ശേഖരം",
+            back: "← സ്വലാത്തുകളുടെ പട്ടിക",
+            count: "📿 ചൊല്ലി — Count കൂട്ടുക",
+            reset: "Reset",
+            favoriteAdd: "♡ Favourite ആയി ചേർക്കുക",
+            favoriteAdded: "❤️ Favourite ആയി ചേർത്തിട്ടുണ്ട്",
+            share: "Share",
+            save: "Save Image",
+            pdf: "📖 Bashairul Khairat — Full PDF",
+            chooseSwalath: "ആദ്യം ഒരു സ്വലാത്ത് തിരഞ്ഞെടുക്കുക.",
+            shareUnavailable: "Share Card സംവിധാനം ലഭ്യമല്ല.",
+            saveUnavailable: "Save Image സംവിധാനം ലഭ്യമല്ല."
+        },
+
+        en: {
+            pageTitle: "Swalath Collection",
+            subtitle: "Swalath • Dhikr • Spiritual Peace",
+            home: "🏠 Home",
+            search: "🔍 Search Swalath...",
+            collectionTitle: "📖 Collection of 21 Swalath",
+            back: "← Back to Swalath List",
+            count: "📿 Recite — Increase Count",
+            reset: "Reset",
+            favoriteAdd: "♡ Add to Favorites",
+            favoriteAdded: "❤️ Added to Favorites",
+            share: "Share",
+            save: "Save Image",
+            pdf: "📖 Bashairul Khairat — Full PDF",
+            chooseSwalath: "Please select a Swalath first.",
+            shareUnavailable: "Share Card is unavailable.",
+            saveUnavailable: "Save Image is unavailable."
+        },
+
+        ar: {
+            pageTitle: "مجموعة الصلوات",
+            subtitle: "الصلاة • الذكر • السكينة الروحية",
+            home: "🏠 الصفحة الرئيسية",
+            search: "🔍 ابحث عن الصلاة...",
+            collectionTitle: "📖 مجموعة من ٢١ صلاة",
+            back: "← العودة إلى قائمة الصلوات",
+            count: "📿 اقرأ — زيادة العدد",
+            reset: "إعادة ضبط",
+            favoriteAdd: "♡ أضف إلى المفضلة",
+            favoriteAdded: "❤️ تمت الإضافة إلى المفضلة",
+            share: "مشاركة",
+            save: "حفظ الصورة",
+            pdf: "📖 بشائر الخيرات — PDF كامل",
+            chooseSwalath: "يرجى اختيار صلاة أولاً.",
+            shareUnavailable: "ميزة مشاركة البطاقة غير متاحة.",
+            saveUnavailable: "ميزة حفظ الصورة غير متاحة."
+        },
+
+        hi: {
+            pageTitle: "सलावत संग्रह",
+            subtitle: "सलावत • ज़िक्र • आध्यात्मिक शांति",
+            home: "🏠 होम",
+            search: "🔍 सलावत खोजें...",
+            collectionTitle: "📖 21 सलावतों का संग्रह",
+            back: "← सलावत सूची पर वापस जाएँ",
+            count: "📿 पढ़ें — गिनती बढ़ाएँ",
+            reset: "रीसेट",
+            favoriteAdd: "♡ पसंदीदा में जोड़ें",
+            favoriteAdded: "❤️ पसंदीदा में जोड़ा गया",
+            share: "शेयर",
+            save: "चित्र सेव करें",
+            pdf: "📖 बशाइरुल खैरात — पूर्ण PDF",
+            chooseSwalath: "कृपया पहले एक सलावत चुनें।",
+            shareUnavailable: "शेयर कार्ड उपलब्ध नहीं है।",
+            saveUnavailable: "चित्र सेव करने की सुविधा उपलब्ध नहीं है।"
+        },
+
+        ur: {
+            pageTitle: "درود شریف کا مجموعہ",
+            subtitle: "درود • ذکر • روحانی سکون",
+            home: "🏠 ہوم",
+            search: "🔍 درود تلاش کریں...",
+            collectionTitle: "📖 ۲۱ درودوں کا مجموعہ",
+            back: "← درودوں کی فہرست پر واپس جائیں",
+            count: "📿 پڑھیں — تعداد بڑھائیں",
+            reset: "ری سیٹ",
+            favoriteAdd: "♡ پسندیدہ میں شامل کریں",
+            favoriteAdded: "❤️ پسندیدہ میں شامل کر دیا گیا",
+            share: "شیئر کریں",
+            save: "تصویر محفوظ کریں",
+            pdf: "📖 بشائر الخیرات — مکمل PDF",
+            chooseSwalath: "براہ کرم پہلے ایک درود منتخب کریں۔",
+            shareUnavailable: "شیئر کارڈ دستیاب نہیں ہے۔",
+            saveUnavailable: "تصویر محفوظ کرنے کی سہولت دستیاب نہیں ہے۔"
+        },
+
+        ta: {
+            pageTitle: "ஸலவாத் தொகுப்பு",
+            subtitle: "ஸலவாத் • திக்ர் • ஆன்மீக அமைதி",
+            home: "🏠 முகப்பு",
+            search: "🔍 ஸலவாத் தேடுங்கள்...",
+            collectionTitle: "📖 21 ஸலவாத்களின் தொகுப்பு",
+            back: "← ஸலவாத் பட்டியலுக்குத் திரும்பு",
+            count: "📿 ஓதுங்கள் — எண்ணிக்கையை அதிகரிக்கவும்",
+            reset: "மீட்டமை",
+            favoriteAdd: "♡ பிடித்தவற்றில் சேர்க்கவும்",
+            favoriteAdded: "❤️ பிடித்தவற்றில் சேர்க்கப்பட்டது",
+            share: "பகிர்",
+            save: "படத்தைச் சேமி",
+            pdf: "📖 பஷாயிருல் கைராத் — முழு PDF",
+            chooseSwalath: "முதலில் ஒரு ஸலவாத்தைத் தேர்ந்தெடுக்கவும்.",
+            shareUnavailable: "பகிர்வு அட்டை கிடைக்கவில்லை.",
+            saveUnavailable: "படத்தைச் சேமிக்கும் வசதி கிடைக்கவில்லை."
+        }
+    };
+
+    function getLanguage() {
+        if (
+            window.SwalathLanguage &&
+            typeof window.SwalathLanguage.getCurrent === "function"
+        ) {
+            return window.SwalathLanguage.getCurrent() || "ml";
+        }
+
+        return localStorage.getItem("swalath-language") || "ml";
+    }
+
+    function getText(key) {
+        const lang = getLanguage();
+        const selected = UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.ml;
+
+        return selected[key] || UI_TRANSLATIONS.ml[key] || key;
+    }
+
+    function applySwalathPageLanguage() {
+        const headerTitle = document.querySelector(".header h1");
+        const headerSubtitle = document.querySelector(".header p");
+        const homeButton = document.querySelector(".home-button");
+        const searchInput = document.getElementById("searchInput");
+        const collectionTitle = document.querySelector(".collection-title");
+        const backButton = document.querySelector(".back-button");
+        const countButton = document.querySelector(".count-button");
+        const resetButton = document.querySelector(".reset-button");
+        const pdfButton = document.querySelector(".pdf-button");
+
+        if (headerTitle) {
+            headerTitle.textContent = "🌿 " + getText("pageTitle");
+        }
+
+        if (headerSubtitle) {
+            headerSubtitle.textContent = getText("subtitle");
+        }
+
+        if (homeButton) {
+            homeButton.textContent = getText("home");
+        }
+
+        if (searchInput) {
+            searchInput.placeholder = getText("search");
+        }
+
+        if (collectionTitle) {
+            collectionTitle.textContent = getText("collectionTitle");
+        }
+
+        if (backButton) {
+            backButton.textContent = getText("back");
+        }
+
+        if (countButton) {
+            countButton.textContent = getText("count");
+        }
+
+        if (resetButton) {
+            resetButton.textContent = getText("reset");
+        }
+
+        if (pdfButton) {
+            pdfButton.textContent = getText("pdf");
+        }
+
+        document.documentElement.lang = getLanguage();
+
+        if (getLanguage() === "ar" || getLanguage() === "ur") {
+            document.documentElement.dir = "rtl";
+        } else {
+            document.documentElement.dir = "ltr";
+        }
+
+        updateFavoriteButtonText();
+    }
+
+    window.updateFavoriteButtonText = function () {
+        const button = document.getElementById("favoriteButton");
+
+        if (!button || !window.currentSwalath) {
+            return;
+        }
+
+        let favorites = [];
+
+        try {
+            favorites = JSON.parse(
+                localStorage.getItem("swalathFavorites") || "[]"
+            );
+        } catch (error) {
+            favorites = [];
+        }
+
+        if (!Array.isArray(favorites)) {
+            favorites = [];
+        }
+
+        const isFavorite = favorites.includes(window.currentSwalath);
+
+        button.classList.toggle("active", isFavorite);
+
+        button.textContent = isFavorite
+            ? getText("favoriteAdded")
+            : getText("favoriteAdd");
+    };
+
+    window.addEventListener(
+        "swalath-language-changed",
+        applySwalathPageLanguage
+    );
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        applySwalathPageLanguage
+    );
+
+    window.addEventListener(
+        "pageshow",
+        applySwalathPageLanguage
+    );
+
+    applySwalathPageLanguage();
+})();
+</script>
 </body>
 </html>
