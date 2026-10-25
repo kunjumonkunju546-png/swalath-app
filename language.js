@@ -966,6 +966,14 @@
 
         document.documentElement.lang = code;
         document.documentElement.dir = lang.dir;
+        // Keep Hijri calendar in English for Hindi, Tamil and Urdu
+const hijriCalendar = document.getElementById("swalathHijriPremium");
+
+if (hijriCalendar) {
+    hijriCalendar.setAttribute("lang", "en");
+    hijriCalendar.setAttribute("translate", "no");
+    hijriCalendar.setAttribute("dir", "ltr");
+}
 
 document.querySelectorAll("[data-i18n]").forEach(function (el) {
     if (el.closest("#swalathHijriPremium")) {
