@@ -1,365 +1,1137 @@
 <!-- SWALATH PREMIUM HIJRI CALENDAR -->
-<section id="swalathHijriPremium" lang="en" translate="no">
+<section id="swalathHijriPremium" lang="en" dir="ltr" translate="no">
+
 <style>
-#swalathHijriPremium{
- --hc-green:#123d34;
- --hc-deep:#0b2c26;
- --hc-gold:#c5a868;
- --hc-cream:#f8f5ec;
- --hc-text:#233b34;
- --hc-muted:#77847d;
- --hc-border:#e8e5da;
- width:100%;max-width:760px;margin:0 auto;
- font-family:Arial,Helvetica,sans-serif;
- color:var(--hc-text);line-height:1.5;
+#swalathHijriPremium {
+    --hc-green: #123d34;
+    --hc-deep: #0b2c26;
+    --hc-gold: #c5a868;
+    --hc-cream: #f8f5ec;
+    --hc-text: #233b34;
+    --hc-muted: #77847d;
+    --hc-border: #e8e5da;
+
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--hc-text);
+    line-height: 1.5;
+    direction: ltr;
+    text-align: left;
 }
-#swalathHijriPremium *{box-sizing:border-box}
-#swalathHijriPremium .hc-shell{
- overflow:hidden;background:#fff;border:1px solid var(--hc-border);
- border-radius:23px;box-shadow:0 10px 35px #123d3417;
+
+#swalathHijriPremium * {
+    box-sizing: border-box;
 }
-#swalathHijriPremium .hc-hero{
- padding:27px 20px 25px;text-align:center;color:#fff;
- background:radial-gradient(circle at 90% 5%,#c5a86830,transparent 35%),
- linear-gradient(145deg,var(--hc-green),var(--hc-deep));
+
+#swalathHijriPremium .hc-shell {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--hc-border);
+    border-radius: 23px;
+    box-shadow: 0 10px 35px #123d3417;
 }
-#swalathHijriPremium .hc-kicker{
- margin:0 0 8px;color:#e4d1a1;font-size:11px;
- font-weight:700;letter-spacing:2.4px;
+
+#swalathHijriPremium .hc-hero {
+    padding: 27px 20px 25px;
+    text-align: center;
+    color: #fff;
+
+    background:
+        radial-gradient(
+            circle at 90% 5%,
+            #c5a86830,
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            var(--hc-green),
+            var(--hc-deep)
+        );
 }
-#swalathHijriPremium .hc-today-label{color:#e7e9e3;font-size:13px}
-#swalathHijriPremium .hc-day-number{
- margin:8px 0 0;color:#f0d99f;font-size:clamp(56px,15vw,82px);
- font-weight:700;line-height:1.12;letter-spacing:-2px;
+
+#swalathHijriPremium .hc-kicker {
+    margin: 0 0 8px;
+    color: #e4d1a1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.4px;
 }
-#swalathHijriPremium .hc-hijri-month{
- margin:5px 0 2px;font-size:clamp(22px,6vw,30px);font-weight:700;
+
+#swalathHijriPremium .hc-today-label {
+    color: #e7e9e3;
+    font-size: 13px;
 }
-#swalathHijriPremium .hc-hijri-year{color:#e7e9e3;font-size:14px}
-#swalathHijriPremium .hc-gregorian{
- margin-top:17px;padding-top:15px;border-top:1px solid #ffffff30;
- font-size:14px;
+
+#swalathHijriPremium .hc-day-number {
+    margin: 8px 0 0;
+    color: #f0d99f;
+    font-size: clamp(56px, 15vw, 82px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -2px;
 }
-#swalathHijriPremium .hc-today-badge{
- display:inline-flex;align-items:center;gap:6px;margin-top:12px;
- padding:5px 12px;border:1px solid #e2cd9780;border-radius:30px;
- color:#f3dfac;font-size:11px;font-weight:700;letter-spacing:.7px;
+
+#swalathHijriPremium .hc-hijri-month {
+    margin: 5px 0 2px;
+    font-size: clamp(22px, 6vw, 30px);
+    font-weight: 700;
 }
-#swalathHijriPremium .hc-badge-dot{
- width:7px;height:7px;background:var(--hc-gold);border-radius:50%;
+
+#swalathHijriPremium .hc-hijri-year {
+    color: #e7e9e3;
+    font-size: 14px;
 }
-#swalathHijriPremium .hc-countdown{
- margin:15px;padding:19px 16px;border:1px solid #e8ddbd;
- border-radius:17px;background:linear-gradient(135deg,#fbf8ef,#f5efdc);
- text-align:center;
+
+#swalathHijriPremium .hc-gregorian {
+    margin-top: 17px;
+    padding-top: 15px;
+    border-top: 1px solid #ffffff30;
+    font-size: 14px;
 }
-#swalathHijriPremium .hc-countdown-label{
- margin:0;color:#746039;font-size:11px;font-weight:700;letter-spacing:1.5px;
+
+#swalathHijriPremium .hc-today-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 12px;
+    padding: 5px 12px;
+
+    border: 1px solid #e2cd9780;
+    border-radius: 30px;
+
+    color: #f3dfac;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .7px;
 }
-#swalathHijriPremium .hc-ramadan-title{
- margin:5px 0 0;color:var(--hc-green);font-size:23px;font-weight:700;
+
+#swalathHijriPremium .hc-badge-dot {
+    width: 7px;
+    height: 7px;
+
+    background: var(--hc-gold);
+    border-radius: 50%;
 }
-#swalathHijriPremium .hc-count-number{
- margin:7px 0 0;color:#a17d35;font-size:clamp(43px,12vw,60px);
- font-weight:800;line-height:1.12;
+
+/* RAMADAN COUNTDOWN */
+
+#swalathHijriPremium .hc-countdown {
+    margin: 15px;
+    padding: 19px 16px;
+
+    border: 1px solid #e8ddbd;
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #fbf8ef,
+        #f5efdc
+    );
+
+    text-align: center;
 }
-#swalathHijriPremium .hc-count-caption{margin:2px 0 0;color:#746039;font-size:13px}
-#swalathHijriPremium .hc-ramadan-date{margin:10px 0 0;color:#596b5e;font-size:12px}
-#swalathHijriPremium .hc-calendar{padding:6px 15px 19px}
-#swalathHijriPremium .hc-month-nav{
- display:flex;align-items:center;justify-content:space-between;
- gap:8px;margin:8px 0 17px;
+
+#swalathHijriPremium .hc-countdown-label {
+    margin: 0;
+    color: #746039;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
-#swalathHijriPremium .hc-month-title{
- flex:1;text-align:center;color:var(--hc-green);font-size:18px;font-weight:700;
+
+#swalathHijriPremium .hc-ramadan-title {
+    margin: 5px 0 0;
+    color: var(--hc-green);
+    font-size: 23px;
+    font-weight: 700;
 }
-#swalathHijriPremium .hc-nav-btn{
- display:flex;align-items:center;justify-content:center;
- width:39px;height:39px;flex-shrink:0;padding:0;
- border:1px solid var(--hc-border);border-radius:12px;
- background:#fff;color:var(--hc-green);font-size:22px;cursor:pointer;
+
+#swalathHijriPremium .hc-count-number {
+    margin: 7px 0 0;
+    color: #a17d35;
+    font-size: clamp(43px, 12vw, 60px);
+    font-weight: 800;
+    line-height: 1.12;
 }
+
+#swalathHijriPremium .hc-count-caption {
+    margin: 2px 0 0;
+    color: #746039;
+    font-size: 13px;
+}
+
+#swalathHijriPremium .hc-ramadan-date {
+    margin: 10px 0 0;
+    color: #596b5e;
+    font-size: 12px;
+}
+
+/* CALENDAR */
+
+#swalathHijriPremium .hc-calendar {
+    padding: 6px 15px 19px;
+}
+
+#swalathHijriPremium .hc-month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    margin: 8px 0 17px;
+}
+
+#swalathHijriPremium .hc-month-title {
+    flex: 1;
+    text-align: center;
+
+    color: var(--hc-green);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#swalathHijriPremium .hc-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    padding: 0;
+
+    border: 1px solid var(--hc-border);
+    border-radius: 12px;
+
+    background: #fff;
+    color: var(--hc-green);
+
+    font-size: 22px;
+    cursor: pointer;
+}
+
 #swalathHijriPremium .hc-weekdays,
-#swalathHijriPremium .hc-days{
- display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;
-}
-#swalathHijriPremium .hc-weekday{
- padding:7px 0;color:var(--hc-muted);text-align:center;
- font-size:10px;font-weight:700;
-}
-#swalathHijriPremium .hc-day{
- position:relative;display:flex;flex-direction:column;
- align-items:center;justify-content:center;min-width:0;min-height:53px;
- padding:4px 1px;border:1px solid transparent;border-radius:11px;
- background:#fff;color:var(--hc-text);text-align:center;
-}
-#swalathHijriPremium .hc-day-number-small{font-size:15px;font-weight:600;line-height:1.3}
-#swalathHijriPremium .hc-day-gregorian{margin-top:3px;color:#9aa29b;font-size:9px;line-height:1.2}
-
-/* SPECIAL MARK FOR TODAY */
-#swalathHijriPremium .hc-day.hc-today{
- border:1.5px solid var(--hc-gold);
- background:linear-gradient(145deg,#174c40,var(--hc-green));
- color:#fff;box-shadow:0 4px 12px #123d3428;
-}
-#swalathHijriPremium .hc-day.hc-today .hc-day-gregorian{color:#f0d99f}
-#swalathHijriPremium .hc-day.hc-today::after{
- content:"";position:absolute;top:4px;right:4px;
- width:5px;height:5px;border-radius:50%;background:var(--hc-gold);
-}
-#swalathHijriPremium .hc-day.hc-friday:not(.hc-today){background:#f8f5ec}
-#swalathHijriPremium .hc-day.hc-empty{min-height:53px;background:transparent}
-#swalathHijriPremium .hc-legend{
- display:flex;flex-wrap:wrap;justify-content:center;gap:14px;
- margin-top:15px;color:var(--hc-muted);font-size:11px;
-}
-#swalathHijriPremium .hc-legend-item{display:flex;align-items:center;gap:6px}
-#swalathHijriPremium .hc-dot{width:9px;height:9px;border-radius:3px;background:var(--hc-green)}
-#swalathHijriPremium .hc-dot-gold{border:1px solid var(--hc-gold);background:#f3e8c8}
-#swalathHijriPremium .hc-note{
- margin:0;padding:13px 17px;border-top:1px solid var(--hc-border);
- background:#fcfbf8;color:#7b827b;text-align:center;font-size:10px;line-height:1.7;
-}
-#swalathHijriPremium .hc-status{
- padding:15px;color:#8b4935;text-align:center;font-size:13px;
-}
-@media(max-width:380px){
- #swalathHijriPremium .hc-hero{padding:23px 14px}
- #swalathHijriPremium .hc-calendar{padding-right:9px;padding-left:9px}
- #swalathHijriPremium .hc-weekdays,#swalathHijriPremium .hc-days{gap:2px}
- #swalathHijriPremium .hc-day{min-height:46px;border-radius:8px}
- #swalathHijriPremium .hc-day-number-small{font-size:14px}
- #swalathHijriPremium .hc-day-gregorian{font-size:8px}
-}
- #swalathHijriPremium .hc-day.hc-today {
-  min-height: 61px;
-  border: 2px solid #c5a868;
-  background: #123d34;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(18,61,52,.25);
+#swalathHijriPremium .hc-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
 }
 
-#swalathHijriPremium .hc-day.hc-today .hc-day-gregorian {
-  color: #f0d99f;
+#swalathHijriPremium .hc-weekday {
+    padding: 7px 0;
+
+    color: var(--hc-muted);
+    text-align: center;
+
+    font-size: 10px;
+    font-weight: 700;
 }
 
-#swalathHijriPremium .hc-day.hc-today .hc-today-mark {
-  display: block;
-  margin-top: 3px;
-  color: #f0d99f;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .5px;
-  line-height: 1.2;
+#swalathHijriPremium .hc-day {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 53px;
+    padding: 4px 1px;
+
+    border: 1px solid transparent;
+    border-radius: 11px;
+
+    background: #fff;
+    color: var(--hc-text);
+
+    text-align: center;
+}
+
+#swalathHijriPremium .hc-day-number-small {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+#swalathHijriPremium .hc-day-gregorian {
+    margin-top: 3px;
+
+    color: #9aa29b;
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+/* TODAY SPECIAL MARK */
+
+#swalathHijriPremium .hc-day.hc-today {
+    min-height: 61px;
+
+    border: 2px solid var(--hc-gold);
+    border-radius: 11px;
+
+    background: linear-gradient(
+        145deg,
+        #174c40,
+        var(--hc-green)
+    );
+
+    color: #fff;
+
+    box-shadow: 0 4px 12px #123d3428;
+}
+
+#swalathHijriPremium .hc-day.hc-today
+.hc-day-gregorian {
+    color: #f0d99f;
+}
+
+#swalathHijriPremium .hc-day.hc-today::after {
+    content: "";
+
+    position: absolute;
+    top: 4px;
+    right: 4px;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+    background: var(--hc-gold);
+}
+
+#swalathHijriPremium .hc-day.hc-today
+.hc-today-mark {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #f0d99f;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    line-height: 1.2;
+}
+
+/* FRIDAY */
+
+#swalathHijriPremium .hc-day.hc-friday:not(.hc-today) {
+    background: #f8f5ec;
+}
+
+/* EMPTY CELLS */
+
+#swalathHijriPremium .hc-day.hc-empty {
+    min-height: 53px;
+    background: transparent;
+}
+
+/* LEGEND */
+
+#swalathHijriPremium .hc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+
+    margin-top: 15px;
+
+    color: var(--hc-muted);
+    font-size: 11px;
+}
+
+#swalathHijriPremium .hc-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#swalathHijriPremium .hc-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 3px;
+    background: var(--hc-green);
+}
+
+#swalathHijriPremium .hc-dot-gold {
+    border: 1px solid var(--hc-gold);
+    background: #f3e8c8;
+}
+
+/* FOOTER */
+
+#swalathHijriPremium .hc-note {
+    margin: 0;
+    padding: 13px 17px;
+
+    border-top: 1px solid var(--hc-border);
+
+    background: #fcfbf8;
+    color: #7b827b;
+
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+/* ERROR */
+
+#swalathHijriPremium .hc-status {
+    padding: 15px;
+
+    color: #8b4935;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 380px) {
+
+    #swalathHijriPremium .hc-hero {
+        padding: 23px 14px;
+    }
+
+    #swalathHijriPremium .hc-calendar {
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+
+    #swalathHijriPremium .hc-weekdays,
+    #swalathHijriPremium .hc-days {
+        gap: 2px;
+    }
+
+    #swalathHijriPremium .hc-day {
+        min-height: 46px;
+        border-radius: 8px;
+    }
+
+    #swalathHijriPremium .hc-day.hc-today {
+        min-height: 61px;
+    }
+
+    #swalathHijriPremium .hc-day-number-small {
+        font-size: 14px;
+    }
+
+    #swalathHijriPremium .hc-day-gregorian {
+        font-size: 8px;
+    }
 }
 </style>
 
 <div class="hc-shell">
- <header class="hc-hero">
-  <p class="hc-kicker">SWALATH • ISLAMIC CALENDAR</p>
-  <div class="hc-today-label">TODAY'S HIJRI DATE</div>
-  <div class="hc-day-number" id="hcTodayDay">--</div>
-  <div class="hc-hijri-month" id="hcTodayMonth">Loading...</div>
-  <div class="hc-hijri-year" id="hcTodayYear"></div>
-  <div class="hc-gregorian" id="hcGregorianToday">Loading Gregorian date...</div>
-  <div class="hc-today-badge"><span class="hc-badge-dot"></span>TODAY</div>
- </header>
 
- <section class="hc-countdown" aria-live="polite">
-  <p class="hc-countdown-label">YOUR NEXT BLESSED MONTH</p>
-  <h2 class="hc-ramadan-title">Ramadan</h2>
-  <div class="hc-count-number" id="hcRamadanDays">--</div>
-  <p class="hc-count-caption" id="hcCountdownCaption">days remaining</p>
-  <p class="hc-ramadan-date" id="hcRamadanDate">Calculating expected date...</p>
- </section>
+    <!-- TODAY'S HIJRI DATE -->
 
- <div class="hc-calendar">
-  <div class="hc-month-nav">
-   <button class="hc-nav-btn" id="hcPrevMonth" type="button" aria-label="Previous month">&#8249;</button>
-   <div class="hc-month-title" id="hcCalendarMonth">Loading calendar...</div>
-   <button class="hc-nav-btn" id="hcNextMonth" type="button" aria-label="Next month">&#8250;</button>
-  </div>
+    <header class="hc-hero">
 
-  <div class="hc-weekdays" aria-hidden="true">
-   <div class="hc-weekday">SUN</div><div class="hc-weekday">MON</div>
-   <div class="hc-weekday">TUE</div><div class="hc-weekday">WED</div>
-   <div class="hc-weekday">THU</div><div class="hc-weekday">FRI</div>
-   <div class="hc-weekday">SAT</div>
-  </div>
-  <div class="hc-days" id="hcCalendarDays" role="grid" aria-label="Hijri calendar dates"></div>
+        <p class="hc-kicker">
+            SWALATH • ISLAMIC CALENDAR
+        </p>
 
-  <div class="hc-legend">
-   <div class="hc-legend-item"><span class="hc-dot"></span><span>Today's date</span></div>
-   <div class="hc-legend-item"><span class="hc-dot hc-dot-gold"></span><span>Gold mark = Today</span></div>
-  </div>
- </div>
+        <div class="hc-today-label">
+            TODAY'S HIJRI DATE
+        </div>
 
- <p class="hc-note">
-  Calculated using the Umm al-Qura Hijri calendar.
-  Actual month beginnings may differ according to local moon sighting
-  and official announcements.
- </p>
+        <div class="hc-day-number" id="hcTodayDay">
+            --
+        </div>
+
+        <div class="hc-hijri-month" id="hcTodayMonth">
+            Loading...
+        </div>
+
+        <div class="hc-hijri-year" id="hcTodayYear">
+        </div>
+
+        <div class="hc-gregorian" id="hcGregorianToday">
+            Loading Gregorian date...
+        </div>
+
+        <div class="hc-today-badge">
+            <span class="hc-badge-dot"></span>
+            TODAY
+        </div>
+
+    </header>
+
+    <!-- RAMADAN COUNTDOWN -->
+
+    <section class="hc-countdown" aria-live="polite">
+
+        <p class="hc-countdown-label">
+            YOUR NEXT BLESSED MONTH
+        </p>
+
+        <h2 class="hc-ramadan-title">
+            Ramadan
+        </h2>
+
+        <div class="hc-count-number" id="hcRamadanDays">
+            --
+        </div>
+
+        <p class="hc-count-caption" id="hcCountdownCaption">
+            days remaining
+        </p>
+
+        <p class="hc-ramadan-date" id="hcRamadanDate">
+            Calculating expected date...
+        </p>
+
+    </section>
+
+    <!-- HIJRI CALENDAR -->
+
+    <div class="hc-calendar">
+
+        <div class="hc-month-nav">
+
+            <button
+                class="hc-nav-btn"
+                id="hcPrevMonth"
+                type="button"
+                aria-label="Previous month"
+            >
+                &#8249;
+            </button>
+
+            <div
+                class="hc-month-title"
+                id="hcCalendarMonth"
+            >
+                Loading calendar...
+            </div>
+
+            <button
+                class="hc-nav-btn"
+                id="hcNextMonth"
+                type="button"
+                aria-label="Next month"
+            >
+                &#8250;
+            </button>
+
+        </div>
+
+        <!-- WEEKDAYS -->
+
+        <div class="hc-weekdays" aria-hidden="true">
+
+            <div class="hc-weekday">SUN</div>
+            <div class="hc-weekday">MON</div>
+            <div class="hc-weekday">TUE</div>
+            <div class="hc-weekday">WED</div>
+            <div class="hc-weekday">THU</div>
+            <div class="hc-weekday">FRI</div>
+            <div class="hc-weekday">SAT</div>
+
+        </div>
+
+        <!-- CALENDAR DAYS -->
+
+        <div
+            class="hc-days"
+            id="hcCalendarDays"
+            role="grid"
+            aria-label="Hijri calendar dates"
+        ></div>
+
+        <!-- LEGEND -->
+
+        <div class="hc-legend">
+
+            <div class="hc-legend-item">
+
+                <span class="hc-dot"></span>
+
+                <span>
+                    Today's date
+                </span>
+
+            </div>
+
+            <div class="hc-legend-item">
+
+                <span class="hc-dot hc-dot-gold"></span>
+
+                <span>
+                    Gold mark = Today
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CALENDAR NOTE -->
+
+    <p class="hc-note">
+
+        Calculated using the Umm al-Qura Hijri calendar.
+
+        Actual month beginnings may differ according to local
+        moon sighting and official announcements.
+
+    </p>
+
 </div>
 
-<div class="hc-status" id="hcError" hidden></div>
+<div
+    class="hc-status"
+    id="hcError"
+    hidden
+></div>
 
 <script>
-(function(){
- "use strict";
- const root=document.getElementById("swalathHijriPremium");
- if(!root||root.dataset.hcInitialized==="true")return;
- root.dataset.hcInitialized="true";
+(function () {
 
- const $=id=>root.querySelector("#"+id);
+    "use strict";
 
- try{
-  const hijri=new Intl.DateTimeFormat(
-   "en-US-u-ca-islamic-umalqura-nu-latn",
-   {day:"numeric",month:"long",year:"numeric"}
-  );
-  const gregorian=new Intl.DateTimeFormat("en-US",{
-   weekday:"long",month:"long",day:"numeric",year:"numeric"
-  });
-  const ramadanFormat=new Intl.DateTimeFormat("en-US",{
-   month:"long",day:"numeric",year:"numeric"
-  });
-  const monthFormat=new Intl.DateTimeFormat(
-   "en-US-u-ca-islamic-umalqura-nu-latn",
-   {month:"long",year:"numeric"}
-  );
-  const monthNumberFormat=new Intl.DateTimeFormat(
-   "en-US-u-ca-islamic-umalqura-nu-latn",{month:"numeric"}
-  );
+    const root = document.getElementById(
+        "swalathHijriPremium"
+    );
 
-  function localDate(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
-  function addDays(d,n){const r=localDate(d);r.setDate(r.getDate()+n);return r}
-  function key(d){
-   return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-  }
-  function parts(d){
-   const p={};
-   hijri.formatToParts(d).forEach(x=>{if(x.type!=="literal")p[x.type]=x.value});
-   return {day:Number(p.day),month:p.month,year:Number(p.year),monthNumber:Number(monthNumberFormat.format(d))};
-  }
-  function sameMonth(a,b){
-   const x=parts(a),y=parts(b);
-   return x.monthNumber===y.monthNumber&&x.year===y.year;
-  }
-  function monthStart(anchor){
-   for(let i=0;i<=35;i++){
-    const d=addDays(anchor,-i);
-    if(parts(d).day===1&&sameMonth(d,anchor))return d;
-   }
-   throw Error("Hijri month start unavailable");
-  }
-  function nextRamadan(today){
-   for(let i=0;i<=370;i++){
-    const d=addDays(today,i),p=parts(d);
-    if(p.monthNumber===9&&p.day===1)return d;
-   }
-   throw Error("Ramadan date unavailable");
-  }
-  function renderToday(today){
-   const p=parts(today);
-   $("hcTodayDay").textContent=p.day;
-   $("hcTodayMonth").textContent=p.month;
-   $("hcTodayYear").textContent=p.year+" AH";
-   $("hcGregorianToday").textContent=gregorian.format(today);
-  }
-  function renderRamadan(today){
-   const start=nextRamadan(today);
-   const days=Math.round((start.getTime()-today.getTime())/86400000);
-   $("hcRamadanDays").textContent=days;
-   $("hcCountdownCaption").textContent=days===0
-    ?"Ramadan begins today":days===1?"day remaining":"days remaining";
-   $("hcRamadanDate").textContent="Expected start: "+ramadanFormat.format(start);
-  }
+    if (
+        !root ||
+        root.dataset.hcInitialized === "true"
+    ) {
+        return;
+    }
 
-  let shownStart;
-  function renderMonth(){
-   const today=localDate(new Date()),start=shownStart;
-   const first=parts(start),grid=$("hcCalendarDays");
-   $("hcCalendarMonth").textContent=monthFormat.format(start);
-   grid.replaceChildren();
+    root.dataset.hcInitialized = "true";
 
-   for(let i=0;i<start.getDay();i++){
-    const empty=document.createElement("div");
-    empty.className="hc-day hc-empty";
-    empty.setAttribute("aria-hidden","true");
-    grid.appendChild(empty);
-   }
+    const $ = id => root.querySelector("#" + id);
 
-   let d=localDate(start);
-   for(let i=0;i<31;i++){
-    const p=parts(d);
-    if(p.year!==first.year||p.monthNumber!==first.monthNumber)break;
+    try {
 
-    const cell=document.createElement("div");
-    cell.className="hc-day";
-    const isToday=key(d)===key(today);
+        /*
+         * HIJRI DATE FORMAT
+         * English language + Latin numerals
+         */
 
-if (isToday) {
-    cell.classList.add("hc-today");
-    cell.setAttribute("aria-current", "date");
-}
-    if(d.getDay()===5)cell.classList.add("hc-friday");
+        const hijri = new Intl.DateTimeFormat(
+            "en-US-u-ca-islamic-umalqura-nu-latn",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                numberingSystem: "latn"
+            }
+        );
 
-    const h=document.createElement("span");
-    h.className="hc-day-number-small";
-    h.textContent=p.day;
+        const gregorian = new Intl.DateTimeFormat(
+            "en-US",
+            {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                numberingSystem: "latn"
+            }
+        );
 
-    const g=document.createElement("span");
-    g.className="hc-day-gregorian";
-    g.textContent=d.getDate();
+        const ramadanFormat = new Intl.DateTimeFormat(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                numberingSystem: "latn"
+            }
+        );
 
-    cell.setAttribute("aria-label",
-     p.month+" "+p.day+", "+p.year+" AH; "+gregorian.format(d));
-cell.append(h, g);
+        const monthFormat = new Intl.DateTimeFormat(
+            "en-US-u-ca-islamic-umalqura-nu-latn",
+            {
+                month: "long",
+                year: "numeric",
+                numberingSystem: "latn"
+            }
+        );
 
-if (isToday) {
-    const todayMark = document.createElement("span");
-    todayMark.className = "hc-today-mark";
-    todayMark.textContent = "TODAY";
-    cell.appendChild(todayMark);
-}
+        const monthNumberFormat = new Intl.DateTimeFormat(
+            "en-US-u-ca-islamic-umalqura-nu-latn",
+            {
+                month: "numeric",
+                numberingSystem: "latn"
+            }
+        );
 
-grid.appendChild(cell);
-    d=addDays(d,1);
-   }
-  }
+        /*
+         * LOCAL DATE FUNCTIONS
+         */
 
-  $("hcPrevMonth").addEventListener("click",function(){
-   shownStart=monthStart(addDays(shownStart,-1));
-   renderMonth();
-  });
-  $("hcNextMonth").addEventListener("click",function(){
-   shownStart=monthStart(addDays(shownStart,40));
-   renderMonth();
-  });
+        function localDate(date) {
 
-  const today=localDate(new Date());
-  const check=parts(today);
-  if(!check.day||!check.monthNumber||!check.year)throw Error("Calendar data unavailable");
+            return new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+            );
+        }
 
-  renderToday(today);
-  renderRamadan(today);
-  shownStart=monthStart(today);
-  renderMonth();
+        function addDays(date, amount) {
 
- }catch(error){
-  console.error("Swalath Hijri calendar error:",error);
-  $("hcError").hidden=false;
-  $("hcError").textContent=
-   "Hijri calendar is unavailable in this browser. Please update your browser and try again.";
-  $("hcTodayDay").textContent="--";
-  $("hcTodayMonth").textContent="Calendar unavailable";
-  $("hcTodayYear").textContent="";
-  $("hcGregorianToday").textContent="";
-  $("hcRamadanDays").textContent="--";
-  $("hcCountdownCaption").textContent="Please update your browser";
-  $("hcRamadanDate").textContent="Unable to calculate the expected date.";
- }
+            const result = localDate(date);
+
+            result.setDate(
+                result.getDate() + amount
+            );
+
+            return result;
+        }
+
+        function key(date) {
+
+            return (
+                date.getFullYear() + "-" +
+                String(
+                    date.getMonth() + 1
+                ).padStart(2, "0") + "-" +
+                String(
+                    date.getDate()
+                ).padStart(2, "0")
+            );
+        }
+
+        /*
+         * GET HIJRI DATE PARTS
+         */
+
+        function parts(date) {
+
+            const result = {};
+
+            hijri.formatToParts(date).forEach(
+                item => {
+
+                    if (item.type !== "literal") {
+
+                        result[item.type] =
+                            item.value;
+                    }
+
+                }
+            );
+
+            return {
+
+                day: Number(result.day),
+
+                month: result.month,
+
+                year: Number(result.year),
+
+                monthNumber: Number(
+                    monthNumberFormat.format(date)
+                )
+
+            };
+        }
+
+        /*
+         * CHECK SAME HIJRI MONTH
+         */
+
+        function sameMonth(dateA, dateB) {
+
+            const a = parts(dateA);
+            const b = parts(dateB);
+
+            return (
+                a.monthNumber === b.monthNumber &&
+                a.year === b.year
+            );
+        }
+
+        /*
+         * FIND FIRST DAY OF HIJRI MONTH
+         */
+
+        function monthStart(anchor) {
+
+            const target = localDate(anchor);
+
+            for (let i = 0; i <= 35; i++) {
+
+                const date = addDays(target, -i);
+
+                const p = parts(date);
+
+                if (
+                    p.day === 1 &&
+                    sameMonth(date, target)
+                ) {
+                    return date;
+                }
+            }
+
+            throw new Error(
+                "Hijri month start unavailable"
+            );
+        }
+
+        /*
+         * FIND NEXT RAMADAN
+         */
+
+        function nextRamadan(today) {
+
+            for (let i = 0; i <= 370; i++) {
+
+                const date = addDays(today, i);
+
+                const p = parts(date);
+
+                if (
+                    p.monthNumber === 9 &&
+                    p.day === 1
+                ) {
+                    return date;
+                }
+            }
+
+            throw new Error(
+                "Ramadan date unavailable"
+            );
+        }
+
+        /*
+         * TODAY'S HIJRI DATE
+         */
+
+        function renderToday(today) {
+
+            const p = parts(today);
+
+            $("hcTodayDay").textContent =
+                p.day;
+
+            $("hcTodayMonth").textContent =
+                p.month;
+
+            $("hcTodayYear").textContent =
+                p.year + " AH";
+
+            $("hcGregorianToday").textContent =
+                gregorian.format(today);
+        }
+
+        /*
+         * RAMADAN COUNTDOWN
+         */
+
+        function renderRamadan(today) {
+
+            const start = nextRamadan(today);
+
+            const todayDate = localDate(today);
+
+            const ramadanDate = localDate(start);
+
+            const days = Math.round(
+                (
+                    ramadanDate.getTime() -
+                    todayDate.getTime()
+                ) / 86400000
+            );
+
+            $("hcRamadanDays").textContent =
+                days;
+
+            $("hcCountdownCaption").textContent =
+                days === 0
+                    ? "Ramadan begins today"
+                    : days === 1
+                        ? "day remaining"
+                        : "days remaining";
+
+            $("hcRamadanDate").textContent =
+                "Expected start: " +
+                ramadanFormat.format(start);
+        }
+
+        /*
+         * RENDER HIJRI MONTH
+         */
+
+        let shownStart;
+
+        function renderMonth() {
+
+            const today = localDate(
+                new Date()
+            );
+
+            const start = localDate(
+                shownStart
+            );
+
+            const first = parts(start);
+
+            const grid = $(
+                "hcCalendarDays"
+            );
+
+            $("hcCalendarMonth").textContent =
+                monthFormat.format(start);
+
+            grid.replaceChildren();
+
+            /*
+             * EMPTY CELLS
+             */
+
+            for (
+                let i = 0;
+                i < start.getDay();
+                i++
+            ) {
+
+                const empty =
+                    document.createElement("div");
+
+                empty.className =
+                    "hc-day hc-empty";
+
+                empty.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                grid.appendChild(empty);
+            }
+
+            /*
+             * HIJRI DATES
+             */
+
+            let date = localDate(start);
+
+            for (let i = 0; i < 31; i++) {
+
+                const p = parts(date);
+
+                if (
+                    p.year !== first.year ||
+                    p.monthNumber !== first.monthNumber
+                ) {
+                    break;
+                }
+
+                const cell =
+                    document.createElement("div");
+
+                cell.className = "hc-day";
+
+                const isToday =
+                    key(date) === key(today);
+
+                /*
+                 * TODAY HIGHLIGHT
+                 */
+
+                if (isToday) {
+
+                    cell.classList.add(
+                        "hc-today"
+                    );
+
+                    cell.setAttribute(
+                        "aria-current",
+                        "date"
+                    );
+                }
+
+                /*
+                 * FRIDAY
+                 */
+
+                if (date.getDay() === 5) {
+
+                    cell.classList.add(
+                        "hc-friday"
+                    );
+                }
+
+                /*
+                 * HIJRI DAY NUMBER
+                 */
+
+                const hijriDay =
+                    document.createElement("span");
+
+                hijriDay.className =
+                    "hc-day-number-small";
+
+                hijriDay.textContent =
+                    p.day;
+
+                /*
+                 * GREGORIAN DAY NUMBER
+                 */
+
+                const gregorianDay =
+                    document.createElement("span");
+
+                gregorianDay.className =
+                    "hc-day-gregorian";
+
+                gregorianDay.textContent =
+                    date.getDate();
+
+                /*
+                 * ACCESSIBILITY LABEL
+                 */
+
+                cell.setAttribute(
+                    "aria-label",
+
+                    p.month + " " +
+                    p.day + ", " +
+                    p.year + " AH; " +
+                    gregorian.format(date)
+                );
+
+                cell.append(
+                    hijriDay,
+                    gregorianDay
+                );
+
+                /*
+                 * TODAY LABEL
+                 */
+
+                if (isToday) {
+
+                    const todayMark =
+                        document.createElement("span");
+
+                    todayMark.className =
+                        "hc-today-mark";
+
+                    todayMark.textContent =
+                        "TODAY";
+
+                    cell.appendChild(
+                        todayMark
+                    );
+                }
+
+                grid.appendChild(cell);
+
+                date = addDays(date, 1);
+            }
+        }
+
+        /*
+         * PREVIOUS HIJRI MONTH
+         */
+
+        $("hcPrevMonth").addEventListener(
+            "click",
+            function () {
+
+                shownStart = monthStart(
+                    addDays(shownStart, -1)
+                );
+
+                renderMonth();
+            }
+        );
+
+        /*
+         * NEXT HIJRI MONTH
+         */
+
+        $("hcNextMonth").addEventListener(
+            "click",
+            function () {
+
+                shownStart = monthStart(
+                    addDays(shownStart, 40)
+                );
+
+                renderMonth();
+            }
+        );
+
+        /*
+         * INITIALIZE
+         */
+
+        const today = localDate(
+            new Date()
+        );
+
+        const check = parts(today);
+
+        if (
+            !check.day ||
+            !check.monthNumber ||
+            !check.year
+        ) {
+
+            throw new Error(
+                "Calendar data unavailable"
+            );
+        }
+
+        renderToday(today);
+
+        renderRamadan(today);
+
+        shownStart = monthStart(today);
+
+        renderMonth();
+
+    } catch (error) {
+
+        console.error(
+            "Swalath Hijri calendar error:",
+            error
+        );
+
+        $("hcError").hidden = false;
+
+        $("hcError").textContent =
+            "Hijri calendar is unavailable in this browser. " +
+            "Please update your browser and try again.";
+
+        $("hcTodayDay").textContent =
+            "--";
+
+        $("hcTodayMonth").textContent =
+            "Calendar unavailable";
+
+        $("hcTodayYear").textContent =
+            "";
+
+        $("hcGregorianToday").textContent =
+            "";
+
+        $("hcRamadanDays").textContent =
+            "--";
+
+        $("hcCountdownCaption").textContent =
+            "Please update your browser";
+
+        $("hcRamadanDate").textContent =
+            "Unable to calculate the expected date.";
+    }
+
 })();
 </script>
+
 </section>
 <!-- END SWALATH PREMIUM HIJRI CALENDAR -->
