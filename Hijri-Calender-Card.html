@@ -618,7 +618,11 @@
     let ramadanFormat;
     let monthFormat;
     let monthNumberFormat;
-
+const hijriMonthNames = [
+        "Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-thani",
+        "Jumada al-awwal", "Jumada al-thani", "Rajab", "Sha'ban",
+        "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
+    ];
     let shownStart = null;
 
     try {
@@ -733,7 +737,7 @@
                 }
             });
 
-            const monthNumber = Number(
+const monthNumber = Number(
                 monthNumberFormat.format(date)
             );
 
@@ -750,7 +754,7 @@
 
             return {
                 day: day,
-                month: result.month,
+                month: hijriMonthNames[monthNumber - 1], // അറബിക് ഇംഗ്ലീഷ് പേരുകൾ നൽകാൻ
                 year: year,
                 monthNumber: monthNumber
             };
