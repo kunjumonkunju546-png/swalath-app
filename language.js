@@ -956,103 +956,97 @@
         }
     };
 
-    function getLanguage() {
+function getLanguage() {
         const saved = localStorage.getItem("swalath-language");
         return LANGUAGES[saved] ? saved : "ml";
     }
 
-   function applyLanguage(code) {
-    const lang = LANGUAGES[code] || LANGUAGES.ml;
+    function applyLanguage(code) {
+        const lang = LANGUAGES[code] || LANGUAGES.ml;
 
-    document.documentElement.lang = code;
-    document.documentElement.dir = lang.dir;
+        document.documentElement.lang = code;
+        document.documentElement.dir = lang.dir;
 
-    /*
-     * HIJRI CALENDAR LANGUAGE
-     * Malayalam, English, Arabic use their own language.
-     * Hindi, Tamil and Urdu use English.
-     */
-    const hijriCalendar = document.getElementById("swalathHijriPremium");
+        // ഹിജ്റി കലണ്ടർ എല്ലാ ആപ്പ് ഭാഷകളിലും ഇംഗ്ലീഷിൽ നിലനിർത്തുക.
+        const hijriCalendar = document.getElementById("swalathHijriPremium");
 
-    const hijriCalendarLang = {
-        ml: "ml",
-        en: "en",
-        ar: "ar",
-        hi: "en",
-        ta: "en",
-        ur: "en"
-    };
-
-    if (hijriCalendar) {
-        const calendarLang = hijriCalendarLang[code] || "en";
-
-        hijriCalendar.setAttribute("lang", calendarLang);
-        hijriCalendar.setAttribute(
-            "dir",
-            calendarLang === "ar" ? "rtl" : "ltr"
-        );
-
-        hijriCalendar.setAttribute("translate", "no");
-    }
-
-    /*
-     * TRANSLATE TEXT ELEMENTS
-     */
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-
-        // Do not translate the contents inside the Hijri calendar.
-        if (el.closest("#swalathHijriPremium")) {
-            return;
+        if (hijriCalendar) {
+            hijriCalendar.setAttribute("lang", "en");
+            hijriCalendar.setAttribute("dir", "ltr");
+            hijriCalendar.setAttribute("translate", "no");
         }
 
-        const key = el.getAttribute("data-i18n");
-        const original = el.getAttribute("data-ml");
-        const translated = lang.translations[key];
+        // ടെക്സ്റ്റുകൾ ഭാഷയ്ക്കനുസരിച്ച് മാറ്റുക.
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            const key = el.getAttribute("data-i18n");
+            const original = el.getAttribute("data-ml");
+            const isHijri = !!el.closest("#swalathHijriPremium");
+            const selectedLanguage = isHijri ? LANGUAGES.en : lang;
+            const translated = selectedLanguage.translations[key];
 
-        if (code === "ml") {
-            if (original !== null) {
+            if (!isHijri && code === "ml") {
+                if (original !== null) {
+                    el.textContent = original;
+                }
+            } else if (translated) {
+                el.textContent = translated;
+            } else if (original !== null && !isHijri) {
                 el.textContent = original;
             }
-        } else if (translated) {
-            el.textContent = translated;
-        } else if (original !== null) {
-            el.textContent = original;
-        }
-    });
+        });
 
-    /*
-     * TRANSLATE PLACEHOLDERS
-     */
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+        // உள்ளீட்டுப் பெட்டிகளിലെ குறிப்புகளையும் மொழிபெயர்க்கவும்.
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+            const key = el.getAttribute("data-i18n-placeholder");
+            const original = el.getAttribute("data-ml-placeholder");
+            const isHijri = !!el.closest("#swalathHijriPremium");
+            const selectedLanguage = isHijri ? LANGUAGES.en : lang;
+            const translated = selectedLanguage.translations[key];
 
-        // Do not translate placeholders inside the Hijri calendar.
-        if (el.closest("#swalathHijriPremium")) {
-            return;
-        }
-
-        const key = el.getAttribute("data-i18n-placeholder");
-        const original = el.getAttribute("data-ml-placeholder");
-        const translated = lang.translations[key];
-
-        if (code === "ml") {
-            if (original !== null) {
+            if (!isHijri && code === "ml") {
+                if (original !== null) {
+                    el.placeholder = original;
+                }
+            } else if (translated) {
+                el.placeholder = translated;
+            } else if (original !== null && !isHijri) {
                 el.placeholder = original;
             }
-        } else if (translated) {
-            el.placeholder = translated;
-        } else if (original !== null) {
-            el.placeholder = original;
-        }
-    });
+        });
 
-    /*
-     * NOTIFY OTHER APP COMPONENTS
-     */
-    document.dispatchEvent(
-        new CustomEvent("swalath-language-changed", {
-            detail: {
-                language: code
-            }
-        })
-    );
-}
+        // മറ്റ് ആപ്പ് ഘടകങ്ങളെ ഭാഷാമാറ്റം അറിയിക്കുക.
+        document.dispatchEvent(
+            new CustomEvent("swalath-language-changed", {
+                detail: {
+                    language: code
+                }
+            })
+        );
+    }
+
+    // ഭാഷ മാറ്റുന്ന ബട്ടണിന് ഉപയോഗിക്കാവുന്ന ഫംഗ്ഷൻ.
+    function setLanguage(code) {
+        if (!LANGUAGES[code]) {
+            return false;
+        }
+
+        localStorage.setItem("swalath-language", code);
+        applyLanguage(code);
+        return true;
+    }
+
+    function getCurrent() {
+        return getLanguage();
+    }
+
+    // ഭാഷാ ഫംഗ്ഷനുകൾ ആപ്പിന് ലഭ്യമാക്കുക.
+    window.SwalathLanguage = {
+        getCurrent: getCurrent,
+        setLanguage: setLanguage,
+        applyLanguage: applyLanguage
+    };
+
+    // സേവ് ചെയ്ത ഭാഷ ആപ്പ് തുറക്കുമ്പോൾ പ്രയോഗിക്കുക.
+    applyLanguage(getLanguage());
+
+})();
