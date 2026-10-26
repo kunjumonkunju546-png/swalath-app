@@ -961,103 +961,98 @@
         return LANGUAGES[saved] ? saved : "ml";
     }
 
-    function applyLanguage(code) {
-        const lang = LANGUAGES[code] || LANGUAGES.ml;
+   function applyLanguage(code) {
+    const lang = LANGUAGES[code] || LANGUAGES.ml;
 
-        document.documentElement.lang = code;
-        document.documentElement.dir = lang.dir;
-        // Keep Hijri calendar in English for Hindi, Tamil and Urdu
-const hijriCalendar = document.getElementById("swalathHijriPremium");
-        const hijriCalendarLang = {
-    ml: "ml",
-    en: "en",
-    ar: "ar",
-    hi: "en",
-    ta: "en",
-    ur: "en"
-};
+    document.documentElement.lang = code;
+    document.documentElement.dir = lang.dir;
 
-const hijriCalendar = document.getElementById("swalathHijriPremium");
+    /*
+     * HIJRI CALENDAR LANGUAGE
+     * Malayalam, English, Arabic use their own language.
+     * Hindi, Tamil and Urdu use English.
+     */
+    const hijriCalendar = document.getElementById("swalathHijriPremium");
 
-if (hijriCalendar) {
-    const calendarLang = hijriCalendarLang[code] || "en";
-    hijriCalendar.setAttribute("lang", calendarLang);
-    hijriCalendar.setAttribute("dir", calendarLang === "ar" ? "rtl" : "ltr");
-}
-
-if (hijriCalendar) {
-    hijriCalendar.setAttribute("lang", "en");
-    hijriCalendar.setAttribute("translate", "no");
-    hijriCalendar.setAttribute("dir", "ltr");
-}
-
-document.querySelectorAll("[data-i18n]").forEach(function (el) {
-    if (el.closest("#swalathHijriPremium")) {
-        return;
-    }
-            const key = el.getAttribute("data-i18n");
-            const original = el.getAttribute("data-ml");
-            const translated = lang.translations[key];
-
-            if (code === "ml") {
-                if (original !== null) {
-                    el.textContent = original;
-                }
-            } else if (translated) {
-                el.textContent = translated;
-            } else if (original !== null) {
-                el.textContent = original;
-            }
-        });
-
-document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-    if (el.closest("#swalathHijriPremium")) {
-        return;
-    }
-            const key = el.getAttribute("data-i18n-placeholder");
-            const original = el.getAttribute("data-ml-placeholder");
-            const translated = lang.translations[key];
-
-            if (code === "ml") {
-                if (original !== null) {
-                    el.placeholder = original;
-                }
-            } else if (translated) {
-                el.placeholder = translated;
-            } else if (original !== null) {
-                el.placeholder = original;
-            }
-        });
-
-        document.dispatchEvent(new CustomEvent("swalath-language-changed", {
-            detail: { language: code }
-        }));
-    }
-
-    window.SwalathLanguage = {
-        supported: LANGUAGES,
-
-        getCurrent: getLanguage,
-
-        setLanguage: function (code) {
-            if (!LANGUAGES[code]) {
-                return false;
-            }
-
-            localStorage.setItem("swalath-language", code);
-            applyLanguage(code);
-            return true;
-        },
-
-        apply: applyLanguage,
-
-        t: function (key) {
-            const lang = LANGUAGES[getLanguage()];
-            return lang.translations[key] || key;
-        }
+    const hijriCalendarLang = {
+        ml: "ml",
+        en: "en",
+        ar: "ar",
+        hi: "en",
+        ta: "en",
+        ur: "en"
     };
 
-    document.addEventListener("DOMContentLoaded", function () {
-        applyLanguage(getLanguage());
+    if (hijriCalendar) {
+        const calendarLang = hijriCalendarLang[code] || "en";
+
+        hijriCalendar.setAttribute("lang", calendarLang);
+        hijriCalendar.setAttribute(
+            "dir",
+            calendarLang === "ar" ? "rtl" : "ltr"
+        );
+
+        hijriCalendar.setAttribute("translate", "no");
+    }
+
+    /*
+     * TRANSLATE TEXT ELEMENTS
+     */
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+
+        // Do not translate the contents inside the Hijri calendar.
+        if (el.closest("#swalathHijriPremium")) {
+            return;
+        }
+
+        const key = el.getAttribute("data-i18n");
+        const original = el.getAttribute("data-ml");
+        const translated = lang.translations[key];
+
+        if (code === "ml") {
+            if (original !== null) {
+                el.textContent = original;
+            }
+        } else if (translated) {
+            el.textContent = translated;
+        } else if (original !== null) {
+            el.textContent = original;
+        }
     });
-})();
+
+    /*
+     * TRANSLATE PLACEHOLDERS
+     */
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+
+        // Do not translate placeholders inside the Hijri calendar.
+        if (el.closest("#swalathHijriPremium")) {
+            return;
+        }
+
+        const key = el.getAttribute("data-i18n-placeholder");
+        const original = el.getAttribute("data-ml-placeholder");
+        const translated = lang.translations[key];
+
+        if (code === "ml") {
+            if (original !== null) {
+                el.placeholder = original;
+            }
+        } else if (translated) {
+            el.placeholder = translated;
+        } else if (original !== null) {
+            el.placeholder = original;
+        }
+    });
+
+    /*
+     * NOTIFY OTHER APP COMPONENTS
+     */
+    document.dispatchEvent(
+        new CustomEvent("swalath-language-changed", {
+            detail: {
+                language: code
+            }
+        })
+    );
+}
