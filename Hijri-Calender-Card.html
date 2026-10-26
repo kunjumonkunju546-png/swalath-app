@@ -604,11 +604,6 @@
 
     const $ = id => root.querySelector("#" + id);
 
-    /*
-     * ENGLISH HIJRI CALENDAR
-     * Always use English and Latin numbers.
-     */
-
     root.setAttribute("lang", "en");
     root.setAttribute("dir", "ltr");
     root.setAttribute("translate", "no");
@@ -618,11 +613,14 @@
     let ramadanFormat;
     let monthFormat;
     let monthNumberFormat;
-const hijriMonthNames = [
+
+    // ഇംഗ്ലീഷ് ഉച്ചാരണത്തിലുള്ള ഹിജ്‌രി മാസങ്ങൾ
+    const hijriMonthNames = [
         "Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-thani",
         "Jumada al-awwal", "Jumada al-thani", "Rajab", "Sha'ban",
         "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
     ];
+
     let shownStart = null;
 
     try {
@@ -675,10 +673,6 @@ const hijriMonthNames = [
             }
         );
 
-        /*
-         * LOCAL DATE HELPERS
-         */
-
         function localDate(date) {
             return new Date(
                 date.getFullYear(),
@@ -689,15 +683,9 @@ const hijriMonthNames = [
 
         function addDays(date, amount) {
             const result = localDate(date);
-
             result.setDate(result.getDate() + amount);
-
             return result;
         }
-
-        /*
-         * DATE KEY
-         */
 
         function key(date) {
             return (
@@ -706,13 +694,6 @@ const hijriMonthNames = [
                 String(date.getDate()).padStart(2, "0")
             );
         }
-
-        /*
-         * UTC DAY NUMBER
-         *
-         * Used for countdown calculations.
-         * Avoids DST / 23-hour / 25-hour day issues.
-         */
 
         function utcDayNumber(date) {
             return Math.floor(
@@ -724,10 +705,6 @@ const hijriMonthNames = [
             );
         }
 
-        /*
-         * GET HIJRI DATE PARTS
-         */
-
         function parts(date) {
             const result = {};
 
@@ -737,7 +714,7 @@ const hijriMonthNames = [
                 }
             });
 
-const monthNumber = Number(
+            const monthNumber = Number(
                 monthNumberFormat.format(date)
             );
 
@@ -754,15 +731,11 @@ const monthNumber = Number(
 
             return {
                 day: day,
-                month: hijriMonthNames[monthNumber - 1], // അറബിക് ഇംഗ്ലീഷ് പേരുകൾ നൽകാൻ
+                month: hijriMonthNames[monthNumber - 1], // മാസം ഇംഗ്ലീഷில் ഉറപ്പാക്കുന്നു
                 year: year,
                 monthNumber: monthNumber
             };
         }
-
-        /*
-         * CHECK SAME HIJRI MONTH
-         */
 
         function sameMonth(dateA, dateB) {
             const a = parts(dateA);
@@ -773,12 +746,6 @@ const monthNumber = Number(
                 a.year === b.year
             );
         }
-
-        /*
-         * FIND FIRST DAY OF HIJRI MONTH
-         *
-         * Search backward from the given date.
-         */
 
         function monthStart(anchor) {
             const target = localDate(anchor);
@@ -798,10 +765,6 @@ const monthNumber = Number(
             throw new Error("Hijri month start unavailable");
         }
 
-        /*
-         * FIND NEXT RAMADAN
-         */
-
         function nextRamadan(today) {
             const start = localDate(today);
 
@@ -820,10 +783,6 @@ const monthNumber = Number(
             throw new Error("Ramadan date unavailable");
         }
 
-        /*
-         * TODAY'S HIJRI DATE
-         */
-
         function renderToday(today) {
             const p = parts(today);
 
@@ -834,10 +793,6 @@ const monthNumber = Number(
             $("hcGregorianToday").textContent =
                 gregorian.format(today);
         }
-
-        /*
-         * RAMADAN COUNTDOWN
-         */
 
         function renderRamadan(today) {
             const start = nextRamadan(today);
@@ -860,10 +815,6 @@ const monthNumber = Number(
                 ramadanFormat.format(start);
         }
 
-        /*
-         * RENDER HIJRI MONTH
-         */
-
         function renderMonth() {
             const today = localDate(new Date());
             const start = localDate(shownStart);
@@ -871,34 +822,17 @@ const monthNumber = Number(
 
             const grid = $("hcCalendarDays");
 
-            $("hcCalendarMonth").textContent =
-                monthFormat.format(start);
+            // മുകളിലെ മാസത്തിന്റെ പേര് ഇംഗ്ലീഷിലും വർഷവും കാണിക്കാൻ
+            $("hcCalendarMonth").textContent = first.month + " " + first.year + " AH";
 
             grid.replaceChildren();
 
-            /*
-             * EMPTY CELLS BEFORE MONTH START
-             */
-
             for (let i = 0; i < start.getDay(); i++) {
                 const empty = document.createElement("div");
-
                 empty.className = "hc-day hc-empty";
-
-                empty.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
+                empty.setAttribute("aria-hidden", "true");
                 grid.appendChild(empty);
             }
-
-            /*
-             * MONTH DATES
-             *
-             * Umm al-Qura months have 29 or 30 days.
-             * Stop when the Hijri month changes.
-             */
 
             let date = localDate(start);
 
@@ -913,60 +847,26 @@ const monthNumber = Number(
                 }
 
                 const cell = document.createElement("div");
-
                 cell.className = "hc-day";
 
                 const isToday = key(date) === key(today);
 
-                /*
-                 * TODAY HIGHLIGHT
-                 */
-
                 if (isToday) {
                     cell.classList.add("hc-today");
-
-                    cell.setAttribute(
-                        "aria-current",
-                        "date"
-                    );
+                    cell.setAttribute("aria-current", "date");
                 }
-
-                /*
-                 * FRIDAY STYLE
-                 */
 
                 if (date.getDay() === 5) {
                     cell.classList.add("hc-friday");
                 }
 
-                /*
-                 * HIJRI DAY NUMBER
-                 */
-
-                const hijriDay =
-                    document.createElement("span");
-
-                hijriDay.className =
-                    "hc-day-number-small";
-
+                const hijriDay = document.createElement("span");
+                hijriDay.className = "hc-day-number-small";
                 hijriDay.textContent = String(p.day);
 
-                /*
-                 * GREGORIAN DAY NUMBER
-                 */
-
-                const gregorianDay =
-                    document.createElement("span");
-
-                gregorianDay.className =
-                    "hc-day-gregorian";
-
-                gregorianDay.textContent =
-                    String(date.getDate());
-
-                /*
-                 * ACCESSIBILITY LABEL
-                 */
+                const gregorianDay = document.createElement("span");
+                gregorianDay.className = "hc-day-gregorian";
+                gregorianDay.textContent = String(date.getDate());
 
                 cell.setAttribute(
                     "aria-label",
@@ -981,19 +881,10 @@ const monthNumber = Number(
                     gregorianDay
                 );
 
-                /*
-                 * TODAY LABEL
-                 */
-
                 if (isToday) {
-                    const todayMark =
-                        document.createElement("span");
-
-                    todayMark.className =
-                        "hc-today-mark";
-
+                    const todayMark = document.createElement("span");
+                    todayMark.className = "hc-today-mark";
                     todayMark.textContent = "TODAY";
-
                     cell.appendChild(todayMark);
                 }
 
@@ -1003,24 +894,15 @@ const monthNumber = Number(
             }
         }
 
-        /*
-         * PREVIOUS MONTH
-         */
-
         $("hcPrevMonth").addEventListener(
             "click",
             function () {
                 shownStart = monthStart(
                     addDays(shownStart, -1)
                 );
-
                 renderMonth();
             }
         );
-
-        /*
-         * NEXT MONTH
-         */
 
         $("hcNextMonth").addEventListener(
             "click",
@@ -1028,14 +910,9 @@ const monthNumber = Number(
                 shownStart = monthStart(
                     addDays(shownStart, 40)
                 );
-
                 renderMonth();
             }
         );
-
-        /*
-         * INITIALIZE CALENDAR
-         */
 
         const today = localDate(new Date());
         const check = parts(today);
@@ -1054,47 +931,18 @@ const monthNumber = Number(
         renderRamadan(today);
 
         shownStart = monthStart(today);
-
         renderMonth();
-
-        /*
-         * Mark as initialized only after successful setup.
-         */
 
         root.dataset.hcInitialized = "true";
 
     } catch (error) {
-        console.error(
-            "Swalath Hijri calendar error:",
-            error
-        );
+        console.error("Swalath Hijri calendar error:", error);
 
         const errorBox = $("hcError");
-
         if (errorBox) {
             errorBox.hidden = false;
-
-            errorBox.textContent =
-                "Hijri calendar is unavailable in this browser. " +
-                "Please update your browser and try again.";
+            errorBox.textContent = "Hijri calendar is unavailable in this browser.";
         }
-
-        $("hcTodayDay").textContent = "--";
-
-        $("hcTodayMonth").textContent =
-            "Calendar unavailable";
-
-        $("hcTodayYear").textContent = "";
-
-        $("hcGregorianToday").textContent = "";
-
-        $("hcRamadanDays").textContent = "--";
-
-        $("hcCountdownCaption").textContent =
-            "Please update your browser";
-
-        $("hcRamadanDate").textContent =
-            "Unable to calculate the expected date.";
     }
 
 })();
