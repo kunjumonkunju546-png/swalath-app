@@ -962,7 +962,7 @@ function getLanguage() {
     }
 
     function applyLanguage(code) {
-        const lang = LANGUAGES[code] || LANGUAGES.ml;
+        const lang = LANGUAGES[code] || LANGUAGES.en;
 
         document.documentElement.lang = code;
         document.documentElement.dir = lang.dir;
