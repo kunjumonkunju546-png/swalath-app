@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1081,7 +1081,7 @@ body.dark-mode footer{
                     <div id="routineProgressBar" style="background:linear-gradient(90deg,#123d34,#25D366);height:100%;width:0%;transition:width .4s ease;"></div>
                 </div>
 
-                <p id="routineProgressText" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">
+<p id="routineProgressText" data-i18n="routineProgressText" style="margin:0;font-weight:bold;color:var(--sw-green);font-size:14px;">
                     0% പൂർത്തിയായി
                 </p>
             </div>
@@ -1170,7 +1170,7 @@ function loadDailyQuoteData(){
     const lang=
         (window.SwalathLanguage&&window.SwalathLanguage.getCurrent)
         ?window.SwalathLanguage.getCurrent()
-        :(localStorage.getItem("swalath-language")||"ml");
+        :(localStorage.getItem("swalath-language")||"en");
 
     const quotes=[
         {
