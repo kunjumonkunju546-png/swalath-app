@@ -958,7 +958,7 @@
 
 function getLanguage() {
         const saved = localStorage.getItem("swalath-language");
-        return LANGUAGES[saved] ? saved : "ml";
+        return LANGUAGES[saved] ? saved : "en";
     }
 
     function applyLanguage(code) {
