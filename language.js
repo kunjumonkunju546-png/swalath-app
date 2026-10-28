@@ -806,13 +806,15 @@
         }
     };
 
-    function getLanguage() {
-        const saved = localStorage.getItem("swalath-language");
-        return LANGUAGES[saved] ? saved : "en";
-    }
+function getLanguage() {
+    const savedLanguage = localStorage.getItem("swalath-language");
+    return savedLanguage && LANGUAGES[savedLanguage]
+        ? savedLanguage
+        : "en";
+}
 
     function applyLanguage(code) {
-        const lang = LANGUAGES[code] || LANGUAGES.en;
+const currentLanguage = LANGUAGES[lang] ? lang : "en";
 
         document.documentElement.lang = code;
         document.documentElement.dir = lang.dir;
