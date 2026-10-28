@@ -1478,23 +1478,53 @@ function increaseCount(){
     localStorage.setItem("swalathCountDate", today);
 }
 
-function resetCount(){
-    const confirmed = window.confirm(
-        "ഇന്നത്തെ സ്വലാത്ത് കൗണ്ട് പൂജ്യമാക്കണോ?"
-    );
+function resetCount() {
+    const lang = localStorage.getItem("swalathLanguage") ||
+                 localStorage.getItem("selectedLanguage") ||
+                 document.documentElement.lang ||
+                 "ml";
 
-    if(!confirmed){
-        return;
+    const messages = {
+        ml: {
+            confirm: "ഇന്നത്തെ സ്വലാത്ത് കൗണ്ട് 0 ആക്കണോ?",
+            success: "ഇന്നത്തെ സ്വലാത്ത് കൗണ്ട് 0 ആക്കി."
+        },
+        en: {
+            confirm: "Do you want to reset today's Swalaath count to 0?",
+            success: "Today's Swalaath count has been reset to 0."
+        },
+        ar: {
+            confirm: "هل تريد إعادة عداد الصلاة على النبي اليوم إلى صفر؟",
+            success: "تمت إعادة عداد الصلاة على النبي اليوم إلى صفر."
+        },
+        hi: {
+            confirm: "क्या आप आज की सलावत गिनती को 0 करना चाहते हैं?",
+            success: "आज की सलावत गिनती 0 कर दी गई है।"
+        },
+        ur: {
+            confirm: "کیا آپ آج کی درود شریف کی گنتی صفر کرنا چاہتے ہیں؟",
+            success: "آج کی درود شریف کی گنتی صفر کر دی گئی ہے۔"
+        },
+        ta: {
+            confirm: "இன்றைய ஸலவாத் எண்ணிக்கையை 0 ஆக மாற்ற வேண்டுமா?",
+            success: "இன்றைய ஸலவாத் எண்ணிக்கை 0 ஆக மாற்றப்பட்டது."
+        }
+    };
+
+    const text = messages[lang] || messages.ml;
+
+    if (confirm(text.confirm)) {
+        localStorage.setItem("swalathDailyCount", "0");
+        localStorage.setItem("swalathCountDate", new Date().toDateString());
+
+        const countElement = document.getElementById("count");
+        if (countElement) {
+            countElement.textContent = "0";
+        }
+
+        alert(text.success);
     }
-
-    count = 0;
-
-    document.getElementById("count").textContent = "0";
-
-    localStorage.setItem("swalathDailyCount", "0");
-    localStorage.setItem("swalathCountDate", getLocalDateString());
 }
-
 /* DAILY QUOTE */
 
 document.addEventListener("DOMContentLoaded",loadDailyQuoteData);
