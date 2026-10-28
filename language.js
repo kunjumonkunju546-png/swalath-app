@@ -1,4 +1,3 @@
-
 (function () {
     "use strict";
 
@@ -7,6 +6,11 @@
             name: "മലയാളം",
             dir: "ltr",
             translations: {
+                counterCardTitle: "സ്വലാത്ത് കൗണ്ടർ",
+                todayCount: "ഇന്ന് ചൊല്ലിയ സ്വലാത്തുകൾ",
+                saySwalaath: "ﷺ സ്വലാത്ത് ചൊല്ലി",
+                resetCounter: "കൗണ്ട് റീസെറ്റ് ചെയ്യുക",
+
                 prayerTimesTitle: "പ്രാർത്ഥനാ സമയങ്ങൾ",
                 fajr: "ഫജ്ർ (സുബ്ഹ്)",
                 sunrise: "സൂര്യോദയം",
@@ -15,7 +19,6 @@
                 maghrib: "മഗ്‌രിബ്",
                 isha: "ഇശാഅ്",
 
-                // Easy Khatam-ul-Quran Translations (Malayalam)
                 khatamTitle: "📖 എളുപ്പത്തിൽ ഖുർആൻ ഖത്മ് തീർക്കാം",
                 khatamDesc: "നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ദിവസങ്ങൾ തിരഞ്ഞെടുത്ത് മുടങ്ങാതെ ഖുർആൻ ഓതി പൂർത്തിയാക്കൂ.",
                 selectDuration: "ഖത്മ് തീർക്കേണ്ട കാലാവധി തിരഞ്ഞെടുക്കുക:",
@@ -32,7 +35,6 @@
                 v2Text: "🌟 <strong>പ്രയാസങ്ങളിൽ നിന്നുള്ള മോചനം:</strong> ജീവിതത്തിലെ ബുദ്ധിമുട്ടുകൾ എളുപ്പമാക്കാൻ ഖുർആനുമായുള്ള ബന്ധം സഹായിക്കും.",
                 v3Text: "🌟 <strong>ഇരട്ടി പ്രതിഫലം:</strong> ഓതുന്ന ഓരോ അക്ഷരത്തിനും വലിയ പ്രതിഫലമുണ്ട്.",
 
-                // Hijri Calendar Card Translations (Malayalam)
                 hijriCardTitle: "🗓️ ഹിജ്‌റ കലണ്ടറും വിശേഷ ദിവസങ്ങളും",
                 hijriDateLabel: "ഇന്നത്തെ ഹിജ്‌റ & ഇംഗ്ലീഷ് തീയതി:",
                 specialDaysHeading: "പ്രധാനപ്പെട്ട വിശേഷ ദിനങ്ങൾ:",
@@ -47,11 +49,13 @@
             name: "English",
             dir: "ltr",
             translations: {
+                counterCardTitle: "Swalath Counter",
                 greeting: "Peace be upon you",
                 intro: "Start reading and reciting Swalaath here",
                 today: "TODAY",
                 todayCount: "Swalaath recited today",
-                saySwalaath: "Recite Swalaath",
+                saySwalaath: "Recite Swalaath ﷺ",
+                resetCounter: "Reset Count",
                 darkMode: "🌙 Dark Mode",
                 lightMode: "☀️ Light Mode",
                 quranDesc: "The Holy Quran",
@@ -83,7 +87,6 @@
                 maghrib: "Maghrib",
                 isha: "Isha",
 
-                // Easy Khatam-ul-Quran Translations (English)
                 khatamTitle: "📖 Easy Khatam-ul-Quran",
                 khatamDesc: "Choose your preferred duration and complete Quran recitation smoothly every day.",
                 selectDuration: "Select Target Duration:",
@@ -100,7 +103,6 @@
                 v2Text: "🌟 <strong>Relief from Hardships:</strong> Connecting with Quran eases life difficulties and brings divine help.",
                 v3Text: "🌟 <strong>Immense Rewards:</strong> Countless blessings and rewards for every letter recited.",
 
-                // Hijri Calendar Card Translations (English)
                 hijriCardTitle: "🗓️ Hijri Calendar & Special Days",
                 hijriDateLabel: "Today's Hijri & English Date:",
                 specialDaysHeading: "Upcoming Special Days:",
@@ -199,11 +201,13 @@
             name: "العربية",
             dir: "rtl",
             translations: {
+                counterCardTitle: "عداد الصلاة على النبي",
                 greeting: "السلام عليكم",
                 intro: "ابدأ قراءة الصلاة على النبي وترديدها هنا",
                 today: "اليوم",
                 todayCount: "عدد الصلوات المقروءة اليوم",
                 saySwalaath: "صلِّ على النبي ﷺ",
+                resetCounter: "إعادة ضبط العداد",
                 darkMode: "🌙 الوضع الداكن",
                 lightMode: "☀️ الوضع الفاتح",
                 quranDesc: "القرآن الكريم",
@@ -235,7 +239,6 @@
                 maghrib: "المغرب",
                 isha: "العشاء",
 
-                // Easy Khatam-ul-Quran Translations (Arabic)
                 khatamTitle: "📖 ختم القرآن الكريم بسهولة",
                 khatamDesc: "اختر المدة المفضلة لديك وأكمل تلاوة القرآن الكريم بانتظام كل يوم.",
                 selectDuration: "اختر المدة المستهدفة:",
@@ -252,7 +255,6 @@
                 v2Text: "🌟 <strong>الفرج من الشدائد:</strong> الارتباط بالقرآن يسهل مصاعب الحياة.",
                 v3Text: "🌟 <strong>الأجر العظيم:</strong> لكل حرف من القرآن حسنة.",
 
-                // Hijri Calendar Card Translations (Arabic)
                 hijriCardTitle: "🗓️ التقويم الهجري والأيام المباركة",
                 hijriDateLabel: "التاريخ الهجري والميلادي اليوم:",
                 specialDaysHeading: "الأيام المميزة القادمة:",
@@ -351,11 +353,13 @@
             name: "हिन्दी",
             dir: "ltr",
             translations: {
+                counterCardTitle: "सलावत काउंटर",
                 greeting: "आप पर सलामती हो",
                 intro: "यहाँ सलावत पढ़ना और सुनना शुरू करें",
                 today: "आज",
                 todayCount: "आज पढ़ी गई सलावतें",
-                saySwalaath: "सलावत पढ़ें",
+                saySwalaath: "सलावत पढ़ें ﷺ",
+                resetCounter: "काउंटर रीसेट करें",
                 darkMode: "🌙 डार्क मोड",
                 lightMode: "☀️ लाइट मोड",
                 quranDesc: "पवित्र कुरआन",
@@ -387,7 +391,6 @@
                 maghrib: "मग़रिब",
                 isha: "इशा",
 
-                // Easy Khatam-ul-Quran Translations (Hindi)
                 khatamTitle: "📖 आसान क़ुरआन ख़त्म",
                 khatamDesc: "अपनी सुविधा के अनुसार दिन चुनें और रोज़ाना क़ुरआन मुकम्मल करें।",
                 selectDuration: "ख़त्म की अवधि चुनें:",
@@ -404,7 +407,6 @@
                 v2Text: "🌟 <strong>मुश्किलों से राहत:</strong> क़ुरआन से जुड़ने से जीवन की कठिनाइयाँ आसान होती हैं।",
                 v3Text: "🌟 <strong>बेहिसाब सवाब:</strong> पढ़े जाने वाले हर हर्फ़ पर कई गुना नेकियों मिलती हैं。",
 
-                // Hijri Calendar Card Translations (Hindi)
                 hijriCardTitle: "🗓️ हिजरी कैलेंडर और विशेष दिन",
                 hijriDateLabel: "आज की तिथि:",
                 specialDaysHeading: "आगामी विशेष दिन:",
@@ -430,7 +432,7 @@
                 umrahStep3Title: "तवाफ़",
                 umrahStep3Desc: "काबा के सात चक्कर लगाकर तवाफ़ करें। संभव हो तो इसके बाद दो रकअत नमाज़ पढ़ें。",
                 umrahStep4Title: "सई",
-                umrahStep4Desc: "सफ़ा और মروہ के बीच सात फेरे पूरे करें। सफ़ा से शुरू होकर मروہ पर समाप्त होगा।",
+                umrahStep4Desc: "सफ़ा और मروہ के बीच सात फेरे पूरे करें। सफ़ा से शुरू होकर मروہ पर समाप्त होगा।",
                 umrahStep5Title: "बाल मुंडवाना या कतरवाना",
                 umrahStep5Desc: "सई पूरी करने के बाद पुरुष अपने बाल मुंडवाएँ या कतरवाएँ, और महिलाएँ अपने बालों के सिरे से थोड़ा काटें。",
                 umrahSuccess: "इसके साथ उमराह पूरा हो जाता है। एहराम की पाबंदियाँ समाप्त हो जाती हैं और सामान्य कपड़े पहने जा सकते हैं।",
@@ -503,11 +505,13 @@
             name: "اردو",
             dir: "rtl",
             translations: {
+                counterCardTitle: "درود شریف کاؤنٹر",
                 greeting: "السلام علیکم",
                 intro: "یہاں درود پڑھنا اور سننا شروع کریں",
                 today: "آج",
                 todayCount: "آج پڑھے گئے درود",
-                saySwalaath: "درود پڑھیں",
+                saySwalaath: "درود پڑھیں ﷺ",
+                resetCounter: "کاؤنٹر ری سیٹ کریں",
                 darkMode: "🌙 ڈارک موڈ",
                 lightMode: "☀️ لائٹ موڈ",
                 quranDesc: "قرآن مجید",
@@ -539,7 +543,6 @@
                 maghrib: "مغرب",
                 isha: "عشاء",
 
-                // Easy Khatam-ul-Quran Translations (Urdu)
                 khatamTitle: "📖 آسان قرآن ختم",
                 khatamDesc: "اپنی آسانی کے مطابق دن منتخب کریں اور روزانہ قرآن مکمل کریں۔",
                 selectDuration: "ختم کی مدت منتخب کریں:",
@@ -556,7 +559,6 @@
                 v2Text: "🌟 <strong>مشکلات سے نجات:</strong> قرآن سے تعلق زندگی کی دشواریوں کو آسان کرتا ہے۔",
                 v3Text: "🌟 <strong>دگنا اجر:</strong> پڑھے جانے والے ہر حرف پر بے شمار نیکیاں ہیں۔",
 
-                // Hijri Calendar Card Translations (Urdu)
                 hijriCardTitle: "🗓️ ہجری کیلنڈر اور خاص دن",
                 hijriDateLabel: "آج کی تاریخ:",
                 specialDaysHeading: "آنے والے خاص دن:",
@@ -580,7 +582,7 @@
                 umrahStep2Title: "تلبیہ پڑھنا",
                 umrahStep2Desc: "نیت کرنے کے بعد تلبیہ پڑھتے ہوئے مسجد الحرام کی طرف روانہ ہوں۔",
                 umrahStep3Title: "طواف",
-                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو তো دو رکعت نفل ادا کریں۔",
+                umrahStep3Desc: "خانہ کعبہ کا سات بار طواف کریں۔ اگر ممکن ہو تو دو رکعت نفل ادا کریں۔",
                 umrahStep4Title: "سعی",
                 umrahStep4Desc: "صفا اور مروہ کے درمیان سات چکر پورے کریں۔ صفا سے شروع ہوکر مروہ پر ختم ہوگا۔",
                 umrahStep5Title: "بال منڈوانا یا کتروانا",
@@ -626,7 +628,7 @@
                 duaTitle1: "1. دنیا اور آخرت کی بھلائی",
                 duaTitle2: "2. اللہ سے مدد طلب کرنا",
                 duaTitle3: "3. معاملات کی آسانی کے لیے",
-                duaTitle4: "4. قرض کی ادائیگی اور حلال رزق के لیے",
+                duaTitle4: "4. قرض کی ادائیگی اور حلال رزق کے لیے",
                 duaTitle5: "5. قرض کے بوجھ سے نجات کی دعا",
                 duaTitle6: "6. بہتر روزی حاصل کرنے کے لیے",
                 duaTitle7: "7. نفع بخش علم اور حلال رزق",
@@ -655,11 +657,13 @@
             name: "தமிழ்",
             dir: "ltr",
             translations: {
+                counterCardTitle: "ஸலவாத் எண்ணிக்கை",
                 greeting: "உங்கள் மீது சாந்தி உண்டாகட்டும்",
                 intro: "இங்கே ஸலவாத்தைப் படிக்கவும் ஓதவும் தொடங்குங்கள்",
                 today: "இன்று",
                 todayCount: "இன்று ஓதிய ஸலவாத்துகள்",
-                saySwalaath: "ஸலவாத் ஓதுங்கள்",
+                saySwalaath: "ஸலவாத் ஓதுங்கள் ﷺ",
+                resetCounter: "எண்ணிக்கையை மீட்டமைக்கவும்",
                 darkMode: "🌙 இருண்ட பயன்முறை",
                 lightMode: "☀️ ஒளி பயன்முறை",
                 quranDesc: "திருக்குர்ஆன்",
@@ -691,7 +695,6 @@
                 maghrib: "மஃக்ரிப்",
                 isha: "இஷா",
 
-                // Easy Khatam-ul-Quran Translations (Tamil)
                 khatamTitle: "📖 எளிய குர்ஆன் கத்ம்",
                 khatamDesc: "உங்கள் வசதிக்கேற்ப நாட்களைத் தேர்ந்தெடுத்து தினமும் குர்ஆனை ஓதி முடிக்கவும்.",
                 selectDuration: "கத்ம் முடிக்க வேண்டிய கால அளவைத் தேர்ந்தெடுக்கவும்:",
@@ -708,7 +711,6 @@
                 v2Text: "🌟 <strong>சிரமங்களிலிருந்து நிவாரணம்:</strong> குர்ஆனுடன் இணைந்திருப்பது வாழ்க்கையின் கடினங்களை எளிதாக்குகிறது.",
                 v3Text: "🌟 <strong>மடங்கு நன்மைகள்:</strong> ஓதும் ஒவ்வொரு எழுத்துக்கும் எண்ணற்ற நன்மைகள் உண்டு.",
 
-                // Hijri Calendar Card Translations (Tamil)
                 hijriCardTitle: "🗓️ ஹிஜ்ரி நாட்காட்டியும் சிறப்பு நாட்களும்",
                 hijriDateLabel: "இன்றைய தேதி:",
                 specialDaysHeading: "வரவிருக்கும் சிறப்பு நாட்கள்:",
@@ -801,162 +803,10 @@
                 duaTitle24: "24. இதயம் உறுதியாக இருக்க",
                 duaTitle25: "25. நற்செயல்களிலும் வணக்கத்திலும் உதவி தேட"
             }
-        },
-
-        ar: {
-            name: "العربية",
-            dir: "rtl",
-            translations: {
-                greeting: "السلام عليكم",
-                intro: "ابدأ قراءة الصلاة على النبي وترديدها هنا",
-                today: "اليوم",
-                todayCount: "عدد الصلوات المقروءة اليوم",
-                saySwalaath: "صلِّ على النبي ﷺ",
-                darkMode: "🌙 الوضع الداكن",
-                lightMode: "☀️ الوضع الفاتح",
-                quranDesc: "القرآن الكريم",
-                swalaathTitle: "الصلوات",
-                swalaathDesc: "اقرأ صيغًا متنوعة من الصلاة",
-                backButton: "← رجوع",
-                searchSwalaath: "🔍 ابحث عن الصلاة على النبي...",
-                mp3Title: "القرآن MP3",
-                mp3Desc: "استمع إلى القرآن",
-                prayerTitle: "مواقيت الصلاة",
-                prayerDesc: "مواقيت الصلاة والأذان",
-                duasTitle: "الأدعية",
-                duasDesc: "أدعية متنوعة",
-                dhikrTitle: "الذكر",
-                dhikrDesc: "ردّد الأذكار",
-                favouritesTitle: "المفضلة",
-                favouritesDesc: "العناصر المحفوظة",
-                umrahTitle: "العمرة",
-                umrahDesc: "معلومات عن العمرة",
-                advertisingTitle: "أعلن معنا",
-                advertisingDesc: "الوصول إلى الجمهور",
-                language: "🌐 اللغة",
-
-                prayerTimesTitle: "مواقيت الصلاة",
-                fajr: "الفجر",
-                sunrise: "الشروق",
-                dhuhr: "الظهر",
-                asr: "العصر",
-                maghrib: "المغرب",
-                isha: "العشاء",
-
-                // Easy Khatam-ul-Quran Translations (Arabic)
-                khatamTitle: "📖 ختم القرآن الكريم بسهولة",
-                khatamDesc: "اختر المدة المفضلة لديك وأكمل تلاوة القرآن الكريم بانتظام كل يوم.",
-                selectDuration: "اختر المدة المستهدفة:",
-                opt30Text: "30 يوماً (~20 صفحة / جزء واحد يومياً)",
-                opt60Text: "60 يوماً (~10 صفحات يومياً)",
-                opt90Text: "90 يوماً (~7 صفحات يومياً)",
-                opt120Text: "120 يوماً (~5 صفحات يومياً)",
-                todayTarget: "هدف اليوم:",
-                targetDays: "المدة المستهدفة:",
-                markCompletedBtn: "✅ تم إنجاز ورد اليوم",
-                completedBtnText: "✔ تم إنجاز هدف اليوم!",
-                virtuesTitle: "✨ فضائل تلاوة القرآن والنجاح في الحياة",
-                v1Text: "🌟 <strong>السكينة والاطمئنان:</strong> تلاوة القرآن تمنح القلب طمأنينة وتزيل الهموم.",
-                v2Text: "🌟 <strong>الفرج من الشدائد:</strong> الارتباط بالقرآن يسهل مصاعب الحياة.",
-                v3Text: "🌟 <strong>الأجر العظيم:</strong> لكل حرف من القرآن حسنة.",
-
-                // Hijri Calendar Card Translations (Arabic)
-                hijriCardTitle: "🗓️ التقويم الهجري والأيام المباركة",
-                hijriDateLabel: "التاريخ الهجري والميلادي اليوم:",
-                specialDaysHeading: "الأيام المميزة القادمة:",
-                hijriBadge: "التقويم الإسلامي",
-                ev1Text: "🌙 رمضان ١: قريباً إن شاء الله",
-                ev2Text: "🕋 يوم عرفة: ٩ ذو الحجة",
-                ev3Text: "🎉 عيد الفطر: ١ شوال",
-
-                dhikrPageTitle: "الذكر",
-                dhikrSubtitle: "اذكر الله",
-                dhikrIntroHeading: "📿 الأذكار",
-                dhikrIntroText: "أذكار سهلة للسان والقلب بذكر الله.",
-
-                umrahPageTitle: "العمرة",
-                umrahSubtitle: "دليل ومعلومات العمرة",
-                umrahIntroTitle: "كيفية أداء العمرة",
-                umrahIntroDesc: "العمرة عبادة عظيمة تؤاد بزيارة بيت الله الحرام والكعبة المشرفة على صفة مخصوصة.",
-                umrahStepsTitle: "🕋 خطوات العمرة الأساسية",
-                umrahStep1Title: "الإحرام",
-                umrahStep1Desc: "الدخول في الإحرام وعقد نية العمرة قبل الوصول إلى الميقات.",
-                umrahStep2Title: "التلبية",
-                umrahStep2Desc: "بعد عقد النية، التوجه نحو المسجد الحرام مع ترديد التلبية.",
-                umrahStep3Title: "الطواف",
-                umrahStep3Desc: "الطواف حول الكعبة سبعة أشواط، وصلاة ركعتين بعدها إن تيسر.",
-                umrahStep4Title: "السعي",
-                umrahStep4Desc: "السعي بين الصفا والمروة سبعة أشواط، تبدأ بالصفا وتنتهي بالمروة.",
-                umrahStep5Title: "حلق الشعر أو تقصيره",
-                umrahStep5Desc: "بعد إتمام السعي، يحلق الرجل رأسه أو يقصره، وتقص المرأة شيئاً من شعرها.",
-                umrahSuccess: "بهذا تتم العمرة، وتنتهي محظورات الإحرام ويجوز لبس الثياب العادية.",
-                umrahBenefitsTitle: "🌿 فضل العمرة وفوائدها",
-                umrahBenefit1Title: "🌿 عبادة عظيمة",
-                umrahBenefit1Desc: "زيارة بيت الله وأداء المناسك تجعل العمرة عبادة جليلة.",
-                umrahBenefit2Title: "🤲 تكفير الذنوب",
-                umrahBenefit2Desc: "ورد في الحديث أن العمرة إلى العمرة كفارة لما بينهما.",
-                umrahBenefit3Title: "❤️ القرب من الله",
-                umrahBenefit3Desc: "فرصة مباركة لطلب القرب من الله بالدعاء والذكر والطواف.",
-                umrahBenefit4Title: "🕋 زيارة البيت الحرام",
-                umrahBenefit4Desc: "فرصة نادرة للعبادة داخل المسجد الحرام وبالقرب من الكعبة.",
-                umrahPackageTitle: "🕋 باقات العمرة",
-                umrahGroupPkg: "باقة العمرة الجماعية",
-                umrahGroupDesc: "فرصة أداء العمرة بإشراف أساتذة ومشايخ ذوي خبرة.",
-                umrahIndPkg: "باقة العمرة الفردية",
-                umrahIndDesc: "ترتيبات سفر العمرة حسب الاحتياجات الشخصية.",
-                noteTitle: "ملاحظة:",
-                umrahNoteText: "ملاحظة: اطلب التوجيه اللازم من العلماء والمشايخ الثقات لضمان أداء كل مناسك العمرة بالشكل الصحيح.",
-
-                duaPageTitle: "الأدعية",
-                duaPageSubtitle: "أدعية لمختلف مواقف الحياة",
-                duaIntroTitle: "🤲 أدعية لحياتنا اليومية",
-                duaIntroText: "لنسأل الله العون ونتوكل عليه في جميع أمورنا.",
-                duaHome: "🏠 الصفحة الرئيسية",
-
-                duaGeneral: "🌿 أدعية عامة",
-                duaDebt: "💰 الديون والصعوبات المالية",
-                duaRizq: "💼 الرزق والمعيشة",
-                duaHouse: "🏠 المنزل وشؤون الحياة",
-                duaTravel: "🚗 المركبة والسفر",
-                duaWorry: "😟 الهموم والصعوبات",
-                duaProtection: "🛡️ الحماية",
-                duaParents: "❤️ للوالدين",
-                duaHealth: "🤍 الصحة والمرض",
-                duaForgiveness: "🤍 المغفرة والتوبة",
-                duaSleep: "🌙 قبل النوم",
-                duaMorning: "🌅 الصباح",
-                duaGoodLife: "🌿 لحياة طيبة",
-
-                duaTitle1: "1. الخير في الدنيا والآخرة",
-                duaTitle2: "2. طلب العون من الله",
-                duaTitle3: "3. لتيسير الأمور",
-                duaTitle4: "4. لقضاء الدين ونيل الرزق الحلال",
-                duaTitle5: "5. طلب الخلاص من الديون",
-                duaTitle6: "6. طلب الرزق الطيب",
-                duaTitle7: "7. العلم النافع والرزق الحلال",
-                duaTitle8: "8. الخير للأسرة",
-                duaTitle9: "9. لتسهيل الأمور",
-                duaTitle10: "10. عند ركوب المركبة",
-                duaTitle11: "11. عند بدء السفر",
-                duaTitle12: "12. للحماية أثناء السفر",
-                duaTitle13: "13. عند الهم والضيق",
-                duaTitle14: "14. طلب العون في الشدائد",
-                duaTitle15: "15. الاستعاذة من كل شر",
-                duaTitle16: "16. طلب حماية الله",
-                duaTitle17: "17. طلب الرحمة للوالدين",
-                duaTitle18: "18. لطلب الصحة والعافية",
-                duaTitle19: "19. لطلب الشفاء",
-                duaTitle20: "20. طلب المغفرة",
-                duaTitle21: "21. سيد الاستغفار",
-                duaTitle22: "22. قبل النوم",
-                duaTitle23: "23. حمد الله في الصباح",
-                duaTitle24: "24. لثبات القلب",
-                duaTitle25: "25. طلب العون على الذكر والشكر والعبادة"
-            }
         }
     };
 
-function getLanguage() {
+    function getLanguage() {
         const saved = localStorage.getItem("swalath-language");
         return LANGUAGES[saved] ? saved : "en";
     }
@@ -987,6 +837,8 @@ function getLanguage() {
             if (!isHijri && code === "ml") {
                 if (original !== null) {
                     el.textContent = original;
+                } else if (translated) {
+                    el.textContent = translated;
                 }
             } else if (translated) {
                 el.textContent = translated;
