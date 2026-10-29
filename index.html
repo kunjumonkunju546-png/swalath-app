@@ -656,67 +656,178 @@ body.dark-mode .today-card .reset-button{
     to{transform:scale(1);opacity:1}
 }
 
-/* LANGUAGE SELECTOR */
+/* SWALATH PREMIUM LANGUAGE SELECTOR */
 
-#languageScreen{
-    position:fixed;
-    inset:0;
-    z-index:100001;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:linear-gradient(145deg,#092b25,#123d34,#1d5143);
-    color:#f1dfb0;
+#languageScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 100001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background:
+        radial-gradient(ellipse at top, rgba(197,168,104,.16), transparent 55%),
+        linear-gradient(145deg, #092b25, #123d34 55%, #1d5143);
+    color: #123d34;
 }
 
-#languageScreen .language-box{
-    width:100%;
-    max-width:400px;
-    padding:24px;
-    border:1px solid #c8a96e;
-    border-radius:22px;
-    background:#fffaf0;
-    color:#123d34;
-    text-align:center;
-    box-shadow:0 12px 35px rgba(0,0,0,.25);
+#languageScreen .language-box {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 25px 20px 20px;
+    border: 1px solid #c5a868;
+    border-radius: 26px;
+    background: linear-gradient(160deg, #fffdf7, #f5f0e3);
+    text-align: center;
+    box-shadow: 0 20px 55px rgba(0,0,0,.32);
+    animation: languageCardEnter .45s ease-out;
 }
 
-.language-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:18px;
+#languageScreen .language-box::before {
+    content: "☾";
+    display: block;
+    margin-bottom: 5px;
+    color: #b29450;
+    font-size: 36px;
+    line-height: 1.2;
 }
 
-.language-option{
-    padding:13px 8px;
-    border:1px solid #d7c69e;
-    border-radius:12px;
-    background:#fff;
-    color:#123d34;
-    font-size:16px;
-    cursor:pointer;
+#languageHeading {
+    margin: 0 0 8px;
+    color: #123d34;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.4;
 }
 
-.language-option.selected{
-    border:2px solid #123d34;
-    background:#e8f0e9;
-    font-weight:bold;
+#languageSubtitle {
+    margin: 0 0 22px;
+    color: #68766d;
+    font-size: 14px;
+    line-height: 1.7;
 }
 
-#languageContinue{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:12px;
-    background:#123d34;
-    color:#fff;
-    font-size:16px;
-    cursor:pointer;
-    font-weight:bold;
+.language-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+    margin-bottom: 20px;
 }
 
+.language-option {
+    position: relative;
+    min-height: 62px;
+    padding: 12px 24px 12px 8px;
+    border: 1px solid #ded5bd;
+    border-radius: 15px;
+    background: #ffffff;
+    color: #173f35;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease,
+                box-shadow .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.language-option:active {
+    transform: scale(.97);
+}
+
+.language-option.selected {
+    border: 2px solid #b29450;
+    background: #edf4ed;
+    box-shadow: 0 3px 12px rgba(18,61,52,.12);
+    color: #123d34;
+}
+
+.language-option.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: #123d34;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+#languageContinue {
+    display: block;
+    width: 100%;
+    min-height: 51px;
+    padding: 14px 18px;
+    border: 1px solid #d9bd78;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #174b3d, #0d3028);
+    color: #fff8e8;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    box-shadow: 0 6px 15px rgba(18,61,52,.2);
+    cursor: pointer;
+    transition: opacity .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#languageContinue:active {
+    transform: scale(.98);
+}
+
+#languageContinue:disabled {
+    opacity: .48;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@keyframes languageCardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 360px) {
+    #languageScreen {
+        padding: 12px;
+    }
+
+    #languageScreen .language-box {
+        padding: 20px 14px 16px;
+        border-radius: 21px;
+    }
+
+    #languageHeading {
+        font-size: 21px;
+    }
+
+    .language-options {
+        gap: 8px;
+    }
+
+    .language-option {
+        min-height: 56px;
+        padding: 10px 22px 10px 6px;
+        font-size: 14px;
+    }
+}
 /* DARK MODE */
 
 body.dark-mode{
@@ -2287,51 +2398,55 @@ window.addEventListener("load",function(){
 
 /* LANGUAGE SELECTOR */
 
-function openSwalathLanguageSelector(){
+function openSwalathLanguageSelector() {
+    const screen = document.getElementById("languageScreen");
+    const options = document.querySelectorAll(".language-option");
+    const continueButton = document.getElementById("languageContinue");
 
-    const screen=document.getElementById("languageScreen");
-    const options=document.querySelectorAll(".language-option");
-    const continueButton=document.getElementById("languageContinue");
-
-    if(!screen||!continueButton||!window.SwalathLanguage){
+    if (!screen || !continueButton || !window.SwalathLanguage) {
         return;
     }
 
-    let selectedLanguage=window.SwalathLanguage.getCurrent();
+    const savedLanguage = localStorage.getItem("swalathLanguage");
+    const hasSavedLanguage = Boolean(savedLanguage);
+    let selectedLanguage = hasSavedLanguage
+        ? window.SwalathLanguage.getCurrent()
+        : null;
 
-    options.forEach(function(button){
+    function updateSelection() {
+        options.forEach(function (button) {
+            const isSelected = button.dataset.lang === selectedLanguage;
 
-        button.classList.toggle(
-            "selected",
-            button.dataset.lang===selectedLanguage
-        );
+            button.classList.toggle("selected", isSelected);
+            button.setAttribute("aria-pressed", String(isSelected));
+        });
 
-        button.onclick=function(){
+        continueButton.disabled = !selectedLanguage;
+    }
 
-            selectedLanguage=button.dataset.lang;
-
-            options.forEach(function(option){
-
-                option.classList.toggle(
-                    "selected",
-                    option.dataset.lang===selectedLanguage
-                );
-            });
+    options.forEach(function (button) {
+        button.onclick = function () {
+            selectedLanguage = button.dataset.lang;
+            updateSelection();
         };
     });
 
-    continueButton.onclick=function(){
+    continueButton.onclick = function () {
+        if (!selectedLanguage) {
+            return;
+        }
 
         window.SwalathLanguage.setLanguage(selectedLanguage);
+        localStorage.setItem("swalathLanguage", selectedLanguage);
 
-        screen.style.display="none";
+        screen.style.display = "none";
 
         loadDailyQuoteData();
-
         updateRoutineUI();
     };
 
-    screen.style.display="flex";
+    updateSelection();
+    screen.style.display = "flex";
 }
 </script>
 
