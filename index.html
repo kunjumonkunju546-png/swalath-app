@@ -1026,6 +1026,117 @@ body.dark-mode #quotePopupOverlay .status-close-button {
     background: #30453a;
     color: #ffffff;
 }
+    /* SWALATH SHARE AND REVIEW POPUP */
+
+#swalathGentlePopup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    background: rgba(3, 18, 14, 0.78);
+    backdrop-filter: blur(7px);
+}
+
+#swalathGentlePopup .gentle-popup-box {
+    width: 100%;
+    max-width: 390px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 24px 20px;
+    text-align: center;
+    border: 1px solid #c5a868;
+    border-radius: 24px;
+    background: #fffdf6;
+    box-shadow: 0 20px 55px rgba(0,0,0,.30);
+}
+
+#swalathGentlePopup .gentle-popup-icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+#swalathGentlePopup .gentle-popup-title {
+    color: #123d34;
+    font-size: 23px;
+    font-weight: 800;
+    margin: 0 0 12px;
+}
+
+#swalathGentlePopup .gentle-popup-copy {
+    color: #43584c;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+#swalathGentlePopup .gentle-popup-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#swalathGentlePopup .gentle-popup-actions button {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#swalathGentleShare {
+    background: #123d34;
+    color: white;
+    border: 1px solid #c5a868;
+}
+
+#swalathGentleReview {
+    background: white;
+    color: #123d34;
+    border: 1px solid #c5a868;
+}
+
+#swalathGentleLater {
+    background: #e9eee7;
+    color: #385247;
+    border: none;
+}
+
+#swalathGentleNever {
+    background: transparent;
+    color: #68776d;
+    border: none;
+    font-size: 12px;
+}
+
+body.dark-mode #swalathGentlePopup .gentle-popup-box {
+    background: #192d25;
+}
+
+body.dark-mode #swalathGentlePopup .gentle-popup-title {
+    color: #e5d09a;
+}
+
+body.dark-mode #swalathGentlePopup .gentle-popup-copy {
+    color: #e2e9df;
+}
+
+body.dark-mode #swalathGentleReview {
+    background: #253d32;
+    color: white;
+}
+
+body.dark-mode #swalathGentleLater {
+    background: #30453a;
+    color: white;
+}
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -1127,6 +1238,48 @@ body.dark-mode #quotePopupOverlay .status-close-button {
         <button onclick="closeCongratulationModal()" style="width:100%;padding:12px;border-radius:20px;background:var(--sw-green);color:white;border:none;font-weight:bold;cursor:pointer;">
             സന്തോഷം! (Close)
         </button>
+    </div>
+</div>
+    <!-- SWALATH SHARE AND REVIEW POPUP -->
+
+<div id="swalathGentlePopup"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="swalathGentleTitle"
+     dir="auto">
+
+    <div class="gentle-popup-box">
+
+        <div class="gentle-popup-icon">🌙</div>
+
+        <h2 id="swalathGentleTitle"
+            class="gentle-popup-title">
+        </h2>
+
+        <p id="swalathGentleCopy"
+           class="gentle-popup-copy">
+        </p>
+
+        <div class="gentle-popup-actions">
+
+            <button type="button"
+                    id="swalathGentleShare">
+            </button>
+
+            <button type="button"
+                    id="swalathGentleReview">
+            </button>
+
+            <button type="button"
+                    id="swalathGentleLater">
+            </button>
+
+            <button type="button"
+                    id="swalathGentleNever">
+            </button>
+
+        </div>
+
     </div>
 </div>
 
@@ -2387,6 +2540,224 @@ function openSwalathLanguageSelector(){
 
 })();
 </script>
+/* SWALATH GENTLE POPUP */
 
+(function () {
+    "use strict";
+
+    const FIRST_DELAY = 3 * 24 * 60 * 60 * 1000;
+    const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+    const FOURTEEN_DAYS = 14 * 24 * 60 * 60 * 1000;
+
+    const KEY = {
+        first: "swalathGentleFirstSeen",
+        next: "swalathGentleNextAt",
+        stage: "swalathGentleStage",
+        disabled: "swalathGentleDisabled"
+    };
+
+    const PLAY_URL =
+        "https://play.google.com/store/apps/details?id=com.nazyan.swalathapp";
+
+    const texts = {
+        ml: {
+            title: "നന്മ പങ്കുവെക്കാം",
+            copy: "നമ്മൾ ചെയ്യുന്ന ചെറിയൊരു നന്മ പോലും മറ്റൊരാൾക്ക് പ്രചോദനമാകാം. ഈ ആപ്പ് സുഹൃത്തുക്കളുമായി പങ്കുവെക്കൂ. ഉപകാരപ്രദമാണെന്ന് തോന്നിയാൽ നിങ്ങളുടെ സത്യസന്ധമായ അഭിപ്രായവും അറിയിക്കാം.",
+            share: "🤝 സുഹൃത്തുക്കളുമായി പങ്കുവെക്കാം",
+            review: "⭐ റേറ്റിങ് നൽകാം",
+            later: "പിന്നീട് ഓർമ്മിപ്പിക്കാം",
+            never: "ഇനി റേറ്റിങ് ഓർമ്മിപ്പിക്കേണ്ട"
+        },
+        en: {
+            title: "Share a Little Goodness",
+            copy: "A small good deed can inspire someone. Share this app with friends. If you find it useful, you can leave your honest feedback.",
+            share: "🤝 Share with Friends",
+            review: "⭐ Leave a Rating",
+            later: "Maybe Later",
+            never: "Don't remind me about rating again"
+        },
+        ar: {
+            title: "شارك الخير",
+            copy: "قد يكون العمل الصغير سببًا لإلهام الآخرين. شارك التطبيق مع أصدقائك، وإذا وجدته مفيدًا فيمكنك ترك تقييمك الصادق.",
+            share: "🤝 شارك مع الأصدقاء",
+            review: "⭐ قيّم التطبيق",
+            later: "لاحقًا",
+            never: "لا تذكّرني بالتقييم مرة أخرى"
+        },
+        hi: {
+            title: "नेकी साझा करें",
+            copy: "एक छोटा-सा अच्छा काम भी किसी को प्रेरित कर सकता है। इस ऐप को दोस्तों के साथ साझा करें। उपयोगी लगे तो अपनी ईमानदार राय दें।",
+            share: "🤝 दोस्तों के साथ साझा करें",
+            review: "⭐ रेटिंग दें",
+            later: "बाद में याद दिलाएँ",
+            never: "रेटिंग के लिए दोबारा याद न दिलाएँ"
+        },
+        ur: {
+            title: "نیکی بانٹیں",
+            copy: "ایک چھوٹی سی نیکی بھی کسی کے لیے ترغیب بن سکتی ہے۔ اس ایپ کو دوستوں کے ساتھ شیئر کریں۔ مفید لگے تو اپنی سچی رائے دیں۔",
+            share: "🤝 دوستوں کے ساتھ شیئر کریں",
+            review: "⭐ ریٹنگ دیں",
+            later: "بعد میں یاد دلائیں",
+            never: "ریٹنگ کے لیے دوبارہ یاد نہ دلائیں"
+        },
+        ta: {
+            title: "நல்லதைப் பகிர்வோம்",
+            copy: "ஒரு சிறிய நற்செயலும் மற்றொருவருக்கு ஊக்கமாக அமையலாம். இந்தச் செயலியை நண்பர்களுடன் பகிருங்கள். பயனுள்ளதாக இருந்தால் உங்கள் நேர்மையான கருத்தையும் தெரிவிக்கலாம்.",
+            share: "🤝 நண்பர்களுடன் பகிரவும்",
+            review: "⭐ மதிப்பீடு வழங்கவும்",
+            later: "பிறகு நினைவூட்டவும்",
+            never: "மதிப்பீட்டை மீண்டும் நினைவூட்ட வேண்டாம்"
+        }
+    };
+
+    function getLanguage() {
+        if (
+            window.SwalathLanguage &&
+            typeof window.SwalathLanguage.getCurrent === "function"
+        ) {
+            return window.SwalathLanguage.getCurrent();
+        }
+
+        return localStorage.getItem("swalathLanguage") ||
+               localStorage.getItem("selectedLanguage") ||
+               localStorage.getItem("swalath-language") ||
+               document.documentElement.lang ||
+               "ml";
+    }
+
+    function translatePopup() {
+        const lang = getLanguage();
+        const t = texts[lang] || texts.ml;
+
+        document.getElementById("swalathGentleTitle").textContent = t.title;
+        document.getElementById("swalathGentleCopy").textContent = t.copy;
+        document.getElementById("swalathGentleShare").textContent = t.share;
+        document.getElementById("swalathGentleReview").textContent = t.review;
+        document.getElementById("swalathGentleLater").textContent = t.later;
+        document.getElementById("swalathGentleNever").textContent = t.never;
+
+        document.getElementById("swalathGentlePopup").dir =
+            (lang === "ar" || lang === "ur") ? "rtl" : "ltr";
+    }
+
+    function closePopup() {
+        document.getElementById("swalathGentlePopup").style.display = "none";
+    }
+
+    function showPopupIfReady() {
+        if (localStorage.getItem(KEY.disabled) === "true") return;
+
+        const now = Date.now();
+        let first = Number(localStorage.getItem(KEY.first) || 0);
+
+        if (!first) {
+            localStorage.setItem(KEY.first, String(now));
+            return;
+        }
+
+        const next = Number(localStorage.getItem(KEY.next) || 0);
+        const stage = Number(localStorage.getItem(KEY.stage) || 0);
+
+        const due = next || first + FIRST_DELAY;
+
+        if (now < due) return;
+
+        // മറ്റൊരു പ്രധാന പോப்ப്അപ്പ് തുറന്നിരിക്കുമ്പോൾ ഇടപെടരുത്.
+        const otherIds = [
+            "splashScreen",
+            "languageScreen",
+            "quotePopupOverlay",
+            "congratulationOverlay"
+        ];
+
+        const anotherPopupOpen = otherIds.some(function (id) {
+            const el = document.getElementById(id);
+            return el && getComputedStyle(el).display !== "none";
+        });
+
+        if (anotherPopupOpen) {
+            window.setTimeout(showPopupIfReady, 30000);
+            return;
+        }
+
+        translatePopup();
+
+        document.getElementById("swalathGentlePopup").style.display = "flex";
+
+        localStorage.setItem(
+            KEY.next,
+            String(now + (stage === 0 ? SEVEN_DAYS : FOURTEEN_DAYS))
+        );
+
+        localStorage.setItem(KEY.stage, String(stage + 1));
+    }
+
+    document.getElementById("swalathGentleLater")
+        .addEventListener("click", closePopup);
+
+    document.getElementById("swalathGentleNever")
+        .addEventListener("click", function () {
+            localStorage.setItem(KEY.disabled, "true");
+            closePopup();
+        });
+
+    document.getElementById("swalathGentleShare")
+        .addEventListener("click", async function () {
+            const lang = getLanguage();
+            const t = texts[lang] || texts.ml;
+
+            try {
+                if (navigator.share) {
+                    await navigator.share({
+                        title: "Swalath",
+                        text: t.copy,
+                        url: PLAY_URL
+                    });
+                } else if (
+                    navigator.clipboard &&
+                    navigator.clipboard.writeText
+                ) {
+                    await navigator.clipboard.writeText(PLAY_URL);
+                    alert(PLAY_URL);
+                } else {
+                    window.prompt("Copy app link:", PLAY_URL);
+                }
+            } catch (error) {
+                if (error.name !== "AbortError") {
+                    window.prompt("Copy app link:", PLAY_URL);
+                }
+            }
+
+            closePopup();
+        });
+
+    document.getElementById("swalathGentleReview")
+        .addEventListener("click", function () {
+            // Play Store റിവ്യൂ സമർപ്പിച്ചോ എന്ന് ആപ്പിന്
+            // ഉറപ്പായി അറിയാൻ കഴിയില്ല. വീണ്ടും ശല്യപ്പെടുത്താതിരിക്കാൻ
+            // റേറ്റിങ് ബട്ടൺ തിരഞ്ഞെടുത്താൽ ഓർമ്മപ്പെടുത്തൽ നിർത്തുന്നു.
+            localStorage.setItem(KEY.disabled, "true");
+            closePopup();
+
+            if (
+                window.AndroidAdhan &&
+                typeof window.AndroidAdhan.requestInAppReview === "function"
+            ) {
+                window.AndroidAdhan.requestInAppReview();
+            } else {
+                window.location.href = PLAY_URL;
+            }
+        });
+
+    document.addEventListener(
+        "swalath-language-changed",
+        translatePopup
+    );
+
+    window.addEventListener("load", function () {
+        window.setTimeout(showPopupIfReady, 18000);
+    });
+
+})();
 </body>
 </html>
