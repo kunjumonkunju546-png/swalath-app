@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
+
+<title>Ratib Al-Attas | Swalath</title>
+
+<script src="language.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eee8d9;
+    color: #222;
+}
+
+.app {
+    max-width: 500px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffdf8;
+    box-shadow: 0 0 25px rgba(0,0,0,.08);
+}
+
+.header {
+    text-align: center;
+    padding: 25px 18px;
+    background: linear-gradient(145deg,#123d34,#1d5b4c);
+    color: white;
+    border-radius: 0 0 28px 28px;
+}
+
+.header .icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    font-size: 25px;
+    color: #f1dfb0;
+}
+
+.header p {
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.top-buttons button {
+    border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.13);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+main {
+    padding: 18px;
+}
+
+.intro {
+    text-align: center;
+    padding: 8px 5px 18px;
+}
+
+.intro h2 {
+    color: #123d34;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.intro p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.section-heading {
+    text-align: center;
+    color: #123d34;
+    font-size: 18px;
+    margin: 20px 0 13px;
+    padding: 12px;
+    background: #f1dfb0;
+    border-radius: 13px;
+}
+
+.reading-card {
+    background: white;
+    border: 1px solid #e6dfd0;
+    border-radius: 17px;
+    padding: 19px 13px;
+    margin-bottom: 13px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.035);
+}
+
+.arabic {
+    direction: rtl;
+    text-align: center;
+    font-family: 'Amiri Quran', 'Amiri', serif;
+    font-size: 27px;
+    line-height: 2.15;
+    color: #172f27;
+    overflow-wrap: break-word;
+}
+
+.repeat {
+    display: block;
+    text-align: center;
+    color: #94763c;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 12px;
+    direction: ltr;
+}
+
+.back-home {
+    width: 100%;
+    border: none;
+    background: #123d34;
+    color: white;
+    padding: 15px;
+    border-radius: 28px;
+    font-size: 15px;
+    margin: 20px 0 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 22px 10px;
+    color: #999;
+    font-size: 11px;
+}
+
+/* DARK MODE */
+
+body.dark {
+    background: #111;
+    color: #eee;
+}
+
+body.dark .app {
+    background: #181818;
+}
+
+body.dark .intro h2 {
+    color: #f1dfb0;
+}
+
+body.dark .intro p {
+    color: #aaa;
+}
+
+body.dark .reading-card {
+    background: #222;
+    border-color: #383838;
+}
+
+body.dark .arabic {
+    color: #fff;
+}
+
+body.dark .section-heading {
+    background: #314c43;
+    color: #f1dfb0;
+}
+
+body.dark .repeat {
+    color: #e3c987;
+}
+
+body.dark footer {
+    color: #888;
+}
+
+@media(max-width:360px) {
+    .arabic {
+        font-size: 24px;
+        line-height: 2.1;
+    }
+
+    main {
+        padding: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div class="icon">📿</div>
+
+    <h1 id="page-title">റാത്തീബുൽ അത്വാസ്</h1>
+    <p id="page-subtitle">റാത്തീബും സമാപന ദുആകളും</p>
+
+    <div class="top-buttons">
+        <button onclick="goBack()" id="back-button">← തിരികെ</button>
+        <button onclick="toggleDark()" id="dark-button">🌙</button>
+    </div>
+</header>
+
+<main>
+
+<section class="intro">
+    <h2>رَاتِبُ الْعَطَّاس</h2>
+    <p id="intro-text">
+        ശ്രദ്ധയോടെയും ശാന്തതയോടെയും പാരായണം ചെയ്യുക.
+    </p>
+</section>
+
+<h2 class="section-heading" id="ratib-heading">
+    റാത്തീബുൽ അത്വാസ്
+</h2>
+
+<div id="ratib-content"></div>
+
+<button class="back-home" onclick="goBack()" id="bottom-back">
+    ← റാത്തീബ് പട്ടികയിലേക്ക് മടങ്ങുക
+</button>
+
+</main>
+
+<footer>Swalath • ذكر الله</footer>
+
+</div>
+
+<script>
+
+function goBack() {
+    window.location.href = "dhikr.html";
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "swalathDarkMode",
+        document.body.classList.contains("dark") ? "on" : "off"
+    );
+}
+
+/*
+ RATIB AL-ATTAS
+ Arabic text and repetitions
+*/
+
+const ratibReadings = [
+
+{
+    text: `الْفَاتِحَةْ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ ❁ وَإِلَى رُوحِ سَيِّدِنَا الْحَبِيبِ عُمَرَ بْنِ عَبْدِ الرَّحْمَانِ الْعَطَّاسِ ❁ صَاحِبِ الرَّاتِبِ ❁ وَالشَّيْخِ عَلِيِّ بْنِ عَبْدِ اللَّهِ بَارَاسْ ❁ وَإِلَى رُوحِ سَيِّدِنَا الْإِمَامِ الْحَبِيبِ أَحْمَدَ بْنِ حَسَنِ بْنِ عَبْدِ اللَّهِ الْعَطَّاسِ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+},
+
+{
+    text: `بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ ❁ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ❁ الرَّحْمَـٰنِ الرَّحِيمِ ❁ مَالِكِ يَوْمِ الدِّينِ ❁ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ❁ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ❁ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ❁`,
+    repeat: "سُورَةُ الْفَاتِحَة"
+},
+
+{
+    text: `أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `لَوْ أَنزَلْنَا هَـٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَّرَأَيْتَهُ خَاشِعًا مُّتَصَدِّعًا مِّنْ خَشْيَةِ اللَّهِ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ ❁ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ ❁ هُوَ اللَّهُ الَّذِي لَا إِلَٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ سُبْحَانَ اللَّهِ عَمَّا يُشْرِكُونَ ❁ هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ وَهُوَ الْعَزِيزُ الْحَكِيمُ ❁`,
+    repeat: "سُورَةُ الْحَشْرِ ٢١–٢٤"
+},
+
+{
+    text: `أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ ❁ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ`,
+    repeat: "× ١٠"
+},
+
+{
+    text: `بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `بِسْمِ اللَّهِ تَحَصَّنَّا بِاللَّهِ ❁ بِسْمِ اللَّهِ تَوَكَّلْنَا بِاللَّهِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `بِسْمِ اللَّهِ آمَنَّا بِاللَّهِ وَمَنْ يُؤْمِنْ بِاللَّهِ لَا خَوْفٌ عَلَيْهِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `سُبْحَانَ اللَّهِ عَزَّ اللَّهُ ❁ سُبْحَانَ اللَّهِ جَلَّ اللَّهُ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ❁ سُبْحَانَ اللَّهِ الْعَظِيمِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ ❁ وَلَا إِلَٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ`,
+    repeat: "× ٤"
+},
+
+{
+    text: `يَا لَطِيفًا بِخَلْقِهِ يَا عَلِيمًا بِخَلْقِهِ يَا خَبِيرًا بِخَلْقِهِ اُلْطُفْ بِنَا يَا لَطِيفُ يَا عَلِيمُ يَا خَبِيرُ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `يَا لَطِيفًا لَمْ يَزَلْ اُلْطُفْ بِنَا فِيمَا نَزَلْ إِنَّكَ لَطِيفٌ لَمْ تَزَلْ اُلْطُفْ بِنَا وَالْمُسْلِمِينَ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `لَا إِلَٰهَ إِلَّا اللَّهُ`,
+    repeat: "× ٤٠"
+},
+
+{
+    text: `مُحَمَّدٌ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ`,
+    repeat: ""
+},
+
+{
+    text: `حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ`,
+    repeat: "× ٧"
+},
+
+{
+    text: `اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ ❁ اللَّهُمَّ صَلِّ عَلَيْهِ وَسَلِّمْ`,
+    repeat: "× ١٠"
+},
+
+{
+    text: `اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ ❁ يَا رَبِّ صَلِّ عَلَيْهِ وَسَلِّمْ`,
+    repeat: ""
+},
+
+{
+    text: `أَسْتَغْفِرُ اللَّهَ`,
+    repeat: "× ١١"
+},
+
+{
+    text: `تَائِبُونَ إِلَى اللَّهِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `يَا اللَّهُ بِهَا ❁ يَا اللَّهُ بِهَا ❁ يَا اللَّهُ بِحُسْنِ الْخَاتِمَةِ`,
+    repeat: "× ٣"
+},
+
+{
+    text: `غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ❁ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ ❁`,
+    repeat: "سُورَةُ الْبَقَرَةِ ٢٨٥–٢٨٦"
+},
+
+{
+    text: `الْفَاتِحَةْ إِلَى رُوحِ سَيِّدِنَا رَسُولِ اللَّهِ سَيِّدِنَا مُحَمَّدِ بْنِ عَبْدِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَأَصْحَابِهِ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ ❁ أَنَّ اللَّهَ يُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ وَعُلُومِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ وَيَجْعَلُنَا مِنْ حِزْبِهِمْ وَيَرْزُقُنَا مَحَبَّتَهُمْ وَيَتَوَفَّانَا عَلَى مِلَّتِهِمْ وَيَحْشُرُنَا فِي زُمْرَتِهِمْ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+},
+
+{
+    text: `الْفَاتِحَةْ إِلَى رُوحِ سَيِّدِنَا الْمُهَاجِرِ إِلَى اللَّهِ أَحْمَدَ بْنِ عِيسَى وَإِلَى رُوحِ سَيِّدِنَا الْأُسْتَاذِ الْأَعْظَمِ الْفَقِيهِ الْمُقَدَّمِ مُحَمَّدِ بْنِ عَلِيِّ بَاعَلَوِيِّ ❁ وَأُصُولِهِمْ وَفُرُوعِهِمْ وَذَوِي الْحُقُوقِ عَلَيْهِمْ أَجْمَعِينَ ❁ أَنَّ اللَّهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ وَعُلُومِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+},
+
+{
+    text: `الْفَاتِحَةْ إِلَى رُوحِ سَيِّدِنَا وَحَبِيبِنَا وَبَرَكَتِنَا صَاحِبِ الرَّاتِبِ قُطْبِ الْأَنْفَاسِ الْحَبِيبِ عُمَرَ بْنِ عَبْدِ الرَّحْمَانِ الْعَطَّاسِ ❁ وَإِلَى رُوحِ الشَّيْخِ عَلِيِّ بْنِ عَبْدِ اللَّهِ بَارَاسْ ❁ وَإِلَى رُوحِ الْحَبِيبِ أَحْمَدَ بْنِ حَسَنِ بْنِ عَبْدِ اللَّهِ الْعَطَّاسِ ❁ وَأُصُولِهِمْ وَفُرُوعِهِمْ وَذَوِي الْحُقُوقِ عَلَيْهِمْ أَجْمَعِينَ ❁ أَنَّ اللَّهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ وَعُلُومِهِمْ وَنَفَحَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+},
+
+{
+    text: `الْفَاتِحَةْ إِلَى أَرْوَاحِ الْأَوْلِيَاءِ وَالشُّهَدَاءِ وَالصَّالِحِينَ وَالْأَئِمَّةِ الرَّاشِدِينَ ❁ وَإِلَى أَرْوَاحِ وَالِدِينَا وَمَشَايِخِنَا وَذَوِي الْحُقُوقِ عَلَيْنَا وَعَلَيْهِمْ أَجْمَعِينَ ❁ ثُمَّ إِلَى أَرْوَاحِ أَمْوَاتِ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَالْمُسْلِمِينَ وَالْمُسْلِمَاتِ ❁ أَنَّ اللَّهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ وَيُعِيدُ عَلَيْنَا مِنْ أَسْرَارِهِمْ وَأَنْوَارِهِمْ وَعُلُومِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+},
+
+{
+    text: `الْفَاتِحَةْ بِالْقَبُولِ وَتَمَامِ كُلِّ سُؤْلٍ وَمَأْمُولٍ وَصَلَاحِ الشَّأْنِ ظَاهِرًا وَبَاطِنًا فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ ❁ دَافِعَةً لِكُلِّ شَرٍّ جَالِبَةً لِكُلِّ خَيْرٍ لَنَا وَلِوَالِدِينَا وَأَوْلَادِنَا وَأَحْبَابِنَا وَمَشَايِخِنَا فِي الدِّينِ مَعَ اللُّطْفِ وَالْعَافِيَةِ وَعَلَى نِيَّةِ أَنَّ اللَّهَ يُنَوِّرُ قُلُوبَنَا وَقَوَالِبَنَا مَعَ الْهُدَى وَالتُّقَى وَالْعَفَافِ وَالْغِنَى وَالْمَوْتِ عَلَى دِينِ الْإِسْلَامِ وَالْإِيمَانِ بِلَا مِحْنَةٍ وَلَا امْتِحَانٍ بِحَقِّ سَيِّدِ وَلَدِ عَدْنَانَ وَعَلَى كُلِّ نِيَّةٍ صَالِحَةٍ ❁ وَإِلَى حَضْرَةِ النَّبِيِّ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ ❁ الْفَاتِحَةْ`,
+    repeat: "الْفَاتِحَة"
+}
+
+];
+
+function renderRatib() {
+    const container = document.getElementById("ratib-content");
+
+    container.innerHTML = ratibReadings.map(item => `
+        <div class="reading-card">
+            <div class="arabic">${item.text}</div>
+            ${item.repeat ? `<span class="repeat">${item.repeat}</span>` : ""}
+        </div>
+    `).join("");
+}
+
+function updatePageLanguage() {
+
+    const lang = window.SwalathLanguage &&
+        typeof window.SwalathLanguage.getCurrent === "function"
+        ? window.SwalathLanguage.getCurrent()
+        : (localStorage.getItem("swalath-language") || "en");
+
+    const ml = lang === "ml";
+
+    document.documentElement.lang = ml ? "ml" : "en";
+
+    document.getElementById("page-title").textContent =
+        ml ? "റാത്തീബുൽ അത്വാസ്" : "Ratib Al-Attas";
+
+    document.getElementById("page-subtitle").textContent =
+        ml ? "റാത്തീബും സമാപന ദുആകളും" : "Ratib and Closing Duas";
+
+    document.getElementById("back-button").textContent =
+        ml ? "← തിരികെ" : "← Back";
+
+    document.getElementById("intro-text").textContent =
+        ml
+        ? "ശ്രദ്ധയോടെയും ശാന്തതയോടെയും പാരായണം ചെയ്യുക."
+        : "Recite with attention and tranquillity.";
+
+    document.getElementById("ratib-heading").textContent =
+        ml ? "റാത്തീബുൽ അത്വാസ്" : "Ratib Al-Attas";
+
+    document.getElementById("bottom-back").textContent =
+        ml
+        ? "← റാത്തീബ് പട്ടികയിലേക്ക് മടങ്ങുക"
+        : "← Back to Ratib List";
+}
+
+window.addEventListener("load", function() {
+
+    if (localStorage.getItem("swalathDarkMode") === "on") {
+        document.body.classList.add("dark");
+    }
+
+    renderRatib();
+    updatePageLanguage();
+});
+
+document.addEventListener("swalath-language-changed", function() {
+    updatePageLanguage();
+});
+
+</script>
+
+</body>
+</html>
