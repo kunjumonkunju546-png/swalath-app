@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123d34">
+
+<title>Ratib Al-Haddad | Swalath</title>
+
+<script src="language.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eee8d9;
+    color: #222;
+}
+
+.app {
+    max-width: 500px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffdf8;
+    box-shadow: 0 0 25px rgba(0,0,0,.08);
+}
+
+.header {
+    text-align: center;
+    padding: 25px 18px;
+    background: linear-gradient(145deg,#123d34,#1d5b4c);
+    color: white;
+    border-radius: 0 0 28px 28px;
+}
+
+.header .icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    font-size: 25px;
+    color: #f1dfb0;
+}
+
+.header p {
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.top-buttons button {
+    border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.13);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+main {
+    padding: 18px;
+}
+
+.intro {
+    text-align: center;
+    padding: 8px 5px 18px;
+}
+
+.intro h2 {
+    color: #123d34;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.intro p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.section-heading {
+    text-align: center;
+    color: #123d34;
+    font-size: 18px;
+    margin: 25px 0 13px;
+    padding: 12px;
+    background: #f1dfb0;
+    border-radius: 13px;
+}
+
+.reading-card {
+    background: white;
+    border: 1px solid #e6dfd0;
+    border-radius: 17px;
+    padding: 19px 13px;
+    margin-bottom: 13px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.035);
+}
+
+.arabic {
+    direction: rtl;
+    text-align: center;
+    font-family: 'Amiri Quran', 'Amiri', serif;
+    font-size: 27px;
+    line-height: 2.15;
+    color: #172f27;
+    overflow-wrap: break-word;
+}
+
+.repeat {
+    display: block;
+    text-align: center;
+    color: #94763c;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 12px;
+    direction: ltr;
+}
+
+.dua-label {
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    color: #94763c;
+    margin-bottom: 12px;
+}
+
+.back-home {
+    width: 100%;
+    border: none;
+    background: #123d34;
+    color: white;
+    padding: 15px;
+    border-radius: 28px;
+    font-size: 15px;
+    margin: 20px 0 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 22px 10px;
+    color: #999;
+    font-size: 11px;
+}
+
+/* DARK MODE */
+
+body.dark {
+    background: #111;
+    color: #eee;
+}
+
+body.dark .app {
+    background: #181818;
+}
+
+body.dark .intro h2 {
+    color: #f1dfb0;
+}
+
+body.dark .intro p {
+    color: #aaa;
+}
+
+body.dark .reading-card {
+    background: #222;
+    border-color: #383838;
+}
+
+body.dark .arabic {
+    color: #fff;
+}
+
+body.dark .section-heading {
+    background: #314c43;
+    color: #f1dfb0;
+}
+
+body.dark .repeat,
+body.dark .dua-label {
+    color: #e3c987;
+}
+
+body.dark footer {
+    color: #888;
+}
+
+@media (max-width:360px) {
+    .arabic {
+        font-size: 24px;
+        line-height: 2.1;
+    }
+
+    main {
+        padding: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <div class="icon">📿</div>
+    <h1 id="page-title">റാത്തീബുൽ ഹദ്ദാദ്</h1>
+    <p id="page-subtitle">റാത്തീബും സമാപന ദുആകളും</p>
+
+    <div class="top-buttons">
+        <button onclick="goBack()" id="back-button">← തിരികെ</button>
+        <button onclick="toggleDark()" id="dark-button">🌙</button>
+    </div>
+</header>
+
+<main>
+
+<section class="intro">
+    <h2 id="intro-title">رَاتِبُ الْحَدَّاد</h2>
+    <p id="intro-text">ശ്രദ്ധയോടെയും ശാന്തതയോടെയും പാരായണം ചെയ്യുക.</p>
+</section>
+
+<h2 class="section-heading" id="ratib-heading">റാത്തീബുൽ ഹദ്ദാദ്</h2>
+
+<!-- OPENING -->
+
+<div class="reading-card">
+    <div class="arabic">
+        إِلَى حَضْرَةِ سَيِّدِنَا وَشَفِيعِنَا وَنَبِيِّنَا وَمَوْلَانَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، الْفَاتِحَة
+    </div>
+    <span class="repeat">الْفَاتِحَة</span>
+</div>
+
+<!-- AL FATIHA -->
+
+<div class="reading-card">
+    <div class="arabic">
+        أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ
+        <br>
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        <br>
+        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+        <br>
+        الرَّحْمَٰنِ الرَّحِيمِ
+        <br>
+        مَالِكِ يَوْمِ الدِّينِ
+        <br>
+        إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+        <br>
+        اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+        <br>
+        صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ
+        <br>
+        غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+        <br>
+        آمِينَ
+    </div>
+    <span class="repeat">سُورَةُ الْفَاتِحَة</span>
+</div>
+
+<!-- AYATUL KURSI -->
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ
+        لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ
+        لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ
+        مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ
+        يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ
+        وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ
+        وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ
+        وَلَا يَئُودُهُ حِفْظُهُمَا ۚ
+        وَهُوَ الْعَلِيُّ الْعَظِيمُ
+    </div>
+    <span class="repeat">آيَةُ الْكُرْسِيِّ</span>
+</div>
+
+<!-- LAST TWO VERSES OF AL BAQARAH -->
+
+<div class="reading-card">
+    <div class="arabic">
+        آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ
+        كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ
+        لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ
+        وَقَالُوا سَمِعْنَا وَأَطَعْنَا غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ
+        <br><br>
+        لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ
+        لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ
+        رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا ۚ
+        رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا ۚ
+        رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ
+        وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ
+        أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ
+    </div>
+    <span class="repeat">سُورَةُ الْبَقَرَةِ ٢٨٥–٢٨٦</span>
+</div>
+
+<!-- MAIN RATIB -->
+
+<div class="reading-card">
+    <div class="arabic">
+        لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ
+        لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ
+        وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ
+        وَلَا إِلَٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+        سُبْحَانَ اللَّهِ الْعَظِيمِ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        رَبَّنَا اغْفِرْ لَنَا وَتُبْ عَلَيْنَا
+        إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ
+        اللَّهُمَّ صَلِّ عَلَيْهِ وَسَلِّمْ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ
+        مِنْ شَرِّ مَا خَلَقَ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ
+        مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ
+        وَلَا فِي السَّمَاءِ
+        وَهُوَ السَّمِيعُ الْعَلِيمُ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        رَضِينَا بِاللَّهِ رَبًّا
+        وَبِالْإِسْلَامِ دِينًا
+        وَبِمُحَمَّدٍ نَبِيًّا وَرَسُولًا
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ وَالْحَمْدُ لِلَّهِ
+        وَالْخَيْرُ وَالشَّرُّ بِمَشِيئَةِ اللَّهِ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        آمَنَّا بِاللَّهِ وَالْيَوْمِ الْآخِرِ
+        تُبْنَا إِلَى اللَّهِ بَاطِنًا وَظَاهِرًا
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا رَبَّنَا وَاعْفُ عَنَّا
+        وَامْحُ الَّذِي كَانَ مِنَّا
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا ذَا الْجَلَالِ وَالْإِكْرَامِ
+        أَمِتْنَا عَلَى دِينِ الْإِسْلَامِ
+    </div>
+    <span class="repeat">× ٧</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا قَوِيُّ يَا مَتِينُ
+        اِكْفِ شَرَّ الظَّالِمِينَ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        أَصْلَحَ اللَّهُ أُمُورَ الْمُسْلِمِينَ
+        صَرَفَ اللَّهُ شَرَّ الْمُؤْذِينَ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا عَلِيُّ يَا كَبِيرُ
+        يَا عَلِيمُ يَا قَدِيرُ
+        يَا سَمِيعُ يَا بَصِيرُ
+        يَا لَطِيفُ يَا خَبِيرُ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا فَارِجَ الْهَمِّ
+        يَا كَاشِفَ الْغَمِّ
+        يَا مَنْ لِعَبْدِهِ يَغْفِرُ وَيَرْحَمُ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        أَسْتَغْفِرُ اللَّهَ رَبَّ الْبَرَايَا
+        أَسْتَغْفِرُ اللَّهَ مِنَ الْخَطَايَا
+    </div>
+    <span class="repeat">× ٤</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        لَا إِلَٰهَ إِلَّا اللَّهُ
+    </div>
+    <span class="repeat">× ٥٠</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        مُحَمَّدٌ رَسُولُ اللَّهِ
+        صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        وَشَرَّفَ وَكَرَّمَ وَمَجَّدَ وَعَظَّمَ
+        رَضِيَ اللَّهُ تَعَالَى عَنْ أَهْلِ بَيْتِهِ الْمُطَهَّرِينَ
+        وَأَصْحَابِهِ الْمُهْتَدِينَ
+        وَالتَّابِعِينَ لَهُمْ بِإِحْسَانٍ إِلَى يَوْمِ الدِّينِ
+    </div>
+</div>
+
+<!-- THREE QULS -->
+
+<h2 class="section-heading" id="surah-heading">മൂന്ന് ഖുൽ സൂറത്തുകൾ</h2>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        <br>
+        قُلْ هُوَ اللَّهُ أَحَدٌ
+        <br>
+        اللَّهُ الصَّمَدُ
+        <br>
+        لَمْ يَلِدْ وَلَمْ يُولَدْ
+        <br>
+        وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ
+    </div>
+    <span class="repeat">سُورَةُ الْإِخْلَاصِ × ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        <br>
+        قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ
+        <br>
+        مِنْ شَرِّ مَا خَلَقَ
+        <br>
+        وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ
+        <br>
+        وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ
+        <br>
+        وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ
+    </div>
+    <span class="repeat">سُورَةُ الْفَلَقِ × ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        <br>
+        قُلْ أَعُوذُ بِرَبِّ النَّاسِ
+        <br>
+        مَلِكِ النَّاسِ
+        <br>
+        إِلَٰهِ النَّاسِ
+        <br>
+        مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ
+        <br>
+        الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ
+        <br>
+        مِنَ الْجِنَّةِ وَالنَّاسِ
+    </div>
+    <span class="repeat">سُورَةُ النَّاسِ × ٣</span>
+</div>
+
+<!-- CLOSING FATIHA AND DUAS -->
+
+<h2 class="section-heading" id="dua-heading">സമാപന ഫാത്തിഹകളും ദുആകളും</h2>
+
+<div class="reading-card">
+    <div class="arabic">
+        الْفَاتِحَةُ إِلَى سَيِّدِنَا وَشَفِيعِنَا
+        رَسُولِ اللَّهِ ﷺ وَآلِهِ وَأَصْحَابِهِ
+        وَأَزْوَاجِهِ وَذُرِّيَّاتِهِ
+        أَنَّ اللَّهَ يُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ
+        وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ
+        وَعُلُومِهِمْ وَبَرَكَاتِهِمْ
+        فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ
+        وَأَنَّ اللَّهَ يَجْعَلُنَا مِنْ حِزْبِهِمْ
+        وَيَرْزُقُنَا مَحَبَّتَهُمْ
+        وَيَتَوَفَّانَا عَلَى مِلَّتِهِمْ
+        وَيَحْشُرُنَا فِي زُمْرَتِهِمْ
+        فِي خَيْرٍ وَلُطْفٍ وَعَافِيَةٍ
+        الْفَاتِحَةُ
+    </div>
+    <span class="repeat">الْفَاتِحَة</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        الْفَاتِحَةُ إِلَى سَيِّدِنَا الْمُهَاجِرِ إِلَى اللَّهِ
+        أَحْمَدَ بْنِ عِيسَى
+        وَسَيِّدِنَا الْفَقِيهِ الْمُقَدَّمِ
+        مُحَمَّدِ بْنِ عَلِيٍّ بَاعَلَوِيٍّ
+        وَعَمِّهِ السَّيِّدِ عَلَوِيٍّ بَاعَلَوِيٍّ
+        وَصَاحِبِ الرَّاتِبِ الْحَبِيبِ
+        عَبْدِ اللَّهِ بْنِ عَلَوِيِّ بْنِ مُحَمَّدٍ الْحَدَّادِ
+        وَمَشَايِخِهِمْ وَتَلَامِيذِهِمْ
+        وَأُصُولِهِمْ وَفُرُوعِهِمْ
+        وَجَمِيعِ سَادَاتِنَا آلِ بَاعَلَوِيٍّ
+        أَنَّ اللَّهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ
+        وَيُعْلِي دَرَجَاتِهِمْ فِي الْجَنَّةِ
+        وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ
+        وَعُلُومِهِمْ وَبَرَكَاتِهِمْ
+        فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ
+        بِسِرِّ الْفَاتِحَةِ
+    </div>
+    <span class="repeat">الْفَاتِحَة</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        الْفَاتِحَةُ إِلَى أَرْوَاحِ الْأَوْلِيَاءِ
+        وَالشُّهَدَاءِ وَالصَّالِحِينَ
+        وَالْأَئِمَّةِ الرَّاشِدِينَ
+        ثُمَّ إِلَى أَرْوَاحِ وَالِدِينَا وَمَشَايِخِنَا
+        وَذَوِي الْحُقُوقِ عَلَيْنَا وَعَلَيْهِمْ أَجْمَعِينَ
+        <br><br>
+        ثُمَّ إِلَى أَرْوَاحِ أَمْوَاتِ هَذِهِ الْبَلْدَةِ
+        مِنَ الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ
+        وَالْمُسْلِمِينَ وَالْمُسْلِمَاتِ
+        أَنَّ اللَّهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ
+        وَيُسْكِنُهُمْ فِي الْجَنَّةِ
+        وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَأَنْوَارِهِمْ
+        وَعُلُومِهِمْ وَبَرَكَاتِهِمْ
+        فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ
+        بِسِرِّ الْفَاتِحَةِ
+    </div>
+    <span class="repeat">الْفَاتِحَة</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        الْفَاتِحَةُ بِالْقَبُولِ وَتَمَامِ كُلِّ سُؤْلٍ وَمَأْمُولٍ
+        وَصَلَاحِ الشَّأْنِ ظَاهِرًا وَبَاطِنًا
+        فِي الدُّنْيَا وَالْآخِرَةِ
+        دَافِعَةً لِكُلِّ شَرٍّ جَالِبَةً لِكُلِّ خَيْرٍ
+        لَنَا وَلِوَالِدِينَا وَمَشَايِخِنَا فِي الدِّينِ
+        مَعَ اللُّطْفِ وَالْعَافِيَةِ
+        وَعَلَى نِيَّةِ أَنَّ اللَّهَ يُنَوِّرُ قُلُوبَنَا وَقَوَالِبَنَا
+        مَعَ التُّقَى وَالْعَفَافِ وَالْغِنَى
+        وَالْمَوْتِ عَلَى دِينِ الْإِسْلَامِ وَالْإِيمَانِ
+        بِلَا مِحْنَةٍ وَلَا امْتِحَانٍ
+        بِحَقِّ سَيِّدِ وَلَدِ عَدْنَانَ
+        وَعَلَى كُلِّ نِيَّةٍ صَالِحَةٍ
+        وَإِلَى حَضْرَةِ النَّبِيِّ مُحَمَّدٍ
+        صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ
+        بِسِرِّ الْفَاتِحَةِ
+    </div>
+    <span class="repeat">الْفَاتِحَة</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ إِنَّا نَسْأَلُكَ رِضَاكَ وَالْجَنَّةَ
+        وَنَعُوذُ بِكَ مِنْ سَخَطِكَ وَالنَّارِ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا عَالِمَ السِّرِّ مِنَّا
+        لَا تَهْتِكِ السِّتْرَ عَنَّا
+        وَعَافِنَا وَاعْفُ عَنَّا
+        وَكُنْ لَنَا حَيْثُ كُنَّا
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا اللَّهُ بِهَا
+        يَا اللَّهُ بِهَا
+        يَا اللَّهُ بِحُسْنِ الْخَاتِمَةِ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        يَا لَطِيفًا لَمْ يَزَلْ
+        الْطُفْ بِنَا فِيمَا نَزَلْ
+        إِنَّكَ لَطِيفٌ لَمْ تَزَلْ
+        الْطُفْ بِنَا وَالْمُسْلِمِينَ
+    </div>
+    <span class="repeat">× ٣</span>
+</div>
+
+<!-- FINAL DUA -->
+
+<h2 class="section-heading" id="final-dua-heading">അവസാന ദുആ</h2>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        <br><br>
+        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+        حَمْدًا يُوَافِي نِعَمَهُ وَيُكَافِئُ مَزِيدَهُ
+        يَا رَبَّنَا لَكَ الْحَمْدُ
+        كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ
+        وَعَظِيمِ سُلْطَانِكَ
+        <br><br>
+        سُبْحَانَكَ لَا نُحْصِي ثَنَاءً عَلَيْكَ
+        أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ
+        فَلَكَ الْحَمْدُ حَتَّى تَرْضَى
+        وَلَكَ الْحَمْدُ إِذَا رَضِيتَ
+        وَلَكَ الْحَمْدُ بَعْدَ الرِّضَا
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ فِي الْأَوَّلِينَ
+        وَصَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ فِي الْآخِرِينَ
+        وَصَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ فِي كُلِّ وَقْتٍ وَحِينٍ
+        وَصَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ فِي الْمَلَإِ الْأَعْلَى إِلَى يَوْمِ الدِّينِ
+        وَصَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ
+        حَتَّى تَرِثَ الْأَرْضَ وَمَنْ عَلَيْهَا
+        وَأَنْتَ خَيْرُ الْوَارِثِينَ
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ إِنَّا نَسْتَحْفِظُكَ وَنَسْتَوْدِعُكَ
+        أَدْيَانَنَا وَأَنْفُسَنَا وَأَمْوَالَنَا
+        وَأَهْلَنَا وَكُلَّ شَيْءٍ أَعْطَيْتَنَا
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ اجْعَلْنَا وَإِيَّاهُمْ فِي كَنَفِكَ
+        وَأَمَانِكَ وَعِيَاذِكَ
+        مِنْ كُلِّ شَيْطَانٍ مَرِيدٍ
+        وَجَبَّارٍ عَنِيدٍ
+        وَذِي عَيْنٍ وَذِي بَغْيٍ وَذِي حَسَدٍ
+        وَمِنْ شَرِّ كُلِّ ذِي شَرٍّ
+        إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        اللَّهُمَّ حُطْنَا بِالتَّقْوَى وَالِاسْتِقَامَةِ
+        وَأَعِذْنَا مِنْ مُوجِبَاتِ النَّدَامَةِ
+        فِي الْحَالِ وَالْمَآلِ
+        إِنَّكَ سَمِيعُ الدُّعَاءِ
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        وَصَلِّ اللَّهُمَّ بِجَلَالِكَ وَجَمَالِكَ
+        عَلَى سَيِّدِنَا مُحَمَّدٍ
+        وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ
+        وَارْزُقْنَا كَمَالَ الْمُتَابَعَةِ لَهُ
+        ظَاهِرًا وَبَاطِنًا
+        يَا أَرْحَمَ الرَّاحِمِينَ
+    </div>
+</div>
+
+<div class="reading-card">
+    <div class="arabic">
+        بِفَضْلِ سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ
+        وَسَلَامٌ عَلَى الْمُرْسَلِينَ
+        وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+    </div>
+</div>
+
+<button class="back-home" onclick="goBack()" id="bottom-back">
+    ← റാത്തീബ് പട്ടികയിലേക്ക് മടങ്ങുക
+</button>
+
+</main>
+
+<footer>Swalath • ذكر الله</footer>
+
+</div>
+
+<script>
+
+function goBack() {
+    window.location.href = "dhikr.html";
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "swalathDarkMode",
+        document.body.classList.contains("dark") ? "on" : "off"
+    );
+}
+
+function updatePageLanguage() {
+
+    const lang = window.SwalathLanguage &&
+        typeof window.SwalathLanguage.getCurrent === "function"
+        ? window.SwalathLanguage.getCurrent()
+        : (localStorage.getItem("swalath-language") || "en");
+
+    const ml = lang === "ml";
+
+    document.documentElement.lang = ml ? "ml" : "en";
+
+    document.getElementById("page-title").textContent =
+        ml ? "റാത്തീബുൽ ഹദ്ദാദ്" : "Ratib Al-Haddad";
+
+    document.getElementById("page-subtitle").textContent =
+        ml ? "റാത്തീബും സമാപന ദുആകളും" : "Ratib and Closing Duas";
+
+    document.getElementById("back-button").textContent =
+        ml ? "← തിരികെ" : "← Back";
+
+    document.getElementById("intro-text").textContent =
+        ml ? "ശ്രദ്ധയോടെയും ശാന്തതയോടെയും പാരായണം ചെയ്യുക." :
+        "Recite with attention and tranquillity.";
+
+    document.getElementById("ratib-heading").textContent =
+        ml ? "റാത്തീബുൽ ഹദ്ദാദ്" : "Ratib Al-Haddad";
+
+    document.getElementById("surah-heading").textContent =
+        ml ? "മൂന്ന് ഖുൽ സൂറത്തുകൾ" : "The Three Quls";
+
+    document.getElementById("dua-heading").textContent =
+        ml ? "സമാപന ഫാത്തിഹകളും ദുആകളും" : "Closing Fatiha and Duas";
+
+    document.getElementById("final-dua-heading").textContent =
+        ml ? "അവസാന ദുആ" : "Final Dua";
+
+    document.getElementById("bottom-back").textContent =
+        ml ? "← റാത്തീബ് പട്ടികയിലേക്ക് മടങ്ങുക" :
+        "← Back to Ratib List";
+}
+
+window.addEventListener("load", function() {
+
+    if (localStorage.getItem("swalathDarkMode") === "on") {
+        document.body.classList.add("dark");
+    }
+
+    updatePageLanguage();
+});
+
+document.addEventListener("swalath-language-changed", function() {
+    updatePageLanguage();
+});
+
+</script>
+
+</body>
+</html>
