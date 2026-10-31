@@ -907,8 +907,7 @@ async function fetchPrayerTimes(lat, lon) {
 
     const url = API + "timings/" + dateString() +
         "?latitude=" + encodeURIComponent(lat) +
-        "&longitude=" + encodeURIComponent(lon) +
-        "&method=10";
+        "&longitude=" + encodeURIComponent(lon);
 
     try {
         const response = await fetch(url);
@@ -926,6 +925,7 @@ async function fetchPrayerTimes(lat, lon) {
 
     } catch (error) {
         const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+
         if (cachedTimings) {
             try {
                 const parsedData = JSON.parse(cachedTimings);
@@ -937,7 +937,12 @@ async function fetchPrayerTimes(lat, lon) {
         }
 
         showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
-        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:() => fetchPrayerTimes(lat, lon)}]);
+        showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [
+            {
+                label: "വീണ്ടും ശ്രമിക്കുക",
+                onClick: () => fetchPrayerTimes(lat, lon)
+            }
+        ]);
     }
 }
 
