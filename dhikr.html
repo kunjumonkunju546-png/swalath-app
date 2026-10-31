@@ -611,6 +611,14 @@ window.addEventListener("load", function(){
         document.body.classList.add("dark");
     }
 
+    // Apply the saved language after the page is fully loaded
+    if (window.SwalathLanguage &&
+        typeof window.SwalathLanguage.applyLanguage === "function") {
+        window.SwalathLanguage.applyLanguage(
+            window.SwalathLanguage.getCurrent()
+        );
+    }
+
     renderDhikrCards();
     renderRatibCards();
 });
