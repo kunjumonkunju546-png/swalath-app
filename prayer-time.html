@@ -506,10 +506,26 @@ window.addEventListener("offline", checkNetworkStatus);
 function toggleMasterMute() {
     let isMuted = localStorage.getItem("swalathMasterMute") === "true";
     isMuted = !isMuted;
+
     localStorage.setItem("swalathMasterMute", String(isMuted));
     updateMasterMuteButton();
-}
 
+    try {
+        if (typeof AndroidAdhan !== "undefined") {
+            if (isMuted) {
+                if (AndroidAdhan.cancelAllAdhanAlarms) {
+                    AndroidAdhan.cancelAllAdhanAlarms();
+                }
+            } else {
+                if (lastPrayerData && lastPrayerData.timings) {
+                    scheduleAllPrayersAndroid(lastPrayerData.timings);
+                }
+            }
+        }
+    } catch (e) {
+        console.log("Master mute alarm error:", e);
+    }
+}
 function updateMasterMuteButton() {
     const btn = document.getElementById("masterMuteBtn");
     if (!btn) return;
@@ -526,8 +542,45 @@ function updateMasterMuteButton() {
 function savePrayerPreference(prayerKey) {
     const mapKey = prayerKey.toLowerCase();
     const checkbox = document.getElementById(mapKey + "Adhan");
-    if (checkbox) {
-        localStorage.setItem("prayer_adhan_" + prayerKey, String(checkbox.checked));
+
+    if (!checkbox) return;
+
+    localStorage.setItem(
+        "prayer_adhan_" + prayerKey,
+        String(checkbox.checked)
+    );
+
+    try {
+        if (typeof AndroidAdhan === "undefined") return;
+
+        const isMasterMuted =
+            localStorage.getItem("swalathMasterMute") === "true";
+
+        if (!checkbox.checked || isMasterMuted) {
+            if (AndroidAdhan.cancelAdhanAlarm) {
+                AndroidAdhan.cancelAdhanAlarm(prayerKey);
+            }
+            return;
+        }
+
+        if (lastPrayerData && lastPrayerData.timings) {
+            const minutes = parseTime(
+                lastPrayerData.timings[prayerKey]
+            );
+
+            if (minutes !== null && AndroidAdhan.scheduleAdhanAlarm) {
+                const hour = Math.floor(minutes / 60);
+                const minute = minutes % 60;
+
+                AndroidAdhan.scheduleAdhanAlarm(
+                    hour,
+                    minute,
+                    prayerKey
+                );
+            }
+        }
+    } catch (e) {
+        console.log("Prayer preference alarm error:", e);
     }
 }
 
@@ -643,29 +696,49 @@ function getNextPrayer(timings) {
 
 function scheduleAllPrayersAndroid(timings) {
     try {
-        if (typeof AndroidAdhan === "undefined" || !AndroidAdhan.scheduleAdhanAlarm) return;
+        if (typeof AndroidAdhan === "undefined") return;
 
-        const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
-        if (isMasterMuted) return;
+        const isMasterMuted =
+            localStorage.getItem("swalathMasterMute") === "true";
+
+        if (isMasterMuted) {
+            if (AndroidAdhan.cancelAllAdhanAlarms) {
+                AndroidAdhan.cancelAllAdhanAlarms();
+            }
+            return;
+        }
 
         mainPrayers.forEach(prayer => {
-            const timeStr = timings[prayer.key];
-            const pMinutes = parseTime(timeStr);
+            const isEnabled =
+                localStorage.getItem("prayer_adhan_" + prayer.key);
+
+            if (isEnabled === "false") {
+                if (AndroidAdhan.cancelAdhanAlarm) {
+                    AndroidAdhan.cancelAdhanAlarm(prayer.key);
+                }
+                return;
+            }
+
+            const pMinutes = parseTime(timings[prayer.key]);
+
             if (pMinutes === null) return;
 
-            const isEnabled = localStorage.getItem("prayer_adhan_" + prayer.key);
-            if (isEnabled === "false") return;
-
             const hour = Math.floor(pMinutes / 60);
-            const min = pMinutes % 60;
+            const minute = pMinutes % 60;
 
-            AndroidAdhan.scheduleAdhanAlarm(hour, min, prayer.key);
+            if (AndroidAdhan.scheduleAdhanAlarm) {
+                AndroidAdhan.scheduleAdhanAlarm(
+                    hour,
+                    minute,
+                    prayer.key
+                );
+            }
         });
+
     } catch (e) {
         console.log("Alarm schedule error:", e);
     }
 }
-
 function checkAdhanTime(timings) {
     const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
     if (isMasterMuted) return;
