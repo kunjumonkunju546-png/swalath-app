@@ -886,10 +886,33 @@ function showPrayerLoading(message) {
 function loadCachedCoordinates() {
     try {
         const saved = localStorage.getItem(CACHE_KEY);
-        if (!saved) return null;
+        const savedTime = localStorage.getItem(CACHE_TIME_KEY);
+
+        if (!saved || !savedTime) return null;
+
         const parsed = JSON.parse(saved);
-        if (typeof parsed.lat !== "number" || typeof parsed.lon !== "number") return null;
+        const savedAt = Number(savedTime);
+
+        if (
+            typeof parsed.lat !== "number" ||
+            typeof parsed.lon !== "number" ||
+            !Number.isFinite(parsed.lat) ||
+            !Number.isFinite(parsed.lon) ||
+            Math.abs(parsed.lat) > 90 ||
+            Math.abs(parsed.lon) > 180
+        ) {
+            return null;
+        }
+
+        const age = Date.now() - savedAt;
+        const maxAge = 24 * 60 * 60 * 1000;
+
+        if (age < 0 || age > maxAge) {
+            return null;
+        }
+
         return parsed;
+
     } catch (e) {
         return null;
     }
@@ -897,15 +920,32 @@ function loadCachedCoordinates() {
 
 function saveCoordinates(lat, lon) {
     try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify({lat,lon}));
-        localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
-    } catch (e) {}
-}
+        if (
+            !Number.isFinite(lat) ||
+            !Number.isFinite(lon) ||
+            Math.abs(lat) > 90 ||
+            Math.abs(lon) > 180
+        ) {
+            return;
+        }
 
+        localStorage.setItem(CACHE_KEY, JSON.stringify({lat, lon}));
+        localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
+
+    } catch (e) {
+        console.log("Location save error:", e);
+    }
+}
 async function fetchPrayerTimes(lat, lon) {
     showPrayerLoading("നിങ്ങളുടെ സ്ഥലത്തെ നമസ്കാര സമയം ലഭ്യമാക്കുന്നു...");
 
-    const url = API + "timings/" + dateString() +
+    const requestedDate = dateString();
+    const cacheKey = CACHE_TIMINGS_KEY + "_" +
+        requestedDate + "_" +
+        lat.toFixed(3) + "_" +
+        lon.toFixed(3);
+
+    const url = API + "timings/" + requestedDate +
         "?latitude=" + encodeURIComponent(lat) +
         "&longitude=" + encodeURIComponent(lon);
 
@@ -914,29 +954,40 @@ async function fetchPrayerTimes(lat, lon) {
         if (!response.ok) throw new Error("Network error");
 
         const result = await response.json();
+
         if (result.code !== 200 || !result.data || !result.data.timings) {
             throw new Error("Prayer times unavailable");
         }
 
-        localStorage.setItem(CACHE_TIMINGS_KEY, JSON.stringify(result.data));
+        localStorage.setItem(cacheKey, JSON.stringify(result.data));
+
+        document.getElementById("offlineBanner").style.display = "none";
 
         renderPrayerTimes(result.data);
         hideLocationStatus();
 
     } catch (error) {
-        const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+        console.log("Prayer times fetch error:", error);
+
+        const cachedTimings = localStorage.getItem(cacheKey);
 
         if (cachedTimings) {
             try {
                 const parsedData = JSON.parse(cachedTimings);
-                renderPrayerTimes(parsedData);
-                document.getElementById("offlineBanner").style.display = "block";
-                hideLocationStatus();
-                return;
-            } catch(e) {}
+
+                if (parsedData.timings) {
+                    renderPrayerTimes(parsedData);
+                    document.getElementById("offlineBanner").style.display = "block";
+                    hideLocationStatus();
+                    return;
+                }
+            } catch(e) {
+                console.log("Cached prayer data error:", e);
+            }
         }
 
         showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
+
         showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [
             {
                 label: "വീണ്ടും ശ്രമിക്കുക",
@@ -994,18 +1045,36 @@ function startLocation() {
 
 function fallbackToDefaultLocation() {
     locationRequestInProgress = false;
-    const defaultLat = 10.8505; 
-    const defaultLon = 76.2711;
-    coordinates = { lat: defaultLat, lon: defaultLon };
-    fetchPrayerTimes(defaultLat, defaultLon);
-    document.getElementById("locationName").textContent = "Kerala, India";
-    
+
+    coordinates = null;
+
+    document.getElementById("locationName").textContent =
+        window.SwalathLanguage &&
+        window.SwalathLanguage.t
+            ? window.SwalathLanguage.t("locationUnavailable")
+            : "സ്ഥലം ലഭ്യമല്ല";
+
+    showPrayerLoading(
+        window.SwalathLanguage &&
+        window.SwalathLanguage.t
+            ? window.SwalathLanguage.t("enableLocation")
+            : "നമസ്കാര സമയം ലഭിക്കാൻ Location ഓൺ ചെയ്യുക."
+    );
+
     showLocationStatus(
-        "കൃത്യമായ GPS ലൊക്കേഷൻ ലഭിച്ചില്ല. തൽക്കാലത്തേക്ക് ഡിഫോൾട്ട് സമയം കാണിക്കുന്നു. വീണ്ടും ശ്രമിക്കാൻ താഴെ ക്ലിക്ക് ചെയ്യുക.",
-        [{label:"വീണ്ടും ശ്രമിക്കുക", onClick:startLocation}]
+        window.SwalathLanguage &&
+        window.SwalathLanguage.t
+            ? window.SwalathLanguage.t("locationPermissionMessage")
+            : "നിങ്ങളുടെ നിലവിലെ സ്ഥലം കണ്ടെത്താൻ Location അനുമതി നൽകുക.",
+        [{
+            label: window.SwalathLanguage &&
+                   window.SwalathLanguage.t
+                ? window.SwalathLanguage.t("tryAgain")
+                : "വീണ്ടും ശ്രമിക്കുക",
+            onClick: startLocation
+        }]
     );
 }
-
 async function lookupCityName(lat, lon) {
     try {
         const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + lat + "&lon=" + lon;
@@ -1058,11 +1127,19 @@ if (cached) {
     }
     
     fetchPrayerTimes(cached.lat, cached.lon);
-} else {
-    const defaultLat = 10.8505; 
-    const defaultLon = 76.2711;
-    fetchPrayerTimes(defaultLat, defaultLon);
-    document.getElementById("locationName").textContent = "Kerala, India";
+const cached = loadCachedCoordinates();
+if (cached) {
+    coordinates = cached;
+    document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
+
+    const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
+    if (cachedTimings) {
+        try {
+            renderPrayerTimes(JSON.parse(cachedTimings));
+        } catch(e) {}
+    }
+
+    fetchPrayerTimes(cached.lat, cached.lon);
 }
 
 startLocation();
