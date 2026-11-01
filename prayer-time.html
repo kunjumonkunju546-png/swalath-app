@@ -589,6 +589,16 @@ const lon = position.coords.longitude;
 
 coordinates = {lat,lon};
 saveCoordinates(lat,lon);
+  try {
+    if (
+        typeof AndroidAdhan !== "undefined" &&
+        AndroidAdhan.savePrayerLocation
+    ) {
+        AndroidAdhan.savePrayerLocation(lat, lon);
+    }
+} catch (e) {
+    console.log("Android location save error:", e);
+}
 
 await fetchPrayerTimes(lat,lon);
 
