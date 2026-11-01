@@ -488,6 +488,7 @@ const prayerItems = [
 const mainPrayers = prayerItems.filter(p => p.key !== "Sunrise");
 
 let coordinates = null;
+    let prayerTimeZone = null;
 let locationRequestInProgress = false;
 let lastPrayerData = null;
 let lastPlayedMinuteKey = "";
@@ -603,11 +604,37 @@ function getPrayerName(prayer) {
 }
 
 function dateString(date = new Date()) {
-    return date.getFullYear() + "-" +
-        String(date.getMonth()+1).padStart(2,"0") + "-" +
-        String(date.getDate()).padStart(2,"0");
-}
+    try {
+        const options = {
+            timeZone: prayerTimeZone || undefined,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        };
 
+        const parts = new Intl.DateTimeFormat(
+            "en-CA",
+            options
+        ).formatToParts(date);
+
+        const values = {};
+
+        parts.forEach(part => {
+            values[part.type] = part.value;
+        });
+
+        return values.year + "-" +
+            values.month + "-" +
+            values.day;
+
+    } catch (e) {
+        console.log("Timezone date error:", e);
+
+        return date.getFullYear() + "-" +
+            String(date.getMonth() + 1).padStart(2, "0") + "-" +
+            String(date.getDate()).padStart(2, "0");
+    }
+}
 function updateDates() {
     const now = new Date();
     const currentLang = window.SwalathLanguage && typeof window.SwalathLanguage.getCurrent === "function" 
@@ -683,17 +710,41 @@ function formatTime(value) {
 }
 
 function getNextPrayer(timings) {
-    const now = new Date();
-    const current = now.getHours()*60 + now.getMinutes();
+    let current;
+
+    try {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+            timeZone: prayerTimeZone || undefined,
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }).formatToParts(new Date());
+
+        const values = {};
+
+        parts.forEach(part => {
+            values[part.type] = part.value;
+        });
+
+        current =
+            Number(values.hour) * 60 +
+            Number(values.minute);
+
+    } catch (e) {
+        const now = new Date();
+        current = now.getHours() * 60 + now.getMinutes();
+    }
 
     for (const prayer of mainPrayers) {
         const minutes = parseTime(timings[prayer.key]);
-        if (minutes !== null && minutes > current) return prayer;
+
+        if (minutes !== null && minutes > current) {
+            return prayer;
+        }
     }
 
     return mainPrayers[0];
 }
-
 function scheduleAllPrayersAndroid(timings) {
     try {
         if (typeof AndroidAdhan === "undefined") return;
@@ -740,34 +791,66 @@ function scheduleAllPrayersAndroid(timings) {
     }
 }
 function checkAdhanTime(timings) {
-    const isMasterMuted = localStorage.getItem("swalathMasterMute") === "true";
+    const isMasterMuted =
+        localStorage.getItem("swalathMasterMute") === "true";
+
     if (isMasterMuted) return;
 
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentMinuteKey = dateString() + "_" + currentHour + "_" + currentMinute;
+    let currentHour;
+    let currentMinute;
+
+    try {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+            timeZone: prayerTimeZone || undefined,
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }).formatToParts(new Date());
+
+        const values = {};
+
+        parts.forEach(part => {
+            values[part.type] = part.value;
+        });
+
+        currentHour = Number(values.hour);
+        currentMinute = Number(values.minute);
+
+    } catch (e) {
+        const now = new Date();
+        currentHour = now.getHours();
+        currentMinute = now.getMinutes();
+    }
+
+    const currentMinuteKey =
+        dateString() + "_" + currentHour + "_" + currentMinute;
 
     if (lastPlayedMinuteKey === currentMinuteKey) return;
 
-    mainPrayers.forEach(prayer => {
-        const timeStr = timings[prayer.key];
-        const pMinutes = parseTime(timeStr);
-        if (pMinutes === null) return;
+    for (const prayer of mainPrayers) {
+        const pMinutes = parseTime(timings[prayer.key]);
+
+        if (pMinutes === null) continue;
 
         const prayerHour = Math.floor(pMinutes / 60);
         const prayerMin = pMinutes % 60;
 
-        if (currentHour === prayerHour && currentMinute === prayerMin) {
-            const isEnabled = localStorage.getItem("prayer_adhan_" + prayer.key);
-            if (isEnabled === "false") return;
+        if (
+            currentHour === prayerHour &&
+            currentMinute === prayerMin
+        ) {
+            const isEnabled = localStorage.getItem(
+                "prayer_adhan_" + prayer.key
+            );
+
+            if (isEnabled === "false") continue;
 
             lastPlayedMinuteKey = currentMinuteKey;
             playAdhanAudio();
+            break;
         }
-    });
+    }
 }
-
 function playAdhanAudio() {
     try {
         if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.playAdhan) {
@@ -940,6 +1023,7 @@ async function fetchPrayerTimes(lat, lon) {
     showPrayerLoading("നിങ്ങളുടെ സ്ഥലത്തെ നമസ്കാര സമയം ലഭ്യമാക്കുന്നു...");
 
     const requestedDate = dateString();
+
     const cacheKey = CACHE_TIMINGS_KEY + "_" +
         requestedDate + "_" +
         lat.toFixed(3) + "_" +
@@ -951,15 +1035,31 @@ async function fetchPrayerTimes(lat, lon) {
 
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error("Network error");
+
+        if (!response.ok) {
+            throw new Error("Network error");
+        }
 
         const result = await response.json();
 
-        if (result.code !== 200 || !result.data || !result.data.timings) {
+        if (
+            result.code !== 200 ||
+            !result.data ||
+            !result.data.timings
+        ) {
             throw new Error("Prayer times unavailable");
         }
 
-        localStorage.setItem(cacheKey, JSON.stringify(result.data));
+        prayerTimeZone =
+            result.data.meta &&
+            result.data.meta.timezone
+                ? result.data.meta.timezone
+                : null;
+
+        localStorage.setItem(
+            cacheKey,
+            JSON.stringify(result.data)
+        );
 
         document.getElementById("offlineBanner").style.display = "none";
 
@@ -976,17 +1076,29 @@ async function fetchPrayerTimes(lat, lon) {
                 const parsedData = JSON.parse(cachedTimings);
 
                 if (parsedData.timings) {
+
+                    prayerTimeZone =
+                        parsedData.meta &&
+                        parsedData.meta.timezone
+                            ? parsedData.meta.timezone
+                            : null;
+
                     renderPrayerTimes(parsedData);
+
                     document.getElementById("offlineBanner").style.display = "block";
+
                     hideLocationStatus();
                     return;
                 }
-            } catch(e) {
+
+            } catch (e) {
                 console.log("Cached prayer data error:", e);
             }
         }
 
-        showPrayerLoading("നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.");
+        showPrayerLoading(
+            "നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക."
+        );
 
         showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.", [
             {
@@ -996,7 +1108,6 @@ async function fetchPrayerTimes(lat, lon) {
         ]);
     }
 }
-
 function startLocation() {
     if (locationRequestInProgress) return;
 
@@ -1115,30 +1226,10 @@ loadPreferences();
 updateDates();
 
 const cached = loadCachedCoordinates();
+
 if (cached) {
     coordinates = cached;
     document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
-    
-    const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
-    if (cachedTimings) {
-        try {
-            renderPrayerTimes(JSON.parse(cachedTimings));
-        } catch(e) {}
-    }
-    
-    fetchPrayerTimes(cached.lat, cached.lon);
-const cached = loadCachedCoordinates();
-if (cached) {
-    coordinates = cached;
-    document.getElementById("locationName").textContent = "നിങ്ങളുടെ സ്ഥലം";
-
-    const cachedTimings = localStorage.getItem(CACHE_TIMINGS_KEY);
-    if (cachedTimings) {
-        try {
-            renderPrayerTimes(JSON.parse(cachedTimings));
-        } catch(e) {}
-    }
-
     fetchPrayerTimes(cached.lat, cached.lon);
 }
 
