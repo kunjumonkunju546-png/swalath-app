@@ -470,6 +470,22 @@ localStorage.setItem(CACHE_TIME_KEY,String(Date.now()));
 console.log("Location save error:",e);
 }
 }
+  function saveCachedLocationToAndroid(location) {
+    try {
+        if (
+            location &&
+            typeof AndroidAdhan !== "undefined" &&
+            AndroidAdhan.savePrayerLocation
+        ) {
+            AndroidAdhan.savePrayerLocation(
+                location.lat,
+                location.lon
+            );
+        }
+    } catch (e) {
+        console.log("Cached Android location save error:", e);
+    }
+}
 
 function getCacheKey(date,lat,lon) {
 return CACHE_TIMINGS_KEY + "_" + date + "_" +
@@ -617,6 +633,7 @@ const cached = loadCachedCoordinates();
 if (cached) {
 coordinates = cached;
 document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
+  saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 hideLocationStatus();
 } else {
@@ -716,6 +733,7 @@ const cached = loadCachedCoordinates();
 if (cached) {
 coordinates = cached;
 document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
+  saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 }
 
