@@ -913,18 +913,6 @@ window.SwalathLanguage.applyLanguage(window.SwalathLanguage.getCurrent());
     }
 );
 
-// ഭാഷ മാറുമ്പോൾ ബട്ടണുകളുടെ ടെക്സ്റ്റ് മാത്രം പുതുക്കുക.
-document.addEventListener("swalath-language-changed", updateDuaPageLanguage);
-});
-// പേജ് ലോഡ് ആയ ശേഷം നിലവിലെ ഭാഷ പ്രയോഗിക്കുക.
-window.addEventListener("load", function () {
-    if (window.SwalathLanguage &&
-        typeof window.SwalathLanguage.applyLanguage === "function") {
-        window.SwalathLanguage.applyLanguage(
-            window.SwalathLanguage.getCurrent()
-        );
-    }
-});
 </script>
 
 </body>
