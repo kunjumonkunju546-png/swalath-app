@@ -1,3 +1,471 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#103b30">
+<title>Prayer Times | സ്വലാത്ത്</title>
+
+<link rel="stylesheet" href="share-card.css">
+<script src="share-card.js" defer></script>
+<script src="language.js"></script>
+
+<style>
+:root {
+    --bg:#f7f7f2;
+    --green:#103b30;
+    --green2:#1b5141;
+    --gold:#ddc486;
+    --text:#25372d;
+    --muted:#899087;
+    --line:#e7e9e1;
+    --active:#edf3eb;
+}
+* { box-sizing:border-box; }
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+.page {
+    width:100%;
+    max-width:540px;
+    min-height:100vh;
+    margin:auto;
+    padding:19px 21px 28px;
+}
+.topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:20px;
+}
+.top-left {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.back-btn {
+    width:39px;
+    height:39px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:transparent;
+    color:var(--green);
+    font-size:23px;
+    cursor:pointer;
+}
+.brand-title {
+    color:var(--green);
+    font-size:18px;
+    font-weight:700;
+}
+.brand-subtitle {
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:4px;
+}
+.location-chip {
+    max-width:155px;
+    border:0;
+    background:transparent;
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:11px;
+    text-align:right;
+    cursor:pointer;
+}
+#locationName {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* OFFLINE BANNER */
+.offline-banner {
+    background: #e67e22;
+    color: white;
+    text-align: center;
+    font-size: 11px;
+    padding: 6px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: none;
+    font-weight: bold;
+}
+
+.hero {
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    padding:27px 22px 23px;
+    min-height:250px;
+    border-radius:24px;
+    color:white;
+    background:
+        radial-gradient(circle at 95% 5%,
+        rgba(221,196,134,.15),transparent 32%),
+        linear-gradient(145deg,#0b2d24,#164b3a 65%,#205640);
+    margin-bottom:20px;
+}
+.hero::before {
+    content:"☾";
+    position:absolute;
+    z-index:-1;
+    right:14px;
+    top:0;
+    color:rgba(221,196,134,.11);
+    font-size:105px;
+    line-height:1;
+}
+.hero-label {
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:2.5px;
+    margin-bottom:15px;
+}
+.arabic-title {
+    font-family:Georgia,serif;
+    font-size:25px;
+    margin-bottom:12px;
+}
+.today-date {
+    font-size:13px;
+    color:#e2e9e0;
+    line-height:1.8;
+}
+.hijri-date {
+    font-size:11px;
+    color:var(--gold);
+    margin-top:3px;
+}
+.hero-divider {
+    height:1px;
+    background:rgba(255,255,255,.17);
+    margin:21px 0 17px;
+}
+.next-label {
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:9px;
+}
+.next-content {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+.next-name {
+    font-size:19px;
+    font-weight:700;
+}
+.next-arabic {
+    font-size:11px;
+    color:#d7e1d7;
+    margin-top:5px;
+}
+.next-time {
+    color:var(--gold);
+    font-size:25px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+/* COMPACT PREMIUM ADHAN CONTROL PANEL */
+.adhan-control-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 16px 18px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(16,59,48,0.04);
+}
+.adhan-control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.adhan-control-header h3 {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+}
+.master-mute-btn {
+    background: #103b30;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.adhan-toggles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+.adhan-toggle-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    font-family: Georgia, serif;
+    background: #fcfcf9;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    color: var(--green);
+    font-weight: bold;
+}
+.adhan-toggle-item input {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--green);
+}
+
+.section-heading {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:0 1px 11px;
+}
+.section-heading h2 {
+    color:var(--green);
+    font-size:17px;
+    margin:0;
+}
+.section-heading span {
+    font-size:10px;
+    color:var(--muted);
+}
+.prayer-row {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    min-height:69px;
+    padding:12px 13px;
+    border-bottom:1px solid var(--line);
+    border-radius:12px;
+}
+.prayer-row:last-child { border-bottom-color:transparent; }
+.prayer-row.next { background:var(--active); }
+.prayer-info {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-width:0;
+}
+.prayer-indicator {
+    width:3px;
+    height:35px;
+    flex-shrink:0;
+    border-radius:5px;
+    background:#d9dfd4;
+}
+.prayer-row.next .prayer-indicator { background:var(--green); }
+.prayer-name {
+    font-size:14px;
+    font-weight:700;
+}
+.prayer-arabic {
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+.next-tag {
+    color:#47734f;
+    font-size:9px;
+    margin-top:4px;
+}
+.prayer-time {
+    color:var(--green);
+    font-size:16px;
+    font-weight:700;
+    white-space:nowrap;
+}
+.status {
+    text-align:center;
+    padding:28px 15px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.9;
+}
+.status-icon {
+    font-size:29px;
+    margin-bottom:8px;
+}
+.action-btn {
+    display:inline-block;
+    margin:9px 4px 0;
+    padding:11px 18px;
+    border:0;
+    border-radius:22px;
+    background:var(--green);
+    color:white;
+    font-size:12px;
+    cursor:pointer;
+}
+.action-btn.secondary {
+    color:var(--green);
+    background:#e8eee6;
+}
+.footer {
+    text-align:center;
+    padding:26px 0 5px;
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+body.dark-mode {
+    --bg:#111713;
+    --green:#d7e6d8;
+    --text:#e9eee8;
+    --muted:#a6b0a5;
+    --line:#343d35;
+    --active:#25362a;
+}
+body.dark-mode .back-btn {
+    color:var(--green);
+    border-color:var(--line);
+}
+body.dark-mode .brand-title,
+body.dark-mode .section-heading h2,
+body.dark-mode .prayer-time,
+body.dark-mode .location-chip,
+body.dark-mode .adhan-control-header h3 {
+    color:var(--green);
+}
+body.dark-mode .prayer-row.next .prayer-indicator {
+    background:#d7e6d8;
+}
+body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
+    background: #19251f;
+    border-color: #32463b;
+    color: #e9eee8;
+}
+
+@media(max-width:360px) {
+    .page { padding:15px 13px 24px; }
+    .hero { padding:24px 17px 21px; }
+    .next-time { font-size:22px; }
+    .prayer-row { padding:11px 9px; }
+    .prayer-time { font-size:15px; }
+    .adhan-toggles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header class="topbar">
+    <div class="top-left">
+        <button class="back-btn" onclick="goBack()" aria-label="Back">←</button>
+        <div>
+            <div class="brand-title">സ്വലാത്ത്</div>
+            <div class="brand-subtitle">PRAYER TIMES</div>
+        </div>
+    </div>
+
+    <button class="location-chip" onclick="startLocation()" aria-label="Refresh location">
+        <span>📍</span>
+        <span id="locationName">സ്ഥലം കണ്ടെത്തുന്നു...</span>
+    </button>
+</header>
+
+<!-- OFFLINE ALERT BANNER -->
+<div id="offlineBanner" class="offline-banner">⚠️ You are offline. Showing saved prayer times.</div>
+
+<section class="hero">
+    <div class="hero-label">DAILY PRAYER</div>
+    <div class="arabic-title">أَوْقَاتُ الصَّلَاة</div>
+    <div class="today-date" id="todayDate"></div>
+    <div class="hijri-date" id="hijriDate"></div>
+
+    <div class="hero-divider"></div>
+
+    <div class="next-label">UPCOMING PRAYER</div>
+    <div class="next-content">
+        <div>
+            <div class="next-name" id="nextName">സമയം കണ്ടെത്തുന്നു...</div>
+            <div class="next-arabic" id="nextArabic"></div>
+        </div>
+        <div class="next-time" id="nextTime">--:--</div>
+    </div>
+</section>
+
+<!-- ADHAN CONTROL & QUICK MUTE PANEL -->
+<section class="adhan-control-card">
+    <div class="adhan-control-header">
+        <h3>🕌 Adhan Sound Settings</h3>
+        <button id="masterMuteBtn" class="master-mute-btn" onclick="toggleMasterMute()">🔔 Adhan ON</button>
+    </div>
+    <div class="adhan-toggles">
+        <label class="adhan-toggle-item">
+            <span>الفجر (Fajr)</span>
+            <input type="checkbox" id="fajrAdhan" checked onchange="savePrayerPreference('Fajr')">
+        </label>
+        <label class="adhan-toggle-item">
+            <span>الظهر (Dhuhr)</span>
+            <input type="checkbox" id="dhuhrAdhan" checked onchange="savePrayerPreference('Dhuhr')">
+        </label>
+        <label class="adhan-toggle-item">
+            <span>العصر (Asr)</span>
+            <input type="checkbox" id="asrAdhan" checked onchange="savePrayerPreference('Asr')">
+        </label>
+        <label class="adhan-toggle-item">
+            <span>المغرب (Maghrib)</span>
+            <input type="checkbox" id="maghribAdhan" checked onchange="savePrayerPreference('Maghrib')">
+        </label>
+        <label class="adhan-toggle-item" style="grid-column: span 2;">
+            <span>العشاء (Isha)</span>
+            <input type="checkbox" id="ishaAdhan" checked onchange="savePrayerPreference('Isha')">
+        </label>
+    </div>
+
+    <div style="margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; text-align: center;">
+        <button onclick="openBatterySettings()" style="background: transparent; border: 1px solid var(--green); color: var(--green); padding: 9px 14px; border-radius: 12px; font-size: 11px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s;">
+            <span id="batteryBtnText">⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
+        </button>
+        <div id="batteryDescText" style="font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.4;">
+            ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.
+        </div>
+    </div>
+</section>
+
+<div class="section-heading">
+    <h2 data-i18n="prayerTimesTitle">നമസ്കാര സമയങ്ങൾ</h2>
+    <span id="updatedDate"></span>
+</div>
+
+<section id="prayerList">
+    <div class="status">നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...</div>
+</section>
+
+<section id="locationStatus" class="status" hidden></section>
+
+<footer class="footer">SWALAATH · MADE WITH CARE</footer>
+</div>
+
+<audio id="adhanAudio" preload="auto">
+    <source src="https://islamic-api.com/audio/adhan.mp3" type="audio/mpeg">
+    <source src="https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 "use strict";
 
@@ -246,7 +714,6 @@ const minutes = parseTime(timings[prayer.key]);
 if (minutes !== null && minutes > current) return prayer;
 }
 
-// ഇന്നത്തെ എല്ലാ നമസ്കാരങ്ങളും കഴിഞ്ഞാൽ അടുത്തത് നാളത്തെ ഫജ്റാണ്.
 return mainPrayers[0];
 }
 
@@ -470,7 +937,8 @@ localStorage.setItem(CACHE_TIME_KEY,String(Date.now()));
 console.log("Location save error:",e);
 }
 }
-  function saveCachedLocationToAndroid(location) {
+
+function saveCachedLocationToAndroid(location) {
     try {
         if (
             location &&
@@ -498,7 +966,6 @@ const requestId = ++fetchRequestId;
 showPrayerLoading("നിങ്ങളുടെ സ്ഥലത്തെ നമസ്കാര സമയം ലഭ്യമാക്കുന്നു...");
 
 try {
-// Timestamp endpoint ഉപയോഗിക്കുന്നതിനാൽ ലക്ഷ്യസ്ഥലത്തിന്റെ ഇന്നത്തെ തീയതി API കണക്കാക്കും.
 const timestamp = Math.floor(Date.now() / 1000);
 const url = API + "timings/" + timestamp +
 "?latitude=" + encodeURIComponent(lat) +
@@ -545,7 +1012,6 @@ if (requestId !== fetchRequestId) return;
 
 console.log("Prayer times fetch error:",error);
 
-// നെറ്റ്‌വർക്ക് ഇല്ലെങ്കിൽ അവസാനമായി സൂക്ഷിച്ച സമയങ്ങൾ ഉപയോഗിക്കുക.
 const latestKey = CACHE_TIMINGS_KEY + "_latest_" +
 lat.toFixed(3) + "_" + lon.toFixed(3);
 
@@ -605,7 +1071,8 @@ const lon = position.coords.longitude;
 
 coordinates = {lat,lon};
 saveCoordinates(lat,lon);
-  try {
+
+try {
     if (
         typeof AndroidAdhan !== "undefined" &&
         AndroidAdhan.savePrayerLocation
@@ -633,7 +1100,7 @@ const cached = loadCachedCoordinates();
 if (cached) {
 coordinates = cached;
 document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
-  saveCachedLocationToAndroid(cached);
+saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 hideLocationStatus();
 } else {
@@ -726,27 +1193,23 @@ checkNetworkStatus();
 loadPreferences();
 updateDates();
 
-// ആദ്യം ലഭ്യമായ cached location ഉപയോഗിച്ച് ഉടൻ സമയം കാണിക്കുക.
-// തുടർന്ന് GPS വഴി യഥാർത്ഥ സ്ഥലം പുതുക്കുക.
 const cached = loadCachedCoordinates();
 
 if (cached) {
 coordinates = cached;
 document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
-  saveCachedLocationToAndroid(cached);
+saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 }
 
 startLocation();
 
-// ഓരോ 30 സെക്കൻഡിലും നിലവിലെ നമസ്കാര സമയം പരിശോധിക്കുന്നു.
 setInterval(() => {
 if (lastPrayerData?.timings) {
 checkAdhanTime(lastPrayerData.timings);
 }
 },30000);
 
-// തീയതി മാറിയാൽ പുതിയ ദിവസത്തെ നമസ്കാര സമയം വീണ്ടും ലഭ്യമാക്കുക.
 setInterval(() => {
 const today = dateString();
 
@@ -756,7 +1219,6 @@ updateDates();
 }
 },60000);
 
-// അടുത്ത നമസ്കാരത്തിന്റെ പേര്/സമയം പുതുക്കുക.
 setInterval(() => {
 if (lastPrayerData?.timings) {
 const next = getNextPrayer(lastPrayerData.timings);
@@ -769,4 +1231,3 @@ formatTime(lastPrayerData.timings[next.key]);
 </script>
 </body>
 </html>
-```
