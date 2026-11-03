@@ -287,7 +287,7 @@
     </header>
 
     <div class="top-buttons">
-        <button onclick="goHome()">← Home</button>
+<button onclick="goHome()" data-i18n="backButton" data-ml="← Home">← Home</button>
         <button onclick="toggleDark()" data-i18n="darkMode" data-ml="🌙 Dark Mode">🌙 Dark Mode</button>
     </div>
 
@@ -404,6 +404,15 @@
     if(localStorage.getItem("swalathDarkMode") === "on"){
         document.body.classList.add("dark");
     }
+    // പേജ് ലോഡ് ആയ ശേഷം നിലവിലെ ഭാഷ പ്രയോഗിക്കുക.
+window.addEventListener("load", function () {
+    if (window.SwalathLanguage &&
+        typeof window.SwalathLanguage.applyLanguage === "function") {
+        window.SwalathLanguage.applyLanguage(
+            window.SwalathLanguage.getCurrent()
+        );
+    }
+});
 </script>
 
 </body>
