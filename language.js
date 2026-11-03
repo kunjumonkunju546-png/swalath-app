@@ -886,6 +886,12 @@ function saveLanguage(code) {
     localStorage.setItem("swalath-language", code);
     localStorage.setItem("swalathLanguage", code);
     localStorage.setItem("selectedLanguage", code);
+
+    // Save language for Android notifications
+    if (window.AndroidAdhan &&
+        typeof window.AndroidAdhan.setNotificationLanguage === "function") {
+        window.AndroidAdhan.setNotificationLanguage(code);
+    }
 }
 
 
