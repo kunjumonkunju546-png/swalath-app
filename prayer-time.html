@@ -376,14 +376,14 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
     <div class="top-left">
         <button class="back-btn" onclick="goBack()" aria-label="Back">←</button>
         <div>
-            <div class="brand-title">സ്വലാത്ത്</div>
+            <div class="brand-title">Swalaath</div>
             <div class="brand-subtitle">PRAYER TIMES</div>
         </div>
     </div>
 
     <button class="location-chip" onclick="startLocation()" aria-label="Refresh location">
         <span>📍</span>
-        <span id="locationName">സ്ഥലം കണ്ടെത്തുന്നു...</span>
+<span id="locationName" data-i18n="locationLoading">Finding location...</span>
     </button>
 </header>
 
@@ -391,17 +391,17 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
 <div id="offlineBanner" class="offline-banner">⚠️ You are offline. Showing saved prayer times.</div>
 
 <section class="hero">
-    <div class="hero-label">DAILY PRAYER</div>
+    <div class="hero-label" data-i18n="dailyPrayer">DAILY PRAYER</div>
     <div class="arabic-title">أَوْقَاتُ الصَّلَاة</div>
     <div class="today-date" id="todayDate"></div>
     <div class="hijri-date" id="hijriDate"></div>
 
     <div class="hero-divider"></div>
 
-    <div class="next-label">UPCOMING PRAYER</div>
+<div class="next-label" data-i18n="upcomingPrayer">UPCOMING PRAYER</div>
     <div class="next-content">
         <div>
-            <div class="next-name" id="nextName">സമയം കണ്ടെത്തുന്നു...</div>
+<div class="next-name" id="nextName">Loading...</div>
             <div class="next-arabic" id="nextArabic"></div>
         </div>
         <div class="next-time" id="nextTime">--:--</div>
@@ -411,7 +411,7 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
 <!-- ADHAN CONTROL & QUICK MUTE PANEL -->
 <section class="adhan-control-card">
     <div class="adhan-control-header">
-        <h3>🕌 Adhan Sound Settings</h3>
+<h3 data-i18n="adhanSettings">🕌 Adhan Sound Settings</h3>
         <button id="masterMuteBtn" class="master-mute-btn" onclick="toggleMasterMute()">🔔 Adhan ON</button>
     </div>
     <div class="adhan-toggles">
@@ -439,21 +439,21 @@ body.dark-mode .adhan-control-card, body.dark-mode .adhan-toggle-item {
 
     <div style="margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; text-align: center;">
         <button onclick="openBatterySettings()" style="background: transparent; border: 1px solid var(--green); color: var(--green); padding: 9px 14px; border-radius: 12px; font-size: 11px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s;">
-            <span id="batteryBtnText">⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</span>
+<span id="batteryBtnText">⚡ Enable reliable Adhan when your phone is locked</span>
         </button>
-        <div id="batteryDescText" style="font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.4;">
-            ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.
-        </div>
+       <div id="batteryDescText" style="font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.4;">
+    Enable this option to help Adhan play on time even when your phone screen is off.
+</div>
     </div>
 </section>
 
 <div class="section-heading">
-    <h2 data-i18n="prayerTimesTitle">നമസ്കാര സമയങ്ങൾ</h2>
+    <h2 data-i18n="prayerTimesTitle">PrayerTimes</h2>
     <span id="updatedDate"></span>
 </div>
 
 <section id="prayerList">
-    <div class="status">നിങ്ങളുടെ സ്ഥലം കണ്ടെത്തുന്നു...</div>
+    <div class="status">Finding location...</div>
 </section>
 
 <section id="locationStatus" class="status" hidden></section>
@@ -653,20 +653,19 @@ updateBatteryText(lang);
 }
 
 function updateBatteryText(lang) {
-const btn = document.getElementById("batteryBtnText");
-const desc = document.getElementById("batteryDescText");
-if (!btn || !desc) return;
+    const btn = document.getElementById("batteryBtnText");
+    const desc = document.getElementById("batteryDescText");
+    if (!btn || !desc) return;
 
-if (lang === "ar") {
-btn.textContent = "⚡ اضغط هنا لضمان عمل الأذان عند إيقاف تشغيل الهاتف";
-desc.textContent = "قم بتفعيل هذا الخيار لضمان سماع الأذان في وقته حتى لو كان الهاتف مقفلاً.";
-} else if (lang === "en") {
-btn.textContent = "⚡ Click here for reliable Adhan when phone is locked";
-desc.textContent = "Enable this option to ensure Adhan plays on time even when the screen is off.";
-} else {
-btn.textContent = "⚡ ഫോൺ ലോക്ക് ചെയ്യുമ്പോൾ വാങ്ക് വിളിക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക";
-desc.textContent = "ഫോൺ ഓഫ് ചെയ്തിരിക്കുമ്പോഴും കൃത്യസമയത്ത് ബാങ്ക് മുഴങ്ങാൻ ഈ ഓപ്ഷൻ ഓൺ ചെയ്യുക.";
-}
+    const t = window.SwalathLanguage?.t;
+
+    btn.textContent = "⚡ " + (
+        t ? t("batteryButton") :
+        "Enable reliable Adhan when your phone is locked"
+    );
+
+    desc.textContent = t ? t("batteryDescription") :
+        "Enable this option to help Adhan play on time even when your phone screen is off.";
 }
 
 function openBatterySettings() {
@@ -674,7 +673,7 @@ try {
 if (typeof AndroidAdhan !== "undefined" && AndroidAdhan.openBatterySettings) {
 AndroidAdhan.openBatterySettings();
 } else {
-alert("ഈ ഫീച്ചർ ആപ്പിൽ മാത്രമേ ലഭ്യമാകൂ.");
+alert(window.SwalathLanguage?.t("appOnlyMessage") || "This feature is available only in the app.");
 }
 } catch (e) {
 console.log(e);
@@ -843,7 +842,7 @@ tag.className = "next-tag";
 tag.textContent =
 window.SwalathLanguage?.getCurrent?.() === "ar"
 ? "الصلاة القادمة"
-: "അടുത്ത നമസ്കാരം";
+: (window.SwalathLanguage?.t("nextPrayer") || "Next Prayer");
 details.appendChild(tag);
 }
 
@@ -963,7 +962,10 @@ lat.toFixed(3) + "_" + lon.toFixed(3);
 async function fetchPrayerTimes(lat,lon) {
 const requestId = ++fetchRequestId;
 
-showPrayerLoading("നിങ്ങളുടെ സ്ഥലത്തെ നമസ്കാര സമയം ലഭ്യമാക്കുന്നു...");
+showPrayerLoading(
+    window.SwalathLanguage?.t("prayerLoading") ||
+    "Loading prayer times for your location..."
+);
 
 try {
 const timestamp = Math.floor(Date.now() / 1000);
@@ -1034,13 +1036,18 @@ console.log("Cached prayer data error:",e);
 }
 
 showPrayerLoading(
-"നമസ്കാര സമയങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക."
+    window.SwalathLanguage?.t("prayerLoadFailed") ||
+    "Unable to load prayer times. Please check your internet connection."
 );
 
-showLocationStatus("സമയങ്ങൾ ലഭ്യമല്ല.",[{
-label:"വീണ്ടും ശ്രമിക്കുക",
-onClick:() => fetchPrayerTimes(lat,lon)
-}]);
+showLocationStatus(
+    window.SwalathLanguage?.t("prayerTimesUnavailable") ||
+    "Prayer times are unavailable.",
+    [{
+        label: window.SwalathLanguage?.t("tryAgain") || "Try Again",
+        onClick:() => fetchPrayerTimes(lat,lon)
+    }]
+);
 }
 }
 
@@ -1048,14 +1055,14 @@ function startLocation() {
 if (locationRequestInProgress) return;
 
 if (!window.isSecureContext) {
-showLocationStatus("Location സൗകര്യത്തിന് സുരക്ഷിതമായ HTTPS കണക്ഷൻ ആവശ്യമാണ്.");
+showLocationStatus("A secure HTTPS connection is required for the location service..");
 return;
 }
 
 locationRequestInProgress = true;
 hideLocationStatus();
-document.getElementById("locationName").textContent = "സ്ഥലം കണ്ടെത്തുന്നു...";
-
+document.getElementById("locationName").textContent =
+    window.SwalathLanguage?.t("locationLoading") || "Finding location...";
 if (!("geolocation" in navigator)) {
 locationRequestInProgress = false;
 fallbackToDefaultLocation();
@@ -1099,7 +1106,8 @@ const cached = loadCachedCoordinates();
 
 if (cached) {
 coordinates = cached;
-document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
+document.getElementById("locationName").textContent =
+    window.SwalathLanguage?.t("savedLocation") || "Saved location";
 saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 hideLocationStatus();
@@ -1116,27 +1124,28 @@ maximumAge:300000
 }
 
 function fallbackToDefaultLocation() {
-locationRequestInProgress = false;
-coordinates = null;
+    locationRequestInProgress = false;
+    coordinates = null;
 
-const t = window.SwalathLanguage?.t;
-document.getElementById("locationName").textContent =
-t ? t("locationUnavailable") : "സ്ഥലം ലഭ്യമല്ല";
+    const t = window.SwalathLanguage?.t;
 
-showPrayerLoading(
-t ? t("enableLocation") : "നമസ്കാര സമയം ലഭിക്കാൻ Location ഓൺ ചെയ്യുക."
-);
+    document.getElementById("locationName").textContent =
+        t ? t("locationUnavailable") : "Location unavailable";
 
-showLocationStatus(
-t ? t("locationPermissionMessage") :
-"നിങ്ങളുടെ നിലവിലെ സ്ഥലം കണ്ടെത്താൻ Location അനുമതി നൽകുക.",
-[{
-label:t ? t("tryAgain") : "വീണ്ടും ശ്രമിക്കുക",
-onClick:startLocation
-}]
-);
+    showPrayerLoading(
+        t ? t("enableLocation") :
+        "Please enable location to get prayer times."
+    );
+
+    showLocationStatus(
+        t ? t("locationPermissionMessage") :
+        "Please allow location access to find your current location.",
+        [{
+            label: t ? t("tryAgain") : "Try Again",
+            onClick: startLocation
+        }]
+    );
 }
-
 async function lookupCityName(lat,lon) {
 try {
 const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
@@ -1197,7 +1206,8 @@ const cached = loadCachedCoordinates();
 
 if (cached) {
 coordinates = cached;
-document.getElementById("locationName").textContent = "സേവ് ചെയ്ത സ്ഥലം";
+document.getElementById("locationName").textContent =
+    window.SwalathLanguage?.t("savedLocation") || "Saved location";
 saveCachedLocationToAndroid(cached);
 fetchPrayerTimes(cached.lat,cached.lon);
 }
