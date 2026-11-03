@@ -592,7 +592,7 @@ function renderDhikrCards() {
             <div class="pronunciation">${pronunciation}</div>
             ${countText ? `<div class="count">${countText}</div>` : ""}
             <div class="counter-box">
-                <div class="count-display" id="count-${index}" onclick="incrementCount(${index})">📿 കൗണ്ട്: <span id="num-${index}">${savedCount}</span></div>
+<div class="count-display" id="count-${index}" onclick="incrementCount(${index})">📿 Count: <span id="num-${index}">${savedCount}</span></div>
                 <button class="reset-btn" onclick="resetCount(${index})">Reset</button>
             </div>
         </div>`;
