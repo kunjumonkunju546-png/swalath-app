@@ -807,20 +807,87 @@
     };
 
 function getLanguage() {
-    const savedLanguage = localStorage.getItem("swalath-language");
-    return savedLanguage && LANGUAGES[savedLanguage]
-        ? savedLanguage
-        : "en";
+    const savedLanguages = [
+        localStorage.getItem("swalath-language"),
+        localStorage.getItem("swalathLanguage"),
+        localStorage.getItem("selectedLanguage")
+    ];
+
+    for (const code of savedLanguages) {
+        if (code && LANGUAGES[code]) {
+            return code;
+        }
+    }
+
+    return "en";
 }
 
-   function applyLanguage(code) {
-    const currentCode = LANGUAGES[code] ? code : "en";
+
+// എല്ലാ ഭാഷകൾക്കും ആവശ്യമായ വിവർത്തനം കണ്ടെത്തുക.
+function getTranslation(key, languageCode, fallback) {
+    const code = LANGUAGES[languageCode] ? languageCode : "en";
+
+    const selectedTranslations =
+        LANGUAGES[code].translations || {};
+
+    const englishTranslations =
+        LANGUAGES.en.translations || {};
+
+    if (
+        Object.prototype.hasOwnProperty.call(
+            selectedTranslations,
+            key
+        ) &&
+        selectedTranslations[key] !== ""
+    ) {
+        return selectedTranslations[key];
+    }
+
+    if (
+        Object.prototype.hasOwnProperty.call(
+            englishTranslations,
+            key
+        ) &&
+        englishTranslations[key] !== ""
+    ) {
+        return englishTranslations[key];
+    }
+
+    return fallback !== undefined ? fallback : key;
+}
+
+
+// മറ്റു HTML ഫയലുകൾക്ക് ഉപയോഗിക്കാനുള്ള Translation Function.
+function translate(key, fallback) {
+    const code = getLanguage();
+
+    return getTranslation(key, code, fallback);
+}
+
+
+// എല്ലാ ഭാഷാ Storage Keys-ഉം ഒരേ ഭാഷയിലേക്ക് ക്രമീകരിക്കുക.
+function saveLanguage(code) {
+    localStorage.setItem("swalath-language", code);
+    localStorage.setItem("swalathLanguage", code);
+    localStorage.setItem("selectedLanguage", code);
+}
+
+
+// HTML ടെക്സ്റ്റുകൾ ഭാഷയ്ക്കനുസരിച്ച് മാറ്റുക.
+function applyLanguage(code) {
+
+    const currentCode = LANGUAGES[code]
+        ? code
+        : getLanguage();
+
     const lang = LANGUAGES[currentCode];
 
     document.documentElement.lang = currentCode;
     document.documentElement.dir = lang.dir;
 
-    const hijriCalendar = document.getElementById("swalathHijriPremium");
+    // Hijri Calendar എപ്പോഴും English-ൽ തന്നെ നിലനിർത്തുക.
+    const hijriCalendar =
+        document.getElementById("swalathHijriPremium");
 
     if (hijriCalendar) {
         hijriCalendar.setAttribute("lang", "en");
@@ -828,32 +895,192 @@ function getLanguage() {
         hijriCalendar.setAttribute("translate", "no");
     }
 
-    // ആപ്പിലെ ടെക്സ്റ്റുകൾ ഭാഷയ്ക്കനുസരിച്ച് മാറ്റുക
+
+    // പ്രധാന ടെക്സ്റ്റുകൾ മാറ്റുക.
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
+
         const key = el.getAttribute("data-i18n");
-        const original = el.getAttribute("data-ml");
-        const isHijri = !!el.closest("#swalathHijriPremium");
 
-        const selectedLanguage = isHijri ? LANGUAGES.en : lang;
-        const translated = selectedLanguage.translations[key];
-        const englishText = LANGUAGES.en.translations[key];
+        const malayalamText =
+            el.getAttribute("data-ml");
 
-        if (currentCode === "ml" && !isHijri) {
-            if (original !== null) {
-                el.textContent = original;
-            } else if (translated) {
-                el.textContent = translated;
-            } else if (englishText) {
-                el.textContent = englishText;
-            }
-        } else if (translated) {
-            el.textContent = translated;
-        } else if (englishText) {
-            el.textContent = englishText;
-        } else if (original !== null && !isHijri) {
-            el.textContent = original;
+        const isHijri =
+            !!el.closest("#swalathHijriPremium");
+
+        let translatedText;
+
+
+        // Hijri Calendar English-ൽ മാത്രം.
+        if (isHijri) {
+
+            translatedText = getTranslation(
+                key,
+                "en",
+                el.innerHTML
+            );
+
         }
+
+        // Malayalam തിരഞ്ഞെടുക്കുമ്പോൾ Malayalam.
+        else if (currentCode === "ml") {
+
+            if (malayalamText !== null) {
+                translatedText = malayalamText;
+            } else {
+                translatedText = getTranslation(
+                    key,
+                    "ml",
+                    el.innerHTML
+                );
+            }
+
+        }
+
+        // മറ്റു ഭാഷകളിൽ വിവർത്തനം ഇല്ലെങ്കിൽ English.
+        else {
+
+            translatedText = getTranslation(
+                key,
+                currentCode,
+                el.innerHTML
+            );
+
+        }
+
+
+        if (
+            translatedText !== undefined &&
+            translatedText !== null
+        ) {
+            // <strong>, <br> തുടങ്ങിയ HTML ഘടന നിലനിർത്തുന്നു.
+            el.innerHTML = translatedText;
+        }
+
     });
+
+
+    // Input Placeholder-കൾ മാറ്റുക.
+    document.querySelectorAll(
+        "[data-i18n-placeholder]"
+    ).forEach(function (el) {
+
+        const key =
+            el.getAttribute("data-i18n-placeholder");
+
+        const malayalamPlaceholder =
+            el.getAttribute("data-ml-placeholder");
+
+        const isHijri =
+            !!el.closest("#swalathHijriPremium");
+
+        let translatedText;
+
+
+        if (isHijri) {
+
+            translatedText = getTranslation(
+                key,
+                "en",
+                el.placeholder
+            );
+
+        }
+
+        else if (currentCode === "ml") {
+
+            if (malayalamPlaceholder !== null) {
+                translatedText = malayalamPlaceholder;
+            } else {
+                translatedText = getTranslation(
+                    key,
+                    "ml",
+                    el.placeholder
+                );
+            }
+
+        }
+
+        else {
+
+            translatedText = getTranslation(
+                key,
+                currentCode,
+                el.placeholder
+            );
+
+        }
+
+
+        if (
+            translatedText !== undefined &&
+            translatedText !== null
+        ) {
+            el.placeholder = translatedText;
+        }
+
+    });
+
+
+    // മറ്റു HTML പേജുകളെ ഭാഷാമാറ്റം അറിയിക്കുക.
+    document.dispatchEvent(
+        new CustomEvent("swalath-language-changed", {
+            detail: {
+                language: currentCode
+            }
+        })
+    );
+
+}
+
+
+// ഭാഷ മാറ്റുക.
+function setLanguage(code) {
+
+    if (!LANGUAGES[code]) {
+        return false;
+    }
+
+    saveLanguage(code);
+
+    applyLanguage(code);
+
+    return true;
+}
+
+
+// നിലവിലെ ഭാഷ കണ്ടെത്തുക.
+function getCurrent() {
+    return getLanguage();
+}
+
+
+// എല്ലാ പേജുകൾക്കും ഒരേ Language API നൽകുക.
+window.SwalathLanguage = {
+
+    getCurrent: getCurrent,
+
+    setLanguage: setLanguage,
+
+    applyLanguage: applyLanguage,
+
+    // പഴയ ഫയലുകളിലെ apply() വിളികൾക്കുള്ള പിന്തുണ.
+    apply: applyLanguage,
+
+    // Prayer Time ഉൾപ്പെടെയുള്ള പേജുകൾക്കുള്ള t() പിന്തുണ.
+    t: translate
+
+};
+
+
+// പഴയ Storage Key-കളിൽ നിന്ന് ലഭിച്ച ഭാഷയും ഏകീകരിക്കുക.
+const initialLanguage = getLanguage();
+
+saveLanguage(initialLanguage);
+
+// പേജ് തുറക്കുമ്പോൾ ഭാഷ പ്രയോഗിക്കുക.
+applyLanguage(initialLanguage);
+
+})();
 
     // ഇൻപുട്ട് ബോക്സുകളിലെ placeholder-കളും മാറ്റുക
     document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
