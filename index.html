@@ -944,7 +944,7 @@ body.dark-mode footer{
         font-size:11px;
     }
 }
-    /* SWALATH PREMIUM DAILY STATUS POPUP FIX */
+/* SWALATH PREMIUM DAILY STATUS POPUP */
 
 #quotePopupOverlay {
     position: fixed;
@@ -953,62 +953,74 @@ body.dark-mode footer{
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 18px;
     box-sizing: border-box;
-    background: rgba(3, 18, 14, 0.78);
-    -webkit-backdrop-filter: blur(7px);
-    backdrop-filter: blur(7px);
+    background: rgba(4, 20, 16, 0.84);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     overflow-y: auto;
     overscroll-behavior: contain;
 }
 
 #quotePopupOverlay .quote-popup-box {
+    position: relative;
     width: 100%;
-    max-width: 390px;
-    max-height: calc(100dvh - 32px);
+    max-width: 380px;
+    max-height: calc(100dvh - 36px);
     overflow-y: auto;
     overscroll-behavior: contain;
     box-sizing: border-box;
     flex-shrink: 0;
-    padding: 20px;
+    padding: 24px 19px 20px;
     margin: auto;
-    border: 1px solid #c5a868;
-    border-radius: 24px;
-    background: linear-gradient(160deg, #ffffff, #f7f8f1);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(197, 168, 104, 0.8);
+    border-radius: 27px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(197,168,104,0.13), transparent 42%),
+        linear-gradient(155deg, #ffffff, #f5f7ef);
+    box-shadow:
+        0 24px 65px rgba(0,0,0,0.38),
+        inset 0 1px 0 rgba(255,255,255,0.9);
     text-align: center;
-    animation: popupScale .25s ease;
+    animation: popupScale .28s ease;
     -webkit-overflow-scrolling: touch;
 }
 
 #quotePopupOverlay .status-popup-title {
-    margin: 0 0 18px;
+    margin: 0 0 22px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(197,168,104,0.45);
     color: #123d34;
     font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif;
     font-size: 17px;
     font-weight: 800;
-    line-height: 1.65;
+    line-height: 1.7;
     overflow-wrap: break-word;
 }
 
 #quotePopupOverlay .status-quote-card {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px 14px;
-    margin-bottom: 18px;
-    border: 1px solid #d7c18a;
-    border-radius: 18px;
-    background: #f5f6ef;
+    padding: 24px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #d8c28e;
+    border-radius: 21px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(197,168,104,0.12), transparent 55%),
+        linear-gradient(145deg, #fbfcf7, #f0f3e9);
+    box-shadow: 0 7px 20px rgba(18,61,52,0.07);
 }
 
 #quotePopupOverlay #popupQuoteArabic {
-    margin: 0 0 18px !important;
-    padding: 0 2px;
+    margin: 0 0 22px !important;
+    padding: 0 3px 19px;
+    border-bottom: 1px solid rgba(197,168,104,0.4);
     color: #123d34 !important;
     font-family: "Amiri", "Traditional Arabic", serif !important;
-    font-size: clamp(25px, 7vw, 32px) !important;
+    font-size: clamp(27px, 7.5vw, 34px) !important;
     font-weight: 700;
-    line-height: 1.9 !important;
+    line-height: 2 !important;
     text-align: center;
     direction: rtl;
     unicode-bidi: isolate;
@@ -1017,12 +1029,12 @@ body.dark-mode footer{
 }
 
 #quotePopupOverlay #popupQuoteText {
-    margin: 0 0 14px !important;
+    margin: 0 0 17px !important;
     color: #23463b !important;
     font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif !important;
     font-size: 16px !important;
-    font-weight: 500;
-    line-height: 1.9 !important;
+    font-weight: 600;
+    line-height: 2 !important;
     text-align: center;
     overflow-wrap: break-word;
     word-break: normal;
@@ -1031,11 +1043,18 @@ body.dark-mode footer{
 
 #quotePopupOverlay #popupQuoteSource {
     display: block;
-    margin: 0 !important;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto !important;
+    padding: 7px 14px;
+    border: 1px solid rgba(197,168,104,0.45);
+    border-radius: 30px;
+    background: rgba(197,168,104,0.12);
     color: #68776d !important;
     font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif;
     font-size: 12px !important;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.8;
     text-align: center;
     overflow-wrap: break-word;
@@ -1044,40 +1063,48 @@ body.dark-mode footer{
 
 #quotePopupOverlay .status-popup-actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 11px;
     width: 100%;
 }
 
 #quotePopupOverlay .status-popup-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     min-width: 0;
-    min-height: 46px;
+    min-height: 49px;
     box-sizing: border-box;
-    padding: 12px 14px;
+    padding: 12px 15px;
     border: 0;
     border-radius: 15px;
     font-family: "Noto Sans Malayalam", "Noto Sans", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.6;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.65;
     white-space: normal;
     overflow-wrap: break-word;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    transition: transform .18s ease, box-shadow .18s ease;
 }
 
 #quotePopupOverlay .status-share-button {
-    flex: 1 1 175px;
-    background: #167b48;
+    background: linear-gradient(135deg, #168653, #0d6840);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(22, 123, 72, 0.18);
+    box-shadow: 0 6px 15px rgba(22,134,83,0.23);
 }
 
 #quotePopupOverlay .status-close-button {
-    flex: 0 1 auto;
-    background: #e8ebe5;
+    background: #e9eee8;
     color: #123d34;
+    border: 1px solid rgba(18,61,52,0.10) !important;
+}
+
+#quotePopupOverlay .status-popup-actions button:active {
+    transform: scale(0.98);
 }
 
 #quotePopupOverlay button:focus-visible {
@@ -1085,44 +1112,52 @@ body.dark-mode footer{
     outline-offset: 3px;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
     #quotePopupOverlay {
-        padding: 10px;
+        padding: 12px;
     }
 
     #quotePopupOverlay .quote-popup-box {
-        max-height: calc(100dvh - 20px);
-        padding: 16px 13px;
-        border-radius: 20px;
+        max-height: calc(100dvh - 24px);
+        padding: 20px 15px 16px;
+        border-radius: 23px;
     }
 
     #quotePopupOverlay .status-quote-card {
-        padding: 16px 10px;
+        padding: 20px 12px;
     }
 
-    #quotePopupOverlay .status-popup-actions button {
-        flex: 1 1 100%;
+    #quotePopupOverlay #popupQuoteArabic {
+        font-size: clamp(25px, 7.5vw, 30px) !important;
+    }
+
+    #quotePopupOverlay #popupQuoteText {
+        font-size: 15px !important;
     }
 }
 
-/* DARK MODE SUPPORT */
+/* DARK MODE */
 
 body.dark-mode #quotePopupOverlay .quote-popup-box {
-    background: #182923;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(197,168,104,0.12), transparent 45%),
+        linear-gradient(155deg, #1c3028, #14271f);
     border-color: #c5a868;
 }
 
 body.dark-mode #quotePopupOverlay .status-popup-title {
     color: #f1dfb0;
+    border-bottom-color: rgba(197,168,104,0.35);
 }
 
 body.dark-mode #quotePopupOverlay .status-quote-card {
-    background: #21382e;
+    background: linear-gradient(145deg, #243b30, #1b3027);
     border-color: #8f7948;
 }
 
 body.dark-mode #quotePopupOverlay #popupQuoteArabic {
     color: #f1dfb0 !important;
+    border-bottom-color: rgba(197,168,104,0.35);
 }
 
 body.dark-mode #quotePopupOverlay #popupQuoteText {
@@ -1130,12 +1165,15 @@ body.dark-mode #quotePopupOverlay #popupQuoteText {
 }
 
 body.dark-mode #quotePopupOverlay #popupQuoteSource {
-    color: #c3cfc5 !important;
+    background: rgba(197,168,104,0.12);
+    border-color: rgba(197,168,104,0.4);
+    color: #d4c69f !important;
 }
 
 body.dark-mode #quotePopupOverlay .status-close-button {
     background: #30453a;
     color: #ffffff;
+    border-color: rgba(255,255,255,0.08) !important;
 }
     /* SWALATH SHARE AND REVIEW POPUP */
 
@@ -1789,11 +1827,16 @@ document.addEventListener("DOMContentLoaded",loadDailyQuoteData);
 
 function loadDailyQuoteData(){
 
-    const lang=
-        (window.SwalathLanguage&&window.SwalathLanguage.getCurrent)
-        ?window.SwalathLanguage.getCurrent()
-        :(localStorage.getItem("swalath-language")||"en");
-
+   const lang =
+    localStorage.getItem("swalathLanguage") ||
+    localStorage.getItem("selectedLanguage") ||
+    localStorage.getItem("swalath-language") ||
+    (
+        window.SwalathLanguage &&
+        typeof window.SwalathLanguage.getCurrent === "function"
+            ? window.SwalathLanguage.getCurrent()
+            : "ml"
+    );
     const quotes=[
         {
             arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
