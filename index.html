@@ -1334,7 +1334,7 @@ body.dark-mode #swalathGentleLater {
 <div id="quotePopupOverlay">
     <div class="quote-popup-box">
 
-        <h3 class="status-popup-title">
+<h3 id="statusPopupTitle" class="status-popup-title">
             ✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്
         </h3>
 
@@ -1354,11 +1354,12 @@ body.dark-mode #swalathGentleLater {
 
         <div class="status-popup-actions">
 
-            <button
-                type="button"
-                class="status-share-button"
-                onclick="triggerShareStatus()"
-            >
+         <button
+    id="statusShareButton"
+    type="button"
+    class="status-share-button"
+    onclick="triggerShareStatus()"
+>
                 📲 സ്റ്റാറ്റസ് ഷെയർ ചെയ്യാം
             </button>
 
@@ -1837,6 +1838,48 @@ function loadDailyQuoteData(){
             ? window.SwalathLanguage.getCurrent()
             : "ml"
     );
+    const statusLabels = {
+        ml: {
+            title: "✨ ഇന്നത്തെ വാട്ട്‌സാപ്പ് സ്റ്റാറ്റസ്",
+            share: "📲 സ്റ്റാറ്റസ് ഷെയർ ചെയ്യാം",
+            close: "മടങ്ങുക"
+        },
+        en: {
+            title: "✨ Today's WhatsApp Status",
+            share: "📲 Share Status",
+            close: "Back"
+        },
+        ar: {
+            title: "✨ حالة واتساب اليوم",
+            share: "📲 مشاركة الحالة",
+            close: "رجوع"
+        },
+        hi: {
+            title: "✨ आज का WhatsApp स्टेटस",
+            share: "📲 स्टेटस साझा करें",
+            close: "वापस"
+        },
+        ur: {
+            title: "✨ آج کا واٹس ایپ اسٹیٹس",
+            share: "📲 اسٹیٹس شیئر کریں",
+            close: "واپس"
+        },
+        ta: {
+            title: "✨ இன்றைய WhatsApp நிலை",
+            share: "📲 நிலையைப் பகிரவும்",
+            close: "திரும்பு"
+        }
+    };
+
+    const labels = statusLabels[lang] || statusLabels.en;
+
+    const titleElement = document.getElementById("statusPopupTitle");
+    const shareElement = document.getElementById("statusShareButton");
+    const closeElement = document.getElementById("statusCloseButton");
+
+    if (titleElement) titleElement.textContent = labels.title;
+    if (shareElement) shareElement.textContent = labels.share;
+    if (closeElement) closeElement.textContent = labels.close;
     const quotes=[
         {
             arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
