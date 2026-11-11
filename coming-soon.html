@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon - Swalath</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eee8d9;
+    color: #222;
+}
+
+.app {
+    max-width: 430px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffdf8;
+}
+
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, #123d34, #1d5b4c);
+    color: white;
+    border-radius: 0 0 28px 28px;
+}
+
+.header h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 14px;
+    opacity: .9;
+}
+
+main {
+    padding: 20px;
+}
+
+.back-button {
+    width: 100%;
+    border: none;
+    background: #123d34;
+    color: white;
+    padding: 13px;
+    border-radius: 14px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.feature-card {
+    background: #fff;
+    border: 1px solid #e6dfd0;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.04);
+}
+
+.feature-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.feature-icon {
+    font-size: 30px;
+}
+
+.feature-info {
+    flex: 1;
+}
+
+.feature-info h2 {
+    font-size: 17px;
+    color: #123d34;
+    margin-bottom: 6px;
+}
+
+.feature-info p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.coming-badge {
+    display: inline-block;
+    margin-top: 13px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #f4e8c8;
+    color: #765b20;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+body.dark-mode {
+    background: #111;
+    color: #eee;
+}
+
+body.dark-mode .app {
+    background: #181818;
+}
+
+body.dark-mode .feature-card {
+    background: #222;
+    border-color: #444;
+}
+
+body.dark-mode .feature-info h2 {
+    color: #e5c76b;
+}
+
+body.dark-mode .feature-info p {
+    color: #bbb;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 11px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+    <section class="header">
+        <h1 data-i18n="comingSoonTitle"
+            data-ml="വരാനിരിക്കുന്ന ഫീച്ചറുകൾ">Coming Soon</h1>
+
+        <p data-i18n="comingSoonSubtitle"
+           data-ml="സ്വലാത്ത് ആപ്പിൽ ഉടൻ എത്തുന്നു">New Islamic features are coming to Swalath</p>
+    </section>
+
+    <main>
+
+        <button class="back-button" onclick="goHome()"
+                data-i18n="backButton" data-ml="← തിരികെ">
+            ← Back
+        </button>
+
+        <div class="feature-card">
+            <div class="feature-top">
+                <div class="feature-icon">🧭</div>
+                <div class="feature-info">
+                    <h2 data-i18n="qiblaFeatureTitle"
+                        data-ml="ഖിബ്‌ല ഫൈൻഡർ">Qibla Finder</h2>
+                    <p data-i18n="qiblaFeatureDesc"
+                       data-ml="നിങ്ങളുടെ സ്ഥലത്തുനിന്ന് ഖിബ്‌ലയുടെ ദിശ കണ്ടെത്താം.">
+                        Find the Qibla direction from your location.
+                    </p>
+                </div>
+            </div>
+            <span class="coming-badge" data-i18n="comingSoonBadge"
+                  data-ml="ഉടൻ വരുന്നു">COMING SOON</span>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-top">
+                <div class="feature-icon">🌙</div>
+                <div class="feature-info">
+                    <h2 data-i18n="ramadanFeatureTitle"
+                        data-ml="റമദാൻ കൗണ്ട്ഡൗൺ">Ramadan Countdown</h2>
+                    <p data-i18n="ramadanFeatureDesc"
+                       data-ml="റമദാൻ ആരംഭിക്കാൻ ബാക്കിയുള്ള ദിവസങ്ങൾ അറിയാം.">
+                        See how many days remain until Ramadan.
+                    </p>
+                </div>
+            </div>
+            <span class="coming-badge" data-i18n="comingSoonBadge"
+                  data-ml="ഉടൻ വരുന്നു">COMING SOON</span>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-top">
+                <div class="feature-icon">🕌</div>
+                <div class="feature-info">
+                    <h2 data-i18n="qadaFeatureTitle"
+                        data-ml="ഖളാ നമസ്കാര കാൽക്കുലേറ്റർ">Qada Salah Calculator</h2>
+                    <p data-i18n="qadaFeatureDesc"
+                       data-ml="ബാക്കിയുള്ള ഖളാ നമസ്കാരങ്ങൾ കണക്കാക്കാൻ സഹായിക്കും.">
+                        Calculate your pending Qada prayers.
+                    </p>
+                </div>
+            </div>
+            <span class="coming-badge" data-i18n="comingSoonBadge"
+                  data-ml="ഉടൻ വരുന്നു">COMING SOON</span>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-top">
+                <div class="feature-icon">✨</div>
+                <div class="feature-info">
+                    <h2 data-i18n="moreFeatureTitle"
+                        data-ml="കൂടുതൽ ഇസ്‌ലാമിക സൗകര്യങ്ങൾ">More Islamic Features</h2>
+                    <p data-i18n="moreFeatureDesc"
+                       data-ml="കൂടുതൽ പ്രയോജനപ്രദമായ ഇസ്‌ലാമിക സൗകര്യങ്ങൾ ഉടൻ ചേർക്കും.">
+                        More useful Islamic features will be added.
+                    </p>
+                </div>
+            </div>
+            <span class="coming-badge" data-i18n="comingSoonBadge"
+                  data-ml="ഉടൻ വരുന്നു">COMING SOON</span>
+        </div>
+
+    </main>
+
+    <footer>© 2026 Swalath</footer>
+</div>
+
+<script src="language.js"></script>
+
+<script>
+function goHome() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
