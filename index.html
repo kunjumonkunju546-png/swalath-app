@@ -1550,6 +1550,17 @@ body.dark-mode #swalathGentleLater {
                 <span>Reach Worldwide users</span>
             </div>
 
+       <div class="menu-card" onclick="openComingSoon()">
+    <div style="font-size:30px;">✨</div>
+    <strong data-i18n="comingSoonTitle"
+            data-ml="വരാനിരിക്കുന്ന ഫീച്ചറുകൾ">
+        Coming Soon
+    </strong>
+    <span data-i18n="comingSoonDesc"
+          data-ml="പുതിയ സൗകര്യങ്ങൾ ഉടൻ">
+        New Features Coming Soon
+    </span>
+</div>
         </div>
 
         <!-- MY DAY HOME CARD
@@ -2220,7 +2231,9 @@ function showHomeElements(){
 }
 
 /* OPEN OTHER PAGES */
-
+function openComingSoon(){
+    window.location.href = "coming-soon.html";
+}
 function openAsmaulHusna(){
     window.location.href="asmaul-husna.html";
 }
