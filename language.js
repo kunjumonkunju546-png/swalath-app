@@ -41,7 +41,18 @@
                 hijriBadge: "ഇസ്ലാമിക് കലണ്ടർ",
                 ev1Text: "🌙 റമദാൻ 1: വരാനിരിക്കുന്നു",
                 ev2Text: "🕋 അറഫാ ദിനം: ദുൽഹിജ്ജ 9",
-                ev3Text: "🎉 പെരുന്നാൾ (ഈദുൽ ഫിത്ർ): ശവ്വാൽ 1"
+                ev3Text: "🎉 പെരുന്നാൾ (ഈദുൽ ഫിത്ർ): ശവ്വാൽ 1",
+                comingSoonTitle: "വരാനിരിക്കുന്ന ഫീച്ചറുകൾ",
+comingSoonSubtitle: "സ്വലാത്ത് ആപ്പിൽ ഉടൻ എത്തുന്നു",
+qiblaFeatureTitle: "ഖിബ്‌ല ഫൈൻഡർ",
+qiblaFeatureDesc: "നിങ്ങളുടെ സ്ഥലത്തുനിന്ന് ഖിബ്‌ലയുടെ ദിശ കണ്ടെത്താം.",
+ramadanFeatureTitle: "റമദാൻ കൗണ്ട്ഡൗൺ",
+ramadanFeatureDesc: "റമദാൻ ആരംഭിക്കാൻ ബാക്കിയുള്ള ദിവസങ്ങൾ അറിയാം.",
+qadaFeatureTitle: "ഖളാ നമസ്കാര കാൽക്കുലേറ്റർ",
+qadaFeatureDesc: "ബാക്കിയുള്ള ഖളാ നമസ്കാരങ്ങൾ കണക്കാക്കാൻ സഹായിക്കും.",
+moreFeatureTitle: "കൂടുതൽ ഇസ്‌ലാമിക സൗകര്യങ്ങൾ",
+moreFeatureDesc: "കൂടുതൽ പ്രയോജനപ്രദമായ ഇസ്‌ലാമിക സൗകര്യങ്ങൾ ഉടൻ ചേർക്കും.",
+comingSoonBadge: "ഉടൻ വരുന്നു"
             }
         },
 
@@ -209,7 +220,18 @@ appOnlyMessage: "This feature is available only in the app.",
                 duaTitle22: "22. Before Sleeping",
                 duaTitle23: "23. Praising Allah in the Morning",
                 duaTitle24: "24. For Steadfastness of the Heart",
-                duaTitle25: "25. Help in Remembrance and Worship"
+                duaTitle25: "25. Help in Remembrance and Worship",
+                comingSoonTitle: "Coming Soon",
+comingSoonSubtitle: "New Islamic features are coming to Swalath",
+qiblaFeatureTitle: "Qibla Finder",
+qiblaFeatureDesc: "Find the Qibla direction from your location.",
+ramadanFeatureTitle: "Ramadan Countdown",
+ramadanFeatureDesc: "See how many days remain until Ramadan.",
+qadaFeatureTitle: "Qada Salah Calculator",
+qadaFeatureDesc: "Calculate your pending Qada prayers.",
+moreFeatureTitle: "More Islamic Features",
+moreFeatureDesc: "More useful Islamic features will be added.",
+comingSoonBadge: "COMING SOON"
             }
         },
 
@@ -361,7 +383,18 @@ appOnlyMessage: "This feature is available only in the app.",
                 duaTitle22: "22. قبل النوم",
                 duaTitle23: "23. حمد الله في الصباح",
                 duaTitle24: "24. لثبات القلب",
-                duaTitle25: "25. طلب العون على الذكر والشكر والعبادة"
+                duaTitle25: "25. طلب العون على الذكر والشكر والعبادة",
+                comingSoonTitle: "قريباً",
+comingSoonSubtitle: "ميزات إسلامية جديدة قادمة إلى تطبيق الصلاة",
+qiblaFeatureTitle: "محدد اتجاه القبلة",
+qiblaFeatureDesc: "اعرف اتجاه القبلة من موقعك.",
+ramadanFeatureTitle: "العد التنازلي لرمضان",
+ramadanFeatureDesc: "تعرف على الأيام المتبقية حتى رمضان.",
+qadaFeatureTitle: "حاسبة قضاء الصلاة",
+qadaFeatureDesc: "احسب الصلوات التي فاتتك وتحتاج إلى قضائها.",
+moreFeatureTitle: "ميزات إسلامية أخرى",
+moreFeatureDesc: "ستتم إضافة المزيد من الميزات الإسلامية المفيدة.",
+comingSoonBadge: "قريباً"
             }
         },
 
@@ -513,7 +546,18 @@ appOnlyMessage: "This feature is available only in the app.",
                 duaTitle22: "22. सोने से पहले की दुआ",
                 duaTitle23: "23. सुबह के समय अल्लाह की प्रशंसा",
                 duaTitle24: "24. दिल की दृढ़ता के लिए",
-                duaTitle25: "25. ज़िक्र, शुक्र और इबादत में मदद"
+                duaTitle25: "25. ज़िक्र, शुक्र और इबादत में मदद",
+                comingSoonTitle: "जल्द आ रहा है",
+comingSoonSubtitle: "स्वलात ऐप में नई इस्लामी सुविधाएँ जल्द आ रही हैं",
+qiblaFeatureTitle: "क़िबला फ़ाइंडर",
+qiblaFeatureDesc: "अपने स्थान से क़िबला की दिशा जानें।",
+ramadanFeatureTitle: "रमज़ान काउंटडाउन",
+ramadanFeatureDesc: "रमज़ान शुरू होने में बचे दिन देखें।",
+qadaFeatureTitle: "क़ज़ा नमाज़ कैलकुलेटर",
+qadaFeatureDesc: "अपनी बाकी क़ज़ा नमाज़ों की गणना करें।",
+moreFeatureTitle: "अन्य इस्लामी सुविधाएँ",
+moreFeatureDesc: "और उपयोगी इस्लामी सुविधाएँ जल्द जोड़ी जाएँगी।",
+comingSoonBadge: "जल्द आ रहा है"
             }
         },
 
@@ -665,7 +709,18 @@ appOnlyMessage: "This feature is available only in the app.",
                 duaTitle22: "22. سونے سے پہلے",
                 duaTitle23: "23. صبح کے وقت اللہ کی حمد",
                 duaTitle24: "24. دل کی استقامت کے لیے",
-                duaTitle25: "25. ذکر، شکر اور عبادت پر مدد"
+                duaTitle25: "25. ذکر، شکر اور عبادت پر مدد",
+                comingSoonTitle: "جلد آرہا ہے",
+comingSoonSubtitle: "صلوٰۃ ایپ میں نئی اسلامی سہولیات جلد آرہی ہیں",
+qiblaFeatureTitle: "قبلہ فائنڈر",
+qiblaFeatureDesc: "اپنے مقام سے قبلہ کی سمت معلوم کریں۔",
+ramadanFeatureTitle: "رمضان کاؤنٹ ڈاؤن",
+ramadanFeatureDesc: "رمضان شروع ہونے میں باقی دن معلوم کریں۔",
+qadaFeatureTitle: "قضا نماز کیلکولیٹر",
+qadaFeatureDesc: "اپنی باقی قضا نمازوں کا حساب لگائیں۔",
+moreFeatureTitle: "مزید اسلامی سہولیات",
+moreFeatureDesc: "مزید مفید اسلامی سہولیات جلد شامل کی جائیں گی۔",
+comingSoonBadge: "جلد آرہا ہے"
             }
         },
 
@@ -817,7 +872,18 @@ appOnlyMessage: "This feature is available only in the app.",
                 duaTitle22: "22. உறங்குவதற்கு முன்",
                 duaTitle23: "23. காலையில் அல்லாஹ்வைப் புகழ",
                 duaTitle24: "24. இதயம் உறுதியாக இருக்க",
-                duaTitle25: "25. நற்செயல்களிலும் வணக்கத்திலும் உதவி தேட"
+                duaTitle25: "25. நற்செயல்களிலும் வணக்கத்திலும் உதவி தேட",
+                comingSoonTitle: "விரைவில் வருகிறது",
+comingSoonSubtitle: "ஸலவாத் செயலியில் புதிய இஸ்லாமிய வசதிகள் விரைவில்",
+qiblaFeatureTitle: "கிப்லா கண்டுபிடிப்பான்",
+qiblaFeatureDesc: "உங்கள் இருப்பிடத்திலிருந்து கிப்லா திசையைக் கண்டறியுங்கள்.",
+ramadanFeatureTitle: "ரமலான் கவுண்ட்டவுன்",
+ramadanFeatureDesc: "ரமலான் தொடங்க இன்னும் எத்தனை நாட்கள் உள்ளன என்பதை அறியுங்கள்.",
+qadaFeatureTitle: "களா தொழுகை கணிப்பான்",
+qadaFeatureDesc: "நிலுவையில் உள்ள களா தொழுகைகளைக் கணக்கிடுங்கள்.",
+moreFeatureTitle: "மேலும் இஸ்லாமிய வசதிகள்",
+moreFeatureDesc: "மேலும் பயனுள்ள இஸ்லாமிய வசதிகள் விரைவில் சேர்க்கப்படும்.",
+comingSoonBadge: "விரைவில் வருகிறது"
             }
         }
     };
